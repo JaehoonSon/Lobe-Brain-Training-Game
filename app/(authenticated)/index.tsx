@@ -1,0 +1,25 @@
+import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { H1, P } from "~/components/ui/typography";
+import { Button } from "~/components/ui/button";
+import { useAuth } from "~/contexts/AuthProvider";
+import { router } from "expo-router";
+
+export default function IndexAuthenticatedScreen() {
+  const { user } = useAuth();
+
+  return (
+    <View className="flex-1 bg-background p-4 items-center justify-center">
+      <SafeAreaView className="flex-1 items-center justify-center gap-6">
+        <H1 className="text-center">Welcome!</H1>
+        <P className="text-center text-muted-foreground">
+          You are authenticated as {user?.email}
+        </P>
+
+        <Button variant="outline" onPress={() => router.push("/settings")}>
+          <P>Go to Settings</P>
+        </Button>
+      </SafeAreaView>
+    </View>
+  );
+}
