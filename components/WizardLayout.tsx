@@ -6,14 +6,17 @@ import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
 import { useOnboarding } from '~/contexts/OnboardingContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 import { cn } from '~/lib/utils';
 
 interface WizardLayoutProps {
     title: string;
     description?: string;
     children: React.ReactNode;
-    onNext?: () => void; // Optional override for validation before moving next
+    onNext?: () => void;
     showSkip?: boolean;
+    nextDisabled?: boolean;
+    nextLabel?: string;
 }
 
 export function WizardLayout({
@@ -22,51 +25,58 @@ export function WizardLayout({
     children,
     onNext,
     showSkip = false,
+    nextDisabled = false,
+    nextLabel = "Continue",
 }: WizardLayoutProps) {
     const { currentStep, totalSteps, nextStep, prevStep } = useOnboarding();
+    const router = useRouter();
 
     const progress = (currentStep / totalSteps) * 100;
 
     const handleNextPress = () => {
         if (onNext) {
             onNext();
-        }
-        // If onNext is provided, it's responsible for calling nextStep() manually if validation passes.
-        // Otherwise, we just call nextStep().
-        // Wait... usually validation happens then nextStep is called.
-        // Let's assume onNext is strictly for validation/data saving.
-        // If onNext is NOT provided, we proceed.
-        if (!onNext) {
+        } else {
             nextStep();
+        }
+    };
+
+    const handleBack = () => {
+        if (currentStep > 1) {
+            prevStep();
+        } else {
+            router.back();
         }
     };
 
     return (
         <SafeAreaView className="bg-background flex-1" edges={['top', 'bottom']}>
             {/* Header / Progress */}
-            <View className="px-6 py-4">
-                <View className="mb-4 flex-row items-center justify-between">
-                    <Text className="text-muted-foreground text-sm font-medium">
-                        Step {currentStep} of {totalSteps}
-                    </Text>
-                    {showSkip && (
-                        <Button variant="ghost" size="sm" onPress={nextStep}>
-                            <Text className="text-muted-foreground">Skip</Text>
-                        </Button>
-                    )}
+            <View className="px-6 py-4 flex-row items-center gap-4">
+                <Button variant="ghost" size="icon" className="-ml-2" onPress={handleBack}>
+                    <ChevronLeft className="text-foreground" size={24} />
+                </Button>
+
+                <View className="flex-1">
+                    <Progress value={progress} className="h-4 bg-primary/20" />
                 </View>
-                <Progress value={progress} className="h-2" />
+
+                {showSkip && (
+                    <Button variant="ghost" size="sm" onPress={nextStep}>
+                        <Text className="text-muted-foreground">Skip</Text>
+                    </Button>
+                )}
             </View>
 
             {/* Content */}
             <ScrollView
-                contentContainerStyle={{ flexGrow: 1, padding: 24 }}
+                contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingBottom: 24 }}
                 keyboardShouldPersistTaps="handled"
             >
-                <View className="mb-8">
-                    <Text className="text-foreground text-3xl font-bold">{title}</Text>
+                <View className="mb-8 mt-4">
+                    <Text className="text-foreground text-3xl font-extrabold text-center">{title}</Text>
                     {description && (
-                        <Text className="text-muted-foreground mt-2 text-lg">
+                        <Text className="text-muted-foreground mt-2 text-lg text-center">
                             {description}
                         </Text>
                     )}
@@ -75,22 +85,15 @@ export function WizardLayout({
             </ScrollView>
 
             {/* Footer / Actions */}
-            <View className="border-border bg-background border-t p-6">
-                <View className="flex-row gap-4">
-                    <Button
-                        variant="outline"
-                        className="flex-1"
-                        onPress={prevStep}
-                        disabled={currentStep === 1}
-                    >
-                        <ChevronLeft className="mr-2 text-foreground" size={18} />
-                        <Text>Back</Text>
-                    </Button>
-                    <Button className="flex-1" onPress={handleNextPress}>
-                        <Text>{currentStep === totalSteps ? 'Finish' : 'Next'}</Text>
-                        <ChevronRight className="ml-2 text-primary-foreground" size={18} />
-                    </Button>
-                </View>
+            <View className="bg-background p-6 pt-2">
+                <Button
+                    size="xl"
+                    className="w-full rounded-2xl shadow-xl"
+                    onPress={handleNextPress}
+                    disabled={nextDisabled}
+                >
+                    <Text className="text-xl font-bold">{nextLabel}</Text>
+                </Button>
             </View>
         </SafeAreaView>
     );
