@@ -16,14 +16,17 @@ module.exports = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          edge: "hsl(var(--primary-edge))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          edge: "hsl(var(--secondary-edge))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+          edge: "hsl(var(--destructive-edge))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -32,6 +35,7 @@ module.exports = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          edge: "hsl(var(--accent-edge))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

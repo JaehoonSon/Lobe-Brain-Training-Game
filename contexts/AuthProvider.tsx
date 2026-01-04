@@ -15,6 +15,7 @@ interface AuthContextType {
   user: User | null;
   logout: () => Promise<void>;
   signInApple: () => Promise<void>;
+  signInGoogle: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -88,6 +89,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const signInGoogle = async () => {
+    // Placeholder for Google Sign In
+    console.warn("Google Sign In not yet configured with native libraries");
+    // TODO: Install @react-native-google-signin/google-signin and configure
+  };
+
   // ----- Memoized context value -----
   const value = useMemo<AuthContextType>(
     () => ({
@@ -96,6 +103,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       user,
       logout,
       signInApple,
+      signInGoogle,
     }),
     [user, isLoading, isSigningIn, logout, signInApple]
   );

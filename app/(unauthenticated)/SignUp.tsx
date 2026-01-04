@@ -1,12 +1,12 @@
 import { Link, router } from "expo-router";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Text } from "~/components/ui/text";
+import { Button } from "~/components/ui/button";
 import { appMetadata } from "~/config";
 import { AntDesign } from "@expo/vector-icons";
 import { showErrorToast } from "~/components/ui/toast";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import GradientText from "~/components/GradientText";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
 export default function SignUp() {
@@ -16,7 +16,7 @@ export default function SignUp() {
   const handleLogin = async () => {
     try {
       await signInApple();
-      // Auth state change in _layout will handle navigation to (authenticated)
+      router.replace("/(onboarding)/birthday");
     } catch (err) {
       showErrorToast("Error Signing in");
     }
@@ -31,10 +31,12 @@ export default function SignUp() {
       >
         <Animated.View
           entering={FadeInDown.duration(600)}
-          className="items-center"
+          className="items-center gap-4"
         >
-          <GradientText text="Let's Start" fontSize={48} />
-          <Text className="text-black/60 text-center text-base mt-2">
+          <Text className="text-5xl font-extrabold tracking-tight text-center text-foreground leading-[1.1]">
+            Let's Start
+          </Text>
+          <Text className="text-xl text-muted-foreground text-center">
             Create your account to begin
           </Text>
         </Animated.View>
@@ -43,41 +45,47 @@ export default function SignUp() {
       {/* Bottom section with sign up options */}
       <View className="px-6" style={{ paddingBottom: insets.bottom + 16 }}>
         <Animated.View entering={FadeInUp.delay(200).duration(600)}>
-          <TouchableOpacity
-            activeOpacity={0.9}
+          <Button
+            size="xl"
+            className="w-full rounded-2xl flex-row gap-3 mb-6"
             onPress={handleLogin}
-            className="rounded-full py-4 px-6 flex-row items-center justify-center mb-4"
-            style={{
-              backgroundColor: "#D946EF",
-              shadowColor: "#D946EF",
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.3,
-              shadowRadius: 12,
-              elevation: 8,
-            }}
           >
-            <AntDesign name="apple" size={22} color="white" />
-            <Text className="text-white font-semibold text-lg ml-3">
+            <AntDesign name="apple" size={24} color="white" />
+            <Text className="font-bold text-xl text-primary-foreground">
               Continue with Apple
             </Text>
-          </TouchableOpacity>
+          </Button>
+
+          <Button
+            variant="secondary"
+            size="xl"
+            className="w-full rounded-2xl flex-row gap-3 mb-6"
+            onPress={() => {
+              // signInGoogle() 
+              showErrorToast("Google Sign In not configured yet");
+            }}
+          >
+            <AntDesign name="google" size={24} color="white" />
+            <Text className="font-bold text-xl text-secondary-foreground">
+              Continue with Google
+            </Text>
+          </Button>
         </Animated.View>
 
         {/* Terms */}
         <Animated.View
           entering={FadeInUp.delay(400).duration(600)}
-          className="mt-4"
         >
-          <Text className="text-xs text-black/50 text-center leading-relaxed">
+          <Text className="text-sm text-muted-foreground text-center leading-relaxed px-8">
             By continuing, you agree to our{" "}
             <Link href={appMetadata.privacyPolicyUrl}>
-              <Text className="text-xs text-black/70 underline font-medium">
+              <Text className="text-sm font-bold underline text-foreground">
                 Privacy Policy
               </Text>
             </Link>{" "}
             and{" "}
             <Link href={appMetadata.endUserLicenseAgreementUrl}>
-              <Text className="text-xs text-black/70 underline font-medium">
+              <Text className="text-sm font-bold underline text-foreground">
                 Terms of Service
               </Text>
             </Link>

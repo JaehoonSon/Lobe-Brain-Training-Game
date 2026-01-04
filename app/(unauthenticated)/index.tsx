@@ -1,99 +1,143 @@
 import { router } from "expo-router";
-import {
-  View,
-  useWindowDimensions,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, useWindowDimensions } from "react-native";
 import { Text } from "~/components/ui/text";
-import { P } from "~/components/ui/typography";
-import { LinearGradient } from "expo-linear-gradient";
+import { Button } from "~/components/ui/button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import GradientText from "~/components/GradientText";
-import Animated, { FadeInUp } from "react-native-reanimated";
+import { CloudBackground } from "~/components/CloudBackground";
+import {
+  Brain,
+  BookOpen,
+  Zap,
+  Trophy,
+  Gamepad2,
+  Lightbulb,
+  Puzzle,
+  Rocket,
+  Target,
+  Music,
+  Palette,
+  Sparkles,
+  GraduationCap,
+} from "lucide-react-native";
 
 export default function IndexUnauthenticatedScreen() {
-  const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
 
   return (
-    <View className="flex-1 bg-white">
-      {/* Gradient Background */}
-      <LinearGradient
-        colors={["#f3e7e9", "#e3eeff", "#e3eeff"]}
-        style={StyleSheet.absoluteFillObject}
-      />
+    <View className="flex-1 bg-background">
+      {/* Sky & Cloud Background - Absolute to allow content to use full height */}
+      <View className="absolute top-0 left-0 right-0 z-0">
+        <CloudBackground skyColor="#7dd3fc">
+          {/* Scattered Icons in the Sky */}
+          <View className="w-full max-w-sm aspect-square relative mt-12">
 
-      {/* Smooth gradient fade - compact and solid at bottom */}
-      <LinearGradient
-        colors={[
-          "transparent",
-          "rgba(255,255,255,0.15)",
-          "rgba(255,255,255,0.4)",
-          "rgba(255,255,255,0.75)",
-          "rgba(255,255,255,0.95)",
-          "#ffffff",
-        ]}
-        locations={[0, 0.1, 0.2, 0.35, 0.45, 0.6]}
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: height * 0.35,
-        }}
-      />
+            {/* Center-ish */}
+            <View className="absolute top-[35%] left-[40%] rotate-[5deg] p-3 bg-card rounded-2xl border-b-4 border-border shadow-sm z-20">
+              <Brain size={56} color="#0ea5e9" strokeWidth={2.5} />
+            </View>
 
-      {/* Bottom content area - compact like reference */}
+            {/* Top Left Cluster */}
+            <View className="absolute top-[5%] left-[10%] rotate-[-15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+              <Rocket size={32} color="#f43f5e" strokeWidth={2.5} />
+            </View>
+            <View className="absolute top-[18%] left-[25%] rotate-[10deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
+              <Trophy size={40} color="#f59e0b" strokeWidth={2.5} />
+            </View>
+
+            {/* Top Right Cluster */}
+            <View className="absolute top-[8%] right-[20%] rotate-[15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+              <Target size={32} color="#ec4899" strokeWidth={2.5} />
+            </View>
+            <View className="absolute top-[20%] right-[5%] rotate-[-5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
+              <Zap size={44} color="#eab308" strokeWidth={2.5} />
+            </View>
+
+            {/* Middle Left */}
+            <View className="absolute top-[45%] left-[5%] rotate-[-20deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm">
+              <BookOpen size={36} color="#ec4899" strokeWidth={2.5} />
+            </View>
+            <View className="absolute top-[30%] left-[-5%] rotate-[10deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
+              <Music size={24} color="#8b5cf6" strokeWidth={2.5} />
+            </View>
+
+            {/* Middle Right */}
+            <View className="absolute top-[50%] right-[10%] rotate-[20deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+              <Puzzle size={36} color="#10b981" strokeWidth={2.5} />
+            </View>
+            <View className="absolute top-[35%] right-[-2%] rotate-[-15deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
+              <Palette size={28} color="#f97316" strokeWidth={2.5} />
+            </View>
+
+
+            {/* Bottom Cluster */}
+            <View className="absolute bottom-[30%] left-[25%] rotate-[5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
+              <Gamepad2 size={40} color="#8b5cf6" strokeWidth={2.5} />
+            </View>
+            <View className="absolute bottom-[35%] right-[25%] rotate-[-10deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+              <Lightbulb size={32} color="#22c55e" strokeWidth={2.5} />
+            </View>
+            <View className="absolute bottom-[20%] inset-x-0 items-center z-0">
+              <View className="p-2 bg-card rounded-lg border-b-4 border-border rotate-[-5deg]">
+                <GraduationCap size={36} color="#3b82f6" strokeWidth={2.5} />
+              </View>
+            </View>
+            <View className="absolute bottom-[45%] left-[10%] rotate-[25deg]">
+              <Sparkles size={24} color="#fbbf24" fill="#fbbf24" />
+            </View>
+            <View className="absolute top-[15%] right-[35%] rotate-[-10deg]">
+              <Sparkles size={20} color="#60a5fa" fill="#60a5fa" />
+            </View>
+
+          </View>
+        </CloudBackground>
+      </View>
+
+      {/* Content Area (Below Clouds) */}
       <View
-        className="absolute left-0 right-0 bottom-0 px-6"
-        style={{ paddingBottom: insets.bottom + 4 }}
+        className="flex-1 px-6 pb-8 z-20"
+        style={{ paddingBottom: insets.bottom + 16, paddingTop: insets.top + 24 }}
       >
-        {/* Title section */}
-        <Animated.View
-          entering={FadeInUp.delay(200).duration(600)}
-          className="items-center mb-1"
-        >
-          <Text className="text-4xl font-semibold text-black">Welcome to</Text>
-          <GradientText text="Elysia" fontSize={48} />
-          <P className="text-black/60 text-center text-sm mt-1">
-            Highlight your natural beauty
-          </P>
-        </Animated.View>
+        {/* Spacer to push content to bottom when possible */}
+        <View className="flex-1" />
 
-        {/* CTA Button - dark like reference */}
-        <Animated.View
-          entering={FadeInUp.delay(400).duration(600)}
-          className="mt-4"
-        >
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() => router.push("/(unauthenticated)/SignUp")}
-            className="rounded-full py-4 items-center"
-            style={{ backgroundColor: "#D946EF" }}
-          >
-            <Text className="text-white font-semibold text-lg">
-              Get Started
-            </Text>
-          </TouchableOpacity>
-        </Animated.View>
+        <View className="items-center gap-4 mb-4 pt-4">
 
-        {/* Footer links like reference */}
-        <Animated.View
-          entering={FadeInUp.delay(500).duration(600)}
-          className="mt-3 items-center"
-        >
-          <Text className="text-xs text-black/50 text-center">
-            By continuing, you agree to our{" "}
-            <Text className="text-xs text-black/70 underline font-medium">
-              Privacy Policy
-            </Text>{" "}
-            and{" "}
-            <Text className="text-xs text-black/70 underline font-medium">
-              Terms of Service
-            </Text>
+          <Text className="text-5xl font-extrabold tracking-tight text-slate-400">
+            brain-app
           </Text>
-        </Animated.View>
+          <Text className="text-5xl font-extrabold text-center leading-[1.1] text-foreground">
+            Discover what your mind can do
+          </Text>
+          <Text className="text-xl text-muted-foreground text-center px-4">
+            Sign up to train your brain for free.
+          </Text>
+        </View>
+
+        <View className="gap-4 w-full">
+          {/* Primary Action - Default (Orange) to match Lumosity */}
+          <Button
+            size="xl"
+            className="w-full rounded-2xl"
+            onPress={() => router.push("/(unauthenticated)/SignUp")}
+          >
+            <Text className="font-bold">Get started</Text>
+          </Button>
+
+          <Button
+            variant="outline"
+            size="xl"
+            className="w-full rounded-2xl border-2"
+            onPress={() => router.push("/(unauthenticated)/login")}
+          >
+            <Text className="font-bold text-primary">Log in</Text>
+          </Button>
+        </View>
+
+        {/* Legal Text */}
+        <Text className="text-sm text-muted-foreground text-center px-8 leading-5 mt-4">
+          By signing up, you agree to our Terms of Service, Privacy Policy, and CA Privacy.
+        </Text>
       </View>
     </View>
   );

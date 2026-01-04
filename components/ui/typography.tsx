@@ -15,7 +15,7 @@ function H1({ className, asChild = false, ...props }: TypographyProps) {
       role='heading'
       aria-level='1'
       className={cn(
-        'web:scroll-m-20 text-4xl text-foreground font-extrabold tracking-tight lg:text-5xl web:select-text',
+        'web:scroll-m-20 text-4xl text-foreground font-sans font-extrabold tracking-tight lg:text-5xl web:select-text',
         className
       )}
       {...props}
@@ -30,7 +30,7 @@ function H2({ className, asChild = false, ...props }: TypographyProps) {
       role='heading'
       aria-level='2'
       className={cn(
-        'web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-semibold tracking-tight first:mt-0 web:select-text',
+        'web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-sans font-semibold tracking-tight first:mt-0 web:select-text',
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ function H3({ className, asChild = false, ...props }: TypographyProps) {
       role='heading'
       aria-level='3'
       className={cn(
-        'web:scroll-m-20 text-2xl text-foreground font-semibold tracking-tight web:select-text',
+        'web:scroll-m-20 text-2xl text-foreground font-sans font-semibold tracking-tight web:select-text',
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function H4({ className, asChild = false, ...props }: TypographyProps) {
       role='heading'
       aria-level='4'
       className={cn(
-        'web:scroll-m-20 text-xl text-foreground font-semibold tracking-tight web:select-text',
+        'web:scroll-m-20 text-xl text-foreground font-sans font-semibold tracking-tight web:select-text',
         className
       )}
       {...props}
@@ -71,7 +71,7 @@ function H4({ className, asChild = false, ...props }: TypographyProps) {
 function P({ className, asChild = false, ...props }: TypographyProps) {
   const Component = asChild ? Slot.Text : RNText;
   return (
-    <Component className={cn('text-base text-foreground web:select-text', className)} {...props} />
+    <Component className={cn('text-base text-foreground font-sans web:select-text', className)} {...props} />
   );
 }
 
@@ -109,7 +109,7 @@ function Lead({ className, asChild = false, ...props }: TypographyProps) {
   const Component = asChild ? Slot.Text : RNText;
   return (
     <Component
-      className={cn('text-xl text-muted-foreground web:select-text', className)}
+      className={cn('text-xl text-muted-foreground font-sans web:select-text', className)}
       {...props}
     />
   );
@@ -119,7 +119,7 @@ function Large({ className, asChild = false, ...props }: TypographyProps) {
   const Component = asChild ? Slot.Text : RNText;
   return (
     <Component
-      className={cn('text-xl text-foreground font-semibold web:select-text', className)}
+      className={cn('text-xl text-foreground font-sans font-semibold web:select-text', className)}
       {...props}
     />
   );
@@ -129,7 +129,7 @@ function Small({ className, asChild = false, ...props }: TypographyProps) {
   const Component = asChild ? Slot.Text : RNText;
   return (
     <Component
-      className={cn('text-sm text-foreground font-medium leading-none web:select-text', className)}
+      className={cn('text-sm text-foreground font-sans font-medium leading-none web:select-text', className)}
       {...props}
     />
   );
@@ -139,7 +139,7 @@ function Muted({ className, asChild = false, ...props }: TypographyProps) {
   const Component = asChild ? Slot.Text : RNText;
   return (
     <Component
-      className={cn('text-sm text-muted-foreground web:select-text', className)}
+      className={cn('text-sm text-muted-foreground font-sans web:select-text', className)}
       {...props}
     />
   );

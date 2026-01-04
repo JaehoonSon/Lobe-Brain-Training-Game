@@ -88,3 +88,5 @@ const styles = StyleSheet.create({
     height: "80%",
   },
 });
+
+export default SplashScreenController;

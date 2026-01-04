@@ -63,6 +63,10 @@ function AppContent() {
             name="(authenticated)"
             options={{ headerRight: () => <ThemeToggle /> }}
           />
+          <Stack.Screen
+            name="(onboarding)"
+            options={{ headerShown: false }}
+          />
         </Stack.Protected>
         <Stack.Protected guard={!isAuthenticated}>
           <Stack.Screen
@@ -76,16 +80,39 @@ function AppContent() {
   );
 }
 
+import {
+  useFonts,
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+} from '@expo-google-fonts/nunito';
+import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
+
+
 export default function RootLayout() {
   usePlatformSpecificSetup();
 
+  const [fontsLoaded] = useFonts({
+    Nunito_400Regular,
+    Nunito_600SemiBold,
+    Nunito_700Bold,
+    Nunito_800ExtraBold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>
-        <SplashScreenController />
-        <AppContent />
-        <Toast config={toastConfig} />
-      </AuthProvider>
+      <AppThemeProvider>
+        <AuthProvider>
+          <SplashScreenController />
+          <AppContent />
+          <Toast config={toastConfig} />
+        </AuthProvider>
+      </AppThemeProvider>
     </GestureHandlerRootView>
   );
 }
@@ -108,4 +135,4 @@ function useSetAndroidNavigationBar() {
   }, []);
 }
 
-function noop() {}
+function noop() { }

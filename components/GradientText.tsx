@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TextProps, TextStyle } from "react-native";
+import { Text as RNText, TextProps, TextStyle, View } from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -20,9 +20,15 @@ export default function GradientText({
   return (
     <MaskedView
       maskElement={
-        <Text style={[style, { fontSize, fontWeight: "bold" }]} {...props}>
+        <RNText
+          style={[
+            style,
+            { fontSize, fontWeight: "bold", paddingVertical: 4, paddingHorizontal: 4 },
+          ]}
+          {...props}
+        >
           {text}
-        </Text>
+        </RNText>
       }
     >
       <LinearGradient
@@ -30,12 +36,22 @@ export default function GradientText({
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
       >
-        <Text
-          style={[style, { fontSize, fontWeight: "bold", opacity: 0 }]}
+        {/* Render invisible text to give the gradient its shape/size */}
+        <RNText
+          style={[
+            style,
+            {
+              fontSize,
+              fontWeight: "bold",
+              opacity: 0,
+              paddingVertical: 4,
+              paddingHorizontal: 4,
+            },
+          ]}
           {...props}
         >
           {text}
-        </Text>
+        </RNText>
       </LinearGradient>
     </MaskedView>
   );
