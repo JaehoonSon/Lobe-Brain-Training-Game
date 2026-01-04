@@ -63,10 +63,7 @@ function AppContent() {
             name="(authenticated)"
             options={{ headerRight: () => <ThemeToggle /> }}
           />
-          <Stack.Screen
-            name="(onboarding)"
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
         </Stack.Protected>
         <Stack.Protected guard={!isAuthenticated}>
           <Stack.Screen
@@ -86,9 +83,8 @@ import {
   Nunito_600SemiBold,
   Nunito_700Bold,
   Nunito_800ExtraBold,
-} from '@expo-google-fonts/nunito';
+} from "@expo-google-fonts/nunito";
 import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
-
 
 export default function RootLayout() {
   usePlatformSpecificSetup();
@@ -135,4 +131,4 @@ function useSetAndroidNavigationBar() {
   }, []);
 }
 
-function noop() { }
+function noop() {}

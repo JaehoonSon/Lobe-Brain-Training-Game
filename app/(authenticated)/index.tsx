@@ -19,6 +19,9 @@ export default function IndexAuthenticatedScreen() {
         <Button variant="outline" onPress={() => router.push("/settings")}>
           <P>Go to Settings</P>
         </Button>
+        <Button variant="outline" onPress={() => router.push("/(onboarding)")}>
+          <P>Go to onboarding</P>
+        </Button>
       </SafeAreaView>
     </View>
   );

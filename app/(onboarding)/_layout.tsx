@@ -1,15 +1,13 @@
-import React from 'react';
-import { Stack } from 'expo-router';
-import { OnboardingProvider } from '~/contexts/OnboardingContext';
+import React from "react";
+import { Stack } from "expo-router";
+import { OnboardingProvider } from "~/contexts/OnboardingContext";
 
 export default function OnboardingLayout() {
-    return (
-        <OnboardingProvider>
-            <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="birthday" />
-                <Stack.Screen name="welcome" />
-                <Stack.Screen name="index" />
-            </Stack>
-        </OnboardingProvider>
-    );
+  return (
+    <OnboardingProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+      </Stack>
+    </OnboardingProvider>
+  );
 }

@@ -1,13 +1,13 @@
-import React from 'react';
-import { View, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Progress } from '~/components/ui/progress';
-import { Text } from '~/components/ui/text';
-import { Button } from '~/components/ui/button';
-import { useOnboarding } from '~/contexts/OnboardingContext';
-import { ChevronLeft, ChevronRight } from 'lucide-react-native';
-import { useRouter } from 'expo-router';
-import { cn } from '~/lib/utils';
+import React from "react";
+import { View, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Progress } from "~/components/ui/progress";
+import { Text } from "~/components/ui/text";
+import { Button } from "~/components/ui/button";
+import { useOnboarding } from "~/contexts/OnboardingContext";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
+import { useRouter } from "expo-router";
+import { cn } from "~/lib/utils";
 
 interface WizardLayoutProps {
   title: string;
@@ -57,10 +57,15 @@ export function WizardLayout({
   };
 
   return (
-    <SafeAreaView className="bg-background flex-1" edges={['top', 'bottom']}>
+    <SafeAreaView className="bg-background flex-1" edges={["top", "bottom"]}>
       {/* Header / Progress */}
       <View className="px-6 py-4 flex-row items-center gap-4">
-        <Button variant="ghost" size="icon" className="-ml-2" onPress={handleBack}>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="-ml-2"
+          onPress={handleBack}
+        >
           <ChevronLeft className="text-foreground" size={24} />
         </Button>
 
@@ -77,11 +82,17 @@ export function WizardLayout({
 
       {/* Content */}
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingBottom: 24 }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingHorizontal: 24,
+          paddingBottom: 24,
+        }}
         keyboardShouldPersistTaps="handled"
       >
         <View className="mb-8 mt-4">
-          <Text className="text-foreground text-3xl font-extrabold text-center">{title}</Text>
+          <Text className="text-foreground text-3xl font-extrabold text-center">
+            {title}
+          </Text>
           {description && (
             <Text className="text-muted-foreground mt-2 text-lg text-center">
               {description}
