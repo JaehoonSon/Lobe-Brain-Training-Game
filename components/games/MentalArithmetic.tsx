@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
+import * as Haptics from "expo-haptics";
 
 interface MentalArithmeticProps {
   onComplete: (isCorrect: boolean) => void;
@@ -89,6 +90,12 @@ export function MentalArithmetic({
     setSelectedChoice(choice);
 
     const isCorrect = choice === question.answer;
+
+    if (isCorrect) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    }
 
     // Small delay to show feedback
     setTimeout(() => {

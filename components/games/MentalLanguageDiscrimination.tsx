@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
+import * as Haptics from "expo-haptics";
 
 interface MentalLanguageDiscriminationProps {
   onComplete: (isCorrect: boolean) => void;
@@ -17,44 +18,44 @@ interface Question {
 
 const QUESTIONS: Question[] = [
   {
-    sentenceParts: ["She went ", " the store."],
-    options: ["to", "too"],
-    answer: "to",
+    sentenceParts: ["I need to ", " my homework before dinner."],
+    options: ["finish", "Finnish"],
+    answer: "finish",
   },
   {
-    sentenceParts: ["The cat is ", " here."],
-    options: ["their", "there"],
+    sentenceParts: ["She left her keys over ", "."],
+    options: ["there", "their"],
     answer: "there",
   },
   {
-    sentenceParts: ["I can't ", " this anymore."],
-    options: ["bare", "bear"],
-    answer: "bear",
+    sentenceParts: ["He bought a new ", " of shoes."],
+    options: ["pear", "pair"],
+    answer: "pair",
   },
   {
-    sentenceParts: ["The ", " was delicious."],
-    options: ["flower", "flour"],
-    answer: "flour",
+    sentenceParts: ["Please ", " quietly during the movie."],
+    options: ["seat", "sit"],
+    answer: "sit",
   },
   {
-    sentenceParts: ["He ", " the ball."],
-    options: ["threw", "through"],
-    answer: "threw",
-  },
-  {
-    sentenceParts: ["It's ", " late."],
-    options: ["to", "too"],
+    sentenceParts: ["They went ", " after work."],
+    options: ["two", "too"],
     answer: "too",
   },
   {
-    sentenceParts: ["This is ", " book."],
-    options: ["their", "there"],
-    answer: "their",
+    sentenceParts: ["The dog wagged its ", "."],
+    options: ["tail", "tale"],
+    answer: "tail",
   },
   {
-    sentenceParts: ["The ", " shines brightly."],
-    options: ["son", "sun"],
-    answer: "sun",
+    sentenceParts: ["I will ", " you tomorrow."],
+    options: ["see", "sea"],
+    answer: "see",
+  },
+  {
+    sentenceParts: ["The knight rode into the ", "."],
+    options: ["night", "knight"],
+    answer: "night",
   },
 ];
 
@@ -91,6 +92,12 @@ export function MentalLanguageDiscrimination({
     setSelectedChoice(choice);
 
     const isCorrect = choice === question.answer;
+
+    if (isCorrect) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    } else {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    }
 
     // Small delay to show feedback
     setTimeout(() => {
