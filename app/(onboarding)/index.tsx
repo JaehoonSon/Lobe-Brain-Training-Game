@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { ChevronRight, ArrowLeft, Zap, Hand, PartyPopper } from "lucide-react-native";
+import {
+  ChevronRight,
+  ArrowLeft,
+  Zap,
+  Hand,
+  PartyPopper,
+} from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { WizardLayout } from "~/components/WizardLayout";
@@ -12,14 +18,15 @@ import {
   GameStep,
   GameStepProps,
 } from "./templates";
-import BirthdaySelectionScreen from "./steps/birthday";
-import WelcomeScreen from "./steps/welcome";
+import BirthdaySelectionScreen from "./birthday";
+import WelcomeScreen from "./welcome";
 import ThankYouScreen from "./steps/thankyou";
 import InterventionStep, {
   InterventionStepProps,
 } from "./steps/InterventionStep";
 import PlanCreationStep from "./steps/PlanCreationStep";
 import PlanRevealStep from "./steps/PlanRevealStep";
+import PaywallScreen from "../paywall";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -406,7 +413,12 @@ const STEPS: StepConfig[] = [
           icon: (
             <View className="flex-row">
               <Zap size={24} color="#EF4444" fill="#EF4444" />
-              <Zap size={24} color="#EF4444" fill="#EF4444" style={{ marginLeft: -8 }} />
+              <Zap
+                size={24}
+                color="#EF4444"
+                fill="#EF4444"
+                style={{ marginLeft: -8 }}
+              />
             </View>
           ), // Double Red Zap
         },
@@ -459,12 +471,7 @@ const STEPS: StepConfig[] = [
       type: "selection",
       dataKey: "sleep_duration",
       maxSelections: 1,
-      options: [
-        "4 hours or less",
-        "5-6 hours",
-        "7-8 hours",
-        "9 hours or more",
-      ],
+      options: ["4 hours or less", "5-6 hours", "7-8 hours", "9 hours or more"],
     },
   },
   // Step: Training Frequency
@@ -501,6 +508,15 @@ const STEPS: StepConfig[] = [
     step: {
       type: "custom",
       component: PlanRevealStep,
+      fullscreen: true,
+    },
+  },
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "custom",
+      component: PaywallScreen,
       fullscreen: true,
     },
   },
