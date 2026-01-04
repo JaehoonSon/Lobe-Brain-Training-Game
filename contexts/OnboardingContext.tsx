@@ -18,6 +18,7 @@ interface OnboardingContextType {
   setStep: (step: number) => void;
   isComplete: boolean;
   completeOnboarding: () => Promise<void>;
+  resetOnboarding: () => Promise<void>;
 }
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(
@@ -35,6 +36,10 @@ export function OnboardingProvider({
   const [currentStep, setCurrentStep] = useState(1);
   const [data, setData] = useState<OnboardingData>({});
   const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    console.log("Onboarding data updated", data);
+  }, [data]);
 
   // Load progress on mount
   useEffect(() => {
@@ -103,6 +108,18 @@ export function OnboardingProvider({
     // For now, keep it simple
   };
 
+  const resetOnboarding = async () => {
+    try {
+      await AsyncStorage.removeItem(ONBOARDING_STORAGE_KEY);
+      setCurrentStep(1);
+      setData({});
+      setIsComplete(false);
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    } catch (e) {
+      console.error("Failed to reset onboarding", e);
+    }
+  };
+
   return (
     <OnboardingContext.Provider
       value={{
@@ -115,6 +132,7 @@ export function OnboardingProvider({
         setStep,
         isComplete,
         completeOnboarding,
+        resetOnboarding,
       }}
     >
       {children}

@@ -12,6 +12,10 @@ import {
 } from "./templates";
 import BirthdaySelectionScreen from "./steps/birthday";
 import WelcomeScreen from "./steps/welcome";
+import ThankYouScreen from "./steps/thankyou";
+import InterventionStep, {
+  InterventionStepProps,
+} from "./steps/InterventionStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -28,6 +32,15 @@ type CustomStepConfig = {
   fullscreen?: boolean; // If true, renders without WizardLayout; otherwise renders inside it
 };
 
+type InterventionStepConfig = {
+  type: "intervention";
+  title: string;
+  description: string;
+  buttonText?: string;
+  variant?: InterventionStepProps["variant"];
+  component: React.ComponentType<InterventionStepProps>;
+};
+
 type GameStepConfig = {
   type: "game";
   component: React.ComponentType<GameStepProps>;
@@ -39,7 +52,8 @@ type StepConfig =
   | { title: string; description: string; step: SelectionStepConfig }
   | { title: string; description: string; step: AffirmationStepConfig }
   | { title: string; description: string; step: CustomStepConfig }
-  | { title: string; description: string; step: GameStepConfig };
+  | { title: string; description: string; step: GameStepConfig }
+  | { title: string; description: string; step: InterventionStepConfig };
 
 const STEPS: StepConfig[] = [
   {
@@ -272,6 +286,19 @@ const STEPS: StepConfig[] = [
         "Next, we'll calibrate your training program to your current level.",
     },
   },
+  // --- Game 1: Mental Arithmetic ---
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "intervention",
+      component: InterventionStep,
+      title: "Mental Math",
+      description: "We'll test your numerical processing speed and accuracy.",
+      buttonText: "Start",
+      variant: "intro",
+    },
+  },
   {
     title: "Game Steps",
     description: "",
@@ -282,6 +309,66 @@ const STEPS: StepConfig[] = [
       gameConfig: {
         type: "mental_arithmetic",
       },
+    },
+  },
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "intervention",
+      component: InterventionStep,
+      title: "Great job!",
+      description: "That measured your quantitative reasoning skills.",
+      buttonText: "Next Challenge",
+      variant: "outro",
+    },
+  },
+
+  // --- Game 2: Language ---
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "intervention",
+      component: InterventionStep,
+      title: "Verbal Fluency",
+      description: "Now let's test your language processing and vocabulary.",
+      buttonText: "Start",
+      variant: "intro",
+    },
+  },
+  {
+    title: "Language Game",
+    description: "",
+    step: {
+      type: "game",
+      component: GameStep,
+      fullscreen: true,
+      gameConfig: {
+        type: "mental_language_discrimination",
+      },
+    },
+  },
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "intervention",
+      component: InterventionStep,
+      title: "Excellent!",
+      description: "That measured your verbal discrimination skills.",
+      buttonText: "See Results",
+      variant: "outro",
+    },
+  },
+  // Step: Thank You & Skill Calibration
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "custom",
+      component: ThankYouScreen,
+      fullscreen: true,
     },
   },
 ];
@@ -354,13 +441,32 @@ export default function OnboardingOrchestrator() {
           />
         );
       }
+      case "intervention": {
+        const Component = stepConfig.step.component;
+        return (
+          <Component
+            key={currentStep}
+            onNext={handleNext}
+            onBack={handlePrev}
+            title={stepConfig.step.title}
+            description={stepConfig.step.description}
+            buttonText={stepConfig.step.buttonText}
+            variant={stepConfig.step.variant}
+          />
+        );
+      }
       default:
         return <Text className="text-destructive">Unknown step type</Text>;
     }
   };
 
-  // Render directly without WizardLayout
-  if (stepConfig.step?.fullscreen) {
+  // Render directly without WizardLayout (safe access)
+  if ("fullscreen" in stepConfig.step && stepConfig.step.fullscreen) {
+    return renderStep();
+  }
+
+  // Intervention steps are also full screen usually, or at least custom layout
+  if (stepConfig.step.type === "intervention") {
     return renderStep();
   }
 

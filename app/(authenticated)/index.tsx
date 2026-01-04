@@ -4,9 +4,16 @@ import { H1, P } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
 import { useAuth } from "~/contexts/AuthProvider";
 import { router } from "expo-router";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export default function IndexAuthenticatedScreen() {
   const { user } = useAuth();
+  const { resetOnboarding } = useOnboarding();
+
+  const restartOnboarding = async () => {
+    await resetOnboarding();
+    router.push("/(onboarding)");
+  };
 
   return (
     <View className="flex-1 bg-background p-4 items-center justify-center">
@@ -21,6 +28,9 @@ export default function IndexAuthenticatedScreen() {
         </Button>
         <Button variant="outline" onPress={() => router.push("/(onboarding)")}>
           <P>Go to onboarding</P>
+        </Button>
+        <Button variant="outline" onPress={restartOnboarding}>
+          <P>Restart onboarding</P>
         </Button>
       </SafeAreaView>
     </View>

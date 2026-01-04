@@ -17,6 +17,7 @@ import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
 import { AuthProvider, useAuth } from "~/contexts/AuthProvider";
 import { SplashScreenController } from "./splash";
+import { OnboardingProvider } from "~/contexts/OnboardingContext";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "~/components/ui/toast";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -104,9 +105,11 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <AppThemeProvider>
         <AuthProvider>
-          <SplashScreenController />
-          <AppContent />
-          <Toast config={toastConfig} />
+          <OnboardingProvider>
+            <SplashScreenController />
+            <AppContent />
+            <Toast config={toastConfig} />
+          </OnboardingProvider>
         </AuthProvider>
       </AppThemeProvider>
     </GestureHandlerRootView>
