@@ -26,10 +26,10 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
           {/* Bell Curve */}
           <View className="my-8">
             <Svg width="280" height="200" viewBox="0 0 280 200">
-              {/* Bell curve path */}
+              {/* Bell curve path - Using Purple to match theme */}
               <Path
                 d="M 20 180 Q 60 120, 80 80 Q 100 40, 140 20 Q 180 40, 200 80 Q 220 120, 260 180"
-                fill="#F4A460"
+                fill="#8b5cf6"
                 stroke="#1F2937"
                 strokeWidth="4"
                 strokeLinecap="round"
@@ -38,11 +38,11 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
             </Svg>
           </View>
 
-          <Text className="text-base text-muted-foreground text-center px-8">
+          <Text className="text-xl text-muted-foreground text-center px-4 leading-relaxed">
             We're now determining your skills in{" "}
-            <Text className="font-bold text-foreground">Memory</Text>,{" "}
-            <Text className="font-bold text-foreground">Attention</Text>, and{" "}
-            <Text className="font-bold text-foreground">Problem Solving</Text>{" "}
+            <Text className="text-xl font-bold text-primary">Memory</Text>,{" "}
+            <Text className="text-xl font-bold text-primary">Attention</Text>, and{" "}
+            <Text className="text-xl font-bold text-primary">Problem Solving</Text>{" "}
             based on your performance.
           </Text>
         </Animated.View>

@@ -116,54 +116,35 @@ export function MentalArithmetic({
       <View className="flex-row gap-4 w-full justify-center">
         {choices.map((choice, index) => {
           const isSelected = selectedChoice === choice;
-          let variant: "default" | "secondary" | "destructive" | "outline" =
-            "outline";
+          const isCorrectAnswer = choice === question.answer;
 
-          if (hasAnswered && isSelected) {
-            variant = choice === question.answer ? "default" : "destructive"; // Green (default usually primary) or Red
-          } else {
-            variant = "secondary";
+          let variant: "default" | "destructive" | "outline" | "secondary" = "default";
+
+          if (hasAnswered) {
+            if (isSelected && !isCorrectAnswer) {
+              variant = "destructive";
+            }
           }
-
-          // Override for Success Color if needed, but Button variants are usually:
-          // default (primary), secondary, destructive, outline, ghost, link.
-          // Assuming 'default' is a primary color (often blue or black), 'destructive' is red.
-          // For correct answer green, we might need custom styles if 'default' isn't green.
-          // But 'default' is usually good enough for "Active/Selected".
-
-          // Actually, let's make it simpler:
-          // Neutral: secondary
-          // Correct: className="bg-green-500"
-          // Incorrect: destructive
 
           return (
             <Button
               key={index}
-              variant="outline"
+              variant={variant}
+              size="xl"
               className={cn(
-                "h-32 w-40 rounded-2xl border-2 active:scale-95",
-                !hasAnswered && "bg-secondary border-transparent",
-                hasAnswered &&
-                  choice === question.answer &&
-                  "bg-green-500 border-green-600",
-                hasAnswered &&
-                  choice !== question.answer &&
-                  isSelected &&
-                  "bg-red-500 border-red-600",
-                hasAnswered &&
-                  choice !== question.answer &&
-                  !isSelected &&
-                  "opacity-50"
+                "h-40 w-48 rounded-3xl active:scale-95 shadow-xl", // Keep button big
+                hasAnswered && isCorrectAnswer && "bg-green-600 border-green-700", // Darker Green
+                hasAnswered && !isCorrectAnswer && isSelected && "bg-red-600 border-red-700", // Darker Red (Override destructive)
+                hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
               onPress={() => handleChoice(choice)}
               disabled={hasAnswered}
             >
               <Text
                 className={cn(
-                  "text-4xl font-bold",
-                  hasAnswered && (choice === question.answer || isSelected)
-                    ? "text-white"
-                    : "text-foreground"
+                  "text-4xl font-black", // 4xl is approx 36px, smaller than 5xl(48px)
+                  variant === "default" && !hasAnswered && "text-primary-foreground",
+                  hasAnswered && isCorrectAnswer && "text-white"
                 )}
               >
                 {choice}

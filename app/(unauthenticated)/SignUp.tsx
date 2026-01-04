@@ -16,7 +16,7 @@ export default function SignUp() {
   const handleLogin = async () => {
     try {
       await signInApple();
-      router.replace("/(onboarding)/birthday");
+      router.replace("/(onboarding)");
     } catch (err) {
       showErrorToast("Error Signing in");
     }

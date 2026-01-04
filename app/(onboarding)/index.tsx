@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { View } from "react-native";
+import { ChevronRight, ArrowLeft, Zap, Hand, PartyPopper } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { WizardLayout } from "~/components/WizardLayout";
@@ -16,6 +18,8 @@ import ThankYouScreen from "./steps/thankyou";
 import InterventionStep, {
   InterventionStepProps,
 } from "./steps/InterventionStep";
+import PlanCreationStep from "./steps/PlanCreationStep";
+import PlanRevealStep from "./steps/PlanRevealStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -57,20 +61,20 @@ type StepConfig =
 
 const STEPS: StepConfig[] = [
   {
-    title: "",
-    description: "",
-    step: {
-      type: "custom",
-      component: WelcomeScreen,
-      fullscreen: true,
-    },
-  },
-  {
     title: "When is your birthday?",
     description: "We use this to personalize your experience.",
     step: {
       type: "custom",
       component: BirthdaySelectionScreen,
+      fullscreen: true,
+    },
+  },
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "custom",
+      component: WelcomeScreen,
       fullscreen: true,
     },
   },
@@ -368,6 +372,135 @@ const STEPS: StepConfig[] = [
     step: {
       type: "custom",
       component: ThankYouScreen,
+      fullscreen: true,
+    },
+  },
+  // Step: Baseline Scores Ready
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "affirmation",
+      image: require("~/assets/yellow_character_cute.png"),
+      headline: "Now that you have your baseline scores",
+      subtext: "Let's design a program just for you.",
+    },
+  },
+  // Step: Difficulty
+  {
+    title: "What difficulty level would you like?",
+    description: "",
+    step: {
+      type: "selection",
+      dataKey: "difficulty",
+      maxSelections: 1,
+      options: [
+        {
+          label: "Standard (recommended)",
+          description: "I like to balance fun with difficulty.",
+          icon: <Zap size={24} color="#F59E0B" fill="#F59E0B" />, // Amber Zap
+        },
+        {
+          label: "Advanced",
+          description: "I'm here to work hard.",
+          icon: (
+            <View className="flex-row">
+              <Zap size={24} color="#EF4444" fill="#EF4444" />
+              <Zap size={24} color="#EF4444" fill="#EF4444" style={{ marginLeft: -8 }} />
+            </View>
+          ), // Double Red Zap
+        },
+      ],
+    },
+  },
+  // Step: Encouragement
+  {
+    title: "What kind of encouragement helps you stay motivated?",
+    description: "",
+    step: {
+      type: "selection",
+      dataKey: "encouragement",
+      maxSelections: 1,
+      options: [
+        {
+          label: "High fives",
+          description: "Celebrate all my successes.",
+          icon: <Hand size={24} color="#EF4444" fill="#EF4444" />, // Red Hand
+        },
+        {
+          label: "Tough love",
+          description: "Push me to stay on track.",
+          icon: <PartyPopper size={24} color="#10B981" />, // Greenish PartyPopper matching the cone shape/vibe
+        },
+      ],
+    },
+  },
+  // Step: Exercise Frequency
+  {
+    title: "How often do you exercise?",
+    description: "",
+    step: {
+      type: "selection",
+      dataKey: "exercise_frequency",
+      maxSelections: 1,
+      options: [
+        "Daily or almost daily",
+        "A few times per week",
+        "Once a week or less",
+        "Rarely or never",
+      ],
+    },
+  },
+  // Step: Sleep Duration
+  {
+    title: "How much sleep do you usually get each night?",
+    description: "",
+    step: {
+      type: "selection",
+      dataKey: "sleep_duration",
+      maxSelections: 1,
+      options: [
+        "4 hours or less",
+        "5-6 hours",
+        "7-8 hours",
+        "9 hours or more",
+      ],
+    },
+  },
+  // Step: Training Frequency
+  {
+    title: "How many days a week can you train?",
+    description: "People who do 5 days see the most gains in performance.",
+    step: {
+      type: "selection",
+      dataKey: "training_frequency",
+      maxSelections: 1,
+      options: [
+        "3 days a week",
+        "4 days a week",
+        "5 days a week",
+        "6 days a week",
+        "7 days a week",
+      ],
+    },
+  },
+  // Step: Plan Creation Loading
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "custom",
+      component: PlanCreationStep,
+      fullscreen: true,
+    },
+  },
+  // Step: Plan Reveal
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "custom",
+      component: PlanRevealStep,
       fullscreen: true,
     },
   },

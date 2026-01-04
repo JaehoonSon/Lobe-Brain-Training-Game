@@ -120,35 +120,35 @@ export function MentalLanguageDiscrimination({
       <View className="flex-row gap-4 w-full justify-center">
         {choices.map((choice, index) => {
           const isSelected = selectedChoice === choice;
+          const isCorrectAnswer = choice === question.answer;
+
+          let variant: "default" | "destructive" | "outline" | "secondary" = "default";
+
+          if (hasAnswered) {
+            if (isSelected && !isCorrectAnswer) {
+              variant = "destructive";
+            }
+          }
 
           return (
             <Button
               key={index}
-              variant="outline"
+              variant={variant}
+              size="xl"
               className={cn(
-                "h-24 px-8 min-w-[140px] rounded-2xl border-2 active:scale-95",
-                !hasAnswered && "bg-secondary border-transparent",
-                hasAnswered &&
-                  choice === question.answer &&
-                  "bg-green-500 border-green-600",
-                hasAnswered &&
-                  choice !== question.answer &&
-                  isSelected &&
-                  "bg-red-500 border-red-600",
-                hasAnswered &&
-                  choice !== question.answer &&
-                  !isSelected &&
-                  "opacity-50"
+                "h-40 min-w-[160px] px-4 rounded-3xl active:scale-95 shadow-xl", // Match Mental Math size
+                hasAnswered && isCorrectAnswer && "bg-green-600 border-green-700", // Darker Green
+                hasAnswered && !isCorrectAnswer && isSelected && "bg-red-600 border-red-700", // Darker Red
+                hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
               onPress={() => handleChoice(choice)}
               disabled={hasAnswered}
             >
               <Text
                 className={cn(
-                  "text-2xl font-bold",
-                  hasAnswered && (choice === question.answer || isSelected)
-                    ? "text-white"
-                    : "text-foreground"
+                  "text-3xl font-black", // Sligthly smaller than 4xl to accommodate words
+                  variant === "default" && !hasAnswered && "text-primary-foreground",
+                  hasAnswered && isCorrectAnswer && "text-white"
                 )}
               >
                 {choice}
