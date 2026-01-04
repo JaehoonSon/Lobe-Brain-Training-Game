@@ -16,8 +16,9 @@ export default function SignUp() {
   const handleLogin = async () => {
     try {
       await signInApple();
-      router.replace("/(onboarding)/birthday");
+      router.replace("/(onboarding)");
     } catch (err) {
+      console.log("sign in error", err);
       showErrorToast("Error Signing in");
     }
   };
@@ -61,7 +62,7 @@ export default function SignUp() {
             size="xl"
             className="w-full rounded-2xl flex-row gap-3 mb-6"
             onPress={() => {
-              // signInGoogle() 
+              // signInGoogle()
               showErrorToast("Google Sign In not configured yet");
             }}
           >
@@ -73,9 +74,7 @@ export default function SignUp() {
         </Animated.View>
 
         {/* Terms */}
-        <Animated.View
-          entering={FadeInUp.delay(400).duration(600)}
-        >
+        <Animated.View entering={FadeInUp.delay(400).duration(600)}>
           <Text className="text-sm text-muted-foreground text-center leading-relaxed px-8">
             By continuing, you agree to our{" "}
             <Link href={appMetadata.privacyPolicyUrl}>

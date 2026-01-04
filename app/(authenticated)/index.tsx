@@ -5,14 +5,20 @@ import { Button } from "~/components/ui/button";
 import { useAuth } from "~/contexts/AuthProvider";
 import { router } from "expo-router";
 import { useOnboarding } from "~/contexts/OnboardingContext";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 export default function IndexAuthenticatedScreen() {
   const { user } = useAuth();
   const { resetOnboarding } = useOnboarding();
+  const { isPro, presentPaywall } = useRevenueCat();
 
   const restartOnboarding = async () => {
     await resetOnboarding();
     router.push("/(onboarding)");
+  };
+
+  const showPaywall = async () => {
+    await presentPaywall();
   };
 
   return (
@@ -31,6 +37,12 @@ export default function IndexAuthenticatedScreen() {
         </Button>
         <Button variant="outline" onPress={restartOnboarding}>
           <P>Restart onboarding</P>
+        </Button>
+        <Button variant="outline" onPress={showPaywall}>
+          <P>Present paywall</P>
+        </Button>
+        <Button variant="outline" onPress={() => router.push("/paywall")}>
+          <P>Go to paywall</P>
         </Button>
       </SafeAreaView>
     </View>

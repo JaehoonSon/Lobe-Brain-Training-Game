@@ -16,6 +16,7 @@ import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
 import { AuthProvider, useAuth } from "~/contexts/AuthProvider";
+import { RevenueCatProvider } from "~/contexts/RevenueCatProvider";
 import { SplashScreenController } from "./splash";
 import { OnboardingProvider } from "~/contexts/OnboardingContext";
 import Toast from "react-native-toast-message";
@@ -106,9 +107,11 @@ export default function RootLayout() {
       <AppThemeProvider>
         <AuthProvider>
           <OnboardingProvider>
-            <SplashScreenController />
-            <AppContent />
-            <Toast config={toastConfig} />
+            <RevenueCatProvider>
+              <SplashScreenController />
+              <AppContent />
+              <Toast config={toastConfig} />
+            </RevenueCatProvider>
           </OnboardingProvider>
         </AuthProvider>
       </AppThemeProvider>

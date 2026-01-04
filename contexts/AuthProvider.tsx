@@ -82,8 +82,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         provider: "apple",
         token: cred.identityToken,
       });
+      console.log("Apple sign in result:", data, error);
       if (error) throw error;
-      const id = await data.user.id;
     } finally {
       setIsSigningIn(false); // Done signing in
     }
