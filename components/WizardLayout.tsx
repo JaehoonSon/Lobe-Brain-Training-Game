@@ -14,6 +14,7 @@ interface WizardLayoutProps {
     description?: string;
     children: React.ReactNode;
     onNext?: () => void;
+    onPrev?: () => void;
     showSkip?: boolean;
     nextDisabled?: boolean;
     nextLabel?: string;
@@ -24,6 +25,7 @@ export function WizardLayout({
     description,
     children,
     onNext,
+    onPrev,
     showSkip = false,
     nextDisabled = false,
     nextLabel = "Continue",
@@ -42,6 +44,11 @@ export function WizardLayout({
     };
 
     const handleBack = () => {
+        if (onPrev) {
+            onPrev();
+            return;
+        }
+
         if (currentStep > 1) {
             prevStep();
         } else {
