@@ -40,7 +40,6 @@ export default function PlanRevealStep({ onNext, onBack }: PlanRevealStepProps) 
                 {/* Visual Section */}
                 <View className="items-center justify-center relative">
                     {/* Glow Effect */}
-                    <View className="absolute w-64 h-64 bg-primary/20 rounded-full blur-3xl" />
 
                     <Animated.View entering={ZoomIn.duration(600)}>
                         <Image
