@@ -28,6 +28,7 @@ import PlanCreationStep from "./steps/PlanCreationStep";
 import PlanRevealStep from "./steps/PlanRevealStep";
 import PaywallScreen from "../paywall";
 import DailyStreakStep from "./steps/DailyStreakStep";
+import PremiumFeaturesStep from "./steps/PremiumFeaturesStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -67,7 +68,7 @@ type StepConfig =
   | { title: string; description: string; step: GameStepConfig }
   | { title: string; description: string; step: InterventionStepConfig };
 
-const STEPS: StepConfig[] = [
+export const STEPS: StepConfig[] = [
   {
     title: "When is your birthday?",
     description: "We use this to personalize your experience.",
@@ -430,6 +431,17 @@ const STEPS: StepConfig[] = [
       fullscreen: true,
     },
   },
+  // Step: Program Design Affirmation
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "affirmation",
+      image: require("~/assets/brain_program_design.png"),
+      headline: "Now that you have your baseline scores",
+      subtext: "Let's design a program just for you.",
+    },
+  },
   // Step: Difficulty
   {
     title: "What difficulty level would you like?",
@@ -545,6 +557,15 @@ const STEPS: StepConfig[] = [
     step: {
       type: "custom",
       component: PlanRevealStep,
+      fullscreen: true,
+    },
+  },
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "custom",
+      component: PremiumFeaturesStep,
       fullscreen: true,
     },
   },

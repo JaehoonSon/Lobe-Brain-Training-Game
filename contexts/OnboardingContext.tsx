@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
+import { STEPS } from "~/app/(onboarding)";
 
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps
@@ -26,7 +27,7 @@ const OnboardingContext = createContext<OnboardingContextType | undefined>(
 );
 
 const ONBOARDING_STORAGE_KEY = "onboarding_progress";
-const TOTAL_STEPS = 32;
+const TOTAL_STEPS = STEPS.length;
 
 export function OnboardingProvider({
   children,
