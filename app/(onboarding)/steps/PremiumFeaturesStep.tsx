@@ -1,0 +1,136 @@
+import React, { useState, useRef } from "react";
+import { View, Image, Dimensions, FlatList, ViewToken } from "react-native";
+import { Text } from "~/components/ui/text";
+import { Button } from "~/components/ui/button";
+import { CustomStepProps } from "~/app/(onboarding)/index";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Animated, {
+  FadeInDown,
+  useAnimatedStyle,
+  withSpring,
+  useSharedValue,
+} from "react-native-reanimated";
+
+const { width } = Dimensions.get("window");
+
+const slides = [
+  {
+    id: "1",
+    title: "Personalized daily\nrecommendations",
+    description:
+      "Generated using your activity patterns and training preferences.",
+    image: require("~/assets/premium_recommendations.png"), // Placeholder for now, user will need to move generated files
+  },
+  {
+    id: "2",
+    title: "Games based on science",
+    description:
+      "Always stay challenged with games that adapt to your skill level.",
+    image: require("~/assets/premium_science.png"),
+  },
+  {
+    id: "3",
+    title: "Performance tracking",
+    description:
+      "Gain insights into your progress throughout your brain-training journey.",
+    image: require("~/assets/premium_tracking.png"),
+  },
+];
+
+export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
+  const insets = useSafeAreaInsets();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Ref for FlatList
+  const flatListRef = useRef<FlatList>(null);
+
+  // Update index on scroll
+  const onViewableItemsChanged = useRef(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems.length > 0 && viewableItems[0].index !== null) {
+        setCurrentIndex(viewableItems[0].index);
+      }
+    }
+  ).current;
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+  }).current;
+
+  return (
+    <View
+      className="flex-1 bg-background"
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom + 16 }}
+    >
+      <View className="flex-1">
+        <Animated.View
+          entering={FadeInDown.duration(600)}
+          className="pt-4 px-6 items-center"
+        >
+          <Text className="text-2xl font-bold text-center text-foreground mb-4">
+            Get more with{"\n"}Brain App Premium
+          </Text>
+        </Animated.View>
+
+        <FlatList
+          ref={flatListRef}
+          data={slides}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                width,
+                paddingHorizontal: 24,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <View className="items-center justify-center p-8 mb-8">
+                <Image
+                  source={item.image}
+                  style={{ width: 280, height: 280, resizeMode: "contain" }}
+                />
+              </View>
+              <Text className="text-2xl font-bold text-center text-foreground mb-4 leading-tight">
+                {item.title}
+              </Text>
+              <Text className="text-lg text-muted-foreground text-center leading-relaxed">
+                {item.description}
+              </Text>
+            </View>
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          bounces={false}
+          keyExtractor={(item) => item.id}
+          onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
+          scrollEventThrottle={32}
+        />
+
+        {/* Pagination Dots */}
+        <View className="flex-row justify-center space-x-2 mb-8">
+          {slides.map((_, index) => (
+            <View
+              key={index}
+              className={`h-2.5 rounded-full ${
+                currentIndex === index
+                  ? "bg-orange-500 w-6"
+                  : "bg-muted-foreground/30 w-2.5"
+              }`}
+            />
+          ))}
+        </View>
+      </View>
+
+      <Animated.View
+        entering={FadeInDown.delay(300).duration(600)}
+        className="px-6"
+      >
+        <Button size="xl" className="w-full rounded-2xl h-16" onPress={onNext}>
+          <Text className="font-bold text-xl">Continue</Text>
+        </Button>
+      </Animated.View>
+    </View>
+  );
+}
