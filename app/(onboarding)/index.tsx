@@ -68,7 +68,7 @@ type StepConfig =
   | { title: string; description: string; step: GameStepConfig }
   | { title: string; description: string; step: InterventionStepConfig };
 
-const STEPS: StepConfig[] = [
+export const STEPS: StepConfig[] = [
   {
     title: "When is your birthday?",
     description: "We use this to personalize your experience.",
