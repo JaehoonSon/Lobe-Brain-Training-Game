@@ -9,7 +9,7 @@ import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 export default function IndexAuthenticatedScreen() {
   const { user } = useAuth();
-  const { resetOnboarding } = useOnboarding();
+  const { resetOnboarding, prevStep } = useOnboarding();
   const { isPro, presentPaywall } = useRevenueCat();
 
   const restartOnboarding = async () => {
@@ -19,6 +19,15 @@ export default function IndexAuthenticatedScreen() {
 
   const showPaywall = async () => {
     await presentPaywall();
+  };
+
+  const goBackFewSteps = () => {
+    const amount = 8;
+    for (let i = 0; i < amount; i++) {
+      prevStep();
+    }
+
+    router.push("/(onboarding)");
   };
 
   return (
@@ -37,6 +46,9 @@ export default function IndexAuthenticatedScreen() {
         </Button>
         <Button variant="outline" onPress={restartOnboarding}>
           <P>Restart onboarding</P>
+        </Button>
+        <Button variant="outline" onPress={goBackFewSteps}>
+          <P>Go back few steps</P>
         </Button>
         <Button variant="outline" onPress={showPaywall}>
           <P>Present paywall</P>

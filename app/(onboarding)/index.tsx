@@ -27,6 +27,7 @@ import InterventionStep, {
 import PlanCreationStep from "./steps/PlanCreationStep";
 import PlanRevealStep from "./steps/PlanRevealStep";
 import PaywallScreen from "../paywall";
+import DailyStreakStep from "./steps/DailyStreakStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -419,15 +420,14 @@ const STEPS: StepConfig[] = [
       fullscreen: true,
     },
   },
-  // Step: Baseline Scores Ready
+  // Step: Daily Streak
   {
     title: "",
     description: "",
     step: {
-      type: "affirmation",
-      image: require("~/assets/yellow_character_cute.png"),
-      headline: "Now that you have your baseline scores",
-      subtext: "Let's design a program just for you.",
+      type: "custom",
+      component: DailyStreakStep,
+      fullscreen: true,
     },
   },
   // Step: Difficulty
