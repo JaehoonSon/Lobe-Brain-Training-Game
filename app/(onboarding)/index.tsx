@@ -370,6 +370,43 @@ const STEPS: StepConfig[] = [
       component: InterventionStep,
       title: "Excellent!",
       description: "That measured your verbal discrimination skills.",
+      buttonText: "Next Challenge",
+      variant: "outro",
+    },
+  },
+  // --- Game 3: Memory Matrix ---
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "intervention",
+      component: InterventionStep,
+      title: "Memory Matrix",
+      description: "Let's test your spatial memory and recall.",
+      buttonText: "Start",
+      variant: "intro",
+    },
+  },
+  {
+    title: "Memory Matrix",
+    description: "",
+    step: {
+      type: "game",
+      component: GameStep,
+      fullscreen: true,
+      gameConfig: {
+        type: "memory_matrix",
+      },
+    },
+  },
+  {
+    title: "",
+    description: "",
+    step: {
+      type: "intervention",
+      component: InterventionStep,
+      title: "Great work!",
+      description: "That measured your spatial memory.",
       buttonText: "See Results",
       variant: "outro",
     },

@@ -6,12 +6,16 @@ import { Button } from "~/components/ui/button";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
+import { MemoryMatrix } from "~/components/games/MemoryMatrix";
 import { Progress } from "~/components/ui/progress";
 
 import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export interface GameConfig {
-  type: "mental_arithmetic" | "mental_language_discrimination";
+  type:
+  | "mental_arithmetic"
+  | "mental_language_discrimination"
+  | "memory_matrix";
 }
 
 const TOTAL_ROUNDS = 5;
@@ -54,7 +58,8 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
 
   if (
     gameConfig.type === "mental_arithmetic" ||
-    gameConfig.type === "mental_language_discrimination"
+    gameConfig.type === "mental_language_discrimination" ||
+    gameConfig.type === "memory_matrix"
   ) {
     return (
       <SafeAreaView className="flex-1 bg-background">
@@ -76,8 +81,14 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
                 onComplete={handleRoundComplete}
                 difficulty="easy"
               />
-            ) : (
+            ) : gameConfig.type === "mental_language_discrimination" ? (
               <MentalLanguageDiscrimination
+                key={roundIndex}
+                onComplete={handleRoundComplete}
+                difficulty="easy"
+              />
+            ) : (
+              <MemoryMatrix
                 key={roundIndex}
                 onComplete={handleRoundComplete}
                 difficulty="easy"
