@@ -8,7 +8,9 @@ import Animated, {
   FadeInDown,
   useAnimatedStyle,
   withSpring,
+  withTiming,
   useSharedValue,
+  LinearTransition,
 } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
@@ -67,7 +69,10 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           entering={FadeInDown.duration(600)}
           className="pt-4 px-6 items-center"
         >
-          <Text className="text-2xl font-bold text-center text-foreground mb-4">
+          <Text className="text-xl font-bold text-primary uppercase tracking-widest mb-2">
+            Unlock Everything
+          </Text>
+          <Text className="text-4xl font-black text-center text-foreground leading-tight mb-4">
             Get more with{"\n"}Brain App Premium
           </Text>
         </Animated.View>
@@ -109,17 +114,21 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
         />
 
         {/* Pagination Dots */}
-        <View className="flex-row justify-center space-x-2 mb-8">
-          {slides.map((_, index) => (
-            <View
-              key={index}
-              className={`h-2.5 rounded-full ${
-                currentIndex === index
-                  ? "bg-orange-500 w-6"
-                  : "bg-muted-foreground/30 w-2.5"
-              }`}
-            />
-          ))}
+        <View className="flex-row justify-center items-center gap-2 mb-8">
+          {slides.map((_, index) => {
+            const isActive = currentIndex === index;
+            // Using inline animated styles for simplicity given we have the index state
+            // For a truly "perfect" 60fps scroll-driven animation we'd need useAnimatedScrollHandler
+            // but for "ugly" and "spacing" fixes, smooth state transition is huge improvement.
+            return (
+              <Animated.View
+                key={index}
+                layout={LinearTransition.springify().damping(15).stiffness(100)}
+                className={`h-2 rounded-full ${isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
+                  }`}
+              />
+            );
+          })}
         </View>
       </View>
 

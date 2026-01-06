@@ -438,7 +438,7 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/brain_program_design.png"),
-      headline: "Now that you have your baseline scores",
+      headline: "Now that we have your baseline scores",
       subtext: "Let's design a program just for you.",
     },
   },

@@ -123,9 +123,9 @@ export function MemoryMatrix({
 
     return (
         <View className="flex-1 items-center justify-center p-6">
-            <View className="mb-8 items-center">
-                <Text className="text-2xl font-bold mb-2">Memory Matrix</Text>
-                <Text className="text-muted-foreground text-center">
+            <View className="mb-12 items-center">
+                <Text className="text-5xl font-extrabold mb-4 text-center">Memory Matrix</Text>
+                <Text className="text-xl text-muted-foreground text-center">
                     {phase === "memorize" && "Remember the pattern..."}
                     {phase === "recall" && "Reproduce the pattern"}
                     {phase === "result" && "Checking..."}
@@ -133,8 +133,8 @@ export function MemoryMatrix({
             </View>
 
             <View
-                className="flex-row flex-wrap justify-center gap-2"
-                style={{ width: gridSize * 70 + (gridSize - 1) * 8 }} // Approx sizing
+                className="flex-row flex-wrap justify-center gap-4"
+                style={{ width: gridSize * 80 + (gridSize - 1) * 16 }} // Scaled sizing (80px tiles + 16px gap)
             >
                 {Array.from({ length: gridSize * gridSize }).map((_, i) => {
                     const state = getTileState(i);
@@ -145,7 +145,7 @@ export function MemoryMatrix({
                             activeOpacity={0.8}
                             onPress={() => handleTilePress(i)}
                             className={cn(
-                                "w-16 h-16 rounded-xl border-2 transition-all duration-200",
+                                "w-20 h-20 rounded-2xl border-4 transition-all duration-200",
                                 // Default state (hidden)
                                 state === "hidden" && "bg-card border-border",
                                 // Active (memorize phase or recall selection)

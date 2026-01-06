@@ -13,12 +13,9 @@
     "postinstall": "npx tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css",
     "lint": "expo lint",
     "db:link": "npx supabase link",
+    "db:new": "npx supabase migration new",
     "db:push": "npx supabase db push",
-    "db:pull": "npx supabase db pull",
-    "db:reset": "npx supabase db reset",
-    "db:diff": "npx supabase db diff",
-    "db:types": "npx supabase gen types typescript --linked > lib/database.types.ts",
-    "db:status": "npx supabase status"
+    "db:types": "npx supabase gen types typescript --linked > lib/database.types.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.0-beta.124",
