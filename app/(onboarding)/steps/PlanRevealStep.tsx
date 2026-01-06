@@ -44,7 +44,7 @@ export default function PlanRevealStep({ onNext, onBack }: PlanRevealStepProps) 
                     <Animated.View entering={ZoomIn.duration(600)}>
                         <Image
                             source={require("~/assets/brain_growth_chart.png")}
-                            style={{ width: 240, height: 240 }}
+                            style={{ width: 280, height: 280 }}
                             resizeMode="contain"
                         />
                     </Animated.View>
