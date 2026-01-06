@@ -7,9 +7,9 @@ export default function PaywallScreen() {
 
   return (
     <Paywall
-      onPurchaseCompleted={() => router.back()}
-      onRestoreCompleted={() => router.back()}
-      onDismiss={() => router.back()}
+      onPurchaseCompleted={() => router.replace("/(authenticated)/(tabs)")}
+      onRestoreCompleted={() => router.replace("/(authenticated)/(tabs)")}
+      onDismiss={() => router.replace("/(authenticated)/(tabs)")}
     />
   );
 }
