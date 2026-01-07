@@ -7,9 +7,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "~/contexts/AuthProvider";
-import { H1, H3, P, Muted } from "~/components/ui/typography";
+import { H1, H3, H4, P, Muted, Large } from "~/components/ui/typography";
 import { Card, CardHeader, CardContent } from "~/components/ui/card";
 import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 import {
   X,
   Lock,
@@ -89,7 +90,7 @@ const MOCK_GAMES: Game[] = [
 ];
 
 const getGameIcon = (iconUrl: string | null, color: string) => {
-  const size = 32;
+  const size = 36; // Increased for better mobile visibility
   switch (iconUrl) {
     case "math":
       return <Calculator color={color} size={size} />;
@@ -106,18 +107,19 @@ const getGameIcon = (iconUrl: string | null, color: string) => {
   }
 };
 
+// Decorative: unique game category colors for visual variety
 const getGameColor = (iconUrl: string | null) => {
   switch (iconUrl) {
     case "math":
-      return "bg-pink-500";
+      return "bg-accent"; // Pink/Rose from theme
     case "language":
-      return "bg-cyan-500";
+      return "bg-secondary"; // Magenta from theme
     case "favorites":
-      return "bg-orange-400";
+      return "bg-primary"; // Orange from theme
     case "strengthen":
-      return "bg-teal-500";
+      return "bg-accent"; // Uses accent color
     case "quick":
-      return "bg-green-500";
+      return "bg-secondary"; // Uses secondary color
     default:
       return "bg-primary";
   }
@@ -156,31 +158,37 @@ export default function Dashboard() {
           <Card className="mb-6 overflow-hidden border-border bg-card shadow-sm">
             <CardContent className="p-8 items-center gap-4">
               {/* Placeholder for Brain Icon */}
-              <View className="w-24 h-24 rounded-full bg-orange-100 dark:bg-orange-900/20 items-center justify-center mb-2">
-                <View className="w-16 h-16 rounded-full bg-orange-500 items-center justify-center">
-                  <Zap size={40} color="white" fill="white" />
+              <View className="w-28 h-28 rounded-full bg-primary/20 items-center justify-center mb-2">
+                <View className="w-20 h-20 rounded-full bg-primary items-center justify-center">
+                  <Zap size={48} color="white" fill="white" />
                 </View>
               </View>
 
               <View className="items-center">
-                <H3 className="text-2xl font-bold text-center">
+                <H3 className="text-3xl font-bold text-center">
                   Daily Workout
                 </H3>
-                <Muted className="text-center mt-1">{today} | 3 Games</Muted>
+                <P className="text-muted-foreground text-center mt-2 text-lg">
+                  {today} | 3 Games
+                </P>
               </View>
 
-              <Button className="w-48 bg-orange-500 active:bg-orange-600 rounded-full h-12 mt-2">
-                <P className="text-white font-bold text-lg">Start</P>
+              <Button size="xl" className="w-52 bg-primary active:bg-primary/80 rounded-full mt-3">
+                <Text className="text-primary-foreground font-bold">
+                  Start
+                </Text>
               </Button>
             </CardContent>
           </Card>
 
           {/* More Workouts Section */}
           <View className="flex-row justify-between items-center mb-4">
-            <H3 className="text-xl">More Workouts</H3>
-            <TouchableOpacity className="bg-green-500 rounded-full px-3 py-1 flex-row items-center">
-              <P className="text-white text-xs font-bold mr-1">UNLOCK</P>
-              <Lock size={10} color="white" />
+            <H3 className="text-2xl">More Workouts</H3>
+            <TouchableOpacity className="bg-secondary rounded-full px-4 py-2 flex-row items-center">
+              <Text className="text-secondary-foreground text-sm font-bold mr-1.5">
+                UNLOCK
+              </Text>
+              <Lock size={14} color="white" />
             </TouchableOpacity>
           </View>
 
@@ -190,26 +198,26 @@ export default function Dashboard() {
                 key={game.id}
                 className="overflow-hidden bg-card border-border shadow-sm"
               >
-                <CardContent className="p-4 flex-row items-center gap-4">
+                <CardContent className="p-5 flex-row items-center gap-4">
                   <View
-                    className={`w-14 h-14 rounded-full ${getGameColor(
+                    className={`w-16 h-16 rounded-full ${getGameColor(
                       game.icon_url
                     )} items-center justify-center`}
                   >
                     {getGameIcon(game.icon_url, "white")}
-                    <View className="absolute bottom-0 right-0 bg-background rounded-full p-0.5 border border-border">
-                      <Lock size={10} className="text-foreground" />
+                    <View className="absolute bottom-0 right-0 bg-background rounded-full p-1 border border-border">
+                      <Lock size={12} className="text-foreground" />
                     </View>
                   </View>
-                  <View className="flex-1 gap-1">
+                  <View className="flex-1 gap-1.5">
                     <View className="flex-row justify-between items-start">
-                      <H3 className="text-lg">{game.name}</H3>
-                      <View className="flex-row items-center gap-1">
-                        <View className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                        <Muted className="text-xs">0/5</Muted>
+                      <H4>{game.name}</H4>
+                      <View className="flex-row items-center gap-1.5">
+                        <View className="w-2 h-2 rounded-full bg-primary" />
+                        <Muted className="text-sm">0/5</Muted>
                       </View>
                     </View>
-                    <P className="text-sm text-muted-foreground leading-5">
+                    <P className="text-base text-muted-foreground leading-6">
                       {game.description}
                     </P>
                   </View>
@@ -222,3 +230,4 @@ export default function Dashboard() {
     </SafeAreaView>
   );
 }
+
