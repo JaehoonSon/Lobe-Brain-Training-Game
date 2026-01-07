@@ -6,6 +6,7 @@ import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MemoryMatrix } from "~/components/games/MemoryMatrix";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
 import { GameContentSchema } from "~/lib/validators/game-content";
+import { generateMemoryMatrix } from "~/lib/generators/memoryMatrix";
 import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 
@@ -28,6 +29,20 @@ export default function GamePlayScreen() {
     setCurrentQuestionIndex(0);
 
     try {
+      // Branch: Procedural vs Static
+      if (id === "memory_matrix") {
+        console.log("Generating procedural content for:", id);
+        const newQuestions = [];
+        for (let i = 0; i < QUESTIONS_PER_ROUND; i++) {
+          // TODO: Dynamic difficulty based on user history (Defaulting to 1 for MVP)
+          newQuestions.push(generateMemoryMatrix({ difficulty: 1 }));
+        }
+        setSessionQuestions(newQuestions);
+        setCurrentQuestionIndex(0);
+        setLoading(false);
+        return;
+      }
+
       console.log("Fetching game content for:", id);
       const { data, error } = await supabase
         .from("questions")
@@ -161,10 +176,10 @@ export default function GamePlayScreen() {
           "memory_matrix",
           "mental_language_discrimination",
         ].includes(id as string) && (
-          <View className="flex-1 items-center justify-center">
-            <Text>Game component not implemented for {id}</Text>
-          </View>
-        )}
+            <View className="flex-1 items-center justify-center">
+              <Text>Game component not implemented for {id}</Text>
+            </View>
+          )}
       </View>
     </View>
   );

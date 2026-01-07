@@ -1,49 +1,62 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, ActivityIndicator } from "react-native";
 import { Text } from "~/components/ui/text";
+import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
-import { MemoryMatrixContent } from "~/lib/validators/game-content";
+import { MemoryMatrixInstance } from "~/lib/generators/memoryMatrix";
+import { useGameSession } from "~/hooks/useGameSession";
+import { supabase } from "~/lib/supabase";
 
 interface MemoryMatrixProps {
   onComplete: (isCorrect: boolean) => void;
-  content: MemoryMatrixContent;
+  content: MemoryMatrixInstance;
+  onExit?: () => void;
 }
 
 type TileState = "hidden" | "active" | "correct" | "incorrect" | "missed";
 type GamePhase = "memorize" | "recall" | "result";
 
-export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
-  const [gridSize, setGridSize] = useState(content.grid_size.rows); // Assuming square for now or handle rows/cols in render
-  const [activeTiles, setActiveTiles] = useState<number[]>([]);
-  const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
+export function MemoryMatrix({ onComplete, content, onExit }: MemoryMatrixProps) {
   const [phase, setPhase] = useState<GamePhase>("memorize");
+  const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
+  const { state: session, startGame, endGame } = useGameSession();
+  const [userId, setUserId] = useState<string | null>(null);
 
-  // Reset when content changes
+  // Initialize User (in a real app, this comes from context)
   useEffect(() => {
-    setGridSize(content.grid_size.rows);
-    generateLevel();
-  }, [content]);
+    supabase.auth.getUser().then(({ data }) => {
+      setUserId(data.user?.id || "anon");
+    });
+  }, []);
 
-  const generateLevel = useCallback(() => {
-    // Generate random unique tiles
-    const totalTiles = content.grid_size.rows * content.grid_size.cols;
-    const newActiveTiles: number[] = [];
-    while (newActiveTiles.length < content.target_count) {
-      const tileIndex = Math.floor(Math.random() * totalTiles);
-      if (!newActiveTiles.includes(tileIndex)) {
-        newActiveTiles.push(tileIndex);
-      }
+  // Start the Game Session
+  useEffect(() => {
+    if (userId && !session.isPlaying && !session.isFinished) {
+      startGame(
+        {
+          gameId: "memory_matrix",
+          difficulty: content.difficulty,
+          userId: userId,
+          metadata: { mode: "standard" },
+        },
+        content
+      );
+
+      // Visual Phase Logic
+      setPhase("memorize");
+      setSelectedTiles([]);
+
+      // Timer for memorization phase
+      const timer = setTimeout(() => {
+        setPhase("recall");
+      }, 2000); // Default 2s for now, or use content.targetTimeMs logic if applicable strictly for display
+
+      return () => clearTimeout(timer);
     }
-    setActiveTiles(newActiveTiles);
-    setSelectedTiles([]);
-    setPhase("memorize");
+  }, [content, userId, startGame, session.isPlaying, session.isFinished]);
 
-    // Switch to recall phase after time
-    setTimeout(() => {
-      setPhase("recall");
-    }, content.display_time_ms);
-  }, [content]);
+  const activeTiles = content.targets.map(t => t.row * content.gridSize + t.col);
 
   const handleTilePress = (index: number) => {
     if (phase !== "recall") return;
@@ -53,7 +66,8 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
     setSelectedTiles(newSelected);
     Haptics.selectionAsync();
 
-    if (newSelected.length === content.target_count) {
+    // Check if finished
+    if (newSelected.length === content.targets.length) {
       checkResult(newSelected);
     }
   };
@@ -61,47 +75,87 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
   const checkResult = (selections: number[]) => {
     setPhase("result");
 
-    // Check correctness
-    const allCorrect =
-      selections.every((s) => activeTiles.includes(s)) &&
-      selections.length === activeTiles.length;
+    const correctPicks = selections.filter(s => activeTiles.includes(s)).length;
+    const totalTargets = activeTiles.length;
+    const accuracy = correctPicks / totalTargets;
 
-    if (allCorrect) {
+    // Determine strict correctness (for haptics/ui)
+    const isPerfect = accuracy === 1.0;
+
+    if (isPerfect) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
 
+    // End Session (Calculates BPI and Syncs)
+    // We pass the selection details for replay
+    endGame(accuracy, {
+      selectedIndices: selections,
+      targetIndices: activeTiles
+    });
+
+    // Notify Parent after delay
     setTimeout(() => {
-      onComplete(allCorrect);
-    }, 1500); // Wait a bit to show the result
+      onComplete(isPerfect);
+    }, 2000);
   };
 
   const getTileState = (index: number): TileState => {
+    // 1. Memorize Phase: Show targets
     if (phase === "memorize") {
       return activeTiles.includes(index) ? "active" : "hidden";
     }
 
+    // 2. Recall Phase: Show what user clicked
     if (phase === "recall") {
       return selectedTiles.includes(index) ? "active" : "hidden";
     }
 
+    // 3. Result Phase: Show Truth vs Selection
     if (phase === "result") {
       const isSelected = selectedTiles.includes(index);
       const isActive = activeTiles.includes(index);
 
-      if (isSelected && isActive) return "correct";
-      if (isSelected && !isActive) return "incorrect";
-      if (!isSelected && isActive) return "missed";
+      if (isSelected && isActive) return "correct";     // Found it
+      if (isSelected && !isActive) return "incorrect";  // Wrong click
+      if (!isSelected && isActive) return "missed";     // Forgot it
     }
 
     return "hidden";
   };
 
-  // Dynamic grid sizing logic can be improved, roughly scaled for now
-  // Assumes square-ish grid for visual simplicity or uses rows/cols
-  const rows = content.grid_size.rows;
-  const cols = content.grid_size.cols;
+  const rows = content.gridSize;
+  const cols = content.gridSize;
+
+  if (session.isFinished && session.score !== null) {
+    return (
+      <View className="flex-1 items-center justify-center p-6">
+        <Text className="text-3xl font-bold mb-2">Round Complete</Text>
+        <Text className="text-xl text-muted-foreground mb-8">Score Calculation...</Text>
+
+        <View className="bg-card p-6 rounded-xl w-full max-w-sm items-center border border-border">
+          <Text className="text-sm text-muted-foreground uppercase tracking-widest mb-2">BPI Score</Text>
+          <Text className="text-6xl font-black text-primary mb-4">{session.score}</Text>
+
+          <View className="flex-row gap-4 w-full justify-between">
+            <View>
+              <Text className="text-xs text-muted-foreground">Accuracy</Text>
+              <Text className="font-bold">{Math.round((selectedTiles.filter(s => activeTiles.includes(s)).length / activeTiles.length) * 100)}%</Text>
+            </View>
+            <View>
+              <Text className="text-xs text-muted-foreground">Time</Text>
+              <Text className="font-bold">{(session.durationMs / 1000).toFixed(1)}s</Text>
+            </View>
+            <View>
+              <Text className="text-xs text-muted-foreground">Diff</Text>
+              <Text className="font-bold">{content.difficulty}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    )
+  }
 
   return (
     <View className="flex-1 items-center justify-center p-6">
@@ -118,7 +172,7 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
 
       <View
         className="flex-row flex-wrap justify-center gap-4"
-        style={{ width: cols * 80 + (cols - 1) * 16 }} // Scaled sizing (80px tiles + 16px gap)
+        style={{ width: cols * 80 + (cols - 1) * 16 }} // Scaled sizing
       >
         {Array.from({ length: rows * cols }).map((_, i) => {
           const state = getTileState(i);
@@ -130,17 +184,11 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
               onPress={() => handleTilePress(i)}
               className={cn(
                 "w-20 h-20 rounded-2xl border-4 transition-all duration-200",
-                // Default state (hidden)
                 state === "hidden" && "bg-card border-border",
-                // Active (memorize phase or recall selection)
                 state === "active" && "bg-primary border-primary",
-                // Correct (result)
                 state === "correct" && "bg-green-500 border-green-600",
-                // Incorrect (result)
                 state === "incorrect" && "bg-destructive border-destructive",
-                // Missed (result)
-                state === "missed" &&
-                  "bg-yellow-400 border-yellow-500 opacity-50"
+                state === "missed" && "bg-yellow-400 border-yellow-500 opacity-50"
               )}
               disabled={phase !== "recall"}
             />
