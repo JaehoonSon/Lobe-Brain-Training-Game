@@ -4,94 +4,36 @@ import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
+import { MentalLanguageDiscriminationContent } from "~/lib/validators/game-content";
 
 interface MentalLanguageDiscriminationProps {
   onComplete: (isCorrect: boolean) => void;
-  difficulty?: "easy" | "medium" | "hard";
+  content: MentalLanguageDiscriminationContent;
 }
-
-interface Question {
-  sentenceParts: string[]; // ["She went ", " the store."]
-  options: string[]; // ["to", "too"]
-  answer: string;
-}
-
-const QUESTIONS: Question[] = [
-  {
-    sentenceParts: ["I need to ", " my homework before dinner."],
-    options: ["finish", "Finnish"],
-    answer: "finish",
-  },
-  {
-    sentenceParts: ["She left her keys over ", "."],
-    options: ["there", "their"],
-    answer: "there",
-  },
-  {
-    sentenceParts: ["He bought a new ", " of shoes."],
-    options: ["pear", "pair"],
-    answer: "pair",
-  },
-  {
-    sentenceParts: ["Please ", " quietly during the movie."],
-    options: ["seat", "sit"],
-    answer: "sit",
-  },
-  {
-    sentenceParts: ["They went ", " after work."],
-    options: ["two", "too"],
-    answer: "too",
-  },
-  {
-    sentenceParts: ["The dog wagged its ", "."],
-    options: ["tail", "tale"],
-    answer: "tail",
-  },
-  {
-    sentenceParts: ["I will ", " you tomorrow."],
-    options: ["see", "sea"],
-    answer: "see",
-  },
-  {
-    sentenceParts: ["The knight rode into the ", "."],
-    options: ["night", "knight"],
-    answer: "night",
-  },
-];
 
 export function MentalLanguageDiscrimination({
   onComplete,
-  difficulty = "easy",
+  content,
 }: MentalLanguageDiscriminationProps) {
-  const [question, setQuestion] = useState<Question | null>(null);
   const [choices, setChoices] = useState<string[]>([]);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
 
   useEffect(() => {
-    generateNewQuestion();
-  }, []);
-
-  const generateNewQuestion = () => {
-    const randomIndex = Math.floor(Math.random() * QUESTIONS.length);
-    const q = QUESTIONS[randomIndex];
-
-    // Shuffle choices
-    const newChoices = [...q.options].sort(() => Math.random() - 0.5);
-
-    setQuestion(q);
+    // Shuffle choices from content options
+    const newChoices = [...content.options].sort(() => Math.random() - 0.5);
     setChoices(newChoices);
     setSelectedChoice(null);
     setHasAnswered(false);
-  };
+  }, [content]);
 
   const handleChoice = (choice: string) => {
-    if (hasAnswered || !question) return;
+    if (hasAnswered) return;
 
     setHasAnswered(true);
     setSelectedChoice(choice);
 
-    const isCorrect = choice === question.answer;
+    const isCorrect = choice === content.answer;
 
     if (isCorrect) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
@@ -105,24 +47,23 @@ export function MentalLanguageDiscrimination({
     }, 500);
   };
 
-  if (!question) return null;
-
   return (
     <View className="flex-1 items-center justify-center p-6 gap-8">
       <View className="items-center justify-center h-48 w-full">
         <Text className="text-3xl font-bold text-foreground text-center p-3 leading-relaxed">
-          {question.sentenceParts[0]}
+          {content.sentenceParts[0]}
           <Text className="text-primary underline">_____</Text>
-          {question.sentenceParts[1]}
+          {content.sentenceParts[1]}
         </Text>
       </View>
 
       <View className="flex-row gap-4 w-full justify-center">
         {choices.map((choice, index) => {
           const isSelected = selectedChoice === choice;
-          const isCorrectAnswer = choice === question.answer;
+          const isCorrectAnswer = choice === content.answer;
 
-          let variant: "default" | "destructive" | "outline" | "secondary" = "default";
+          let variant: "default" | "destructive" | "outline" | "secondary" =
+            "default";
 
           if (hasAnswered) {
             if (isSelected && !isCorrectAnswer) {
@@ -137,8 +78,13 @@ export function MentalLanguageDiscrimination({
               size="xl"
               className={cn(
                 "h-40 min-w-[160px] px-4 rounded-3xl active:scale-95 shadow-xl", // Match Mental Math size
-                hasAnswered && isCorrectAnswer && "bg-green-600 border-green-700", // Darker Green
-                hasAnswered && !isCorrectAnswer && isSelected && "bg-red-600 border-red-700", // Darker Red
+                hasAnswered &&
+                  isCorrectAnswer &&
+                  "bg-green-600 border-green-700", // Darker Green
+                hasAnswered &&
+                  !isCorrectAnswer &&
+                  isSelected &&
+                  "bg-red-600 border-red-700", // Darker Red
                 hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
               onPress={() => handleChoice(choice)}
@@ -147,7 +93,9 @@ export function MentalLanguageDiscrimination({
               <Text
                 className={cn(
                   "text-3xl font-black", // Sligthly smaller than 4xl to accommodate words
-                  variant === "default" && !hasAnswered && "text-primary-foreground",
+                  variant === "default" &&
+                    !hasAnswered &&
+                    "text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white"
                 )}
               >

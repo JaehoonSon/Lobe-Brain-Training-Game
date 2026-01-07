@@ -7,11 +7,10 @@ import {
 } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { useGames } from "~/contexts/GamesContext";
-import { H1, H2, H3, H4, P, Muted } from "~/components/ui/typography";
+import { H1, H4, P } from "~/components/ui/typography";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import {
-  ArrowLeft,
   ChevronLeft,
   X,
   Trophy,
@@ -21,17 +20,15 @@ import {
 } from "lucide-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import { cn } from "~/lib/utils";
 
 export default function GameDetailScreen() {
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
   const { games, categories } = useGames();
 
   const game = games.find((g) => g.id === id);
   const category = categories.find((c) => c.id === game?.category_id);
 
   if (!game) {
-    // Handle loading or not found state better in real app
     return (
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator />
@@ -170,10 +167,10 @@ export default function GameDetailScreen() {
           <Button
             size="xl"
             className="flex-1 rounded-full"
-            onPress={() => console.log("Start Tutorial")}
+            onPress={() => router.push(`/game/${id}/play`)}
           >
             <Text className="text-primary-foreground font-bold">
-              Start Tutorial
+              Start Game
             </Text>
           </Button>
         </View>
@@ -181,4 +178,3 @@ export default function GameDetailScreen() {
     </View>
   );
 }
-
