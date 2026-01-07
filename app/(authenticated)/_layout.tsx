@@ -33,14 +33,14 @@ export default function AuthenticatedLayout() {
         <Stack.Screen
           name="settings"
           options={{
-            presentation: "card",
+            presentation: "pageSheet",
             animation: "default",
           }}
         />
         <Stack.Screen
           name="dev_setting"
           options={{
-            presentation: "card",
+            presentation: "pageSheet",
             animation: "default",
           }}
         />

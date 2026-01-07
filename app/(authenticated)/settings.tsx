@@ -1,34 +1,47 @@
 import {
-  ChevronLeft,
   ChevronRight,
   LogOut,
   ShieldCheck,
   BookText,
   Trash,
   User,
+  Info,
+  Crown,
 } from "lucide-react-native";
 import {
   View,
-  Text,
   TouchableOpacity,
   Linking,
   Alert,
   ScrollView,
 } from "react-native";
+import Constants from "expo-constants";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Card, CardHeader } from "~/components/ui/card";
 import { showErrorToast } from "~/components/ui/toast";
-import { H1, H3, Muted, P } from "~/components/ui/typography";
+import { H1, H2, Muted, P } from "~/components/ui/typography";
 import { useAuth } from "~/contexts/AuthProvider";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
 import { appMetadata } from "~/config";
-import { router } from "expo-router";
+
+// Get version info from app.json via expo-constants
+const appVersion = Constants.expoConfig?.version ?? "1.0.0";
+const buildNumber =
+  Constants.expoConfig?.ios?.buildNumber ??
+  Constants.expoConfig?.android?.versionCode?.toString() ??
+  "1";
 
 export default function Settings() {
   const { user, logout } = useAuth();
+  const { isPro, presentPaywall, currentOffering } = useRevenueCat();
 
-  const handle_dev = async () => {};
+  const handleMembershipPress = async () => {
+    playHaptic("soft");
+    if (!isPro) {
+      await presentPaywall();
+    }
+    // If Pro, we just show the info (no action needed)
+  };
 
   const handle_privacy = async () => {
     playHaptic("soft");
@@ -54,10 +67,7 @@ export default function Settings() {
       "Confirm Deletion",
       "Are you sure you want to delete your account? This action cannot be undone.",
       [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
+        { text: "Cancel", style: "cancel" },
         {
           text: "Delete",
           style: "destructive",
@@ -74,144 +84,199 @@ export default function Settings() {
       { cancelable: true }
     );
   };
+
+  // Get membership label
+  const membershipLabel = isPro ? ENTITLEMENT_ID : "Member (limited access)";
+  const membershipDescription = isPro
+    ? "You have full access to all features"
+    : "Tap to upgrade";
+
   return (
-    <ScrollView className="flex-1 bg-background">
-      <View className="flex-1 gap-5 p-2 bg-background">
-        <SafeAreaView className="flex-1 items-center gap-y-4" edges={["top"]}>
-          <View className="flex flex-row items-center gap-x-3 mr-auto">
-            <TouchableOpacity
-              className="rounded-full p-1 items-center justify-center"
-              onPress={router.back}
-            >
-              <ChevronLeft />
-            </TouchableOpacity>
-            <H1 className="mr-auto">Settings</H1>
-          </View>
-          <Card className="w-full">
-            <CardHeader className="flex flex-row items-center">
-              <Avatar alt="Avatar" className="w-16 h-16 bg-primary">
-                <AvatarImage
-                  source={{ uri: user?.user_metadata?.avatar_url ?? "" }}
-                />
-                <AvatarFallback>
-                  <User strokeWidth={2.5} vectorEffect="uri" />
-                </AvatarFallback>
-              </Avatar>
-              <View className="ml-4 flex flex-col">
-                <H3 className="border-0">
-                  Hello{user?.email && ", " + user?.email.split("@")[0]}
-                </H3>
-                {user && user.created_at && (
-                  <Text className="ml-0">
-                    Joined on {new Date(user?.created_at).toDateString()}
-                  </Text>
-                )}
+    <View className="flex-1 bg-background">
+      <ScrollView
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 60 }}
+      >
+        {/* Drag Handle */}
+        <View className="items-center pt-3 pb-4">
+          <View className="w-10 h-1 rounded-full bg-muted-foreground/30" />
+        </View>
+
+        {/* Header */}
+        <H1 className="px-6">Settings</H1>
+
+        {/* Settings List */}
+        <View className="px-6">
+          {/* My Information Section */}
+          <SectionHeader>My Information</SectionHeader>
+          <SettingsCard>
+            <View className="flex-row items-center px-4 py-3.5">
+              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
+                <User size={18} className="text-foreground" />
               </View>
-            </CardHeader>
-          </Card>
-          <TouchableOpacity
-            className="w-full"
-            activeOpacity={0.7}
-            onPress={handle_privacy}
-          >
-            <Card className="w-full justify-center">
-              <CardHeader className="flex flex-row items-center justify-between p-4">
-                <View className="flex flex-row items-center">
-                  <ShieldCheck fill={"black"} color="white" size={36} />
-                  <View className="flex flex-col ml-3">
-                    <P className="font-semibold">Privacy</P>
-                    <Muted>Data usage and privacy terms</Muted>
-                  </View>
-                </View>
-                <ChevronRight />
-              </CardHeader>
-            </Card>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="w-full"
-            activeOpacity={0.7}
-            onPress={handle_eula}
-          >
-            <Card className="w-full justify-center">
-              <CardHeader className="flex flex-row items-center justify-between p-4">
-                <View className="flex flex-row items-center">
-                  <BookText fill={"black"} color="white" size={36} />
-                  <View className="flex flex-col ml-3">
-                    <P className="font-semibold">EULA</P>
-                    <Muted>View End User License Agreement</Muted>
-                  </View>
-                </View>
-                <ChevronRight />
-              </CardHeader>
-            </Card>
-          </TouchableOpacity>
+              <View className="flex-1">
+                <Muted className="text-sm">Email</Muted>
+                <P className="text-lg text-foreground">
+                  {user?.email || "Not set"}
+                </P>
+              </View>
+            </View>
+          </SettingsCard>
 
-          {__DEV__ && (
+          {/* Membership Section */}
+          <SectionHeader>Membership</SectionHeader>
+          <SettingsCard>
             <TouchableOpacity
-              className="w-full"
-              activeOpacity={0.7}
-              onPress={handle_dev}
+              className="flex-row items-center px-4 py-3.5"
+              onPress={handleMembershipPress}
+              activeOpacity={0.6}
             >
-              <Card className="w-full justify-center">
-                <CardHeader className="flex flex-row items-center justify-between p-4">
-                  <View className="flex flex-row items-center">
-                    <BookText fill={"black"} color="white" size={36} />
-                    <View className="flex flex-col ml-3">
-                      <P className="font-semibold">DEV</P>
-                      <Muted>Development view only</Muted>
-                    </View>
-                  </View>
-                  <ChevronRight />
-                </CardHeader>
-              </Card>
+              <View
+                className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${
+                  isPro ? "bg-yellow-500/20" : "bg-muted"
+                }`}
+              >
+                <Crown
+                  size={18}
+                  className={isPro ? "text-yellow-500" : "text-foreground"}
+                />
+              </View>
+              <View className="flex-1">
+                <P
+                  className={`text-lg font-medium ${
+                    isPro ? "text-yellow-600" : "text-foreground"
+                  }`}
+                >
+                  {membershipLabel}
+                </P>
+                <Muted className="text-sm">{membershipDescription}</Muted>
+              </View>
+              {!isPro && (
+                <ChevronRight size={18} className="text-muted-foreground" />
+              )}
             </TouchableOpacity>
-          )}
+          </SettingsCard>
 
-          <TouchableOpacity
-            className="w-full"
-            activeOpacity={0.7}
-            onPress={handleLogout}
-          >
-            <Card className="w-full justify-center bg-destructive/20">
-              <CardHeader className="flex flex-row items-center justify-between p-4">
-                <View className="flex flex-row items-center">
-                  <LogOut color="red" size={36} />
-                  <View className="flex flex-col ml-3">
-                    <P className="font-semibold text-destructive">Logout</P>
-                    <Muted className="text-destructive">
-                      Logout of your account
-                    </Muted>
-                  </View>
-                </View>
-                <ChevronRight color={"red"} />
-              </CardHeader>
-            </Card>
-          </TouchableOpacity>
+          {/* Legal Section */}
+          <SectionHeader>Legal</SectionHeader>
+          <SettingsCard>
+            <SettingRow
+              icon={ShieldCheck}
+              label="Privacy Policy"
+              onPress={handle_privacy}
+            />
+            <Divider />
+            <SettingRow
+              icon={BookText}
+              label="Terms of Service"
+              onPress={handle_eula}
+            />
+          </SettingsCard>
 
-          <TouchableOpacity
-            className="w-full"
-            activeOpacity={0.7}
-            onPress={handleDeleteAccount}
-          >
-            <Card className="w-full justify-center bg-destructive/20">
-              <CardHeader className="flex flex-row items-center justify-between p-4">
-                <View className="flex flex-row items-center">
-                  <Trash color="red" size={36} />
-                  <View className="flex flex-col ml-3">
-                    <P className="font-semibold text-destructive">
-                      Delete Account
-                    </P>
-                    <Muted className="text-destructive">
-                      Delete Your Account
-                    </Muted>
-                  </View>
-                </View>
-                <ChevronRight color={"red"} />
-              </CardHeader>
-            </Card>
-          </TouchableOpacity>
-        </SafeAreaView>
+          {/* Account Section */}
+          <SectionHeader>Account</SectionHeader>
+          <SettingsCard>
+            <SettingRow
+              icon={LogOut}
+              label="Logout"
+              onPress={handleLogout}
+              variant="destructive"
+            />
+            <Divider />
+            <SettingRow
+              icon={Trash}
+              label="Delete Account"
+              onPress={handleDeleteAccount}
+              variant="destructive"
+            />
+          </SettingsCard>
+
+          {/* About Section */}
+          <SectionHeader>About</SectionHeader>
+          <SettingsCard>
+            <View className="flex-row items-center px-4 py-3.5">
+              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
+                <Info size={18} className="text-foreground" />
+              </View>
+              <P className="flex-1 text-lg text-foreground">
+                Version {appVersion} ({buildNumber})
+              </P>
+            </View>
+          </SettingsCard>
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+// Helper Components
+function SectionHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <P className="text-muted-foreground text-sm font-semibold uppercase tracking-wider mb-3 ml-1 mt-8">
+      {children}
+    </P>
+  );
+}
+
+function SettingsCard({ children }: { children: React.ReactNode }) {
+  return (
+    <View className="bg-card rounded-xl overflow-hidden border border-border/50">
+      {children}
+    </View>
+  );
+}
+
+function Divider() {
+  return <View className="h-px bg-border/50 ml-14" />;
+}
+
+function SettingRow({
+  icon: Icon,
+  label,
+  onPress,
+  variant = "default",
+  showChevron = true,
+}: {
+  icon: any;
+  label: string;
+  onPress: () => void;
+  variant?: "default" | "destructive";
+  showChevron?: boolean;
+}) {
+  const isDestructive = variant === "destructive";
+
+  return (
+    <TouchableOpacity
+      className="flex-row items-center px-4 py-4"
+      onPress={onPress}
+      activeOpacity={0.6}
+    >
+      <View
+        className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${
+          isDestructive ? "bg-destructive/10" : "bg-muted"
+        }`}
+      >
+        <Icon
+          size={18}
+          className={isDestructive ? "text-destructive" : "text-foreground"}
+        />
       </View>
-    </ScrollView>
+      <P
+        className={`flex-1 text-lg ${
+          isDestructive ? "text-destructive" : "text-foreground"
+        }`}
+      >
+        {label}
+      </P>
+      {showChevron && (
+        <ChevronRight
+          size={18}
+          className={
+            isDestructive ? "text-destructive/50" : "text-muted-foreground"
+          }
+        />
+      )}
+    </TouchableOpacity>
   );
 }

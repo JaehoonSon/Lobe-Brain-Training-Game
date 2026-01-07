@@ -9,7 +9,7 @@ import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 
 // Config
 const API_KEY = "test_gMisiyIRDnuQuxtHUtlkVMGzyvC"; // User provided test key
-const ENTITLEMENT_ID = "Brain App Pro"; // As defined in task
+export const ENTITLEMENT_ID = "Brain App Pro"; // As defined in task
 
 interface RevenueCatContextType {
   isPro: boolean;
