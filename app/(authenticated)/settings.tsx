@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   ChevronRight,
   LogOut,
@@ -7,6 +8,7 @@ import {
   User,
   Info,
   Crown,
+  Cake,
 } from "lucide-react-native";
 import {
   View,
@@ -23,6 +25,7 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
 import { appMetadata } from "~/config";
+import { supabase } from "~/lib/supabase";
 
 // Get version info from app.json via expo-constants
 const appVersion = Constants.expoConfig?.version ?? "1.0.0";
@@ -34,6 +37,38 @@ const buildNumber =
 export default function Settings() {
   const { user, logout } = useAuth();
   const { isPro, presentPaywall, currentOffering } = useRevenueCat();
+  const [birthday, setBirthday] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user) return;
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("onboarding_data")
+          .eq("id", user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching profile:", error);
+          return;
+        }
+
+        // Extract birthday from onboarding_data if it exists
+        const onboardingData = data?.onboarding_data as Record<
+          string,
+          any
+        > | null;
+        if (onboardingData?.birthday) {
+          setBirthday(onboardingData.birthday);
+        }
+      } catch (err) {
+        console.error("Failed to fetch profile", err);
+      }
+    };
+
+    fetchProfile();
+  }, [user]);
 
   const handleMembershipPress = async () => {
     playHaptic("soft");
@@ -122,6 +157,20 @@ export default function Settings() {
                 </P>
               </View>
             </View>
+            {birthday && (
+              <>
+                <Divider />
+                <View className="flex-row items-center px-4 py-3.5">
+                  <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
+                    <Cake size={18} className="text-foreground" />
+                  </View>
+                  <View className="flex-1">
+                    <Muted className="text-sm">Birthday</Muted>
+                    <P className="text-lg text-foreground">{birthday}</P>
+                  </View>
+                </View>
+              </>
+            )}
           </SettingsCard>
 
           {/* Membership Section */}

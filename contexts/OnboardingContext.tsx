@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
 import { STEPS } from "~/app/(onboarding)";
+import { supabase } from "~/lib/supabase";
+import { useAuth } from "./AuthProvider";
 
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps
@@ -34,9 +36,11 @@ export function OnboardingProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const { user } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [data, setData] = useState<OnboardingData>({});
   const [isComplete, setIsComplete] = useState(false);
+  const lastStep = currentStep === TOTAL_STEPS;
 
   useEffect(() => {
     console.log("Onboarding data updated", data);
@@ -100,13 +104,36 @@ export function OnboardingProvider({
       setCurrentStep(step);
     }
   };
+  useEffect(() => {
+    (async () => {
+      if (lastStep && data) {
+        await completeOnboarding();
+      }
+    })();
+  }, [lastStep]);
 
   const completeOnboarding = async () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    // Here we would sync with the backend (supabase profiles table)
+
+    // Save onboarding data to supabase profiles table
+    if (user) {
+      try {
+        const { error } = await supabase
+          .from("profiles")
+          .update({ onboarding_data: data })
+          .eq("id", user.id);
+
+        if (error) {
+          console.error("Failed to save onboarding data to database", error);
+        } else {
+          console.log("Onboarding data saved successfully");
+        }
+      } catch (e) {
+        console.error("Failed to save onboarding data", e);
+      }
+    }
+
     setIsComplete(true);
-    // Clear local storage or mark as synced?
-    // For now, keep it simple
   };
 
   const resetOnboarding = async () => {

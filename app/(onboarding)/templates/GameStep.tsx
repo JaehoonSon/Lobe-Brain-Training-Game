@@ -28,7 +28,6 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
   const { updateData } = useOnboarding();
   const [roundIndex, setRoundIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
-  const [complete, setComplete] = useState(false);
   const [startTime] = useState<number>(Date.now());
   const [questions, setQuestions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -92,9 +91,7 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
     if (roundIndex < Math.min(TOTAL_ROUNDS, questions.length) - 1) {
       setRoundIndex(roundIndex + 1);
     } else {
-      setComplete(true);
-
-      // Save results
+      // Save results and move on immediately
       const duration = (Date.now() - startTime) / 1000;
       const score = newResults.filter((r) => r).length;
 
@@ -104,9 +101,7 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
         duration,
       });
 
-      setTimeout(() => {
-        onNext();
-      }, 1000);
+      onNext();
     }
   };
 
@@ -149,34 +144,24 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
         </View>
 
         <View className="flex-1">
-          {!complete ? (
-            gameConfig.type === "mental_arithmetic" ? (
-              <MentalArithmetic
-                key={roundIndex}
-                onComplete={handleRoundComplete}
-                content={currentContent}
-              />
-            ) : gameConfig.type === "mental_language_discrimination" ? (
-              <MentalLanguageDiscrimination
-                key={roundIndex}
-                onComplete={handleRoundComplete}
-                content={currentContent}
-              />
-            ) : (
-              <MemoryMatrix
-                key={roundIndex}
-                onComplete={handleRoundComplete}
-                content={currentContent}
-              />
-            )
+          {gameConfig.type === "mental_arithmetic" ? (
+            <MentalArithmetic
+              key={roundIndex}
+              onComplete={handleRoundComplete}
+              content={currentContent}
+            />
+          ) : gameConfig.type === "mental_language_discrimination" ? (
+            <MentalLanguageDiscrimination
+              key={roundIndex}
+              onComplete={handleRoundComplete}
+              content={currentContent}
+            />
           ) : (
-            <View className="flex-1 items-center justify-center">
-              <Text className="text-3xl font-bold mb-4">Complete!</Text>
-              <Text className="text-xl text-muted-foreground">
-                Score: {results.filter((r) => r).length}/
-                {Math.min(TOTAL_ROUNDS, questions.length)}
-              </Text>
-            </View>
+            <MemoryMatrix
+              key={roundIndex}
+              onComplete={handleRoundComplete}
+              content={currentContent}
+            />
           )}
         </View>
       </SafeAreaView>

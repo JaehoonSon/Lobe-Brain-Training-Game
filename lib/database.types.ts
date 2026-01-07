@@ -165,6 +165,7 @@ export type Database = {
           id: string
           instructions: string | null
           is_active: boolean | null
+          is_pro_only: boolean
           name: string
         }
         Insert: {
@@ -176,6 +177,7 @@ export type Database = {
           id: string
           instructions?: string | null
           is_active?: boolean | null
+          is_pro_only?: boolean
           name: string
         }
         Update: {
@@ -187,6 +189,7 @@ export type Database = {
           id?: string
           instructions?: string | null
           is_active?: boolean | null
+          is_pro_only?: boolean
           name?: string
         }
         Relationships: [
@@ -198,6 +201,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          full_name: string | null
+          id: string
+          onboarding_data: Json | null
+          updated_at: string | null
+          username: string | null
+          website: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          full_name?: string | null
+          id: string
+          onboarding_data?: Json | null
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          full_name?: string | null
+          id?: string
+          onboarding_data?: Json | null
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
+        }
+        Relationships: []
       }
       questions: {
         Row: {

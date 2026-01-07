@@ -11,12 +11,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useState, useRef } from "react";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { CustomStepProps } from "~/app/(onboarding)/index";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export default function BirthdaySelectionScreen({
   onNext,
   onBack,
 }: CustomStepProps) {
   const insets = useSafeAreaInsets();
+  const { updateData } = useOnboarding();
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -30,7 +32,14 @@ export default function BirthdaySelectionScreen({
 
   const handleContinue = () => {
     if (!day || !month || !year) return;
-    // TODO: Validate date and save to profile
+
+    // Save birthday to onboarding context
+    const birthday = `${year}-${month.padStart(2, "0")}-${day.padStart(
+      2,
+      "0"
+    )}`;
+    updateData("birthday", birthday);
+
     onNext();
   };
 

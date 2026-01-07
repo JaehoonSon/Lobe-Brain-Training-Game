@@ -22,7 +22,7 @@ export default function IndexAuthenticatedScreen() {
   };
 
   const goBackFewSteps = () => {
-    const amount = 9;
+    const amount = 2;
     for (let i = 0; i < amount; i++) {
       prevStep();
     }
