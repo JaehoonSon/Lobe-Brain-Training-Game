@@ -1,6 +1,150 @@
 [
   {
-    "id": "dfce450d-ed9a-4f1b-bd98-3421cb2ee290",
+    "id": "1753021d-ff80-406a-9e49-49cb37f54f58",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "24f5f018-780b-4ee7-8341-281b0bc0591b",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "4645c597-f700-49c6-ae80-c8e7fa6551e6",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "82a37418-f4b4-4269-b225-ea33d92643c5",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "8e14e56c-cc07-4530-92bb-8d56f3a98800",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "5cadcb3a-d7c0-431f-9169-5d465293a603",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "2ef3d84a-871e-4bee-b5ec-6ca22167eef5",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "105f7c5b-97fd-46bb-b3ed-585570385555",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "d6a8a9aa-098b-42a7-a7c1-6444e134233e",
+    "game_id": "mental_arithmetic",
+    "difficulty": 9,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        100,
+        999
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  },
+  {
+    "id": "7d15dcdd-7e41-430a-889a-4475aa5877bd",
     "game_id": "mental_arithmetic",
     "difficulty": 9,
     "content": {
