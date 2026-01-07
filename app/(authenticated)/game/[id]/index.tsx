@@ -17,16 +17,22 @@ import {
   Hexagon,
   Crown,
   Star,
+  Lock,
 } from "lucide-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 export default function GameDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { games, categories } = useGames();
+  const { isPro, presentPaywall } = useRevenueCat();
 
   const game = games.find((g) => g.id === id);
   const category = categories.find((c) => c.id === game?.category_id);
+
+  // Check if the game is locked for this user
+  const isLocked = !isPro && game?.is_pro_only;
 
   if (!game) {
     return (
@@ -65,12 +71,15 @@ export default function GameDetailScreen() {
             </View>
           )}
           {/* Gradient Overlay for Text Readability */}
-          <LinearGradient
+          {/* <LinearGradient
             colors={["transparent", "rgba(0,0,0,0.8)"]}
             className="absolute bottom-0 left-0 right-0 h-32 justify-end px-6 pb-6"
           >
-            <H1 className="text-white text-4xl text-shadow">{game.name}</H1>
-          </LinearGradient>
+            <H1 className="text-yellow-50 text-4xl text-shadow">{game.name}</H1>
+          </LinearGradient> */}
+          <View className="absolute bottom-0 left-0 right-0 h-32 justify-end px-6 pb-6">
+            <H1 className="text-4xl text-shadow">{game.name}</H1>
+          </View>
         </View>
 
         {/* Content */}
@@ -166,12 +175,25 @@ export default function GameDetailScreen() {
 
           <Button
             size="xl"
-            className="flex-1 rounded-full"
-            onPress={() => router.push(`/game/${id}/play`)}
+            className={`flex-1 rounded-full`}
+            onPress={async () => {
+              if (isLocked) {
+                await presentPaywall();
+              } else {
+                router.push(`/game/${id}/play`);
+              }
+            }}
           >
-            <Text className="text-primary-foreground font-bold">
-              Start Game
-            </Text>
+            {isLocked ? (
+              <View className="flex-row items-center gap-2">
+                <Lock size={18} color="white" />
+                <Text className="text-white font-bold">Unlock Pro</Text>
+              </View>
+            ) : (
+              <Text className="text-primary-foreground font-bold">
+                Start Game
+              </Text>
+            )}
           </Button>
         </View>
       </SafeAreaView>
