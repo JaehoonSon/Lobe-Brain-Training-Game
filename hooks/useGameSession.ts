@@ -1,125 +1,147 @@
 import { useState, useRef, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import { calculateBPI } from '../lib/scoring';
-import { GeneratedContent } from '../lib/generators/types';
 import { Json } from '../lib/database.types';
 
-export interface GameSessionState {
+export interface RoundSessionState {
   isPlaying: boolean;
   isFinished: boolean;
   score: number | null;
   startTime: number | null;
   durationMs: number;
+  correctCount: number;
+  totalQuestions: number;
 }
 
-export interface GameSessionConfig {
+export interface RoundSessionConfig {
   gameId: string;
   difficulty: number;
   userId: string;
-  // Metadata for the session (Daily Challenge, etc.)
-  metadata?: Json; 
+  totalQuestions: number;
+  metadata?: Json;
 }
 
+/**
+ * Manages a game round session (multiple questions).
+ * - Tracks start time, correct answers, and calculates BPI at the end.
+ * - Saves session to database when round completes.
+ */
 export function useGameSession() {
-  const [state, setState] = useState<GameSessionState>({
+  const [state, setState] = useState<RoundSessionState>({
     isPlaying: false,
     isFinished: false,
     score: null,
     startTime: null,
     durationMs: 0,
+    correctCount: 0,
+    totalQuestions: 0,
   });
 
-  // Refs for items that don't need to trigger re-renders instantly
-  const configRef = useRef<GameSessionConfig | null>(null);
-  const contentRef = useRef<GeneratedContent | null>(null);
+  const configRef = useRef<RoundSessionConfig | null>(null);
 
   /**
-   * Starts a new game session.
-   * @param config - Context about the game (ID, User, Difficulty)
-   * @param content - The generated content (grid, targets, etc.)
+   * Starts a new round session
    */
-  const startGame = useCallback(
-    (config: GameSessionConfig, content: GeneratedContent) => {
-      configRef.current = config;
-      contentRef.current = content;
+  const startRound = useCallback((config: RoundSessionConfig) => {
+    configRef.current = config;
 
-      setState({
-        isPlaying: true,
-        isFinished: false,
-        score: null,
-        startTime: Date.now(),
-        durationMs: 0,
-      });
-    },
-    []
-  );
+    setState({
+      isPlaying: true,
+      isFinished: false,
+      score: null,
+      startTime: Date.now(),
+      durationMs: 0,
+      correctCount: 0,
+      totalQuestions: config.totalQuestions,
+    });
+  }, []);
 
   /**
-   * Ends the game, calculates BPI, and saves to DB.
-   * @param accuracy - 0.0 to 1.0 (Percentage of correct items)
-   * @param details - JSON blob of the user's specific moves (for replay)
+   * Records a question result (called after each question)
    */
-  const endGame = useCallback(
-    async (accuracy: number, details: any) => {
-      if (!configRef.current || !contentRef.current || !state.startTime) return;
+  const recordAnswer = useCallback((isCorrect: boolean) => {
+    setState((prev) => ({
+      ...prev,
+      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
+    }));
+  }, []);
 
-      const endTime = Date.now();
-      const durationMs = endTime - state.startTime;
-      const { difficulty, metadata, userId, gameId } = configRef.current;
-      const { targetTimeMs } = contentRef.current;
+  /**
+   * Ends the round, calculates BPI, and saves to DB
+   */
+  const endRound = useCallback(async () => {
+    if (!configRef.current || !state.startTime) return null;
 
-      // 1. Calculate BPI (Client-Side Referee)
-      const bpi = calculateBPI({
-        accuracy,
-        difficulty,
-        targetTimeMs,
-        actualTimeMs: durationMs,
-      });
+    const endTime = Date.now();
+    const durationMs = endTime - state.startTime;
+    const { difficulty, metadata, userId, gameId, totalQuestions } = configRef.current;
+    const { correctCount } = state;
 
-      setState((prev) => ({
-        ...prev,
-        isPlaying: false,
-        isFinished: true,
+    // Calculate accuracy
+    const accuracy = totalQuestions > 0 ? correctCount / totalQuestions : 0;
+
+    // Calculate BPI
+    // Using a reasonable target time based on difficulty (e.g., 10s per question at difficulty 1)
+    const targetTimeMs = totalQuestions * 10000 * (1 / difficulty);
+    
+    const bpi = calculateBPI({
+      accuracy,
+      difficulty,
+      targetTimeMs,
+      actualTimeMs: durationMs,
+    });
+
+    setState((prev) => ({
+      ...prev,
+      isPlaying: false,
+      isFinished: true,
+      score: bpi,
+      durationMs,
+    }));
+
+    // Save to database
+    try {
+      const { error } = await supabase.from('game_sessions').insert({
+        user_id: userId,
+        game_id: gameId,
+        difficulty_level: difficulty,
         score: bpi,
-        durationMs,
-      }));
+        duration_seconds: Math.round(durationMs / 1000),
+        correct_count: correctCount,
+        total_questions: totalQuestions,
+        metadata: metadata || null,
+      });
 
-      // 2. Sync to Database (The Scribe)
-      try {
-        const { error } = await supabase.from('game_sessions').insert({
-          user_id: userId,
-          game_id: gameId,
-          difficulty_level: difficulty,
-          score: bpi,
-          duration_seconds: Math.round(durationMs / 1000),
-          correct_count: Math.round(accuracy * 100), // Approximate for now
-          total_questions: 1, // Single round for procedural games
-          metadata: metadata || null,
-        });
+      if (error) throw error;
+      console.log('Session saved with BPI:', bpi);
+    } catch (err) {
+      console.error('Failed to save game session:', err);
+    }
 
-        if (error) throw error;
+    return bpi;
+  }, [state.startTime, state.correctCount]);
 
-        // 3. Save Detailed Answer (The "Black Box" Log)
-        await supabase.from('game_answers').insert({
-          session_id: undefined, // Note: We need the ID from the previous insert. Supabase returns it if valid.
-          is_correct: accuracy > 0.99, 
-          question_id: null,
-          user_response: details,
-          generated_content: contentRef.current, // Store the "Instance"
-          response_time_ms: durationMs,
-        });
-
-      } catch (err) {
-        console.error('Failed to save game session:', err);
-        // Queue for offline sync? (Future feature)
-      }
-    },
-    [state.startTime]
-  );
+  /**
+   * Resets the session for a new round
+   */
+  const resetSession = useCallback(() => {
+    setState({
+      isPlaying: false,
+      isFinished: false,
+      score: null,
+      startTime: null,
+      durationMs: 0,
+      correctCount: 0,
+      totalQuestions: 0,
+    });
+    configRef.current = null;
+  }, []);
 
   return {
     state,
-    startGame,
-    endGame,
+    startRound,
+    recordAnswer,
+    endRound,
+    resetSession,
   };
 }

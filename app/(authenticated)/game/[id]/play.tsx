@@ -7,49 +7,41 @@ import { MemoryMatrix } from "~/components/games/MemoryMatrix";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
 import { Wordle } from "~/components/games/Wordle";
 import { GameContentSchema } from "~/lib/validators/game-content";
-import { generateMemoryMatrix } from "~/lib/generators/memoryMatrix";
+import { useGameSession } from "~/hooks/useGameSession";
+import { useAuth } from "~/contexts/AuthProvider";
 import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 
+// Constants
+const QUESTIONS_PER_ROUND = 3;
+const DEFAULT_DIFFICULTY = 1;
+
 export default function GamePlayScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { user } = useAuth();
+  const { state: session, startRound, recordAnswer, endRound, resetSession } = useGameSession();
+
   const [sessionQuestions, setSessionQuestions] = useState<any[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Constants
-  const QUESTIONS_PER_ROUND = 3;
-
   useEffect(() => {
-    fetchGameContent();
+    fetchAndStartRound();
   }, [id]);
 
-  const fetchGameContent = async () => {
+  const fetchAndStartRound = async () => {
     setLoading(true);
     setSessionQuestions([]);
     setCurrentQuestionIndex(0);
+    resetSession();
 
     try {
-      // Branch: Procedural vs Static
-      if (id === "memory_matrix") {
-        console.log("Generating procedural content for:", id);
-        const newQuestions = [];
-        for (let i = 0; i < QUESTIONS_PER_ROUND; i++) {
-          // TODO: Dynamic difficulty based on user history (Defaulting to 1 for MVP)
-          newQuestions.push(generateMemoryMatrix({ difficulty: 1 }));
-        }
-        setSessionQuestions(newQuestions);
-        setCurrentQuestionIndex(0);
-        setLoading(false);
-        return;
-      }
-
       console.log("Fetching game content for:", id);
       const { data, error } = await supabase
         .from("questions")
-        .select("content")
+        .select("content, difficulty")
         .eq("game_id", id)
-        .limit(20); // Fetch more pool to pick from
+        .limit(20);
 
       if (error) throw error;
 
@@ -60,7 +52,7 @@ export default function GamePlayScreen() {
         return;
       }
 
-      // Shuffle and pick 3 unique questions if possible
+      // Shuffle and pick questions
       const shuffled = [...data].sort(() => Math.random() - 0.5);
       const selectedRaw = shuffled.slice(0, QUESTIONS_PER_ROUND);
 
@@ -84,6 +76,15 @@ export default function GamePlayScreen() {
 
       setSessionQuestions(validQuestions);
       setCurrentQuestionIndex(0);
+
+      // Start the session!
+      startRound({
+        gameId: id as string,
+        difficulty: DEFAULT_DIFFICULTY, // TODO: Use user's current rating
+        userId: user?.id || "anonymous",
+        totalQuestions: validQuestions.length,
+      });
+
     } catch (e) {
       console.error(e);
       Alert.alert("Error", "Failed to load game.", [
@@ -94,22 +95,24 @@ export default function GamePlayScreen() {
     }
   };
 
-  const handleComplete = (isCorrect: boolean) => {
-    // For now, we can just log correctness or maybe show a mini feedback
-    // Ideally we track score here.
+  const handleQuestionComplete = async (isCorrect: boolean) => {
+    // Record this answer in the session
+    recordAnswer(isCorrect);
 
     if (currentQuestionIndex < sessionQuestions.length - 1) {
       // Next question
       setTimeout(() => {
         setCurrentQuestionIndex((prev) => prev + 1);
-      }, 500); // Small delay between questions if needed, though game component has delay too
+      }, 300);
     } else {
-      // End of round
+      // End of round - calculate and save BPI
+      const finalBpi = await endRound();
+
       Alert.alert(
-        "Session Complete!",
-        `You finished ${QUESTIONS_PER_ROUND} rounds.`,
+        "Round Complete!",
+        `Score: ${finalBpi ?? 0} BPI\nCorrect: ${session.correctCount + (isCorrect ? 1 : 0)}/${sessionQuestions.length}`,
         [
-          { text: "Play Again", onPress: fetchGameContent },
+          { text: "Play Again", onPress: fetchAndStartRound },
           { text: "Exit", onPress: () => router.back() },
         ]
       );
@@ -133,11 +136,38 @@ export default function GamePlayScreen() {
     return null;
   }
 
+  // Map game ID to component
+  const renderGame = () => {
+    const commonProps = {
+      key: currentQuestionIndex,
+      content: currentContent,
+      onComplete: handleQuestionComplete,
+    };
+
+    switch (id) {
+      case "mental_arithmetic":
+        return <MentalArithmetic {...commonProps} />;
+      case "memory_matrix":
+        return <MemoryMatrix {...commonProps} />;
+      case "mental_language_discrimination":
+        return <MentalLanguageDiscrimination {...commonProps} />;
+      case "wordle":
+        return <Wordle {...commonProps} />;
+      default:
+        return (
+          <View className="flex-1 items-center justify-center">
+            <Text>Game component not implemented for {id}</Text>
+          </View>
+        );
+    }
+  };
+
   return (
     <View className="flex-1 bg-background">
+      {/* Close Button */}
       <TouchableOpacity
         onPress={() => router.back()}
-        className="absolute top-12 left-6 z-20 w-12 h-12 rounded-full bg-black/40 items-center justify-center mb-4"
+        className="absolute top-12 left-6 z-20 w-12 h-12 rounded-full bg-black/40 items-center justify-center"
       >
         <X color="white" size={24} />
       </TouchableOpacity>
@@ -149,46 +179,17 @@ export default function GamePlayScreen() {
         </Text>
       </View>
 
+      {/* Score Preview (during play) */}
+      {session.isPlaying && session.correctCount > 0 && (
+        <View className="absolute top-12 right-28 z-20 bg-green-600/80 px-3 py-2 rounded-full">
+          <Text className="text-white font-bold">
+            ✓ {session.correctCount}
+          </Text>
+        </View>
+      )}
+
       <View className="flex-1 pt-20">
-        {/* Render Key to force re-mount on question change so internal state resets */}
-        {id === "mental_arithmetic" && (
-          <MentalArithmetic
-            key={currentQuestionIndex}
-            content={currentContent}
-            onComplete={handleComplete}
-          />
-        )}
-        {id === "memory_matrix" && (
-          <MemoryMatrix
-            key={currentQuestionIndex}
-            content={currentContent}
-            onComplete={handleComplete}
-          />
-        )}
-        {id === "mental_language_discrimination" && (
-          <MentalLanguageDiscrimination
-            key={currentQuestionIndex}
-            content={currentContent}
-            onComplete={handleComplete}
-          />
-        )}
-        {id === "wordle" && (
-          <Wordle
-            key={currentQuestionIndex}
-            content={currentContent}
-            onComplete={handleComplete}
-          />
-        )}
-        {![
-          "mental_arithmetic",
-          "memory_matrix",
-          "mental_language_discrimination",
-          "wordle",
-        ].includes(id as string) && (
-            <View className="flex-1 items-center justify-center">
-              <Text>Game component not implemented for {id}</Text>
-            </View>
-          )}
+        {renderGame()}
       </View>
     </View>
   );
