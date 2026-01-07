@@ -1,0 +1,762 @@
+[
+  {
+    "id": "376cb83c-727a-4a81-b854-56341c251253",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The author's prose was so ",
+        " that readers felt transported to another era."
+      ],
+      "options": [
+        "evocative",
+        "provocative",
+        "evocatory",
+        "provocatory"
+      ],
+      "answer": "evocative"
+    }
+  },
+  {
+    "id": "f4eebcb3-32a3-4c14-9390-6f3f92c3ab85",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her argument was ",
+        " by a logical fallacy, undermining its credibility."
+      ],
+      "options": [
+        "vitiated",
+        "vitated",
+        "vitriolic",
+        "vituperative"
+      ],
+      "answer": "vitiated"
+    }
+  },
+  {
+    "id": "a049d878-86d8-4293-9263-45e16a77feaf",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The treaty's ",
+        " clauses were intentionally ambiguous to allow future reinterpretation."
+      ],
+      "options": [
+        "Delphic",
+        "Delphian",
+        "Delphine",
+        "Delphicly"
+      ],
+      "answer": "Delphic"
+    }
+  },
+  {
+    "id": "759b73f1-69be-45bd-be90-83c4e20c1b22",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He maintained an air of ",
+        " detachment, even in the face of personal tragedy."
+      ],
+      "options": [
+        "Stoic",
+        "Stoical",
+        "Stoically",
+        "Stoicism"
+      ],
+      "answer": "Stoic"
+    }
+  },
+  {
+    "id": "f5f9e531-e951-4bb0-9790-554e0c65cb92",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The critic's review was ",
+        " in its praise, leaving no room for misinterpretation."
+      ],
+      "options": [
+        "unequivocal",
+        "unequivocating",
+        "unequivocally",
+        "unequivocality"
+      ],
+      "answer": "unequivocal"
+    }
+  },
+  {
+    "id": "8267cdbe-8567-4087-ad0b-d914509272a0",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her insights were ",
+        " with profound wisdom, yet delivered with humility."
+      ],
+      "options": [
+        "imbued",
+        "imbibed",
+        "imbrued",
+        "imbrowned"
+      ],
+      "answer": "imbued"
+    }
+  },
+  {
+    "id": "fd98b07a-6cb3-46de-855f-b427f851db18",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The politician's speech was a masterclass in ",
+        " rhetoric, swaying even skeptical audiences."
+      ],
+      "options": [
+        "demagogic",
+        "demagogical",
+        "demagoguery",
+        "demagogism"
+      ],
+      "answer": "demagogic"
+    }
+  },
+  {
+    "id": "40ca3fc3-1cab-4508-a4d3-7b6585436d20",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's work was ",
+        " by critics for its lack of originality."
+      ],
+      "options": [
+        "excoriated",
+        "excoricated",
+        "excoriating",
+        "excoriation"
+      ],
+      "answer": "excoriated"
+    }
+  },
+  {
+    "id": "bcaca85b-e868-44bc-8e6e-b90ae59a237d",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His apology seemed ",
+        " lacking the sincerity needed for true reconciliation."
+      ],
+      "options": [
+        "perfunctory",
+        "perfunctious",
+        "perfunctorily",
+        "perfunctoriness"
+      ],
+      "answer": "perfunctory"
+    }
+  },
+  {
+    "id": "42612c32-be2b-4693-ab73-00fb0b68dcb1",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The novel's plot was ",
+        " with unexpected twists that kept readers guessing."
+      ],
+      "options": [
+        "replete",
+        "repleted",
+        "repletion",
+        "repleteness"
+      ],
+      "answer": "replete"
+    }
+  },
+  {
+    "id": "a52ddc3e-9649-41e8-a4d9-9c1eb63250ce",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her leadership style was ",
+        " fostering collaboration without sacrificing decisiveness."
+      ],
+      "options": [
+        "syncretic",
+        "syncretistic",
+        "syncretically",
+        "syncretism"
+      ],
+      "answer": "syncretic"
+    }
+  },
+  {
+    "id": "eb57068c-8938-41df-b0e8-ba67c4fc7d0f",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The scientist's theory was ",
+        " by new evidence, forcing a complete reevaluation."
+      ],
+      "options": [
+        "falsified",
+        "falsifiable",
+        "falsification",
+        "falsifying"
+      ],
+      "answer": "falsified"
+    }
+  },
+  {
+    "id": "00bac0a3-a984-4cdb-8c2b-eb29a7b87460",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His remarks were ",
+        " intended to provoke thought rather than offense."
+      ],
+      "options": [
+        "polemical",
+        "polemic",
+        "polemically",
+        "polemicist"
+      ],
+      "answer": "polemical"
+    }
+  },
+  {
+    "id": "7abc94f3-ce04-421c-802b-9166e3bf1a40",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was reached through ",
+        " negotiations that respected all parties' interests."
+      ],
+      "options": [
+        "consensual",
+        "consensually",
+        "consensus",
+        "consensuality"
+      ],
+      "answer": "consensual"
+    }
+  },
+  {
+    "id": "1ff75007-0e90-4c71-8c50-ec587a59923d",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her analysis was ",
+        " cutting through complexity to reveal underlying truths."
+      ],
+      "options": [
+        "incisive",
+        "incising",
+        "incision",
+        "incisively"
+      ],
+      "answer": "incisive"
+    }
+  },
+  {
+    "id": "0e260d0a-39c1-4058-b188-ee18f905f7f4",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The policy's implementation was ",
+        " by bureaucratic inertia, delaying its benefits."
+      ],
+      "options": [
+        "stymied",
+        "stymieing",
+        "stymier",
+        "stymie"
+      ],
+      "answer": "stymied"
+    }
+  },
+  {
+    "id": "c74b091d-aa73-4042-93a0-ce51d34a384e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His worldview was ",
+        " shaped by diverse cultural experiences."
+      ],
+      "options": [
+        "eclectic",
+        "eclectically",
+        "eclecticism",
+        "eclecticist"
+      ],
+      "answer": "eclectic"
+    }
+  },
+  {
+    "id": "9cbb0e54-91f2-4b05-9b8b-a051990978d7",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The debate became ",
+        " as participants clung to entrenched positions."
+      ],
+      "options": [
+        "intractable",
+        "intractably",
+        "intractability",
+        "intractableness"
+      ],
+      "answer": "intractable"
+    }
+  },
+  {
+    "id": "ef033b88-4039-49da-b98c-335364fdd8d3",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her testimony was ",
+        " with vivid details that lent it credibility."
+      ],
+      "options": [
+        "replete",
+        "repleted",
+        "repletion",
+        "repleteness"
+      ],
+      "answer": "replete"
+    }
+  },
+  {
+    "id": "ca9f649d-16d2-4147-940e-b1236f450d8e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The philosopher's ideas were ",
+        " challenging conventional wisdom at every turn."
+      ],
+      "options": [
+        "iconoclastic",
+        "iconoclasticly",
+        "iconoclasm",
+        "iconoclast"
+      ],
+      "answer": "iconoclastic"
+    }
+  },
+  {
+    "id": "0b4a6d88-f252-4df2-899b-6149578062d9",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The report's conclusions were ",
+        " based on flawed methodology."
+      ],
+      "options": [
+        "specious",
+        "speciously",
+        "speciousness",
+        "speciosity"
+      ],
+      "answer": "specious"
+    }
+  },
+  {
+    "id": "41a39be9-2dbd-4bfb-893b-2fd0b01265cb",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His demeanor was ",
+        " betraying no emotion despite the intense pressure."
+      ],
+      "options": [
+        "inscrutable",
+        "inscrutably",
+        "inscrutability",
+        "inscrutableness"
+      ],
+      "answer": "inscrutable"
+    }
+  },
+  {
+    "id": "4fa1b6d6-1a1c-4525-b74b-834bdcbb25e4",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's vision was ",
+        " blending realism with surreal elements."
+      ],
+      "options": [
+        "chimerical",
+        "chimerically",
+        "chimerism",
+        "chimera"
+      ],
+      "answer": "chimerical"
+    }
+  },
+  {
+    "id": "0c564237-1c77-4ed2-80a5-be3a3f19f35e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her argument was ",
+        " relying on circular reasoning that proved nothing."
+      ],
+      "options": [
+        "tautological",
+        "tautologically",
+        "tautology",
+        "tautologize"
+      ],
+      "answer": "tautological"
+    }
+  },
+  {
+    "id": "aa9eec75-283e-43ad-a9f1-29d10cc84446",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The leader's charisma was ",
+        " inspiring loyalty even in adverse circumstances."
+      ],
+      "options": [
+        "indomitable",
+        "indomitability",
+        "indomitably",
+        "indomitableness"
+      ],
+      "answer": "indomitable"
+    }
+  },
+  {
+    "id": "0c21788a-5e89-49d8-9f0f-eae5de7aac47",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The theory was ",
+        " by subsequent research, confirming its validity."
+      ],
+      "options": [
+        "corroborated",
+        "corroborating",
+        "corroboration",
+        "corroborative"
+      ],
+      "answer": "corroborated"
+    }
+  },
+  {
+    "id": "9287c6c4-899d-4e7f-9f71-301dda6550b4",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His writing style was ",
+        " marked by excessive ornamentation that distracted from the content."
+      ],
+      "options": [
+        "florid",
+        "floridly",
+        "floridity",
+        "floridness"
+      ],
+      "answer": "florid"
+    }
+  },
+  {
+    "id": "3c999ee8-a4f4-4680-8be5-3fab689af0d8",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The decision was ",
+        " based on a thorough analysis of all available data."
+      ],
+      "options": [
+        "prudent",
+        "prudently",
+        "prudence",
+        "prudential"
+      ],
+      "answer": "prudent"
+    }
+  },
+  {
+    "id": "c0cbf0d2-cf03-4a1b-9ba8-b3664e953298",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her critique was ",
+        " exposing flaws with surgical precision."
+      ],
+      "options": [
+        "lacerating",
+        "lacerated",
+        "laceration",
+        "lacerative"
+      ],
+      "answer": "lacerating"
+    }
+  },
+  {
+    "id": "bb0d311a-0c91-426d-b464-c326f4ae8336",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The narrative was ",
+        " weaving together multiple timelines seamlessly."
+      ],
+      "options": [
+        "nonlinear",
+        "nonlinearly",
+        "nonlinearity",
+        "nonlinearness"
+      ],
+      "answer": "nonlinear"
+    }
+  },
+  {
+    "id": "f21b90cc-8cde-4e81-9031-db855d2068e2",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His apology was ",
+        " failing to address the core issues at hand."
+      ],
+      "options": [
+        "equivocal",
+        "equivocally",
+        "equivocation",
+        "equivocator"
+      ],
+      "answer": "equivocal"
+    }
+  },
+  {
+    "id": "0fb6d62e-efbb-4f4d-bd0b-e0fdba979ba2",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The policy was ",
+        " designed to benefit a select few at the expense of the majority."
+      ],
+      "options": [
+        "regressive",
+        "regressively",
+        "regression",
+        "regressiveness"
+      ],
+      "answer": "regressive"
+    }
+  },
+  {
+    "id": "b3baf395-8660-4778-9772-6041acba725b",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her insights were ",
+        " drawing from a deep well of personal experience."
+      ],
+      "options": [
+        "autobiographical",
+        "autobiographically",
+        "autobiography",
+        "autobiographic"
+      ],
+      "answer": "autobiographical"
+    }
+  },
+  {
+    "id": "799645e8-25c5-470a-9ccf-1f816b61b64e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The debate turned ",
+        " as participants resorted to personal attacks."
+      ],
+      "options": [
+        "acrimonious",
+        "acrimoniously",
+        "acrimony",
+        "acrimoniousness"
+      ],
+      "answer": "acrimonious"
+    }
+  },
+  {
+    "id": "1ed72164-1861-41c1-b66b-de928458aeac",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His logic was ",
+        " built on assumptions that were never questioned."
+      ],
+      "options": [
+        "circular",
+        "circularly",
+        "circularity",
+        "circularness"
+      ],
+      "answer": "circular"
+    }
+  },
+  {
+    "id": "f5963405-61f0-46b6-951b-3228add8e041",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's technique was ",
+        " combining traditional methods with innovative approaches."
+      ],
+      "options": [
+        "hybrid",
+        "hybridly",
+        "hybridity",
+        "hybridization"
+      ],
+      "answer": "hybrid"
+    }
+  },
+  {
+    "id": "c92850d3-5fa9-4b11-9d6d-6cad046e14b3",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her response was ",
+        " avoiding any commitment to a specific course of action."
+      ],
+      "options": [
+        "noncommittal",
+        "noncommittally",
+        "noncommitment",
+        "noncommittalness"
+      ],
+      "answer": "noncommittal"
+    }
+  },
+  {
+    "id": "34ff0708-e1db-43e1-b1c6-2d2db259ff10",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The theory's implications were ",
+        " challenging fundamental beliefs in the field."
+      ],
+      "options": [
+        "paradigm-shifting",
+        "paradigm-shift",
+        "paradigm-shifted",
+        "paradigm-shifter"
+      ],
+      "answer": "paradigm-shifting"
+    }
+  },
+  {
+    "id": "4cabf523-68c3-4111-ab90-be1abb443787",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His criticism was ",
+        " focusing on minor flaws while ignoring overall merits."
+      ],
+      "options": [
+        "nitpicking",
+        "nitpicked",
+        "nitpicker",
+        "nitpick"
+      ],
+      "answer": "nitpicking"
+    }
+  },
+  {
+    "id": "2ec3aa4c-cfb8-4819-a511-be5cda5258d3",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 10,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was ",
+        " requiring all parties to make significant concessions."
+      ],
+      "options": [
+        "reciprocal",
+        "reciprocally",
+        "reciprocity",
+        "reciprocation"
+      ],
+      "answer": "reciprocal"
+    }
+  }
+]

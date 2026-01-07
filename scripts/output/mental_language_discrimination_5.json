@@ -1,0 +1,762 @@
+[
+  {
+    "id": "95d27598-9fb0-421e-bcf9-4180adafc413",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The company's financial report was ",
+        " by the recent market fluctuations."
+      ],
+      "options": [
+        "affected",
+        "effected",
+        "impacted",
+        "influenced"
+      ],
+      "answer": "affected"
+    }
+  },
+  {
+    "id": "c5cecc1b-3b74-4225-bf7a-1bb4537ccced",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her argument was based on a fundamental ",
+        " that guided her ethical decisions."
+      ],
+      "options": [
+        "principal",
+        "principle",
+        "precept",
+        "doctrine"
+      ],
+      "answer": "principle"
+    }
+  },
+  {
+    "id": "da377738-802b-4bc7-bec9-719e543a1e4f",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The diplomat's ",
+        " remarks helped de-escalate the international crisis."
+      ],
+      "options": [
+        "diplomatic",
+        "tactful",
+        "conciliatory",
+        "amicable"
+      ],
+      "answer": "conciliatory"
+    }
+  },
+  {
+    "id": "51a375a8-bc42-4db5-a0bd-78a450878180",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "By the time we arrived, the meeting had already ",
+        "."
+      ],
+      "options": [
+        "begun",
+        "began",
+        "started",
+        "commenced"
+      ],
+      "answer": "begun"
+    }
+  },
+  {
+    "id": "ae2868f4-653d-4383-b085-112182e389bd",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The new policy will ",
+        " significant changes to the workflow."
+      ],
+      "options": [
+        "effect",
+        "affect",
+        "implement",
+        "enact"
+      ],
+      "answer": "effect"
+    }
+  },
+  {
+    "id": "15f5dc15-d545-42bd-89ec-8cdb905b022a",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "She has a ",
+        " for remembering intricate details."
+      ],
+      "options": [
+        "knack",
+        "talent",
+        "aptitude",
+        "proclivity"
+      ],
+      "answer": "knack"
+    }
+  },
+  {
+    "id": "cddbb1e6-4a17-4b60-a06c-eaf8bff09e21",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The contract is ",
+        " to renewal next month."
+      ],
+      "options": [
+        "subject",
+        "liable",
+        "prone",
+        "susceptible"
+      ],
+      "answer": "subject"
+    }
+  },
+  {
+    "id": "8a4ff10d-6e76-4514-99f3-7b480d31be88",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His explanation was so ",
+        " that no one could doubt his sincerity."
+      ],
+      "options": [
+        "credible",
+        "plausible",
+        "convincing",
+        "persuasive"
+      ],
+      "answer": "convincing"
+    }
+  },
+  {
+    "id": "82f92be4-b6a9-4304-87a3-6a9af287b25c",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "We need to ",
+        " the data before drawing any conclusions."
+      ],
+      "options": [
+        "analyze",
+        "examine",
+        "scrutinize",
+        "evaluate"
+      ],
+      "answer": "scrutinize"
+    }
+  },
+  {
+    "id": "fc567733-6add-45cc-88f2-3d8d7690eccd",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's work is often ",
+        " by critics as groundbreaking."
+      ],
+      "options": [
+        "described",
+        "characterized",
+        "labeled",
+        "hailed"
+      ],
+      "answer": "hailed"
+    }
+  },
+  {
+    "id": "39ca1326-c721-475a-9aa8-22ab8bda0d8b",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He was ",
+        " of the crime due to lack of evidence."
+      ],
+      "options": [
+        "absolved",
+        "acquitted",
+        "exonerated",
+        "vindicated"
+      ],
+      "answer": "acquitted"
+    }
+  },
+  {
+    "id": "087e659a-ab35-4129-aac0-2bca90a2882d",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The team must ",
+        " to the new regulations immediately."
+      ],
+      "options": [
+        "comply",
+        "adhere",
+        "conform",
+        "abide"
+      ],
+      "answer": "comply"
+    }
+  },
+  {
+    "id": "e451229e-6ee9-4843-a1f2-7a48a0380be0",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her speech was filled with ",
+        " that resonated with the audience."
+      ],
+      "options": [
+        "pathos",
+        "emotion",
+        "sentiment",
+        "feeling"
+      ],
+      "answer": "pathos"
+    }
+  },
+  {
+    "id": "449a09ec-0e96-405d-9065-4057bb747084",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The project's success is ",
+        " on securing additional funding."
+      ],
+      "options": [
+        "contingent",
+        "dependent",
+        "reliant",
+        "conditional"
+      ],
+      "answer": "contingent"
+    }
+  },
+  {
+    "id": "e98d0018-61af-4206-b178-2f49b15774b9",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "They decided to ",
+        " the meeting until next week."
+      ],
+      "options": [
+        "postpone",
+        "delay",
+        "defer",
+        "adjourn"
+      ],
+      "answer": "adjourn"
+    }
+  },
+  {
+    "id": "fccc7274-035b-4ba5-9445-292c45393455",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The novel's plot is ",
+        " with unexpected twists."
+      ],
+      "options": [
+        "replete",
+        "filled",
+        "abundant",
+        "teeming"
+      ],
+      "answer": "replete"
+    }
+  },
+  {
+    "id": "9927bc27-e069-4e66-97f6-0390106ff53e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His actions were ",
+        " as reckless by the committee."
+      ],
+      "options": [
+        "deemed",
+        "considered",
+        "judged",
+        "regarded"
+      ],
+      "answer": "deemed"
+    }
+  },
+  {
+    "id": "43e73bf5-9cf0-4a2d-a2da-d0ad2cb13879",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was reached after lengthy ",
+        "."
+      ],
+      "options": [
+        "negotiations",
+        "discussions",
+        "deliberations",
+        "consultations"
+      ],
+      "answer": "negotiations"
+    }
+  },
+  {
+    "id": "4a64fd20-04a4-4b49-a4d4-51754931feef",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "She has a ",
+        " understanding of quantum mechanics."
+      ],
+      "options": [
+        "profound",
+        "deep",
+        "thorough",
+        "comprehensive"
+      ],
+      "answer": "profound"
+    }
+  },
+  {
+    "id": "b8275000-bd4b-4e0f-b303-0b2817fe3169",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The evidence was ",
+        " to support the hypothesis."
+      ],
+      "options": [
+        "insufficient",
+        "inadequate",
+        "deficient",
+        "lacking"
+      ],
+      "answer": "insufficient"
+    }
+  },
+  {
+    "id": "3d47803f-d2d6-4caf-ab2c-40c85da77510",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He tends to ",
+        " over minor details."
+      ],
+      "options": [
+        "obsess",
+        "fixate",
+        "dwell",
+        "ponder"
+      ],
+      "answer": "obsess"
+    }
+  },
+  {
+    "id": "9a1f3ef5-13bc-4088-8ed8-f4dbb49e4e96",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The report highlights the ",
+        " between theory and practice."
+      ],
+      "options": [
+        "discrepancy",
+        "difference",
+        "divergence",
+        "variance"
+      ],
+      "answer": "discrepancy"
+    }
+  },
+  {
+    "id": "d408d88d-f442-452a-9fba-96d5d64a1ea3",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her response was ",
+        " and left no room for ambiguity."
+      ],
+      "options": [
+        "unequivocal",
+        "clear",
+        "explicit",
+        "definitive"
+      ],
+      "answer": "unequivocal"
+    }
+  },
+  {
+    "id": "647e1589-4fc4-4f64-b71a-334adfb7a80d",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The company is ",
+        " to expand into Asian markets."
+      ],
+      "options": [
+        "poised",
+        "ready",
+        "prepared",
+        "set"
+      ],
+      "answer": "poised"
+    }
+  },
+  {
+    "id": "3f53067f-a151-41b2-943f-8a93d4602fb0",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The lawyer's argument was ",
+        " by the judge."
+      ],
+      "options": [
+        "overruled",
+        "rejected",
+        "dismissed",
+        "denied"
+      ],
+      "answer": "overruled"
+    }
+  },
+  {
+    "id": "14fb7589-2670-4fd9-9be1-2121f2be0b81",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His behavior was ",
+        " of a true leader."
+      ],
+      "options": [
+        "indicative",
+        "suggestive",
+        "evocative",
+        "characteristic"
+      ],
+      "answer": "characteristic"
+    }
+  },
+  {
+    "id": "0dc4185b-588d-460d-93bc-0064b9106623",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The software update will ",
+        " several security vulnerabilities."
+      ],
+      "options": [
+        "remedy",
+        "fix",
+        "address",
+        "resolve"
+      ],
+      "answer": "address"
+    }
+  },
+  {
+    "id": "cffe1c2b-2e35-488f-bbe2-d690c98755d8",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "She spoke with ",
+        " confidence during the presentation."
+      ],
+      "options": [
+        "unwavering",
+        "steadfast",
+        "resolute",
+        "firm"
+      ],
+      "answer": "unwavering"
+    }
+  },
+  {
+    "id": "8e5a2673-1509-49eb-b8f7-7a0372300095",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The treaty is designed to ",
+        " peace in the region."
+      ],
+      "options": [
+        "foster",
+        "promote",
+        "encourage",
+        "cultivate"
+      ],
+      "answer": "foster"
+    }
+  },
+  {
+    "id": "5380b4a3-4aaa-4a89-8f99-3153844df52b",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His explanation was ",
+        " and failed to convince the panel."
+      ],
+      "options": [
+        "specious",
+        "misleading",
+        "deceptive",
+        "fallacious"
+      ],
+      "answer": "specious"
+    }
+  },
+  {
+    "id": "1aeb86ca-add4-4f61-a032-f562da61c90c",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The team must ",
+        " a strategy before proceeding."
+      ],
+      "options": [
+        "devise",
+        "formulate",
+        "conceive",
+        "craft"
+      ],
+      "answer": "formulate"
+    }
+  },
+  {
+    "id": "549b7b69-2f7c-43c4-b681-bad41f4767ab",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's style is ",
+        " by bold colors and dynamic shapes."
+      ],
+      "options": [
+        "marked",
+        "characterized",
+        "defined",
+        "distinguished"
+      ],
+      "answer": "characterized"
+    }
+  },
+  {
+    "id": "17658657-2ac6-4ac7-94d3-3ad32bf1af43",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The decision was made after careful ",
+        " of all options."
+      ],
+      "options": [
+        "consideration",
+        "evaluation",
+        "assessment",
+        "appraisal"
+      ],
+      "answer": "consideration"
+    }
+  },
+  {
+    "id": "377eb821-2226-4d00-96d5-7f446292b3f3",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her remarks were ",
+        " and intended to provoke thought."
+      ],
+      "options": [
+        "incisive",
+        "sharp",
+        "penetrating",
+        "keen"
+      ],
+      "answer": "incisive"
+    }
+  },
+  {
+    "id": "83aca242-9b0d-489b-9d8e-4959a1f07747",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The project's timeline is ",
+        " due to unforeseen delays."
+      ],
+      "options": [
+        "extended",
+        "prolonged",
+        "lengthened",
+        "stretched"
+      ],
+      "answer": "extended"
+    }
+  },
+  {
+    "id": "f83407c3-49cb-4d21-8f53-867c3d71bdbb",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He has a ",
+        " ability to solve complex problems."
+      ],
+      "options": [
+        "remarkable",
+        "notable",
+        "extraordinary",
+        "exceptional"
+      ],
+      "answer": "remarkable"
+    }
+  },
+  {
+    "id": "77c939e4-88f7-4f32-8447-2d77b8700bda",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was ",
+        " by both parties."
+      ],
+      "options": [
+        "ratified",
+        "approved",
+        "endorsed",
+        "sanctioned"
+      ],
+      "answer": "ratified"
+    }
+  },
+  {
+    "id": "4c6bd4d1-3913-4019-97e6-7d979db0f1e2",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her analysis was ",
+        " and overlooked key factors."
+      ],
+      "options": [
+        "superficial",
+        "shallow",
+        "cursory",
+        "perfunctory"
+      ],
+      "answer": "superficial"
+    }
+  },
+  {
+    "id": "c2af0e34-1e25-47e6-933d-d59802d035ab",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The company aims to ",
+        " its market share by 20%."
+      ],
+      "options": [
+        "increase",
+        "expand",
+        "augment",
+        "boost"
+      ],
+      "answer": "boost"
+    }
+  },
+  {
+    "id": "90e5108e-ff76-4757-b202-c39bc2d97368",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His testimony was ",
+        " by corroborating evidence."
+      ],
+      "options": [
+        "substantiated",
+        "supported",
+        "validated",
+        "confirmed"
+      ],
+      "answer": "substantiated"
+    }
+  }
+]

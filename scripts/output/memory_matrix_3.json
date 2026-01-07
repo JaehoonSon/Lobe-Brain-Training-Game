@@ -1,0 +1,16 @@
+[
+  {
+    "id": "143a9131-31e9-4ec2-985f-add629bb2794",
+    "game_id": "memory_matrix",
+    "difficulty": 3,
+    "content": {
+      "type": "memory_matrix",
+      "grid_size": {
+        "rows": 4,
+        "cols": 4
+      },
+      "target_count": 5,
+      "display_time_ms": 1200
+    }
+  }
+]

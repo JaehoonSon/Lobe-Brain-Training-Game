@@ -1,0 +1,18 @@
+[
+  {
+    "id": "8c821c04-ee5d-40b7-a6a4-d362744a8e03",
+    "game_id": "mental_arithmetic",
+    "difficulty": 5,
+    "content": {
+      "type": "mental_arithmetic",
+      "operandRange": [
+        10,
+        50
+      ],
+      "operators": [
+        "+",
+        "-"
+      ]
+    }
+  }
+]

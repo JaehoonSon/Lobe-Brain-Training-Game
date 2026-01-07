@@ -1,0 +1,762 @@
+[
+  {
+    "id": "d5a51626-9291-460e-bc53-c69c05d425e7",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The company's new policy will",
+        "employee morale significantly."
+      ],
+      "options": [
+        "affect",
+        "effect",
+        "impact",
+        "influence"
+      ],
+      "answer": "affect"
+    }
+  },
+  {
+    "id": "1e58b64a-5232-4fb3-a59d-185e08a22250",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her argument was based on a fundamental",
+        "of physics."
+      ],
+      "options": [
+        "principle",
+        "principal",
+        "precept",
+        "doctrine"
+      ],
+      "answer": "principle"
+    }
+  },
+  {
+    "id": "deddc0f7-352e-4eed-a210-ac2fcd23e9bd",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The manager's decision was",
+        "by recent market trends."
+      ],
+      "options": [
+        "informed",
+        "influenced",
+        "guided",
+        "driven"
+      ],
+      "answer": "informed"
+    }
+  },
+  {
+    "id": "35f5b03c-50a1-41cf-87fa-a9a8a52a2942",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "She has a",
+        "for languages, picking up new ones quickly."
+      ],
+      "options": [
+        "knack",
+        "talent",
+        "gift",
+        "aptitude"
+      ],
+      "answer": "knack"
+    }
+  },
+  {
+    "id": "2c4c9f38-e96d-4790-a8e4-c56a8760a513",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The contract must be signed",
+        "both parties agree."
+      ],
+      "options": [
+        "before",
+        "after",
+        "when",
+        "once"
+      ],
+      "answer": "before"
+    }
+  },
+  {
+    "id": "ea179d8b-6fde-454c-9579-ab2e18bdf7c2",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "They decided to",
+        "the meeting due to scheduling conflicts."
+      ],
+      "options": [
+        "postpone",
+        "delay",
+        "cancel",
+        "adjourn"
+      ],
+      "answer": "postpone"
+    }
+  },
+  {
+    "id": "c5cddaae-90c1-45dd-ad28-1689c832ec60",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The evidence was",
+        "enough to convict the suspect."
+      ],
+      "options": [
+        "compelling",
+        "convincing",
+        "persuasive",
+        "strong"
+      ],
+      "answer": "compelling"
+    }
+  },
+  {
+    "id": "c6bdd63c-7710-45d0-89e1-7c60a72a87af",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He tends to",
+        "his emotions, rarely showing anger."
+      ],
+      "options": [
+        "suppress",
+        "repress",
+        "control",
+        "restrain"
+      ],
+      "answer": "suppress"
+    }
+  },
+  {
+    "id": "bd52700d-c079-4b9d-b58e-b5b5354c3d86",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The project is",
+        "completion by next month."
+      ],
+      "options": [
+        "scheduled for",
+        "due for",
+        "set for",
+        "planned for"
+      ],
+      "answer": "due for"
+    }
+  },
+  {
+    "id": "edd29ca9-af75-4d53-bad7-57e1915d8a04",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her remarks were",
+        "and offended many in the audience."
+      ],
+      "options": [
+        "insensitive",
+        "tactless",
+        "rude",
+        "blunt"
+      ],
+      "answer": "tactless"
+    }
+  },
+  {
+    "id": "335a433e-f615-4043-a0c6-aa957114a0c6",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "We need to",
+        "a solution that works for everyone."
+      ],
+      "options": [
+        "devise",
+        "create",
+        "formulate",
+        "develop"
+      ],
+      "answer": "devise"
+    }
+  },
+  {
+    "id": "65c940e7-71d4-4e84-a78f-67ee201789d1",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The data",
+        "a clear trend over the past decade."
+      ],
+      "options": [
+        "reveals",
+        "shows",
+        "indicates",
+        "demonstrates"
+      ],
+      "answer": "reveals"
+    }
+  },
+  {
+    "id": "75f49943-2c26-4df5-9379-bad47abc7885",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He was",
+        "from the competition for violating the rules."
+      ],
+      "options": [
+        "disqualified",
+        "excluded",
+        "eliminated",
+        "barred"
+      ],
+      "answer": "disqualified"
+    }
+  },
+  {
+    "id": "de8a3e1d-65c2-434e-ab96-ea516d991552",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The team worked",
+        "to meet the deadline."
+      ],
+      "options": [
+        "tirelessly",
+        "diligently",
+        "hard",
+        "steadily"
+      ],
+      "answer": "tirelessly"
+    }
+  },
+  {
+    "id": "5478596c-33c0-49bc-b5a7-6b2e36630432",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her explanation was",
+        "and easy to understand."
+      ],
+      "options": [
+        "lucid",
+        "clear",
+        "simple",
+        "straightforward"
+      ],
+      "answer": "lucid"
+    }
+  },
+  {
+    "id": "5c4b43a9-52ac-4c88-be5e-f89271a36172",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The company is",
+        "to expand into new markets."
+      ],
+      "options": [
+        "poised",
+        "ready",
+        "set",
+        "prepared"
+      ],
+      "answer": "poised"
+    }
+  },
+  {
+    "id": "d5f255b8-3856-4eed-ac4f-2ba21f2e5985",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The report",
+        "several key findings."
+      ],
+      "options": [
+        "highlights",
+        "emphasizes",
+        "stresses",
+        "underscores"
+      ],
+      "answer": "highlights"
+    }
+  },
+  {
+    "id": "05747228-27b1-4b27-8bcd-4cf0c9864a42",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "They had a",
+        "agreement, nothing in writing."
+      ],
+      "options": [
+        "verbal",
+        "oral",
+        "spoken",
+        "unwritten"
+      ],
+      "answer": "verbal"
+    }
+  },
+  {
+    "id": "e6d066a6-8932-4b84-b6b5-5c5c81c0f3bc",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The new law will",
+        "next year."
+      ],
+      "options": [
+        "take effect",
+        "come into effect",
+        "be implemented",
+        "be enacted"
+      ],
+      "answer": "take effect"
+    }
+  },
+  {
+    "id": "758369be-32da-4b63-bbeb-b301c5661212",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His behavior was",
+        "and raised many eyebrows."
+      ],
+      "options": [
+        "unconventional",
+        "unusual",
+        "odd",
+        "peculiar"
+      ],
+      "answer": "unconventional"
+    }
+  },
+  {
+    "id": "cede641c-6827-4c89-b734-8d192d35201b",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "We must",
+        "the risks before proceeding."
+      ],
+      "options": [
+        "assess",
+        "evaluate",
+        "analyze",
+        "examine"
+      ],
+      "answer": "assess"
+    }
+  },
+  {
+    "id": "62df15b3-f2c7-4e93-a21b-1c1812323290",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's work is",
+        "by critics worldwide."
+      ],
+      "options": [
+        "acclaimed",
+        "praised",
+        "lauded",
+        "celebrated"
+      ],
+      "answer": "acclaimed"
+    }
+  },
+  {
+    "id": "1c405728-1f45-4109-9967-d8121715e97d",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "She has a",
+        "understanding of the subject."
+      ],
+      "options": [
+        "profound",
+        "deep",
+        "thorough",
+        "comprehensive"
+      ],
+      "answer": "profound"
+    }
+  },
+  {
+    "id": "a81839f4-cdf8-4908-b140-9c5e7731f941",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The plan was",
+        "after careful consideration."
+      ],
+      "options": [
+        "approved",
+        "endorsed",
+        "sanctioned",
+        "ratified"
+      ],
+      "answer": "approved"
+    }
+  },
+  {
+    "id": "5b891a42-7f49-4122-9f6d-6d658780aa0f",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His comments were",
+        "and did not address the main issue."
+      ],
+      "options": [
+        "tangential",
+        "irrelevant",
+        "off-topic",
+        "peripheral"
+      ],
+      "answer": "tangential"
+    }
+  },
+  {
+    "id": "9d33752a-50ba-46e3-af98-ed9dd70f46f1",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The team needs to",
+        "a strategy for the upcoming project."
+      ],
+      "options": [
+        "formulate",
+        "devise",
+        "create",
+        "develop"
+      ],
+      "answer": "formulate"
+    }
+  },
+  {
+    "id": "809f7e4e-b7a4-479b-be19-0140851a36f0",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The evidence is",
+        "and leaves no room for doubt."
+      ],
+      "options": [
+        "conclusive",
+        "definitive",
+        "decisive",
+        "final"
+      ],
+      "answer": "conclusive"
+    }
+  },
+  {
+    "id": "14cf8922-6afa-46f2-af70-127b66693c29",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "She spoke with",
+        "confidence during the presentation."
+      ],
+      "options": [
+        "unwavering",
+        "steady",
+        "firm",
+        "resolute"
+      ],
+      "answer": "unwavering"
+    }
+  },
+  {
+    "id": "1a3adc8a-3cc5-4aee-9faa-891e260442bc",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was reached after",
+        "negotiations."
+      ],
+      "options": [
+        "protracted",
+        "lengthy",
+        "extended",
+        "prolonged"
+      ],
+      "answer": "protracted"
+    }
+  },
+  {
+    "id": "3b077b7f-5440-404a-9441-45ae8867a076",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His actions were",
+        "by a desire to help others."
+      ],
+      "options": [
+        "motivated",
+        "driven",
+        "inspired",
+        "propelled"
+      ],
+      "answer": "motivated"
+    }
+  },
+  {
+    "id": "eca3777c-8cdc-4c05-9b71-d9f81b59ac72",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The software has a",
+        "interface that is easy to navigate."
+      ],
+      "options": [
+        "user-friendly",
+        "intuitive",
+        "simple",
+        "straightforward"
+      ],
+      "answer": "intuitive"
+    }
+  },
+  {
+    "id": "68f05c37-bebc-4a49-a477-81a57fb50dd6",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "They decided to",
+        "the old system in favor of a new one."
+      ],
+      "options": [
+        "phase out",
+        "replace",
+        "discontinue",
+        "abandon"
+      ],
+      "answer": "phase out"
+    }
+  },
+  {
+    "id": "c05b0149-6e49-41d8-b0c9-3fcf902722e8",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her response was",
+        "and did not reveal much."
+      ],
+      "options": [
+        "guarded",
+        "cautious",
+        "reserved",
+        "reticent"
+      ],
+      "answer": "guarded"
+    }
+  },
+  {
+    "id": "7e25f098-da9d-4999-b69f-57e0e0622362",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The company is",
+        "a period of rapid growth."
+      ],
+      "options": [
+        "undergoing",
+        "experiencing",
+        "facing",
+        "enduring"
+      ],
+      "answer": "undergoing"
+    }
+  },
+  {
+    "id": "793a5b56-f43d-4d0c-8c02-74e2c69b7694",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The report",
+        "the need for immediate action."
+      ],
+      "options": [
+        "underscores",
+        "highlights",
+        "emphasizes",
+        "stresses"
+      ],
+      "answer": "underscores"
+    }
+  },
+  {
+    "id": "20fd2f91-636e-47d4-9039-d349d0e6f630",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His explanation was",
+        "and failed to convince anyone."
+      ],
+      "options": [
+        "flimsy",
+        "weak",
+        "unconvincing",
+        "insubstantial"
+      ],
+      "answer": "flimsy"
+    }
+  },
+  {
+    "id": "c3a75c17-0372-4a97-8396-0bf6d40b8909",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "We must",
+        "the deadline to ensure quality."
+      ],
+      "options": [
+        "extend",
+        "prolong",
+        "delay",
+        "postpone"
+      ],
+      "answer": "extend"
+    }
+  },
+  {
+    "id": "766e1924-f718-49b9-bb43-2990fab5c167",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The new policy has",
+        "implications for the entire industry."
+      ],
+      "options": [
+        "far-reaching",
+        "extensive",
+        "broad",
+        "wide-ranging"
+      ],
+      "answer": "far-reaching"
+    }
+  },
+  {
+    "id": "fec32a62-a8ec-4972-aa1a-8f6af6b22dca",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her dedication to the cause is",
+        "."
+      ],
+      "options": [
+        "unwavering",
+        "steadfast",
+        "resolute",
+        "firm"
+      ],
+      "answer": "unwavering"
+    }
+  },
+  {
+    "id": "c0a91d83-e9f3-40c9-a42c-d3779f8aa84f",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 4,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The team needs to",
+        "a consensus before moving forward."
+      ],
+      "options": [
+        "reach",
+        "achieve",
+        "arrive at",
+        "establish"
+      ],
+      "answer": "reach"
+    }
+  }
+]

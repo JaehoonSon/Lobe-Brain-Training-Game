@@ -1,0 +1,762 @@
+[
+  {
+    "id": "aadd6c99-890b-41bd-9276-fb0e7132197c",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The committee's decision was ",
+        " and left no room for debate."
+      ],
+      "options": [
+        "peremptory",
+        "preemptive",
+        "precursory",
+        "precipitous"
+      ],
+      "answer": "peremptory"
+    }
+  },
+  {
+    "id": "90f60c9b-bcd3-41b4-8db1-bceb61c33809",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her argument was so ",
+        " that it convinced even the skeptics."
+      ],
+      "options": [
+        "cogent",
+        "coherent",
+        "cohesive",
+        "coincident"
+      ],
+      "answer": "cogent"
+    }
+  },
+  {
+    "id": "e1996d9b-ae91-414e-ad7d-ce25ae527d24",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The treaty's ",
+        " clauses were subject to intense scrutiny."
+      ],
+      "options": [
+        "abstruse",
+        "obtuse",
+        "recondite",
+        "arcane"
+      ],
+      "answer": "abstruse"
+    }
+  },
+  {
+    "id": "7b6f011d-36b6-4b0d-8414-8712f03231ac",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "He spoke with such ",
+        " that his words seemed to hang in the air."
+      ],
+      "options": [
+        "gravitas",
+        "gravity",
+        "gravitation",
+        "graveness"
+      ],
+      "answer": "gravitas"
+    }
+  },
+  {
+    "id": "516392e4-3d8c-4d42-96fe-5bacd50094fb",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The artist's work was praised for its ",
+        " use of color and form."
+      ],
+      "options": [
+        "laconic",
+        "lacunar",
+        "lacustrine",
+        "lacunal"
+      ],
+      "answer": "laconic"
+    }
+  },
+  {
+    "id": "f1c1cc18-ae50-4ebd-9ce1-fc0328315183",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her response was ",
+        " and failed to address the core issue."
+      ],
+      "options": [
+        "evasive",
+        "elusive",
+        "illusive",
+        "allusive"
+      ],
+      "answer": "evasive"
+    }
+  },
+  {
+    "id": "49109b4d-eb81-4da9-ae20-85b324e8b5c5",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The novel's plot was ",
+        " and kept readers guessing until the end."
+      ],
+      "options": [
+        "convoluted",
+        "involved",
+        "entangled",
+        "intricate"
+      ],
+      "answer": "convoluted"
+    }
+  },
+  {
+    "id": "b7f9ed4d-947f-4520-b699-e31e53ac14c0",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His management style was ",
+        " and often alienated his team."
+      ],
+      "options": [
+        "peremptory",
+        "preemptive",
+        "precursory",
+        "precipitous"
+      ],
+      "answer": "peremptory"
+    }
+  },
+  {
+    "id": "d43a96ce-31af-4e94-9fbd-ab8156d82d18",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The scientist's theory was ",
+        " and challenged established norms."
+      ],
+      "options": [
+        "heretical",
+        "heterodox",
+        "heterogeneous",
+        "heterologous"
+      ],
+      "answer": "heretical"
+    }
+  },
+  {
+    "id": "729d784f-8a43-4d9d-ac65-3df58e8ae139",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her speech was ",
+        " and moved the audience to tears."
+      ],
+      "options": [
+        "poignant",
+        "pungent",
+        "piquant",
+        "piercing"
+      ],
+      "answer": "poignant"
+    }
+  },
+  {
+    "id": "057b597b-96bf-4d42-9108-744be8b24f64",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was ",
+        " and required careful negotiation."
+      ],
+      "options": [
+        "tortuous",
+        "torturous",
+        "tortious",
+        "tortoise"
+      ],
+      "answer": "tortuous"
+    }
+  },
+  {
+    "id": "7bb07bcf-b9b2-4de3-9603-b8c4ad717c59",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His explanation was ",
+        " and left many questions unanswered."
+      ],
+      "options": [
+        "cursory",
+        "cursive",
+        "curative",
+        "curatorial"
+      ],
+      "answer": "cursory"
+    }
+  },
+  {
+    "id": "f3c325a9-c5de-4781-a703-c40bb0148c94",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The landscape was ",
+        " and inspired awe in all who saw it."
+      ],
+      "options": [
+        "sublime",
+        "subliminal",
+        "sublimate",
+        "subluxation"
+      ],
+      "answer": "sublime"
+    }
+  },
+  {
+    "id": "472888be-092e-4665-813f-591ea5b1466d",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her criticism was ",
+        " and focused on minor flaws."
+      ],
+      "options": [
+        "captious",
+        "cautious",
+        "capacious",
+        "capitous"
+      ],
+      "answer": "captious"
+    }
+  },
+  {
+    "id": "a609295a-ec32-4b4f-9004-d5ae2d590b88",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The policy's impact was ",
+        " and affected various sectors differently."
+      ],
+      "options": [
+        "differential",
+        "deferential",
+        "different",
+        "differing"
+      ],
+      "answer": "differential"
+    }
+  },
+  {
+    "id": "65f55658-8efb-4e5a-9a38-2f030d4c6b63",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His demeanor was ",
+        " and put everyone at ease."
+      ],
+      "options": [
+        "avuncular",
+        "avascular",
+        "avaricious",
+        "aviary"
+      ],
+      "answer": "avuncular"
+    }
+  },
+  {
+    "id": "e64dce61-0af5-4c9d-94c2-2886e8fc4a2e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The report was ",
+        " and omitted key details."
+      ],
+      "options": [
+        "elliptical",
+        "ellipsoid",
+        "elliptic",
+        "ellipsis"
+      ],
+      "answer": "elliptical"
+    }
+  },
+  {
+    "id": "7a82cf62-a341-429d-b62a-b8d1fe21f81a",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her approach was ",
+        " and considered all possible outcomes."
+      ],
+      "options": [
+        "circumspect",
+        "circumstantial",
+        "circumscribed",
+        "circumvent"
+      ],
+      "answer": "circumspect"
+    }
+  },
+  {
+    "id": "e4584a18-d557-4aa7-8542-46278ef3b8a5",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The debate became ",
+        " and focused on trivial points."
+      ],
+      "options": [
+        "picayune",
+        "picaresque",
+        "picador",
+        "piccalilli"
+      ],
+      "answer": "picayune"
+    }
+  },
+  {
+    "id": "3a144891-f0e9-4a1d-a70f-a9fab61da1c7",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His writing style was ",
+        " and full of obscure references."
+      ],
+      "options": [
+        "recondite",
+        "recumbent",
+        "reclusive",
+        "recreant"
+      ],
+      "answer": "recondite"
+    }
+  },
+  {
+    "id": "d1efda24-98ff-4b5b-8ae7-9d5189843a75",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The solution was ",
+        " and solved the problem elegantly."
+      ],
+      "options": [
+        "ingenious",
+        "ingenuous",
+        "ingenerate",
+        "ingressive"
+      ],
+      "answer": "ingenious"
+    }
+  },
+  {
+    "id": "b5c7906a-1a94-49c8-81f0-bf6dc727d177",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her remarks were ",
+        " and intended to provoke thought."
+      ],
+      "options": [
+        "provocative",
+        "provident",
+        "provisory",
+        "provenance"
+      ],
+      "answer": "provocative"
+    }
+  },
+  {
+    "id": "ba534f58-6661-4b32-b9a4-3e80b3a47ccb",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The evidence was ",
+        " and pointed clearly to the culprit."
+      ],
+      "options": [
+        "inculpatory",
+        "exculpatory",
+        "culpable",
+        "inculcate"
+      ],
+      "answer": "inculpatory"
+    }
+  },
+  {
+    "id": "c8983330-4e9c-4152-b79d-0ab1d20038f9",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His tone was ",
+        " and suggested hidden meanings."
+      ],
+      "options": [
+        "oracular",
+        "oratorical",
+        "orbicular",
+        "ordinate"
+      ],
+      "answer": "oracular"
+    }
+  },
+  {
+    "id": "d35b0027-6b87-4ddd-8373-647135a7efd7",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The analysis was ",
+        " and considered every angle."
+      ],
+      "options": [
+        "comprehensive",
+        "comprehensible",
+        "compressive",
+        "comprised"
+      ],
+      "answer": "comprehensive"
+    }
+  },
+  {
+    "id": "2034846d-8bb0-4c3d-bbc1-76b460a3bd9e",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her apology seemed ",
+        " and lacked sincerity."
+      ],
+      "options": [
+        "perfunctory",
+        "perforated",
+        "perfervid",
+        "perfidious"
+      ],
+      "answer": "perfunctory"
+    }
+  },
+  {
+    "id": "6e99718c-dfb3-4a19-9aab-532fec367934",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The strategy was ",
+        " and adapted to changing conditions."
+      ],
+      "options": [
+        "nimble",
+        "nimbus",
+        "niminy-piminy",
+        "nimbostratus"
+      ],
+      "answer": "nimble"
+    }
+  },
+  {
+    "id": "cd669f37-3808-49f4-9ea4-40b324ba558b",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His argument was ",
+        " and based on flawed logic."
+      ],
+      "options": [
+        "specious",
+        "spacious",
+        "speciose",
+        "speckled"
+      ],
+      "answer": "specious"
+    }
+  },
+  {
+    "id": "8109a017-3308-4758-8a08-a1404e8ac5e0",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The description was ",
+        " and painted a vivid picture."
+      ],
+      "options": [
+        "evocative",
+        "provocative",
+        "convulsive",
+        "revocative"
+      ],
+      "answer": "evocative"
+    }
+  },
+  {
+    "id": "507e3dbb-ecd9-4efd-b0cb-4b1735450f1c",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her leadership was ",
+        " and inspired great loyalty."
+      ],
+      "options": [
+        "charismatic",
+        "characteristic",
+        "charitable",
+        "charlatan"
+      ],
+      "answer": "charismatic"
+    }
+  },
+  {
+    "id": "87133e79-d791-4655-adc6-cbfbb44ad11c",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The proposal was ",
+        " and required further discussion."
+      ],
+      "options": [
+        "tentative",
+        "tendentious",
+        "tenacious",
+        "tenebrous"
+      ],
+      "answer": "tentative"
+    }
+  },
+  {
+    "id": "a0ff22fb-de59-406f-a5a4-77ee6aa6e71a",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His behavior was ",
+        " and showed a lack of respect."
+      ],
+      "options": [
+        "contumelious",
+        "contumacious",
+        "contiguous",
+        "contingent"
+      ],
+      "answer": "contumelious"
+    }
+  },
+  {
+    "id": "442e8c4a-d296-49bb-a2dd-bf227d85f6fc",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The interpretation was ",
+        " and open to multiple readings."
+      ],
+      "options": [
+        "ambiguous",
+        "ambivalent",
+        "ambidextrous",
+        "ambient"
+      ],
+      "answer": "ambiguous"
+    }
+  },
+  {
+    "id": "ec55b7ac-4270-4f55-aa5b-e01713aedd53",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her insight was ",
+        " and revealed underlying patterns."
+      ],
+      "options": [
+        "penetrating",
+        "penitent",
+        "penurious",
+        "penumbral"
+      ],
+      "answer": "penetrating"
+    }
+  },
+  {
+    "id": "4e46367c-4f9c-411b-9beb-a504ff176b2c",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The agreement was ",
+        " and legally binding."
+      ],
+      "options": [
+        "executory",
+        "executive",
+        "execrable",
+        "exegetical"
+      ],
+      "answer": "executory"
+    }
+  },
+  {
+    "id": "2593fa59-173a-4b76-bde6-4c65dfe7602b",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His critique was ",
+        " and focused on structural flaws."
+      ],
+      "options": [
+        "architectonic",
+        "archival",
+        "archaic",
+        "archetypal"
+      ],
+      "answer": "architectonic"
+    }
+  },
+  {
+    "id": "41a5627e-e60e-457b-9a05-bccac1ebf153",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The narrative was ",
+        " and skipped between times and places."
+      ],
+      "options": [
+        "discontinuous",
+        "disconsolate",
+        "discordant",
+        "discreet"
+      ],
+      "answer": "discontinuous"
+    }
+  },
+  {
+    "id": "ad0887d5-404e-4616-949a-2df0aeb4b948",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "Her manner was ",
+        " and put people off."
+      ],
+      "options": [
+        "supercilious",
+        "superficial",
+        "superfluous",
+        "supernal"
+      ],
+      "answer": "supercilious"
+    }
+  },
+  {
+    "id": "66820149-a64a-42ce-96c7-ed045ce86654",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "The theory was ",
+        " and challenged conventional wisdom."
+      ],
+      "options": [
+        "iconoclastic",
+        "iconographic",
+        "iconic",
+        "icosahedral"
+      ],
+      "answer": "iconoclastic"
+    }
+  },
+  {
+    "id": "bd4bebec-e8d6-47cc-b61c-3e219a9c85ef",
+    "game_id": "mental_language_discrimination",
+    "difficulty": 7,
+    "content": {
+      "type": "mental_language_discrimination",
+      "sentenceParts": [
+        "His response was ",
+        " and avoided direct answers."
+      ],
+      "options": [
+        "equivocal",
+        "equitable",
+        "equinoctial",
+        "equipollent"
+      ],
+      "answer": "equivocal"
+    }
+  }
+]

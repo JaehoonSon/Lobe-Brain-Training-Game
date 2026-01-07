@@ -18,7 +18,7 @@
     "db:types": "npx supabase gen types typescript --linked > lib/database.types.ts"
   },
   "dependencies": {
-    "@ai-sdk/react": "^3.0.0-beta.124",
+    "@ai-sdk/react": "^3.0.13",
     "@expo-google-fonts/nunito": "^0.4.2",
     "@gorhom/bottom-sheet": "^5",
     "@react-native-async-storage/async-storage": "^2.2.0",
@@ -54,7 +54,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@shopify/react-native-skia": "2.2.12",
     "@supabase/supabase-js": "^2.89.0",
-    "ai": "^6.0.0-beta.124",
+    "ai": "^6.0.13",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^4.1.0",
