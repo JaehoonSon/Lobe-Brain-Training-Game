@@ -5,6 +5,7 @@ import { supabase } from "~/lib/supabase";
 import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MemoryMatrix } from "~/components/games/MemoryMatrix";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
+import { Wordle } from "~/components/games/Wordle";
 import { GameContentSchema } from "~/lib/validators/game-content";
 import { generateMemoryMatrix } from "~/lib/generators/memoryMatrix";
 import { X } from "lucide-react-native";
@@ -171,10 +172,18 @@ export default function GamePlayScreen() {
             onComplete={handleComplete}
           />
         )}
+        {id === "wordle" && (
+          <Wordle
+            key={currentQuestionIndex}
+            content={currentContent}
+            onComplete={handleComplete}
+          />
+        )}
         {![
           "mental_arithmetic",
           "memory_matrix",
           "mental_language_discrimination",
+          "wordle",
         ].includes(id as string) && (
             <View className="flex-1 items-center justify-center">
               <Text>Game component not implemented for {id}</Text>
