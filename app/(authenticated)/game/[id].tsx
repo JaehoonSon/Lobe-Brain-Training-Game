@@ -3,15 +3,16 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  useColorScheme,
-  Text,
   ActivityIndicator,
 } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { useGames } from "~/contexts/GamesContext";
-import { H1, H3, P, Muted } from "~/components/ui/typography";
+import { H1, H2, H3, H4, P, Muted } from "~/components/ui/typography";
+import { Text } from "~/components/ui/text";
+import { Button } from "~/components/ui/button";
 import {
   ArrowLeft,
+  ChevronLeft,
   X,
   Trophy,
   Hexagon,
@@ -25,8 +26,6 @@ import { cn } from "~/lib/utils";
 export default function GameDetailScreen() {
   const { id } = useLocalSearchParams();
   const { games, categories } = useGames();
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
 
   const game = games.find((g) => g.id === id);
   const category = categories.find((c) => c.id === game?.category_id);
@@ -36,9 +35,9 @@ export default function GameDetailScreen() {
     return (
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator />
-        <P className="mt-4">Loading game...</P>
+        <P className="mt-4 text-lg">Loading game...</P>
         <TouchableOpacity onPress={() => router.back()} className="mt-4">
-          <P className="text-primary font-bold">Go Back</P>
+          <P className="text-primary font-bold text-lg">Go Back</P>
         </TouchableOpacity>
       </View>
     );
@@ -49,9 +48,9 @@ export default function GameDetailScreen() {
       {/* Close Button Overlay */}
       <TouchableOpacity
         onPress={() => router.back()}
-        className="absolute top-12 left-6 z-20 w-10 h-10 rounded-full bg-black/40 items-center justify-center"
+        className="absolute top-12 left-6 z-20 w-12 h-12 rounded-full bg-black/40 items-center justify-center"
       >
-        <X color="white" size={20} />
+        <X color="white" size={24} />
       </TouchableOpacity>
 
       <ScrollView className="flex-1 pb-32">
@@ -64,8 +63,8 @@ export default function GameDetailScreen() {
               resizeMode="cover"
             />
           ) : (
-            <View className="flex-1 items-center justify-center bg-gray-800">
-              <Hexagon size={64} className="text-gray-600" />
+            <View className="flex-1 items-center justify-center bg-muted">
+              <Hexagon size={72} className="text-muted-foreground" />
             </View>
           )}
           {/* Gradient Overlay for Text Readability */}
@@ -81,75 +80,70 @@ export default function GameDetailScreen() {
         <View className="px-6 py-6 bg-background">
           {/* Breadcrumbs */}
           <View className="flex-row items-center mb-6">
-            <P className="text-xs font-bold tracking-widest uppercase text-muted-foreground">
+            <P className="text-sm font-bold tracking-widest uppercase text-muted-foreground">
               {category?.name || "GAME"}
             </P>
             <View className="mx-2">
-              <P className="text-xs text-muted-foreground">{">"}</P>
+              <P className="text-sm text-muted-foreground">{">"}</P>
             </View>
-            <P className="text-xs font-bold tracking-widest uppercase text-muted-foreground">
+            <P className="text-sm font-bold tracking-widest uppercase text-muted-foreground">
               {category?.description?.split(" ")[0] || "SKILL"}
             </P>
           </View>
 
           {/* Description */}
-          <P className="text-lg leading-7 mb-8 text-foreground/90">
+          <P className="text-xl leading-8 mb-8 text-foreground/90">
             {game.description}
           </P>
 
-          <P className="text-base text-muted-foreground leading-6 mb-8">
+          <P className="text-lg text-muted-foreground leading-7 mb-8">
             {game.instructions || "Play consistently to improve your scores."}
           </P>
 
           {/* Stats Grid - Mocked Data */}
           <View className="gap-6">
             {/* LPI Row */}
-            <View className="flex-row justify-between items-center py-2 border-b border-border/50">
-              <H3 className="text-base">Game LPI</H3>
-              <View className="bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/50 flex-row items-center gap-1">
-                <Trophy
-                  size={12}
-                  className="text-yellow-600 dark:text-yellow-400"
-                />
-                <P className="text-xs font-bold text-yellow-700 dark:text-yellow-300">
-                  UNLOCK
-                </P>
+            <View className="flex-row justify-between items-center py-3 border-b border-border/50">
+              <H4>Game LPI</H4>
+              <View className="bg-primary/20 px-4 py-2 rounded-full border border-primary/50 flex-row items-center gap-2">
+                <Trophy size={16} className="text-primary" />
+                <Text className="text-sm font-bold text-primary">UNLOCK</Text>
               </View>
             </View>
 
             {/* Best Score Row */}
-            <View className="flex-row justify-between items-center py-2 border-b border-border/50">
-              <H3 className="text-base">Best Score</H3>
-              <P className=" text-muted-foreground text-lg">-</P>
+            <View className="flex-row justify-between items-center py-3 border-b border-border/50">
+              <H4>Best Score</H4>
+              <P className="text-muted-foreground text-xl">-</P>
             </View>
 
             {/* Best Stat Row */}
-            <View className="flex-row justify-between items-center py-2 border-b border-border/50">
-              <H3 className="text-base">Best Stat</H3>
-              <P className=" text-muted-foreground text-lg">-</P>
+            <View className="flex-row justify-between items-center py-3 border-b border-border/50">
+              <H4>Best Stat</H4>
+              <P className="text-muted-foreground text-xl">-</P>
             </View>
 
             {/* Newcomer Badges Row */}
-            <View className="flex-row justify-between items-center py-2 border-b border-border/50">
-              <H3 className="text-base">Newcomer</H3>
-              <View className="flex-row gap-2">
+            <View className="flex-row justify-between items-center py-3 border-b border-border/50">
+              <H4>Newcomer</H4>
+              <View className="flex-row gap-3">
                 <Hexagon
-                  size={24}
-                  className="text-green-500 fill-transparent"
+                  size={28}
+                  className="text-secondary fill-transparent"
                   strokeWidth={2}
                 />
-                <Hexagon size={24} className="text-muted-foreground/30" />
-                <Star size={24} className="text-muted-foreground/30" />
-                <Crown size={24} className="text-muted-foreground/30" />
+                <Hexagon size={28} className="text-muted-foreground/30" />
+                <Star size={28} className="text-muted-foreground/30" />
+                <Crown size={28} className="text-muted-foreground/30" />
               </View>
             </View>
 
             {/* Total Plays Row */}
-            <View className="flex-row justify-between items-center py-2">
-              <H3 className="text-base">Total Plays</H3>
+            <View className="flex-row justify-between items-center py-3">
+              <H4>Total Plays</H4>
               <View className="flex-row items-baseline gap-1">
-                <P className="text-xl font-bold">0</P>
-                <P className="text-sm text-muted-foreground">of 3</P>
+                <P className="text-2xl font-bold">0</P>
+                <P className="text-base text-muted-foreground">of 3</P>
               </View>
             </View>
           </View>
@@ -165,24 +159,26 @@ export default function GameDetailScreen() {
         className="absolute bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg z-20"
       >
         <View className="px-6 py-4 flex-row items-center gap-4">
-          <TouchableOpacity
+          <Button
+            variant="outline"
             onPress={() => router.back()}
-            className="flex-row items-center justify-center h-12 px-4"
+            className="h-14 w-14 rounded-full border-2 border-muted-foreground/20 p-0 items-center justify-center mr-4"
           >
-            <ArrowLeft size={18} className="text-orange-500 mr-2" />
-            <P className="text-orange-500 font-bold uppercase text-sm tracking-wide">
-              All Games
-            </P>
-          </TouchableOpacity>
+            <ChevronLeft size={24} className="text-muted-foreground" />
+          </Button>
 
-          <TouchableOpacity
-            className="flex-1 bg-orange-500 h-14 rounded-full items-center justify-center active:bg-orange-600 shadow-md"
+          <Button
+            size="xl"
+            className="flex-1 rounded-full"
             onPress={() => console.log("Start Tutorial")}
           >
-            <P className="text-white font-bold text-lg">Start Tutorial</P>
-          </TouchableOpacity>
+            <Text className="text-primary-foreground font-bold">
+              Start Tutorial
+            </Text>
+          </Button>
         </View>
       </SafeAreaView>
     </View>
   );
 }
+
