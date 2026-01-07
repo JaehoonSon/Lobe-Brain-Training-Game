@@ -1,0 +1,502 @@
+[
+  {
+    "id": "d1ce37ce-43b7-4fe3-ac6f-d46986b01c36",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "APPLE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "d970a126-830f-4f5d-baa6-3dbb5dea91e9",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "HOUSE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "cb0cea41-0b3a-4c4a-b903-3537cb494535",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "CHAIR",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "21eb603c-b230-493e-a7e5-91fb579f4388",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "TABLE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "7513c3ed-2295-449f-b260-ade732dac86f",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "WATER",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "50a51bb9-8355-48f3-a676-1a97600dbde6",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "BREAD",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "475a4938-575a-43aa-8de6-8c338072e038",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "CLOUD",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "c5bc6cf5-ba51-4245-bc94-d79bc64890be",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "GRASS",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "545c0945-3150-4209-8bde-c2793edf389c",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "LIGHT",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "23553926-9245-480a-ae37-02bb62f47579",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "MONEY",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "1f29bbc3-cdda-4922-9a77-b8a632b6da75",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "PAPER",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "f440eb62-3c53-4512-871b-d8963771970e",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "RIVER",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "bfe71a02-5810-4fe1-9908-c8ad1e6ab694",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "SMILE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "c9fab650-24e6-47bb-9658-1a885e5180d1",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "TIGER",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "cf23c5ba-25f4-4528-bd8e-3ca1479d0e9b",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "UNION",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "2db4530b-c994-4954-87a7-352602ac227a",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "VOICE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "049845c7-6ebe-4ff0-8071-09b7fe75609e",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "WOMAN",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "2be95994-83fd-407e-8bb8-a3ee4d706e7f",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "YOUTH",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "264fe9ac-90b2-47ff-bd99-f5f952d917a3",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "ZEBRA",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "60a8d103-a997-4ad0-bfe2-9a0aa4c17b65",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "BEACH",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "4ed9ca01-db5f-4271-a632-2881636793e0",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "CLOCK",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "6c57e6f1-cf65-4ae8-89fd-27c086a65ba5",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "DREAM",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "794cb8d9-3d9a-44b7-9831-235ce794170e",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "EARTH",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "dd5beb3c-5501-4e9f-bd07-f21dc1fc1b8d",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "FLAME",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "65c0c548-a2f4-4b49-8267-d4d03057dd79",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "GLASS",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "a0f61555-e0ec-4fdc-9966-dac4d041d168",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "HEART",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "32bcbc29-f149-4740-98d7-b379ece0a3cf",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "IMAGE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "fb9b3293-0c96-475e-b97a-9de2eaa8283d",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "JUICE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "31826fbb-da90-4503-bd27-452487b1d83e",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "KNIFE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "a428622b-7ca0-49de-b995-c82308cc2343",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "LEMON",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "7fda5227-5c59-495f-b830-8a34dc38a8c3",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "MUSIC",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "49136d56-d5b6-4a1c-8209-b33ced717e6b",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "NIGHT",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "8bfaa8b2-9a60-4a80-8127-705bcd68b703",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "OCEAN",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "e91e540d-578f-4f88-8709-9f5097f8bf49",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "PEACE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "8f6b587a-dec1-48dd-b753-6d276b3e821e",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "QUEEN",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "82481f82-40a4-4e6b-b5d2-645e39bdccce",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "ROBOT",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "064b5312-16c5-4fb7-a072-c4b9992b2209",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "SHIRT",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "3986ed5d-2f0d-43ca-a5ad-a1cf80fe7193",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "TRAIN",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "466e029a-01cb-42df-9de6-1ed1df06c88b",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "UMBRA",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "5b46e25b-95bd-4cb0-87bb-171fa96b984e",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "VITAL",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "86d79442-e0f1-4852-a600-f946fbf39d49",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "WHEAT",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "a7dad630-3760-4e97-8bf8-883c5f39e5ca",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "XENON",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "294d0c00-f739-4672-874d-55fc02088442",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "YACHT",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "50c368fa-2882-4235-b372-38abd0be0da1",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "ZESTY",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "23c52464-7001-456f-b6a0-bfa306195791",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "BRAIN",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "2e36aa2a-2ea2-478b-aa17-edc714bb8ddd",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "CRANE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "1fcda4bb-aabf-41dc-870b-566adc373ab6",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "DANCE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "d865fe3a-24b2-4a8b-aa3d-03abb080cf22",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "EAGLE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "9d0d10b8-a3f1-4dfa-b766-95789262157c",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "FENCE",
+      "max_guesses": 6
+    }
+  },
+  {
+    "id": "daf8d772-e36a-4289-8124-64c1a13f2912",
+    "game_id": "wordle",
+    "difficulty": 1,
+    "content": {
+      "type": "wordle",
+      "word": "GRAPE",
+      "max_guesses": 6
+    }
+  }
+]

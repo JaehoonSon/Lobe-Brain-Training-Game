@@ -26,11 +26,19 @@ export const MentalLanguageDiscriminationContentSchema = z.object({
   answer: z.string(),
 });
 
+// 4. Wordle
+export const WordleContentSchema = z.object({
+  type: z.literal("wordle"),
+  word: z.string().length(5),
+  max_guesses: z.number(),
+});
+
 // Union Schema for all game content
 export const GameContentSchema = z.discriminatedUnion("type", [
   MentalArithmeticContentSchema,
   MemoryMatrixContentSchema,
   MentalLanguageDiscriminationContentSchema,
+  WordleContentSchema,
 ]);
 
 export type MentalArithmeticContent = z.infer<typeof MentalArithmeticContentSchema>;
@@ -38,4 +46,5 @@ export type MemoryMatrixContent = z.infer<typeof MemoryMatrixContentSchema>;
 export type MentalLanguageDiscriminationContent = z.infer<
   typeof MentalLanguageDiscriminationContentSchema
 >;
+export type WordleContent = z.infer<typeof WordleContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;

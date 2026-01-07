@@ -1,0 +1,512 @@
+[
+  {
+    "id": "7e11a712-ed6b-4968-a7b6-274b7928c70a",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "ABANDON",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "97dcc432-8bd2-4a55-acea-ad733448ba62",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "BALANCE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "61351b52-5eb7-4f41-bf6e-2b0b455d5ba2",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "CABINET",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "a23aa6d0-77bc-4507-b139-68603b7a8ae2",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "DAMAGED",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "cf8c22a2-a740-47da-a996-eb6a17ead968",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "ECLIPSE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "f95955a1-7710-4806-95b0-187af02f820d",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "FACTORY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "3c6e3304-5212-48ba-bec6-8465d2d009bb",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "GALLERY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "4c6df001-60a8-4d6d-b7c9-e190e7288613",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "HARBORS",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "da05c25d-ac12-41ac-b82b-949580846058",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "IMAGINE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "75826657-73bf-4c8a-9c89-b93339947320",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "JOURNEY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "33dcd02c-b01a-47cb-87a8-d573213633dd",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "KITCHEN",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "58b47e38-2b50-4ecf-a51f-9ccb17c3ec87",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "LIBRARY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "32a71e96-441d-48f0-9857-21f782d51636",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "MACHINE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "c03e3a33-5feb-4581-a154-0782c9377106",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "NATURAL",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "08b925cd-dc92-4dee-98d2-9f0e26d78830",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "OBSCURE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "db056daa-ac02-46f2-b5e6-efd48505dbff",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "PACKAGE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "e55ed70b-60b8-440c-8411-7fc92d26b0a9",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "QUALITY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "aca0d8a7-9816-4b69-863b-e7abff0320f7",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "RADIANT",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "8a1d29a0-9bd3-4979-b781-e494ba7cb224",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "SALVAGE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "de8456a8-b0d8-4745-9f5e-266a33e719dc",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "TACTICS",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "979b3158-0c69-48a8-bfa8-906c90ec171e",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "UNCOVER",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "297db9ae-3ebf-47d3-9806-80eb24119aa9",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "VICTORY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "d683f1d5-5fc4-4731-897b-df9a8059ef63",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "WARRIOR",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "f9eb4976-d850-4b39-a80f-7a3597a38d40",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "XENOPUS",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "e2100d01-77df-48fc-b83a-8482b385bdca",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "YEAREND",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "4ab530c6-a221-4397-955e-19c9d4520ac2",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "ZEALOUS",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "1618e961-66a4-465f-b0b6-c1cb191601fa",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "ABSOLVE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "16e64234-762c-4d1c-891c-4bf05e0e450a",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "BROADEN",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "9479b0f7-c25b-494b-8c0e-68731faf7c24",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "COMPACT",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "288250d5-f6d4-46a2-8480-8bec569a88c2",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "DIVERSE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "4c30f014-cb40-45aa-b08e-806ea974297a",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "EXPLORE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "b96bcde3-f24f-4448-b0ad-9397825846e5",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "FREQUENT",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "b40959ab-0d2e-4292-a211-a23f66dd29a9",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "GENERAL",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "fa61b39e-b12a-4327-b870-a3b58577345a",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "HARMONY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "16b2012a-5303-4f19-a16d-a69c46cc87ea",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "INQUIRE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "177847ee-3f74-4ebf-96e1-2970bed54c2d",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "JUSTIFY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "4d72c963-c9ba-4473-9c48-60255c2f28cb",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "KINETIC",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "f6522d5e-1bc1-46b5-9146-d79583fb010b",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "LEGIBLE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "f747008b-0fc9-4992-8cd6-0c75f996fe47",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "MOMENTO",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "922c0926-a066-4a51-a86b-48808bfc7af4",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "NEGLECT",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "b519048a-bb7f-45bb-9842-379fd2852ce1",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "OPTIMAL",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "8d7a46d3-893e-4c11-95e4-b589546d38a2",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "PERSIST",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "7650ea71-02c6-4c9b-af80-6ee65319a119",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "QUANTUM",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "41c71e35-d26d-4b7e-ad2c-cdb28a0b7bb5",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "REACTOR",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "8da17120-98c0-4b99-965c-d6980fe261ab",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "SILENCE",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "44ee436b-dda3-402c-877b-9628ac6c847e",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "TENSION",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "2edd5d24-0d14-49f3-9ec1-4997ea43a343",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "URBANLY",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "a018a957-2919-4d89-911a-e3c7b36f4961",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "VERSION",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "22455bfd-f951-4251-877b-fc23d65db640",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "WELCOME",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "3adf78d8-066c-435e-81bc-e6ab1320eeec",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "YIELDED",
+      "max_guesses": 5
+    }
+  },
+  {
+    "id": "c5854893-f53b-4c6e-9741-c0b5da156e56",
+    "game_id": "wordle",
+    "difficulty": 7,
+    "content": {
+      "type": "wordle",
+      "word": "ZONALLY",
+      "max_guesses": 5
+    }
+  }
+]

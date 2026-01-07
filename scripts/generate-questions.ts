@@ -41,6 +41,13 @@ const MentalLanguageDiscriminationSchema = z.object({
   answer: z.string(),
 });
 
+// 4. Wordle
+const WordleSchema = z.object({
+  type: z.literal('wordle'),
+  word: z.string(),
+  max_guesses: z.number(),
+});
+
 /* -------------------------------------------------------------------------- */
 /*                         Game → Schema Type Mapping                          */
 /* -------------------------------------------------------------------------- */
@@ -49,6 +56,7 @@ const GameSchemas = {
   mental_arithmetic: MentalArithmeticSchema,
   memory_matrix: MemoryMatrixSchema,
   mental_language_discrimination: MentalLanguageDiscriminationSchema,
+  wordle: WordleSchema,
 } as const;
 
 type GameId = keyof typeof GameSchemas;
@@ -189,6 +197,35 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
 
     Output ONLY valid JSON.
     `;
+
+    case 'wordle': {
+      const wordLength = difficulty <= 4 ? 5 : difficulty <= 6 ? 6 : difficulty <= 8 ? 7 : 8;
+      const maxGuesses = difficulty >= 7 ? 5 : 6;
+
+      return `
+    Generate ${count} unique ${wordLength}-letter words for a Wordle game at difficulty ${difficulty}/10.
+
+    RULES:
+    - Every word must be EXACTLY ${wordLength} letters.
+    - All words must be valid English dictionary words.
+    - No proper nouns, abbreviations, or slang.
+    - Ensure variety: mix different starting letters, vowel patterns.
+    - Words should be in UPPERCASE.
+
+    DIFFICULTY GUIDE:
+    - 1-2: Common 5-letter words (household items, common verbs). max_guesses: 6
+    - 3-4: Moderate 5-letter vocabulary. max_guesses: 6
+    - 5-6: Standard 6-letter vocabulary. max_guesses: 6
+    - 7-8: Less common 6-7 letter words. max_guesses: 5
+    - 9-10: Advanced/rare 7-8 letter words. max_guesses: 5
+
+    For this request:
+    - word_length: ${wordLength}
+    - max_guesses: ${maxGuesses}
+
+    Output ONLY valid JSON.
+    `;
+    }
 
     default:
       game satisfies never;

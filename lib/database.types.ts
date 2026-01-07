@@ -119,6 +119,7 @@ export type Database = {
           duration_seconds: number | null
           game_id: string | null
           id: string
+          metadata: Json | null
           score: number | null
           total_questions: number | null
           user_id: string | null
@@ -130,6 +131,7 @@ export type Database = {
           duration_seconds?: number | null
           game_id?: string | null
           id?: string
+          metadata?: Json | null
           score?: number | null
           total_questions?: number | null
           user_id?: string | null
@@ -141,6 +143,7 @@ export type Database = {
           duration_seconds?: number | null
           game_id?: string | null
           id?: string
+          metadata?: Json | null
           score?: number | null
           total_questions?: number | null
           user_id?: string | null
