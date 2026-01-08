@@ -346,6 +346,33 @@ export type Database = {
           },
         ]
       }
+      user_streaks: {
+        Row: {
+          best_streak: number
+          created_at: string | null
+          current_streak: number
+          last_played_date: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          best_streak?: number
+          created_at?: string | null
+          current_streak?: number
+          last_played_date?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          best_streak?: number
+          created_at?: string | null
+          current_streak?: number
+          last_played_date?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
