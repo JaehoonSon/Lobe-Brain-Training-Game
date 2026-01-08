@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { supabase } from "~/lib/supabase";
@@ -6,8 +6,8 @@ import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MemoryMatrix } from "~/components/games/MemoryMatrix";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
 import { Wordle } from "~/components/games/Wordle";
-import { GameContentSchema } from "~/lib/validators/game-content";
-import { useGameSession } from "~/hooks/useGameSession";
+import { GameContentSchema, GameContent } from "~/lib/validators/game-content";
+import { useGameSession, AnswerRecord } from "~/hooks/useGameSession";
 import { useAuth } from "~/contexts/AuthProvider";
 import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
@@ -16,14 +16,23 @@ import { Text } from "~/components/ui/text";
 const QUESTIONS_PER_ROUND = 3;
 const DEFAULT_DIFFICULTY = 1;
 
+interface QuestionData {
+  id?: string;          // Question ID from DB (if applicable)
+  content: GameContent; // Parsed content
+  difficulty: number;
+}
+
 export default function GamePlayScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { user } = useAuth();
   const { state: session, startRound, recordAnswer, endRound, resetSession } = useGameSession();
 
-  const [sessionQuestions, setSessionQuestions] = useState<any[]>([]);
+  const [sessionQuestions, setSessionQuestions] = useState<QuestionData[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  // Track when each question started (for response time calculation)
+  const questionStartTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
     fetchAndStartRound();
@@ -39,7 +48,7 @@ export default function GamePlayScreen() {
       console.log("Fetching game content for:", id);
       const { data, error } = await supabase
         .from("questions")
-        .select("content, difficulty")
+        .select("id, content, difficulty")
         .eq("game_id", id)
         .limit(20);
 
@@ -56,12 +65,16 @@ export default function GamePlayScreen() {
       const shuffled = [...data].sort(() => Math.random() - 0.5);
       const selectedRaw = shuffled.slice(0, QUESTIONS_PER_ROUND);
 
-      const validQuestions: any[] = [];
+      const validQuestions: QuestionData[] = [];
 
       for (const item of selectedRaw) {
         const parsed = GameContentSchema.safeParse(item.content);
         if (parsed.success) {
-          validQuestions.push(parsed.data);
+          validQuestions.push({
+            id: item.id,
+            content: parsed.data,
+            difficulty: item.difficulty ?? DEFAULT_DIFFICULTY,
+          });
         } else {
           console.warn("Invalid question content:", parsed.error);
         }
@@ -74,13 +87,19 @@ export default function GamePlayScreen() {
         return;
       }
 
+      // Calculate average difficulty of selected questions
+      const avgDifficulty = Math.round(
+        validQuestions.reduce((sum, q) => sum + q.difficulty, 0) / validQuestions.length
+      );
+
       setSessionQuestions(validQuestions);
       setCurrentQuestionIndex(0);
+      questionStartTimeRef.current = Date.now();
 
       // Start the session!
       startRound({
         gameId: id as string,
-        difficulty: DEFAULT_DIFFICULTY, // TODO: Use user's current rating
+        difficulty: avgDifficulty,
         userId: user?.id || "anonymous",
         totalQuestions: validQuestions.length,
       });
@@ -95,9 +114,28 @@ export default function GamePlayScreen() {
     }
   };
 
-  const handleQuestionComplete = async (isCorrect: boolean) => {
+  // Called when question index changes - reset the timer
+  useEffect(() => {
+    if (!loading && sessionQuestions.length > 0) {
+      questionStartTimeRef.current = Date.now();
+    }
+  }, [currentQuestionIndex, loading]);
+
+  const handleQuestionComplete = async (accuracy: number, userResponse?: any) => {
+    const currentQuestion = sessionQuestions[currentQuestionIndex];
+    const responseTimeMs = Date.now() - questionStartTimeRef.current;
+
+    // Build full answer record
+    const answer: AnswerRecord = {
+      questionId: currentQuestion.id,
+      accuracy,  // 0.0 to 1.0
+      responseTimeMs,
+      userResponse: userResponse ?? null,
+      generatedContent: currentQuestion.content as any, // Store the question content
+    };
+
     // Record this answer in the session
-    recordAnswer(isCorrect);
+    recordAnswer(answer);
 
     if (currentQuestionIndex < sessionQuestions.length - 1) {
       // Next question
@@ -107,10 +145,11 @@ export default function GamePlayScreen() {
     } else {
       // End of round - calculate and save BPI
       const finalBpi = await endRound();
+      const perfectCount = session.correctCount + (accuracy === 1.0 ? 1 : 0);
 
       Alert.alert(
         "Round Complete!",
-        `Score: ${finalBpi ?? 0} BPI\nCorrect: ${session.correctCount + (isCorrect ? 1 : 0)}/${sessionQuestions.length}`,
+        `Score: ${finalBpi ?? 0} BPI\nPerfect: ${perfectCount}/${sessionQuestions.length}`,
         [
           { text: "Play Again", onPress: fetchAndStartRound },
           { text: "Exit", onPress: () => router.back() },
@@ -130,29 +169,53 @@ export default function GamePlayScreen() {
     );
   }
 
-  const currentContent = sessionQuestions[currentQuestionIndex];
+  const currentQuestion = sessionQuestions[currentQuestionIndex];
 
-  if (!currentContent) {
+  if (!currentQuestion) {
     return null;
   }
 
   // Map game ID to component
   const renderGame = () => {
-    const commonProps = {
-      key: currentQuestionIndex,
-      content: currentContent,
-      onComplete: handleQuestionComplete,
-    };
+    const content = currentQuestion.content;
 
     switch (id) {
       case "mental_arithmetic":
-        return <MentalArithmetic {...commonProps} />;
+        if (content.type !== "mental_arithmetic") return null;
+        return (
+          <MentalArithmetic
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       case "memory_matrix":
-        return <MemoryMatrix {...commonProps} />;
+        if (content.type !== "memory_matrix") return null;
+        return (
+          <MemoryMatrix
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       case "mental_language_discrimination":
-        return <MentalLanguageDiscrimination {...commonProps} />;
+        if (content.type !== "mental_language_discrimination") return null;
+        return (
+          <MentalLanguageDiscrimination
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       case "wordle":
-        return <Wordle {...commonProps} />;
+        if (content.type !== "wordle") return null;
+        return (
+          <Wordle
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       default:
         return (
           <View className="flex-1 items-center justify-center">

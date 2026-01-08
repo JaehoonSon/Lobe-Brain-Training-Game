@@ -6,7 +6,7 @@ import * as Haptics from "expo-haptics";
 import { MemoryMatrixContent } from "~/lib/validators/game-content";
 
 interface MemoryMatrixProps {
-  onComplete: (isCorrect: boolean) => void;
+  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
   content: MemoryMatrixContent;
   difficulty?: number;
 }
@@ -100,9 +100,9 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
 
-    // Notify Parent after delay
+    // Notify Parent after delay with accuracy (0-1)
     setTimeout(() => {
-      onComplete(isPerfect);
+      onComplete(accuracy);
     }, 1500);
   };
 

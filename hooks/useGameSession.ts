@@ -21,10 +21,18 @@ export interface RoundSessionConfig {
   metadata?: Json;
 }
 
+export interface AnswerRecord {
+  questionId?: string;       // From questions table (nullable for procedural games)
+  accuracy: number;          // 0.0 to 1.0 (e.g., 0.8 for 4/5 correct)
+  responseTimeMs: number;
+  userResponse?: Json;       // What user clicked/typed
+  generatedContent?: Json;   // For procedural games (e.g., which tiles were shown)
+}
+
 /**
  * Manages a game round session (multiple questions).
  * - Tracks start time, correct answers, and calculates BPI at the end.
- * - Saves session to database when round completes.
+ * - Saves session and individual answers to database when round completes.
  */
 export function useGameSession() {
   const [state, setState] = useState<RoundSessionState>({
@@ -38,12 +46,14 @@ export function useGameSession() {
   });
 
   const configRef = useRef<RoundSessionConfig | null>(null);
+  const answersRef = useRef<AnswerRecord[]>([]);
 
   /**
    * Starts a new round session
    */
   const startRound = useCallback((config: RoundSessionConfig) => {
     configRef.current = config;
+    answersRef.current = [];
 
     setState({
       isPlaying: true,
@@ -57,17 +67,20 @@ export function useGameSession() {
   }, []);
 
   /**
-   * Records a question result (called after each question)
+   * Records a question result with full details
    */
-  const recordAnswer = useCallback((isCorrect: boolean) => {
+  const recordAnswer = useCallback((answer: AnswerRecord) => {
+    answersRef.current.push(answer);
+    
     setState((prev) => ({
       ...prev,
-      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
+      // Count as "correct" if accuracy is 1.0 (perfect)
+      correctCount: prev.correctCount + (answer.accuracy === 1.0 ? 1 : 0),
     }));
   }, []);
 
   /**
-   * Ends the round, calculates BPI, and saves to DB
+   * Ends the round, calculates BPI, and saves session + answers to DB
    */
   const endRound = useCallback(async () => {
     if (!configRef.current || !state.startTime) return null;
@@ -75,13 +88,16 @@ export function useGameSession() {
     const endTime = Date.now();
     const durationMs = endTime - state.startTime;
     const { difficulty, metadata, userId, gameId, totalQuestions } = configRef.current;
-    const { correctCount } = state;
+    const answers = answersRef.current;
+    const correctCount = answers.filter(a => a.accuracy === 1.0).length;
 
-    // Calculate accuracy
-    const accuracy = totalQuestions > 0 ? correctCount / totalQuestions : 0;
+    // Calculate overall accuracy as average of individual accuracies
+    const accuracy = answers.length > 0 
+      ? answers.reduce((sum, a) => sum + a.accuracy, 0) / answers.length 
+      : 0;
 
     // Calculate BPI
-    // Using a reasonable target time based on difficulty (e.g., 10s per question at difficulty 1)
+    // Target time: 10s per question at difficulty 1, scales inversely with difficulty
     const targetTimeMs = totalQuestions * 10000 * (1 / difficulty);
     
     const bpi = calculateBPI({
@@ -97,29 +113,58 @@ export function useGameSession() {
       isFinished: true,
       score: bpi,
       durationMs,
+      correctCount,
     }));
 
     // Save to database
     try {
-      const { error } = await supabase.from('game_sessions').insert({
-        user_id: userId,
-        game_id: gameId,
-        difficulty_level: difficulty,
-        score: bpi,
-        duration_seconds: Math.round(durationMs / 1000),
-        correct_count: correctCount,
-        total_questions: totalQuestions,
-        metadata: metadata || null,
-      });
+      // 1. Insert game_sessions and get back the session_id
+      const { data: sessionData, error: sessionError } = await supabase
+        .from('game_sessions')
+        .insert({
+          user_id: userId,
+          game_id: gameId,
+          difficulty_level: difficulty,
+          score: bpi,
+          duration_seconds: Math.round(durationMs / 1000),
+          correct_count: correctCount,
+          total_questions: totalQuestions,
+          metadata: metadata || null,
+        })
+        .select('id')
+        .single();
 
-      if (error) throw error;
-      console.log('Session saved with BPI:', bpi);
+      if (sessionError) throw sessionError;
+
+      const sessionId = sessionData.id;
+      console.log('Session saved with BPI:', bpi, 'ID:', sessionId);
+
+      // 2. Insert all game_answers linked to this session
+      if (answers.length > 0) {
+        const answerRows = answers.map((answer) => ({
+          session_id: sessionId,
+          question_id: answer.questionId || null,
+          accuracy: answer.accuracy,
+          response_time_ms: answer.responseTimeMs,
+          user_response: answer.userResponse || null,
+          generated_content: answer.generatedContent || null,
+        }));
+
+        const { error: answersError } = await supabase
+          .from('game_answers')
+          .insert(answerRows);
+
+        if (answersError) throw answersError;
+
+        console.log('Saved', answers.length, 'answers to game_answers');
+      }
+
     } catch (err) {
       console.error('Failed to save game session:', err);
     }
 
     return bpi;
-  }, [state.startTime, state.correctCount]);
+  }, [state.startTime]);
 
   /**
    * Resets the session for a new round
@@ -135,6 +180,7 @@ export function useGameSession() {
       totalQuestions: 0,
     });
     configRef.current = null;
+    answersRef.current = [];
   }, []);
 
   return {

@@ -65,30 +65,30 @@ export type Database = {
       }
       game_answers: {
         Row: {
+          accuracy: number
           created_at: string | null
           generated_content: Json | null
           id: string
-          is_correct: boolean
           question_id: string | null
           response_time_ms: number | null
           session_id: string | null
           user_response: Json | null
         }
         Insert: {
+          accuracy: number
           created_at?: string | null
           generated_content?: Json | null
           id?: string
-          is_correct: boolean
           question_id?: string | null
           response_time_ms?: number | null
           session_id?: string | null
           user_response?: Json | null
         }
         Update: {
+          accuracy?: number
           created_at?: string | null
           generated_content?: Json | null
           id?: string
-          is_correct?: boolean
           question_id?: string | null
           response_time_ms?: number | null
           session_id?: string | null

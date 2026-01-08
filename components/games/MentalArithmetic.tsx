@@ -7,7 +7,7 @@ import * as Haptics from "expo-haptics";
 import { MentalArithmeticContent } from "~/lib/validators/game-content";
 
 interface MentalArithmeticProps {
-  onComplete: (isCorrect: boolean) => void;
+  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
   content: MentalArithmeticContent;
 }
 
@@ -113,9 +113,9 @@ export function MentalArithmetic({
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
 
-    // Small delay to show feedback
+    // Small delay to show feedback - pass 1.0 for correct, 0.0 for incorrect
     setTimeout(() => {
-      onComplete(isCorrect);
+      onComplete(isCorrect ? 1.0 : 0.0);
     }, 500);
   };
 
@@ -126,8 +126,8 @@ export function MentalArithmetic({
     question.operator === "*"
       ? "x"
       : question.operator === "/"
-      ? "÷"
-      : question.operator;
+        ? "÷"
+        : question.operator;
 
   return (
     <View className="flex-1 items-center justify-center p-6 gap-8">
@@ -159,12 +159,12 @@ export function MentalArithmetic({
               className={cn(
                 "h-40 w-48 rounded-3xl active:scale-95 shadow-xl", // Keep button big
                 hasAnswered &&
-                  isCorrectAnswer &&
-                  "bg-green-600 border-green-700", // Darker Green
+                isCorrectAnswer &&
+                "bg-green-600 border-green-700", // Darker Green
                 hasAnswered &&
-                  !isCorrectAnswer &&
-                  isSelected &&
-                  "bg-red-600 border-red-700", // Darker Red (Override destructive)
+                !isCorrectAnswer &&
+                isSelected &&
+                "bg-red-600 border-red-700", // Darker Red (Override destructive)
                 hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
               onPress={() => handleChoice(choice)}
@@ -174,8 +174,8 @@ export function MentalArithmetic({
                 className={cn(
                   "text-4xl font-black", // 4xl is approx 36px, smaller than 5xl(48px)
                   variant === "default" &&
-                    !hasAnswered &&
-                    "text-primary-foreground",
+                  !hasAnswered &&
+                  "text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white"
                 )}
               >
