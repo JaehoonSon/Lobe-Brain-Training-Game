@@ -44,6 +44,20 @@ export default function AuthenticatedLayout() {
             animation: "default",
           }}
         />
+        <Stack.Screen
+          name="streak"
+          options={{
+            presentation: "card",
+            animation: "slide_from_right",
+          }}
+        />
+        <Stack.Screen
+          name="stat/[id]"
+          options={{
+            presentation: "card",
+            animation: "slide_from_right",
+          }}
+        />
       </Stack>
     </GamesProvider>
   );

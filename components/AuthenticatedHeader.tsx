@@ -12,10 +12,13 @@ export function AuthenticatedHeader({ className }: AuthenticatedHeaderProps) {
   return (
     <View className={cn("flex-row justify-between items-center", className)}>
       <View className="flex-row gap-3">
-        <View className="flex-row items-center bg-card rounded-full px-3 py-1.5 shadow-sm border border-border">
+        <TouchableOpacity
+          className="flex-row items-center bg-card rounded-full px-3 py-1.5 shadow-sm border border-border"
+          onPress={() => router.push("/streak")}
+        >
           <Flame size={18} className="text-orange-500 mr-1.5" fill="#f97316" />
-          <P className="font-bold text-sm">0</P>
-        </View>
+          {/* <P className="font-bold text-sm">0</P> */}
+        </TouchableOpacity>
         <View className="flex-row items-center bg-card rounded-full px-3 py-1.5 shadow-sm border border-border">
           <Zap size={18} className="text-yellow-500 mr-1.5" fill="#eab308" />
           <P className="font-bold text-sm">--</P>
