@@ -71,6 +71,17 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontWeight: {
+        thin: "100",
+        extralight: "200",
+        light: "300",
+        normal: "Nunito_400Regular",
+        medium: "500",
+        semibold: "Nunito_600SemiBold",
+        bold: "Nunito_700Bold",
+        extrabold: "Nunito_800ExtraBold",
+        black: "Nunito_900Black",
+      },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],

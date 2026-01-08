@@ -7,7 +7,7 @@ import * as Haptics from "expo-haptics";
 import { MentalLanguageDiscriminationContent } from "~/lib/validators/game-content";
 
 interface MentalLanguageDiscriminationProps {
-  onComplete: (isCorrect: boolean) => void;
+  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
   content: MentalLanguageDiscriminationContent;
 }
 
@@ -41,9 +41,9 @@ export function MentalLanguageDiscrimination({
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
 
-    // Small delay to show feedback
+    // Small delay to show feedback - pass 1.0 for correct, 0.0 for incorrect
     setTimeout(() => {
-      onComplete(isCorrect);
+      onComplete(isCorrect ? 1.0 : 0.0);
     }, 500);
   };
 
@@ -79,12 +79,12 @@ export function MentalLanguageDiscrimination({
               className={cn(
                 "h-40 min-w-[160px] px-4 rounded-3xl active:scale-95 shadow-xl", // Match Mental Math size
                 hasAnswered &&
-                  isCorrectAnswer &&
-                  "bg-green-600 border-green-700", // Darker Green
+                isCorrectAnswer &&
+                "bg-green-600 border-green-700", // Darker Green
                 hasAnswered &&
-                  !isCorrectAnswer &&
-                  isSelected &&
-                  "bg-red-600 border-red-700", // Darker Red
+                !isCorrectAnswer &&
+                isSelected &&
+                "bg-red-600 border-red-700", // Darker Red
                 hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
               onPress={() => handleChoice(choice)}
@@ -94,8 +94,8 @@ export function MentalLanguageDiscrimination({
                 className={cn(
                   "text-3xl font-black", // Sligthly smaller than 4xl to accommodate words
                   variant === "default" &&
-                    !hasAnswered &&
-                    "text-primary-foreground",
+                  !hasAnswered &&
+                  "text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white"
                 )}
               >

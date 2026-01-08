@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
@@ -6,44 +6,72 @@ import * as Haptics from "expo-haptics";
 import { MemoryMatrixContent } from "~/lib/validators/game-content";
 
 interface MemoryMatrixProps {
-  onComplete: (isCorrect: boolean) => void;
+  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
   content: MemoryMatrixContent;
+  difficulty?: number;
 }
 
 type TileState = "hidden" | "active" | "correct" | "incorrect" | "missed";
 type GamePhase = "memorize" | "recall" | "result";
 
-export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
-  const [gridSize, setGridSize] = useState(content.grid_size.rows); // Assuming square for now or handle rows/cols in render
-  const [activeTiles, setActiveTiles] = useState<number[]>([]);
-  const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
+/**
+ * Generate random target tiles based on content params.
+ * This is called once per game session.
+ */
+function generateTargets(
+  rows: number,
+  cols: number,
+  targetCount: number
+): number[] {
+  const totalTiles = rows * cols;
+  const targets = new Set<number>();
+
+  while (targets.size < targetCount && targets.size < totalTiles) {
+    const randomIndex = Math.floor(Math.random() * totalTiles);
+    targets.add(randomIndex);
+  }
+
+  return Array.from(targets);
+}
+
+export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatrixProps) {
   const [phase, setPhase] = useState<GamePhase>("memorize");
+  const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
+  const hasInitialized = useRef(false);
 
-  // Reset when content changes
+  // Generate random targets once when content changes
+  const [activeTiles, setActiveTiles] = useState<number[]>([]);
+
+  const rows = content.grid_size.rows;
+  const cols = content.grid_size.cols;
+  const targetCount = content.target_count;
+  const displayTimeMs = content.display_time_ms;
+
+  // Initialize game on mount/content change
   useEffect(() => {
-    setGridSize(content.grid_size.rows);
-    generateLevel();
-  }, [content]);
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
 
-  const generateLevel = useCallback(() => {
-    // Generate random unique tiles
-    const totalTiles = content.grid_size.rows * content.grid_size.cols;
-    const newActiveTiles: number[] = [];
-    while (newActiveTiles.length < content.target_count) {
-      const tileIndex = Math.floor(Math.random() * totalTiles);
-      if (!newActiveTiles.includes(tileIndex)) {
-        newActiveTiles.push(tileIndex);
-      }
+      // Generate random tiles
+      const targets = generateTargets(rows, cols, targetCount);
+      setActiveTiles(targets);
+
+      // Reset UI state
+      setPhase("memorize");
+      setSelectedTiles([]);
     }
-    setActiveTiles(newActiveTiles);
-    setSelectedTiles([]);
-    setPhase("memorize");
+  }, [content, rows, cols, targetCount]);
 
-    // Switch to recall phase after time
-    setTimeout(() => {
-      setPhase("recall");
-    }, content.display_time_ms);
-  }, [content]);
+  // Phase timer (memorize -> recall)
+  useEffect(() => {
+    if (phase === "memorize" && activeTiles.length > 0) {
+      const timer = setTimeout(() => {
+        setPhase("recall");
+      }, displayTimeMs);
+
+      return () => clearTimeout(timer);
+    }
+  }, [phase, activeTiles.length, displayTimeMs]);
 
   const handleTilePress = (index: number) => {
     if (phase !== "recall") return;
@@ -53,7 +81,8 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
     setSelectedTiles(newSelected);
     Haptics.selectionAsync();
 
-    if (newSelected.length === content.target_count) {
+    // Check if finished
+    if (newSelected.length === targetCount) {
       checkResult(newSelected);
     }
   };
@@ -61,20 +90,20 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
   const checkResult = (selections: number[]) => {
     setPhase("result");
 
-    // Check correctness
-    const allCorrect =
-      selections.every((s) => activeTiles.includes(s)) &&
-      selections.length === activeTiles.length;
+    const correctPicks = selections.filter(s => activeTiles.includes(s)).length;
+    const accuracy = correctPicks / targetCount;
+    const isPerfect = accuracy === 1.0;
 
-    if (allCorrect) {
+    if (isPerfect) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
     }
 
+    // Notify Parent after delay with accuracy (0-1)
     setTimeout(() => {
-      onComplete(allCorrect);
-    }, 1500); // Wait a bit to show the result
+      onComplete(accuracy);
+    }, 1500);
   };
 
   const getTileState = (index: number): TileState => {
@@ -98,10 +127,14 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
     return "hidden";
   };
 
-  // Dynamic grid sizing logic can be improved, roughly scaled for now
-  // Assumes square-ish grid for visual simplicity or uses rows/cols
-  const rows = content.grid_size.rows;
-  const cols = content.grid_size.cols;
+  // Show loading if targets not yet generated
+  if (activeTiles.length === 0) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <Text className="text-muted-foreground">Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 items-center justify-center p-6">
@@ -111,14 +144,14 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
         </Text>
         <Text className="text-xl text-muted-foreground text-center">
           {phase === "memorize" && "Remember the pattern..."}
-          {phase === "recall" && "Reproduce the pattern"}
+          {phase === "recall" && `Select ${targetCount} tiles`}
           {phase === "result" && "Checking..."}
         </Text>
       </View>
 
       <View
-        className="flex-row flex-wrap justify-center gap-4"
-        style={{ width: cols * 80 + (cols - 1) * 16 }} // Scaled sizing (80px tiles + 16px gap)
+        className="flex-row flex-wrap justify-center gap-3"
+        style={{ width: cols * 72 + (cols - 1) * 12 }}
       >
         {Array.from({ length: rows * cols }).map((_, i) => {
           const state = getTileState(i);
@@ -129,24 +162,24 @@ export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
               activeOpacity={0.8}
               onPress={() => handleTilePress(i)}
               className={cn(
-                "w-20 h-20 rounded-2xl border-4 transition-all duration-200",
-                // Default state (hidden)
+                "w-16 h-16 rounded-xl border-4 transition-all duration-200",
                 state === "hidden" && "bg-card border-border",
-                // Active (memorize phase or recall selection)
                 state === "active" && "bg-primary border-primary",
-                // Correct (result)
                 state === "correct" && "bg-green-500 border-green-600",
-                // Incorrect (result)
                 state === "incorrect" && "bg-destructive border-destructive",
-                // Missed (result)
-                state === "missed" &&
-                  "bg-yellow-400 border-yellow-500 opacity-50"
+                state === "missed" && "bg-yellow-400 border-yellow-500 opacity-50"
               )}
               disabled={phase !== "recall"}
             />
           );
         })}
       </View>
+
+      {phase === "recall" && (
+        <Text className="mt-6 text-muted-foreground">
+          {selectedTiles.length} / {targetCount} selected
+        </Text>
+      )}
     </View>
   );
 }

@@ -65,30 +65,30 @@ export type Database = {
       }
       game_answers: {
         Row: {
+          accuracy: number
           created_at: string | null
           generated_content: Json | null
           id: string
-          is_correct: boolean
           question_id: string | null
           response_time_ms: number | null
           session_id: string | null
           user_response: Json | null
         }
         Insert: {
+          accuracy: number
           created_at?: string | null
           generated_content?: Json | null
           id?: string
-          is_correct: boolean
           question_id?: string | null
           response_time_ms?: number | null
           session_id?: string | null
           user_response?: Json | null
         }
         Update: {
+          accuracy?: number
           created_at?: string | null
           generated_content?: Json | null
           id?: string
-          is_correct?: boolean
           question_id?: string | null
           response_time_ms?: number | null
           session_id?: string | null
@@ -260,6 +260,47 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "questions_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_game_performance: {
+        Row: {
+          created_at: string | null
+          difficulty_rating: number
+          game_id: string
+          games_played_count: number
+          highest_score: number | null
+          last_played_at: string | null
+          total_score: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          difficulty_rating?: number
+          game_id: string
+          games_played_count?: number
+          highest_score?: number | null
+          last_played_at?: string | null
+          total_score?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          difficulty_rating?: number
+          game_id?: string
+          games_played_count?: number
+          highest_score?: number | null
+          last_played_at?: string | null
+          total_score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_game_performance_game_id_fkey"
             columns: ["game_id"]
             isOneToOne: false
             referencedRelation: "games"

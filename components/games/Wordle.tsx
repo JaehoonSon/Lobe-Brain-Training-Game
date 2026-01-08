@@ -6,7 +6,7 @@ import * as Haptics from "expo-haptics";
 import { WordleContent } from "~/lib/validators/game-content";
 
 interface WordleProps {
-  onComplete: (isCorrect: boolean) => void;
+  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
   content: WordleContent;
 }
 
@@ -102,11 +102,11 @@ export function Wordle({ onComplete, content }: WordleProps) {
     if (isWin) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setGameOver(true);
-      setTimeout(() => onComplete(true), 1500);
+      setTimeout(() => onComplete(1.0), 1500);  // Win = 100% accuracy
     } else if (isLoss) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       setGameOver(true);
-      setTimeout(() => onComplete(false), 1500);
+      setTimeout(() => onComplete(0.0), 1500);  // Loss = 0% accuracy
     } else {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }
@@ -209,9 +209,9 @@ export function Wordle({ onComplete, content }: WordleProps) {
                       (status === "correct" ||
                         status === "present" ||
                         status === "absent") &&
-                        "text-white",
+                      "text-white",
                       (status === "empty" || status === "filled") &&
-                        "text-foreground"
+                      "text-foreground"
                     )}
                   >
                     {letter}
