@@ -41,16 +41,19 @@ function getNextMilestone(currentStreak: number): number {
 function getCompletedDaysThisWeek(lastPlayedDate: string | null): number[] {
   if (!lastPlayedDate) return [];
 
-  const today = new Date();
-  const lastPlayed = new Date(lastPlayedDate);
+  const today = new Date(); // Local now
+  const lastPlayed = new Date(lastPlayedDate); // Auto-converts UTC ISO to Local time
 
   // Check if last played is within this week
-  const todayDay = today.getDay();
+  const todayDay = today.getDay(); // 0-6
+
+  // Calculate start of week (Sunday) at 00:00:00 Local Time
   const startOfWeek = new Date(today);
   startOfWeek.setDate(today.getDate() - todayDay);
   startOfWeek.setHours(0, 0, 0, 0);
 
-  if (lastPlayed >= startOfWeek) {
+  // Compare timestamps
+  if (lastPlayed.getTime() >= startOfWeek.getTime()) {
     return [lastPlayed.getDay()];
   }
 

@@ -26,118 +26,37 @@ import { Database } from "~/lib/database.types";
 import { useState } from "react";
 import React from "react";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-
-// define Game using the DB type
-type Game = Database["public"]["Tables"]["games"]["Row"];
-
-// Mock data conforming to the type
-const MOCK_GAMES: Game[] = [
-  {
-    id: "1",
-    name: "Math",
-    description: "Challenge your estimation and calculation skills.",
-    icon_url: "math",
-    banner_url: null,
-    category_id: "math",
-    created_at: new Date().toISOString(),
-    instructions: null,
-    is_active: true,
-  },
-  {
-    id: "2",
-    name: "Language",
-    description: "Dive deep into your vocabulary and reading skills.",
-    icon_url: "language",
-    banner_url: null,
-    category_id: "language",
-    created_at: new Date().toISOString(),
-    instructions: null,
-    is_active: true,
-  },
-  {
-    id: "3",
-    name: "Favorites",
-    description: "Treat your brain to the games you play the most.",
-    icon_url: "favorites",
-    banner_url: null,
-    category_id: "favorites",
-    created_at: new Date().toISOString(),
-    instructions: null,
-    is_active: true,
-  },
-  {
-    id: "4",
-    name: "Strengthen",
-    description: "Play your weakest games and raise your low game scores.",
-    icon_url: "strengthen",
-    banner_url: null,
-    category_id: "strengthen",
-    created_at: new Date().toISOString(),
-    instructions: null,
-    is_active: true,
-  },
-  {
-    id: "5",
-    name: "Quick",
-    description: "Race through short games in 8 minutes or less.",
-    icon_url: "quick",
-    banner_url: null,
-    category_id: "quick",
-    created_at: new Date().toISOString(),
-    instructions: null,
-    is_active: true,
-  },
-];
-
-const getGameIcon = (iconUrl: string | null, color: string) => {
-  const size = 36; // Increased for better mobile visibility
-  switch (iconUrl) {
-    case "math":
-      return <Calculator color={color} size={size} />;
-    case "language":
-      return <BookA color={color} size={size} />;
-    case "favorites":
-      return <Heart color={color} size={size} />;
-    case "strengthen":
-      return <Mountain color={color} size={size} />;
-    case "quick":
-      return <Clock color={color} size={size} />;
-    default:
-      return <Zap color={color} size={size} />;
-  }
-};
-
-// Decorative: unique game category colors for visual variety
-const getGameColor = (iconUrl: string | null) => {
-  switch (iconUrl) {
-    case "math":
-      return "bg-accent"; // Pink/Rose from theme
-    case "language":
-      return "bg-secondary"; // Magenta from theme
-    case "favorites":
-      return "bg-primary"; // Orange from theme
-    case "strengthen":
-      return "bg-accent"; // Uses accent color
-    case "quick":
-      return "bg-secondary"; // Uses secondary color
-    default:
-      return "bg-primary";
-  }
-};
+import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
+import { useGames } from "~/contexts/GamesContext";
+import { useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 
 export default function Dashboard() {
-  const { user } = useAuth();
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
+  const { getDailyWorkout, dailyCompletedGameIds, refreshDailyProgress } =
+    useGames();
+  const [dailyGames, setDailyGames] = useState<
+    Database["public"]["Tables"]["games"]["Row"][]
+  >([]);
 
-  const userName = user?.user_metadata?.full_name || "User";
-  const firstName = userName.split(" ")[0];
+  React.useEffect(() => {
+    // In a real app, you might want to wrap this in useMemo or similar if the date changes
+    const games = getDailyWorkout(3);
+    setDailyGames(games);
+  }, [getDailyWorkout]);
 
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
+  // Refresh progress when focusing the screen
+  useFocusEffect(
+    useCallback(() => {
+      refreshDailyProgress();
+    }, [refreshDailyProgress])
+  );
+
+  // Mock progress for now
+  // const [completedGameIds, setCompletedGameIds] = useState<string[]>([]);
+
+  const handlePlayGame = (gameId: string) => {
+    router.push(`/game/${gameId}`);
+  };
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -150,84 +69,77 @@ export default function Dashboard() {
         className="flex-1 bg-background"
         contentContainerStyle={{ paddingBottom: 100 }}
       >
-        <View className="px-6 pb-6">
-          {/* Greetings */}
-          <H1 className="mb-6 pt-4">Hi, {firstName}</H1>
-
-          {/* Daily Workout Card */}
-          <Card className="mb-6 overflow-hidden border-border bg-card shadow-sm">
-            <CardContent className="p-8 items-center gap-4">
-              {/* Placeholder for Brain Icon */}
-              <View className="w-28 h-28 rounded-full bg-primary/20 items-center justify-center mb-2">
-                <View className="w-20 h-20 rounded-full bg-primary items-center justify-center">
-                  <Zap size={48} color="white" fill="white" />
-                </View>
-              </View>
-
-              <View className="items-center">
-                <H3 className="text-3xl font-bold text-center">
-                  Daily Workout
-                </H3>
-                <P className="text-muted-foreground text-center mt-2 text-lg">
-                  {today} | 3 Games
-                </P>
-              </View>
-
-              <Button size="xl" className="w-52 bg-primary active:bg-primary/80 rounded-full mt-3">
-                <Text className="text-primary-foreground font-bold">
-                  Start
-                </Text>
-              </Button>
-            </CardContent>
-          </Card>
-
-          {/* More Workouts Section */}
-          <View className="flex-row justify-between items-center mb-4">
-            <H3 className="text-2xl">More Workouts</H3>
-            <TouchableOpacity className="bg-secondary rounded-full px-4 py-2 flex-row items-center">
-              <Text className="text-secondary-foreground text-sm font-bold mr-1.5">
-                UNLOCK
-              </Text>
-              <Lock size={14} color="white" />
-            </TouchableOpacity>
+        <View className="px-6 py-6">
+          <View className="flex-row justify-between items-end mb-6">
+            <View>
+              <H3>Today's Training</H3>
+              <P className="text-muted-foreground">
+                Keep your streak alive! 🔥
+              </P>
+            </View>
+            {/* <Link href="/(authenticated)/(tabs)/games" asChild>
+                    <TouchableOpacity>
+                        <P className="text-primary font-medium">See all</P>
+                    </TouchableOpacity>
+                </Link> */}
           </View>
 
-          <View className="gap-4">
-            {MOCK_GAMES.map((game) => (
-              <Card
-                key={game.id}
-                className="overflow-hidden bg-card border-border shadow-sm"
-              >
-                <CardContent className="p-5 flex-row items-center gap-4">
-                  <View
-                    className={`w-16 h-16 rounded-full ${getGameColor(
-                      game.icon_url
-                    )} items-center justify-center`}
-                  >
-                    {getGameIcon(game.icon_url, "white")}
-                    <View className="absolute bottom-0 right-0 bg-background rounded-full p-1 border border-border">
-                      <Lock size={12} className="text-foreground" />
-                    </View>
-                  </View>
-                  <View className="flex-1 gap-1.5">
-                    <View className="flex-row justify-between items-start">
-                      <H4>{game.name}</H4>
-                      <View className="flex-row items-center gap-1.5">
-                        <View className="w-2 h-2 rounded-full bg-primary" />
-                        <Muted className="text-sm">0/5</Muted>
-                      </View>
-                    </View>
-                    <P className="text-base text-muted-foreground leading-6">
-                      {game.description}
-                    </P>
-                  </View>
-                </CardContent>
-              </Card>
-            ))}
+          {dailyGames.length > 0 ? (
+            <View>
+              {dailyGames.map((game, index) => {
+                // Logic for status:
+                // - If previous game is not completed, this one is locked (unless it's the first one)
+                // - If this game is in dailyCompletedGameIds, it's completed
+                // - Otherwise, if it's the first uncompleted one, it's active
+
+                const isCompleted = dailyCompletedGameIds.includes(game.id);
+                const isPrevCompleted =
+                  index === 0 ||
+                  dailyCompletedGameIds.includes(dailyGames[index - 1].id);
+
+                let status: "locked" | "active" | "completed" = "locked";
+                if (isCompleted) {
+                  status = "completed";
+                } else if (isPrevCompleted) {
+                  status = "active";
+                }
+
+                return (
+                  <WorkoutGameCard
+                    key={game.id}
+                    game={game}
+                    index={index}
+                    isLast={index === dailyGames.length - 1}
+                    status={status}
+                    onPress={() => handlePlayGame(game.id)}
+                  />
+                );
+              })}
+            </View>
+          ) : (
+            <Card className="p-6 items-center justify-center border-dashed">
+              <P className="text-muted-foreground text-center">
+                Loading workout...
+              </P>
+            </Card>
+          )}
+
+          <View className="mt-8">
+            <H3 className="mb-4">Relaxing Games</H3>
+            <Card className="p-4 flex-row items-center border-border/50 bg-card/50">
+              <View className="w-12 h-12 bg-blue-100 rounded-xl mr-4 items-center justify-center">
+                <BookA className="text-blue-500" size={24} />
+              </View>
+              <View className="flex-1">
+                <H4>Quick Zen</H4>
+                <P className="text-muted-foreground text-xs">
+                  Stress relief • 5 min
+                </P>
+              </View>
+            </Card>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-

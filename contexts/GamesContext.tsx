@@ -12,6 +12,9 @@ interface GamesContextType {
   error: Error | null;
   refresh: () => Promise<void>;
   getGamesByCategory: (categoryId: string) => Game[];
+  getDailyWorkout: (count?: number) => Game[];
+  dailyCompletedGameIds: string[];
+  refreshDailyProgress: () => Promise<void>;
 }
 
 const GamesContext = createContext<GamesContextType | undefined>(undefined);
@@ -19,8 +22,35 @@ const GamesContext = createContext<GamesContextType | undefined>(undefined);
 export function GamesProvider({ children }: { children: React.ReactNode }) {
   const [games, setGames] = useState<Game[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [dailyCompletedGameIds, setDailyCompletedGameIds] = useState<string[]>(
+    []
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
+  const fetchDailyProgress = async () => {
+    try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Start of today
+
+      const { data: sessions, error: sessionsError } = await supabase
+        .from("game_sessions")
+        .select("game_id")
+        .gte("created_at", today.toISOString());
+
+      if (sessionsError) throw sessionsError;
+
+      if (sessions) {
+        // distinct game IDs
+        const uniqueGameIds = Array.from(
+          new Set(sessions.map((s) => s.game_id).filter(Boolean) as string[])
+        );
+        setDailyCompletedGameIds(uniqueGameIds);
+      }
+    } catch (e) {
+      console.error("Error fetching daily progress:", e);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -37,6 +67,9 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
 
       setGames(gamesResult.data || []);
       setCategories(categoriesResult.data || []);
+
+      // Also fetch progress
+      await fetchDailyProgress();
     } catch (e) {
       setError(e as Error);
       console.error("Error fetching games data:", e);
@@ -48,6 +81,10 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const refreshDailyProgress = async () => {
+    await fetchDailyProgress();
+  };
 
   const getGamesByCategory = (categoryId: string) => {
     return games.filter((game) => game.category_id === categoryId);
@@ -62,6 +99,33 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
         error,
         refresh: fetchData,
         getGamesByCategory,
+        dailyCompletedGameIds,
+        refreshDailyProgress,
+        getDailyWorkout: (count: number = 3) => {
+          if (games.length === 0) return [];
+
+          // Seed based on date (YYYYMMDD) to be deterministic for everyone on the same day
+          const today = new Date();
+          const seed =
+            today.getFullYear() * 10000 +
+            (today.getMonth() + 1) * 100 +
+            today.getDate();
+
+          const seededRandom = (s: number) => {
+            const x = Math.sin(s) * 10000;
+            return x - Math.floor(x);
+          };
+
+          const shuffled = [...games];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(seededRandom(seed + i) * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+
+          // Filter out pro games if you want (optional), or keep them to upsell
+          // For now, let's just return unique random games
+          return shuffled.slice(0, count);
+        },
       }}
     >
       {children}

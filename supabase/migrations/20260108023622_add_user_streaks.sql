@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS public.user_streaks (
 ALTER TABLE public.user_streaks ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policy: Users can only READ their own streak data (system manages writes via triggers)
+DROP POLICY IF EXISTS "Users can view their own streak data" ON public.user_streaks;
+
 CREATE POLICY "Users can view their own streak data"
     ON public.user_streaks
     FOR SELECT
