@@ -1,52 +1,42 @@
-/**
- * Brain Performance Index (BPI) Calculator
- *
- * This function standardizes scoring across all game types.
- *
- * Formula:
- * BPI = BaseScore + DifficultyBonus + SpeedBonus
- *
- * 1. BaseScore: accuracy * 100 (Variable based on performance)
- * 2. DifficultyBonus: difficulty * 50
- * 3. SpeedBonus: (targetTime - actualTime) * 0.1
- *    - ONLY if accuracy > 0.5 (Prevents "speed spamming")
- */
-
 interface ScoreInputs {
-  accuracy: number; // 0.0 to 1.0 (e.g., 0.8 for 8/10)
-  difficulty: number; // 1 to 10
-  targetTimeMs: number; // From GeneratedContent
-  actualTimeMs: number; // Measured by Hook
+  accuracy: number;        // 0..1
+  difficulty: number;      // 0..10 (avg_question_difficulty)
+  targetTimeMs?: number;   // per-question target time
+  actualTimeMs?: number;   // per-question actual (avg)
+  guessRate?: number;      // 0.25, 0.5...
+  useSpeed?: boolean;
 }
+
+const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
 export function calculateBPI({
   accuracy,
   difficulty,
   targetTimeMs,
   actualTimeMs,
+  guessRate = 0,
+  useSpeed = false,
 }: ScoreInputs): number {
-  // 1. Base Score
-  // Full points (100) only for perfect accuracy.
-  // 8/10 correct = 80 points.
-  const baseScore = 100 * accuracy;
+  const A = clamp01(accuracy);
 
-  // 2. Difficulty Bonus
-  // Fixed multiplier. Level 5 is worth 250 points.
-  const difficultyBonus = difficulty * 50;
-
-  // 3. Speed Bonus (Conditional)
-  let speedBonus = 0;
-
-  // Cheat Protection: No speed bonus if you are guessing (User must be > 50% accurate)
-  if (accuracy > 0.5) {
-    const timeSaved = Math.max(0, targetTimeMs - actualTimeMs);
-    const speedMultiplier = 0.1; // 100 points per second saved
-    speedBonus = timeSaved * speedMultiplier;
+  // Optional bounded speed ratio (0..1)
+  let S = 0;
+  if (useSpeed && targetTimeMs && actualTimeMs && A > guessRate + 0.1) {
+    S = clamp01((targetTimeMs - actualTimeMs) / targetTimeMs);
   }
 
-  // 4. Final Calculation
-  const totalScore = baseScore + difficultyBonus + speedBonus;
+  // Base skill (0..1)
+  const base = useSpeed ? (0.85 * A + 0.15 * S) : A;
 
-  // Ensure no negative scores (though formula makes it unlikely) and round
-  return Math.max(0, Math.round(totalScore));
+  // Difficulty gate: easy content caps your score
+  const dNorm = clamp01(difficulty / 10);
+  const difficultyGate = 0.35 + 0.65 * Math.pow(dNorm, 1.7); // 0.35..1.0
+
+  // Combined performance (0..1)
+  const p = clamp01(base * difficultyGate);
+
+  // Competitive ladder: makes 1800–2000 very hard
+  const ladder = 2000 * Math.pow(p, 1.9);
+
+  return Math.round(ladder);
 }

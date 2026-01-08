@@ -15,7 +15,8 @@ export interface RoundSessionState {
 
 export interface RoundSessionConfig {
   gameId: string;
-  difficulty: number;
+  avgQuestionDifficulty: number; // Average difficulty (0-10) of questions served
+  difficultyRatingUsed: number;  // User's target rating at session start (from user_game_performance)
   userId: string;
   totalQuestions: number;
   metadata?: Json;
@@ -87,24 +88,42 @@ export function useGameSession() {
 
     const endTime = Date.now();
     const durationMs = endTime - state.startTime;
-    const { difficulty, metadata, userId, gameId, totalQuestions } = configRef.current;
+    const { avgQuestionDifficulty, difficultyRatingUsed, metadata, userId, gameId, totalQuestions } = configRef.current;
     const answers = answersRef.current;
     const correctCount = answers.filter(a => a.accuracy === 1.0).length;
+
+    // Clamp difficulty values to 0-10 for safety
+    const avgQDifficulty = Math.max(0, Math.min(10, avgQuestionDifficulty));
+    const targetRating = Math.max(0, Math.min(10, difficultyRatingUsed));
 
     // Calculate overall accuracy as average of individual accuracies
     const accuracy = answers.length > 0 
       ? answers.reduce((sum, a) => sum + a.accuracy, 0) / answers.length 
       : 0;
 
-    // Calculate BPI
-    // Target time: 10s per question at difficulty 1, scales inversely with difficulty
-    const targetTimeMs = totalQuestions * 10000 * (1 / difficulty);
+    // Per-game target times (ms per question) - null means no speed scoring for this game
+    const targetPerQuestionMsByGame: Record<string, number | null> = {
+      mental_arithmetic: 6000,
+      mental_language_discrimination: 9000,
+      memory_matrix: null,  // Speed not applicable
+      wordle: null,         // Speed not applicable
+    };
+    
+    const targetPerQ = targetPerQuestionMsByGame[gameId] ?? null;
+    
+    // Calculate average response time per question
+    const avgResponseTimeMs = answers.length > 0
+      ? Math.round(answers.reduce((sum, a) => sum + a.responseTimeMs, 0) / answers.length)
+      : null;
     
     const bpi = calculateBPI({
       accuracy,
-      difficulty,
-      targetTimeMs,
-      actualTimeMs: durationMs,
+      difficulty: avgQDifficulty,
+      // Only pass speed inputs if this game uses speed scoring
+      ...(targetPerQ && avgResponseTimeMs !== null ? {
+        targetTimeMs: targetPerQ,
+        actualTimeMs: avgResponseTimeMs,
+      } : {}),
     });
 
     setState((prev) => ({
@@ -124,12 +143,14 @@ export function useGameSession() {
         .insert({
           user_id: userId,
           game_id: gameId,
-          difficulty_level: difficulty,
+          difficulty_rating_used: targetRating,      // User's target rating at session start
+          avg_question_difficulty: avgQDifficulty,   // Average difficulty of served questions
+          avg_response_time_ms: avgResponseTimeMs,   // Average per-question response time (null for non-speed games)
           score: bpi,
           duration_seconds: Math.round(durationMs / 1000),
           correct_count: correctCount,
           total_questions: totalQuestions,
-          metadata: metadata || null,
+          metadata: metadata ?? null,
         })
         .select('id')
         .single();

@@ -40,8 +40,8 @@ export interface UserStats {
 }
 
 // Maximum expected BPI for normalization (used for progress bars)
-// Based on scoring formula: Base(100) + Difficulty(500 at level 10) + Speed bonus
-const MAX_EXPECTED_BPI = 700;
+// Based on scoring formula: Base(100) + Speed(50) = 150 max performance × 1.1 difficulty multiplier ≈ 165
+const MAX_EXPECTED_BPI = 165;
 
 // Minimum categories required for Overall BPI calculation
 const MIN_CATEGORIES_FOR_OVERALL = 3;
@@ -65,7 +65,7 @@ export function useUserStats(): UserStats {
       setIsLoading(true);
       setError(null);
 
-      // Fetch all game sessions for this user (for average BPI calculation)
+      // Fetch recent game sessions for display (averages come from user_game_performance)
       const { data: sessions, error: sessionsError } = await supabase
         .from("game_sessions")
         .select("*")
@@ -142,12 +142,15 @@ export function useUserStats(): UserStats {
         const gamesWithScores = gameStats.filter((gs) => gs.averageScore !== null);
         const totalGamesPlayed = gameStats.reduce((sum, gs) => sum + gs.gamesPlayed, 0);
 
-        // Category average = average of game averages (weighted equally)
+        // Category average weighted by games played (games with more plays have more influence)
+        const totalPlaysWithScores = gamesWithScores.reduce((sum, gs) => sum + gs.gamesPlayed, 0);
         const categoryAverageScore =
-          gamesWithScores.length > 0
+          totalPlaysWithScores > 0
             ? Math.round(
-                gamesWithScores.reduce((sum, gs) => sum + (gs.averageScore || 0), 0) /
-                  gamesWithScores.length
+                gamesWithScores.reduce(
+                  (sum, gs) => sum + (gs.averageScore ?? 0) * gs.gamesPlayed,
+                  0
+                ) / totalPlaysWithScores
               )
             : null;
 
@@ -188,13 +191,16 @@ export function useUserStats(): UserStats {
     fetchStats();
   }, [fetchStats]);
 
-  // Calculate Overall BPI (average of category averages, if enough categories have data)
+  // Calculate Overall BPI weighted by games played per category
   const categoriesWithScores = categoryStats.filter((c) => c.score !== null);
+  const totalCategoryPlays = categoriesWithScores.reduce((sum, c) => sum + c.gamesPlayed, 0);
   const overallBPI =
-    categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL
+    categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL && totalCategoryPlays > 0
       ? Math.round(
-          categoriesWithScores.reduce((sum, c) => sum + (c.score || 0), 0) /
-            categoriesWithScores.length
+          categoriesWithScores.reduce(
+            (sum, c) => sum + (c.score ?? 0) * c.gamesPlayed,
+            0
+          ) / totalCategoryPlays
         )
       : null;
 

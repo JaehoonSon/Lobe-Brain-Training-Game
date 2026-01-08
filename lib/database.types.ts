@@ -113,9 +113,11 @@ export type Database = {
       }
       game_sessions: {
         Row: {
+          avg_question_difficulty: number
+          avg_response_time_ms: number | null
           correct_count: number | null
           created_at: string | null
-          difficulty_level: number | null
+          difficulty_rating_used: number | null
           duration_seconds: number | null
           game_id: string | null
           id: string
@@ -125,9 +127,11 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          avg_question_difficulty: number
+          avg_response_time_ms?: number | null
           correct_count?: number | null
           created_at?: string | null
-          difficulty_level?: number | null
+          difficulty_rating_used?: number | null
           duration_seconds?: number | null
           game_id?: string | null
           id?: string
@@ -137,9 +141,11 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          avg_question_difficulty?: number
+          avg_response_time_ms?: number | null
           correct_count?: number | null
           created_at?: string | null
-          difficulty_level?: number | null
+          difficulty_rating_used?: number | null
           duration_seconds?: number | null
           game_id?: string | null
           id?: string
@@ -345,6 +351,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_streaks: {
+        Row: {
+          best_streak: number
+          created_at: string | null
+          current_streak: number
+          last_played_date: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          best_streak?: number
+          created_at?: string | null
+          current_streak?: number
+          last_played_date?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          best_streak?: number
+          created_at?: string | null
+          current_streak?: number
+          last_played_date?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {

@@ -13,7 +13,9 @@ import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 
 // Constants
-const QUESTIONS_PER_ROUND = 3;
+const QUESTIONS_PER_ROUND = 8;
+const CORE_QUESTIONS = 6;    // ~75% comfort (rating ± 0.5)
+const STRETCH_QUESTIONS = 2; // ~25% challenge (rating + 0.8 to +1.5)
 const DEFAULT_DIFFICULTY = 1;
 
 interface QuestionData {
@@ -45,29 +47,116 @@ export default function GamePlayScreen() {
     resetSession();
 
     try {
-      console.log("Fetching game content for:", id);
-      const { data, error } = await supabase
+      // 1. First, fetch user's current difficulty rating
+      let difficultyRatingUsed = DEFAULT_DIFFICULTY; // Default for new players
+      if (user?.id) {
+        const { data: perfData, error: perfErr } = await supabase
+          .from("user_game_performance")
+          .select("difficulty_rating")
+          .eq("user_id", user.id)
+          .eq("game_id", id)
+          .maybeSingle();
+
+        if (perfErr) throw perfErr;
+
+        if (perfData?.difficulty_rating) {
+          difficultyRatingUsed = perfData.difficulty_rating;
+        } else {
+          // Create row for first-time players
+          await supabase
+            .from("user_game_performance")
+            .upsert(
+              { user_id: user.id, game_id: id as string, difficulty_rating: DEFAULT_DIFFICULTY },
+              { onConflict: "user_id,game_id" }
+            );
+        }
+      }
+      console.log(`User difficulty rating: ${difficultyRatingUsed}`);
+
+      // 2. Query CORE questions (comfort zone: rating ± 0.5)
+      const coreMinD = Math.max(0, difficultyRatingUsed - 0.5);
+      const coreMaxD = Math.min(10, difficultyRatingUsed + 0.5);
+      console.log(`Querying CORE questions: ${coreMinD.toFixed(1)} - ${coreMaxD.toFixed(1)}`);
+
+      const { data: coreData, error: coreErr } = await supabase
         .from("questions")
         .select("id, content, difficulty")
         .eq("game_id", id)
-        .limit(20);
+        .gte("difficulty", coreMinD)
+        .lte("difficulty", coreMaxD)
+        .limit(30);
 
-      if (error) throw error;
+      if (coreErr) throw coreErr;
 
-      if (!data || data.length === 0) {
+      // 3. Query STRETCH questions (challenge zone: rating + 0.8 to +1.5)
+      const stretchMinD = Math.min(10, difficultyRatingUsed + 0.8);
+      const stretchMaxD = Math.min(10, difficultyRatingUsed + 1.5);
+      console.log(`Querying STRETCH questions: ${stretchMinD.toFixed(1)} - ${stretchMaxD.toFixed(1)}`);
+
+      const { data: stretchData, error: stretchErr } = await supabase
+        .from("questions")
+        .select("id, content, difficulty")
+        .eq("game_id", id)
+        .gte("difficulty", stretchMinD)
+        .lte("difficulty", stretchMaxD)
+        .limit(15);
+
+      if (stretchErr) throw stretchErr;
+
+      // 4. Fallback: if not enough questions, query any difficulty
+      let fallbackData: { id: string; content: any; difficulty: number }[] | null = null;
+      const availableCore = coreData?.length ?? 0;
+      const availableStretch = stretchData?.length ?? 0;
+      const neededFallback = QUESTIONS_PER_ROUND - Math.min(availableCore, CORE_QUESTIONS) - Math.min(availableStretch, STRETCH_QUESTIONS);
+
+      if (neededFallback > 0) {
+        console.log(`Need ${neededFallback} fallback questions from any difficulty`);
+        const usedIds = [
+          ...(coreData?.map(q => q.id) ?? []),
+          ...(stretchData?.map(q => q.id) ?? []),
+        ];
+
+        const { data: fallback, error: fallbackErr } = await supabase
+          .from("questions")
+          .select("id, content, difficulty")
+          .eq("game_id", id)
+          .not("id", "in", `(${usedIds.join(",")})`)
+          .limit(neededFallback + 5);
+
+        if (fallbackErr) throw fallbackErr;
+        fallbackData = fallback;
+      }
+
+      // 5. Combine: pick CORE_QUESTIONS from core, STRETCH_QUESTIONS from stretch, rest from fallback
+      const coreSorted = [...(coreData ?? [])].sort(
+        (a, b) => Math.abs(a.difficulty - difficultyRatingUsed) - Math.abs(b.difficulty - difficultyRatingUsed)
+      );
+      const stretchSorted = [...(stretchData ?? [])].sort(
+        (a, b) => a.difficulty - b.difficulty // Easiest stretch first
+      );
+      const fallbackSorted = [...(fallbackData ?? [])].sort(() => Math.random() - 0.5);
+
+      const selectedCore = coreSorted.slice(0, CORE_QUESTIONS);
+      const selectedStretch = stretchSorted.slice(0, STRETCH_QUESTIONS);
+      const remaining = QUESTIONS_PER_ROUND - selectedCore.length - selectedStretch.length;
+      const selectedFallback = fallbackSorted.slice(0, Math.max(0, remaining));
+
+      const selectedRaw = [...selectedCore, ...selectedStretch, ...selectedFallback];
+      console.log(`Selected: ${selectedCore.length} core, ${selectedStretch.length} stretch, ${selectedFallback.length} fallback`);
+
+      if (selectedRaw.length === 0) {
         Alert.alert("Error", "No questions found for this game.", [
           { text: "Go Back", onPress: () => router.back() },
         ]);
         return;
       }
 
-      // Shuffle and pick questions
-      const shuffled = [...data].sort(() => Math.random() - 0.5);
-      const selectedRaw = shuffled.slice(0, QUESTIONS_PER_ROUND);
+      // 6. Shuffle final selection for variety
+      const shuffledSelection = [...selectedRaw].sort(() => Math.random() - 0.5);
 
       const validQuestions: QuestionData[] = [];
 
-      for (const item of selectedRaw) {
+      for (const item of shuffledSelection) {
         const parsed = GameContentSchema.safeParse(item.content);
         if (parsed.success) {
           validQuestions.push({
@@ -87,19 +176,21 @@ export default function GamePlayScreen() {
         return;
       }
 
-      // Calculate average difficulty of selected questions
-      const avgDifficulty = Math.round(
-        validQuestions.reduce((sum, q) => sum + q.difficulty, 0) / validQuestions.length
-      );
+      // 4. Calculate average difficulty of selected questions
+      const avgDifficulty =
+        validQuestions.reduce((sum, q) => sum + q.difficulty, 0) / validQuestions.length;
 
       setSessionQuestions(validQuestions);
       setCurrentQuestionIndex(0);
       questionStartTimeRef.current = Date.now();
 
-      // Start the session!
+      console.log(`Starting round: difficultyRatingUsed=${difficultyRatingUsed.toFixed(2)}, avgQuestionDifficulty=${avgDifficulty.toFixed(2)}`);
+
+      // 5. Start the session!
       startRound({
         gameId: id as string,
-        difficulty: avgDifficulty,
+        avgQuestionDifficulty: avgDifficulty,
+        difficultyRatingUsed,
         userId: user?.id || "anonymous",
         totalQuestions: validQuestions.length,
       });
