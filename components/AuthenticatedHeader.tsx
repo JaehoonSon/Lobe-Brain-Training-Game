@@ -25,9 +25,11 @@ export function AuthenticatedHeader({ className }: AuthenticatedHeaderProps) {
         </View>
       </View>
       <View className="flex-row gap-4 items-center">
-        <TouchableOpacity onPress={() => router.push("/dev_setting")}>
-          <Code2 size={26} className="text-foreground" />
-        </TouchableOpacity>
+        {__DEV__ && (
+          <TouchableOpacity onPress={() => router.push("/dev_setting")}>
+            <Code2 size={26} className="text-foreground" />
+          </TouchableOpacity>
+        )}
         <TouchableOpacity onPress={() => router.push("/settings")}>
           <Settings size={26} className="text-foreground" />
         </TouchableOpacity>

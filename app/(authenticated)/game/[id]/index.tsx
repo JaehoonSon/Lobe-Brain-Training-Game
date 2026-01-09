@@ -149,7 +149,9 @@ export default function GameDetailScreen() {
               <H4 className="font-black text-xl">Total Plays</H4>
               <View className="flex-row items-baseline gap-1">
                 <P className="text-2xl font-black">0</P>
-                <P className="text-base font-bold text-muted-foreground">of 3</P>
+                <P className="text-base font-bold text-muted-foreground">
+                  of 3
+                </P>
               </View>
             </View>
           </View>
@@ -180,14 +182,16 @@ export default function GameDetailScreen() {
               if (isLocked) {
                 await presentPaywall();
               } else {
-                router.push(`/game/${id}/play`);
+                router.replace(`/game/${id}/play`);
               }
             }}
           >
             {isLocked ? (
               <View className="flex-row items-center gap-2">
                 <Lock size={18} color="white" />
-                <Text className="text-white font-black text-lg">Unlock Pro</Text>
+                <Text className="text-white font-black text-lg">
+                  Unlock Pro
+                </Text>
               </View>
             ) : (
               <Text className="text-primary-foreground font-black text-lg">

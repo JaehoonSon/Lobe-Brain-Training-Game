@@ -1,5 +1,11 @@
 import { Tabs } from "expo-router";
-import { Sun, Gamepad2, BarChart3, Lightbulb, LayoutTemplate } from "lucide-react-native";
+import {
+  Sun,
+  Gamepad2,
+  BarChart3,
+  Lightbulb,
+  LayoutTemplate,
+} from "lucide-react-native";
 import { useColorScheme } from "react-native";
 
 export default function TabsLayout() {
