@@ -16,6 +16,7 @@ import Constants from "expo-constants";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { showErrorToast } from "~/components/ui/toast";
 import { H1, H2, Muted, P } from "~/components/ui/typography";
+import { Card } from "~/components/ui/card";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
@@ -133,26 +134,22 @@ export default function Settings() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 60 }}
       >
-        {/* Drag Handle */}
-        <View className="items-center pt-3 pb-4">
-          <View className="w-10 h-1 rounded-full bg-muted-foreground/30" />
-        </View>
-
         {/* Header */}
-        <H1 className="px-6">Settings</H1>
+        {/* Header */}
+        <H1 className="px-6 pt-6 mb-2 text-3xl font-black">Settings</H1>
 
         {/* Settings List */}
         <View className="px-6">
           {/* My Information Section */}
           <SectionHeader>My Information</SectionHeader>
-          <SettingsCard>
+          <Card className="overflow-hidden">
             <View className="flex-row items-center px-4 py-3.5">
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <User size={18} className="text-foreground" />
               </View>
               <View className="flex-1">
-                <Muted className="text-sm">Email</Muted>
-                <P className="text-lg text-foreground">
+                <Muted className="text-sm font-bold">Email</Muted>
+                <P className="text-lg font-bold text-foreground">
                   {user?.email || "Not set"}
                 </P>
               </View>
@@ -165,51 +162,48 @@ export default function Settings() {
                     <Cake size={18} className="text-foreground" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-sm">Birthday</Muted>
-                    <P className="text-lg text-foreground">{birthday}</P>
+                    <Muted className="text-sm font-bold">Birthday</Muted>
+                    <P className="text-lg font-bold text-foreground">{birthday}</P>
                   </View>
                 </View>
               </>
             )}
-          </SettingsCard>
+          </Card>
 
           {/* Membership Section */}
           <SectionHeader>Membership</SectionHeader>
-          <SettingsCard>
+          <Card className="overflow-hidden">
             <TouchableOpacity
               className="flex-row items-center px-4 py-3.5"
               onPress={handleMembershipPress}
               activeOpacity={0.6}
             >
               <View
-                className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${
-                  isPro ? "bg-yellow-500/20" : "bg-muted"
-                }`}
+                className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted"
               >
                 <Crown
                   size={18}
-                  className={isPro ? "text-yellow-500" : "text-foreground"}
+                  className={isPro ? "text-primary" : "text-foreground"}
                 />
               </View>
               <View className="flex-1">
                 <P
-                  className={`text-lg font-medium ${
-                    isPro ? "text-yellow-600" : "text-foreground"
-                  }`}
+                  className={`text-lg font-black ${isPro ? "text-primary" : "text-foreground"
+                    }`}
                 >
                   {membershipLabel}
                 </P>
-                <Muted className="text-sm">{membershipDescription}</Muted>
+                <Muted className="text-sm font-bold">{membershipDescription}</Muted>
               </View>
               {!isPro && (
                 <ChevronRight size={18} className="text-muted-foreground" />
               )}
             </TouchableOpacity>
-          </SettingsCard>
+          </Card>
 
           {/* Legal Section */}
           <SectionHeader>Legal</SectionHeader>
-          <SettingsCard>
+          <Card className="overflow-hidden">
             <SettingRow
               icon={ShieldCheck}
               label="Privacy Policy"
@@ -227,11 +221,11 @@ export default function Settings() {
               label="License Agreement"
               onPress={handle_eula}
             />
-          </SettingsCard>
+          </Card>
 
           {/* Account Section */}
           <SectionHeader>Account</SectionHeader>
-          <SettingsCard>
+          <Card className="overflow-hidden">
             <SettingRow
               icon={LogOut}
               label="Logout"
@@ -245,20 +239,20 @@ export default function Settings() {
               onPress={handleDeleteAccount}
               variant="destructive"
             />
-          </SettingsCard>
+          </Card>
 
           {/* About Section */}
           <SectionHeader>About</SectionHeader>
-          <SettingsCard>
+          <Card className="overflow-hidden">
             <View className="flex-row items-center px-4 py-3.5">
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <Info size={18} className="text-foreground" />
               </View>
-              <P className="flex-1 text-lg text-foreground">
+              <P className="flex-1 text-lg font-bold text-foreground">
                 Version {appVersion} ({buildNumber})
               </P>
             </View>
-          </SettingsCard>
+          </Card>
         </View>
       </ScrollView>
     </View>
@@ -268,19 +262,13 @@ export default function Settings() {
 // Helper Components
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
-    <P className="text-muted-foreground text-sm font-semibold uppercase tracking-wider mb-3 ml-1 mt-8">
+    <P className="text-muted-foreground text-sm font-black uppercase tracking-wider mb-3 ml-1 mt-8">
       {children}
     </P>
   );
 }
 
-function SettingsCard({ children }: { children: React.ReactNode }) {
-  return (
-    <View className="bg-card rounded-xl overflow-hidden border border-border/50">
-      {children}
-    </View>
-  );
-}
+
 
 function Divider() {
   return <View className="h-px bg-border/50 ml-14" />;
@@ -308,9 +296,8 @@ function SettingRow({
       activeOpacity={0.6}
     >
       <View
-        className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${
-          isDestructive ? "bg-destructive/10" : "bg-muted"
-        }`}
+        className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${isDestructive ? "bg-destructive/10" : "bg-muted"
+          }`}
       >
         <Icon
           size={18}
@@ -318,9 +305,8 @@ function SettingRow({
         />
       </View>
       <P
-        className={`flex-1 text-lg ${
-          isDestructive ? "text-destructive" : "text-foreground"
-        }`}
+        className={`flex-1 text-lg font-bold ${isDestructive ? "text-destructive" : "text-foreground"
+          }`}
       >
         {label}
       </P>

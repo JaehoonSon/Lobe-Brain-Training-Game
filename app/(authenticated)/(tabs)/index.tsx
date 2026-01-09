@@ -61,7 +61,7 @@ export default function Dashboard() {
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       {/* Sticky Top Bar */}
-      <View className="px-6 pt-2 pb-2 bg-background z-10">
+      <View className="px-6 pt-4 pb-2 bg-background z-10">
         <AuthenticatedHeader />
       </View>
 
@@ -72,8 +72,8 @@ export default function Dashboard() {
         <View className="px-6 py-6">
           <View className="flex-row justify-between items-end mb-6">
             <View>
-              <H3>Today's Training</H3>
-              <P className="text-muted-foreground">
+              <H3 className="text-3xl font-black mb-1">Today's Training</H3>
+              <P className="text-muted-foreground font-bold">
                 Keep your streak alive! 🔥
               </P>
             </View>
@@ -91,7 +91,8 @@ export default function Dashboard() {
                 // - If previous game is not completed, this one is locked (unless it's the first one)
                 // - If this game is in dailyCompletedGameIds, it's completed
                 // - Otherwise, if it's the first uncompleted one, it's active
-
+                //
+                // Note: dailyCompletedGameIds check might need to be robust against strings/numbers
                 const isCompleted = dailyCompletedGameIds.includes(game.id);
                 const isPrevCompleted =
                   index === 0 ||
@@ -117,7 +118,7 @@ export default function Dashboard() {
               })}
             </View>
           ) : (
-            <Card className="p-6 items-center justify-center border-dashed">
+            <Card variant="muted" className="p-6 items-center justify-center">
               <P className="text-muted-foreground text-center">
                 Loading workout...
               </P>
@@ -125,14 +126,14 @@ export default function Dashboard() {
           )}
 
           <View className="mt-8">
-            <H3 className="mb-4">Relaxing Games</H3>
-            <Card className="p-4 flex-row items-center border-border/50 bg-card/50">
-              <View className="w-12 h-12 bg-blue-100 rounded-xl mr-4 items-center justify-center">
-                <BookA className="text-blue-500" size={24} />
+            <H3 className="mb-4 text-2xl font-black">Relaxing Games</H3>
+            <Card variant="secondary" className="p-4 flex-row items-center">
+              <View className="w-12 h-12 bg-white/20 rounded-xl mr-4 items-center justify-center">
+                <BookA className="text-white" size={24} />
               </View>
               <View className="flex-1">
-                <H4>Quick Zen</H4>
-                <P className="text-muted-foreground text-xs">
+                <H4 className="text-white font-black text-xl">Quick Zen</H4>
+                <P className="text-white/80 text-sm font-bold text-secondary-foreground">
                   Stress relief • 5 min
                 </P>
               </View>

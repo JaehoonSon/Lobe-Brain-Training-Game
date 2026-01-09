@@ -53,8 +53,8 @@ export function WorkoutGameCard({
             isCompleted
               ? "border-primary bg-primary"
               : isActive
-              ? "border-primary"
-              : "border-muted-foreground/30"
+                ? "border-primary"
+                : "border-muted-foreground/30"
           )}
         >
           {isCompleted && <Check size={14} color="white" strokeWidth={3} />}
@@ -70,43 +70,60 @@ export function WorkoutGameCard({
         disabled={isLocked}
       >
         <Card
+          variant={isActive ? "primary" : "default"}
           className={cn(
-            "flex-row items-center p-4 border bg-card",
-            isActive ? "border-primary/50 shadow-sm" : "border-border",
+            "flex-row items-center p-4",
             isLocked && "opacity-60 bg-muted/20"
           )}
         >
           {/* Game Icon Placeholder */}
           <View
             className={cn(
-              "w-12 h-12 rounded-xl items-center justify-center mr-4 bg-muted/20"
+              "w-12 h-12 rounded-xl items-center justify-center mr-4",
+              isActive ? "bg-white/20" : "bg-muted/20"
             )}
           >
             {game.icon_url ? (
               <Image source={{ uri: game.icon_url }} className="w-8 h-8" />
             ) : (
-              <Play size={24} className="text-foreground" />
+              <Play
+                size={24}
+                className={isActive ? "text-primary-foreground" : "text-foreground"}
+                fill={isActive ? "currentColor" : "none"}
+              />
             )}
           </View>
 
           <View className="flex-1">
             <H4
               className={cn(
-                "text-base leading-none mb-1",
+                "text-lg font-black leading-tight mb-1",
+                isActive ? "text-primary-foreground" : "text-foreground",
                 isCompleted && "text-muted-foreground line-through"
               )}
             >
               {game.name}
             </H4>
-            <P className="text-xs text-muted-foreground">
-              {game.instructions ? "Daily Challenge" : "Focus"} • 2 min
+            <P
+              className={cn(
+                "text-sm font-bold",
+                isActive
+                  ? "text-primary-foreground/90"
+                  : "text-muted-foreground"
+              )}
+            >
+              {game.instructions ? "Daily" : "Focus"} • 2 min
             </P>
           </View>
 
           {/* Action indicator */}
           {isActive && (
-            <View className="bg-primary/10 p-2 rounded-full">
-              <Play size={16} className="text-primary" fill="currentColor" />
+            <View className="bg-white/20 p-2 rounded-full">
+              <Play
+                size={16}
+                className="text-primary-foreground"
+                fill="currentColor"
+              />
             </View>
           )}
           {isLocked && <Lock size={16} className="text-muted-foreground" />}

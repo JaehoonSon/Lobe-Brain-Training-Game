@@ -19,7 +19,7 @@ export default function InsightsScreen() {
             >
                 <View className="px-6 pb-6">
                     {/* Page Title */}
-                    <H1 className="mb-6 pt-4">Insights</H1>
+                    <H1 className="mb-6 pt-4 text-3xl font-black">Insights</H1>
 
                     {/* Coming Soon Card */}
                     <Card className="overflow-hidden">
@@ -27,8 +27,8 @@ export default function InsightsScreen() {
                             <View className="w-20 h-20 rounded-full bg-primary/20 items-center justify-center">
                                 <Lightbulb size={40} className="text-primary" />
                             </View>
-                            <P className="text-xl font-semibold text-center">Coming Soon</P>
-                            <Muted className="text-center text-base leading-6">
+                            <P className="text-xl font-black text-center">Coming Soon</P>
+                            <Muted className="text-center text-base font-bold leading-6">
                                 Personalized insights about your brain training progress will
                                 appear here after you've completed more sessions.
                             </Muted>

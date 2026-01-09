@@ -4,123 +4,227 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
+import { BlurView } from "expo-blur";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H4, P, Muted } from "~/components/ui/typography";
-import { Card, CardContent } from "~/components/ui/card";
+import { H1, H4, P } from "~/components/ui/typography";
+import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 import {
   Zap,
-  Info,
   ChevronRight,
   Lock,
   Sparkles,
   TrendingUp,
   BarChart2,
+  Brain,
+  Calculator,
+  Languages,
+  Target,
+  Puzzle,
+  Eye,
+  BookType,
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { useUserStats, CategoryStats } from "~/hooks/useUserStats";
 import { router } from "expo-router";
+import { cn } from "~/lib/utils";
 
-// Category colors for progress bars
-const CATEGORY_COLORS: Record<string, string> = {
-  speed: "#F59E0B",
-  memory: "#F59E0B",
-  attention: "#F59E0B",
-  flexibility: "#22C55E",
-  "problem-solving": "#F59E0B",
-  logic: "#8B5CF6",
-  focus: "#3B82F6",
-};
+// --- Components ---
 
-const DEFAULT_COLOR = "#F59E0B";
+function getCategoryIcon(categoryName: string) {
+  const name = categoryName.toLowerCase();
+  if (name.includes("memory")) return Brain;
+  if (name.includes("logic") || name.includes("math")) return Calculator;
+  if (name.includes("speed") || name.includes("reaction")) return Zap;
+  if (name.includes("language") || name.includes("verbal")) return Languages;
+  if (name.includes("focus") || name.includes("attention")) return Target;
+
+  // Fallbacks or specific other cases
+  if (name.includes("problem")) return Puzzle;
+  if (name.includes("visual")) return Eye;
+
+  return Zap; // Defaulti
+}
 
 interface CategoryRowProps {
   category: CategoryStats;
+  isLast: boolean;
+  index: number;
   onPress?: () => void;
 }
 
-function CategoryRow({ category, onPress }: CategoryRowProps) {
+function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
   const hasScore = category.score !== null;
-  const color = CATEGORY_COLORS[category.id] || DEFAULT_COLOR;
+  const IconComponent = getCategoryIcon(category.name);
+
+  // Semantic variant alternation: even = primary, odd = secondary
+  const variant = index % 2 === 0 ? "primary" : "secondary";
+
+  // Map variant to text/bg colors
+  // Note: We use specific text classes to ensure good contrast on white bg
+  const iconColorClass = variant === "primary" ? "text-primary" : "text-secondary";
+  const progressBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="flex-row items-center justify-between py-4 border-b border-border/50"
+      activeOpacity={0.7}
+      className={cn(
+        "flex-col py-4 px-4",
+        !isLast && "border-b border-muted"
+      )}
     >
-      <View className="flex-1">
-        <H4 className="text-lg font-bold mb-2">{category.name}</H4>
+      {/* Top Row: Icon + Title */}
+      <View className="flex-row items-center gap-3 mb-3">
+        {/* Icon bubble */}
+        <View className="w-10 h-10 rounded-xl bg-muted/30 items-center justify-center">
+          <IconComponent size={20} className={iconColorClass} strokeWidth={2.5} />
+        </View>
+        <H4 className="text-lg font-bold text-foreground pt-0.5">
+          {category.name}
+        </H4>
+      </View>
+
+      {/* Bottom Row: Bar + Score + Chevron */}
+      <View className="flex-row items-center justify-between pl-1">
         {hasScore ? (
-          <View className="flex-row items-center gap-2">
-            {/* Progress bar */}
-            <View className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
+          <>
+            {/* Progress Bar captures available width */}
+            <View className="flex-1 h-3 bg-muted/40 rounded-full overflow-hidden mr-3">
               <View
-                className="h-full rounded-full"
-                style={{
-                  width: `${category.progress}%`,
-                  backgroundColor: color,
-                }}
+                className={cn("h-full rounded-full", progressBgClass)}
+                style={{ width: `${category.progress}%` }}
               />
             </View>
-            <Text className="font-bold text-foreground min-w-[50px] text-right">
-              {category.score}
-            </Text>
-          </View>
+            <View className="flex-row items-center gap-1">
+              <Text className="text-xl font-black text-foreground min-w-[30px] text-right">
+                {category.score}
+              </Text>
+              <ChevronRight size={20} className="text-muted-foreground ml-1" />
+            </View>
+          </>
         ) : (
-          <View className="flex-row items-center gap-2">
-            {/* Empty indicator bar */}
-            <View
-              className="w-2 h-6 rounded-full"
-              style={{ backgroundColor: color }}
-            />
-            <Muted className="text-base">--</Muted>
+          <View className="flex-1 flex-row items-center justify-between">
+            <P className="text-muted-foreground text-sm font-bold">No games played</P>
+            <ChevronRight size={20} className="text-muted-foreground" />
           </View>
         )}
       </View>
-      <ChevronRight size={20} className="text-muted-foreground ml-3" />
     </TouchableOpacity>
   );
 }
 
-interface LockedSectionProps {
-  icon: React.ReactNode;
-  title: string;
+// Reusable Content Components for locked states
+// Adjusted to use standard colors
+function CompareContent() {
+  return (
+    <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
+      {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
+        <View key={i} className="w-4 bg-secondary rounded-t-sm" style={{ height: `${h}%` }} />
+      ))}
+    </View>
+  );
 }
 
-function LockedSection({ icon, title }: LockedSectionProps) {
+function StrengthContent() {
   return (
-    <Card className="mb-4 overflow-hidden">
-      <CardContent className="p-0">
-        {/* Header */}
-        <View className="flex-row justify-between items-center p-4">
-          <View className="flex-row items-center gap-2">
-            {icon}
-            <Text className="text-sm font-bold text-muted-foreground tracking-wide">
-              {title}
-            </Text>
+    <View className="h-24 justify-center gap-2 opacity-60 px-4">
+      <View className="flex-row items-center gap-2">
+        <View className="w-16 h-2 bg-muted rounded-full" />
+        <View className="flex-1 h-2 bg-primary rounded-full" />
+      </View>
+      <View className="flex-row items-center gap-2">
+        <View className="w-16 h-2 bg-muted rounded-full" />
+        <View className="w-3/4 h-2 bg-secondary rounded-full" />
+      </View>
+      <View className="flex-row items-center gap-2">
+        <View className="w-16 h-2 bg-muted rounded-full" />
+        <View className="w-1/2 h-2 bg-primary rounded-full" />
+      </View>
+    </View>
+  );
+}
+
+function HistoryContent() {
+  return (
+    <View className="h-24 flex-row items-end justify-between px-4 opacity-60">
+      <View className="w-1/5 h-[30%] bg-muted rounded-t-sm" />
+      <View className="w-1/5 h-[45%] bg-muted rounded-t-sm" />
+      <View className="w-1/5 h-[60%] bg-muted rounded-t-sm" />
+      <View className="w-1/5 h-[50%] bg-muted rounded-t-sm" />
+      <View className="w-1/5 h-[90%] bg-primary rounded-t-sm" />
+    </View>
+  );
+}
+
+interface FeatureCardProps {
+  title: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+}
+
+function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps) {
+  // Header: Full brand color fill
+  // Text: White
+  // Body: Warm Alabaster
+  // Border: Juicy 3D Frame (inherited from variant)
+
+  const headerBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
+
+  return (
+    <Card
+      frameMode={true}
+      className="mb-6 overflow-hidden bg-card p-0"
+    >
+      <View className="relative">
+        {/* 1. Underlying Content (to be blurred) */}
+        <View>
+          {/* Header Area Spacer */}
+          <View className="px-4 pt-4 pb-2">
+            <View className="px-4 py-1.5 rounded-full opacity-0">
+              <H4 className="text-lg font-black leading-tight">{title}</H4>
+            </View>
           </View>
-          <TouchableOpacity className="flex-row items-center bg-secondary rounded-full px-3 py-1.5">
-            <Text className="text-secondary-foreground text-xs font-bold mr-1">
-              UNLOCK
-            </Text>
-            <Lock size={12} color="white" />
-          </TouchableOpacity>
+
+          {/* Body Content */}
+          <View className="p-4 pt-0">
+            <View className="px-2">
+              {children}
+            </View>
+            {/* Extra padding for the message center alignment */}
+            <View className="h-8" />
+          </View>
         </View>
 
-        {/* Locked Content Overlay */}
-        <View className="items-center justify-center py-8 bg-card/50">
-          <Lock size={28} className="text-muted-foreground mb-3" />
-          <P className="text-muted-foreground text-center px-8">
-            This feature is available with a Premium subscription.
-          </P>
+        {/* 2. Global Blur - Now covers the whole card */}
+        <BlurView intensity={70} tint="light" className="absolute inset-0" />
+
+        {/* 3. Floating Sharp Pill - On top of blur */}
+        <View className="absolute top-4 left-4">
+          <View className={cn(
+            "px-4 py-1.5 rounded-full border-b-4",
+            variant === "primary" ? "bg-primary border-primary-edge" : "bg-secondary border-secondary-edge"
+          )}>
+            <H4 className="text-lg font-black text-white leading-tight">{title}</H4>
+          </View>
         </View>
-      </CardContent>
+
+        {/* 4. Minimal Unlock Message - High Contrast on Blur */}
+        <View className="absolute inset-0 items-center justify-center p-8">
+          <View className="items-center gap-2">
+            <Lock size={20} className="text-primary-edge/60" strokeWidth={3} />
+            <Text className="text-primary-edge/80  text-center text-lg leading-tight max-w-[220px]">
+              This feature is available with a{"\n"}premium subscription
+            </Text>
+          </View>
+        </View>
+      </View>
     </Card>
   );
 }
 
 export default function StatsScreen() {
-  const { overallBPI, categoryStats, totalGamesPlayed, isLoading, error } =
+  const { overallBPI, categoryStats, isLoading, error } =
     useUserStats();
 
   const hasOverallBPI = overallBPI !== null;
@@ -131,7 +235,7 @@ export default function StatsScreen() {
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       {/* Sticky Top Bar */}
-      <View className="px-6 pt-2 pb-2 bg-background z-10">
+      <View className="px-6 pt-4 pb-2 bg-background z-10">
         <AuthenticatedHeader />
       </View>
 
@@ -141,102 +245,108 @@ export default function StatsScreen() {
       >
         <View className="px-6 pb-6">
           {/* Page Title */}
-          <H1 className="mb-6 pt-4">My stats</H1>
+          <H1 className="mb-6 pt-4 text-3xl font-black">My stats</H1>
 
-          {/* BPI Card */}
-          <Card className="mb-6 overflow-hidden">
-            <CardContent className="p-0">
-              {/* BPI Header */}
-              <View className="flex-row justify-between items-center p-4 border-b border-border/50">
-                <View className="flex-row items-center gap-2">
-                  <Zap size={20} className="text-yellow-500" fill="#eab308" />
-                  <Text className="text-sm font-bold text-muted-foreground tracking-wide">
-                    BRAIN PERFORMANCE INDEX
-                  </Text>
-                </View>
-                <TouchableOpacity>
-                  <Info size={20} className="text-muted-foreground" />
-                </TouchableOpacity>
+          {/* BPI HERO CARD */}
+          {/* Use standard bg-primary/border-primary classes */}
+          <Card
+            frameMode={true}
+            className="mb-6 bg-primary border-primary-edge p-6 shadow-xl shadow-primary/20"
+          >
+            <View className="flex-row justify-between items-start mb-6">
+              <View>
+                <P className="text-primary-foreground/80 text-sm font-black tracking-widest uppercase mb-1">
+                  OVERALL PERFORMANCE
+                </P>
+                <H4 className="text-3xl font-black text-primary-foreground">
+                  Brain Index
+                </H4>
               </View>
+              <View className="bg-white/20 p-2 rounded-xl">
+                <TrendingUp size={24} className="text-primary-foreground" />
+              </View>
+            </View>
 
-              {/* Overall BPI Section */}
-              <View className="p-4">
-                <View className="flex-row items-center justify-between mb-2">
-                  <H4 className="text-xl font-bold">Overall BPI</H4>
-                  {hasOverallBPI && (
-                    <Text className="text-3xl font-bold text-primary">
-                      {overallBPI}
-                    </Text>
-                  )}
-                </View>
-                {!hasOverallBPI && (
-                  <P className="text-muted-foreground text-base leading-6">
-                    Your Overall BPI will be available after playing a game from
-                    at least 3 Training Areas below.{" "}
-                    {categoriesWithData > 0 && (
-                      <Text className="text-primary font-semibold">
-                        ({categoriesWithData}/{categoryStats.length} completed)
-                      </Text>
-                    )}
-                  </P>
-                )}
-                {hasOverallBPI && (
-                  <P className="text-muted-foreground text-base">
-                    Based on {totalGamesPlayed} games across{" "}
-                    {categoriesWithData} training areas.
-                  </P>
-                )}
-              </View>
+            <View className="items-center py-4">
+              {hasOverallBPI ? (
+                <Text className="text-7xl font-black text-primary-foreground tracking-tighter">
+                  {overallBPI}
+                </Text>
+              ) : (
+                <Text className="text-6xl font-black text-primary-foreground/30 tracking-tighter">
+                  ---
+                </Text>
+              )}
+            </View>
 
-              {/* Category Breakdown */}
-              <View className="px-4 pb-2">
-                {isLoading ? (
-                  <View className="py-8 items-center">
-                    <ActivityIndicator size="large" />
-                    <Muted className="mt-2">Loading your stats...</Muted>
-                  </View>
-                ) : error ? (
-                  <View className="py-8 items-center">
-                    <P className="text-destructive text-center">
-                      Failed to load stats. Pull down to retry.
-                    </P>
-                  </View>
-                ) : categoryStats.length === 0 ? (
-                  <View className="py-8 items-center">
-                    <Muted className="text-center">
-                      No training areas found. Start playing some games!
-                    </Muted>
-                  </View>
-                ) : (
-                  categoryStats.map((category) => (
-                    <CategoryRow
-                      key={category.id}
-                      category={category}
-                      onPress={() => router.push(`/stat/${category.id}`)}
-                    />
-                  ))
-                )}
-              </View>
-            </CardContent>
+            <View className="mt-4 bg-black/10 rounded-xl p-3 flex-row items-center justify-center border border-black/5">
+              {hasOverallBPI ? (
+                <Text className="text-primary-foreground font-bold">
+                  Top 15% of users this week 🏆
+                </Text>
+              ) : (
+                <Text className="text-primary-foreground/90 font-bold text-center">
+                  Play {3 - categoriesWithData} more categories to unlock
+                </Text>
+              )}
+            </View>
           </Card>
 
-          {/* Premium Sections */}
-          <LockedSection
-            icon={<Sparkles size={18} className="text-cyan-400" />}
-            title="HOW YOU COMPARE"
-          />
+          {/* TRAINING AREAS HEADER */}
+          <H4 className="mb-4 text-2xl font-black px-1">Training Areas</H4>
 
-          <LockedSection
-            icon={<BarChart2 size={18} className="text-muted-foreground" />}
-            title="GAME STRENGTH PROFILE"
-          />
+          {/* CATEGORIES LIST - UNIFIED CARD */}
+          <Card
+            frameMode={true}
+            className="mb-8 overflow-hidden border-2 border-muted/50 p-0 bg-card"
+          >
+            {isLoading ? (
+              <ActivityIndicator size="large" className="py-8 text-primary" />
+            ) : error ? (
+              <P className="text-destructive text-center py-8 font-bold">
+                Could not load stats.
+              </P>
+            ) : (
+              <View>
+                {categoryStats.map((category, index) => (
+                  <CategoryRow
+                    key={category.id}
+                    category={category}
+                    index={index}
+                    isLast={index === categoryStats.length - 1} // Ensure last item has no border
+                    onPress={() => router.push(`/stat/${category.id}`)}
+                  />
+                ))}
+              </View>
+            )}
+          </Card>
 
-          <LockedSection
-            icon={<TrendingUp size={18} className="text-muted-foreground" />}
-            title="GAME PROGRESS PROFILE"
-          />
+          {/* Premium Sections - Updated Visuals */}
+          <H4 className="mb-4 text-2xl font-black px-1">Detailed Analysis</H4>
+
+          <FeatureCard
+            title="How You Compare"
+            variant="secondary"
+          >
+            <CompareContent />
+          </FeatureCard>
+
+          <FeatureCard
+            title="Strength Profile"
+            variant="primary"
+          >
+            <StrengthContent />
+          </FeatureCard>
+
+          <FeatureCard
+            title="Progress History"
+            variant="secondary"
+          >
+            <HistoryContent />
+          </FeatureCard>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
+

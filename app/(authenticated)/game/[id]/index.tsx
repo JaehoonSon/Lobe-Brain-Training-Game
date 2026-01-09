@@ -78,7 +78,7 @@ export default function GameDetailScreen() {
             <H1 className="text-yellow-50 text-4xl text-shadow">{game.name}</H1>
           </LinearGradient> */}
           <View className="absolute bottom-0 left-0 right-0 h-32 justify-end px-6 pb-6">
-            <H1 className="text-4xl text-shadow">{game.name}</H1>
+            <H1 className="text-4xl font-black text-shadow">{game.name}</H1>
           </View>
         </View>
 
@@ -86,13 +86,13 @@ export default function GameDetailScreen() {
         <View className="px-6 py-6 bg-background">
           {/* Breadcrumbs */}
           <View className="flex-row items-center mb-6">
-            <P className="text-sm font-bold tracking-widest uppercase text-muted-foreground">
+            <P className="text-sm font-black tracking-widest uppercase text-muted-foreground">
               {category?.name || "GAME"}
             </P>
             <View className="mx-2">
-              <P className="text-sm text-muted-foreground">{">"}</P>
+              <P className="text-sm font-black text-muted-foreground">{">"}</P>
             </View>
-            <P className="text-sm font-bold tracking-widest uppercase text-muted-foreground">
+            <P className="text-sm font-black tracking-widest uppercase text-muted-foreground">
               {category?.description?.split(" ")[0] || "SKILL"}
             </P>
           </View>
@@ -110,28 +110,28 @@ export default function GameDetailScreen() {
           <View className="gap-6">
             {/* LPI Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4>Game LPI</H4>
+              <H4 className="font-black text-xl">Game LPI</H4>
               <View className="bg-primary/20 px-4 py-2 rounded-full border border-primary/50 flex-row items-center gap-2">
                 <Trophy size={16} className="text-primary" />
-                <Text className="text-sm font-bold text-primary">UNLOCK</Text>
+                <Text className="text-sm font-black text-primary">UNLOCK</Text>
               </View>
             </View>
 
             {/* Best Score Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4>Best Score</H4>
-              <P className="text-muted-foreground text-xl">-</P>
+              <H4 className="font-black text-xl">Best Score</H4>
+              <P className="text-muted-foreground font-bold text-xl">-</P>
             </View>
 
             {/* Best Stat Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4>Best Stat</H4>
-              <P className="text-muted-foreground text-xl">-</P>
+              <H4 className="font-black text-xl">Best Stat</H4>
+              <P className="text-muted-foreground font-bold text-xl">-</P>
             </View>
 
             {/* Newcomer Badges Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4>Newcomer</H4>
+              <H4 className="font-black text-xl">Newcomer</H4>
               <View className="flex-row gap-3">
                 <Hexagon
                   size={28}
@@ -146,10 +146,10 @@ export default function GameDetailScreen() {
 
             {/* Total Plays Row */}
             <View className="flex-row justify-between items-center py-3">
-              <H4>Total Plays</H4>
+              <H4 className="font-black text-xl">Total Plays</H4>
               <View className="flex-row items-baseline gap-1">
-                <P className="text-2xl font-bold">0</P>
-                <P className="text-base text-muted-foreground">of 3</P>
+                <P className="text-2xl font-black">0</P>
+                <P className="text-base font-bold text-muted-foreground">of 3</P>
               </View>
             </View>
           </View>
@@ -187,10 +187,10 @@ export default function GameDetailScreen() {
             {isLocked ? (
               <View className="flex-row items-center gap-2">
                 <Lock size={18} color="white" />
-                <Text className="text-white font-bold">Unlock Pro</Text>
+                <Text className="text-white font-black text-lg">Unlock Pro</Text>
               </View>
             ) : (
-              <Text className="text-primary-foreground font-bold">
+              <Text className="text-primary-foreground font-black text-lg">
                 Start Game
               </Text>
             )}

@@ -1,113 +1,138 @@
 import React from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, ScrollView, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { H1, H2, P, Muted } from "~/components/ui/typography";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent } from "~/components/ui/card";
+import { BrainCircuit, Sparkles, Zap, Target, ArrowRight } from "lucide-react-native";
 import { router } from "expo-router";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 
 const WelcomeScreen = () => {
+  const handleGetStarted = () => {
+    router.push("/(unauthenticated)");
+  };
+
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.container}>
-        {/* Main Content Card */}
-        <LinearGradient
-          colors={["#8A2BE2", "#4B0082", "#00BFFF"]} // Purple to blue gradient
-          style={styles.card}
-        >
-          <View style={styles.logoContainer}>
-            <Text style={{ fontSize: 40 }}>✨</Text>
-          </View>
-        </LinearGradient>
-
-        <View style={styles.bottomContent}>
-          <Text style={styles.title}>Welcome to App</Text>
-          <Text style={styles.subtitle}>
-            By using this App, you agree to the{" "}
-            <Text style={styles.link}>terms</Text> and{" "}
-            <Text style={styles.link}>privacy policy</Text>
-          </Text>
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => router.push("/(unauthenticated)")}
+    <SafeAreaView edges={["top"]} className="flex-1 bg-background">
+      <ScrollView
+        className="flex-1 bg-background"
+        contentContainerStyle={{ paddingBottom: 100 }}
+      >
+        <View className="px-6 py-6">
+          <Animated.View
+            entering={FadeInDown.duration(600)}
+            className="items-center mb-8"
           >
-            <Text style={styles.buttonText}>Get Started</Text>
-          </TouchableOpacity>
+            <View className="bg-primary/10 p-6 rounded-full mb-6 border-2 border-primary/20">
+              <BrainCircuit size={64} className="text-primary" strokeWidth={3} />
+            </View>
+            <H1 className="text-4xl font-black text-center mb-3">
+              Welcome to Brain App
+            </H1>
+            <Muted className="text-lg font-bold text-center">
+              Train your brain. Sharpen your mind.
+            </Muted>
+          </Animated.View>
+
+          <Animated.View
+            entering={FadeInDown.delay(200).duration(600)}
+            className="gap-4 mb-8"
+          >
+            <Card frameMode={true} className="bg-card border-border p-0">
+              <CardContent>
+                <View className="flex-row items-center gap-4 p-2">
+                  <View className="w-14 h-14 rounded-xl bg-primary/10 items-center justify-center">
+                    <Zap size={28} className="text-primary" strokeWidth={2.5} />
+                  </View>
+                  <View className="flex-1">
+                    <H2 className="text-lg font-black text-foreground mb-1">
+                      Think Faster
+                    </H2>
+                    <Muted className="text-sm font-bold">
+                      Improve your processing speed
+                    </Muted>
+                  </View>
+                  <ArrowRight size={20} className="text-muted-foreground" />
+                </View>
+              </CardContent>
+            </Card>
+
+            <Card frameMode={true} className="bg-card border-border p-0">
+              <CardContent>
+                <View className="flex-row items-center gap-4 p-2">
+                  <View className="w-14 h-14 rounded-xl bg-secondary/10 items-center justify-center">
+                    <Target size={28} className="text-secondary" strokeWidth={2.5} />
+                  </View>
+                  <View className="flex-1">
+                    <H2 className="text-lg font-black text-foreground mb-1">
+                      Sharpen Focus
+                    </H2>
+                    <Muted className="text-sm font-bold">
+                      Boost your concentration
+                    </Muted>
+                  </View>
+                  <ArrowRight size={20} className="text-muted-foreground" />
+                </View>
+              </CardContent>
+            </Card>
+
+            <Card frameMode={true} className="bg-card border-border p-0">
+              <CardContent>
+                <View className="flex-row items-center gap-4 p-2">
+                  <View className="w-14 h-14 rounded-xl bg-accent/10 items-center justify-center">
+                    <Sparkles size={28} className="text-accent" strokeWidth={2.5} />
+                  </View>
+                  <View className="flex-1">
+                    <H2 className="text-lg font-black text-foreground mb-1">
+                      Enhance Memory
+                    </H2>
+                    <Muted className="text-sm font-bold">
+                      Remember better, longer
+                    </Muted>
+                  </View>
+                  <ArrowRight size={20} className="text-muted-foreground" />
+                </View>
+              </CardContent>
+            </Card>
+          </Animated.View>
+
+          <Animated.View
+            entering={FadeInDown.delay(400).duration(600)}
+            className="items-center mb-8"
+          >
+            <Muted className="text-center text-sm font-bold">
+              By using this App, you agree to our{" "}
+              <TouchableOpacity onPress={() => {}}>
+                <Muted className="text-primary font-black underline">Terms</Muted>
+              </TouchableOpacity>{" "}
+              and{" "}
+              <TouchableOpacity onPress={() => {}}>
+                <Muted className="text-primary font-black underline">
+                  Privacy Policy
+                </Muted>
+              </TouchableOpacity>
+            </Muted>
+          </Animated.View>
+
+          <Animated.View
+            entering={ZoomIn.delay(600).duration(500).springify()}
+            className="w-full"
+          >
+            <Button
+              size="xl"
+              className="w-full h-16 rounded-2xl border-b-4 active:border-b-0 active:translate-y-1"
+              onPress={handleGetStarted}
+            >
+              <P className="text-white font-black text-xl tracking-wide uppercase">
+                Get Started
+              </P>
+            </Button>
+          </Animated.View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#000000",
-  },
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#000000",
-    padding: 20,
-  },
-  card: {
-    width: 200,
-    height: 300,
-    borderRadius: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    marginBottom: 40,
-  },
-  logoContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bottomContent: {
-    alignItems: "center",
-    width: "100%",
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "#FFFFFF",
-    marginBottom: 15,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#A9A9A9",
-    textAlign: "center",
-    paddingHorizontal: 30,
-    marginBottom: 30,
-  },
-  link: {
-    color: "#FFFFFF",
-    textDecorationLine: "underline",
-  },
-  button: {
-    backgroundColor: "#1E90FF",
-    paddingVertical: 18,
-    paddingHorizontal: 30,
-    borderRadius: 30,
-    width: "100%",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
 
 export default WelcomeScreen;

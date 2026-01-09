@@ -1,4 +1,5 @@
-import { View, ScrollView, TouchableOpacity, Image } from "react-native";
+import { View, ScrollView, TouchableOpacity } from "react-native";
+import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H3, H4, P, Muted } from "~/components/ui/typography";
 import { Text } from "~/components/ui/text";
@@ -20,19 +21,19 @@ export default function GamesScreen() {
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       {/* Sticky Top Bar & Header */}
-      <View className="bg-background z-10 px-6 pt-2 pb-4 border-b border-border/50">
+      <View className="bg-background z-10 px-6 pt-4 pb-4 border-b border-border/50">
         <AuthenticatedHeader className="mb-4" />
 
-        <H1 className="mb-4">Games</H1>
+        <H1 className="mb-4 text-3xl font-black">Games</H1>
 
         {/* Search Bar */}
-        <View className="flex-row items-center bg-muted/30 rounded-xl overflow-hidden pl-4">
+        <Card className="flex-row items-center px-4 py-1 h-16">
           <Search size={24} className="text-muted-foreground" />
           <Input
             placeholder="What do you want to play?"
-            className="flex-1 bg-transparent border-0 h-16 text-xl"
+            className="flex-1 bg-transparent border-0 text-xl h-full"
           />
-        </View>
+        </Card>
       </View>
 
       <ScrollView
@@ -42,7 +43,7 @@ export default function GamesScreen() {
         <View className="py-6 gap-8">
           {/* Today's Games Section */}
           <View>
-            <H3 className="px-6 mb-4 text-2xl font-bold">Today's games</H3>
+            <H3 className="px-6 mb-4 text-2xl font-black">Today's games</H3>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -53,17 +54,25 @@ export default function GamesScreen() {
                   key={game.id}
                   className="w-[180px] gap-2"
                   onPress={() => router.push(`/game/${game.id}`)}
+                  activeOpacity={0.7}
                 >
-                  <View className="w-full h-[110px] rounded-xl overflow-hidden bg-muted relative">
+                  <Card frameMode className="w-full h-[110px]">
                     {game.banner_url ? (
                       <Image
                         source={{ uri: game.banner_url }}
-                        className="w-full h-full"
-                        resizeMode="cover"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: 12,
+                        }}
+                        contentFit="cover"
                       />
                     ) : (
-                      <View className="w-full h-full items-center justify-center bg-primary/20">
-                        <Zap size={36} className="text-primary" />
+                      <View
+                        className="items-center justify-center bg-muted"
+                        style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                      >
+                        <Zap size={36} className="text-muted-foreground" />
                       </View>
                     )}
                     {!isPro && game.is_pro_only && (
@@ -71,10 +80,10 @@ export default function GamesScreen() {
                         <Lock size={14} className="text-foreground" />
                       </View>
                     )}
-                  </View>
-                  <View className="gap-1">
-                    <H4 className="leading-tight">{game.name}</H4>
-                    <Muted className="text-base line-clamp-2">
+                  </Card>
+                  <View className="gap-1 px-1 mt-2">
+                    <H4 className="text-lg font-black leading-tight">{game.name}</H4>
+                    <Muted className="text-sm font-bold leading-snug line-clamp-2">
                       {game.description}
                     </Muted>
                   </View>
@@ -90,7 +99,7 @@ export default function GamesScreen() {
 
             return (
               <View key={category.id}>
-                <H3 className="px-6 mb-4 text-2xl font-bold">
+                <H3 className="px-6 mb-4 text-2xl font-black">
                   {category.name}
                 </H3>
                 <ScrollView
@@ -103,16 +112,24 @@ export default function GamesScreen() {
                       key={game.id}
                       className="w-[180px] gap-2"
                       onPress={() => router.push(`/game/${game.id}`)}
+                      activeOpacity={0.7}
                     >
-                      <View className="w-full h-[110px] rounded-xl overflow-hidden bg-muted relative">
+                      <Card frameMode className="w-full h-[110px]">
                         {game.banner_url ? (
                           <Image
                             source={{ uri: game.banner_url }}
-                            className="w-full h-full"
-                            resizeMode="cover"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: 12,
+                            }}
+                            contentFit="cover"
                           />
                         ) : (
-                          <View className="w-full h-full items-center justify-center bg-muted">
+                          <View
+                            className="items-center justify-center bg-muted"
+                            style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                          >
                             <Zap size={36} className="text-muted-foreground" />
                           </View>
                         )}
@@ -121,10 +138,10 @@ export default function GamesScreen() {
                             <Lock size={14} className="text-foreground" />
                           </View>
                         )}
-                      </View>
-                      <View className="gap-1">
-                        <H4 className="leading-tight">{game.name}</H4>
-                        <Muted className="text-base">
+                      </Card>
+                      <View className="gap-1 px-1 mt-2">
+                        <H4 className="text-lg font-black leading-tight">{game.name}</H4>
+                        <Muted className="text-sm font-bold leading-snug line-clamp-2">
                           {category.description || category.name}
                         </Muted>
                       </View>
