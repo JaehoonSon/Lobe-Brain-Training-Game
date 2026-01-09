@@ -18,7 +18,10 @@ import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
 import { AuthProvider, useAuth } from "~/contexts/AuthProvider";
 import { RevenueCatProvider } from "~/contexts/RevenueCatProvider";
 import { SplashScreenController } from "./splash";
-import { OnboardingProvider } from "~/contexts/OnboardingContext";
+import {
+  OnboardingProvider,
+  useOnboarding,
+} from "~/contexts/OnboardingContext";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "~/components/ui/toast";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -46,27 +49,41 @@ const usePlatformSpecificSetup = Platform.select({
 function AppContent() {
   const { isDarkColorScheme } = useColorScheme();
 
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
+  const { isComplete, isLoading: isOnboardingLoading } = useOnboarding();
+
+  const isAppLoading = isAuthLoading || isOnboardingLoading;
 
   // Debug: Log auth state for routing decisions
   console.log("=== Root Layout Routing ===");
   console.log("isAuthenticated:", isAuthenticated);
-  console.log("isLoading:", isLoading);
-  console.log("Show authenticated:", isAuthenticated);
-  console.log("Show unauthenticated:", !isAuthenticated);
+  console.log("isAuthLoading:", isAuthLoading);
+  console.log("isOnboardingLoading:", isOnboardingLoading);
+  console.log("isComplete:", isComplete);
   console.log("===========================");
+
+  if (isAppLoading) {
+    return null;
+  }
 
   return (
     <ThemeProvider value={isDarkColorScheme ? LIGHT_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "light"} />
       <Stack screenOptions={{ headerShown: false, animation: "none" }}>
-        <Stack.Protected guard={isAuthenticated}>
+        {/* Onboarding Flow: Authenticated but not complete */}
+        <Stack.Protected guard={isAuthenticated && !isComplete}>
+          <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
+        </Stack.Protected>
+
+        {/* Authenticated Flow: Authenticated and complete */}
+        <Stack.Protected guard={isAuthenticated && isComplete}>
           <Stack.Screen
             name="(authenticated)"
             options={{ headerRight: () => <ThemeToggle /> }}
           />
-          <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
         </Stack.Protected>
+
+        {/* Unauthenticated Flow: Not authenticated */}
         <Stack.Protected guard={!isAuthenticated}>
           <Stack.Screen
             name="(unauthenticated)"
@@ -139,4 +156,4 @@ function useSetAndroidNavigationBar() {
   }, []);
 }
 
-function noop() { }
+function noop() {}

@@ -22,6 +22,7 @@ interface OnboardingContextType {
   isComplete: boolean;
   completeOnboarding: () => Promise<void>;
   resetOnboarding: () => Promise<void>;
+  isLoading: boolean;
 }
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(
@@ -40,6 +41,7 @@ export function OnboardingProvider({
   const [currentStep, setCurrentStep] = useState(1);
   const [data, setData] = useState<OnboardingData>({});
   const [isComplete, setIsComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const lastStep = currentStep === TOTAL_STEPS;
 
   useEffect(() => {
@@ -50,18 +52,48 @@ export function OnboardingProvider({
   useEffect(() => {
     const loadProgress = async () => {
       try {
+        // 1. Check local storage first for immediate feedback
         const saved = await AsyncStorage.getItem(ONBOARDING_STORAGE_KEY);
+        let localIsComplete = false;
         if (saved) {
           const parsed = JSON.parse(saved);
           setCurrentStep(parsed.currentStep || 1);
           setData(parsed.data || {});
+          if (parsed.isComplete) {
+            localIsComplete = true;
+            setIsComplete(true);
+          }
+        }
+
+        // 2. If not complete locally, check DB (if user is logged in)
+        if (!localIsComplete && user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("onboarding_completed_at")
+            .eq("id", user.id)
+            .single();
+
+          if (profile?.onboarding_completed_at) {
+            setIsComplete(true);
+            // Sync back to local storage so next time it's faster
+            await AsyncStorage.setItem(
+              ONBOARDING_STORAGE_KEY,
+              JSON.stringify({
+                currentStep: TOTAL_STEPS,
+                data: saved ? JSON.parse(saved).data : {},
+                isComplete: true,
+              })
+            );
+          }
         }
       } catch (e) {
         console.error("Failed to load onboarding progress", e);
+      } finally {
+        setIsLoading(false);
       }
     };
     loadProgress();
-  }, []);
+  }, [user]);
 
   // Save progress on change
   useEffect(() => {
@@ -69,14 +101,14 @@ export function OnboardingProvider({
       try {
         await AsyncStorage.setItem(
           ONBOARDING_STORAGE_KEY,
-          JSON.stringify({ currentStep, data })
+          JSON.stringify({ currentStep, data, isComplete })
         );
       } catch (e) {
         console.error("Failed to save onboarding progress", e);
       }
     };
     saveProgress();
-  }, [currentStep, data]);
+  }, [currentStep, data, isComplete]);
 
   const updateData = (key: string, value: any) => {
     setData((prev) => ({ ...prev, [key]: value }));
@@ -120,7 +152,10 @@ export function OnboardingProvider({
       try {
         const { error } = await supabase
           .from("profiles")
-          .update({ onboarding_data: data })
+          .update({
+            onboarding_data: data,
+            onboarding_completed_at: new Date().toISOString(),
+          })
           .eq("id", user.id);
 
         if (error) {
@@ -161,6 +196,7 @@ export function OnboardingProvider({
         isComplete,
         completeOnboarding,
         resetOnboarding,
+        isLoading,
       }}
     >
       {children}

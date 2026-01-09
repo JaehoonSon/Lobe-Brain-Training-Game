@@ -216,6 +216,7 @@ export type Database = {
           avatar_url: string | null
           full_name: string | null
           id: string
+          onboarding_completed_at: string | null
           onboarding_data: Json | null
           updated_at: string | null
           username: string | null
@@ -225,6 +226,7 @@ export type Database = {
           avatar_url?: string | null
           full_name?: string | null
           id: string
+          onboarding_completed_at?: string | null
           onboarding_data?: Json | null
           updated_at?: string | null
           username?: string | null
@@ -234,6 +236,7 @@ export type Database = {
           avatar_url?: string | null
           full_name?: string | null
           id?: string
+          onboarding_completed_at?: string | null
           onboarding_data?: Json | null
           updated_at?: string | null
           username?: string | null
