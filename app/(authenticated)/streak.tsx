@@ -36,28 +36,44 @@ function getNextMilestone(currentStreak: number): number {
 }
 
 /**
- * Get days of the week that have been completed based on last_played_date
+ * Get days of the week that have been completed based on last_played_date and current streak
  */
-function getCompletedDaysThisWeek(lastPlayedDate: string | null): number[] {
-  if (!lastPlayedDate) return [];
+function getCompletedDaysThisWeek(
+  lastPlayedDate: string | null,
+  currentStreak: number
+): number[] {
+  if (!lastPlayedDate || currentStreak <= 0) return [];
 
   const today = new Date(); // Local now
   const lastPlayed = new Date(lastPlayedDate); // Auto-converts UTC ISO to Local time
 
-  // Check if last played is within this week
-  const todayDay = today.getDay(); // 0-6
-
   // Calculate start of week (Sunday) at 00:00:00 Local Time
+  const todayDay = today.getDay(); // 0-6
   const startOfWeek = new Date(today);
   startOfWeek.setDate(today.getDate() - todayDay);
   startOfWeek.setHours(0, 0, 0, 0);
 
-  // Compare timestamps
-  if (lastPlayed.getTime() >= startOfWeek.getTime()) {
-    return [lastPlayed.getDay()];
+  // Check if last played is within this week
+  if (lastPlayed.getTime() < startOfWeek.getTime()) {
+    return [];
   }
 
-  return [];
+  const lastPlayedDay = lastPlayed.getDay();
+  const completedDays: number[] = [];
+
+  // Mark consecutive days going back from lastPlayedDay based on streak length
+  // but only for days within this week (day index >= 0)
+  for (let i = 0; i < currentStreak; i++) {
+    const dayIndex = lastPlayedDay - i;
+    if (dayIndex >= 0) {
+      completedDays.push(dayIndex);
+    } else {
+      // Day falls into previous week, stop adding
+      break;
+    }
+  }
+
+  return completedDays;
 }
 
 export default function StreakScreen() {
@@ -99,7 +115,8 @@ export default function StreakScreen() {
   const nextMilestone = getNextMilestone(currentStreak);
   const daysToMilestone = nextMilestone - currentStreak;
   const completedDays = getCompletedDaysThisWeek(
-    streakData?.last_played_date ?? null
+    streakData?.last_played_date ?? null,
+    currentStreak
   );
 
   // Progress ring calculations
