@@ -314,6 +314,56 @@ export type Database = {
           },
         ]
       }
+      user_game_performance_history: {
+        Row: {
+          created_at: string | null
+          difficulty_rating: number
+          game_id: string
+          games_played_count: number
+          highest_score: number | null
+          id: string
+          last_played_at: string | null
+          perf_created_at: string | null
+          snapshot_date: string
+          total_score: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          difficulty_rating: number
+          game_id: string
+          games_played_count: number
+          highest_score?: number | null
+          id?: string
+          last_played_at?: string | null
+          perf_created_at?: string | null
+          snapshot_date?: string
+          total_score: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          difficulty_rating?: number
+          game_id?: string
+          games_played_count?: number
+          highest_score?: number | null
+          id?: string
+          last_played_at?: string | null
+          perf_created_at?: string | null
+          snapshot_date?: string
+          total_score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_game_performance_history_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_performance: {
         Row: {
           created_at: string | null
@@ -384,7 +434,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      process_daily_game_performance_snapshot: {
+        Args: never
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
