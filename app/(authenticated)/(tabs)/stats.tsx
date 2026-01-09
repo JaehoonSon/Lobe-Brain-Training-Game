@@ -190,7 +190,7 @@ function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps)
         <View className="absolute inset-0 items-center justify-center p-8">
           <View className="items-center gap-2">
             <Lock size={20} className="text-primary-edge/60" strokeWidth={3} />
-            <Text className="text-primary-edge/80 font-black text-center text-lg leading-tight max-w-[220px]">
+            <Text className="text-primary-edge/80  text-center text-lg leading-tight max-w-[220px]">
               This feature is available with a{"\n"}premium subscription
             </Text>
           </View>
@@ -222,17 +222,17 @@ export default function StatsScreen() {
       >
         <View className="px-6 pb-6">
           {/* Page Title */}
-          <H1 className="mb-6 pt-4">My stats</H1>
+          <H1 className="mb-6 pt-4 text-3xl font-black">My stats</H1>
 
           {/* BPI HERO CARD */}
           {/* Use standard bg-primary/border-primary classes */}
           <Card
             frameMode={true}
-            className="mb-8 bg-primary border-primary-edge p-6 shadow-xl shadow-primary/20"
+            className="mb-6 bg-primary border-primary-edge p-6 shadow-xl shadow-primary/20"
           >
             <View className="flex-row justify-between items-start mb-6">
               <View>
-                <P className="text-primary-foreground/80 text-xs font-black tracking-widest uppercase mb-1">
+                <P className="text-primary-foreground/80 text-sm font-black tracking-widest uppercase mb-1">
                   OVERALL PERFORMANCE
                 </P>
                 <H4 className="text-3xl font-black text-primary-foreground">
@@ -270,7 +270,7 @@ export default function StatsScreen() {
           </Card>
 
           {/* TRAINING AREAS HEADER */}
-          <H4 className="mb-4 text-xl px-1">Training Areas</H4>
+          <H4 className="mb-4 text-2xl font-black px-1">Training Areas</H4>
 
           {/* CATEGORIES LIST - UNIFIED CARD */}
           <Card
@@ -299,7 +299,7 @@ export default function StatsScreen() {
           </Card>
 
           {/* Premium Sections - Updated Visuals */}
-          <H4 className="mb-4 text-xl px-1">Detailed Analysis</H4>
+          <H4 className="mb-4 text-2xl font-black px-1">Detailed Analysis</H4>
 
           <FeatureCard
             title="How You Compare"

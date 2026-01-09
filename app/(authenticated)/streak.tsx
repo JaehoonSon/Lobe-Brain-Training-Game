@@ -134,7 +134,7 @@ export default function StreakScreen() {
 
         {/* Centered title */}
         <View className="absolute left-0 right-0 items-center">
-          <H1 className="text-2xl">Training Streak</H1>
+          <H1 className="text-3xl font-black">Training Streak</H1>
         </View>
       </View>
 
@@ -175,13 +175,12 @@ export default function StreakScreen() {
                   return (
                     <View key={index} className="items-center gap-1.5">
                       <View
-                        className={`w-9 h-9 rounded-full items-center justify-center ${
-                          isCompleted
+                        className={`w-9 h-9 rounded-full items-center justify-center ${isCompleted
                             ? "bg-orange-500/20"
                             : isPast
-                            ? "bg-destructive/10"
-                            : "bg-muted"
-                        }`}
+                              ? "bg-destructive/10"
+                              : "bg-muted"
+                          }`}
                       >
                         {isCompleted ? (
                           <Flame size={18} color="#F97316" fill="#F97316" />
@@ -190,13 +189,12 @@ export default function StreakScreen() {
                         ) : null}
                       </View>
                       <P
-                        className={`text-xs ${
-                          isToday
-                            ? "font-bold text-foreground"
+                        className={`text-xs ${isToday
+                            ? "font-black text-foreground"
                             : isCompleted
-                            ? "font-semibold text-foreground"
-                            : "font-medium text-muted-foreground"
-                        }`}
+                              ? "font-bold text-foreground"
+                              : "font-medium text-muted-foreground"
+                          }`}
                       >
                         {day}
                       </P>
@@ -218,8 +216,8 @@ export default function StreakScreen() {
                     <Flame size={20} color="#F97316" fill="#F97316" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-xs">Current Streak</Muted>
-                    <P className="text-lg font-bold text-foreground">
+                    <Muted className="text-xs font-bold">Current Streak</Muted>
+                    <P className="text-2xl font-black text-foreground">
                       {currentStreak} day{currentStreak !== 1 ? "s" : ""}
                     </P>
                   </View>
@@ -233,8 +231,8 @@ export default function StreakScreen() {
                     <Trophy size={20} color="#EAB308" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-xs">Best Streak</Muted>
-                    <P className="text-lg font-bold text-foreground">
+                    <Muted className="text-xs font-bold">Best Streak</Muted>
+                    <P className="text-2xl font-black text-foreground">
                       {bestStreak} day{bestStreak !== 1 ? "s" : ""}
                     </P>
                   </View>
@@ -281,10 +279,10 @@ export default function StreakScreen() {
 
                 {/* Labels Row - tight under the circles */}
                 <View className="flex-row justify-between px-3">
-                  <P className="text-foreground text-sm font-bold">
+                  <P className="text-foreground text-lg font-black">
                     {currentStreak}
                   </P>
-                  <P className="text-muted-foreground text-sm font-bold">
+                  <P className="text-muted-foreground text-lg font-black">
                     {nextMilestone}
                   </P>
                 </View>
@@ -353,7 +351,7 @@ export default function StreakScreen() {
 // Helper Components (matching settings.tsx style)
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
-    <P className="text-muted-foreground text-sm font-semibold uppercase tracking-wider mb-2 ml-1 mt-5">
+    <P className="text-muted-foreground text-sm font-black uppercase tracking-wider mb-2 ml-1 mt-5">
       {children}
     </P>
   );

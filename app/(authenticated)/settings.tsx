@@ -135,7 +135,8 @@ export default function Settings() {
         contentContainerStyle={{ paddingBottom: 60 }}
       >
         {/* Header */}
-        <H1 className="px-6 pt-6 mb-2">Settings</H1>
+        {/* Header */}
+        <H1 className="px-6 pt-6 mb-2 text-3xl font-black">Settings</H1>
 
         {/* Settings List */}
         <View className="px-6">
@@ -147,8 +148,8 @@ export default function Settings() {
                 <User size={18} className="text-foreground" />
               </View>
               <View className="flex-1">
-                <Muted className="text-sm">Email</Muted>
-                <P className="text-lg text-foreground">
+                <Muted className="text-sm font-bold">Email</Muted>
+                <P className="text-lg font-bold text-foreground">
                   {user?.email || "Not set"}
                 </P>
               </View>
@@ -161,8 +162,8 @@ export default function Settings() {
                     <Cake size={18} className="text-foreground" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-sm">Birthday</Muted>
-                    <P className="text-lg text-foreground">{birthday}</P>
+                    <Muted className="text-sm font-bold">Birthday</Muted>
+                    <P className="text-lg font-bold text-foreground">{birthday}</P>
                   </View>
                 </View>
               </>
@@ -187,12 +188,12 @@ export default function Settings() {
               </View>
               <View className="flex-1">
                 <P
-                  className={`text-lg font-medium ${isPro ? "text-primary" : "text-foreground"
+                  className={`text-lg font-black ${isPro ? "text-primary" : "text-foreground"
                     }`}
                 >
                   {membershipLabel}
                 </P>
-                <Muted className="text-sm">{membershipDescription}</Muted>
+                <Muted className="text-sm font-bold">{membershipDescription}</Muted>
               </View>
               {!isPro && (
                 <ChevronRight size={18} className="text-muted-foreground" />
@@ -247,7 +248,7 @@ export default function Settings() {
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <Info size={18} className="text-foreground" />
               </View>
-              <P className="flex-1 text-lg text-foreground">
+              <P className="flex-1 text-lg font-bold text-foreground">
                 Version {appVersion} ({buildNumber})
               </P>
             </View>
@@ -261,7 +262,7 @@ export default function Settings() {
 // Helper Components
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
-    <P className="text-muted-foreground text-sm font-semibold uppercase tracking-wider mb-3 ml-1 mt-8">
+    <P className="text-muted-foreground text-sm font-black uppercase tracking-wider mb-3 ml-1 mt-8">
       {children}
     </P>
   );
@@ -304,7 +305,7 @@ function SettingRow({
         />
       </View>
       <P
-        className={`flex-1 text-lg ${isDestructive ? "text-destructive" : "text-foreground"
+        className={`flex-1 text-lg font-bold ${isDestructive ? "text-destructive" : "text-foreground"
           }`}
       >
         {label}

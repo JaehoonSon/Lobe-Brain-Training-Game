@@ -97,7 +97,7 @@ export function WorkoutGameCard({
           <View className="flex-1">
             <H4
               className={cn(
-                "text-lg leading-tight mb-1",
+                "text-lg font-black leading-tight mb-1",
                 isActive ? "text-primary-foreground" : "text-foreground",
                 isCompleted && "text-muted-foreground line-through"
               )}
@@ -106,7 +106,7 @@ export function WorkoutGameCard({
             </H4>
             <P
               className={cn(
-                "text-sm font-medium",
+                "text-sm font-bold",
                 isActive
                   ? "text-primary-foreground/90"
                   : "text-muted-foreground"

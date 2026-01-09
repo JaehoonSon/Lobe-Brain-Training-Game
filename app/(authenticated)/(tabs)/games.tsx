@@ -24,7 +24,7 @@ export default function GamesScreen() {
       <View className="bg-background z-10 px-6 pt-2 pb-4 border-b border-border/50">
         <AuthenticatedHeader className="mb-4" />
 
-        <H1 className="mb-4">Games</H1>
+        <H1 className="mb-4 text-3xl font-black">Games</H1>
 
         {/* Search Bar */}
         <Card className="flex-row items-center px-4 py-1 h-16">
@@ -43,7 +43,7 @@ export default function GamesScreen() {
         <View className="py-6 gap-8">
           {/* Today's Games Section */}
           <View>
-            <H3 className="px-6 mb-4 text-2xl font-bold">Today's games</H3>
+            <H3 className="px-6 mb-4 text-2xl font-black">Today's games</H3>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -82,8 +82,8 @@ export default function GamesScreen() {
                     )}
                   </Card>
                   <View className="gap-1 px-1 mt-2">
-                    <H4 className="text-lg font-bold leading-tight">{game.name}</H4>
-                    <Muted className="text-sm leading-snug line-clamp-2">
+                    <H4 className="text-lg font-black leading-tight">{game.name}</H4>
+                    <Muted className="text-sm font-bold leading-snug line-clamp-2">
                       {game.description}
                     </Muted>
                   </View>
@@ -99,7 +99,7 @@ export default function GamesScreen() {
 
             return (
               <View key={category.id}>
-                <H3 className="px-6 mb-4 text-2xl font-bold">
+                <H3 className="px-6 mb-4 text-2xl font-black">
                   {category.name}
                 </H3>
                 <ScrollView
@@ -140,8 +140,8 @@ export default function GamesScreen() {
                         )}
                       </Card>
                       <View className="gap-1 px-1 mt-2">
-                        <H4 className="text-lg font-bold leading-tight">{game.name}</H4>
-                        <Muted className="text-sm leading-snug line-clamp-2">
+                        <H4 className="text-lg font-black leading-tight">{game.name}</H4>
+                        <Muted className="text-sm font-bold leading-snug line-clamp-2">
                           {category.description || category.name}
                         </Muted>
                       </View>

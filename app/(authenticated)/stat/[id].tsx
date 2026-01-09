@@ -1,15 +1,13 @@
 import React from "react";
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from "react-native";
+import { View, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
+import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { ChevronLeft, Zap, Lock, TrendingUp } from "lucide-react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { H1, H4, P, Muted } from "~/components/ui/typography";
+import { BlurView } from "expo-blur";
+import { cn } from "~/lib/utils";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 import { useUserStats } from "~/hooks/useUserStats";
@@ -78,60 +76,52 @@ export default function CategoryDetailScreen() {
         contentContainerStyle={{ paddingBottom: 40 }}
       >
         <View className="px-6">
-          {/* Current LPI Section */}
-          <Animated.View
-            entering={FadeInDown.duration(400)}
-            className="mt-4 mb-6"
-          >
-            <View className="flex-row items-center gap-2 mb-2">
-              <Zap size={24} className="text-yellow-500" fill="#eab308" />
-              <Muted className="text-sm">Current BPI</Muted>
+          {/* Hero BPI Section */}
+          {/* Hero BPI Section - Duolingo Style */}
+          <View className="mb-8 pt-4 flex-row items-center justify-between px-2">
+            <View className="overflow-visible">
+              <Text
+                className="text-8xl font-black text-primary"
+                style={{ lineHeight: 100, }}
+              >
+                {hasScore ? category.score : "--"}
+              </Text>
+              <Text className="text-3xl font-black text-primary/80 ml-1 -mt-4">
+                current BPI
+              </Text>
             </View>
-            <H1 className="text-5xl font-bold mb-3">
-              {hasScore ? category.score : "--"}
-            </H1>
-            <View className="flex-row items-center gap-4">
-              <View className="flex-row items-center gap-2">
-                <Muted className="text-sm">FIRST</Muted>
-                <P className="font-bold">{hasScore ? category.score : "--"}</P>
-              </View>
-              <Muted>|</Muted>
-              <View className="flex-row items-center gap-2">
-                <Muted className="text-sm">BEST</Muted>
-                <P className="font-bold">{category.highestScore ?? "--"}</P>
-              </View>
+
+            {/* Big Icon */}
+            <View className="shadow-lg shadow-orange-500/20">
+              <Image
+                source={require("~/assets/brain_icon_clay.png")}
+                style={{ width: 150, height: 150 }}
+                contentFit="contain"
+              />
             </View>
-          </Animated.View>
+          </View>
 
           {/* LPI History Card (Locked) */}
           <Animated.View entering={FadeInDown.delay(200).duration(400)}>
-            <Card className="mb-6 overflow-hidden">
-              <CardContent className="p-0">
-                {/* Header */}
-                <View className="flex-row justify-between items-center p-4 border-b border-border/50">
-                  <View className="flex-row items-center gap-2">
-                    <TrendingUp size={18} className="text-muted-foreground" />
-                    <Text className="text-sm font-bold text-muted-foreground tracking-wide">
-                      {category.name.toUpperCase()} BPI HISTORY
-                    </Text>
-                  </View>
-                  <TouchableOpacity className="flex-row items-center bg-secondary rounded-full px-3 py-1.5">
-                    <Text className="text-secondary-foreground text-xs font-bold mr-1">
-                      UNLOCK
-                    </Text>
-                    <Lock size={12} color="white" />
-                  </TouchableOpacity>
-                </View>
-
-                {/* Locked Content */}
-                <View className="items-center justify-center py-12 bg-card/50">
+            {/* History Section */}
+            <Card frameMode={true} className="mb-6 overflow-hidden bg-card p-0">
+              <View className="relative">
+                {/* Content */}
+                <View className="items-center justify-center py-12">
                   <Lock size={32} className="text-muted-foreground mb-3" />
                   <P className="text-muted-foreground text-center px-8 mb-4">
-                    Track your progress with Training History in Brain App
-                    Premium.
+                    Track your progress with Training History in Brain App Premium.
                   </P>
                 </View>
-              </CardContent>
+                {/* Blur overlay */}
+                <BlurView intensity={70} tint="light" className="absolute inset-0" />
+                {/* Floating Pill Header */}
+                <View className="absolute top-4 left-4">
+                  <View className={cn("px-4 py-1.5 rounded-full border-b-4", "bg-secondary border-secondary-edge")}>
+                    <H4 className="text-lg font-black text-white">History</H4>
+                  </View>
+                </View>
+              </View>
             </Card>
           </Animated.View>
 
@@ -159,34 +149,40 @@ export default function CategoryDetailScreen() {
                       onPress={() => router.push(`/game/${game.id}`)}
                       activeOpacity={0.7}
                     >
-                      <Card className="overflow-hidden">
+                      <Card
+                        frameMode={true}
+                      >
                         <CardContent className="p-4">
                           <View className="flex-row items-center justify-between">
                             <View className="flex-1">
-                              <H4 className="text-base font-bold mb-1">
+                              <H4 className="text-lg font-black mb-1 text-foreground">
                                 {game.name}
                               </H4>
                               {hasPlayed ? (
                                 <View className="flex-row items-center gap-3">
-                                  <Muted className="text-sm">
-                                    Played: {gameStats.gamesPlayed}
-                                  </Muted>
-                                  <Muted className="text-sm">
-                                    Best: {gameStats.highestScore ?? "--"}
-                                  </Muted>
+                                  <View className="bg-primary/10 px-2 py-0.5 rounded-md">
+                                    <Text className="text-xs font-bold text-primary">
+                                      {gameStats.gamesPlayed} PLAYED
+                                    </Text>
+                                  </View>
+                                  <Text className="text-xs font-bold text-muted-foreground">
+                                    BEST: {gameStats.highestScore ?? "--"}
+                                  </Text>
                                 </View>
                               ) : (
-                                <Muted className="text-sm">
-                                  Not played yet
-                                </Muted>
+                                <View className="bg-muted/20 px-2 py-0.5 rounded-md self-start">
+                                  <Text className="text-xs font-bold text-muted-foreground">
+                                    NEW
+                                  </Text>
+                                </View>
                               )}
                             </View>
                             {hasPlayed && gameStats.averageScore && (
-                              <View className="items-end">
-                                <P className="text-2xl font-bold text-primary">
+                              <View className="items-end bg-secondary/10 px-3 py-2 rounded-lg">
+                                <P className="text-2xl font-black text-secondary">
                                   {gameStats.averageScore}
                                 </P>
-                                <Muted className="text-xs">AVG</Muted>
+                                <Text className="text-[10px] font-black text-secondary/60 text-right">AVG BPI</Text>
                               </View>
                             )}
                           </View>

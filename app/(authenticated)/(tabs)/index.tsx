@@ -72,8 +72,8 @@ export default function Dashboard() {
         <View className="px-6 py-6">
           <View className="flex-row justify-between items-end mb-6">
             <View>
-              <H3 className="text-3xl font-bold mb-1">Today's Training</H3>
-              <P className="text-muted-foreground">
+              <H3 className="text-3xl font-black mb-1">Today's Training</H3>
+              <P className="text-muted-foreground font-bold">
                 Keep your streak alive! 🔥
               </P>
             </View>
@@ -126,14 +126,14 @@ export default function Dashboard() {
           )}
 
           <View className="mt-8">
-            <H3 className="mb-4 text-2xl font-bold">Relaxing Games</H3>
+            <H3 className="mb-4 text-2xl font-black">Relaxing Games</H3>
             <Card variant="secondary" className="p-4 flex-row items-center">
               <View className="w-12 h-12 bg-white/20 rounded-xl mr-4 items-center justify-center">
                 <BookA className="text-white" size={24} />
               </View>
               <View className="flex-1">
-                <H4 className="text-white">Quick Zen</H4>
-                <P className="text-white/80 text-xs text-secondary-foreground">
+                <H4 className="text-white font-black text-xl">Quick Zen</H4>
+                <P className="text-white/80 text-sm font-bold text-secondary-foreground">
                   Stress relief • 5 min
                 </P>
               </View>
