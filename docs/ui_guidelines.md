@@ -63,13 +63,13 @@ While we love "Juicy" colors, they only pop if they have room to breathe.
 ## 4. Component Patterns
 
 ### A. The "Juicy" Card (Standard)
-Most cards should have a 3D effect.
+All cards have a 3D effect with `overflow-hidden` for clean corners.
 **Key Props/Classes:**
-*   Use `<Card frameMode={true} />` if available, or manually apply:
-    *   `border-2` (sometimes `border-0` if using just bottom)
-    *   `border-b-4` (The 3D shadow)
-    *   `rounded-xl` or `rounded-2xl`
-    *   `border-muted` or `border-[color]-edge`
+*   `border-2` (sometimes `border-0` if using just bottom)
+*   `border-b-4` (The 3D shadow)
+*   `rounded-xl` or `rounded-2xl`
+*   `border-muted` or `border-[color]-edge`
+*   `overflow-hidden` (applied automatically)
 
 ### B. "Floating Pill" Headers
 Headers inside cards or lists often use the "Floating Pill" style.

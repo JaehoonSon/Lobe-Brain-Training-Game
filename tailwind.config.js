@@ -106,6 +106,14 @@ module.exports = {
       letterSpacing: {
         normal: "var(--tracking-normal)",
       },
+      lineHeight: {
+        none: '1.1',    // Nunito-safe override (was 1, clips heavy weights)
+        tight: '1.25',
+        snug: '1.375',
+        normal: '1.5',
+        relaxed: '1.625',
+        loose: '2',
+      },
       spacing: {
         DEFAULT: "var(--spacing)",
       },

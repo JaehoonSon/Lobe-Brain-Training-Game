@@ -56,6 +56,9 @@ export default function IndexAuthenticatedScreen() {
         <Button variant="outline" onPress={() => router.push("/paywall")}>
           <P>Go to paywall</P>
         </Button>
+        <Button variant="outline" onPress={() => router.push("/components-showcase")}>
+          <P>Component Showcase</P>
+        </Button>
       </SafeAreaView>
     </View>
   );

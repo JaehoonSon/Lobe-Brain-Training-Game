@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils';
 import { TextClassContext } from '~/components/ui/text';
 
 const badgeVariants = cva(
-  'web:inline-flex items-center rounded-full border border-border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2',
+  'web:inline-flex items-center rounded-full border-2 border-border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2',
   {
     variants: {
       variant: {
@@ -21,7 +21,7 @@ const badgeVariants = cva(
   }
 );
 
-const badgeTextVariants = cva('text-xs font-semibold ', {
+const badgeTextVariants = cva('text-xs font-bold ', {
   variants: {
     variant: {
       default: 'text-primary-foreground',

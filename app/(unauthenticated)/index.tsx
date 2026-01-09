@@ -103,7 +103,7 @@ export default function IndexUnauthenticatedScreen() {
 
         <View className="items-center gap-4 mb-4 pt-4">
 
-          <Text className="text-5xl font-extrabold tracking-tight text-slate-400">
+          <Text className="text-5xl font-extrabold leading-[1.1] text-slate-400">
             brain-app
           </Text>
           <Text className="text-5xl font-extrabold text-center leading-[1.1] text-foreground">

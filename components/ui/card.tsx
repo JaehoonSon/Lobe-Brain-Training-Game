@@ -24,46 +24,52 @@ const cardVariants = cva(
 );
 
 /**
- * Card component with optional frame mode for reliable image clipping.
- *
- * @param frameMode - When true, renders border as an overlay frame on top of content.
- *                    This fixes React Native's overflow:hidden + borderRadius + border bug.
- *                    Use this when the Card contains images that need corner clipping.
+ * Card component with "Juicy" 3D border effect.
+ * Uses inline styles for overflow/borderRadius for reliable clipping in React Native.
  */
 function Card({
   className,
   variant,
   children,
-  frameMode = false,
   style,
   ...props
 }: ViewProps & VariantProps<typeof cardVariants> & {
   ref?: React.RefObject<View>;
-  frameMode?: boolean;
 }) {
-  // Default mode: standard Card with border classes
-  if (!frameMode) {
-    return (
-      <View
-        className={cn(cardVariants({ variant }), className)}
-        style={style}
-        {...props}
-      >
-        {children}
-      </View>
-    );
-  }
-
-  // Frame mode: border rendered on top of content for reliable clipping
-  // Children should apply their own borderRadius to clip themselves
   return (
     <View
-      className={cn("rounded-xl", className)}
-      style={[{ position: "relative" }, style]}
+      className={cn(cardVariants({ variant }), className)}
+      style={[{ overflow: "hidden", borderRadius: 12 }, style]}
       {...props}
     >
       {children}
-      {/* Border frame overlay */}
+    </View>
+  );
+}
+
+/**
+ * ImageCard component for cards containing full-bleed images.
+ * Uses border overlay approach for reliable image clipping.
+ */
+function ImageCard({
+  className,
+  children,
+  style,
+  ...props
+}: ViewProps & {
+  ref?: React.RefObject<View>;
+}) {
+  return (
+    <View
+      className={cn("rounded-xl", className)}
+      style={[{ position: "relative", overflow: "hidden", borderRadius: 12 }, style]}
+      {...props}
+    >
+      {/* Inner clipping container */}
+      <View style={{ flex: 1, borderRadius: 10, overflow: "hidden" }}>
+        {children}
+      </View>
+      {/* Border overlay on top */}
       <View
         style={{
           position: "absolute",
@@ -75,13 +81,7 @@ function Card({
           borderWidth: 2,
           borderBottomWidth: 4,
         }}
-        className={cn(
-          variant === "primary" && "border-primary-edge",
-          variant === "secondary" && "border-secondary-edge",
-          variant === "accent" && "border-accent-edge",
-          variant === "muted" && "border-muted-foreground/20",
-          (!variant || variant === "default") && "border-border"
-        )}
+        className="border-border"
         pointerEvents="none"
       />
     </View>
@@ -164,6 +164,7 @@ function CardFooter({
 
 export {
   Card,
+  ImageCard,
   CardContent,
   CardDescription,
   CardFooter,

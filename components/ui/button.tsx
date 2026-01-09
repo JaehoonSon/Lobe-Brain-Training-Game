@@ -5,14 +5,14 @@ import { TextClassContext } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 
 const buttonVariants = cva(
-  "group flex items-center justify-center rounded-md web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
+  "group flex items-center justify-center rounded-xl web:ring-offset-background web:transition-colors web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
         default: "bg-primary border-b-4 border-primary-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-90",
         destructive: "bg-destructive border-b-4 border-destructive-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-90",
         outline:
-          "border border-input bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
+          "border-2 border-input bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
         secondary: "bg-secondary border-b-4 border-secondary-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-80",
         ghost:
           "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
@@ -20,9 +20,9 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-10 px-4 py-2 native:h-12 native:px-5 native:py-3",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8 native:h-14",
-        xl: "h-12 rounded-md px-10 native:h-16",
+        sm: "h-9 rounded-xl px-3",
+        lg: "h-11 rounded-xl px-8 native:h-14",
+        xl: "h-12 rounded-xl px-10 native:h-16",
         icon: "h-10 w-10",
       },
     },
@@ -34,15 +34,15 @@ const buttonVariants = cva(
 );
 
 const buttonTextVariants = cva(
-  "web:whitespace-nowrap text-sm native:text-base font-medium text-foreground web:transition-colors",
+  "web:whitespace-nowrap text-sm native:text-base font-bold text-foreground web:transition-colors",
   {
     variants: {
       variant: {
-        default: "text-primary-foreground ",
-        destructive: "text-destructive-foreground",
-        outline: "group-active:text-accent-foreground",
+        default: "text-primary-foreground font-black",
+        destructive: "text-destructive-foreground font-black",
+        outline: "group-active:text-accent-foreground font-black",
         secondary:
-          "text-secondary-foreground group-active:text-secondary-foreground",
+          "text-secondary-foreground group-active:text-secondary-foreground font-black",
         ghost: "group-active:text-accent-foreground",
         link: "text-primary group-active:underline",
       },

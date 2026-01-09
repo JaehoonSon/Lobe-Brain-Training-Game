@@ -169,14 +169,11 @@ function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps)
   // Body: Warm Alabaster
   // Border: Juicy 3D Frame (inherited from variant)
 
-  const headerBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
-
   return (
     <Card
-      frameMode={true}
-      className="mb-6 overflow-hidden bg-card p-0"
+      className="mb-6 bg-card p-0"
     >
-      <View className="relative">
+      <View className="relative" style={{ overflow: "hidden", borderRadius: 10 }}>
         {/* 1. Underlying Content (to be blurred) */}
         <View>
           {/* Header Area Spacer */}
@@ -197,7 +194,11 @@ function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps)
         </View>
 
         {/* 2. Global Blur - Now covers the whole card */}
-        <BlurView intensity={70} tint="light" className="absolute inset-0" />
+        <BlurView
+          intensity={70}
+          tint="light"
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, borderRadius: 10 }}
+        />
 
         {/* 3. Floating Sharp Pill - On top of blur */}
         <View className="absolute top-4 left-4">
@@ -250,8 +251,7 @@ export default function StatsScreen() {
           {/* BPI HERO CARD */}
           {/* Use standard bg-primary/border-primary classes */}
           <Card
-            frameMode={true}
-            className="mb-6 bg-primary border-primary-edge p-6 shadow-xl shadow-primary/20"
+            className="mb-6 bg-primary p-6"
           >
             <View className="flex-row justify-between items-start mb-6">
               <View>
@@ -297,8 +297,7 @@ export default function StatsScreen() {
 
           {/* CATEGORIES LIST - UNIFIED CARD */}
           <Card
-            frameMode={true}
-            className="mb-8 overflow-hidden border-2 border-muted/50 p-0 bg-card"
+            className="mb-8 bg-card"
           >
             {isLoading ? (
               <ActivityIndicator size="large" className="py-8 text-primary" />

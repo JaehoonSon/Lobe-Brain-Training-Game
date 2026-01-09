@@ -7,7 +7,7 @@ import { cn } from '~/lib/utils';
 import { Text } from '~/components/ui/text';
 
 const alertVariants = cva(
-  'relative bg-background w-full rounded-lg border border-border p-4 shadow shadow-foreground/10',
+  'relative bg-background w-full rounded-xl border-2 border-border p-4 shadow shadow-foreground/10',
   {
     variants: {
       variant: {
@@ -54,7 +54,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) 
   return (
     <Text
       className={cn(
-        'pl-7 mb-1 font-medium text-base leading-none tracking-tight text-foreground',
+        'pl-7 mb-1 font-bold text-base leading-none tracking-tight text-foreground',
         className
       )}
       {...props}

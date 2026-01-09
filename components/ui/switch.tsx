@@ -19,8 +19,8 @@ function SwitchWeb({
   return (
     <SwitchPrimitives.Root
       className={cn(
-        'peer flex-row h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed',
-        props.checked ? 'bg-primary' : 'bg-input',
+        'peer flex-row h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent border-b-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed',
+        props.checked ? 'bg-primary border-primary-edge' : 'bg-input',
         props.disabled && 'opacity-50',
         className
       )}
@@ -74,8 +74,8 @@ function SwitchNative({
     >
       <SwitchPrimitives.Root
         className={cn(
-          'flex-row h-8 w-[46px] shrink-0 items-center rounded-full border-2 border-transparent',
-          props.checked ? 'bg-primary' : 'bg-input',
+          'flex-row h-8 w-[46px] shrink-0 items-center rounded-full border-2 border-transparent border-b-4',
+          props.checked ? 'bg-primary border-primary-edge' : 'bg-input',
           className
         )}
         {...props}

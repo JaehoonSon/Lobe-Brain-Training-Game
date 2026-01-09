@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Sun, Gamepad2, BarChart3, Lightbulb } from "lucide-react-native";
+import { Sun, Gamepad2, BarChart3, Lightbulb, LayoutTemplate } from "lucide-react-native";
 import { useColorScheme } from "react-native";
 
 export default function TabsLayout() {
@@ -75,6 +75,15 @@ export default function TabsLayout() {
           title: "Insights",
           tabBarIcon: ({ color }) => (
             <Lightbulb color={color} size={24} strokeWidth={2.5} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="components-showcase"
+        options={{
+          title: "Showcase",
+          tabBarIcon: ({ color }) => (
+            <LayoutTemplate color={color} size={24} strokeWidth={2.5} />
           ),
         }}
       />

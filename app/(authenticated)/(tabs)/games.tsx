@@ -7,7 +7,7 @@ import { Input } from "~/components/ui/input";
 import { Search, Lock, Zap } from "lucide-react-native";
 import { router } from "expo-router";
 import { useGames } from "~/contexts/GamesContext";
-import { Card, CardContent } from "~/components/ui/card";
+import { Card, ImageCard, CardContent } from "~/components/ui/card";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
@@ -56,21 +56,23 @@ export default function GamesScreen() {
                   onPress={() => router.push(`/game/${game.id}`)}
                   activeOpacity={0.7}
                 >
-                  <Card frameMode className="w-full h-[110px]">
+                  <ImageCard className="w-full h-[110px]">
                     {game.banner_url ? (
                       <Image
                         source={{ uri: game.banner_url }}
                         style={{
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: 12,
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
                         }}
                         contentFit="cover"
                       />
                     ) : (
                       <View
                         className="items-center justify-center bg-muted"
-                        style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
                       >
                         <Zap size={36} className="text-muted-foreground" />
                       </View>
@@ -80,7 +82,7 @@ export default function GamesScreen() {
                         <Lock size={14} className="text-foreground" />
                       </View>
                     )}
-                  </Card>
+                  </ImageCard>
                   <View className="gap-1 px-1 mt-2">
                     <H4 className="text-lg font-black leading-tight">{game.name}</H4>
                     <Muted className="text-sm font-bold leading-snug line-clamp-2">
@@ -114,21 +116,23 @@ export default function GamesScreen() {
                       onPress={() => router.push(`/game/${game.id}`)}
                       activeOpacity={0.7}
                     >
-                      <Card frameMode className="w-full h-[110px]">
+                      <ImageCard className="w-full h-[110px]">
                         {game.banner_url ? (
                           <Image
                             source={{ uri: game.banner_url }}
                             style={{
-                              width: "100%",
-                              height: "100%",
-                              borderRadius: 12,
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
                             }}
                             contentFit="cover"
                           />
                         ) : (
                           <View
                             className="items-center justify-center bg-muted"
-                            style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                            style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
                           >
                             <Zap size={36} className="text-muted-foreground" />
                           </View>
@@ -138,7 +142,7 @@ export default function GamesScreen() {
                             <Lock size={14} className="text-foreground" />
                           </View>
                         )}
-                      </Card>
+                      </ImageCard>
                       <View className="gap-1 px-1 mt-2">
                         <H4 className="text-lg font-black leading-tight">{game.name}</H4>
                         <Muted className="text-sm font-bold leading-snug line-clamp-2">

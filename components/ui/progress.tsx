@@ -20,7 +20,7 @@ function Progress({
 }) {
   return (
     <ProgressPrimitive.Root
-      className={cn('relative h-4 w-full overflow-hidden rounded-full bg-secondary', className)}
+      className={cn('relative h-3 w-full overflow-hidden rounded-full bg-muted/40', className)}
       {...props}
     >
       <Indicator value={value} className={indicatorClassName} />

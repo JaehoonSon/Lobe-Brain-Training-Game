@@ -39,7 +39,7 @@ const WelcomeScreen = () => {
             entering={FadeInDown.delay(200).duration(600)}
             className="gap-4 mb-8"
           >
-            <Card frameMode={true} className="bg-card border-border p-0">
+            <Card className="bg-card border-border p-0">
               <CardContent>
                 <View className="flex-row items-center gap-4 p-2">
                   <View className="w-14 h-14 rounded-xl bg-primary/10 items-center justify-center">
@@ -58,7 +58,7 @@ const WelcomeScreen = () => {
               </CardContent>
             </Card>
 
-            <Card frameMode={true} className="bg-card border-border p-0">
+            <Card className="bg-card border-border p-0">
               <CardContent>
                 <View className="flex-row items-center gap-4 p-2">
                   <View className="w-14 h-14 rounded-xl bg-secondary/10 items-center justify-center">
@@ -77,7 +77,7 @@ const WelcomeScreen = () => {
               </CardContent>
             </Card>
 
-            <Card frameMode={true} className="bg-card border-border p-0">
+            <Card className="bg-card border-border p-0">
               <CardContent>
                 <View className="flex-row items-center gap-4 p-2">
                   <View className="w-14 h-14 rounded-xl bg-accent/10 items-center justify-center">
@@ -103,11 +103,11 @@ const WelcomeScreen = () => {
           >
             <Muted className="text-center text-sm font-bold">
               By using this App, you agree to our{" "}
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => { }}>
                 <Muted className="text-primary font-black underline">Terms</Muted>
               </TouchableOpacity>{" "}
               and{" "}
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => { }}>
                 <Muted className="text-primary font-black underline">
                   Privacy Policy
                 </Muted>

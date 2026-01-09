@@ -104,7 +104,7 @@ export default function CategoryDetailScreen() {
           {/* LPI History Card (Locked) */}
           <Animated.View entering={FadeInDown.delay(200).duration(400)}>
             {/* History Section */}
-            <Card frameMode={true} className="mb-6 overflow-hidden bg-card p-0">
+            <Card className="mb-6 overflow-hidden bg-card p-0">
               <View className="relative">
                 {/* Content */}
                 <View className="items-center justify-center py-12">
@@ -150,7 +150,6 @@ export default function CategoryDetailScreen() {
                       activeOpacity={0.7}
                     >
                       <Card
-                        frameMode={true}
                       >
                         <CardContent className="p-4">
                           <View className="flex-row items-center justify-between">

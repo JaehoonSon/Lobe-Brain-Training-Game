@@ -74,7 +74,7 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           onPress={handleBegin}
         >
           <Text className="font-extrabold text-xl tracking-wide uppercase">
-            Let's Begin
+            Let&apos;s Begin
           </Text>
         </Button>
       </Animated.View>
