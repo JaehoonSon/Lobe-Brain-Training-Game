@@ -16,6 +16,13 @@ import {
   Sparkles,
   TrendingUp,
   BarChart2,
+  Brain,
+  Calculator,
+  Languages,
+  Target,
+  Puzzle,
+  Eye,
+  BookType,
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { useUserStats, CategoryStats } from "~/hooks/useUserStats";
@@ -23,6 +30,21 @@ import { router } from "expo-router";
 import { cn } from "~/lib/utils";
 
 // --- Components ---
+
+function getCategoryIcon(categoryName: string) {
+  const name = categoryName.toLowerCase();
+  if (name.includes("memory")) return Brain;
+  if (name.includes("logic") || name.includes("math")) return Calculator;
+  if (name.includes("speed") || name.includes("reaction")) return Zap;
+  if (name.includes("language") || name.includes("verbal")) return Languages;
+  if (name.includes("focus") || name.includes("attention")) return Target;
+
+  // Fallbacks or specific other cases
+  if (name.includes("problem")) return Puzzle;
+  if (name.includes("visual")) return Eye;
+
+  return Zap; // Defaulti
+}
 
 interface CategoryRowProps {
   category: CategoryStats;
@@ -33,6 +55,7 @@ interface CategoryRowProps {
 
 function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
   const hasScore = category.score !== null;
+  const IconComponent = getCategoryIcon(category.name);
 
   // Semantic variant alternation: even = primary, odd = secondary
   const variant = index % 2 === 0 ? "primary" : "secondary";
@@ -55,7 +78,7 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
       <View className="flex-row items-center gap-3 mb-3">
         {/* Icon bubble */}
         <View className="w-10 h-10 rounded-xl bg-muted/30 items-center justify-center">
-          <Zap size={18} className={iconColorClass} fill="currentColor" />
+          <IconComponent size={20} className={iconColorClass} strokeWidth={2.5} />
         </View>
         <H4 className="text-lg font-bold text-foreground pt-0.5">
           {category.name}
@@ -179,7 +202,7 @@ function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps)
         {/* 3. Floating Sharp Pill - On top of blur */}
         <View className="absolute top-4 left-4">
           <View className={cn(
-            "px-4 py-1.5 rounded-full border-b-4",
+            "px-4 py-1.5 rounded-md border-b-4",
             variant === "primary" ? "bg-primary border-primary-edge" : "bg-secondary border-secondary-edge"
           )}>
             <H4 className="text-lg font-black text-white leading-tight">{title}</H4>
