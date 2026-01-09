@@ -16,9 +16,9 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
   };
 
   const goals = [
-    { icon: Target, label: "Sharpen your focus", color: "#f43f5e" },
-    { icon: Brain, label: "Improve your memory", color: "#0ea5e9" },
-    { icon: Zap, label: "Think faster", color: "#eab308" },
+    { icon: Target, label: "Sharpen your focus" },
+    { icon: Brain, label: "Improve your memory" },
+    { icon: Zap, label: "Think faster" },
   ];
 
   return (
@@ -32,7 +32,7 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           className="items-center gap-4 mb-8"
         >
           <View className="bg-primary/10 p-6 rounded-full mb-4">
-            <BrainCircuit size={64} className="text-primary" color="#f97316" />
+            <BrainCircuit size={64} className="text-primary" strokeWidth={3} />
           </View>
           <Text className="text-4xl font-extrabold text-foreground text-center leading-[1.1]">
             Welcome to your Personal Plan
@@ -42,22 +42,22 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           </Text>
         </Animated.View>
 
-        {/* Goals List */}
+          {/* Goals List */}
         <View className="w-full max-w-xs gap-4 mb-8">
           {goals.map((goal, index) => (
             <Animated.View
               key={index}
               entering={FadeInDown.delay(200 + index * 100).duration(600)}
-              className="flex-row items-center gap-4 bg-card p-4 rounded-2xl border-2 border-slate-100 dark:border-slate-800"
+              className="flex-row items-center gap-4 bg-card p-4 rounded-2xl border-2 border-muted"
             >
-              <View className="p-2 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
-                <goal.icon size={24} color={goal.color} />
+              <View className="p-2 rounded-xl bg-muted">
+                <goal.icon size={24} className="text-foreground" strokeWidth={2.5} />
               </View>
               <Text className="font-bold text-lg text-foreground">
                 {goal.label}
               </Text>
               <View className="ml-auto">
-                <Check size={20} className="text-green-500" color="#22c55e" />
+                <Check size={20} className="text-green-500" strokeWidth={2.5} />
               </View>
             </Animated.View>
           ))}

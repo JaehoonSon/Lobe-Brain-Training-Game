@@ -202,7 +202,7 @@ function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps)
         {/* 3. Floating Sharp Pill - On top of blur */}
         <View className="absolute top-4 left-4">
           <View className={cn(
-            "px-4 py-1.5 rounded-md border-b-4",
+            "px-4 py-1.5 rounded-full border-b-4",
             variant === "primary" ? "bg-primary border-primary-edge" : "bg-secondary border-secondary-edge"
           )}>
             <H4 className="text-lg font-black text-white leading-tight">{title}</H4>
@@ -235,7 +235,7 @@ export default function StatsScreen() {
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       {/* Sticky Top Bar */}
-      <View className="px-6 pt-2 pb-2 bg-background z-10">
+      <View className="px-6 pt-4 pb-2 bg-background z-10">
         <AuthenticatedHeader />
       </View>
 

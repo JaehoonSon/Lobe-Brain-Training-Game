@@ -21,7 +21,7 @@ export default function GamesScreen() {
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       {/* Sticky Top Bar & Header */}
-      <View className="bg-background z-10 px-6 pt-2 pb-4 border-b border-border/50">
+      <View className="bg-background z-10 px-6 pt-4 pb-4 border-b border-border/50">
         <AuthenticatedHeader className="mb-4" />
 
         <H1 className="mb-4 text-3xl font-black">Games</H1>

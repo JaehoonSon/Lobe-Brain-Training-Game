@@ -61,7 +61,7 @@ export default function Dashboard() {
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       {/* Sticky Top Bar */}
-      <View className="px-6 pt-2 pb-2 bg-background z-10">
+      <View className="px-6 pt-4 pb-2 bg-background z-10">
         <AuthenticatedHeader />
       </View>
 
