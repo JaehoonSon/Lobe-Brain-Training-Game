@@ -10,13 +10,8 @@ import {
   Crown,
   Cake,
 } from "lucide-react-native";
-import {
-  View,
-  TouchableOpacity,
-  Linking,
-  Alert,
-  ScrollView,
-} from "react-native";
+import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
+import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { showErrorToast } from "~/components/ui/toast";
@@ -81,12 +76,17 @@ export default function Settings() {
 
   const handle_privacy = async () => {
     playHaptic("soft");
-    Linking.openURL(appMetadata.privacyPolicyUrl);
+    await WebBrowser.openBrowserAsync(appMetadata.privacyPolicyUrl);
   };
 
   const handle_eula = async () => {
     playHaptic("soft");
-    Linking.openURL(appMetadata.endUserLicenseAgreementUrl);
+    await WebBrowser.openBrowserAsync(appMetadata.endUserLicenseAgreementUrl);
+  };
+
+  const handle_tos = async () => {
+    playHaptic("soft");
+    await WebBrowser.openBrowserAsync(appMetadata.termsOfServiceUrl);
   };
 
   const handleLogout = async () => {
@@ -212,6 +212,12 @@ export default function Settings() {
             <SettingRow
               icon={BookText}
               label="Terms of Service"
+              onPress={handle_tos}
+            />
+            <Divider />
+            <SettingRow
+              icon={BookText}
+              label="License Agreement"
               onPress={handle_eula}
             />
           </Card>

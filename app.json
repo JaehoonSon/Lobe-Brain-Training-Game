@@ -13,7 +13,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#faeeda"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "appStoreUrl": "https://apps.apple.com/us/app/elysia-photo-glow/id6749180620",
       "usesAppleSignIn": true,
@@ -57,7 +59,8 @@
             "deploymentTarget": "15.1"
           }
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
