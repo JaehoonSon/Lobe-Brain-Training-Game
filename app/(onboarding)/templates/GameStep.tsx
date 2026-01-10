@@ -44,14 +44,18 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
     try {
       // Map config type to game_id in DB
       // Assuming game_ids match the config type strings exactly
-      const { data, error } = await supabase
+      const { data: questionsData, error } = await supabase
         .from("questions")
         .select("content, difficulty")
         .eq("game_id", gameConfig.type)
         .order("difficulty", { ascending: true }) // Lowest difficulty first
-        .limit(TOTAL_ROUNDS);
+        .limit(TOTAL_ROUNDS * 10);
 
       if (error) throw error;
+
+      const data = questionsData
+        .sort(() => Math.random() - 0.5)
+        .slice(0, TOTAL_ROUNDS);
 
       if (!data || data.length < TOTAL_ROUNDS) {
         // Fallback or alert if not enough questions.

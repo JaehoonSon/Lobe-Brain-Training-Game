@@ -28,6 +28,7 @@ import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { useUserStats, CategoryStats } from "~/hooks/useUserStats";
 import { router } from "expo-router";
 import { cn } from "~/lib/utils";
+import { FeatureCard } from "~/components/FeatureCard";
 
 // --- Components ---
 
@@ -62,23 +63,25 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
 
   // Map variant to text/bg colors
   // Note: We use specific text classes to ensure good contrast on white bg
-  const iconColorClass = variant === "primary" ? "text-primary" : "text-secondary";
+  const iconColorClass =
+    variant === "primary" ? "text-primary" : "text-secondary";
   const progressBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
 
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
-      className={cn(
-        "flex-col py-4 px-4",
-        !isLast && "border-b border-muted"
-      )}
+      className={cn("flex-col py-4 px-4", !isLast && "border-b border-muted")}
     >
       {/* Top Row: Icon + Title */}
       <View className="flex-row items-center gap-3 mb-3">
         {/* Icon bubble */}
         <View className="w-10 h-10 rounded-xl bg-muted/30 items-center justify-center">
-          <IconComponent size={20} className={iconColorClass} strokeWidth={2.5} />
+          <IconComponent
+            size={20}
+            className={iconColorClass}
+            strokeWidth={2.5}
+          />
         </View>
         <H4 className="text-lg font-bold text-foreground pt-0.5">
           {category.name}
@@ -105,7 +108,9 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
           </>
         ) : (
           <View className="flex-1 flex-row items-center justify-between">
-            <P className="text-muted-foreground text-sm font-bold">No games played</P>
+            <P className="text-muted-foreground text-sm font-bold">
+              No games played
+            </P>
             <ChevronRight size={20} className="text-muted-foreground" />
           </View>
         )}
@@ -120,7 +125,11 @@ export function CompareContent() {
   return (
     <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
       {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
-        <View key={i} className="w-4 bg-secondary rounded-t-sm" style={{ height: `${h}%` }} />
+        <View
+          key={i}
+          className="w-4 bg-secondary rounded-t-sm"
+          style={{ height: `${h}%` }}
+        />
       ))}
     </View>
   );
@@ -157,76 +166,8 @@ function HistoryContent() {
   );
 }
 
-interface FeatureCardProps {
-  title: string;
-  children: React.ReactNode;
-  variant?: "primary" | "secondary";
-}
-
-export function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps) {
-  // Header: Full brand color fill
-  // Text: White
-  // Body: Warm Alabaster
-  // Border: Juicy 3D Frame (inherited from variant)
-
-  return (
-    <Card
-      className="mb-6 bg-card p-0"
-    >
-      <View className="relative" style={{ overflow: "hidden", borderRadius: 10 }}>
-        {/* 1. Underlying Content (to be blurred) */}
-        <View>
-          {/* Header Area Spacer */}
-          <View className="px-4 pt-4 pb-2">
-            <View className="px-4 py-1.5 rounded-full opacity-0">
-              <H4 className="text-lg font-black leading-tight">{title}</H4>
-            </View>
-          </View>
-
-          {/* Body Content */}
-          <View className="p-4 pt-0">
-            <View className="px-2">
-              {children}
-            </View>
-            {/* Extra padding for the message center alignment */}
-            <View className="h-8" />
-          </View>
-        </View>
-
-        {/* 2. Global Blur - Now covers the whole card */}
-        <BlurView
-          intensity={70}
-          tint="light"
-          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, borderRadius: 10 }}
-        />
-
-        {/* 3. Floating Sharp Pill - On top of blur */}
-        <View className="absolute top-4 left-4">
-          <View className={cn(
-            "px-4 py-1.5 rounded-full border-b-4",
-            variant === "primary" ? "bg-primary border-primary-edge" : "bg-secondary border-secondary-edge"
-          )}>
-            <H4 className="text-lg font-black text-white leading-tight">{title}</H4>
-          </View>
-        </View>
-
-        {/* 4. Minimal Unlock Message - High Contrast on Blur */}
-        <View className="absolute inset-0 items-center justify-center p-8">
-          <View className="items-center gap-2">
-            <Lock size={20} className="text-primary-edge/60" strokeWidth={3} />
-            <Text className="text-primary-edge/80  text-center text-lg leading-tight max-w-[220px]">
-              This feature is available with a{"\n"}premium subscription
-            </Text>
-          </View>
-        </View>
-      </View>
-    </Card>
-  );
-}
-
 export default function StatsScreen() {
-  const { overallBPI, categoryStats, isLoading, error } =
-    useUserStats();
+  const { overallBPI, categoryStats, isLoading, error } = useUserStats();
 
   const hasOverallBPI = overallBPI !== null;
   const categoriesWithData = categoryStats.filter(
@@ -250,9 +191,7 @@ export default function StatsScreen() {
 
           {/* BPI HERO CARD */}
           {/* Use standard bg-primary/border-primary classes */}
-          <Card
-            className="mb-6 bg-primary p-6"
-          >
+          <Card className="mb-6 bg-primary p-6">
             <View className="flex-row justify-between items-start mb-6">
               <View>
                 <P className="text-primary-foreground/80 text-sm font-black tracking-widest uppercase mb-1">
@@ -296,9 +235,7 @@ export default function StatsScreen() {
           <H4 className="mb-4 text-2xl font-black px-1">Training Areas</H4>
 
           {/* CATEGORIES LIST - UNIFIED CARD */}
-          <Card
-            className="mb-8 bg-card"
-          >
+          <Card className="mb-8 bg-card">
             {isLoading ? (
               <ActivityIndicator size="large" className="py-8 text-primary" />
             ) : error ? (
@@ -323,24 +260,15 @@ export default function StatsScreen() {
           {/* Premium Sections - Updated Visuals */}
           <H4 className="mb-4 text-2xl font-black px-1">Detailed Analysis</H4>
 
-          <FeatureCard
-            title="How You Compare"
-            variant="secondary"
-          >
+          <FeatureCard title="How You Compare" variant="secondary">
             <CompareContent />
           </FeatureCard>
 
-          <FeatureCard
-            title="Strength Profile"
-            variant="primary"
-          >
+          <FeatureCard title="Strength Profile" variant="primary">
             <StrengthContent />
           </FeatureCard>
 
-          <FeatureCard
-            title="Progress History"
-            variant="secondary"
-          >
+          <FeatureCard title="Progress History" variant="secondary">
             <HistoryContent />
           </FeatureCard>
         </View>
@@ -348,4 +276,3 @@ export default function StatsScreen() {
     </SafeAreaView>
   );
 }
-

@@ -1,5 +1,10 @@
 import React from "react";
-import { View, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
+import {
+  View,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -85,7 +90,7 @@ export default function CategoryDetailScreen() {
                 className="text-8xl font-black text-primary"
                 style={{
                   lineHeight: 100,
-                  textShadowColor: 'rgba(0, 0, 0, 0.1)',
+                  textShadowColor: "rgba(0, 0, 0, 0.1)",
                   textShadowOffset: { width: 2, height: 4 },
                   textShadowRadius: 0,
                 }}
@@ -97,7 +102,11 @@ export default function CategoryDetailScreen() {
                   current bpi
                 </Text>
                 {hasScore && (
-                  <TrendingUp size={16} className="text-primary" strokeWidth={3} />
+                  <TrendingUp
+                    size={16}
+                    className="text-primary"
+                    strokeWidth={3}
+                  />
                 )}
               </View>
             </View>
@@ -113,13 +122,14 @@ export default function CategoryDetailScreen() {
           </View>
 
           {/* LPI History Card (Locked) */}
-          <FeatureCard
-            title="How You Compare"
-            variant="secondary"
-          >
+          <FeatureCard title="How You Compare" variant="secondary">
             <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
               {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
-                <View key={i} className="w-4 bg-secondary rounded-t-sm" style={{ height: `${h}%` }} />
+                <View
+                  key={i}
+                  className="w-4 bg-secondary rounded-t-sm"
+                  style={{ height: `${h}%` }}
+                />
               ))}
             </View>
           </FeatureCard>
@@ -148,8 +158,7 @@ export default function CategoryDetailScreen() {
                       onPress={() => router.push(`/game/${game.id}`)}
                       activeOpacity={0.7}
                     >
-                      <Card
-                      >
+                      <Card>
                         <CardContent className="p-4">
                           <View className="flex-row items-center justify-between">
                             <View className="flex-1">
@@ -180,7 +189,9 @@ export default function CategoryDetailScreen() {
                                 <P className="text-2xl font-black text-secondary">
                                   {gameStats.averageScore}
                                 </P>
-                                <Text className="text-[10px] font-black text-secondary/60 text-right">AVG BPI</Text>
+                                <Text className="text-[10px] font-black text-secondary/60 text-right">
+                                  AVG BPI
+                                </Text>
                               </View>
                             )}
                           </View>

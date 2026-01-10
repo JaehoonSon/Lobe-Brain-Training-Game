@@ -14,12 +14,6 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 
-// Constants
-const QUESTIONS_PER_ROUND = 8;
-const CORE_QUESTIONS = 6; // ~75% comfort (rating ± 0.5)
-const STRETCH_QUESTIONS = 2; // ~25% challenge (rating + 0.8 to +1.5)
-const DEFAULT_DIFFICULTY = 1;
-
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
   content: GameContent; // Parsed content
@@ -42,6 +36,12 @@ export default function GamePlayScreen() {
   // Get game and category metadata for finish screen
   const game = games.find((g) => g.id === id);
   const category = categories.find((c) => c.id === game?.category_id);
+
+  // Constants
+  const QUESTIONS_PER_ROUND = game?.recommended_rounds || 8;
+  const STRETCH_QUESTIONS = Math.max(1, Math.round(QUESTIONS_PER_ROUND * 0.25));
+  const CORE_QUESTIONS = Math.min(QUESTIONS_PER_ROUND - STRETCH_QUESTIONS, 1);
+  const DEFAULT_DIFFICULTY = 2;
 
   const [sessionQuestions, setSessionQuestions] = useState<QuestionData[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
