@@ -48,6 +48,14 @@ const WordleSchema = z.object({
   max_guesses: z.number(),
 });
 
+// 5. Ball Sort
+const BallSortSchema = z.object({
+  type: z.literal('ball_sort'),
+  tubeCount: z.number(),
+  capacityPerTube: z.number(),
+  colorCount: z.number(),
+});
+
 /* -------------------------------------------------------------------------- */
 /*                         Game → Schema Type Mapping                          */
 /* -------------------------------------------------------------------------- */
@@ -57,6 +65,7 @@ const GameSchemas = {
   memory_matrix: MemoryMatrixSchema,
   mental_language_discrimination: MentalLanguageDiscriminationSchema,
   wordle: WordleSchema,
+  ball_sort: BallSortSchema,
 } as const;
 
 type GameId = keyof typeof GameSchemas;
@@ -225,6 +234,32 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
 
     Output ONLY valid JSON.
     `;
+    }
+
+    case 'ball_sort': {
+      // Logic for scaling difficulty
+      // Diff 1-3: Easy (Extra empty tubes, few colors)
+      // Diff 4-7: Medium
+      // Diff 8-10: Hard (Minimal empty tubes, many colors)
+      
+      return `
+      Generate ${count} unique Ball Sort game configurations for difficulty ${difficulty}/10.
+
+      Constraints:
+      - capacityPerTube: ALWAYS 4 (standard for this game).
+      - tubeCount MUST be > colorCount.
+      
+      Difficulty Guide:
+      - 1-2: 4 tubes, 2 colors (2 empty tubes). Very easy.
+      - 3-4: 5 tubes, 3 colors (2 empty tubes).
+      - 5-6: 7 tubes, 5 colors (2 empty tubes).
+      - 7-8: 9 tubes, 7 colors (2 empty tubes).
+      - 9-10: 12 tubes, 10 colors (2 empty tubes) OR 11 tubes, 10 colors (1 empty tube - very hard).
+
+      Ensure valid configurations where the game is solvable (having at least 1-2 empty tubes is key).
+
+      Output ONLY valid JSON.
+      `;
     }
 
     default:

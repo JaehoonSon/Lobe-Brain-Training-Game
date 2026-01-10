@@ -1,0 +1,112 @@
+[
+  {
+    "id": "f0b01f70-f063-4ec5-a625-0e65152f667a",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "88607074-fc9e-40f9-bada-a1530aa751ec",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "057798ca-6377-4815-bbf4-b3225539290c",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "9998dc38-e5af-4394-8c98-b5aec5608827",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "53c51710-a027-4256-a5bc-2303e3aa1ac4",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "6927cd01-326c-4ee4-ae76-4fedb019047c",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "e6bdd3d2-6c64-40d6-a136-adfd991ff8e5",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "8bcaa585-6f51-437d-be1a-898eccd00eb6",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "81e8e212-b1de-42cc-ac24-abbf4653a65d",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  },
+  {
+    "id": "52d83771-cf31-4249-b43e-3559c0a0800e",
+    "game_id": "ball_sort",
+    "difficulty": 10,
+    "content": {
+      "type": "ball_sort",
+      "tubeCount": 12,
+      "capacityPerTube": 4,
+      "colorCount": 10
+    }
+  }
+]

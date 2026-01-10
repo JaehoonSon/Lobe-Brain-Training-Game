@@ -8,7 +8,14 @@ import {
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { ChevronLeft, Zap, Lock, TrendingUp } from "lucide-react-native";
+import {
+  ChevronLeft,
+  Zap,
+  Lock,
+  TrendingUp,
+  Lightbulb,
+  ChevronRight,
+} from "lucide-react-native";
 import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { H1, H4, P, Muted } from "~/components/ui/typography";
 import { BlurView } from "expo-blur";
@@ -18,6 +25,7 @@ import { Text } from "~/components/ui/text";
 import { useUserStats } from "~/contexts/UserStatsContext";
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
+import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -25,17 +33,22 @@ export default function CategoryDetailScreen() {
   const { games } = useGames();
 
   // Refresh stats when focusing the screen
-  useFocusEffect(
-    useCallback(() => {
-      refresh();
-    }, [refresh])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     refresh();
+  //   }, [refresh])
+  // );
 
   // Find the category stats for this ID
   const category = categoryStats.find((c) => c.id === id);
 
   // Get games in this category
   const categoryGames = games.filter((g) => g.category_id === id);
+
+  // Get relevant insights
+  const relevantInsights = INSIGHTS.filter(
+    (i) => i.category.toLowerCase() === category?.name.toLowerCase()
+  );
 
   if (isLoading) {
     return (
@@ -152,7 +165,7 @@ export default function CategoryDetailScreen() {
                 No games in this category yet.
               </Muted>
             ) : (
-              <View className="gap-3">
+              <View className="gap-3 mb-8">
                 {categoryGames.map((game) => {
                   const gameStats = category.gameStats.find(
                     (gs) => gs.gameId === game.id
@@ -210,6 +223,45 @@ export default function CategoryDetailScreen() {
               </View>
             )}
           </Animated.View>
+
+          {/* Recommended Insights Section */}
+          {relevantInsights.length > 0 && (
+            <Animated.View entering={FadeInDown.delay(600).duration(400)}>
+              <H4 className="text-lg font-bold mb-3">Recommended Reading</H4>
+              <View className="gap-3">
+                {relevantInsights.map((insight) => (
+                  <TouchableOpacity
+                    key={insight.id}
+                    activeOpacity={0.7}
+                    onPress={() => router.push(`/insight/${insight.id}`)}
+                  >
+                    <Card>
+                      <CardContent className="p-4 flex-row gap-4 items-center">
+                        <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
+                          <Lightbulb size={20} className="text-primary" />
+                        </View>
+                        <View className="flex-1">
+                          <H4 className="text-base font-bold text-foreground">
+                            {insight.title}
+                          </H4>
+                          <P
+                            className="text-xs text-muted-foreground line-clamp-1"
+                            numberOfLines={1}
+                          >
+                            {insight.summary}
+                          </P>
+                        </View>
+                        <ChevronRight
+                          size={16}
+                          className="text-muted-foreground"
+                        />
+                      </CardContent>
+                    </Card>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </Animated.View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -33,12 +33,54 @@ export const WordleContentSchema = z.object({
   max_guesses: z.number(),
 });
 
+// 5. Ball Sort
+export const BallSortContentSchema = z
+  .object({
+    type: z.literal("ball_sort"),
+    tubeCount: z.number().int().min(2, "Need at least 2 tubes"),
+    capacityPerTube: z
+      .number()
+      .int()
+      .min(2, "Each tube should hold at least 2 balls")
+      .max(12, "Tubes taller than 12 are usually impractical"),
+    colorCount: z.number().int().min(1, "Need at least one color"),
+  })
+  .superRefine((data, ctx) => {
+    // Must have at least one extra tube to be able to move anything
+    if (data.tubeCount <= data.colorCount) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `Need at least ${data.colorCount + 1} tubes to sort (${data.colorCount} colors)`,
+        path: ["tubeCount"],
+      });
+    }
+
+    // Very strong recommendation (not hard requirement)
+    if (data.tubeCount < data.colorCount + 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Most fun & solvable games use 2 extra tubes",
+        path: ["tubeCount"],
+      });
+    }
+
+    // Prevent nonsense
+    if (data.colorCount >= data.tubeCount) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Can't have more colors than tubes",
+        path: ["colorCount"],
+      });
+    }
+  });
+
 // Union Schema for all game content
 export const GameContentSchema = z.discriminatedUnion("type", [
   MentalArithmeticContentSchema,
   MemoryMatrixContentSchema,
   MentalLanguageDiscriminationContentSchema,
   WordleContentSchema,
+  BallSortContentSchema,
 ]);
 
 export type MentalArithmeticContent = z.infer<typeof MentalArithmeticContentSchema>;
@@ -47,4 +89,5 @@ export type MentalLanguageDiscriminationContent = z.infer<
   typeof MentalLanguageDiscriminationContentSchema
 >;
 export type WordleContent = z.infer<typeof WordleContentSchema>;
+export type BallSortContent = z.infer<typeof BallSortContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;

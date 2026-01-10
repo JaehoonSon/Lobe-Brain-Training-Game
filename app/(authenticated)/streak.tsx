@@ -192,12 +192,13 @@ export default function StreakScreen() {
                   return (
                     <View key={index} className="items-center gap-1.5">
                       <View
-                        className={`w-9 h-9 rounded-full items-center justify-center ${isCompleted
+                        className={`w-9 h-9 rounded-full items-center justify-center ${
+                          isCompleted
                             ? "bg-orange-500/20"
                             : isPast
-                              ? "bg-destructive/10"
-                              : "bg-muted"
-                          }`}
+                            ? "bg-destructive/10"
+                            : "bg-muted"
+                        }`}
                       >
                         {isCompleted ? (
                           <Flame size={18} color="#F97316" fill="#F97316" />
@@ -206,12 +207,13 @@ export default function StreakScreen() {
                         ) : null}
                       </View>
                       <P
-                        className={`text-xs ${isToday
+                        className={`text-xs ${
+                          isToday
                             ? "font-black text-foreground"
                             : isCompleted
-                              ? "font-bold text-foreground"
-                              : "font-medium text-muted-foreground"
-                          }`}
+                            ? "font-bold text-foreground"
+                            : "font-medium text-muted-foreground"
+                        }`}
                       >
                         {day}
                       </P>
