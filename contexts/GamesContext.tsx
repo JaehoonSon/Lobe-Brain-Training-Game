@@ -12,7 +12,7 @@ interface GamesContextType {
   error: Error | null;
   refresh: () => Promise<void>;
   getGamesByCategory: (categoryId: string) => Game[];
-  getDailyWorkout: (count?: number) => Game[];
+  getDailyWorkout: (userId: string, count?: number) => Game[];
   dailyCompletedGameIds: string[];
   refreshDailyProgress: () => Promise<void>;
 }
@@ -101,15 +101,26 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
         getGamesByCategory,
         dailyCompletedGameIds,
         refreshDailyProgress,
-        getDailyWorkout: (count: number = 3) => {
+        getDailyWorkout: (userId: string, count: number = 3) => {
           if (games.length === 0) return [];
 
-          // Seed based on date (YYYYMMDD) to be deterministic for everyone on the same day
+          // Seed based on date (YYYYMMDD) + userId to be deterministic for this user today
           const today = new Date();
-          const seed =
+          const dateSeed =
             today.getFullYear() * 10000 +
             (today.getMonth() + 1) * 100 +
             today.getDate();
+
+          // Simple hash of userId (string) to a number if it's not numeric
+          let userHash = 0;
+          if (userId) {
+            for (let i = 0; i < userId.length; i++) {
+              userHash = (userHash << 5) - userHash + userId.charCodeAt(i);
+              userHash |= 0; // Convert to 32bit integer
+            }
+          }
+
+          const seed = dateSeed + Math.abs(userHash);
 
           const seededRandom = (s: number) => {
             const x = Math.sin(s) * 10000;
@@ -122,8 +133,6 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
           }
 
-          // Filter out pro games if you want (optional), or keep them to upsell
-          // For now, let's just return unique random games
           return shuffled.slice(0, count);
         },
       }}

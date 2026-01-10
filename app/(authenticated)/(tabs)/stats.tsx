@@ -208,7 +208,7 @@ export default function StatsScreen() {
 
             <View className="items-center py-4">
               {hasOverallBPI ? (
-                <Text className="text-7xl font-black text-primary-foreground tracking-tighter">
+                <Text className="text-7xl font-black text-primary-foreground tracking-tighter leading-relaxed">
                   {overallBPI}
                 </Text>
               ) : (
@@ -232,7 +232,7 @@ export default function StatsScreen() {
           </Card>
 
           {/* TRAINING AREAS HEADER */}
-          <H4 className="mb-4 text-2xl font-black px-1">Training Areas</H4>
+          <H4 className="mb-4 text-2xl font-black px-1 py-1">Training Areas</H4>
 
           {/* CATEGORIES LIST - UNIFIED CARD */}
           <Card className="mb-8 bg-card">
@@ -258,7 +258,7 @@ export default function StatsScreen() {
           </Card>
 
           {/* Premium Sections - Updated Visuals */}
-          <H4 className="mb-4 text-2xl font-black px-1">Detailed Analysis</H4>
+          <H4 className="mb-4 text-2xl font-black px-1 py-1">Detailed Analysis</H4>
 
           <FeatureCard title="How You Compare" variant="secondary">
             <CompareContent />

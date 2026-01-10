@@ -27,6 +27,7 @@ import React from "react";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
 import { useGames } from "~/contexts/GamesContext";
+import { useAuth } from "~/contexts/AuthProvider";
 import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { useDailyInsight } from "~/hooks/useDailyInsight";
@@ -34,15 +35,18 @@ import { useDailyInsight } from "~/hooks/useDailyInsight";
 export default function Dashboard() {
   const { getDailyWorkout, dailyCompletedGameIds, refreshDailyProgress } =
     useGames();
+  const { user } = useAuth();
   const [dailyGames, setDailyGames] = useState<
     Database["public"]["Tables"]["games"]["Row"][]
   >([]);
 
   React.useEffect(() => {
     // In a real app, you might want to wrap this in useMemo or similar if the date changes
-    const games = getDailyWorkout(5);
-    setDailyGames(games);
-  }, [getDailyWorkout]);
+    if (user?.id) {
+      const games = getDailyWorkout(user.id, 3);
+      setDailyGames(games);
+    }
+  }, [getDailyWorkout, user?.id]);
 
   // Refresh progress when focusing the screen
   useFocusEffect(
