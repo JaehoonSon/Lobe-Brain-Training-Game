@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   View,
   ScrollView,
@@ -9,7 +9,7 @@ import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { ChevronLeft, Zap, Lock, TrendingUp } from "lucide-react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { H1, H4, P, Muted } from "~/components/ui/typography";
 import { BlurView } from "expo-blur";
 import { cn } from "~/lib/utils";
@@ -21,8 +21,15 @@ import { FeatureCard } from "~/components/FeatureCard";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { categoryStats, isLoading } = useUserStats();
+  const { categoryStats, isLoading, refresh } = useUserStats();
   const { games } = useGames();
+
+  // Refresh stats when focusing the screen
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [refresh])
+  );
 
   // Find the category stats for this ID
   const category = categoryStats.find((c) => c.id === id);

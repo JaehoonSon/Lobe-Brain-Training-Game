@@ -26,9 +26,10 @@ import {
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { cn } from "~/lib/utils";
 import { FeatureCard } from "~/components/FeatureCard";
+import { useCallback } from "react";
 
 // --- Components ---
 
@@ -167,7 +168,14 @@ function HistoryContent() {
 }
 
 export default function StatsScreen() {
-  const { overallBPI, categoryStats, isLoading, error } = useUserStats();
+  const { overallBPI, categoryStats, isLoading, error, refresh } = useUserStats();
+
+  // Refresh stats when focusing the screen
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [refresh])
+  );
 
   const hasOverallBPI = overallBPI !== null;
   const categoriesWithData = categoryStats.filter(

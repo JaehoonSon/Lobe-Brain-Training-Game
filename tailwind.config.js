@@ -62,6 +62,11 @@ module.exports = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+          edge: "hsl(var(--info-edge))",
+        },
       },
       borderWidth: {
         hairline: hairlineWidth(),

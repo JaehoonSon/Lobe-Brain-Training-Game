@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useGameSession } from "~/contexts/GameSessionContext";
@@ -10,28 +10,22 @@ import { Button } from "~/components/ui/button";
 import {
   Clock,
   Target,
-  ChevronLeft,
-  RotateCcw,
-  Hexagon,
   Zap,
-  X,
 } from "lucide-react-native";
 import LottieView from "lottie-react-native";
+import { cn } from "~/lib/utils";
 
 export default function GameFinishScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { state, config, resetSession } = useGameSession();
-  const { games, categories, refreshDailyProgress } = useGames();
+  const { games, refreshDailyProgress } = useGames();
 
   const game = games.find((g) => g.id === id);
-  const category = categories.find((c) => c.id === game?.category_id);
 
-  // Refresh daily progress when finish screen loads
   useEffect(() => {
     refreshDailyProgress();
   }, []);
 
-  // Calculate stats
   const accuracy =
     state.totalQuestions > 0
       ? Math.round((state.correctCount / state.totalQuestions) * 100)
@@ -40,9 +34,8 @@ export default function GameFinishScreen() {
   const durationSeconds = Math.round(state.durationMs / 1000);
   const minutes = Math.floor(durationSeconds / 60);
   const seconds = durationSeconds % 60;
-  const timeDisplay = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+  const timeDisplay = minutes > 0 ? `${minutes}:${seconds.toString().padStart(2, "0")}` : `0:${seconds.toString().padStart(2, "0")}`;
 
-  // Handle no session data (direct navigation to finish without playing)
   if (!state.isFinished) {
     return (
       <View className="flex-1 items-center justify-center bg-background">
@@ -65,119 +58,142 @@ export default function GameFinishScreen() {
     router.replace("/");
   };
 
+  const getFeedback = () => {
+    if (accuracy === 100)
+      return {
+        title: "Flawless",
+        sub: "0 mistakes. You're like a pristine, freshwater pearl.",
+        color: "text-secondary",
+      };
+    if (accuracy >= 90)
+      return {
+        title: "Amazing",
+        sub: "So close to perfect! Your focus is incredible.",
+        color: "text-green-500",
+      };
+    if (accuracy >= 70)
+      return {
+        title: "Great Job",
+        sub: "Solid work! You're making real progress.",
+        color: "text-sky-500",
+      };
+    return {
+      title: "Keep Going",
+      sub: "Every bit of practice helps your brain grow.",
+      color: "text-orange-500",
+    };
+  };
+
+  const feedback = getFeedback();
+
   return (
     <View className="flex-1 bg-background">
-      {/* Close Button Overlay */}
-      <TouchableOpacity
-        onPress={handleGoHome}
-        className="absolute top-12 left-6 z-20 w-12 h-12 rounded-full bg-black/40 items-center justify-center"
-      >
-        <X color="white" size={24} />
-      </TouchableOpacity>
+      <SafeAreaView className="flex-1">
+        {/* Header - Game Name */}
+        <View className="px-6 pt-4 items-center">
+          <Text className="text-muted-foreground font-black text-sm uppercase tracking-widest">
+            {game?.name || "Game Complete"}
+          </Text>
+        </View>
 
-      {/* Banner Image */}
-      <View className="w-full h-[200px] relative bg-muted">
-        {game?.banner_url ? (
-          <Image
-            source={{ uri: game.banner_url }}
-            className="w-full h-full"
-            resizeMode="cover"
+        {/* Mojo Area */}
+        <View className="flex-1 items-center justify-center -mt-12">
+          <LottieView
+            source={require("~/assets/animations/session_complete_1.lottie.json")}
+            autoPlay
+            loop={true}
+            style={{ width: 300, height: 300 }}
           />
-        ) : (
-          <View className="flex-1 items-center justify-center bg-muted">
-            <Hexagon size={72} className="text-muted-foreground" />
-          </View>
-        )}
-        {/* Overlay with title */}
-        <View className="absolute bottom-0 left-0 right-0 h-24 justify-end px-6 pb-4">
-          <P className="text-sm font-black tracking-widest uppercase text-white mb-1 text-shadow">
-            Round Complete
-          </P>
-          <H1 className="text-3xl font-black text-white text-shadow">
-            {config?.gameName || game?.name || "Game"}
-          </H1>
-        </View>
-      </View>
 
-      {/* Lottie Animation - Takes up flexible middle space */}
-      <View className="flex-1 items-center justify-center">
-        <LottieView
-          source={require("~/assets/animations/session_complete_1.lottie.json")}
-          autoPlay
-          loop={true}
-          style={{ width: 200, height: 200 }}
-        />
-      </View>
-
-      {/* Stats Row - 3 Horizontal Cards */}
-      <View className="px-6 flex-row gap-3 pb-6">
-        {/* BPI Card - Yellow */}
-        <View className="flex-1 bg-yellow-400 rounded-2xl p-4 items-center">
-          <Text className="text-yellow-900/70 font-bold text-xs uppercase tracking-wider mb-2">
-            Total XP
-          </Text>
-          <View className="flex-row items-center gap-1">
-            <Zap size={18} color="#713f12" fill="#713f12" />
-            <Text className="text-yellow-900 text-2xl font-black">
-              {state.score ?? 0}
-            </Text>
+          <View className="items-center px-10 mt-4">
+            <H1 className={cn("text-5xl font-black mb-3", feedback.color)}>
+              {feedback.title}
+            </H1>
+            <P className="text-center text-muted-foreground text-lg leading-6 font-bold px-2">
+              {feedback.sub}
+            </P>
           </View>
         </View>
 
-        {/* Accuracy Card - Green */}
-        <View className="flex-1 bg-green-500 rounded-2xl p-4 items-center">
-          <Text className="text-green-900/70 font-bold text-xs uppercase tracking-wider mb-2">
-            Good
-          </Text>
-          <View className="flex-row items-center gap-1">
-            <Target size={18} color="#14532d" />
-            <Text className="text-green-900 text-2xl font-black">
-              {accuracy}%
-            </Text>
-          </View>
+        {/* Stat Cards Row */}
+        <View className="px-6 flex-row gap-3 mb-10">
+          <StatCard
+            label="TOTAL XP"
+            value={state.score?.toString() || "0"}
+            icon={<Zap size={22} color="#EAB308" fill="#EAB308" />}
+            color="yellow"
+          />
+          <StatCard
+            label="AMAZING"
+            value={`${accuracy}%`}
+            icon={<Target size={22} color="#22C55E" strokeWidth={3} />}
+            color="green"
+          />
+          <StatCard
+            label="SPEEDY"
+            value={timeDisplay}
+            icon={<Clock size={22} color="#3B82F6" strokeWidth={3} />}
+            color="blue"
+          />
         </View>
 
-        {/* Time Card - Blue */}
-        <View className="flex-1 bg-blue-400 rounded-2xl p-4 items-center">
-          <Text className="text-blue-900/70 font-bold text-xs uppercase tracking-wider mb-2">
-            Speedy
-          </Text>
-          <View className="flex-row items-center gap-1">
-            <Clock size={18} color="#1e3a5f" />
-            <Text className="text-blue-900 text-2xl font-black">
-              {minutes}:{seconds.toString().padStart(2, "0")}
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Footer */}
-      <SafeAreaView
-        edges={["bottom"]}
-        className="bg-background border-t border-border"
-      >
-        <View className="px-6 py-4 flex-row items-center gap-4">
+        {/* Actions */}
+        <View className="px-6 pb-8">
           <Button
-            variant="outline"
+            className="h-16 rounded-3xl bg-info border-b-8 border-info-edge active:border-b-0 active:mt-2"
             onPress={handleGoHome}
-            className="h-14 w-14 rounded-full border-2 border-muted-foreground/20 p-0 items-center justify-center mr-4"
           >
-            <ChevronLeft size={24} className="text-muted-foreground" />
+            <Text className="text-white font-black text-xl uppercase tracking-widest">
+              Continue
+            </Text>
           </Button>
 
-          <Button
-            className="flex-1 rounded-full h-12 native:h-16 px-10"
+          <TouchableOpacity
             onPress={handlePlayAgain}
+            className="mt-8 items-center"
           >
-            <View className="flex-row items-center gap-2">
-              <RotateCcw size={20} color="white" />
-              <Text className="text-primary-foreground font-black text-lg">
-                Play Again
-              </Text>
-            </View>
-          </Button>
+            <Text className="text-muted-foreground font-black text-sm uppercase tracking-widest">
+              Play Again
+            </Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
+    </View>
+  );
+}
+
+function StatCard({ label, value, icon, color }: { label: string; value: string; icon: React.ReactNode, color: 'yellow' | 'green' | 'blue' }) {
+  const colorClasses = {
+    yellow: "border-yellow-400",
+    green: "border-green-500",
+    blue: "border-info"
+  };
+
+  const headerClasses = {
+    yellow: "bg-yellow-400",
+    green: "bg-green-500",
+    blue: "bg-info"
+  };
+
+  return (
+    <View className={cn(
+      "flex-1 rounded-[32px] border-2 border-b-4 bg-white items-center pb-5 overflow-hidden",
+      colorClasses[color]
+    )}>
+      {/* Card Header Pill */}
+      <View className={cn("w-full py-2 items-center mb-5", headerClasses[color])}>
+        <Text className="text-[10px] font-black text-white uppercase tracking-widest">
+          {label}
+        </Text>
+      </View>
+
+      {/* Icon + Value */}
+      <View className="gap-2 items-center">
+        {icon}
+        <Text className="text-xl font-black text-foreground">
+          {value}
+        </Text>
+      </View>
     </View>
   );
 }
