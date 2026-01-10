@@ -25,7 +25,7 @@ import {
   BookType,
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { useUserStats, CategoryStats } from "~/hooks/useUserStats";
+import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
 import { router } from "expo-router";
 import { cn } from "~/lib/utils";
 import { FeatureCard } from "~/components/FeatureCard";

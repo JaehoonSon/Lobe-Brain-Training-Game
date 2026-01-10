@@ -2,6 +2,7 @@ import { Redirect, Stack } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
 import LoadingScreen from "../Loading";
 import { GamesProvider } from "~/contexts/GamesContext";
+import { UserStatsProvider } from "~/contexts/UserStatsContext";
 
 export default function AuthenticatedLayout() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -21,44 +22,46 @@ export default function AuthenticatedLayout() {
 
   return (
     <GamesProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen
-          name="game/[id]"
-          options={{
-            presentation: "card",
-            animation: "slide_from_right",
-          }}
-        />
-        <Stack.Screen
-          name="settings"
-          options={{
-            presentation: "pageSheet",
-            animation: "default",
-          }}
-        />
-        <Stack.Screen
-          name="dev_setting"
-          options={{
-            presentation: "pageSheet",
-            animation: "default",
-          }}
-        />
-        <Stack.Screen
-          name="streak"
-          options={{
-            presentation: "card",
-            animation: "slide_from_right",
-          }}
-        />
-        <Stack.Screen
-          name="stat/[id]"
-          options={{
-            presentation: "card",
-            animation: "slide_from_right",
-          }}
-        />
-      </Stack>
+      <UserStatsProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="game/[id]"
+            options={{
+              presentation: "card",
+              animation: "slide_from_right",
+            }}
+          />
+          <Stack.Screen
+            name="settings"
+            options={{
+              presentation: "pageSheet",
+              animation: "default",
+            }}
+          />
+          <Stack.Screen
+            name="dev_setting"
+            options={{
+              presentation: "pageSheet",
+              animation: "default",
+            }}
+          />
+          <Stack.Screen
+            name="streak"
+            options={{
+              presentation: "card",
+              animation: "slide_from_right",
+            }}
+          />
+          <Stack.Screen
+            name="stat/[id]"
+            options={{
+              presentation: "card",
+              animation: "slide_from_right",
+            }}
+          />
+        </Stack>
+      </UserStatsProvider>
     </GamesProvider>
   );
 }
