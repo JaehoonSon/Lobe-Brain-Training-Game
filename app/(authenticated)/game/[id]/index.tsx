@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { useGames } from "~/contexts/GamesContext";
+import { useUserStats } from "~/contexts/UserStatsContext";
 import { H1, H4, P } from "~/components/ui/typography";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -26,10 +27,15 @@ import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 export default function GameDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { games, categories } = useGames();
+  const { categoryStats } = useUserStats();
   const { isPro, presentPaywall } = useRevenueCat();
 
   const game = games.find((g) => g.id === id);
   const category = categories.find((c) => c.id === game?.category_id);
+
+  // Find game stats from the user stats context
+  const categoryStat = categoryStats.find((c) => c.id === game?.category_id);
+  const gameStats = categoryStat?.gameStats.find((gs) => gs.gameId === id);
 
   // Check if the game is locked for this user
   const isLocked = !isPro && game?.is_pro_only;
@@ -103,53 +109,122 @@ export default function GameDetailScreen() {
             {game.instructions || "Play consistently to improve your scores."}
           </P>
 
-          {/* Stats Grid - Mocked Data */}
+          {/* Stats Grid */}
           <View className="gap-6">
-            {/* LPI Row */}
+            {/* BPI Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Game LPI</H4>
-              <View className="bg-primary/20 px-4 py-2 rounded-full border border-primary/50 flex-row items-center gap-2">
-                <Trophy size={16} className="text-primary" />
-                <Text className="text-sm font-black text-primary">UNLOCK</Text>
-              </View>
+              <H4 className="font-black text-xl">Avg BPI</H4>
+              {gameStats?.averageScore ? (
+                <View className="flex-row items-center gap-2">
+                  <Trophy size={18} className="text-primary" />
+                  <P className="text-2xl font-black text-primary">
+                    {gameStats.averageScore}
+                  </P>
+                </View>
+              ) : (
+                <P className="text-muted-foreground font-bold text-xl">--</P>
+              )}
             </View>
 
             {/* Best Score Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
               <H4 className="font-black text-xl">Best Score</H4>
-              <P className="text-muted-foreground font-bold text-xl">-</P>
+              {gameStats?.highestScore ? (
+                <P className="text-2xl font-black">{gameStats.highestScore}</P>
+              ) : (
+                <P className="text-muted-foreground font-bold text-xl">--</P>
+              )}
             </View>
 
-            {/* Best Stat Row */}
+            {/* Difficulty Rating Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Best Stat</H4>
-              <P className="text-muted-foreground font-bold text-xl">-</P>
+              <H4 className="font-black text-xl">Difficulty</H4>
+              <View className="flex-row items-center gap-2">
+                <View className="flex-row gap-1">
+                  {[1, 2, 3, 4, 5].map((level) => (
+                    <View
+                      key={level}
+                      className={`w-3 h-3 rounded-full ${
+                        level <= Math.round(gameStats?.currentRating ?? 1)
+                          ? "bg-secondary"
+                          : "bg-muted"
+                      }`}
+                    />
+                  ))}
+                </View>
+                <P className="text-lg font-black text-secondary">
+                  {(gameStats?.currentRating ?? 1).toFixed(1)}
+                </P>
+              </View>
             </View>
 
-            {/* Newcomer Badges Row */}
+            {/* Badge Progress Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Newcomer</H4>
+              <H4 className="font-black text-xl">Badge Progress</H4>
               <View className="flex-row gap-3">
                 <Hexagon
                   size={28}
-                  className="text-secondary fill-transparent"
+                  color={
+                    (gameStats?.averageScore ?? 0) >= 0 ? "#d925b5" : "#d4d4d8"
+                  }
+                  fill={
+                    (gameStats?.averageScore ?? 0) >= 0
+                      ? "#d925b5"
+                      : "transparent"
+                  }
                   strokeWidth={2}
                 />
-                <Hexagon size={28} className="text-muted-foreground/30" />
-                <Star size={28} className="text-muted-foreground/30" />
-                <Crown size={28} className="text-muted-foreground/30" />
+                <Hexagon
+                  size={28}
+                  color={
+                    (gameStats?.averageScore ?? 0) >= 300
+                      ? "#d925b5"
+                      : "#d4d4d8"
+                  }
+                  fill={
+                    (gameStats?.averageScore ?? 0) >= 300
+                      ? "#d925b5"
+                      : "transparent"
+                  }
+                  strokeWidth={2}
+                />
+                <Star
+                  size={28}
+                  color={
+                    (gameStats?.averageScore ?? 0) >= 600
+                      ? "#d925b5"
+                      : "#d4d4d8"
+                  }
+                  fill={
+                    (gameStats?.averageScore ?? 0) >= 600
+                      ? "#d925b5"
+                      : "transparent"
+                  }
+                  strokeWidth={2}
+                />
+                <Crown
+                  size={28}
+                  color={
+                    (gameStats?.averageScore ?? 0) >= 900
+                      ? "#d925b5"
+                      : "#d4d4d8"
+                  }
+                  fill={
+                    (gameStats?.averageScore ?? 0) >= 900
+                      ? "#d925b5"
+                      : "transparent"
+                  }
+                  strokeWidth={2}
+                />
               </View>
             </View>
 
             {/* Total Plays Row */}
             <View className="flex-row justify-between items-center py-3">
               <H4 className="font-black text-xl">Total Plays</H4>
-              <View className="flex-row items-baseline gap-1">
-                <P className="text-2xl font-black">0</P>
-                <P className="text-base font-bold text-muted-foreground">
-                  of 3
-                </P>
-              </View>
+              <P className="text-2xl font-black">
+                {gameStats?.gamesPlayed ?? 0}
+              </P>
             </View>
           </View>
         </View>

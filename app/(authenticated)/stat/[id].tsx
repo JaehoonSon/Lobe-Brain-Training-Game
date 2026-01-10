@@ -15,7 +15,7 @@ import { BlurView } from "expo-blur";
 import { cn } from "~/lib/utils";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-import { useUserStats } from "~/hooks/useUserStats";
+import { useUserStats } from "~/contexts/UserStatsContext";
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
 
