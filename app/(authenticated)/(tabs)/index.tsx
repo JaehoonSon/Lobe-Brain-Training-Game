@@ -21,7 +21,8 @@ import {
 import { router } from "expo-router";
 import { cn } from "~/lib/utils";
 import { Database } from "~/lib/database.types";
-import { useState } from "react";
+import { supabase } from "~/lib/supabase";
+import { useState, useEffect } from "react";
 import React from "react";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
@@ -41,6 +42,24 @@ export default function Dashboard() {
   const [quickPlayGames, setQuickPlayGames] = useState<
     Database["public"]["Tables"]["games"]["Row"][]
   >([]);
+  const [communityCount, setCommunityCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function fetchCommunityStats() {
+      if (dailyGames.length > 0) {
+        const { data, error } = await supabase.rpc(
+          "get_community_challenge_stats",
+          {
+            p_game_id: dailyGames[0].id,
+          }
+        );
+        if (!error && data && data.length > 0) {
+          setCommunityCount(data[0].sessions_count);
+        }
+      }
+    }
+    fetchCommunityStats();
+  }, [dailyGames]);
 
   React.useEffect(() => {
     // In a real app, you might want to wrap this in useMemo or similar if the date changes
@@ -195,6 +214,13 @@ export default function Dashboard() {
                   <View className="w-16 h-16 bg-white/10 rounded-2xl items-center justify-center border border-white/20">
                     <Globe size={32} color="white" strokeWidth={2.5} />
                   </View>
+                </View>
+                <View className="bg-white rounded-2xl py-3 items-center">
+                  <Text className="text-info-edge font-black uppercase text-sm tracking-widest">
+                    {communityCount !== null
+                      ? `${communityCount} Sessions Finished Today`
+                      : "Loading Activity..."}
+                  </Text>
                 </View>
               </Card>
             </TouchableOpacity>
