@@ -13,6 +13,7 @@ import { useGames } from "~/contexts/GamesContext";
 import { useAuth } from "~/contexts/AuthProvider";
 import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
+import { BallSort } from "~/components/games/BallSort";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -41,7 +42,7 @@ export default function GamePlayScreen() {
   const QUESTIONS_PER_ROUND = game?.recommended_rounds || 8;
   const STRETCH_QUESTIONS = Math.max(1, Math.round(QUESTIONS_PER_ROUND * 0.25));
   const CORE_QUESTIONS = Math.min(QUESTIONS_PER_ROUND - STRETCH_QUESTIONS, 1);
-  const DEFAULT_DIFFICULTY = 2;
+  const DEFAULT_DIFFICULTY = 5;
 
   const [sessionQuestions, setSessionQuestions] = useState<QuestionData[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -74,7 +75,11 @@ export default function GamePlayScreen() {
         if (perfErr) throw perfErr;
 
         if (perfData?.difficulty_rating) {
-          difficultyRatingUsed = perfData.difficulty_rating;
+          difficultyRatingUsed = Math.max(
+            perfData.difficulty_rating + 1,
+            perfData.difficulty_rating,
+            DEFAULT_DIFFICULTY
+          );
         } else {
           // Create row for first-time players
           await supabase.from("user_game_performance").upsert(
@@ -346,6 +351,15 @@ export default function GamePlayScreen() {
         if (content.type !== "wordle") return null;
         return (
           <Wordle
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
+      case "ball_sort":
+        if (content.type !== "ball_sort") return null;
+        return (
+          <BallSort
             key={currentQuestionIndex}
             content={content}
             onComplete={handleQuestionComplete}

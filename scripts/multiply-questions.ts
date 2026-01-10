@@ -10,7 +10,7 @@ async function main() {
 
   for (const file of files) {
     if (
-      (file.startsWith('memory_matrix_') || file.startsWith('mental_arithmetic_')) &&
+      (file.startsWith('ball_sort_')) &&
       file.endsWith('.json')
     ) {
       const filePath = path.join(OUTPUT_DIR, file);
