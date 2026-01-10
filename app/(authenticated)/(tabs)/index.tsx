@@ -142,14 +142,14 @@ export default function Dashboard() {
                 {insightLoading ? (
                   <>
                     <H4 className="text-secondary font-black text-xl mb-1">Loading...</H4>
-                    <P className="text-muted-foreground text-sm font-bold leading-tight">
+                    <P className="text-muted-foreground text-sm font-bold">
                       Fetching today's brain fact...
                     </P>
                   </>
                 ) : insight ? (
                   <>
                     <H4 className="text-secondary font-black text-xl mb-1">Did you know?</H4>
-                    <P className="text-muted-foreground text-sm font-bold leading-tight mb-2">
+                    <P className="text-muted-foreground text-sm font-bold mb-2">
                       {insight.content}
                     </P>
                     {insight.source && (
@@ -161,7 +161,7 @@ export default function Dashboard() {
                 ) : (
                   <>
                     <H4 className="text-secondary font-black text-xl mb-1">Did you know?</H4>
-                    <P className="text-muted-foreground text-sm font-bold leading-tight">
+                    <P className="text-muted-foreground text-sm font-bold">
                       Your brain is amazing! Check back tomorrow for a new fact.
                     </P>
                   </>

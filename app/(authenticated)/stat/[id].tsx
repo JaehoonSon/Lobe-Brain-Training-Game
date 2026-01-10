@@ -98,7 +98,7 @@ export default function CategoryDetailScreen() {
                 {hasScore ? category.score : "--"}
               </Text>
               <View className="flex-row items-center gap-2 ml-1 -mt-3">
-                <Text className="text-3xl font-black text-primary/80 tracking-tighter">
+                <Text className="text-3xl font-black text-primary/80">
                   current bpi
                 </Text>
                 {hasScore && (

@@ -40,7 +40,7 @@ export function AffirmationStep({
         </Text>
       </Animated.View>
       <Animated.View entering={FadeInDown.delay(500).duration(600)}>
-        <Text className="text-lg text-muted-foreground text-center leading-relaxed">
+        <Text className="text-lg text-muted-foreground text-center">
           {config.subtext}
         </Text>
       </Animated.View>

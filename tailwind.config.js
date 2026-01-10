@@ -106,6 +106,21 @@ module.exports = {
       letterSpacing: {
         normal: "var(--tracking-normal)",
       },
+      fontSize: {
+        xs: ["0.75rem", { lineHeight: "1.2" }],
+        sm: ["0.875rem", { lineHeight: "1.25" }],
+        base: ["1rem", { lineHeight: "1.5" }],
+        lg: ["1.125rem", { lineHeight: "1.5" }],
+        xl: ["1.25rem", { lineHeight: "1.5" }],
+        "2xl": ["1.5rem", { lineHeight: "1.4", letterSpacing: "-0.01em" }],
+        "3xl": ["1.875rem", { lineHeight: "1.3", letterSpacing: "-0.02em" }],
+        "4xl": ["2.25rem", { lineHeight: "1.25", letterSpacing: "-0.02em" }],
+        "5xl": ["3rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        "6xl": ["3.75rem", { lineHeight: "1.2", letterSpacing: "-0.03em" }],
+        "7xl": ["4.5rem", { lineHeight: "1.2", letterSpacing: "-0.03em" }],
+        "8xl": ["6rem", { lineHeight: "1.2", letterSpacing: "-0.04em" }],
+        "9xl": ["8rem", { lineHeight: "1.2", letterSpacing: "-0.04em" }],
+      },
       lineHeight: {
         none: '1.1',    // Nunito-safe override (was 1, clips heavy weights)
         tight: '1.25',

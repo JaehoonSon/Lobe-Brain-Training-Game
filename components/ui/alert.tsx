@@ -54,7 +54,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) 
   return (
     <Text
       className={cn(
-        'pl-7 mb-1 font-bold text-base leading-none tracking-tight text-foreground',
+        'pl-7 mb-1 font-bold text-base text-foreground',
         className
       )}
       {...props}
@@ -64,7 +64,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) 
 
 function AlertDescription({ className, ...props }: React.ComponentProps<typeof Text>) {
   return (
-    <Text className={cn('pl-7 text-sm leading-relaxed text-foreground', className)} {...props} />
+    <Text className={cn('pl-7 text-sm text-foreground', className)} {...props} />
   );
 }
 

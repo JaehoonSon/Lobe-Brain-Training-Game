@@ -54,7 +54,7 @@ export default function PlanCreationStep({ onNext }: PlanCreationStepProps) {
                 </Animated.View>
 
                 <View className="items-center gap-3">
-                    <Text className="text-3xl font-bold text-center text-foreground leading-tight">
+                    <Text className="text-3xl font-bold text-center text-foreground">
                         Creating your{"\n"}30-Day Plan
                     </Text>
                     <Text className="text-xl text-muted-foreground text-center">

@@ -19,7 +19,7 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
           entering={FadeInDown.duration(600)}
           className="items-center gap-6 mb-12"
         >
-          <Text className="text-3xl font-bold text-foreground text-center leading-tight">
+          <Text className="text-3xl font-bold text-foreground text-center">
             That was the last one.{"\n"}Well done!
           </Text>
 
@@ -38,7 +38,7 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
             </Svg>
           </View>
 
-          <Text className="text-xl text-muted-foreground text-center px-4 leading-relaxed">
+          <Text className="text-xl text-muted-foreground text-center px-4">
             We're now determining your skills in{" "}
             <Text className="text-xl font-bold text-primary">Memory</Text>,{" "}
             <Text className="text-xl font-bold text-primary">Attention</Text>, and{" "}

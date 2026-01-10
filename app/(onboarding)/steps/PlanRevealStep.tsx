@@ -55,7 +55,7 @@ export default function PlanRevealStep({ onNext, onBack }: PlanRevealStepProps) 
                         <Text className="text-xl font-bold text-primary uppercase tracking-widest">
                             Personalized For You
                         </Text>
-                        <Text className="text-5xl font-black text-center text-foreground leading-tight">
+                        <Text className="text-5xl font-black text-center text-foreground">
                             Your 30-Day Plan
                         </Text>
                         <Text className="text-lg text-center text-muted-foreground px-2 leading-6 mt-1">

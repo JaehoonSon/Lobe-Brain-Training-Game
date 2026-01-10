@@ -39,11 +39,11 @@ export default function InterventionStep({
             </View>
           )}
 
-          <Text className="text-4xl font-extrabold text-foreground text-center leading-tight">
+          <Text className="text-4xl font-extrabold text-foreground text-center">
             {title}
           </Text>
 
-          <Text className="text-xl text-muted-foreground text-center px-4 leading-relaxed">
+          <Text className="text-xl text-muted-foreground text-center px-4">
             {description}
           </Text>
         </Animated.View>

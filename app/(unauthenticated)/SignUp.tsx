@@ -34,7 +34,7 @@ export default function SignUp() {
           entering={FadeInDown.duration(600)}
           className="items-center gap-4"
         >
-          <Text className="text-5xl font-extrabold tracking-tight text-center text-foreground leading-[1.1]">
+          <Text className="text-5xl font-extrabold text-center text-foreground">
             Let's Start
           </Text>
           <Text className="text-xl text-muted-foreground text-center">
@@ -73,7 +73,7 @@ export default function SignUp() {
 
         {/* Terms */}
         <Animated.View entering={FadeInUp.delay(400).duration(600)}>
-          <Text className="text-sm text-muted-foreground text-center leading-relaxed px-8">
+          <Text className="text-sm text-muted-foreground text-center px-8">
             By continuing, you agree to our{" "}
             <Link href={appMetadata.privacyPolicyUrl}>
               <Text className="text-sm font-bold underline text-foreground">

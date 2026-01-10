@@ -208,11 +208,11 @@ export default function StatsScreen() {
 
             <View className="items-center py-4">
               {hasOverallBPI ? (
-                <Text className="text-7xl font-black text-primary-foreground tracking-tighter leading-relaxed">
+                <Text className="text-8xl font-black text-primary-foreground ">
                   {overallBPI}
                 </Text>
               ) : (
-                <Text className="text-6xl font-black text-primary-foreground/30 tracking-tighter">
+                <Text className="text-6xl font-black text-primary-foreground/30">
                   ---
                 </Text>
               )}

@@ -84,8 +84,8 @@ export default function GamesScreen() {
                     )}
                   </ImageCard>
                   <View className="gap-1 px-1 mt-2">
-                    <H4 className="text-lg font-black leading-tight">{game.name}</H4>
-                    <Muted className="text-sm font-bold leading-snug line-clamp-2">
+                    <H4 className="text-lg font-black">{game.name}</H4>
+                    <Muted className="text-sm font-bold line-clamp-2">
                       {game.description}
                     </Muted>
                   </View>
@@ -144,8 +144,8 @@ export default function GamesScreen() {
                         )}
                       </ImageCard>
                       <View className="gap-1 px-1 mt-2">
-                        <H4 className="text-lg font-black leading-tight">{game.name}</H4>
-                        <Muted className="text-sm font-bold leading-snug line-clamp-2">
+                        <H4 className="text-lg font-black">{game.name}</H4>
+                        <Muted className="text-sm font-bold line-clamp-2">
                           {category.description || category.name}
                         </Muted>
                       </View>

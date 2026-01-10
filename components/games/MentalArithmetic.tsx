@@ -174,7 +174,7 @@ export function MentalArithmetic({
             >
               <Text
                 className={cn(
-                  "text-4xl leading-tight font-black text-primary-foreground",
+                  "text-4xl font-black text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white",
                   hasAnswered && !isCorrectAnswer && isSelected && "text-white"
                 )}

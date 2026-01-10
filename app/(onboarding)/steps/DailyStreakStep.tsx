@@ -20,7 +20,7 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
       <View className="flex-1 justify-center items-center">
         {/* Title */}
         <Animated.View entering={FadeInDown.duration(600).springify()}>
-          <Text className="text-4xl font-extrabold text-foreground text-center mb-12 leading-tight">
+          <Text className="text-4xl font-extrabold text-foreground text-center mb-12">
             You’ve started a new{"\n"}Daily Streak!
           </Text>
         </Animated.View>
@@ -74,7 +74,7 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
 
         {/* Subtext */}
         <Animated.View entering={FadeInDown.delay(600).duration(600)}>
-          <Text className="text-xl text-muted-foreground text-center px-8 leading-relaxed">
+          <Text className="text-xl text-muted-foreground text-center px-8">
             Complete a game every day to build your streak.
           </Text>
         </Animated.View>

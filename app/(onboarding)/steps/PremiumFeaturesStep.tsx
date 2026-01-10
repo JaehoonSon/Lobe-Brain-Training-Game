@@ -72,7 +72,7 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           <Text className="text-xl font-bold text-primary uppercase tracking-widest mb-2">
             Unlock Everything
           </Text>
-          <Text className="text-4xl font-black text-center text-foreground leading-tight mb-4">
+          <Text className="text-4xl font-black text-center text-foreground mb-4">
             Get more with{"\n"}Brain App Premium
           </Text>
         </Animated.View>
@@ -95,10 +95,10 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
                   style={{ width: 280, height: 280, resizeMode: "contain" }}
                 />
               </View>
-              <Text className="text-2xl font-bold text-center text-foreground mb-4 leading-tight">
+              <Text className="text-2xl font-bold text-center text-foreground mb-4">
                 {item.title}
               </Text>
-              <Text className="text-lg text-muted-foreground text-center leading-relaxed">
+              <Text className="text-lg text-muted-foreground text-center">
                 {item.description}
               </Text>
             </View>

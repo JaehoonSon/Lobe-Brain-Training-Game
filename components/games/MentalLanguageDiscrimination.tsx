@@ -52,7 +52,7 @@ export function MentalLanguageDiscrimination({
   return (
     <View className="flex-1 items-center justify-center p-6 gap-8">
       <View className="items-center justify-center h-48 w-full">
-        <Text className="text-3xl font-bold text-foreground text-center p-3 leading-relaxed">
+        <Text className="text-3xl font-bold text-foreground text-center p-3">
           {content.sentenceParts[0]}
           <Text className="text-primary underline">_____</Text>
           {content.sentenceParts[1]}
@@ -94,7 +94,7 @@ export function MentalLanguageDiscrimination({
             >
               <Text
                 className={cn(
-                  "text-2xl leading-tight font-black text-primary-foreground",
+                  "text-2xl font-black text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white",
                   hasAnswered && !isCorrectAnswer && isSelected && "text-white"
                 )}

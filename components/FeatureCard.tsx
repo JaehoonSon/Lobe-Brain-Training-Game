@@ -33,7 +33,7 @@ export function FeatureCard({
           {/* Header Area Spacer */}
           <View className="px-4 pt-4 pb-2">
             <View className="px-4 py-1.5 rounded-full opacity-0">
-              <H4 className="text-lg font-black leading-tight">{title}</H4>
+              <H4 className="text-lg font-black">{title}</H4>
             </View>
           </View>
 
@@ -69,7 +69,7 @@ export function FeatureCard({
                 : "bg-secondary border-secondary-edge"
             )}
           >
-            <H4 className="text-lg font-black text-white leading-tight">
+            <H4 className="text-lg font-black text-white">
               {title}
             </H4>
           </View>
@@ -79,7 +79,7 @@ export function FeatureCard({
         <View className="absolute inset-0 items-center justify-center p-8">
           <View className="items-center gap-2">
             <Lock size={20} className="text-primary-edge/60" strokeWidth={3} />
-            <Text className="text-primary-edge/80 text-center text-lg leading-tight max-w-[220px]">
+            <Text className="text-primary-edge/80 text-center text-lg max-w-[220px]">
               This feature is available with a{"\n"}premium subscription
             </Text>
           </View>

@@ -15,7 +15,7 @@ function H1({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="1"
       className={cn(
-        "web:scroll-m-20 text-4xl text-foreground font-sans font-black tracking-tight leading-snug lg:text-5xl web:select-text",
+        "web:scroll-m-20 text-4xl text-foreground font-sans font-black lg:text-5xl web:select-text",
         className
       )}
       {...props}
@@ -30,7 +30,7 @@ function H2({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="2"
       className={cn(
-        "web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-sans font-black tracking-tight leading-snug first:mt-0 web:select-text",
+        "web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-sans font-black first:mt-0 web:select-text",
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ function H3({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="3"
       className={cn(
-        "web:scroll-m-20 text-2xl text-foreground font-sans font-bold tracking-tight leading-snug web:select-text",
+        "web:scroll-m-20 text-2xl text-foreground font-sans font-bold web:select-text",
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function H4({ className, asChild = false, ...props }: TypographyProps) {
       role="heading"
       aria-level="4"
       className={cn(
-        "web:scroll-m-20 text-xl text-foreground font-sans font-bold tracking-tight leading-snug web:select-text",
+        "web:scroll-m-20 text-xl text-foreground font-sans font-bold web:select-text",
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ function P({ className, asChild = false, ...props }: TypographyProps) {
   return (
     <Component
       className={cn(
-        "text-base text-foreground font-sans font-semibold leading-snug web:select-text",
+        "text-base text-foreground font-sans font-semibold web:select-text",
         className
       )}
       {...props}
@@ -116,7 +116,7 @@ function Lead({ className, asChild = false, ...props }: TypographyProps) {
   return (
     <Component
       className={cn(
-        "text-xl text-muted-foreground font-sans font-semibold leading-snug web:select-text",
+        "text-xl text-muted-foreground font-sans font-semibold web:select-text",
         className
       )}
       {...props}
@@ -129,7 +129,7 @@ function Large({ className, asChild = false, ...props }: TypographyProps) {
   return (
     <Component
       className={cn(
-        "text-xl text-foreground font-sans font-bold leading-snug web:select-text",
+        "text-xl text-foreground font-sans font-bold web:select-text",
         className
       )}
       {...props}
@@ -142,7 +142,7 @@ function Small({ className, asChild = false, ...props }: TypographyProps) {
   return (
     <Component
       className={cn(
-        "text-sm text-foreground font-sans font-semibold leading-none web:select-text",
+        "text-sm text-foreground font-sans font-semibold web:select-text",
         className
       )}
       {...props}
