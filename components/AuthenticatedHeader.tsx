@@ -3,12 +3,15 @@ import { P } from "~/components/ui/typography";
 import { Settings, Flame, Zap, Code2 } from "lucide-react-native";
 import { router } from "expo-router";
 import { cn } from "~/lib/utils";
+import { useUserStats } from "~/contexts/UserStatsContext";
 
 interface AuthenticatedHeaderProps {
   className?: string;
 }
 
 export function AuthenticatedHeader({ className }: AuthenticatedHeaderProps) {
+  const { currentStreak, overallBPI } = useUserStats();
+
   return (
     <View className={cn("flex-row justify-between items-center", className)}>
       <View className="flex-row gap-3">
@@ -17,11 +20,13 @@ export function AuthenticatedHeader({ className }: AuthenticatedHeaderProps) {
           onPress={() => router.push("/streak")}
         >
           <Flame size={18} className="text-orange-500 mr-1.5" fill="#f97316" />
-          {/* <P className="font-bold text-sm">0</P> */}
+          <P className="font-bold text-sm tracking-tight">{currentStreak}</P>
         </TouchableOpacity>
         <View className="flex-row items-center bg-card rounded-xl px-3 py-1.5 border-2 border-border border-b-4">
           <Zap size={18} className="text-yellow-500 mr-1.5" fill="#eab308" />
-          <P className="font-bold text-sm">--</P>
+          <P className="font-bold text-sm tracking-tight">
+            {overallBPI !== null ? overallBPI : "--"}
+          </P>
         </View>
       </View>
       <View className="flex-row gap-4 items-center">

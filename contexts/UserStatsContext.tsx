@@ -39,6 +39,7 @@ export interface CategoryStats {
 
 export interface UserStatsContextValue {
   overallBPI: number | null;
+  currentStreak: number;
   totalGamesPlayed: number;
   categoryStats: CategoryStats[];
   recentSessions: GameSession[];
@@ -62,6 +63,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
 
   const [categoryStats, setCategoryStats] = useState<CategoryStats[]>([]);
   const [recentSessions, setRecentSessions] = useState<GameSession[]>([]);
+  const [currentStreak, setCurrentStreak] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -93,7 +95,20 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
 
       if (perfError) throw perfError;
 
+      // Fetch streak data
+      const { data: streakData, error: streakError } = await supabase
+        .from("user_streaks")
+        .select("current_streak")
+        .eq("user_id", user.id)
+        .single();
+
+      if (streakError && streakError.code !== "PGRST116") {
+        // PGRST116 means no rows found, which is fine for a new user
+        throw streakError;
+      }
+
       setRecentSessions(sessions || []);
+      setCurrentStreak(streakData?.current_streak ?? 0);
 
       // Build a map of game_id -> UserGamePerformance
       const performanceMap = new Map<string, UserGamePerformance>();
@@ -165,11 +180,11 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         const categoryAverageScore =
           totalPlaysWithScores > 0
             ? Math.round(
-                gamesWithScores.reduce(
-                  (sum, gs) => sum + (gs.averageScore ?? 0) * gs.gamesPlayed,
-                  0
-                ) / totalPlaysWithScores
-              )
+              gamesWithScores.reduce(
+                (sum, gs) => sum + (gs.averageScore ?? 0) * gs.gamesPlayed,
+                0
+              ) / totalPlaysWithScores
+            )
             : null;
 
         // Category highest = max of all game highest scores
@@ -183,9 +198,9 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         const progress =
           categoryAverageScore !== null
             ? Math.min(
-                100,
-                Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
-              )
+              100,
+              Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
+            )
             : 0;
 
         return {
@@ -220,13 +235,13 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
   );
   const overallBPI =
     categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL &&
-    totalCategoryPlays > 0
+      totalCategoryPlays > 0
       ? Math.round(
-          categoriesWithScores.reduce(
-            (sum, c) => sum + (c.score ?? 0) * c.gamesPlayed,
-            0
-          ) / totalCategoryPlays
-        )
+        categoriesWithScores.reduce(
+          (sum, c) => sum + (c.score ?? 0) * c.gamesPlayed,
+          0
+        ) / totalCategoryPlays
+      )
       : null;
 
   const totalGamesPlayed = categoryStats.reduce(
@@ -237,6 +252,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<UserStatsContextValue>(
     () => ({
       overallBPI,
+      currentStreak,
       totalGamesPlayed,
       categoryStats,
       recentSessions,
@@ -246,6 +262,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
     }),
     [
       overallBPI,
+      currentStreak,
       totalGamesPlayed,
       categoryStats,
       recentSessions,

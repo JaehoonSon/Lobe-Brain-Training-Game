@@ -178,8 +178,8 @@ export default function Dashboard() {
             </Card>
           </View>
 
-          <View className="mt-8 gap-4">
-            <H3 className="mb-2 text-2xl font-black">Community & Growth</H3>
+          <View className="mt-10">
+            <H3 className="mb-4 text-2xl font-black">Community & Growth</H3>
 
             {/* Global Challenge Card */}
             <TouchableOpacity onPress={() => handlePlayGame(dailyGames[0]?.id || '')} activeOpacity={0.8}>
@@ -196,14 +196,11 @@ export default function Dashboard() {
                     <Globe size={32} color="white" strokeWidth={2.5} />
                   </View>
                 </View>
-                <View className="bg-white rounded-2xl py-3 items-center">
-                  <Text className="text-info-edge font-black uppercase text-sm tracking-widest">Join 12,402 Others</Text>
-                </View>
               </Card>
             </TouchableOpacity>
 
             {/* Quick Play Games Row */}
-            <View className="flex-row gap-4 mb-4">
+            <View className="flex-row gap-4 mt-6">
               {quickPlayGames.map((game, idx) => (
                 <View key={game.id} className="flex-1">
                   <TouchableOpacity onPress={() => handlePlayGame(game.id)} activeOpacity={0.8}>
@@ -212,8 +209,10 @@ export default function Dashboard() {
                       idx === 0 ? "border-b-[6px] border-primary-edge" : "border-b-[6px] border-secondary-edge"
                     )}>
                       <View className="flex-row justify-between items-start">
+                        <View className="bg-white/20 self-start px-2 py-0.5 rounded-md">
+                          <Text className="text-[10px] font-black text-white uppercase tracking-wider">QUICK PLAY</Text>
+                        </View>
                         <Zap size={20} color="white" />
-                        <Text className="text-[10px] font-black text-white/60 uppercase">QUICK PLAY</Text>
                       </View>
                       <View className="flex-1 justify-center items-center py-2">
                         <H4 className="text-white font-black text-lg text-center" numberOfLines={2}>{game.name}</H4>
