@@ -206,6 +206,7 @@ export type Database = {
           is_active: boolean | null
           is_pro_only: boolean
           name: string
+          recommended_rounds: number
         }
         Insert: {
           banner_url?: string | null
@@ -218,6 +219,7 @@ export type Database = {
           is_active?: boolean | null
           is_pro_only?: boolean
           name: string
+          recommended_rounds?: number
         }
         Update: {
           banner_url?: string | null
@@ -230,6 +232,7 @@ export type Database = {
           is_active?: boolean | null
           is_pro_only?: boolean
           name?: string
+          recommended_rounds?: number
         }
         Relationships: [
           {
