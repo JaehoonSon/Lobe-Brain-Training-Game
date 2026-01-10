@@ -43,23 +43,28 @@ export default function Dashboard() {
     Database["public"]["Tables"]["games"]["Row"][]
   >([]);
   const [communityCount, setCommunityCount] = useState<number | null>(null);
+  const [dailyChallengeGame, setDailyChallengeGame] = useState<{
+    game_id: string;
+    game_name: string;
+    sessions_count: number;
+  } | null>(null);
 
+  // Fetch the global daily challenge (same game for everyone)
   useEffect(() => {
-    async function fetchCommunityStats() {
-      if (dailyGames.length > 0) {
-        const { data, error } = await supabase.rpc(
-          "get_community_challenge_stats",
-          {
-            p_game_id: dailyGames[0].id,
-          }
-        );
-        if (!error && data && data.length > 0) {
-          setCommunityCount(data[0].sessions_count);
-        }
+    async function fetchDailyChallenge() {
+      console.log('[Daily Challenge] Fetching...');
+
+      const { data, error } = await supabase.rpc("get_daily_challenge");
+
+      console.log('[Daily Challenge] Response:', { data, error });
+
+      if (!error && data && data.length > 0) {
+        setDailyChallengeGame(data[0]);
+        setCommunityCount(data[0].sessions_count);
       }
     }
-    fetchCommunityStats();
-  }, [dailyGames]);
+    fetchDailyChallenge();
+  }, []);
 
   React.useEffect(() => {
     // In a real app, you might want to wrap this in useMemo or similar if the date changes
@@ -201,7 +206,7 @@ export default function Dashboard() {
             <H3 className="mb-4 text-2xl font-black">Community & Growth</H3>
 
             {/* Global Challenge Card */}
-            <TouchableOpacity onPress={() => handlePlayGame(dailyGames[0]?.id || '')} activeOpacity={0.8}>
+            <TouchableOpacity onPress={() => handlePlayGame(dailyChallengeGame?.game_id || '')} activeOpacity={0.8}>
               <Card className="bg-info-edge border-b-[8px] border-black/20 p-5">
                 <View className="flex-row justify-between items-start mb-4">
                   <View className="flex-1">
@@ -209,7 +214,7 @@ export default function Dashboard() {
                       <Text className="text-[10px] font-black text-white uppercase tracking-wider">GLOBAL CHALLENGE</Text>
                     </View>
                     <H4 className="text-white font-black text-2xl mb-1">Elite Focus</H4>
-                    <P className="text-white/80 font-bold leading-5">Everyone is playing {dailyGames[0]?.name || 'Memory Matrix'} today! Can you reach the top 10%?</P>
+                    <P className="text-white/80 font-bold leading-5">Everyone is playing {dailyChallengeGame?.game_name || 'Loading...'} today! Can you reach the top 10%?</P>
                   </View>
                   <View className="w-16 h-16 bg-white/10 rounded-2xl items-center justify-center border border-white/20">
                     <Globe size={32} color="white" strokeWidth={2.5} />

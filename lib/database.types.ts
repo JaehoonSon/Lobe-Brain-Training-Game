@@ -63,41 +63,6 @@ export type Database = {
         }
         Relationships: []
       }
-      community_stats: {
-        Row: {
-          created_at: string | null
-          date: string | null
-          game_id: string | null
-          id: string
-          sessions_count_override: number | null
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          date?: string | null
-          game_id?: string | null
-          id?: string
-          sessions_count_override?: number | null
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          date?: string | null
-          game_id?: string | null
-          id?: string
-          sessions_count_override?: number | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "community_stats_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       daily_insights: {
         Row: {
           category: string | null
@@ -467,9 +432,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_community_challenge_stats: {
-        Args: { p_game_id: string }
+      get_daily_challenge: {
+        Args: never
         Returns: {
+          game_description: string
+          game_id: string
+          game_name: string
           sessions_count: number
         }[]
       }
