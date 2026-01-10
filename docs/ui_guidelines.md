@@ -180,3 +180,57 @@ When refactoring a generic UI component to "Juicy" UI:
 3.  [ ] **Add Depth**: Add `border-b-4` and appropriate edge colors to primary buttons/cards.
 4.  [ ] **Fatten Icons**: Increase `strokeWidth` to 2.5 or 3.
 5.  [ ] **Check Contrast**: Ensure text on colored pills is White (`text-white`).
+
+## 14. Asset Generation Prompts (3D Claymorphism)
+
+All game assets follow the **3D Claymorphism** style — a rendering technique that mimics soft, matte plasticine or clay animation to create a friendly, tactile look.
+
+### A. Game Thumbnails (Banners)
+**Dimensions:** 16:9 landscape (fits 180×110px cards)  
+**Storage:** Supabase Storage → `game-assets/[game-name]_game.jpg`
+
+**Base Prompt Template:**
+```
+3D Claymorphism scene in 16:9 landscape format. The entire image is a [THEMED ENVIRONMENT]—[DESCRIBE CLAY SURFACE AND ELEMENTS] extending edge-to-edge. Dead center: [MAIN OBJECT DESCRIPTION]. No borders, no vignette, the scene fills the entire frame seamlessly. Style: Plasticine texture, matte finish, soft lighting, cute, friendly, no text.
+```
+
+**Example Prompts:**
+
+| Game | Prompt |
+| :--- | :--- |
+| **Memory Matrix** | 3D Claymorphism scene in 16:9 landscape format. The entire image is a clay "puzzle room" environment—a soft, matte clay surface with subtle embossed grid patterns and small scattered clay cubes extending edge-to-edge. Dead center: A prominent, floating 3x3 grid of soft clay tiles with rounded corners; some tiles glow green, others are off-white. No borders, no vignette. Style: Plasticine texture, matte finish, soft warm lighting, friendly, tactile, no text. |
+| **Mental Arithmetic** | 3D Claymorphism scene in 16:9 landscape format. The entire image is a playful clay "math playground" environment—a soft pastel blue clay desk surface extending edge-to-edge, scattered with small clay abacus beads, tiny clay pencils, miniature clay dice, and faint embossed doodle scribbles. Dead center: Large, cute clay numbers (1, 2, 3) and math symbols (+, -, ×) floating playfully in bright primary colors. No borders, no vignette. Style: Plasticine texture with subtle fingerprint impressions, matte finish, soft warm lighting, friendly, tactile, no text. |
+| **Language Discrimination** | 3D Claymorphism scene in 16:9 landscape format. The entire image is a serene clay "communication sky" environment—a smooth pale sky-blue clay surface extending edge-to-edge. Pressed into this background are simple white clay cloud blobs and concentric curved lines molded into the blue clay to represent sound waves. Dead center: Two prominent soft clay speech bubbles (one Blue, one Orange) oriented towards each other as if chatting. No borders, no vignette. Style: Plasticine texture with subtle fingerprint indentations, matte finish, soft daylight lighting, cute, friendly, no text. |
+| **Wordle** | 3D Claymorphism scene in 16:9 landscape format. The entire image is a stylized clay "game board" environment—a matching horizontal clay surface with empty square indentations (slots) extending edge-to-edge. Dead center: A crisp row of 5 prominent soft clay square letter tiles (Green, Green, Yellow, Grey, Grey). No borders, no vignette. Style: Plasticine texture, matte finish, soft lighting, satisfying, tactile, no text. |
+
+---
+
+### B. Game Icons (Square)
+**Dimensions:** 1:1 square (fits 56×56px containers)  
+**Background:** Transparent (PNG)  
+**Storage:** Supabase Storage → `game-assets/[game-name]-square.png`
+
+**Base Prompt Template:**
+```
+3D Claymorphism icon, 1:1 square aspect ratio. [MAIN OBJECT DESCRIPTION]. Isolated object on a transparent background. Style: Plasticine texture, matte finish, soft lighting, cute, friendly, no text.
+```
+
+**Example Prompts:**
+
+| Game | Prompt |
+| :--- | :--- |
+| **Memory Matrix** | 3D Claymorphism icon, 1:1 square aspect ratio. A soft clay 3x3 grid with rounded tiles, some glowing green, others white. Isolated object on a transparent background. Style: Plasticine texture, matte finish, soft lighting, cute, friendly, no text. |
+| **Mental Arithmetic** | 3D Claymorphism icon, 1:1 square aspect ratio. A cute clay "+" and "−" symbol stacked together with a small clay number "3" floating nearby. Isolated object on a transparent background. Style: Plasticine texture, matte finish, bright primary colors, soft lighting, cute, friendly, no text. |
+| **Language Discrimination** | 3D Claymorphism icon, 1:1 square aspect ratio. Two small soft clay speech bubbles (one blue, one orange) overlapping slightly. Isolated object on a transparent background. Style: Plasticine texture, matte finish, soft lighting, cute, friendly, no text. |
+| **Wordle** | 3D Claymorphism icon, 1:1 square aspect ratio. Five small soft clay letter tiles in a row (Green, Green, Yellow, Grey, Grey). Isolated object on a transparent background. Style: Plasticine texture, matte finish, soft lighting, satisfying, tactile, no text on tiles. |
+
+---
+
+### C. Key Style Notes
+- **Plasticine Texture**: Soft, slightly imperfect clay surfaces with subtle fingerprint impressions.
+- **Matte Finish**: No glossy or shiny reflections.
+- **Edge-to-Edge Scenes**: For thumbnails, the environment should fill the entire frame with no borders or vignettes.
+- **Central Focus**: The main object should be dead center and prominent.
+- **No Text**: All text/labels come from the UI, not the asset itself.
+- **Export Formats**: Thumbnails as JPG, Icons as PNG (for transparency).
+

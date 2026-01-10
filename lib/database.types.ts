@@ -63,6 +63,36 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_insights: {
+        Row: {
+          category: string | null
+          content: string
+          created_at: string | null
+          day_of_year: number
+          id: string
+          source: string | null
+          source_url: string | null
+        }
+        Insert: {
+          category?: string | null
+          content: string
+          created_at?: string | null
+          day_of_year: number
+          id?: string
+          source?: string | null
+          source_url?: string | null
+        }
+        Update: {
+          category?: string | null
+          content?: string
+          created_at?: string | null
+          day_of_year?: number
+          id?: string
+          source?: string | null
+          source_url?: string | null
+        }
+        Relationships: []
+      }
       game_answers: {
         Row: {
           accuracy: number
@@ -367,44 +397,6 @@ export type Database = {
           },
         ]
       }
-      user_performance: {
-        Row: {
-          created_at: string | null
-          current_rating: number | null
-          game_id: string
-          games_played_count: number | null
-          highest_score: number | null
-          last_played_at: string | null
-          user_id: string
-        }
-        Insert: {
-          created_at?: string | null
-          current_rating?: number | null
-          game_id: string
-          games_played_count?: number | null
-          highest_score?: number | null
-          last_played_at?: string | null
-          user_id: string
-        }
-        Update: {
-          created_at?: string | null
-          current_rating?: number | null
-          game_id?: string
-          games_played_count?: number | null
-          highest_score?: number | null
-          last_played_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_performance_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       user_streaks: {
         Row: {
           best_streak: number
@@ -437,6 +429,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_daily_insight: {
+        Args: never
+        Returns: {
+          category: string
+          content: string
+          id: string
+          source: string
+          source_url: string
+        }[]
+      }
       process_daily_game_performance_snapshot: {
         Args: never
         Returns: undefined

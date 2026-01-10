@@ -79,12 +79,12 @@ export function WorkoutGameCard({
           {/* Game Icon Placeholder */}
           <View
             className={cn(
-              "w-12 h-12 rounded-xl items-center justify-center mr-4",
+              "w-14 h-14 rounded-xl items-center justify-center mr-4 overflow-hidden",
               isActive ? "bg-white/20" : "bg-muted/20"
             )}
           >
             {game.icon_url ? (
-              <Image source={{ uri: game.icon_url }} className="w-8 h-8" />
+              <Image source={{ uri: game.icon_url }} className="w-full h-full" resizeMode="cover" />
             ) : (
               <Play
                 size={24}

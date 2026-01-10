@@ -116,7 +116,7 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
 
 // Reusable Content Components for locked states
 // Adjusted to use standard colors
-function CompareContent() {
+export function CompareContent() {
   return (
     <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
       {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
@@ -163,7 +163,7 @@ interface FeatureCardProps {
   variant?: "primary" | "secondary";
 }
 
-function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps) {
+export function FeatureCard({ title, children, variant = "primary" }: FeatureCardProps) {
   // Header: Full brand color fill
   // Text: White
   // Body: Warm Alabaster

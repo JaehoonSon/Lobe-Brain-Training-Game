@@ -71,15 +71,12 @@ export default function GameDetailScreen() {
             </View>
           )}
           {/* Gradient Overlay for Text Readability */}
-          {/* <LinearGradient
-            colors={["transparent", "rgba(0,0,0,0.8)"]}
-            className="absolute bottom-0 left-0 right-0 h-32 justify-end px-6 pb-6"
+          <LinearGradient
+            colors={["transparent", "rgba(0,0,0,0.6)"]}
+            className="absolute bottom-0 left-0 right-0 h-40 justify-end px-6 pb-6"
           >
-            <H1 className="text-yellow-50 text-4xl text-shadow">{game.name}</H1>
-          </LinearGradient> */}
-          <View className="absolute bottom-0 left-0 right-0 h-32 justify-end px-6 pb-6">
-            <H1 className="text-4xl font-black text-shadow">{game.name}</H1>
-          </View>
+            <H1 className="text-white text-4xl font-black">{game.name}</H1>
+          </LinearGradient>
         </View>
 
         {/* Content */}

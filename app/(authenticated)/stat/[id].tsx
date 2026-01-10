@@ -12,6 +12,7 @@ import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 import { useUserStats } from "~/hooks/useUserStats";
 import { useGames } from "~/contexts/GamesContext";
+import { FeatureCard } from "~/components/FeatureCard";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -82,48 +83,46 @@ export default function CategoryDetailScreen() {
             <View className="overflow-visible">
               <Text
                 className="text-8xl font-black text-primary"
-                style={{ lineHeight: 100, }}
+                style={{
+                  lineHeight: 100,
+                  textShadowColor: 'rgba(0, 0, 0, 0.1)',
+                  textShadowOffset: { width: 2, height: 4 },
+                  textShadowRadius: 0,
+                }}
               >
                 {hasScore ? category.score : "--"}
               </Text>
-              <Text className="text-3xl font-black text-primary/80 ml-1 -mt-4">
-                current BPI
-              </Text>
+              <View className="flex-row items-center gap-2 ml-1 -mt-3">
+                <Text className="text-3xl font-black text-primary/80 tracking-tighter">
+                  current bpi
+                </Text>
+                {hasScore && (
+                  <TrendingUp size={16} className="text-primary" strokeWidth={3} />
+                )}
+              </View>
             </View>
 
             {/* Big Icon */}
             <View className="shadow-lg shadow-orange-500/20">
               <Image
-                source={require("~/assets/brain_icon_clay.png")}
-                style={{ width: 150, height: 150 }}
+                source={require("~/assets/brain_workout_clay_3d.png")}
+                style={{ width: 160, height: 160 }}
                 contentFit="contain"
               />
             </View>
           </View>
 
           {/* LPI History Card (Locked) */}
-          <Animated.View entering={FadeInDown.delay(200).duration(400)}>
-            {/* History Section */}
-            <Card className="mb-6 overflow-hidden bg-card p-0">
-              <View className="relative">
-                {/* Content */}
-                <View className="items-center justify-center py-12">
-                  <Lock size={32} className="text-muted-foreground mb-3" />
-                  <P className="text-muted-foreground text-center px-8 mb-4">
-                    Track your progress with Training History in Brain App Premium.
-                  </P>
-                </View>
-                {/* Blur overlay */}
-                <BlurView intensity={70} tint="light" className="absolute inset-0" />
-                {/* Floating Pill Header */}
-                <View className="absolute top-4 left-4">
-                  <View className={cn("px-4 py-1.5 rounded-full border-b-4", "bg-secondary border-secondary-edge")}>
-                    <H4 className="text-lg font-black text-white">History</H4>
-                  </View>
-                </View>
-              </View>
-            </Card>
-          </Animated.View>
+          <FeatureCard
+            title="How You Compare"
+            variant="secondary"
+          >
+            <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
+              {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
+                <View key={i} className="w-4 bg-secondary rounded-t-sm" style={{ height: `${h}%` }} />
+              ))}
+            </View>
+          </FeatureCard>
 
           {/* Category Games Section */}
           <Animated.View entering={FadeInDown.delay(400).duration(400)}>
