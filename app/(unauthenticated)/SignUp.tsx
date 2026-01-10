@@ -47,8 +47,7 @@ export default function SignUp() {
       <View className="px-6" style={{ paddingBottom: insets.bottom + 16 }}>
         <Animated.View entering={FadeInUp.delay(200).duration(600)}>
           <Button
-            size="xl"
-            className="w-full rounded-2xl flex-row gap-3 mb-6"
+            className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
             onPress={handleLogin}
           >
             <AntDesign name="apple" size={24} color="white" />
@@ -59,8 +58,7 @@ export default function SignUp() {
 
           <Button
             variant="secondary"
-            size="xl"
-            className="w-full rounded-2xl flex-row gap-3 mb-6"
+            className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
             onPress={() => {
               // signInGoogle()
               showErrorToast("Google Sign In not configured yet");

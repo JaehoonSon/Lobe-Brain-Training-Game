@@ -23,8 +23,7 @@ export default function PlanRevealStep({ onNext, onBack }: PlanRevealStepProps) 
             <View className="px-6 py-4 flex-row items-center gap-4">
                 <Button
                     variant="ghost"
-                    size="icon"
-                    className="-ml-2"
+                    className="-ml-2 h-10 w-10"
                     onPress={onBack}
                 >
                     <ChevronLeft className="text-foreground" size={24} />
@@ -60,7 +59,7 @@ export default function PlanRevealStep({ onNext, onBack }: PlanRevealStepProps) 
                             Your 30-Day Plan
                         </Text>
                         <Text className="text-lg text-center text-muted-foreground px-2 leading-6 mt-1">
-                            Projected <Text className="text-primary font-bold">30-40% LPI increase</Text> in first month.
+                            Projected <Text className="text-primary font-bold">30-40% BPI increase</Text> in first month.
                         </Text>
                     </View>
 
@@ -76,11 +75,10 @@ export default function PlanRevealStep({ onNext, onBack }: PlanRevealStepProps) 
             {/* Footer */}
             <View className="bg-background p-6 pt-2">
                 <Button
-                    size="xl"
-                    className="w-full h-[72px] bg-orange-500 active:bg-orange-600 rounded-full shadow-lg shadow-orange-500/20"
+                    className="w-full h-12 native:h-16 px-10 rounded-2xl shadow-lg shadow-primary/20"
                     onPress={onNext}
                 >
-                    <Text className="text-2xl font-bold text-white">
+                    <Text className="text-xl font-bold text-primary-foreground">
                         Start Training
                     </Text>
                 </Button>

@@ -49,9 +49,8 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
             return (
               <View key={index} className="items-center gap-3">
                 <View
-                  className={`w-4 h-4 rounded-full ${
-                    isActive ? "bg-transparent" : "bg-muted"
-                  } justify-center items-center`}
+                  className={`w-4 h-4 rounded-full ${isActive ? "bg-transparent" : "bg-muted"
+                    } justify-center items-center`}
                 >
                   {isActive && (
                     <Flame
@@ -63,9 +62,8 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
                   )}
                 </View>
                 <Text
-                  className={`text-sm font-bold ${
-                    isActive ? "text-foreground" : "text-muted-foreground"
-                  }`}
+                  className={`text-sm font-bold ${isActive ? "text-foreground" : "text-muted-foreground"
+                    }`}
                 >
                   {day}
                 </Text>
@@ -84,8 +82,8 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
 
       {/* Continue Button */}
       <Animated.View entering={FadeInDown.delay(800).duration(600)}>
-        <Button size="xl" className="w-full rounded-2xl h-16" onPress={onNext}>
-          <Text className="font-bold text-xl">Continue</Text>
+        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
+          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
         </Button>
       </Animated.View>
     </View>

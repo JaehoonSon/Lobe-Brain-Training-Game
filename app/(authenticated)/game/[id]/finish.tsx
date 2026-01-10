@@ -166,8 +166,7 @@ export default function GameFinishScreen() {
           </Button>
 
           <Button
-            size="xl"
-            className="flex-1 rounded-full"
+            className="flex-1 rounded-full h-12 native:h-16 px-10"
             onPress={handlePlayAgain}
           >
             <View className="flex-row items-center gap-2">

@@ -42,7 +42,7 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           </Text>
         </Animated.View>
 
-          {/* Goals List */}
+        {/* Goals List */}
         <View className="w-full max-w-xs gap-4 mb-8">
           {goals.map((goal, index) => (
             <Animated.View
@@ -69,11 +69,10 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
         className="w-full"
       >
         <Button
-          size="xl"
-          className="w-full rounded-2xl h-16"
+          className="w-full rounded-2xl h-12 native:h-16 px-10"
           onPress={handleBegin}
         >
-          <Text className="font-extrabold text-xl tracking-wide uppercase">
+          <Text className="font-extrabold text-xl tracking-wide uppercase text-primary-foreground">
             Let&apos;s Begin
           </Text>
         </Button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, useWindowDimensions } from "react-native";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
@@ -35,6 +35,7 @@ function generateTargets(
 }
 
 export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatrixProps) {
+  const { width } = useWindowDimensions();
   const [phase, setPhase] = useState<GamePhase>("memorize");
   const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
   const hasInitialized = useRef(false);
@@ -46,6 +47,12 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
   const cols = content.grid_size.cols;
   const targetCount = content.target_count;
   const displayTimeMs = content.display_time_ms;
+
+  // Responsive tile sizing: calculate based on screen width with padding
+  const gap = 12;
+  const horizontalPadding = 48; // 24px padding on each side
+  const availableWidth = width - horizontalPadding;
+  const tileSize = Math.min(64, Math.floor((availableWidth - (cols - 1) * gap) / cols));
 
   // Initialize game on mount/content change
   useEffect(() => {
@@ -150,8 +157,8 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
       </View>
 
       <View
-        className="flex-row flex-wrap justify-center gap-3"
-        style={{ width: cols * 72 + (cols - 1) * 12 }}
+        className="flex-row flex-wrap justify-center"
+        style={{ width: cols * tileSize + (cols - 1) * gap, gap }}
       >
         {Array.from({ length: rows * cols }).map((_, i) => {
           const state = getTileState(i);
@@ -162,13 +169,14 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
               activeOpacity={0.8}
               onPress={() => handleTilePress(i)}
               className={cn(
-                "w-16 h-16 rounded-xl border-4 transition-all duration-200",
+                "rounded-xl border-4 transition-all duration-200",
                 state === "hidden" && "bg-card border-border",
                 state === "active" && "bg-primary border-primary",
                 state === "correct" && "bg-green-500 border-green-600",
                 state === "incorrect" && "bg-destructive border-destructive",
                 state === "missed" && "bg-yellow-400 border-yellow-500 opacity-50"
               )}
+              style={{ width: tileSize, height: tileSize }}
               disabled={phase !== "recall"}
             />
           );
