@@ -180,11 +180,11 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         const categoryAverageScore =
           totalPlaysWithScores > 0
             ? Math.round(
-              gamesWithScores.reduce(
-                (sum, gs) => sum + (gs.averageScore ?? 0) * gs.gamesPlayed,
-                0
-              ) / totalPlaysWithScores
-            )
+                gamesWithScores.reduce(
+                  (sum, gs) => sum + (gs.averageScore ?? 0) * gs.gamesPlayed,
+                  0
+                ) / totalPlaysWithScores
+              )
             : null;
 
         // Category highest = max of all game highest scores
@@ -198,9 +198,9 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         const progress =
           categoryAverageScore !== null
             ? Math.min(
-              100,
-              Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
-            )
+                100,
+                Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
+              )
             : 0;
 
         return {
@@ -235,13 +235,13 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
   );
   const overallBPI =
     categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL &&
-      totalCategoryPlays > 0
+    totalCategoryPlays > 0
       ? Math.round(
-        categoriesWithScores.reduce(
-          (sum, c) => sum + (c.score ?? 0) * c.gamesPlayed,
-          0
-        ) / totalCategoryPlays
-      )
+          categoriesWithScores.reduce(
+            (sum, c) => sum + (c.score ?? 0) * c.gamesPlayed,
+            0
+          ) / totalCategoryPlays
+        )
       : null;
 
   const totalGamesPlayed = categoryStats.reduce(

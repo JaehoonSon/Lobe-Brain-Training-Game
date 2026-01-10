@@ -380,7 +380,9 @@ export default function GamePlayScreen() {
           {/* Score Preview (during play) */}
           {session.isPlaying && session.correctCount > 0 && (
             <View className="bg-green-600/80 px-3 py-2 rounded-full">
-              <Text className="text-white font-bold">✓ {session.correctCount}</Text>
+              <Text className="text-white font-bold">
+                ✓ {session.correctCount}
+              </Text>
             </View>
           )}
 
