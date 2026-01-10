@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, P } from "~/components/ui/typography";
+import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useAuth } from "~/contexts/AuthProvider";
 import { router } from "expo-router";
@@ -38,26 +39,26 @@ export default function IndexAuthenticatedScreen() {
           You are authenticated as {user?.email}
         </P>
 
-        <Button variant="outline" onPress={() => router.push("/settings")}>
-          <P>Go to Settings</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/settings")}>
+          <Text className="text-foreground font-bold">Go to Settings</Text>
         </Button>
-        <Button variant="outline" onPress={() => router.push("/(onboarding)")}>
-          <P>Go to onboarding</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/(onboarding)")}>
+          <Text className="text-foreground font-bold">Go to onboarding</Text>
         </Button>
-        <Button variant="outline" onPress={restartOnboarding}>
-          <P>Restart onboarding</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={restartOnboarding}>
+          <Text className="text-foreground font-bold">Restart onboarding</Text>
         </Button>
-        <Button variant="outline" onPress={goBackFewSteps}>
-          <P>Go back few steps</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={goBackFewSteps}>
+          <Text className="text-foreground font-bold">Go back few steps</Text>
         </Button>
-        <Button variant="outline" onPress={showPaywall}>
-          <P>Present paywall</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={showPaywall}>
+          <Text className="text-foreground font-bold">Present paywall</Text>
         </Button>
-        <Button variant="outline" onPress={() => router.push("/paywall")}>
-          <P>Go to paywall</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/paywall")}>
+          <Text className="text-foreground font-bold">Go to paywall</Text>
         </Button>
-        <Button variant="outline" onPress={() => router.push("/components-showcase")}>
-          <P>Component Showcase</P>
+        <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/components-showcase")}>
+          <Text className="text-foreground font-bold">Component Showcase</Text>
         </Button>
       </SafeAreaView>
     </View>

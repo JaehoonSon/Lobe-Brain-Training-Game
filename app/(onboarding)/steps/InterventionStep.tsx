@@ -51,11 +51,10 @@ export default function InterventionStep({
 
       <Animated.View entering={FadeInUp.delay(300).duration(600)}>
         <Button
-          size="xl"
-          className="w-full rounded-2xl h-16 flex-row gap-2"
+          className="w-full rounded-2xl h-12 native:h-16 px-10 flex-row gap-2"
           onPress={onNext}
         >
-          <Text className="font-bold text-xl">{buttonText}</Text>
+          <Text className="font-bold text-xl text-primary-foreground">{buttonText}</Text>
           <ArrowRight size={24} color="white" />
         </Button>
       </Animated.View>

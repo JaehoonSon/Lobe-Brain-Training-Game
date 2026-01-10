@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useLocalSearchParams, router } from "expo-router";
 import { supabase } from "~/lib/supabase";
 import { MentalArithmetic } from "~/components/games/MentalArithmetic";
@@ -23,6 +24,7 @@ export default function GamePlayScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { user } = useAuth();
   const { games, categories } = useGames();
+  const insets = useSafeAreaInsets();
   const {
     state: session,
     startRound,
@@ -360,29 +362,39 @@ export default function GamePlayScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      {/* Close Button */}
-      <TouchableOpacity
-        onPress={() => router.back()}
-        className="absolute top-12 left-6 z-20 w-12 h-12 rounded-full bg-black/40 items-center justify-center"
+      {/* Header Row - Respects Safe Area */}
+      <View
+        className="flex-row items-center justify-between px-6 z-20"
+        style={{ paddingTop: insets.top + 12 }}
       >
-        <X color="white" size={24} />
-      </TouchableOpacity>
+        {/* Close Button */}
+        <TouchableOpacity
+          onPress={() => router.back()}
+          className="w-12 h-12 rounded-full bg-black/40 items-center justify-center"
+        >
+          <X color="white" size={24} />
+        </TouchableOpacity>
 
-      {/* Progress Indicator */}
-      <View className="absolute top-12 right-6 z-20 bg-black/40 px-4 py-2 rounded-full">
-        <Text className="text-white font-bold">
-          {currentQuestionIndex + 1} / {sessionQuestions.length}
-        </Text>
+        {/* Right Side: Score Preview + Progress */}
+        <View className="flex-row items-center gap-3">
+          {/* Score Preview (during play) */}
+          {session.isPlaying && session.correctCount > 0 && (
+            <View className="bg-green-600/80 px-3 py-2 rounded-full">
+              <Text className="text-white font-bold">✓ {session.correctCount}</Text>
+            </View>
+          )}
+
+          {/* Progress Indicator */}
+          <View className="bg-black/40 px-4 py-2 rounded-full">
+            <Text className="text-white font-bold">
+              {currentQuestionIndex + 1} / {sessionQuestions.length}
+            </Text>
+          </View>
+        </View>
       </View>
 
-      {/* Score Preview (during play) */}
-      {session.isPlaying && session.correctCount > 0 && (
-        <View className="absolute top-12 right-28 z-20 bg-green-600/80 px-3 py-2 rounded-full">
-          <Text className="text-white font-bold">✓ {session.correctCount}</Text>
-        </View>
-      )}
-
-      <View className="flex-1 pt-20">{renderGame()}</View>
+      {/* Game Content */}
+      <View className="flex-1">{renderGame()}</View>
     </View>
   );
 }

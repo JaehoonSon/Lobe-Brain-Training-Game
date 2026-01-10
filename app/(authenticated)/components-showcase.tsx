@@ -84,10 +84,10 @@ export default function ComponentShowcase() {
                 <Button variant="ghost"><Text className="text-foreground font-bold">Ghost</Text></Button>
               </View>
               <View className="flex flex-wrap gap-3">
-                <Button size="sm"><Text className="text-primary-foreground font-bold">Small</Text></Button>
-                <Button size="default"><Text className="text-primary-foreground font-bold">Default</Text></Button>
-                <Button size="lg"><Text className="text-primary-foreground font-bold">Large</Text></Button>
-                <Button size="xl"><Text className="text-primary-foreground font-bold">Extra Large</Text></Button>
+                <Button className="h-9 px-3"><Text className="text-primary-foreground font-bold">Small</Text></Button>
+                <Button className="h-10 px-4 py-2 native:h-12 native:px-5 native:py-3"><Text className="text-primary-foreground font-bold">Default</Text></Button>
+                <Button className="h-11 px-8 native:h-14"><Text className="text-primary-foreground font-bold">Large</Text></Button>
+                <Button className="h-12 px-10 native:h-16"><Text className="text-primary-foreground font-bold">Extra Large</Text></Button>
               </View>
             </CardContent>
           </Card>

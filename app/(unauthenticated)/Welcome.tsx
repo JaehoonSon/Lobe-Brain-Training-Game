@@ -120,8 +120,7 @@ const WelcomeScreen = () => {
             className="w-full"
           >
             <Button
-              size="xl"
-              className="w-full h-16 rounded-2xl border-b-4 active:border-b-0 active:translate-y-1"
+              className="w-full h-12 native:h-16 px-10 rounded-2xl border-b-4 active:border-b-0 active:translate-y-1"
               onPress={handleGetStarted}
             >
               <P className="text-white font-black text-xl tracking-wide uppercase">

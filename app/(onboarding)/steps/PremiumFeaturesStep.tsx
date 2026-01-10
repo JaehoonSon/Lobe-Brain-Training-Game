@@ -136,8 +136,8 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
         entering={FadeInDown.delay(300).duration(600)}
         className="px-6"
       >
-        <Button size="xl" className="w-full rounded-2xl h-16" onPress={onNext}>
-          <Text className="font-bold text-xl">Continue</Text>
+        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
+          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
         </Button>
       </Animated.View>
     </View>

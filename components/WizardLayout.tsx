@@ -62,8 +62,7 @@ export function WizardLayout({
       <View className="px-6 py-4 flex-row items-center gap-4">
         <Button
           variant="ghost"
-          size="icon"
-          className="-ml-2"
+          className="-ml-2 h-10 w-10"
           onPress={handleBack}
         >
           <ChevronLeft className="text-foreground" size={24} />
@@ -74,7 +73,7 @@ export function WizardLayout({
         </View>
 
         {showSkip && (
-          <Button variant="ghost" size="sm" onPress={nextStep}>
+          <Button variant="ghost" className="h-9 px-3" onPress={nextStep}>
             <Text className="text-muted-foreground">Skip</Text>
           </Button>
         )}
@@ -105,12 +104,11 @@ export function WizardLayout({
       {/* Footer / Actions */}
       <View className="bg-background p-6 pt-2">
         <Button
-          size="xl"
-          className="w-full rounded-2xl shadow-xl"
+          className="w-full rounded-2xl shadow-xl h-12 px-10 native:h-16"
           onPress={handleNextPress}
           disabled={nextDisabled}
         >
-          <Text className="text-xl font-bold">{nextLabel}</Text>
+          <Text className="text-xl font-bold text-primary-foreground">{nextLabel}</Text>
         </Button>
       </View>
     </SafeAreaView>

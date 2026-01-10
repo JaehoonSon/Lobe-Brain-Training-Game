@@ -80,11 +80,10 @@ export default function BirthdaySelectionScreen({
     const borderColor = isFocused
       ? "border-primary"
       : hasValue
-      ? "border-primary/50"
-      : "border-slate-200";
-    return `text-center text-4xl font-bold text-primary p-4 border-b-4 ${borderColor} ${
-      field === "year" ? "w-32" : "w-24"
-    }`;
+        ? "border-primary/50"
+        : "border-slate-200";
+    return `text-center text-4xl font-bold text-primary p-4 border-b-4 ${borderColor} ${field === "year" ? "w-32" : "w-24"
+      }`;
   };
 
   return (
@@ -124,9 +123,8 @@ export default function BirthdaySelectionScreen({
                 onBlur={() => setFocused(null)}
               />
               <Text
-                className={`text-xs font-bold uppercase tracking-wider ${
-                  focused === "month" ? "text-primary" : "text-muted-foreground"
-                }`}
+                className={`text-xs font-bold uppercase tracking-wider ${focused === "month" ? "text-primary" : "text-muted-foreground"
+                  }`}
               >
                 Month
               </Text>
@@ -149,9 +147,8 @@ export default function BirthdaySelectionScreen({
                 onBlur={() => setFocused(null)}
               />
               <Text
-                className={`text-xs font-bold uppercase tracking-wider ${
-                  focused === "day" ? "text-primary" : "text-muted-foreground"
-                }`}
+                className={`text-xs font-bold uppercase tracking-wider ${focused === "day" ? "text-primary" : "text-muted-foreground"
+                  }`}
               >
                 Day
               </Text>
@@ -173,9 +170,8 @@ export default function BirthdaySelectionScreen({
                 onBlur={() => setFocused(null)}
               />
               <Text
-                className={`text-xs font-bold uppercase tracking-wider ${
-                  focused === "year" ? "text-primary" : "text-muted-foreground"
-                }`}
+                className={`text-xs font-bold uppercase tracking-wider ${focused === "year" ? "text-primary" : "text-muted-foreground"
+                  }`}
               >
                 Year
               </Text>
@@ -185,12 +181,11 @@ export default function BirthdaySelectionScreen({
 
         <Animated.View entering={FadeInUp.delay(400).duration(600)}>
           <Button
-            size="xl"
-            className="w-full rounded-2xl"
+            className="w-full rounded-2xl h-12 native:h-16 px-10"
             onPress={handleContinue}
             disabled={!isValid}
           >
-            <Text className="font-bold text-xl">Continue</Text>
+            <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
           </Button>
         </Animated.View>
       </View>

@@ -15,9 +15,9 @@ import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export interface GameConfig {
   type:
-    | "mental_arithmetic"
-    | "mental_language_discrimination"
-    | "memory_matrix";
+  | "mental_arithmetic"
+  | "mental_language_discrimination"
+  | "memory_matrix";
 }
 
 export interface GameStepProps extends CustomStepProps {
@@ -87,7 +87,8 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
     }
   };
 
-  const handleRoundComplete = (isCorrect: boolean) => {
+  const handleRoundComplete = (accuracy: number) => {
+    const isCorrect = accuracy === 1;
     const newResults = [...results, isCorrect];
     setResults(newResults);
 
@@ -122,8 +123,8 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
         <Text>No questions available.</Text>
-        <Button onPress={onNext} variant="outline" className="mt-4">
-          <Text>Skip</Text>
+        <Button onPress={onNext} variant="outline" className="h-12 px-8 mt-4">
+          <Text className="text-foreground font-bold">Skip</Text>
         </Button>
       </View>
     );

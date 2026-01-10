@@ -49,8 +49,8 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
       </View>
 
       <Animated.View entering={FadeInUp.delay(400).duration(600)}>
-        <Button size="xl" className="w-full rounded-2xl h-16" onPress={onNext}>
-          <Text className="font-bold text-xl">Continue</Text>
+        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
+          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
         </Button>
       </Animated.View>
     </View>

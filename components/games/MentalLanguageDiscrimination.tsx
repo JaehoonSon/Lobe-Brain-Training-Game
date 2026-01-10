@@ -19,6 +19,8 @@ export function MentalLanguageDiscrimination({
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
 
+
+
   useEffect(() => {
     // Shuffle choices from content options
     const newChoices = [...content.options].sort(() => Math.random() - 0.5);
@@ -57,7 +59,7 @@ export function MentalLanguageDiscrimination({
         </Text>
       </View>
 
-      <View className="flex-row gap-4 w-full justify-center">
+      <View className="flex-row flex-wrap gap-4 w-full justify-center">
         {choices.map((choice, index) => {
           const isSelected = selectedChoice === choice;
           const isCorrectAnswer = choice === content.answer;
@@ -75,28 +77,26 @@ export function MentalLanguageDiscrimination({
             <Button
               key={index}
               variant={variant}
-              size="xl"
               className={cn(
-                "h-40 min-w-[160px] px-4 rounded-3xl active:scale-95 shadow-xl", // Match Mental Math size
+                "rounded-3xl active:scale-95 shadow-xl",
                 hasAnswered &&
                 isCorrectAnswer &&
-                "bg-green-600 border-green-700", // Darker Green
+                "bg-green-600 border-green-700",
                 hasAnswered &&
                 !isCorrectAnswer &&
                 isSelected &&
-                "bg-red-600 border-red-700", // Darker Red
+                "bg-red-600 border-red-700",
                 hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
+              style={{ width: 150, height: 110 }}
               onPress={() => handleChoice(choice)}
               disabled={hasAnswered}
             >
               <Text
                 className={cn(
-                  "text-3xl font-black", // Sligthly smaller than 4xl to accommodate words
-                  variant === "default" &&
-                  !hasAnswered &&
-                  "text-primary-foreground",
-                  hasAnswered && isCorrectAnswer && "text-white"
+                  "text-2xl leading-tight font-black text-primary-foreground",
+                  hasAnswered && isCorrectAnswer && "text-white",
+                  hasAnswered && !isCorrectAnswer && isSelected && "text-white"
                 )}
               >
                 {choice}

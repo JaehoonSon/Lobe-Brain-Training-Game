@@ -109,7 +109,7 @@ export default function IndexUnauthenticatedScreen() {
           <Text className="text-5xl font-extrabold text-center leading-[1.1] text-foreground">
             Discover what your mind can do
           </Text>
-          <Text className="text-xl text-muted-foreground text-center px-4">
+          <Text className="text-2xl text-muted-foreground text-center px-4">
             Sign up to train your brain for free.
           </Text>
         </View>
@@ -117,20 +117,18 @@ export default function IndexUnauthenticatedScreen() {
         <View className="gap-4 w-full">
           {/* Primary Action - Default (Orange) to match Lumosity */}
           <Button
-            size="xl"
-            className="w-full rounded-2xl"
+            className="w-full h-12 native:h-16 px-10 rounded-2xl"
             onPress={() => router.push("/(unauthenticated)/SignUp")}
           >
-            <Text className="font-bold">Get started</Text>
+            <Text className="font-bold text-2xl text-primary-foreground">Get started</Text>
           </Button>
 
           <Button
             variant="outline"
-            size="xl"
-            className="w-full rounded-2xl border-2"
+            className="w-full h-12 native:h-16 px-10 rounded-2xl border-2"
             onPress={() => router.push("/(unauthenticated)/login")}
           >
-            <Text className="font-bold text-primary">Log in</Text>
+            <Text className="font-bold text-2xl text-primary">Log in</Text>
           </Button>
         </View>
 

@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { Pressable } from "react-native";
-import { TextClassContext } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 
 const buttonVariants = cva(
@@ -18,45 +17,9 @@ const buttonVariants = cva(
           "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
         link: "web:underline-offset-4 web:hover:underline web:focus:underline",
       },
-      size: {
-        default: "h-10 px-4 py-2 native:h-12 native:px-5 native:py-3",
-        sm: "h-9 rounded-xl px-3",
-        lg: "h-11 rounded-xl px-8 native:h-14",
-        xl: "h-12 rounded-xl px-10 native:h-16",
-        icon: "h-10 w-10",
-      },
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
-    },
-  }
-);
-
-const buttonTextVariants = cva(
-  "web:whitespace-nowrap text-sm native:text-base font-bold text-foreground web:transition-colors",
-  {
-    variants: {
-      variant: {
-        default: "text-primary-foreground font-black",
-        destructive: "text-destructive-foreground font-black",
-        outline: "group-active:text-accent-foreground font-black",
-        secondary:
-          "text-secondary-foreground group-active:text-secondary-foreground font-black",
-        ghost: "group-active:text-accent-foreground",
-        link: "text-primary group-active:underline",
-      },
-      size: {
-        default: "",
-        sm: "",
-        lg: "native:text-lg",
-        xl: "native:text-2xl",
-        icon: "",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
     },
   }
 );
@@ -64,27 +27,19 @@ const buttonTextVariants = cva(
 type ButtonProps = React.ComponentProps<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
-function Button({ ref, className, variant, size, ...props }: ButtonProps) {
+function Button({ ref, className, variant, ...props }: ButtonProps) {
   return (
-    <TextClassContext.Provider
-      value={buttonTextVariants({
-        variant,
-        size,
-        className: "web:pointer-events-none",
-      })}
-    >
-      <Pressable
-        className={cn(
-          props.disabled && "opacity-50 web:pointer-events-none",
-          buttonVariants({ variant, size, className })
-        )}
-        ref={ref}
-        role="button"
-        {...props}
-      />
-    </TextClassContext.Provider>
+    <Pressable
+      className={cn(
+        props.disabled && "opacity-50 web:pointer-events-none",
+        buttonVariants({ variant, className })
+      )}
+      ref={ref}
+      role="button"
+      {...props}
+    />
   );
 }
 
-export { Button, buttonTextVariants, buttonVariants };
+export { Button, buttonVariants };
 export type { ButtonProps };
