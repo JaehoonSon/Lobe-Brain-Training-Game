@@ -34,10 +34,10 @@ export default function InsightsScreen() {
               Daily Read
             </P>
             <TouchableOpacity
-              activeOpacity={0.9}
+              activeOpacity={0.8}
               onPress={() => router.push(`/insight/${dailyInsight.id}`)}
             >
-              <Card className="bg-primary border-primary">
+              <Card className="bg-primary border-primary border-b-[8px] border-black/20">
                 <CardContent className="p-6">
                   <View className="flex-row justify-between items-start mb-4">
                     <View className="bg-white/20 px-3 py-1 rounded-full">
@@ -73,10 +73,10 @@ export default function InsightsScreen() {
             {otherInsights.map((insight) => (
               <TouchableOpacity
                 key={insight.id}
-                activeOpacity={0.7}
+                activeOpacity={0.8}
                 onPress={() => router.push(`/insight/${insight.id}`)}
               >
-                <Card>
+                <Card className="border-b-[4px] border-muted">
                   <CardContent className="p-4 flex-row gap-4 items-center">
                     {/* Color Indicator */}
                     <View
@@ -96,7 +96,7 @@ export default function InsightsScreen() {
                           {insight.readTime}
                         </Text>
                       </View>
-                      <H4 className="text-lg font-bold text-foreground mb-1">
+                      <H4 className="text-lg font-black text-foreground mb-1">
                         {insight.title}
                       </H4>
                       <P

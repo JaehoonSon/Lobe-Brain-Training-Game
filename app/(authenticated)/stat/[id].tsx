@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   View,
   ScrollView,
@@ -7,7 +7,14 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import Animated, {
+  FadeInDown,
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  withSequence
+} from "react-native-reanimated";
 import {
   ChevronLeft,
   Zap,
@@ -38,6 +45,24 @@ export default function CategoryDetailScreen() {
   //     refresh();
   //   }, [refresh])
   // );
+
+  // Floating animation for the brain
+  const translateY = useSharedValue(0);
+
+  useEffect(() => {
+    translateY.value = withRepeat(
+      withSequence(
+        withTiming(-10, { duration: 2000 }),
+        withTiming(0, { duration: 2000 })
+      ),
+      -1,
+      true
+    );
+  }, []);
+
+  const floatingStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }],
+  }));
 
   // Find the category stats for this ID
   const category = categoryStats.find((c) => c.id === id);
@@ -103,42 +128,65 @@ export default function CategoryDetailScreen() {
       >
         <View className="px-6">
           {/* Hero BPI Section */}
-          {/* Hero BPI Section - Duolingo Style */}
-          <View className="mb-8 pt-4 flex-row items-center justify-between px-2">
-            <View className="overflow-visible">
-              <Text
-                className="text-8xl font-black text-primary"
-                style={{
-                  lineHeight: 100,
-                  textShadowColor: "rgba(0, 0, 0, 0.1)",
-                  textShadowOffset: { width: 2, height: 4 },
-                  textShadowRadius: 0,
-                }}
-              >
-                {hasScore ? category.score : "--"}
-              </Text>
-              <View className="flex-row items-center gap-2 ml-1 -mt-3">
-                <Text className="text-3xl font-black text-primary/80">
-                  current bpi
+          {/* Hero BPI Section - Juicy Tactile Style */}
+          <View className="mb-10 pt-6 flex-row items-center justify-between px-2">
+            <Animated.View
+              entering={FadeInDown.delay(200).duration(600)}
+              className="flex-1"
+            >
+              <View className="relative">
+                {/* 3D Drop Shadow Text Layer */}
+                <Text
+                  className="text-8xl font-black text-primary/20 absolute top-1.5 left-1.5"
+                  style={{ lineHeight: 90 }}
+                >
+                  {hasScore ? category.score : "--"}
                 </Text>
-                {hasScore && (
-                  <TrendingUp
-                    size={16}
-                    className="text-primary"
-                    strokeWidth={3}
-                  />
-                )}
+                {/* Main Text Layer */}
+                <Text
+                  className="text-8xl font-black text-primary"
+                  style={{
+                    lineHeight: 90,
+                  }}
+                >
+                  {hasScore ? category.score : "--"}
+                </Text>
               </View>
-            </View>
 
-            {/* Big Icon */}
-            <View className="shadow-lg shadow-orange-500/20">
-              <Image
-                source={require("~/assets/brain_workout_clay_3d.png")}
-                style={{ width: 160, height: 160 }}
-                contentFit="contain"
-              />
-            </View>
+              <View className="-mt-1 flex-row">
+                <View className="bg-primary/10 px-3 py-1 rounded-full border-b-4 border-primary/20 flex-row items-center gap-2">
+                  <Text className="text-sm font-black text-primary uppercase tracking-wider">
+                    current bpi
+                  </Text>
+                  {hasScore && (
+                    <TrendingUp
+                      size={14}
+                      className="text-primary"
+                      strokeWidth={3}
+                    />
+                  )}
+                </View>
+              </View>
+            </Animated.View>
+
+            {/* Big Floating Icon */}
+            <Animated.View
+              entering={FadeInDown.delay(400).duration(600)}
+              style={{
+                shadowColor: "#f97316", // orange-500
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.3,
+                shadowRadius: 20,
+              }}
+            >
+              <Animated.View style={floatingStyle}>
+                <Image
+                  source={require("~/assets/brain_workout_clay_3d.png")}
+                  style={{ width: 160, height: 160 }}
+                  contentFit="contain"
+                />
+              </Animated.View>
+            </Animated.View>
           </View>
 
           {/* LPI History Card (Locked) */}
@@ -233,7 +281,7 @@ export default function CategoryDetailScreen() {
                   <TouchableOpacity
                     key={insight.id}
                     activeOpacity={0.7}
-                    onPress={() => router.push(`/insight/${insight.id}`)}
+                    onPress={() => router.push({ pathname: "/insight/[id]", params: { id: insight.id } } as any)}
                   >
                     <Card>
                       <CardContent className="p-4 flex-row gap-4 items-center">
