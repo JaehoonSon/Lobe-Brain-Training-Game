@@ -56,6 +56,12 @@ const BallSortSchema = z.object({
   colorCount: z.number(),
 });
 
+// 6. Word Unscramble
+const WordUnscrambleSchema = z.object({
+  type: z.literal('word_unscramble'),
+  word: z.string(),
+});
+
 /* -------------------------------------------------------------------------- */
 /*                         Game → Schema Type Mapping                          */
 /* -------------------------------------------------------------------------- */
@@ -66,6 +72,7 @@ const GameSchemas = {
   mental_language_discrimination: MentalLanguageDiscriminationSchema,
   wordle: WordleSchema,
   ball_sort: BallSortSchema,
+  word_unscramble: WordUnscrambleSchema,
 } as const;
 
 type GameId = keyof typeof GameSchemas;
@@ -128,13 +135,16 @@ function parseArgs(): ScriptConfig {
 /* -------------------------------------------------------------------------- */
 
 function buildOutputSchema<G extends GameId>(game: G) {
+  // Cast to ZodObject to allow .omit() - assuming all schemas are objects
+  const schema = GameSchemas[game] as unknown as z.ZodObject<any>;
   return z.object({
-    questions: z.array(GameSchemas[game]),
+    questions: z.array(schema.omit({ type: true })),
   });
 }
 
+// Payload now has questions without 'type'
 type OutputPayload<G extends GameId> = {
-  questions: GameContent<G>[];
+  questions: Omit<GameContent<G>, 'type'>[];
 };
 
 function buildPrompt(game: GameId, count: number, difficulty: number): string {
@@ -262,6 +272,33 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
       `;
     }
 
+    case 'word_unscramble': {
+      let wordLengthRange = '3-4';
+      if (difficulty <= 2) wordLengthRange = '3-4';
+      else if (difficulty <= 5) wordLengthRange = '5-6';
+      else if (difficulty <= 8) wordLengthRange = '7-8';
+      else wordLengthRange = '8-9'; // Strict cap at 9
+
+      return `
+      Generate ${count} unique Word Unscramble profiles for difficulty ${difficulty}/10.
+
+      Requirements:
+      - 'word': A valid, recognized English word. Length must be strictly in range ${wordLengthRange}.
+      - 'hint': A clear, concise definition or synonym (max 6 words).
+      - VARIETY: Do NOT reuse the same word. Provide a diverse set of words (nouns, verbs, adjectives).
+      - CRITICAL: DO NOT produce words longer than 9 letters. Longer words are unplayable on mobile.
+      
+      Difficulty Guide:
+      - 1-2: Short, very common words (e.g. CAT, DOG, BOOK).
+      - 3-5: Everyday words (e.g. APPLE, TABLE, SLEEP).
+      - 6-8: Educated/Professional vocabulary (e.g. PROCESS, DYNAMIC, LOGIC).
+      - 9-10: Challenging academic words, but NOT obscure/archaic (e.g. ALGORITHM, SYMPHONY, PHENOMENON). 
+        Avoid words longer than 10 letters unless they are very common.
+
+      Output ONLY valid JSON.
+      `;
+    }
+
     default:
       game satisfies never;
       return '';
@@ -332,11 +369,14 @@ async function main() {
         const payload = result.output as OutputPayload<typeof game>;
 
         const newQuestions: Question<typeof game>[] = payload.questions.map(
-          (content) => ({
+          (partialContent) => ({
             id: crypto.randomUUID(),
             game_id: game,
             difficulty,
-            content,
+            content: {
+              ...partialContent,
+              type: game,
+            } as GameContent<typeof game>,
           })
         );
 
