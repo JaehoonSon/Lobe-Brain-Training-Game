@@ -20,16 +20,13 @@
       "appStoreUrl": "https://apps.apple.com/us/app/elysia-photo-glow/id6749180620",
       "usesAppleSignIn": true,
       "supportsTablet": false,
-      "buildNumber": "2",
+      "buildNumber": "1",
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
-        },
-        "NSCameraUsageDescription": "We need to use your camera to let you take photos or scan items.",
-        "NSPhotoLibraryUsageDescription": "We need to access your photo library so you can choose images from your gallery.",
-        "NSPhotoLibraryAddUsageDescription": "We need permission to save images to your photo library."
+        }
       }
     },
     "android": {
@@ -69,7 +66,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "a7e567b5-0040-4b61-8bc8-64963c8b4465"
+        "projectId": "586a70a9-4ec7-4ec2-a30a-220fd0ebf9d4"
       }
     }
   }
