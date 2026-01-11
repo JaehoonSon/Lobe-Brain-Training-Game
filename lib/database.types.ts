@@ -93,6 +93,44 @@ export type Database = {
         }
         Relationships: []
       }
+      game_ability_norms: {
+        Row: {
+          game_id: string
+          mean_raw: number
+          sample_size: number
+          std_raw: number
+          updated_at: string
+          window_end: string
+          window_start: string
+        }
+        Insert: {
+          game_id: string
+          mean_raw: number
+          sample_size: number
+          std_raw: number
+          updated_at?: string
+          window_end: string
+          window_start: string
+        }
+        Update: {
+          game_id?: string
+          mean_raw?: number
+          sample_size?: number
+          std_raw?: number
+          updated_at?: string
+          window_end?: string
+          window_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_ability_norms_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: true
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       game_answers: {
         Row: {
           accuracy: number
@@ -137,53 +175,6 @@ export type Database = {
             columns: ["session_id"]
             isOneToOne: false
             referencedRelation: "game_sessions"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      game_norms: {
-        Row: {
-          game_id: string
-          mean_score: number
-          p50: number | null
-          p90: number | null
-          p99: number | null
-          sample_size: number
-          std_score: number
-          updated_at: string
-          window_end: string
-          window_start: string
-        }
-        Insert: {
-          game_id: string
-          mean_score: number
-          p50?: number | null
-          p90?: number | null
-          p99?: number | null
-          sample_size: number
-          std_score: number
-          updated_at?: string
-          window_end: string
-          window_start: string
-        }
-        Update: {
-          game_id?: string
-          mean_score?: number
-          p50?: number | null
-          p90?: number | null
-          p99?: number | null
-          sample_size?: number
-          std_score?: number
-          updated_at?: string
-          window_end?: string
-          window_start?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "game_norms_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: true
-            referencedRelation: "games"
             referencedColumns: ["id"]
           },
         ]
@@ -397,28 +388,28 @@ export type Database = {
           },
         ]
       }
-      user_category_scores: {
+      user_category_ability_scores: {
         Row: {
+          ability_score: number
           category_id: string
-          display_score: number
           updated_at: string
           user_id: string
         }
         Insert: {
+          ability_score: number
           category_id: string
-          display_score: number
           updated_at?: string
           user_id: string
         }
         Update: {
+          ability_score?: number
           category_id?: string
-          display_score?: number
           updated_at?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "user_category_scores_category_id_fkey"
+            foreignKeyName: "user_category_ability_scores_category_id_fkey"
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
@@ -426,9 +417,47 @@ export type Database = {
           },
         ]
       }
-      user_game_percentiles: {
+      user_game_ability_history: {
         Row: {
-          display_score: number
+          ability_score: number
+          created_at: string | null
+          game_id: string
+          id: string
+          percentile: number
+          snapshot_date: string
+          user_id: string
+        }
+        Insert: {
+          ability_score: number
+          created_at?: string | null
+          game_id: string
+          id?: string
+          percentile: number
+          snapshot_date?: string
+          user_id: string
+        }
+        Update: {
+          ability_score?: number
+          created_at?: string | null
+          game_id?: string
+          id?: string
+          percentile?: number
+          snapshot_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_game_ability_history_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_game_ability_scores: {
+        Row: {
+          ability_score: number
           game_id: string
           last_score_raw: number
           percentile: number
@@ -436,7 +465,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          display_score: number
+          ability_score: number
           game_id: string
           last_score_raw: number
           percentile: number
@@ -444,7 +473,7 @@ export type Database = {
           user_id: string
         }
         Update: {
-          display_score?: number
+          ability_score?: number
           game_id?: string
           last_score_raw?: number
           percentile?: number
@@ -453,7 +482,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "user_game_percentiles_game_id_fkey"
+            foreignKeyName: "user_game_ability_scores_game_id_fkey"
             columns: ["game_id"]
             isOneToOne: false
             referencedRelation: "games"
@@ -552,19 +581,19 @@ export type Database = {
           },
         ]
       }
-      user_global_scores: {
+      user_global_ability_scores: {
         Row: {
-          display_score: number
+          ability_score: number
           updated_at: string
           user_id: string
         }
         Insert: {
-          display_score: number
+          ability_score: number
           updated_at?: string
           user_id: string
         }
         Update: {
-          display_score?: number
+          ability_score?: number
           updated_at?: string
           user_id?: string
         }
@@ -621,6 +650,15 @@ export type Database = {
           source_url: string
         }[]
       }
+      get_game_questions: {
+        Args: { p_count?: number; p_game_id: string }
+        Returns: {
+          content: Json
+          difficulty: number
+          id: string
+          pool_type: string
+        }[]
+      }
       process_daily_game_performance_snapshot: {
         Args: never
         Returns: undefined
@@ -629,7 +667,7 @@ export type Database = {
         Args: never
         Returns: undefined
       }
-      refresh_norm_referenced_scores: { Args: never; Returns: undefined }
+      refresh_ability_scores: { Args: never; Returns: undefined }
       seed_game_norms: { Args: never; Returns: number }
     }
     Enums: {
