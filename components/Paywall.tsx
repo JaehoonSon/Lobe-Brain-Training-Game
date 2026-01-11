@@ -4,9 +4,9 @@ import RevenueCatUI from "react-native-purchases-ui";
 import { CustomerInfo } from "react-native-purchases";
 
 type PaywallProps = {
-  onPurchaseCompleted?: (customerInfo: CustomerInfo) => void;
-  onRestoreCompleted?: (customerInfo: CustomerInfo) => void;
-  onDismiss?: () => void;
+  onPurchaseCompleted: (customerInfo: CustomerInfo) => void;
+  onRestoreCompleted: (customerInfo: CustomerInfo) => void;
+  onDismiss: () => void;
   options?: any; // Allow passing through other RevenueCat options if needed
 };
 
@@ -21,14 +21,15 @@ export default function Paywall({
       <RevenueCatUI.Paywall
         onPurchaseCompleted={({ customerInfo }) => {
           console.log("Purchase completed:", customerInfo);
-          onPurchaseCompleted?.(customerInfo);
+          onPurchaseCompleted(customerInfo);
         }}
         onRestoreCompleted={({ customerInfo }) => {
           console.log("Restore completed:", customerInfo);
-          onRestoreCompleted?.(customerInfo);
+          onRestoreCompleted(customerInfo);
         }}
         onDismiss={() => {
-          onDismiss?.();
+          console.log("Paywall dismissed");
+          onDismiss();
         }}
         {...options}
       />

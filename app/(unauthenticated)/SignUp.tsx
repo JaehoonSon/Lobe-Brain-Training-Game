@@ -1,4 +1,4 @@
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { View } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -16,7 +16,8 @@ export default function SignUp() {
   const handleLogin = async () => {
     try {
       await signInApple();
-      router.replace("/(onboarding)");
+      // Stack.Protected guards will automatically route to onboarding
+      // since isAuthenticated=true and isComplete=false for new users
     } catch (err) {
       console.log("sign in error", err);
       showErrorToast("Error Signing in");

@@ -16,7 +16,10 @@ import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
 import { AuthProvider, useAuth } from "~/contexts/AuthProvider";
-import { RevenueCatProvider } from "~/contexts/RevenueCatProvider";
+import {
+  RevenueCatProvider,
+  useRevenueCat,
+} from "~/contexts/RevenueCatProvider";
 import { SplashScreenController } from "./splash";
 import {
   OnboardingProvider,
@@ -51,6 +54,7 @@ function AppContent() {
 
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
   const { isComplete, isLoading: isOnboardingLoading } = useOnboarding();
+  const { isPro } = useRevenueCat();
 
   const isAppLoading = isAuthLoading || isOnboardingLoading;
 
@@ -60,6 +64,7 @@ function AppContent() {
   console.log("isAuthLoading:", isAuthLoading);
   console.log("isOnboardingLoading:", isOnboardingLoading);
   console.log("isComplete:", isComplete);
+  console.log("isPro:", isPro);
   console.log("===========================");
 
   if (isAppLoading) {

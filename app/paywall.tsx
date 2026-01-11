@@ -1,19 +1,28 @@
 import React from "react";
 import { useRouter } from "expo-router";
 import Paywall from "~/components/Paywall";
-import { Button } from "~/components/ui/button";
-import { X } from "lucide-react-native";
-import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useOnboarding } from "~/contexts/OnboardingContext";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 export default function PaywallScreen() {
   const router = useRouter();
+  const { completeOnboarding } = useOnboarding();
+  const { isPro } = useRevenueCat();
 
   return (
     <Paywall
-      onPurchaseCompleted={() => router.replace("/(authenticated)/(tabs)")}
-      onRestoreCompleted={() => router.replace("/(authenticated)/(tabs)")}
-      onDismiss={() => router.replace("/(authenticated)/(tabs)")}
+      onPurchaseCompleted={async () => {
+        await completeOnboarding();
+      }}
+      onRestoreCompleted={async () => {
+        // Only complete onboarding if restore was actually successful
+        if (isPro) {
+          await completeOnboarding();
+        }
+      }}
+      onDismiss={async () => {
+        await completeOnboarding();
+      }}
     />
   );
 }
