@@ -29,7 +29,8 @@ import { BlurView } from "expo-blur";
 import { cn } from "~/lib/utils";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-import { useUserStats } from "~/contexts/UserStatsContext";
+import { useUserStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
 import { CategoryPerformanceChart } from "~/components/charts/CategoryPerformanceChart";
@@ -37,7 +38,8 @@ import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { categoryStats, isLoading, refresh, history } = useUserStats();
+  const { categoryStats, categoryScoreHistory, isLoading, refresh } = useUserStats();
+
   const { games } = useGames();
 
   // Refresh stats when focusing the screen
@@ -129,7 +131,9 @@ export default function CategoryDetailScreen() {
           <ChevronLeft size={24} className="text-foreground" />
         </TouchableOpacity>
         <View className="absolute left-0 right-0 items-center">
-          <H1 className="text-xl">{category.name} BPI</H1>
+          <H1 className="text-xl">{category.name} Score</H1>
+
+
         </View>
       </View>
 
@@ -168,9 +172,9 @@ export default function CategoryDetailScreen() {
               <View className="-mt-1 flex-row">
                 <View className="bg-primary/10 px-3 py-1 rounded-full border-b-4 border-primary/20 flex-row items-center gap-2">
                   <Text className="text-sm font-black text-primary uppercase tracking-wider">
-                    current bpi
+                    current score
                   </Text>
-                  {hasScore && (
+                  {hasScore && categoryScoreHistory[id]?.length > 0 && (
                     <TrendingUp
                       size={14}
                       className="text-primary"
@@ -178,6 +182,7 @@ export default function CategoryDetailScreen() {
                     />
                   )}
                 </View>
+
               </View>
             </Animated.View>
 
@@ -266,7 +271,8 @@ export default function CategoryDetailScreen() {
                                   {gameStats.averageScore}
                                 </P>
                                 <Text className="text-[10px] font-black text-secondary/60 text-right">
-                                  AVG BPI
+                                  AVG SCORE
+
                                 </Text>
                               </View>
                             )}
@@ -280,7 +286,31 @@ export default function CategoryDetailScreen() {
             )}
           </Animated.View>
 
+          <Animated.View entering={FadeInDown.delay(600).duration(400)}>
+            <H4 className="text-lg font-bold mb-3">Score History</H4>
+            {categoryScoreHistory[id]?.length ? (
+              <Card>
+                <CardContent className="p-4">
+                  <View className="h-32 flex-row items-end justify-center gap-1 opacity-60 px-4">
+                    {categoryScoreHistory[id]?.slice(-10).map((point, i) => (
+                      <View
+                        key={i}
+                        className="w-3 bg-secondary rounded-t-sm"
+                        style={{ height: `${(point.score / 2000) * 100}%` }}
+                      />
+                    ))}
+                  </View>
+                </CardContent>
+              </Card>
+            ) : (
+              <P className="text-center py-8">
+                No score history yet.
+              </P>
+            )}
+          </Animated.View>
+
           {/* Recommended Insights Section */}
+
           {relevantInsights.length > 0 && (
             <Animated.View entering={FadeInDown.delay(600).duration(400)}>
               <H4 className="text-lg font-bold mb-3">Recommended Reading</H4>

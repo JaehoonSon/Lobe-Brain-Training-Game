@@ -552,6 +552,44 @@ export type Database = {
           },
         ]
       }
+      user_game_score_history: {
+        Row: {
+          created_at: string | null
+          display_score: number
+          game_id: string
+          id: string
+          percentile: number
+          snapshot_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_score: number
+          game_id: string
+          id?: string
+          percentile: number
+          snapshot_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          display_score?: number
+          game_id?: string
+          id?: string
+          percentile?: number
+          snapshot_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_game_score_history_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_global_scores: {
         Row: {
           display_score: number

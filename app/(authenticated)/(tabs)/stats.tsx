@@ -30,7 +30,8 @@ import {
   BookType,
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
+import { useUserStats, CategoryStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+
 import { router, useFocusEffect } from "expo-router";
 import { cn } from "~/lib/utils";
 import { FeatureCard } from "~/components/FeatureCard";
@@ -145,28 +146,34 @@ function StrengthContent() {
   );
 }
 
-function HistoryContent() {
+function HistoryContent({ history }: { history: ScoreHistoryPoint[] }) {
+  if (history.length === 0) {
+    return (
+      <P className="text-center py-8">
+        No history yet
+      </P>
+    );
+  }
+
+  const maxScore = Math.max(...history.map((h) => h.score));
+
   return (
-    <View className="h-24 flex-row items-end justify-between px-4 opacity-60">
-      <View className="w-1/5 h-[30%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[45%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[60%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[50%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[90%] bg-primary rounded-t-sm" />
+    <View className="h-24 flex-row items-end justify-between gap-1 opacity-60 px-4">
+      {history.slice(-10).map((point, i) => (
+        <View
+          key={i}
+          className="w-3 bg-secondary rounded-t-sm"
+          style={{ height: `${(point.score / maxScore) * 100}%` }}
+        />
+      ))}
     </View>
   );
 }
 
+
 export default function StatsScreen() {
-  const {
-    overallBPI,
-    overallPercentile,
-    categoryStats,
-    history,
-    isLoading,
-    error,
-    refresh,
-  } = useUserStats();
+  const { overallBPI, categoryStats, isLoading, error, refresh, overallScoreHistory } = useUserStats();
+
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -180,6 +187,8 @@ export default function StatsScreen() {
   const categoriesWithData = categoryStats.filter(
     (c) => c.score !== null
   ).length;
+  const hasHistory = overallScoreHistory.length > 0;
+
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -235,8 +244,9 @@ export default function StatsScreen() {
                 </Text>
               ) : hasOverallBPI ? (
                 <Text className="text-primary-foreground font-bold">
-                  Keep playing to see your rank!
+                  Scores update daily based on all players
                 </Text>
+
               ) : (
                 <Text className="text-primary-foreground/90 font-bold text-center">
                   Play {3 - categoriesWithData} more categories to unlock
@@ -295,8 +305,9 @@ export default function StatsScreen() {
           </FeatureCard>
 
           <FeatureCard title="Progress History" variant="secondary">
-            <OverallPerformanceChart history={history} />
+            <HistoryContent history={overallScoreHistory} />
           </FeatureCard>
+
         </View>
       </ScrollView>
     </SafeAreaView>
