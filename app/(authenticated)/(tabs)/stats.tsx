@@ -280,7 +280,7 @@ export default function StatsScreen() {
             <FeatureCard
               title="How You Compare"
               variant="secondary"
-              isLocked={false}
+              isLocked={true}
             >
               <ComparisonChart percentile={overallPercentile} />
             </FeatureCard>
@@ -289,14 +289,14 @@ export default function StatsScreen() {
           <FeatureCard
             title="Strength Profile"
             variant="primary"
-            isLocked={false}
+            isLocked={true}
           >
             <StrengthProfileChart categoryStats={categoryStats} />
           </FeatureCard>
 
-          <FeatureCard title="Progress History" variant="secondary">
+          {/* <FeatureCard title="Progress History" variant="secondary">
             <OverallPerformanceChart history={history} />
-          </FeatureCard>
+          </FeatureCard> */}
         </View>
       </ScrollView>
     </SafeAreaView>
