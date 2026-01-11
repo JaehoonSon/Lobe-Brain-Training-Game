@@ -56,7 +56,7 @@ export default function SignUp() {
             </Text>
           </Button>
 
-          <Button
+          {/* <Button
             variant="secondary"
             className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
             onPress={() => {
@@ -68,7 +68,7 @@ export default function SignUp() {
             <Text className="font-bold text-xl text-secondary-foreground">
               Continue with Google
             </Text>
-          </Button>
+          </Button> */}
         </Animated.View>
 
         {/* Terms */}
