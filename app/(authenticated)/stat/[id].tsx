@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   View,
   ScrollView,
@@ -13,7 +13,7 @@ import Animated, {
   useAnimatedStyle,
   withRepeat,
   withTiming,
-  withSequence
+  withSequence,
 } from "react-native-reanimated";
 import {
   ChevronLeft,
@@ -32,11 +32,12 @@ import { Text } from "~/components/ui/text";
 import { useUserStats } from "~/contexts/UserStatsContext";
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
+import { CategoryPerformanceChart } from "~/components/charts/CategoryPerformanceChart";
 import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { categoryStats, isLoading, refresh } = useUserStats();
+  const { categoryStats, isLoading, refresh, history } = useUserStats();
   const { games } = useGames();
 
   // Refresh stats when focusing the screen
@@ -45,6 +46,17 @@ export default function CategoryDetailScreen() {
   //     refresh();
   //   }, [refresh])
   // );
+
+  const categoryHistory = useMemo(() => {
+    const relevantGameIds = new Set(
+      games.filter((g) => g.category_id === id).map((g) => g.id)
+    );
+    return history.filter((h) => relevantGameIds.has(h.game_id));
+  }, [games, history, id]);
+
+  useEffect(() => {
+    console.log("categoryHistory", JSON.stringify(categoryHistory));
+  }, [categoryHistory]);
 
   // Floating animation for the brain
   const translateY = useSharedValue(0);
@@ -189,17 +201,13 @@ export default function CategoryDetailScreen() {
             </Animated.View>
           </View>
 
-          {/* LPI History Card (Locked) */}
-          <FeatureCard title="How You Compare" variant="secondary">
-            <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
-              {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
-                <View
-                  key={i}
-                  className="w-4 bg-secondary rounded-t-sm"
-                  style={{ height: `${h}%` }}
-                />
-              ))}
-            </View>
+          {/* Performance History Chart */}
+          <FeatureCard
+            title="Performance History"
+            variant="secondary"
+            isLocked={true}
+          >
+            <CategoryPerformanceChart history={categoryHistory} />
           </FeatureCard>
 
           {/* Category Games Section */}
@@ -281,7 +289,12 @@ export default function CategoryDetailScreen() {
                   <TouchableOpacity
                     key={insight.id}
                     activeOpacity={0.7}
-                    onPress={() => router.push({ pathname: "/insight/[id]", params: { id: insight.id } } as any)}
+                    onPress={() =>
+                      router.push({
+                        pathname: "/insight/[id]",
+                        params: { id: insight.id },
+                      } as any)
+                    }
                   >
                     <Card>
                       <CardContent className="p-4 flex-row gap-4 items-center">

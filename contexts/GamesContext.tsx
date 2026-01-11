@@ -66,7 +66,16 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
       if (categoriesResult.error) throw categoriesResult.error;
 
       setGames(gamesResult.data || []);
-      setCategories(categoriesResult.data || []);
+
+      const activeGames = gamesResult.data || [];
+      const allCategories = categoriesResult.data || [];
+
+      // Filter categories that have at least one active game
+      const categoriesWithGames = allCategories.filter((category) =>
+        activeGames.some((game) => game.category_id === category.id)
+      );
+
+      setCategories(categoriesWithGames);
 
       // Also fetch progress
       await fetchDailyProgress();

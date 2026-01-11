@@ -3,7 +3,12 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  RefreshControl,
 } from "react-native";
+import { useCallback, useState } from "react";
+import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
+import { OverallPerformanceChart } from "~/components/charts/OverallPerformanceChart";
+
 import { BlurView } from "expo-blur";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H4, P } from "~/components/ui/typography";
@@ -29,8 +34,6 @@ import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
 import { router, useFocusEffect } from "expo-router";
 import { cn } from "~/lib/utils";
 import { FeatureCard } from "~/components/FeatureCard";
-import { useCallback } from "react";
-
 // --- Components ---
 
 function getCategoryIcon(categoryName: string) {
@@ -168,14 +171,23 @@ function HistoryContent() {
 }
 
 export default function StatsScreen() {
-  const { overallBPI, categoryStats, isLoading, error, refresh } = useUserStats();
+  const { overallBPI, categoryStats, history, isLoading, error, refresh } =
+    useUserStats();
 
   // Refresh stats when focusing the screen
-  useFocusEffect(
-    useCallback(() => {
-      refresh();
-    }, [refresh])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     refresh();
+  //   }, [refresh])
+  // );
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await refresh();
+    setRefreshing(false);
+  }, [refresh]);
 
   const hasOverallBPI = overallBPI !== null;
   const categoriesWithData = categoryStats.filter(
@@ -192,6 +204,9 @@ export default function StatsScreen() {
       <ScrollView
         className="flex-1 bg-background"
         contentContainerStyle={{ paddingBottom: 100 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <View className="px-6 pb-6">
           {/* Page Title */}
@@ -266,18 +281,24 @@ export default function StatsScreen() {
           </Card>
 
           {/* Premium Sections - Updated Visuals */}
-          <H4 className="mb-4 text-2xl font-black px-1 py-1">Detailed Analysis</H4>
+          <H4 className="mb-4 text-2xl font-black px-1 py-1">
+            Detailed Analysis
+          </H4>
 
           <FeatureCard title="How You Compare" variant="secondary">
             <CompareContent />
           </FeatureCard>
 
-          <FeatureCard title="Strength Profile" variant="primary">
-            <StrengthContent />
+          <FeatureCard
+            title="Strength Profile"
+            variant="primary"
+            isLocked={false}
+          >
+            <StrengthProfileChart categoryStats={categoryStats} />
           </FeatureCard>
 
           <FeatureCard title="Progress History" variant="secondary">
-            <HistoryContent />
+            <OverallPerformanceChart history={history} />
           </FeatureCard>
         </View>
       </ScrollView>

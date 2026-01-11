@@ -1,89 +1,94 @@
 import React from "react";
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
-import { Lock } from "lucide-react-native";
+import { Lock, Unlock } from "lucide-react-native";
 import { Card } from "~/components/ui/card";
 import { H4 } from "~/components/ui/typography";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 interface FeatureCardProps {
   title: string;
   children: React.ReactNode;
   variant?: "primary" | "secondary";
+  isLocked?: boolean;
 }
 
 /**
  * FeatureCard - A locked premium feature card with blur overlay
- * Used on Stats page and Category detail pages
+ * automatically handles Pro status checks.
  */
 export function FeatureCard({
   title,
   children,
   variant = "primary",
+  isLocked = false,
 }: FeatureCardProps) {
+  const { isPro, presentPaywall } = useRevenueCat();
+
+  // Logic: Locked if requested AND user is not pro
+  const isGated = isLocked && !isPro;
+  // Show Pro badge if it IS a locked feature but user HAS access
+  const showProBadge = isLocked && isPro;
+
   return (
-    <Card className="mb-6 bg-card p-0">
-      <View
-        className="relative"
-        style={{ overflow: "hidden", borderRadius: 10 }}
-      >
-        {/* 1. Underlying Content (to be blurred) */}
-        <View>
-          {/* Header Area Spacer */}
-          <View className="px-4 pt-4 pb-2">
-            <View className="px-4 py-1.5 rounded-full opacity-0">
-              <H4 className="text-lg font-black">{title}</H4>
-            </View>
-          </View>
-
-          {/* Body Content */}
-          <View className="p-4 pt-0">
-            <View className="px-2">{children}</View>
-            {/* Extra padding for the message center alignment */}
-            <View className="h-8" />
-          </View>
+    <Card className="mb-6 bg-card overflow-hidden">
+      {/* Header Section */}
+      <View className="flex-row items-center justify-between px-4 pt-4 pb-2">
+        <View className="flex-row items-center gap-2">
+          {/* Optional: Add an icon here if passed in props later */}
+          <H4 className="text-base font-black uppercase tracking-wider text-foreground/80">
+            {title}
+          </H4>
         </View>
 
-        {/* 2. Global Blur - Now covers the whole card */}
-        <BlurView
-          intensity={70}
-          tint="light"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            borderRadius: 10,
-          }}
-        />
-
-        {/* 3. Floating Sharp Pill - On top of blur */}
-        <View className="absolute top-4 left-4">
-          <View
-            className={cn(
-              "px-4 py-1.5 rounded-full border-b-4",
-              variant === "primary"
-                ? "bg-primary border-primary-edge"
-                : "bg-secondary border-secondary-edge"
-            )}
+        {/* Right Action/Badge */}
+        {isGated ? (
+          <TouchableOpacity
+            onPress={() => presentPaywall()}
+            className="bg-primary px-3 py-1.5 rounded-full flex-row items-center gap-1.5 shadow-sm"
           >
-            <H4 className="text-lg font-black text-white">
-              {title}
-            </H4>
+            <Text className="text-white font-black text-xs">UNLOCK</Text>
+            <Lock size={12} color="white" strokeWidth={3} />
+          </TouchableOpacity>
+        ) : showProBadge ? (
+          <View className="bg-secondary/10 px-2 py-1 rounded-md border border-secondary/20">
+            <Text className="text-secondary font-black text-[10px]">PRO</Text>
           </View>
+        ) : null}
+      </View>
+
+      <View className="relative">
+        {/* Main Content */}
+        <View className={cn("p-4 pt-0", isGated && "opacity-50")}>
+          {children}
         </View>
 
-        {/* 4. Minimal Unlock Message - High Contrast on Blur */}
-        <View className="absolute inset-0 items-center justify-center p-8">
-          <View className="items-center gap-2">
-            <Lock size={20} className="text-primary-edge/60" strokeWidth={3} />
-            <Text className="text-primary-edge/80 text-center text-lg max-w-[220px]">
-              This feature is available with a{"\n"}premium subscription
-            </Text>
-          </View>
-        </View>
+        {/* Locked Overlay */}
+        {isGated && (
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => presentPaywall()}
+            className="absolute inset-0 overflow-hidden rounded-b-xl"
+          >
+            <BlurView
+              intensity={90}
+              tint="light"
+              className="absolute inset-0"
+            />
+            <View className="absolute inset-0 items-center justify-center p-6">
+              <View className="items-center gap-3">
+                <View className="bg-transparent p-3 rounded-full shadow-sm">
+                  <Lock size={24} className="text-primary" />
+                </View>
+                <Text className="text-center font-bold text-foreground/80 text-sm">
+                  This feature is available with a Premium subscription.
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     </Card>
   );

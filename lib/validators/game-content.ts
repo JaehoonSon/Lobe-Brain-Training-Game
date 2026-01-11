@@ -29,7 +29,7 @@ export const MentalLanguageDiscriminationContentSchema = z.object({
 // 4. Wordle
 export const WordleContentSchema = z.object({
   type: z.literal("wordle"),
-  word: z.string().length(5),
+  word: z.string(),
   max_guesses: z.number(),
 });
 

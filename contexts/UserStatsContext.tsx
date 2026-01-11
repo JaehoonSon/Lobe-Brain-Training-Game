@@ -14,6 +14,8 @@ import { Database } from "~/lib/database.types";
 type GameSession = Database["public"]["Tables"]["game_sessions"]["Row"];
 type UserGamePerformance =
   Database["public"]["Tables"]["user_game_performance"]["Row"];
+type UserGamePerformanceHistory =
+  Database["public"]["Tables"]["user_game_performance_history"]["Row"];
 
 export interface GameStats {
   gameId: string;
@@ -43,6 +45,7 @@ export interface UserStatsContextValue {
   totalGamesPlayed: number;
   categoryStats: CategoryStats[];
   recentSessions: GameSession[];
+  history: UserGamePerformanceHistory[];
   isLoading: boolean;
   error: Error | null;
   refresh: () => Promise<void>;
@@ -63,6 +66,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
 
   const [categoryStats, setCategoryStats] = useState<CategoryStats[]>([]);
   const [recentSessions, setRecentSessions] = useState<GameSession[]>([]);
+  const [history, setHistory] = useState<UserGamePerformanceHistory[]>([]);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -95,6 +99,15 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
 
       if (perfError) throw perfError;
 
+      // Fetch performance history
+      const { data: historyData, error: historyError } = await supabase
+        .from("user_game_performance_history")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+
+      if (historyError) throw historyError;
+
       // Fetch streak data
       const { data: streakData, error: streakError } = await supabase
         .from("user_streaks")
@@ -108,6 +121,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       }
 
       setRecentSessions(sessions || []);
+      setHistory(historyData || []);
       setCurrentStreak(streakData?.current_streak ?? 0);
 
       // Build a map of game_id -> UserGamePerformance
@@ -256,6 +270,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       totalGamesPlayed,
       categoryStats,
       recentSessions,
+      history,
       isLoading,
       error,
       refresh: fetchStats,
@@ -266,6 +281,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       totalGamesPlayed,
       categoryStats,
       recentSessions,
+      history,
       isLoading,
       error,
       fetchStats,

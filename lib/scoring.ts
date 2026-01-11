@@ -38,5 +38,5 @@ export function calculateBPI({
   // Competitive ladder: makes 1800–2000 very hard
   const ladder = 2000 * Math.pow(p, 1.9);
 
-  return Math.round(ladder);
+  return Math.round(ladder) + 100;
 }
