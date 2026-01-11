@@ -1,11 +1,10 @@
 import { router } from "expo-router";
-import { View, useWindowDimensions } from "react-native";
+import { View, useWindowDimensions, Image } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CloudBackground } from "~/components/CloudBackground";
 import {
-  Brain,
   BookOpen,
   Zap,
   Trophy,
@@ -32,21 +31,25 @@ export default function IndexUnauthenticatedScreen() {
           {/* Scattered Icons in the Sky */}
           <View className="w-full max-w-sm aspect-square relative mt-12">
 
-            {/* Center-ish */}
-            <View className="absolute top-[35%] left-[40%] rotate-[5deg] p-3 bg-card rounded-2xl border-b-4 border-border shadow-sm z-20">
-              <Brain size={56} color="#0ea5e9" strokeWidth={2.5} />
+            {/* Center - App Logo */}
+            <View className="absolute top-[30%] left-[35%] rotate-[5deg] bg-card rounded-2xl border-b-4 border-border shadow-sm  overflow-hidden">
+              <Image
+                source={require("~/assets/images/brain_logo_transparent.png")}
+                style={{ width: 100, height: 100 }}
+                resizeMode="contain"
+              />
             </View>
 
             {/* Top Left Cluster */}
             <View className="absolute top-[5%] left-[10%] rotate-[-15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
               <Rocket size={32} color="#f43f5e" strokeWidth={2.5} />
             </View>
-            <View className="absolute top-[18%] left-[25%] rotate-[10deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
+            <View className="absolute top-[9%] left-[25%] rotate-[10deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
               <Trophy size={40} color="#f59e0b" strokeWidth={2.5} />
             </View>
 
             {/* Top Right Cluster */}
-            <View className="absolute top-[8%] right-[20%] rotate-[15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+            <View className="absolute top-[8%] right-[25%] rotate-[15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
               <Target size={32} color="#ec4899" strokeWidth={2.5} />
             </View>
             <View className="absolute top-[20%] right-[5%] rotate-[-5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
@@ -65,16 +68,16 @@ export default function IndexUnauthenticatedScreen() {
             <View className="absolute top-[50%] right-[10%] rotate-[20deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
               <Puzzle size={36} color="#10b981" strokeWidth={2.5} />
             </View>
-            <View className="absolute top-[35%] right-[-2%] rotate-[-15deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
+            <View className="absolute top-[35%] right-[-10%] rotate-[-15deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
               <Palette size={28} color="#f97316" strokeWidth={2.5} />
             </View>
 
 
             {/* Bottom Cluster */}
-            <View className="absolute bottom-[30%] left-[25%] rotate-[5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
+            <View className="absolute bottom-[20%] left-[20%] rotate-[5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
               <Gamepad2 size={40} color="#8b5cf6" strokeWidth={2.5} />
             </View>
-            <View className="absolute bottom-[35%] right-[25%] rotate-[-10deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+            <View className="absolute bottom-[20%] right-[25%] rotate-[-10deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
               <Lightbulb size={32} color="#22c55e" strokeWidth={2.5} />
             </View>
             <View className="absolute bottom-[20%] inset-x-0 items-center z-0">
@@ -104,7 +107,7 @@ export default function IndexUnauthenticatedScreen() {
         <View className="items-center gap-4 mb-4 pt-4">
 
           <Text className="text-5xl font-extrabold leading-[1.1] text-slate-400">
-            brain-app
+            Lobe
           </Text>
           <Text className="text-5xl font-extrabold text-center leading-[1.1] text-foreground">
             Discover what your mind can do
@@ -126,7 +129,7 @@ export default function IndexUnauthenticatedScreen() {
           <Button
             variant="outline"
             className="w-full h-12 native:h-16 px-10 rounded-2xl border-2"
-            onPress={() => router.push("/(unauthenticated)/login")}
+            onPress={() => router.push("/(unauthenticated)/SignUp")}
           >
             <Text className="font-bold text-2xl text-primary">Log in</Text>
           </Button>

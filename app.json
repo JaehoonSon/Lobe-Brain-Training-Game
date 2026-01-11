@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Brain App",
-    "slug": "brain-app",
+    "name": "Lobe",
+    "slug": "lobe",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/brain-logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/brain-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#faeeda"
+      "backgroundColor": "#fe7939"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -34,8 +34,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/brain-app-logo.png",
+        "backgroundColor": "#fa8b4b"
       },
       "package": "com.knuceles.ExpoTemplate"
     },

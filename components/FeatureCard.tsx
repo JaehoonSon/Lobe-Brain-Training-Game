@@ -73,7 +73,7 @@ export function FeatureCard({
             className="absolute inset-0 overflow-hidden rounded-b-xl"
           >
             <BlurView
-              intensity={90}
+              intensity={15}
               tint="light"
               className="absolute inset-0"
             />
