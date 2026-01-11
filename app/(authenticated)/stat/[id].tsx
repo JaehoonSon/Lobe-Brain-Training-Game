@@ -49,16 +49,7 @@ export default function CategoryDetailScreen() {
   //   }, [refresh])
   // );
 
-  const categoryHistory = useMemo(() => {
-    const relevantGameIds = new Set(
-      games.filter((g) => g.category_id === id).map((g) => g.id)
-    );
-    return history.filter((h) => relevantGameIds.has(h.game_id));
-  }, [games, history, id]);
-
-  useEffect(() => {
-    console.log("categoryHistory", JSON.stringify(categoryHistory));
-  }, [categoryHistory]);
+  const categoryHistory = categoryScoreHistory[id] || [];
 
   // Floating animation for the brain
   const translateY = useSharedValue(0);
@@ -80,6 +71,22 @@ export default function CategoryDetailScreen() {
 
   // Find the category stats for this ID
   const category = categoryStats.find((c) => c.id === id);
+
+  // Compute category percentile
+  const gamePercentiles =
+    category?.gameStats
+      .map((gs) => gs.percentile)
+      .filter((p): p is number => p !== null && p !== undefined) ?? [];
+
+  const categoryPercentileRaw =
+    gamePercentiles.length > 0
+      ? gamePercentiles.reduce((a, b) => a + b, 0) / gamePercentiles.length
+      : null;
+
+  const categoryTopPercent =
+    categoryPercentileRaw !== null
+      ? Math.max(1, 100 - Math.round(categoryPercentileRaw * 100))
+      : null;
 
   // Get games in this category
   const categoryGames = games.filter((g) => g.category_id === id);
@@ -169,7 +176,7 @@ export default function CategoryDetailScreen() {
                 </Text>
               </View>
 
-              <View className="-mt-1 flex-row">
+              <View className="-mt-1 flex-row flex-wrap gap-2">
                 <View className="bg-primary/10 px-3 py-1 rounded-full border-b-4 border-primary/20 flex-row items-center gap-2">
                   <Text className="text-sm font-black text-primary uppercase tracking-wider">
                     current score
@@ -183,6 +190,14 @@ export default function CategoryDetailScreen() {
                   )}
                 </View>
 
+                {categoryTopPercent !== null && (
+                  <View className="bg-accent/10 px-3 py-1 rounded-full border-b-4 border-accent/20 flex-row items-center gap-2">
+                    <Zap size={14} className="text-accent" fill="currentColor" />
+                    <Text className="text-sm font-black text-accent uppercase tracking-wider">
+                      Top {categoryTopPercent}%
+                    </Text>
+                  </View>
+                )}
               </View>
             </Animated.View>
 
@@ -266,14 +281,15 @@ export default function CategoryDetailScreen() {
                               )}
                             </View>
                             {hasPlayed && gameStats.averageScore && (
-                              <View className="items-end bg-secondary/10 px-3 py-2 rounded-lg">
-                                <P className="text-2xl font-black text-secondary">
-                                  {gameStats.averageScore}
-                                </P>
-                                <Text className="text-[10px] font-black text-secondary/60 text-right">
-                                  AVG SCORE
-
-                                </Text>
+                              <View className="flex-row gap-2">
+                                <View className="items-end bg-secondary/10 px-3 py-2 rounded-lg">
+                                  <P className="text-2xl font-black text-secondary">
+                                    {gameStats.averageScore}
+                                  </P>
+                                  <Text className="text-[10px] font-black text-secondary/60 text-right">
+                                    AVG SCORE
+                                  </Text>
+                                </View>
                               </View>
                             )}
                           </View>

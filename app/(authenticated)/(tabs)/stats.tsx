@@ -6,9 +6,11 @@ import {
   RefreshControl,
 } from "react-native";
 import { useCallback, useState } from "react";
+import { useWindowDimensions } from "react-native";
 import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
 import { OverallPerformanceChart } from "~/components/charts/OverallPerformanceChart";
 import { ComparisonChart } from "~/components/charts/ComparisonChart";
+import { LineChart } from "react-native-gifted-charts";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H4, P } from "~/components/ui/typography";
@@ -72,6 +74,17 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
     variant === "primary" ? "text-primary" : "text-secondary";
   const progressBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
 
+  const validPercentiles = category.gameStats
+    .map((g) => g.percentile)
+    .filter((p): p is number => p !== null);
+
+  const avgPercentile =
+    validPercentiles.length > 0
+      ? Math.round(
+        (validPercentiles.reduce((a, b) => a + b, 0) / validPercentiles.length) * 100
+      )
+      : null;
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -104,7 +117,14 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
                 style={{ width: `${category.progress}%` }}
               />
             </View>
-            <View className="flex-row items-center gap-1">
+            <View className="flex-row items-center gap-2">
+              {avgPercentile !== null && (
+                <View className="bg-muted px-2 py-0.5 rounded">
+                  <Text className="text-xs font-bold text-muted-foreground">
+                    Top {Math.max(1, 100 - avgPercentile)}%
+                  </Text>
+                </View>
+              )}
               <Text className="text-xl font-black text-foreground min-w-[30px] text-right">
                 {category.score}
               </Text>
@@ -147,6 +167,9 @@ function StrengthContent() {
 }
 
 function HistoryContent({ history }: { history: ScoreHistoryPoint[] }) {
+  const { width: screenWidth } = useWindowDimensions();
+  const chartWidth = screenWidth - 140; // Account for card padding + y-axis
+
   if (history.length === 0) {
     return (
       <P className="text-center py-8">
@@ -155,17 +178,58 @@ function HistoryContent({ history }: { history: ScoreHistoryPoint[] }) {
     );
   }
 
-  const maxScore = Math.max(...history.map((h) => h.score));
+  // Transform data (last 7 days)
+  const recentHistory = history.slice(-7);
+  const chartData = recentHistory.map((point, index) => ({
+    value: point.score,
+    label: index === 0 || index === recentHistory.length - 1
+      ? point.date.slice(5)
+      : "",
+    dataPointLabelComponent: () => null,
+  }));
+
+  const maxScore = Math.max(...chartData.map((d) => d.value), 100);
+
+  // Round maxValue to nice intervals (multiples of 200)
+  const roundedMax = Math.ceil(maxScore / 200) * 200;
+
+  // Format Y-axis labels
+  const formatY = (val: string) => {
+    const num = Number(val);
+    if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+    return String(Math.round(num));
+  };
 
   return (
-    <View className="h-24 flex-row items-end justify-between gap-1 opacity-60 px-4">
-      {history.slice(-10).map((point, i) => (
-        <View
-          key={i}
-          className="w-3 bg-secondary rounded-t-sm"
-          style={{ height: `${(point.score / maxScore) * 100}%` }}
-        />
-      ))}
+    <View className="h-56 w-full mt-4">
+      <LineChart
+        data={chartData}
+        width={chartWidth}
+        height={180}
+        curved
+        color="#d925b5"
+        thickness={2}
+        hideDataPoints={chartData.length > 3}
+        dataPointsColor="#d925b5"
+        dataPointsRadius={4}
+        yAxisThickness={1}
+        yAxisColor="#e5e7eb"
+        yAxisTextStyle={{ color: "#6b7280", fontSize: 10 }}
+        formatYLabel={formatY}
+        noOfSections={4}
+        xAxisThickness={1}
+        xAxisColor="#e5e7eb"
+        xAxisLabelTextStyle={{ color: "#6b7280", fontSize: 9 }}
+        hideRules={false}
+        rulesType="dashed"
+        rulesColor="#f3f4f6"
+        maxValue={roundedMax}
+        yAxisOffset={0}
+        spacing={chartData.length > 1 ? chartWidth / chartData.length : chartWidth / 2}
+        initialSpacing={20}
+        endSpacing={20}
+        isAnimated
+      />
     </View>
   );
 }
@@ -189,6 +253,18 @@ export default function StatsScreen() {
   ).length;
   const hasHistory = overallScoreHistory.length > 0;
 
+  const allGameStats = categoryStats.flatMap((c) => c.gameStats);
+  const validOverallPercentiles = allGameStats
+    .map((g) => g.percentile)
+    .filter((p): p is number => p !== null);
+
+  const overallAvgPercentile =
+    validOverallPercentiles.length > 0
+      ? Math.round(
+        (validOverallPercentiles.reduce((a, b) => a + b, 0) /
+          validOverallPercentiles.length) * 100
+      )
+      : null;
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -227,9 +303,18 @@ export default function StatsScreen() {
 
             <View className="items-center py-4">
               {hasOverallBPI ? (
-                <Text className="text-8xl font-black text-primary-foreground ">
-                  {overallBPI}
-                </Text>
+                <>
+                  <Text className="text-8xl font-black text-primary-foreground ">
+                    {overallBPI}
+                  </Text>
+                  {overallAvgPercentile !== null && (
+                    <View className="bg-white/20 px-3 py-1 rounded-full mt-2">
+                      <Text className="text-primary-foreground font-bold">
+                        Top {Math.max(1, 100 - overallAvgPercentile)}%
+                      </Text>
+                    </View>
+                  )}
+                </>
               ) : (
                 <Text className="text-6xl font-black text-primary-foreground/30">
                   ---
@@ -238,15 +323,10 @@ export default function StatsScreen() {
             </View>
 
             <View className="mt-4 bg-black/10 rounded-xl p-3 flex-row items-center justify-center border border-black/5">
-              {hasOverallBPI && overallPercentile !== null ? (
+              {hasOverallBPI ? (
                 <Text className="text-primary-foreground font-bold">
-                  Top {Math.max(1, 100 - overallPercentile)}% of users 🏆
+                  Scores update after each game
                 </Text>
-              ) : hasOverallBPI ? (
-                <Text className="text-primary-foreground font-bold">
-                  Scores update daily based on all players
-                </Text>
-
               ) : (
                 <Text className="text-primary-foreground/90 font-bold text-center">
                   Play {3 - categoriesWithData} more categories to unlock
@@ -286,15 +366,6 @@ export default function StatsScreen() {
             Detailed Analysis
           </H4>
 
-          {overallPercentile && (
-            <FeatureCard
-              title="How You Compare"
-              variant="secondary"
-              isLocked={false}
-            >
-              <ComparisonChart percentile={overallPercentile} />
-            </FeatureCard>
-          )}
 
           <FeatureCard
             title="Strength Profile"

@@ -30,7 +30,7 @@ export function calculateBPI({
 
   // Difficulty gate: easy content caps your score
   const dNorm = clamp01(difficulty / 10);
-  const difficultyGate = 0.35 + 0.65 * Math.pow(dNorm, 1.7); // 0.35..1.0
+  const difficultyGate = 0.45 + 0.55 * Math.pow(dNorm, 1.2); // 0.45..1.0
 
   // Combined performance (0..1)
   const p = clamp01(base * difficultyGate);

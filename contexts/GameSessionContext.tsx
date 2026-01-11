@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import { supabase } from "~/lib/supabase";
 import { calculateBPI } from "~/lib/scoring";
-import { Json } from "~/lib/database.types";
+import { Database, Json } from "~/lib/database.types";
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -262,6 +263,13 @@ export function GameSessionProvider({
         if (answersError) throw answersError;
 
         console.log("Saved", currentAnswers.length, "answers to game_answers");
+      }
+
+      const { error: refreshError } = await supabase.rpc(
+        "refresh_ability_scores" as keyof Database["public"]["Functions"]
+      );
+      if (refreshError) {
+        console.error("Failed to refresh ability scores:", refreshError);
       }
     } catch (err) {
       console.error("Failed to save game session:", err);
