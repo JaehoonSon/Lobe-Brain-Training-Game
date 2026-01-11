@@ -16,6 +16,8 @@ type UserGamePerformance =
   Database["public"]["Tables"]["user_game_performance"]["Row"];
 type UserGamePerformanceHistory =
   Database["public"]["Tables"]["user_game_performance_history"]["Row"];
+type GlobalGamePerformanceHistory =
+  Database["public"]["Tables"]["global_game_performance_history"]["Row"];
 
 export interface GameStats {
   gameId: string;
@@ -25,6 +27,14 @@ export interface GameStats {
   highestScore: number | null;
   gamesPlayed: number;
   currentRating: number; // Difficulty rating 1-10
+}
+
+export interface GlobalStats {
+  gameId: string;
+  averageScore: number;
+  averageDifficulty: number;
+  averageGamesPlayed: number;
+  averageHighestScore: number;
 }
 
 export interface CategoryStats {
@@ -46,6 +56,8 @@ export interface UserStatsContextValue {
   categoryStats: CategoryStats[];
   recentSessions: GameSession[];
   history: UserGamePerformanceHistory[];
+  globalStats: Map<string, GlobalStats>;
+  overallPercentile: number | null;
   isLoading: boolean;
   error: Error | null;
   refresh: () => Promise<void>;
@@ -67,6 +79,9 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
   const [categoryStats, setCategoryStats] = useState<CategoryStats[]>([]);
   const [recentSessions, setRecentSessions] = useState<GameSession[]>([]);
   const [history, setHistory] = useState<UserGamePerformanceHistory[]>([]);
+  const [globalStats, setGlobalStats] = useState<Map<string, GlobalStats>>(
+    new Map()
+  );
   const [currentStreak, setCurrentStreak] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -120,9 +135,40 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         throw streakError;
       }
 
+      // Fetch Global Performance History (Latest only)
+      const { data: globalData, error: globalError } = await supabase
+        .from("global_game_performance_history")
+        .select("*")
+        .order("snapshot_date", { ascending: false });
+
+      if (globalError) throw globalError;
+
+      // Process global stats
+      const latestGlobalStats = new Map<string, GlobalStats>();
+      const processedGames = new Set<string>();
+
+      (globalData || []).forEach((row) => {
+        if (!processedGames.has(row.game_id)) {
+          // Calculate Global Average Score Per Game
+          const avgGamesPlayed = row.games_played_count || 1;
+          const avgTotalScore = row.total_score || 0;
+          const avgScorePerGame = Math.round(avgTotalScore / avgGamesPlayed);
+
+          latestGlobalStats.set(row.game_id, {
+            gameId: row.game_id,
+            averageScore: avgScorePerGame,
+            averageDifficulty: row.difficulty_rating,
+            averageGamesPlayed: avgGamesPlayed,
+            averageHighestScore: row.highest_score || 0,
+          });
+          processedGames.add(row.game_id);
+        }
+      });
+
       setRecentSessions(sessions || []);
       setHistory(historyData || []);
       setCurrentStreak(streakData?.current_streak ?? 0);
+      setGlobalStats(latestGlobalStats);
 
       // Build a map of game_id -> UserGamePerformance
       const performanceMap = new Map<string, UserGamePerformance>();
@@ -263,6 +309,61 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
     0
   );
 
+  // Calculate Global BPI for comparison
+  let globalBPI: number | null = null;
+  if (globalStats.size > 0) {
+    const globalCategoryStats = categories.map((category) => {
+      const categoryGames = games.filter((g) => g.category_id === category.id);
+      const categoryGlobalGames = categoryGames
+        .map((g) => globalStats.get(g.id))
+        .filter((g): g is GlobalStats => !!g);
+
+      if (categoryGlobalGames.length === 0) return { score: null, weight: 0 };
+
+      const totalWeight = categoryGlobalGames.reduce(
+        (sum, g) => sum + g.averageGamesPlayed,
+        0
+      );
+      const weightedScore = categoryGlobalGames.reduce(
+        (sum, g) => sum + g.averageScore * g.averageGamesPlayed,
+        0
+      );
+
+      return {
+        score: totalWeight > 0 ? weightedScore / totalWeight : null,
+        weight: totalWeight,
+      };
+    });
+
+    const validGlobalCategories = globalCategoryStats.filter(
+      (c) => c.score !== null
+    );
+    const totalGlobalWeight = validGlobalCategories.reduce(
+      (sum, c) => sum + c.weight,
+      0
+    );
+
+    if (validGlobalCategories.length > 0 && totalGlobalWeight > 0) {
+      globalBPI = Math.round(
+        validGlobalCategories.reduce(
+          (sum, c) => sum + (c.score ?? 0) * c.weight,
+          0
+        ) / totalGlobalWeight
+      );
+    }
+  }
+
+  // Overall Percentile Calculation (User vs Global BPI)
+  let overallPercentile: number | null = null;
+  if (overallBPI !== null && globalBPI !== null && globalBPI > 0) {
+    // Z-score approximation
+    const stdDev = globalBPI * 0.25; // Assume 25% std dev
+    const zScore = (overallBPI - globalBPI) / stdDev;
+    // Logistic approximation for cumulative normal distribution
+    const p = 1 / (1 + Math.exp(-1.7 * zScore));
+    overallPercentile = Math.round(p * 100);
+  }
+
   const value = useMemo<UserStatsContextValue>(
     () => ({
       overallBPI,
@@ -271,6 +372,8 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       categoryStats,
       recentSessions,
       history,
+      globalStats,
+      overallPercentile,
       isLoading,
       error,
       refresh: fetchStats,
@@ -282,6 +385,8 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       categoryStats,
       recentSessions,
       history,
+      globalStats,
+      overallPercentile,
       isLoading,
       error,
       fetchStats,

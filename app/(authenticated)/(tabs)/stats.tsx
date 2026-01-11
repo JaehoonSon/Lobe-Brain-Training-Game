@@ -8,8 +8,8 @@ import {
 import { useCallback, useState } from "react";
 import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
 import { OverallPerformanceChart } from "~/components/charts/OverallPerformanceChart";
+import { ComparisonChart } from "~/components/charts/ComparisonChart";
 
-import { BlurView } from "expo-blur";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H4, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
@@ -125,19 +125,6 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
 
 // Reusable Content Components for locked states
 // Adjusted to use standard colors
-export function CompareContent() {
-  return (
-    <View className="h-24 flex-row items-end justify-center gap-1 opacity-60 px-4">
-      {[10, 20, 35, 55, 80, 95, 80, 55, 35, 20, 10].map((h, i) => (
-        <View
-          key={i}
-          className="w-4 bg-secondary rounded-t-sm"
-          style={{ height: `${h}%` }}
-        />
-      ))}
-    </View>
-  );
-}
 
 function StrengthContent() {
   return (
@@ -171,15 +158,15 @@ function HistoryContent() {
 }
 
 export default function StatsScreen() {
-  const { overallBPI, categoryStats, history, isLoading, error, refresh } =
-    useUserStats();
-
-  // Refresh stats when focusing the screen
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     refresh();
-  //   }, [refresh])
-  // );
+  const {
+    overallBPI,
+    overallPercentile,
+    categoryStats,
+    history,
+    isLoading,
+    error,
+    refresh,
+  } = useUserStats();
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -242,9 +229,13 @@ export default function StatsScreen() {
             </View>
 
             <View className="mt-4 bg-black/10 rounded-xl p-3 flex-row items-center justify-center border border-black/5">
-              {hasOverallBPI ? (
+              {hasOverallBPI && overallPercentile !== null ? (
                 <Text className="text-primary-foreground font-bold">
-                  Top 15% of users this week 🏆
+                  Top {Math.max(1, 100 - overallPercentile)}% of users 🏆
+                </Text>
+              ) : hasOverallBPI ? (
+                <Text className="text-primary-foreground font-bold">
+                  Keep playing to see your rank!
                 </Text>
               ) : (
                 <Text className="text-primary-foreground/90 font-bold text-center">
@@ -259,7 +250,7 @@ export default function StatsScreen() {
 
           {/* CATEGORIES LIST - UNIFIED CARD */}
           <Card className="mb-8 bg-card">
-            {isLoading ? (
+            {isLoading && !categoryStats.length ? (
               <ActivityIndicator size="large" className="py-8 text-primary" />
             ) : error ? (
               <P className="text-destructive text-center py-8 font-bold">
@@ -285,9 +276,15 @@ export default function StatsScreen() {
             Detailed Analysis
           </H4>
 
-          <FeatureCard title="How You Compare" variant="secondary">
-            <CompareContent />
-          </FeatureCard>
+          {overallPercentile && (
+            <FeatureCard
+              title="How You Compare"
+              variant="secondary"
+              isLocked={false}
+            >
+              <ComparisonChart percentile={overallPercentile} />
+            </FeatureCard>
+          )}
 
           <FeatureCard
             title="Strength Profile"
