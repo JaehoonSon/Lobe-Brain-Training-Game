@@ -33,11 +33,13 @@ import { useUserStats } from "~/contexts/UserStatsContext";
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
 import { CategoryPerformanceChart } from "~/components/charts/CategoryPerformanceChart";
+import { ComparisonChart } from "~/components/charts/ComparisonChart";
 import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { categoryStats, isLoading, refresh, history } = useUserStats();
+  const { categoryStats, isLoading, refresh, history, globalStats } =
+    useUserStats();
   const { games } = useGames();
 
   // Refresh stats when focusing the screen
@@ -81,6 +83,41 @@ export default function CategoryDetailScreen() {
 
   // Get games in this category
   const categoryGames = games.filter((g) => g.category_id === id);
+
+  // Calculate category-specific percentile using globalStats
+  const categoryPercentile = useMemo(() => {
+    if (!category?.score || categoryGames.length === 0) return null;
+
+    // Get global stats for games in this category
+    const categoryGlobalGames = categoryGames
+      .map((g) => globalStats.get(g.id))
+      .filter((g) => !!g);
+
+    if (categoryGlobalGames.length === 0) return null;
+
+    // Calculate weighted global average for this category
+    const totalWeight = categoryGlobalGames.reduce(
+      (sum, g) => sum + (g?.averageGamesPlayed || 0),
+      0
+    );
+    const weightedScore = categoryGlobalGames.reduce(
+      (sum, g) => sum + (g?.averageScore || 0) * (g?.averageGamesPlayed || 0),
+      0
+    );
+
+    if (totalWeight === 0) return null;
+
+    const globalCategoryBPI = weightedScore / totalWeight;
+
+    // Z-score approximation (same as overall percentile calculation)
+    const stdDev = globalCategoryBPI * 0.25; // Assume 25% std dev
+    if (stdDev === 0) return 50; // If no variance, user is at 50%
+
+    const zScore = (category.score - globalCategoryBPI) / stdDev;
+    // Logistic approximation for cumulative normal distribution
+    const p = 1 / (1 + Math.exp(-1.7 * zScore));
+    return Math.round(p * 100);
+  }, [category?.score, categoryGames, globalStats]);
 
   // Get relevant insights
   const relevantInsights = INSIGHTS.filter(
@@ -209,6 +246,17 @@ export default function CategoryDetailScreen() {
           >
             <CategoryPerformanceChart history={categoryHistory} />
           </FeatureCard>
+
+          {/* How You Compare Chart */}
+          {categoryPercentile !== null && (
+            <FeatureCard
+              title="How You Compare"
+              variant="primary"
+              isLocked={false}
+            >
+              <ComparisonChart percentile={categoryPercentile} />
+            </FeatureCard>
+          )}
 
           {/* Category Games Section */}
           <Animated.View entering={FadeInDown.delay(400).duration(400)}>
