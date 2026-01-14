@@ -15,11 +15,17 @@ type GameSession = Database["public"]["Tables"]["game_sessions"]["Row"];
 type UserGamePerformance =
   Database["public"]["Tables"]["user_game_performance"]["Row"];
 type UserGameAbilityScore =
-  Database["public"]["Tables"]["user_game_ability_scores"]["Row"];
+  Database["public"]["Tables"]["testing_user_game_ability_scores"]["Row"];
 type UserCategoryAbilityScore =
-  Database["public"]["Tables"]["user_category_ability_scores"]["Row"];
+  Database["public"]["Tables"]["testing_user_category_ability_scores"]["Row"];
 type UserGameAbilityHistory =
-  Database["public"]["Tables"]["user_game_ability_history"]["Row"];
+  Database["public"]["Tables"]["testing_user_game_ability_history"]["Row"];
+
+type UserCategoryAbilityHistory =
+  Database["public"]["Tables"]["testing_user_category_ability_history"]["Row"];
+
+type UserGlobalAbilityHistory =
+  Database["public"]["Tables"]["testing_user_global_ability_history"]["Row"];
 
 
 
@@ -115,13 +121,14 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       const historyStartDate = historyStart.toISOString().slice(0, 10);
 
       const [
-
         { data: sessions, error: sessionsError },
         { data: gamePerformance, error: perfError },
         { data: gameAbilityScores, error: percentilesError },
         { data: categoryAbilityScores, error: categoryAbilityScoresError },
         { data: globalScoreRow, error: globalScoreError },
-        { data: scoreHistory, error: scoreHistoryError },
+        { data: gameAbilityHistory, error: gameHistoryError },
+        { data: categoryAbilityHistory, error: categoryHistoryError },
+        { data: globalAbilityHistory, error: globalHistoryError },
         { data: streakData, error: streakError },
       ] = await Promise.all([
         supabase
@@ -135,21 +142,33 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
           .select("*")
           .eq("user_id", user.id),
         supabase
-          .from("user_game_ability_scores")
+          .from("testing_user_game_ability_scores")
           .select("*")
           .eq("user_id", user.id),
         supabase
-          .from("user_category_ability_scores")
+          .from("testing_user_category_ability_scores")
           .select("*")
           .eq("user_id", user.id),
         supabase
-          .from("user_global_ability_scores")
+          .from("testing_user_global_ability_scores")
           .select("*")
           .eq("user_id", user.id)
           .maybeSingle(),
         supabase
-          .from("user_game_ability_history")
+          .from("testing_user_game_ability_history")
           .select("game_id, ability_score, snapshot_date")
+          .eq("user_id", user.id)
+          .gte("snapshot_date", historyStartDate)
+          .order("snapshot_date", { ascending: true }),
+        supabase
+          .from("testing_user_category_ability_history")
+          .select("category_id, ability_score, snapshot_date")
+          .eq("user_id", user.id)
+          .gte("snapshot_date", historyStartDate)
+          .order("snapshot_date", { ascending: true }),
+        supabase
+          .from("testing_user_global_ability_history")
+          .select("ability_score, snapshot_date")
           .eq("user_id", user.id)
           .gte("snapshot_date", historyStartDate)
           .order("snapshot_date", { ascending: true }),
@@ -160,13 +179,17 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
           .single(),
       ]);
 
+
       if (sessionsError) throw sessionsError;
       if (perfError) throw perfError;
       if (percentilesError) throw percentilesError;
       if (categoryAbilityScoresError) throw categoryAbilityScoresError;
       if (globalScoreError) throw globalScoreError;
-      if (scoreHistoryError) throw scoreHistoryError;
+      if (gameHistoryError) throw gameHistoryError;
+      if (categoryHistoryError) throw categoryHistoryError;
+      if (globalHistoryError) throw globalHistoryError;
       if (streakError && streakError.code !== "PGRST116") {
+
         throw streakError;
       }
 
@@ -191,62 +214,52 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         categoryAbilityScoreMap.set(score.category_id, score);
       });
 
-      const gameCategoryMap = new Map<string, string>();
-      games.forEach((game) => {
-        if (game.category_id) {
-          gameCategoryMap.set(game.id, game.category_id);
-        }
-      });
+      const gameHistoryRows = (gameAbilityHistory || []) as UserGameAbilityHistory[];
+      const categoryHistoryRows =
+        (categoryAbilityHistory || []) as UserCategoryAbilityHistory[];
+      const globalHistoryRows =
+        (globalAbilityHistory || []) as UserGlobalAbilityHistory[];
 
-      const historyRows = (scoreHistory || []) as UserGameAbilityHistory[];
       const gameHistory: Record<string, ScoreHistoryPoint[]> = {};
-      const categoryDateMap = new Map<string, Map<string, { sum: number; count: number }>>();
-
-      historyRows.forEach((row) => {
+      gameHistoryRows.forEach((row) => {
         const date = row.snapshot_date;
         if (!date) return;
         const gameId = row.game_id;
         const gamePoints = gameHistory[gameId] || [];
         gamePoints.push({ date, score: row.ability_score });
         gameHistory[gameId] = gamePoints;
+      });
 
-        const categoryId = gameCategoryMap.get(gameId);
-        if (!categoryId) return;
-        const dateMap = categoryDateMap.get(categoryId) || new Map<string, { sum: number; count: number }>();
-        const agg = dateMap.get(date) || { sum: 0, count: 0 };
-        agg.sum += row.ability_score;
-        agg.count += 1;
-        dateMap.set(date, agg);
-        categoryDateMap.set(categoryId, dateMap);
+      Object.values(gameHistory).forEach((points) => {
+        points.sort((a, b) => a.date.localeCompare(b.date));
       });
 
       const categoryHistory: Record<string, ScoreHistoryPoint[]> = {};
-      categoryDateMap.forEach((dateMap, categoryId) => {
-        const points = Array.from(dateMap.entries()).map(([date, agg]) => ({
-          date,
-          score: Math.round(agg.sum / agg.count),
-        }));
-        points.sort((a, b) => a.date.localeCompare(b.date));
+      categoryHistoryRows.forEach((row) => {
+        const date = row.snapshot_date;
+        if (!date) return;
+        const categoryId = row.category_id;
+        const points = categoryHistory[categoryId] || [];
+        points.push({ date, score: row.ability_score });
         categoryHistory[categoryId] = points;
       });
 
-      const overallDateMap = new Map<string, { sum: number; count: number }>();
       Object.values(categoryHistory).forEach((points) => {
-        points.forEach((point) => {
-          const agg = overallDateMap.get(point.date) || { sum: 0, count: 0 };
-          agg.sum += point.score;
-          agg.count += 1;
-          overallDateMap.set(point.date, agg);
-        });
+        points.sort((a, b) => a.date.localeCompare(b.date));
       });
 
-      const overallHistory = Array.from(overallDateMap.entries())
-        .map(([date, agg]) => ({ date, score: Math.round(agg.sum / agg.count) }))
+      const overallHistory = globalHistoryRows
+        .filter((row) => row.snapshot_date)
+        .map((row) => ({
+          date: row.snapshot_date as string,
+          score: row.ability_score,
+        }))
         .sort((a, b) => a.date.localeCompare(b.date));
 
       setGameScoreHistory(gameHistory);
       setCategoryScoreHistory(categoryHistory);
       setOverallScoreHistory(overallHistory);
+
 
       // Calculate per-game stats from aggregates
       const allGameStats: GameStats[] = games

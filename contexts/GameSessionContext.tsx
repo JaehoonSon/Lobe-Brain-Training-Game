@@ -179,7 +179,7 @@ export function GameSessionProvider({
     const accuracy =
       currentAnswers.length > 0
         ? currentAnswers.reduce((sum, a) => sum + a.accuracy, 0) /
-          currentAnswers.length
+        currentAnswers.length
         : 0;
 
     // Per-game target times (ms per question)
@@ -196,9 +196,9 @@ export function GameSessionProvider({
     const avgResponseTimeMs =
       currentAnswers.length > 0
         ? Math.round(
-            currentAnswers.reduce((sum, a) => sum + a.responseTimeMs, 0) /
-              currentAnswers.length
-          )
+          currentAnswers.reduce((sum, a) => sum + a.responseTimeMs, 0) /
+          currentAnswers.length
+        )
         : null;
 
     const bpi = calculateBPI({
@@ -206,9 +206,9 @@ export function GameSessionProvider({
       difficulty: avgQDifficulty,
       ...(targetPerQ && avgResponseTimeMs !== null
         ? {
-            targetTimeMs: targetPerQ,
-            actualTimeMs: avgResponseTimeMs,
-          }
+          targetTimeMs: targetPerQ,
+          actualTimeMs: avgResponseTimeMs,
+        }
         : {}),
     });
 
@@ -266,7 +266,7 @@ export function GameSessionProvider({
       }
 
       const { error: refreshError } = await supabase.rpc(
-        "refresh_ability_scores" as keyof Database["public"]["Functions"]
+        "testing_refresh_ability_scores" as keyof Database["public"]["Functions"]
       );
       if (refreshError) {
         console.error("Failed to refresh ability scores:", refreshError);

@@ -6,11 +6,8 @@ import {
   RefreshControl,
 } from "react-native";
 import { useCallback, useState } from "react";
-import { useWindowDimensions } from "react-native";
 import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
-import { OverallPerformanceChart } from "~/components/charts/OverallPerformanceChart";
-import { ComparisonChart } from "~/components/charts/ComparisonChart";
-import { LineChart } from "react-native-gifted-charts";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H4, P } from "~/components/ui/typography";
@@ -166,73 +163,6 @@ function StrengthContent() {
   );
 }
 
-function HistoryContent({ history }: { history: ScoreHistoryPoint[] }) {
-  const { width: screenWidth } = useWindowDimensions();
-  const chartWidth = screenWidth - 140; // Account for card padding + y-axis
-
-  if (history.length === 0) {
-    return (
-      <P className="text-center py-8">
-        No history yet
-      </P>
-    );
-  }
-
-  // Transform data (last 7 days)
-  const recentHistory = history.slice(-7);
-  const chartData = recentHistory.map((point, index) => ({
-    value: point.score,
-    label: index === 0 || index === recentHistory.length - 1
-      ? point.date.slice(5)
-      : "",
-    dataPointLabelComponent: () => null,
-  }));
-
-  const maxScore = Math.max(...chartData.map((d) => d.value), 100);
-
-  // Round maxValue to nice intervals (multiples of 200)
-  const roundedMax = Math.ceil(maxScore / 200) * 200;
-
-  // Format Y-axis labels
-  const formatY = (val: string) => {
-    const num = Number(val);
-    if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, "") + "k";
-    return String(Math.round(num));
-  };
-
-  return (
-    <View className="h-56 w-full mt-4">
-      <LineChart
-        data={chartData}
-        width={chartWidth}
-        height={180}
-        curved
-        color="#d925b5"
-        thickness={2}
-        hideDataPoints={chartData.length > 3}
-        dataPointsColor="#d925b5"
-        dataPointsRadius={4}
-        yAxisThickness={1}
-        yAxisColor="#e5e7eb"
-        yAxisTextStyle={{ color: "#6b7280", fontSize: 10 }}
-        formatYLabel={formatY}
-        noOfSections={4}
-        xAxisThickness={1}
-        xAxisColor="#e5e7eb"
-        xAxisLabelTextStyle={{ color: "#6b7280", fontSize: 9 }}
-        hideRules={false}
-        rulesType="dashed"
-        rulesColor="#f3f4f6"
-        maxValue={roundedMax}
-        yAxisOffset={0}
-        spacing={chartData.length > 1 ? chartWidth / chartData.length : chartWidth / 2}
-        initialSpacing={20}
-        endSpacing={20}
-        isAnimated
-      />
-    </View>
-  );
-}
 
 
 export default function StatsScreen() {
@@ -375,8 +305,8 @@ export default function StatsScreen() {
             <StrengthProfileChart categoryStats={categoryStats} />
           </FeatureCard>
 
-          <FeatureCard title="Progress History" variant="secondary">
-            <HistoryContent history={overallScoreHistory} />
+          <FeatureCard title="Progress History" variant="secondary" noPadding>
+            <ScoreHistoryChart history={overallScoreHistory} />
           </FeatureCard>
 
         </View>

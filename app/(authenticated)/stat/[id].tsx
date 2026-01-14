@@ -33,7 +33,7 @@ import { useUserStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
 
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
-import { CategoryPerformanceChart } from "~/components/charts/CategoryPerformanceChart";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
@@ -225,9 +225,9 @@ export default function CategoryDetailScreen() {
           <FeatureCard
             title="Performance History"
             variant="secondary"
-            isLocked={true}
+            isLocked={false}
           >
-            <CategoryPerformanceChart history={categoryHistory} />
+            <ScoreHistoryChart history={categoryHistory} />
           </FeatureCard>
 
           {/* Category Games Section */}
@@ -302,31 +302,9 @@ export default function CategoryDetailScreen() {
             )}
           </Animated.View>
 
-          <Animated.View entering={FadeInDown.delay(600).duration(400)}>
-            <H4 className="text-lg font-bold mb-3">Score History</H4>
-            {categoryScoreHistory[id]?.length ? (
-              <Card>
-                <CardContent className="p-4">
-                  <View className="h-32 flex-row items-end justify-center gap-1 opacity-60 px-4">
-                    {categoryScoreHistory[id]?.slice(-10).map((point, i) => (
-                      <View
-                        key={i}
-                        className="w-3 bg-secondary rounded-t-sm"
-                        style={{ height: `${(point.score / 2000) * 100}%` }}
-                      />
-                    ))}
-                  </View>
-                </CardContent>
-              </Card>
-            ) : (
-              <P className="text-center py-8">
-                No score history yet.
-              </P>
-            )}
-          </Animated.View>
+
 
           {/* Recommended Insights Section */}
-
           {relevantInsights.length > 0 && (
             <Animated.View entering={FadeInDown.delay(600).duration(400)}>
               <H4 className="text-lg font-bold mb-3">Recommended Reading</H4>
