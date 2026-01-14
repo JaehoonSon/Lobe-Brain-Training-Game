@@ -8,7 +8,12 @@ import Purchases, {
 import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 
 // Config
-const API_KEY = "test_gMisiyIRDnuQuxtHUtlkVMGzyvC"; // User provided test key
+const API_KEY = __DEV__
+  ? "test_gMisiyIRDnuQuxtHUtlkVMGzyvC" // Test key for dev mode
+  : process.env.EXPO_PUBLIC_REVENUECAT_API_KEY ||
+    (() => {
+      throw new Error("EXPO_PUBLIC_REVENUECAT_API_KEY is not defined");
+    })();
 export const ENTITLEMENT_ID = "Brain App Pro"; // As defined in task
 
 interface RevenueCatContextType {

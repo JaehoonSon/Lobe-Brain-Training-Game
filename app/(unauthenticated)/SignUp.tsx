@@ -1,4 +1,4 @@
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { View } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -16,7 +16,8 @@ export default function SignUp() {
   const handleLogin = async () => {
     try {
       await signInApple();
-      router.replace("/(onboarding)");
+      // Stack.Protected guards will automatically route to onboarding
+      // since isAuthenticated=true and isComplete=false for new users
     } catch (err) {
       console.log("sign in error", err);
       showErrorToast("Error Signing in");
@@ -56,7 +57,7 @@ export default function SignUp() {
             </Text>
           </Button>
 
-          <Button
+          {/* <Button
             variant="secondary"
             className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
             onPress={() => {
@@ -68,7 +69,7 @@ export default function SignUp() {
             <Text className="font-bold text-xl text-secondary-foreground">
               Continue with Google
             </Text>
-          </Button>
+          </Button> */}
         </Animated.View>
 
         {/* Terms */}

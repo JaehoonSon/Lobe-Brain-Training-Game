@@ -15,9 +15,9 @@ import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export interface GameConfig {
   type:
-  | "mental_arithmetic"
-  | "mental_language_discrimination"
-  | "memory_matrix";
+    | "mental_arithmetic"
+    | "mental_language_discrimination"
+    | "memory_matrix";
 }
 
 export interface GameStepProps extends CustomStepProps {
@@ -42,42 +42,46 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
   const fetchQuestions = async () => {
     setLoading(true);
     try {
-      // Map config type to game_id in DB
-      // Assuming game_ids match the config type strings exactly
-      const { data: questionsData, error } = await supabase
-        .from("questions")
-        .select("content, difficulty")
-        .eq("game_id", gameConfig.type)
-        .order("difficulty", { ascending: true }) // Lowest difficulty first
-        .limit(TOTAL_ROUNDS * 10);
+      console.log(
+        `Fetching onboarding questions for ${gameConfig.type} via RPC...`
+      );
+
+      const { data: questionsData, error } = await supabase.rpc(
+        "get_game_questions",
+        {
+          p_game_id: gameConfig.type,
+          p_count: TOTAL_ROUNDS,
+        }
+      );
 
       if (error) throw error;
 
-      const data = questionsData
-        .sort(() => Math.random() - 0.5)
-        .slice(0, TOTAL_ROUNDS);
-
-      if (!data || data.length < TOTAL_ROUNDS) {
-        // Fallback or alert if not enough questions.
-        // For onboarding, we ideally expect seeded data.
-        // We will use what we have or error.
-        if (!data || data.length === 0) {
-          Alert.alert("Error", "Setup incomplete. No questions found.");
-          return;
-        }
+      if (!questionsData || questionsData.length === 0) {
+        Alert.alert("Error", "Setup incomplete. No questions found.");
+        return;
       }
+
+      console.log(`Received ${questionsData.length} questions from RPC`);
+
+      // 6. Shuffle final selection for variety
+      const shuffled = [...questionsData].sort(() => Math.random() - 0.5);
 
       // Validate and prepare questions
       const validQs: any[] = [];
-      for (const q of data) {
+      for (const q of shuffled) {
         const parsed = GameContentSchema.safeParse(q.content);
         if (parsed.success) {
           validQs.push(parsed.data);
+        } else {
+          console.warn("Invalid onboarding question content:", parsed.error);
         }
       }
 
-      // If we have fewer than total rounds, we might need to cycle or reduce rounds.
-      // For now, let's just use what we have and effectively shorten the game if needed.
+      if (validQs.length === 0) {
+        Alert.alert("Error", "No valid questions found.");
+        return;
+      }
+
       setQuestions(validQs);
     } catch (err) {
       console.error("Failed to fetch onboarding questions", err);

@@ -52,42 +52,44 @@ export function OnboardingProvider({
   useEffect(() => {
     const loadProgress = async () => {
       try {
-        // 1. Check local storage first for immediate feedback
+        // Load step progress from local storage (for resuming mid-onboarding)
         const saved = await AsyncStorage.getItem(ONBOARDING_STORAGE_KEY);
-        let localIsComplete = false;
         if (saved) {
           const parsed = JSON.parse(saved);
           setCurrentStep(parsed.currentStep || 1);
           setData(parsed.data || {});
-          if (parsed.isComplete) {
-            localIsComplete = true;
-            setIsComplete(true);
-          }
         }
 
-        // 2. If not complete locally, check DB (if user is logged in)
-        if (!localIsComplete && user) {
-          const { data: profile } = await supabase
+        // Always check DB for completion status (single source of truth)
+        if (user) {
+          console.log("Checking onboarding status from DB for user:", user.id);
+          const { data: profile, error } = await supabase
             .from("profiles")
             .select("onboarding_completed_at")
             .eq("id", user.id)
             .single();
 
-          if (profile?.onboarding_completed_at) {
-            setIsComplete(true);
-            // Sync back to local storage so next time it's faster
-            await AsyncStorage.setItem(
-              ONBOARDING_STORAGE_KEY,
-              JSON.stringify({
-                currentStep: TOTAL_STEPS,
-                data: saved ? JSON.parse(saved).data : {},
-                isComplete: true,
-              })
+          if (error) {
+            console.error("Failed to check onboarding status:", error);
+            // On error, default to not complete (show onboarding)
+            setIsComplete(false);
+          } else if (profile?.onboarding_completed_at) {
+            console.log(
+              "Onboarding already completed at:",
+              profile.onboarding_completed_at
             );
+            setIsComplete(true);
+          } else {
+            console.log("Onboarding not completed yet");
+            setIsComplete(false);
           }
+        } else {
+          // No user logged in - can't determine completion status
+          setIsComplete(false);
         }
       } catch (e) {
         console.error("Failed to load onboarding progress", e);
+        setIsComplete(false);
       } finally {
         setIsLoading(false);
       }
@@ -119,7 +121,7 @@ export function OnboardingProvider({
     if (currentStep < TOTAL_STEPS) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      setIsComplete(true);
+      // setIsComplete(true);
     }
   };
 
@@ -136,15 +138,9 @@ export function OnboardingProvider({
       setCurrentStep(step);
     }
   };
-  useEffect(() => {
-    (async () => {
-      if (lastStep && data) {
-        await completeOnboarding();
-      }
-    })();
-  }, [lastStep]);
 
   const completeOnboarding = async () => {
+    console.log("Completing onboarding");
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
     // Save onboarding data to supabase profiles table
@@ -176,7 +172,19 @@ export function OnboardingProvider({
       await AsyncStorage.removeItem(ONBOARDING_STORAGE_KEY);
       setCurrentStep(1);
       setData({});
-      setIsComplete(false);
+      if (!user) return;
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          onboarding_data: {},
+          onboarding_completed_at: null,
+        })
+        .eq("id", user?.id);
+      if (error) {
+        console.error("Failed to reset onboarding data", error);
+      }
+      setIsComplete(() => false);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (e) {
       console.error("Failed to reset onboarding", e);

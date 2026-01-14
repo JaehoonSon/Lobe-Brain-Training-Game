@@ -8,6 +8,9 @@ import {
 } from "lucide-react-native";
 import { useColorScheme } from "react-native";
 
+// Toggle this to show/hide the tab bar UI
+const SHOW_TAB_BAR = true;
+
 export default function TabsLayout() {
   const colorScheme = useColorScheme();
 
@@ -36,6 +39,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: theme.primary,
         tabBarInactiveTintColor: theme.muted,
         tabBarStyle: {
+          display: SHOW_TAB_BAR ? "flex" : "none",
           paddingTop: 8,
           height: 90,
           borderTopWidth: 1,

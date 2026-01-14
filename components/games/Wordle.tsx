@@ -6,7 +6,7 @@ import * as Haptics from "expo-haptics";
 import { WordleContent } from "~/lib/validators/game-content";
 
 interface WordleProps {
-  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
+  onComplete: (accuracy: number) => void; // 0.0 to 1.0
   content: WordleContent;
 }
 
@@ -20,12 +20,13 @@ const KEYBOARD_ROWS = [
 ];
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const TILE_SIZE = Math.min(60, (SCREEN_WIDTH - 60) / 5);
 const TILE_GAP = 6;
 
 export function Wordle({ onComplete, content }: WordleProps) {
   const targetWord = content.word.toUpperCase();
+  const wordLength = targetWord.length;
   const maxGuesses = content.max_guesses;
+  const tileSize = Math.min(60, (SCREEN_WIDTH - 60) / wordLength);
 
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -34,7 +35,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
 
   const evaluateGuess = useCallback(
     (guess: string): TileStatus[] => {
-      const result: TileStatus[] = Array(5).fill("absent");
+      const result: TileStatus[] = Array(wordLength).fill("absent");
       const targetLetters = targetWord.split("");
       const guessLetters = guess.split("");
 
@@ -86,8 +87,40 @@ export function Wordle({ onComplete, content }: WordleProps) {
     []
   );
 
+  // Calculate accuracy based on letter correctness
+  const calculateAccuracy = useCallback(
+    (allGuesses: string[], won: boolean): number => {
+      if (won) {
+        // Win bonus: base 50% + up to 50% based on efficiency (fewer guesses = better)
+        const efficiency = 1 - (allGuesses.length - 1) / maxGuesses;
+        return 0.5 + efficiency * 0.5;
+      }
+
+      // For losses, calculate based on the best guess's letter accuracy
+      let bestGuessScore = 0;
+
+      for (const guess of allGuesses) {
+        const statuses = evaluateGuess(guess);
+        let guessScore = 0;
+
+        statuses.forEach((status) => {
+          if (status === "correct") guessScore += 1.0;
+          else if (status === "present") guessScore += 0.5;
+          // absent = 0
+        });
+
+        const normalizedScore = guessScore / wordLength;
+        bestGuessScore = Math.max(bestGuessScore, normalizedScore);
+      }
+
+      // Scale to 0-50% range for losses (never higher than a win)
+      return bestGuessScore * 0.5;
+    },
+    [maxGuesses, wordLength, evaluateGuess]
+  );
+
   const submitGuess = useCallback(() => {
-    if (currentGuess.length !== 5 || gameOver) return;
+    if (currentGuess.length !== wordLength || gameOver) return;
 
     const statuses = evaluateGuess(currentGuess);
     updateKeyStatuses(currentGuess, statuses);
@@ -102,11 +135,13 @@ export function Wordle({ onComplete, content }: WordleProps) {
     if (isWin) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setGameOver(true);
-      setTimeout(() => onComplete(1.0), 1500);  // Win = 100% accuracy
+      const accuracy = calculateAccuracy(newGuesses, true);
+      setTimeout(() => onComplete(accuracy), 1500);
     } else if (isLoss) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       setGameOver(true);
-      setTimeout(() => onComplete(0.0), 1500);  // Loss = 0% accuracy
+      const accuracy = calculateAccuracy(newGuesses, false);
+      setTimeout(() => onComplete(accuracy), 1500);
     } else {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }
@@ -115,9 +150,11 @@ export function Wordle({ onComplete, content }: WordleProps) {
     guesses,
     gameOver,
     targetWord,
+    wordLength,
     maxGuesses,
     evaluateGuess,
     updateKeyStatuses,
+    calculateAccuracy,
     onComplete,
   ]);
 
@@ -131,7 +168,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
         submitGuess();
       } else if (key === "⌫") {
         setCurrentGuess((prev) => prev.slice(0, -1));
-      } else if (currentGuess.length < 5) {
+      } else if (currentGuess.length < wordLength) {
         setCurrentGuess((prev) => prev + key);
       }
     },
@@ -182,7 +219,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
             className="flex-row"
             style={{ marginBottom: TILE_GAP }}
           >
-            {Array.from({ length: 5 }).map((_, colIndex) => {
+            {Array.from({ length: wordLength }).map((_, colIndex) => {
               const status = getTileStatus(rowIndex, colIndex);
               const letter = getTileLetter(rowIndex, colIndex);
 
@@ -198,8 +235,8 @@ export function Wordle({ onComplete, content }: WordleProps) {
                     status === "absent" && "bg-zinc-600 border-zinc-700"
                   )}
                   style={{
-                    width: TILE_SIZE,
-                    height: TILE_SIZE,
+                    width: tileSize,
+                    height: tileSize,
                     marginHorizontal: TILE_GAP / 2,
                   }}
                 >
@@ -209,9 +246,9 @@ export function Wordle({ onComplete, content }: WordleProps) {
                       (status === "correct" ||
                         status === "present" ||
                         status === "absent") &&
-                      "text-white",
+                        "text-white",
                       (status === "empty" || status === "filled") &&
-                      "text-foreground"
+                        "text-foreground"
                     )}
                   >
                     {letter}
