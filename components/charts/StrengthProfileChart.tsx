@@ -29,7 +29,6 @@ export function StrengthProfileChart({
     ? "rgba(129, 140, 248, 0.4)"
     : "rgba(250, 139, 75, 0.2)"; // Primary with opacity
   const strokeColor = isDark ? "#818cf8" : "#fa8b4b"; // Primary
-  const maxBPI = 600; // Normalized progress is 0-100
 
   // Chart configuration
   const size = Math.min(width, height);
@@ -47,7 +46,7 @@ export function StrengthProfileChart({
     // Calculate points for the data polygon
     const points = data
       .map((stat, i) => {
-        const value = (stat.score || 0) / maxBPI;
+        const value = (stat.progress || 0) / 100;
         const angle = i * angleStep - Math.PI / 2; // Start from top (-90deg)
         const x = cx + radius * value * Math.cos(angle);
         const y = cy + radius * value * Math.sin(angle);
@@ -134,7 +133,7 @@ export function StrengthProfileChart({
         {/* Data Points (Dots) */}
         {data.map((stat, i) => {
           const angle = i * ((Math.PI * 2) / count) - Math.PI / 2;
-          const value = (stat.score || 0) / maxBPI;
+          const value = (stat.progress || 0) / 100;
           const x = cx + radius * value * Math.cos(angle);
           const y = cy + radius * value * Math.sin(angle);
           return <Circle key={i} cx={x} cy={y} r="4" fill={strokeColor} />;
