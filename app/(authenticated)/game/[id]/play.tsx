@@ -395,7 +395,8 @@ export default function GamePlayScreen() {
           {session.isPlaying && session.correctCount > 0 && (
             <View className="bg-green-600/80 px-3 py-2 rounded-full">
               <Text className="text-white font-bold">
-                ✓ {session.correctCount}
+                ✓ {Math.round(session.correctCount)}
+
               </Text>
             </View>
           )}

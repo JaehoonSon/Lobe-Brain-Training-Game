@@ -143,7 +143,7 @@ export function GameSessionProvider({
 
     setState((prev) => ({
       ...prev,
-      correctCount: prev.correctCount + (answer.accuracy === 1.0 ? 1 : 0),
+      correctCount: prev.correctCount + answer.accuracy,
     }));
   }, []);
 
@@ -167,9 +167,10 @@ export function GameSessionProvider({
 
     // Get current answers from ref to avoid stale state
     const currentAnswers = answers;
-    const correctCount = currentAnswers.filter(
-      (a) => a.accuracy === 1.0
-    ).length;
+    const accuracySum = currentAnswers.reduce(
+      (sum, a) => sum + a.accuracy,
+      0
+    );
 
     // Clamp difficulty values
     const avgQDifficulty = Math.max(0, Math.min(10, avgQuestionDifficulty));
@@ -177,10 +178,7 @@ export function GameSessionProvider({
 
     // Calculate overall accuracy
     const accuracy =
-      currentAnswers.length > 0
-        ? currentAnswers.reduce((sum, a) => sum + a.accuracy, 0) /
-        currentAnswers.length
-        : 0;
+      currentAnswers.length > 0 ? accuracySum / currentAnswers.length : 0;
 
     // Per-game target times (ms per question)
     const targetPerQuestionMsByGame: Record<string, number | null> = {
@@ -218,7 +216,7 @@ export function GameSessionProvider({
       isFinished: true,
       score: bpi,
       durationMs,
-      correctCount,
+      correctCount: accuracySum,
     }));
 
     // Save to database
@@ -233,7 +231,8 @@ export function GameSessionProvider({
           avg_response_time_ms: avgResponseTimeMs,
           score: bpi,
           duration_seconds: Math.round(durationMs / 1000),
-          correct_count: correctCount,
+          correct_count: accuracySum,
+
           total_questions: totalQuestions,
           metadata: metadata ?? null,
         })
