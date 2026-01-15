@@ -14,6 +14,7 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { BallSort } from "~/components/games/BallSort";
+import { WordUnscramble } from "~/components/games/WordUnscramble";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -259,6 +260,15 @@ export default function GamePlayScreen() {
         if (content.type !== "ball_sort") return null;
         return (
           <BallSort
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
+      case "word_unscramble":
+        if (content.type !== "word_unscramble") return null;
+        return (
+          <WordUnscramble
             key={currentQuestionIndex}
             content={content}
             onComplete={handleQuestionComplete}

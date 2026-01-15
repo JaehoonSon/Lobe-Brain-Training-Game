@@ -74,6 +74,13 @@ export const BallSortContentSchema = z
     }
   });
 
+// 6. Word Unscramble
+export const WordUnscrambleContentSchema = z.object({
+  type: z.literal("word_unscramble"),
+  word: z.string(),
+  hint: z.string().optional(),
+});
+
 // Union Schema for all game content
 export const GameContentSchema = z.discriminatedUnion("type", [
   MentalArithmeticContentSchema,
@@ -81,6 +88,7 @@ export const GameContentSchema = z.discriminatedUnion("type", [
   MentalLanguageDiscriminationContentSchema,
   WordleContentSchema,
   BallSortContentSchema,
+  WordUnscrambleContentSchema,
 ]);
 
 export type MentalArithmeticContent = z.infer<typeof MentalArithmeticContentSchema>;
@@ -90,4 +98,5 @@ export type MentalLanguageDiscriminationContent = z.infer<
 >;
 export type WordleContent = z.infer<typeof WordleContentSchema>;
 export type BallSortContent = z.infer<typeof BallSortContentSchema>;
+export type WordUnscrambleContent = z.infer<typeof WordUnscrambleContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;

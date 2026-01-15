@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 
 const OUTPUT_DIR = path.join(__dirname, 'output');
-const MIGRATION_FILE = path.join(__dirname, '../supabase/migrations/20260110041340_seed_ball_sort.sql');
-const FILE_PREFIX = 'ball_sort_';
+const MIGRATION_FILE = path.join(__dirname, '../supabase/migrations/20260111230000_seed_word_unscramble.sql');
+const FILE_PREFIX = 'word_unscramble_';
 
 const generateSql = () => {
   const files = fs.readdirSync(OUTPUT_DIR).filter(file => file.endsWith('.json') && file.startsWith(FILE_PREFIX));
