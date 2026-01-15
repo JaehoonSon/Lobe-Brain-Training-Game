@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Image, Dimensions } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -9,11 +9,13 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
   Extrapolation,
+  useFrameCallback,
+  runOnJS,
 } from "react-native-reanimated";
 
 const { width, height } = Dimensions.get("window");
 const ROCKET_SIZE = 100;
-const PLAYABLE_HEIGHT = height * 0.55;
+const PLAYABLE_HEIGHT = height * 0.75;
 
 interface MathRocketProps {
   onComplete: (accuracy: number) => void;
@@ -35,20 +37,26 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [score, setScore] = useState(0);
 
-  const rocketY = useSharedValue(PLAYABLE_HEIGHT / 2);
-  const velocity = useRef(0);
+  const rocketY = useSharedValue(PLAYABLE_HEIGHT * 0.15);
+  const velocity = useSharedValue(0);
+  const isPlaying = useSharedValue(true);
 
-  // Game constants
-  const GRAVITY = (content.gravity ?? 0.5) * 0.1;
-  const THRUST = content.thrust ?? 15;
+  // Game constants as shared values for UI thread access
+  const GRAVITY = (content.gravity ?? 0.5) * 0.050;
+  const THRUST = (content.thrust ?? 10) / 5; // DB 10 = physics 2
   const WINNING_SCORE = content.winningScore ?? 10;
 
-  // Refs for loop access to ensure no stale closures
-  const gravityRef = useRef(GRAVITY);
-  gravityRef.current = GRAVITY;
+  const gravityValue = useSharedValue(GRAVITY);
 
-  const gameStateRef = useRef(gameState);
-  gameStateRef.current = gameState;
+  // Update gravity when content changes
+  useEffect(() => {
+    gravityValue.value = GRAVITY;
+  }, [GRAVITY]);
+
+  // Sync isPlaying with gameState
+  useEffect(() => {
+    isPlaying.value = gameState === "playing";
+  }, [gameState]);
 
   useEffect(() => {
     generateNewQuestion();
@@ -103,47 +111,43 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
     });
   };
 
-  useEffect(() => {
-    let animationFrameId: number;
+  // Callbacks for game over/win (must be called from UI thread via runOnJS)
+  const handleGameOver = useCallback(() => {
+    setGameState("game_over");
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    onComplete(0.0);
+  }, [onComplete]);
 
-    const animate = () => {
-      // Only run physics if playing
-      if (gameStateRef.current !== "playing") return;
+  // Physics loop running on UI thread
+  useFrameCallback(() => {
+    "worklet";
+    if (!isPlaying.value) return;
 
-      // Physics update using refs for current values
-      velocity.current += gravityRef.current;
-      let newY = rocketY.value + velocity.current;
+    // Apply gravity
+    velocity.value += gravityValue.value;
+    let newY = rocketY.value + velocity.value;
 
-      // Floor collision
-      if (newY > PLAYABLE_HEIGHT - ROCKET_SIZE) {
-        setGameState("game_over");
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-        onComplete(0.0);
-        return;
-      }
+    // Floor collision - game over
+    if (newY > PLAYABLE_HEIGHT - ROCKET_SIZE) {
+      isPlaying.value = false;
+      runOnJS(handleGameOver)();
+      return;
+    }
 
-      // Ceiling collision
-      if (newY < 0) {
-        newY = 0;
-        velocity.current = 0;
-      }
+    // Ceiling collision - stop at top
+    if (newY < 0) {
+      newY = 0;
+      velocity.value = 0;
+    }
 
-      rocketY.value = newY;
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
+    rocketY.value = newY;
+  });
 
   const handleAnswer = (choice: number) => {
     if (gameState !== "playing" || !currentQuestion) return;
 
     if (choice === currentQuestion.answer) {
-      velocity.current = -THRUST;
+      velocity.value = -THRUST;
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       setScore((s) => {
         const newScore = s + 1;
@@ -156,19 +160,13 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
       });
     } else {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      velocity.current += 5;
+      velocity.value += 1.0;
     }
   };
 
   const rocketStyle = useAnimatedStyle(() => {
-    const rotation = interpolate(
-      velocity.current,
-      [-20, 0, 20],
-      [-15, 0, 15],
-      Extrapolation.CLAMP
-    );
     return {
-      transform: [{ translateY: rocketY.value }, { rotate: `${rotation}deg` }],
+      transform: [{ translateY: rocketY.value }],
     };
   });
 
@@ -198,6 +196,20 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
             resizeMode="contain"
           />
         </Animated.View>
+
+        {/* Ground Indicator */}
+        <View
+          className="absolute bottom-0 left-0 right-0 h-4"
+          style={{
+            backgroundColor: '#8B4513',
+            borderTopWidth: 3,
+            borderTopColor: '#654321',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: -2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+          }}
+        />
       </View>
 
       {/* Question & Answers */}
