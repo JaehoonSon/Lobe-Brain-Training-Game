@@ -1,0 +1,287 @@
+[
+  {
+    "id": "8f7552f8-21a9-4872-bc6d-995e92990c6e",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "4b5b1fe9-7068-444a-8ef5-4156275b81e0",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "464a8b83-ed9f-40f3-a50b-7080b1f24d7e",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "968b06c1-b367-4e71-995f-9e31ca5e9b44",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "7a2b9542-f6b7-46dc-aea9-d35030956916",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "ceb99edb-a5c5-448b-ad10-cf3f391c62b5",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "c8efd50d-75f6-4238-aad4-bd7d2a726de6",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "bbe026f9-b589-47ec-b156-2e56c0ca1392",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "65dd1d98-26d2-4869-bd5b-75a3d6d26f8f",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "b01aca9a-870e-4a36-80c1-e22183e68628",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "d989a93a-6ee2-49b5-9782-819dbfdbc793",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "1a0885bd-9a32-4593-8749-9e6207e4e0c2",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "d1c178f2-44cf-4163-aeac-5c697e2c146b",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "d47b83a7-a24c-49ff-a492-036cdf934ed5",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  },
+  {
+    "id": "2e5d233e-b097-4917-8bba-4c3707202680",
+    "game_id": "math_rocket",
+    "difficulty": 2,
+    "content": {
+      "operandRange": [
+        1,
+        15
+      ],
+      "operators": [
+        "+",
+        "-"
+      ],
+      "gravity": 0.35,
+      "thrust": 10,
+      "winningScore": 12,
+      "type": "math_rocket"
+    }
+  }
+]

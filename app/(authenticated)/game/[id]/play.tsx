@@ -15,6 +15,7 @@ import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { BallSort } from "~/components/games/BallSort";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
+import { MathRocket } from "~/components/games/MathRocket";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -274,6 +275,15 @@ export default function GamePlayScreen() {
             onComplete={handleQuestionComplete}
           />
         );
+      case "math_rocket":
+        if (content.type !== "math_rocket") return null;
+        return (
+          <MathRocket
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       default:
         return (
           <View className="flex-1 items-center justify-center">
@@ -285,10 +295,14 @@ export default function GamePlayScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      {/* Header Row - Respects Safe Area */}
+      {/* Game Content - Full Screen */}
+      <View className="absolute inset-0">{renderGame()}</View>
+
+      {/* Header Row - Absolute overlay on top */}
       <View
-        className="flex-row items-center justify-between px-6 z-20"
-        style={{ paddingTop: insets.top + 12 }}
+        className="absolute left-0 right-0 flex-row items-center justify-between px-6 z-20"
+        style={{ top: insets.top + 12 }}
+        pointerEvents="box-none"
       >
         {/* Close Button */}
         <TouchableOpacity
@@ -317,9 +331,6 @@ export default function GamePlayScreen() {
           </View>
         </View>
       </View>
-
-      {/* Game Content */}
-      <View className="flex-1">{renderGame()}</View>
     </View>
   );
 }

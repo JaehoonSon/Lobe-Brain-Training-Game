@@ -10,7 +10,7 @@ async function main() {
 
   for (const file of files) {
     if (
-      (file.startsWith('ball_sort_')) &&
+      (file.startsWith('math_rocket_')) &&
       file.endsWith('.json')
     ) {
       const filePath = path.join(OUTPUT_DIR, file);
@@ -28,7 +28,7 @@ async function main() {
         const template = questions[0];
         const newQuestions: any[] = [];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 15; i++) {
           newQuestions.push({
             ...template,
             id: crypto.randomUUID(), // Generate a new unique ID
@@ -36,7 +36,7 @@ async function main() {
         }
 
         fs.writeFileSync(filePath, JSON.stringify(newQuestions, null, 2));
-        console.log(`Updated ${file} with 10 questions.`);
+        console.log(`Updated ${file} with 15 questions.`);
 
       } catch (error) {
         console.error(`Error processing ${file}:`, error);

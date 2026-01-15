@@ -81,6 +81,16 @@ export const WordUnscrambleContentSchema = z.object({
   hint: z.string().optional(),
 });
 
+// 7. Math Rocket
+export const MathRocketContentSchema = z.object({
+  type: z.literal("math_rocket"),
+  operandRange: z.tuple([z.number(), z.number()]).optional(),
+  operators: z.array(z.enum(["+", "-", "x", "*", "/"])).optional(),
+  gravity: z.number().optional(),
+  thrust: z.number().optional(),
+  winningScore: z.number().optional(),
+});
+
 // Union Schema for all game content
 export const GameContentSchema = z.discriminatedUnion("type", [
   MentalArithmeticContentSchema,
@@ -89,6 +99,7 @@ export const GameContentSchema = z.discriminatedUnion("type", [
   WordleContentSchema,
   BallSortContentSchema,
   WordUnscrambleContentSchema,
+  MathRocketContentSchema,
 ]);
 
 export type MentalArithmeticContent = z.infer<typeof MentalArithmeticContentSchema>;
@@ -99,4 +110,5 @@ export type MentalLanguageDiscriminationContent = z.infer<
 export type WordleContent = z.infer<typeof WordleContentSchema>;
 export type BallSortContent = z.infer<typeof BallSortContentSchema>;
 export type WordUnscrambleContent = z.infer<typeof WordUnscrambleContentSchema>;
+export type MathRocketContent = z.infer<typeof MathRocketContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;
