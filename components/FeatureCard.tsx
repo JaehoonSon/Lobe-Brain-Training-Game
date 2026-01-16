@@ -13,6 +13,7 @@ interface FeatureCardProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
   isLocked?: boolean;
+  noPadding?: boolean;
 }
 
 /**
@@ -24,6 +25,7 @@ export function FeatureCard({
   children,
   variant = "primary",
   isLocked = false,
+  noPadding = false,
 }: FeatureCardProps) {
   const { isPro, presentPaywall } = useRevenueCat();
 
@@ -35,7 +37,7 @@ export function FeatureCard({
   return (
     <Card className="mb-6 bg-card overflow-hidden">
       {/* Header Section */}
-      <View className="flex-row items-center justify-between px-4 pt-4 pb-2">
+      <View className="flex-row items-center justify-between px-4 pt-4">
         <View className="flex-row items-center gap-2">
           {/* Optional: Add an icon here if passed in props later */}
           <H4 className="text-base font-black uppercase tracking-wider text-foreground/80">
@@ -61,7 +63,7 @@ export function FeatureCard({
 
       <View className="relative">
         {/* Main Content */}
-        <View className={cn("p-4 pt-0", isGated && "opacity-50")}>
+        <View className={cn(noPadding ? "px-0 py-2" : "p-4 pb-2", isGated && "opacity-50")}>
           {children}
         </View>
 
