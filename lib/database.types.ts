@@ -93,6 +93,44 @@ export type Database = {
         }
         Relationships: []
       }
+      game_ability_norms: {
+        Row: {
+          game_id: string
+          mean_raw: number
+          sample_size: number
+          std_raw: number
+          updated_at: string
+          window_end: string
+          window_start: string
+        }
+        Insert: {
+          game_id: string
+          mean_raw: number
+          sample_size: number
+          std_raw: number
+          updated_at?: string
+          window_end: string
+          window_start: string
+        }
+        Update: {
+          game_id?: string
+          mean_raw?: number
+          sample_size?: number
+          std_raw?: number
+          updated_at?: string
+          window_end?: string
+          window_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "testing_game_ability_norms_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: true
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       game_answers: {
         Row: {
           accuracy: number
@@ -244,47 +282,6 @@ export type Database = {
           },
         ]
       }
-      global_game_performance_history: {
-        Row: {
-          created_at: string | null
-          difficulty_rating: number
-          game_id: string
-          games_played_count: number
-          highest_score: number | null
-          id: string
-          snapshot_date: string
-          total_score: number
-        }
-        Insert: {
-          created_at?: string | null
-          difficulty_rating: number
-          game_id: string
-          games_played_count: number
-          highest_score?: number | null
-          id?: string
-          snapshot_date?: string
-          total_score: number
-        }
-        Update: {
-          created_at?: string | null
-          difficulty_rating?: number
-          game_id?: string
-          games_played_count?: number
-          highest_score?: number | null
-          id?: string
-          snapshot_date?: string
-          total_score?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "global_game_performance_history_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -350,45 +347,7 @@ export type Database = {
           },
         ]
       }
-      testing_game_ability_norms: {
-        Row: {
-          game_id: string
-          mean_raw: number
-          sample_size: number
-          std_raw: number
-          updated_at: string
-          window_end: string
-          window_start: string
-        }
-        Insert: {
-          game_id: string
-          mean_raw: number
-          sample_size: number
-          std_raw: number
-          updated_at?: string
-          window_end: string
-          window_start: string
-        }
-        Update: {
-          game_id?: string
-          mean_raw?: number
-          sample_size?: number
-          std_raw?: number
-          updated_at?: string
-          window_end?: string
-          window_start?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "testing_game_ability_norms_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: true
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      testing_user_category_ability_history: {
+      user_category_ability_history: {
         Row: {
           ability_score: number
           category_id: string
@@ -423,7 +382,7 @@ export type Database = {
           },
         ]
       }
-      testing_user_category_ability_scores: {
+      user_category_ability_scores: {
         Row: {
           ability_score: number
           category_id: string
@@ -452,7 +411,7 @@ export type Database = {
           },
         ]
       }
-      testing_user_game_ability_history: {
+      user_game_ability_history: {
         Row: {
           ability_score: number
           created_at: string | null
@@ -490,7 +449,7 @@ export type Database = {
           },
         ]
       }
-      testing_user_game_ability_scores: {
+      user_game_ability_scores: {
         Row: {
           ability_score: number
           game_id: string
@@ -524,48 +483,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      testing_user_global_ability_history: {
-        Row: {
-          ability_score: number
-          created_at: string | null
-          id: string
-          snapshot_date: string
-          user_id: string
-        }
-        Insert: {
-          ability_score: number
-          created_at?: string | null
-          id?: string
-          snapshot_date?: string
-          user_id: string
-        }
-        Update: {
-          ability_score?: number
-          created_at?: string | null
-          id?: string
-          snapshot_date?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      testing_user_global_ability_scores: {
-        Row: {
-          ability_score: number
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          ability_score: number
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          ability_score?: number
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
       }
       user_game_performance: {
         Row: {
@@ -608,7 +525,117 @@ export type Database = {
           },
         ]
       }
-      user_game_performance_history: {
+      user_global_ability_history: {
+        Row: {
+          ability_score: number
+          created_at: string | null
+          id: string
+          snapshot_date: string
+          user_id: string
+        }
+        Insert: {
+          ability_score: number
+          created_at?: string | null
+          id?: string
+          snapshot_date?: string
+          user_id: string
+        }
+        Update: {
+          ability_score?: number
+          created_at?: string | null
+          id?: string
+          snapshot_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_global_ability_scores: {
+        Row: {
+          ability_score: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ability_score: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ability_score?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_streaks: {
+        Row: {
+          best_streak: number
+          created_at: string | null
+          current_streak: number
+          last_played_date: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          best_streak?: number
+          created_at?: string | null
+          current_streak?: number
+          last_played_date?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          best_streak?: number
+          created_at?: string | null
+          current_streak?: number
+          last_played_date?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      zzz_unused_global_game_performance_history: {
+        Row: {
+          created_at: string | null
+          difficulty_rating: number
+          game_id: string
+          games_played_count: number
+          highest_score: number | null
+          id: string
+          snapshot_date: string
+          total_score: number
+        }
+        Insert: {
+          created_at?: string | null
+          difficulty_rating: number
+          game_id: string
+          games_played_count: number
+          highest_score?: number | null
+          id?: string
+          snapshot_date?: string
+          total_score: number
+        }
+        Update: {
+          created_at?: string | null
+          difficulty_rating?: number
+          game_id?: string
+          games_played_count?: number
+          highest_score?: number | null
+          id?: string
+          snapshot_date?: string
+          total_score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "global_game_performance_history_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      zzz_unused_user_game_performance_history: {
         Row: {
           created_at: string | null
           difficulty_rating: number
@@ -658,32 +685,43 @@ export type Database = {
           },
         ]
       }
-      user_streaks: {
+      zzz_unused_user_performance: {
         Row: {
-          best_streak: number
           created_at: string | null
-          current_streak: number
-          last_played_date: string | null
-          updated_at: string | null
+          current_rating: number | null
+          game_id: string
+          games_played_count: number | null
+          highest_score: number | null
+          last_played_at: string | null
           user_id: string
         }
         Insert: {
-          best_streak?: number
           created_at?: string | null
-          current_streak?: number
-          last_played_date?: string | null
-          updated_at?: string | null
+          current_rating?: number | null
+          game_id: string
+          games_played_count?: number | null
+          highest_score?: number | null
+          last_played_at?: string | null
           user_id: string
         }
         Update: {
-          best_streak?: number
           created_at?: string | null
-          current_streak?: number
-          last_played_date?: string | null
-          updated_at?: string | null
+          current_rating?: number | null
+          game_id?: string
+          games_played_count?: number | null
+          highest_score?: number | null
+          last_played_at?: string | null
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_performance_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -718,15 +756,15 @@ export type Database = {
           pool_type: string
         }[]
       }
-      process_daily_game_performance_snapshot: {
+      refresh_ability_scores: { Args: never; Returns: undefined }
+      zzz_process_daily_game_performance_snapshot: {
         Args: never
         Returns: undefined
       }
-      process_daily_global_game_performance_snapshot: {
+      zzz_process_daily_global_game_performance_snapshot: {
         Args: never
         Returns: undefined
       }
-      testing_refresh_ability_scores: { Args: never; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

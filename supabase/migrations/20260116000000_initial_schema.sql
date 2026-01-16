@@ -250,77 +250,10 @@ $$;
 ALTER FUNCTION "public"."handle_new_user"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."process_daily_game_performance_snapshot"() RETURNS "void"
-    LANGUAGE "plpgsql"
-    AS $$
-begin
-    insert into public.user_game_performance_history (
-        user_id,
-        game_id,
-        difficulty_rating,
-        games_played_count,
-        highest_score,
-        total_score,
-        last_played_at,
-        perf_created_at,
-        snapshot_date
-    )
-    select
-        user_id,
-        game_id,
-        difficulty_rating,
-        games_played_count,
-        highest_score,
-        total_score,
-        last_played_at,
-        created_at as perf_created_at,
-        current_date as snapshot_date
-    from
-        public.user_game_performance
-    on conflict (user_id, game_id, snapshot_date) do nothing;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."process_daily_game_performance_snapshot"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."process_daily_global_game_performance_snapshot"() RETURNS "void"
-    LANGUAGE "plpgsql"
-    AS $$
-begin
-    insert into public.global_game_performance_history (
-        game_id,
-        difficulty_rating,
-        games_played_count,
-        highest_score,
-        total_score,
-        snapshot_date
-    )
-    select
-        game_id,
-        round(avg(difficulty_rating)::numeric, 2) as difficulty_rating,
-        round(avg(games_played_count)) as games_played_count,
-        round(avg(highest_score)) as highest_score,
-        round(avg(total_score)) as total_score,
-        current_date as snapshot_date
-    from
-        public.user_game_performance
-    group by
-        game_id
-    on conflict (game_id, snapshot_date) do nothing;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."process_daily_global_game_performance_snapshot"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."testing_refresh_ability_scores"() RETURNS "void"
+CREATE OR REPLACE FUNCTION "public"."refresh_ability_scores"() RETURNS "void"
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public'
-    AS $$
-DECLARE
+    AS $$DECLARE
     window_end TIMESTAMPTZ := NOW();
     window_start TIMESTAMPTZ := window_end - INTERVAL '90 days';
     seed_mean FLOAT8 := 1000;
@@ -556,11 +489,10 @@ BEGIN
     ON CONFLICT (user_id, snapshot_date) DO UPDATE SET
         ability_score = EXCLUDED.ability_score,
         created_at = NOW();
-END;
-$$;
+END;$$;
 
 
-ALTER FUNCTION "public"."testing_refresh_ability_scores"() OWNER TO "postgres";
+ALTER FUNCTION "public"."refresh_ability_scores"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."update_user_game_performance_from_session"() RETURNS "trigger"
@@ -683,6 +615,68 @@ $$;
 
 ALTER FUNCTION "public"."update_user_streak_from_session"() OWNER TO "postgres";
 
+
+CREATE OR REPLACE FUNCTION "public"."zzz_process_daily_game_performance_snapshot"() RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$begin
+    insert into public.user_game_performance_history (
+        user_id,
+        game_id,
+        difficulty_rating,
+        games_played_count,
+        highest_score,
+        total_score,
+        last_played_at,
+        perf_created_at,
+        snapshot_date
+    )
+    select
+        user_id,
+        game_id,
+        difficulty_rating,
+        games_played_count,
+        highest_score,
+        total_score,
+        last_played_at,
+        created_at as perf_created_at,
+        current_date as snapshot_date
+    from
+        public.user_game_performance
+    on conflict (user_id, game_id, snapshot_date) do nothing;
+end;$$;
+
+
+ALTER FUNCTION "public"."zzz_process_daily_game_performance_snapshot"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."zzz_process_daily_global_game_performance_snapshot"() RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$begin
+    insert into public.global_game_performance_history (
+        game_id,
+        difficulty_rating,
+        games_played_count,
+        highest_score,
+        total_score,
+        snapshot_date
+    )
+    select
+        game_id,
+        round(avg(difficulty_rating)::numeric, 2) as difficulty_rating,
+        round(avg(games_played_count)) as games_played_count,
+        round(avg(highest_score)) as highest_score,
+        round(avg(total_score)) as total_score,
+        current_date as snapshot_date
+    from
+        public.user_game_performance
+    group by
+        game_id
+    on conflict (game_id, snapshot_date) do nothing;
+end;$$;
+
+
+ALTER FUNCTION "public"."zzz_process_daily_global_game_performance_snapshot"() OWNER TO "postgres";
+
 SET default_tablespace = '';
 
 SET default_table_access_method = "heap";
@@ -713,6 +707,20 @@ CREATE TABLE IF NOT EXISTS "public"."daily_insights" (
 
 
 ALTER TABLE "public"."daily_insights" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."game_ability_norms" (
+    "game_id" "text" NOT NULL,
+    "mean_raw" double precision NOT NULL,
+    "std_raw" double precision NOT NULL,
+    "sample_size" integer NOT NULL,
+    "window_start" timestamp with time zone NOT NULL,
+    "window_end" timestamp with time zone NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."game_ability_norms" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."game_answers" (
@@ -783,21 +791,6 @@ COMMENT ON COLUMN "public"."games"."recommended_rounds" IS 'Recommended number o
 
 
 
-CREATE TABLE IF NOT EXISTS "public"."global_game_performance_history" (
-    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
-    "game_id" "text" NOT NULL,
-    "difficulty_rating" real NOT NULL,
-    "games_played_count" integer NOT NULL,
-    "highest_score" integer,
-    "total_score" integer NOT NULL,
-    "snapshot_date" "date" DEFAULT CURRENT_DATE NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"()
-);
-
-
-ALTER TABLE "public"."global_game_performance_history" OWNER TO "postgres";
-
-
 CREATE TABLE IF NOT EXISTS "public"."profiles" (
     "id" "uuid" NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"(),
@@ -830,21 +823,7 @@ CREATE TABLE IF NOT EXISTS "public"."questions" (
 ALTER TABLE "public"."questions" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."testing_game_ability_norms" (
-    "game_id" "text" NOT NULL,
-    "mean_raw" double precision NOT NULL,
-    "std_raw" double precision NOT NULL,
-    "sample_size" integer NOT NULL,
-    "window_start" timestamp with time zone NOT NULL,
-    "window_end" timestamp with time zone NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
-);
-
-
-ALTER TABLE "public"."testing_game_ability_norms" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."testing_user_category_ability_history" (
+CREATE TABLE IF NOT EXISTS "public"."user_category_ability_history" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "user_id" "uuid" NOT NULL,
     "category_id" "text" NOT NULL,
@@ -854,10 +833,10 @@ CREATE TABLE IF NOT EXISTS "public"."testing_user_category_ability_history" (
 );
 
 
-ALTER TABLE "public"."testing_user_category_ability_history" OWNER TO "postgres";
+ALTER TABLE "public"."user_category_ability_history" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."testing_user_category_ability_scores" (
+CREATE TABLE IF NOT EXISTS "public"."user_category_ability_scores" (
     "user_id" "uuid" NOT NULL,
     "category_id" "text" NOT NULL,
     "ability_score" integer NOT NULL,
@@ -865,10 +844,10 @@ CREATE TABLE IF NOT EXISTS "public"."testing_user_category_ability_scores" (
 );
 
 
-ALTER TABLE "public"."testing_user_category_ability_scores" OWNER TO "postgres";
+ALTER TABLE "public"."user_category_ability_scores" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."testing_user_game_ability_history" (
+CREATE TABLE IF NOT EXISTS "public"."user_game_ability_history" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "user_id" "uuid" NOT NULL,
     "game_id" "text" NOT NULL,
@@ -879,10 +858,10 @@ CREATE TABLE IF NOT EXISTS "public"."testing_user_game_ability_history" (
 );
 
 
-ALTER TABLE "public"."testing_user_game_ability_history" OWNER TO "postgres";
+ALTER TABLE "public"."user_game_ability_history" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."testing_user_game_ability_scores" (
+CREATE TABLE IF NOT EXISTS "public"."user_game_ability_scores" (
     "user_id" "uuid" NOT NULL,
     "game_id" "text" NOT NULL,
     "last_score_raw" integer NOT NULL,
@@ -892,29 +871,7 @@ CREATE TABLE IF NOT EXISTS "public"."testing_user_game_ability_scores" (
 );
 
 
-ALTER TABLE "public"."testing_user_game_ability_scores" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."testing_user_global_ability_history" (
-    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
-    "user_id" "uuid" NOT NULL,
-    "ability_score" integer NOT NULL,
-    "snapshot_date" "date" DEFAULT CURRENT_DATE NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"()
-);
-
-
-ALTER TABLE "public"."testing_user_global_ability_history" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."testing_user_global_ability_scores" (
-    "user_id" "uuid" NOT NULL,
-    "ability_score" integer NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
-);
-
-
-ALTER TABLE "public"."testing_user_global_ability_scores" OWNER TO "postgres";
+ALTER TABLE "public"."user_game_ability_scores" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."user_game_performance" (
@@ -932,22 +889,26 @@ CREATE TABLE IF NOT EXISTS "public"."user_game_performance" (
 ALTER TABLE "public"."user_game_performance" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."user_game_performance_history" (
+CREATE TABLE IF NOT EXISTS "public"."user_global_ability_history" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "user_id" "uuid" NOT NULL,
-    "game_id" "text" NOT NULL,
-    "difficulty_rating" real NOT NULL,
-    "games_played_count" integer NOT NULL,
-    "highest_score" integer,
-    "total_score" integer NOT NULL,
-    "last_played_at" timestamp with time zone,
-    "perf_created_at" timestamp with time zone,
+    "ability_score" integer NOT NULL,
     "snapshot_date" "date" DEFAULT CURRENT_DATE NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"()
 );
 
 
-ALTER TABLE "public"."user_game_performance_history" OWNER TO "postgres";
+ALTER TABLE "public"."user_global_ability_history" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."user_global_ability_scores" (
+    "user_id" "uuid" NOT NULL,
+    "ability_score" integer NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."user_global_ability_scores" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."user_streaks" (
@@ -965,6 +926,53 @@ ALTER TABLE "public"."user_streaks" OWNER TO "postgres";
 
 COMMENT ON TABLE "public"."user_streaks" IS 'Tracks daily training streaks for users based on game session activity';
 
+
+
+CREATE TABLE IF NOT EXISTS "public"."zzz_unused_global_game_performance_history" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "game_id" "text" NOT NULL,
+    "difficulty_rating" real NOT NULL,
+    "games_played_count" integer NOT NULL,
+    "highest_score" integer,
+    "total_score" integer NOT NULL,
+    "snapshot_date" "date" DEFAULT CURRENT_DATE NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"()
+);
+
+
+ALTER TABLE "public"."zzz_unused_global_game_performance_history" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."zzz_unused_user_game_performance_history" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "user_id" "uuid" NOT NULL,
+    "game_id" "text" NOT NULL,
+    "difficulty_rating" real NOT NULL,
+    "games_played_count" integer NOT NULL,
+    "highest_score" integer,
+    "total_score" integer NOT NULL,
+    "last_played_at" timestamp with time zone,
+    "perf_created_at" timestamp with time zone,
+    "snapshot_date" "date" DEFAULT CURRENT_DATE NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"()
+);
+
+
+ALTER TABLE "public"."zzz_unused_user_game_performance_history" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."zzz_unused_user_performance" (
+    "user_id" "uuid" NOT NULL,
+    "game_id" "text" NOT NULL,
+    "current_rating" real DEFAULT 1.0,
+    "highest_score" integer,
+    "games_played_count" integer DEFAULT 0,
+    "last_played_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"()
+);
+
+
+ALTER TABLE "public"."zzz_unused_user_performance" OWNER TO "postgres";
 
 
 ALTER TABLE ONLY "public"."categories"
@@ -997,7 +1005,7 @@ ALTER TABLE ONLY "public"."games"
 
 
 
-ALTER TABLE ONLY "public"."global_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_global_game_performance_history"
     ADD CONSTRAINT "global_game_performance_history_pkey" PRIMARY KEY ("id");
 
 
@@ -1017,73 +1025,78 @@ ALTER TABLE ONLY "public"."questions"
 
 
 
-ALTER TABLE ONLY "public"."testing_game_ability_norms"
+ALTER TABLE ONLY "public"."game_ability_norms"
     ADD CONSTRAINT "testing_game_ability_norms_pkey" PRIMARY KEY ("game_id");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_history"
+ALTER TABLE ONLY "public"."user_category_ability_history"
     ADD CONSTRAINT "testing_user_category_ability_history_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_scores"
+ALTER TABLE ONLY "public"."user_category_ability_scores"
     ADD CONSTRAINT "testing_user_category_ability_scores_pkey" PRIMARY KEY ("user_id", "category_id");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_history"
+ALTER TABLE ONLY "public"."user_game_ability_history"
     ADD CONSTRAINT "testing_user_game_ability_history_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_scores"
+ALTER TABLE ONLY "public"."user_game_ability_scores"
     ADD CONSTRAINT "testing_user_game_ability_scores_pkey" PRIMARY KEY ("user_id", "game_id");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_global_ability_history"
+ALTER TABLE ONLY "public"."user_global_ability_history"
     ADD CONSTRAINT "testing_user_global_ability_history_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_global_ability_scores"
+ALTER TABLE ONLY "public"."user_global_ability_scores"
     ADD CONSTRAINT "testing_user_global_ability_scores_pkey" PRIMARY KEY ("user_id");
 
 
 
-ALTER TABLE ONLY "public"."global_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_global_game_performance_history"
     ADD CONSTRAINT "uq_global_game_perf_history_daily" UNIQUE ("game_id", "snapshot_date");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_history"
+ALTER TABLE ONLY "public"."user_category_ability_history"
     ADD CONSTRAINT "uq_testing_user_category_ability_history_daily" UNIQUE ("user_id", "category_id", "snapshot_date");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_history"
+ALTER TABLE ONLY "public"."user_game_ability_history"
     ADD CONSTRAINT "uq_testing_user_game_ability_history_daily" UNIQUE ("user_id", "game_id", "snapshot_date");
 
 
 
-ALTER TABLE ONLY "public"."testing_user_global_ability_history"
+ALTER TABLE ONLY "public"."user_global_ability_history"
     ADD CONSTRAINT "uq_testing_user_global_ability_history_daily" UNIQUE ("user_id", "snapshot_date");
 
 
 
-ALTER TABLE ONLY "public"."user_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_user_game_performance_history"
     ADD CONSTRAINT "uq_user_game_perf_history_daily" UNIQUE ("user_id", "game_id", "snapshot_date");
 
 
 
-ALTER TABLE ONLY "public"."user_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_user_game_performance_history"
     ADD CONSTRAINT "user_game_performance_history_pkey" PRIMARY KEY ("id");
 
 
 
 ALTER TABLE ONLY "public"."user_game_performance"
     ADD CONSTRAINT "user_game_performance_pkey" PRIMARY KEY ("user_id", "game_id");
+
+
+
+ALTER TABLE ONLY "public"."zzz_unused_user_performance"
+    ADD CONSTRAINT "user_performance_pkey" PRIMARY KEY ("user_id", "game_id");
 
 
 
@@ -1133,7 +1146,7 @@ ALTER TABLE ONLY "public"."games"
 
 
 
-ALTER TABLE ONLY "public"."global_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_global_game_performance_history"
     ADD CONSTRAINT "global_game_performance_history_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
 
 
@@ -1148,57 +1161,57 @@ ALTER TABLE ONLY "public"."questions"
 
 
 
-ALTER TABLE ONLY "public"."testing_game_ability_norms"
+ALTER TABLE ONLY "public"."game_ability_norms"
     ADD CONSTRAINT "testing_game_ability_norms_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_history"
+ALTER TABLE ONLY "public"."user_category_ability_history"
     ADD CONSTRAINT "testing_user_category_ability_history_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "public"."categories"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_history"
+ALTER TABLE ONLY "public"."user_category_ability_history"
     ADD CONSTRAINT "testing_user_category_ability_history_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_scores"
+ALTER TABLE ONLY "public"."user_category_ability_scores"
     ADD CONSTRAINT "testing_user_category_ability_scores_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "public"."categories"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_category_ability_scores"
+ALTER TABLE ONLY "public"."user_category_ability_scores"
     ADD CONSTRAINT "testing_user_category_ability_scores_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_history"
+ALTER TABLE ONLY "public"."user_game_ability_history"
     ADD CONSTRAINT "testing_user_game_ability_history_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_history"
+ALTER TABLE ONLY "public"."user_game_ability_history"
     ADD CONSTRAINT "testing_user_game_ability_history_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_scores"
+ALTER TABLE ONLY "public"."user_game_ability_scores"
     ADD CONSTRAINT "testing_user_game_ability_scores_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_game_ability_scores"
+ALTER TABLE ONLY "public"."user_game_ability_scores"
     ADD CONSTRAINT "testing_user_game_ability_scores_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_global_ability_history"
+ALTER TABLE ONLY "public"."user_global_ability_history"
     ADD CONSTRAINT "testing_user_global_ability_history_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."testing_user_global_ability_scores"
+ALTER TABLE ONLY "public"."user_global_ability_scores"
     ADD CONSTRAINT "testing_user_global_ability_scores_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
@@ -1208,18 +1221,28 @@ ALTER TABLE ONLY "public"."user_game_performance"
 
 
 
-ALTER TABLE ONLY "public"."user_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_user_game_performance_history"
     ADD CONSTRAINT "user_game_performance_history_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."user_game_performance_history"
+ALTER TABLE ONLY "public"."zzz_unused_user_game_performance_history"
     ADD CONSTRAINT "user_game_performance_history_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
 ALTER TABLE ONLY "public"."user_game_performance"
     ADD CONSTRAINT "user_game_performance_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."zzz_unused_user_performance"
+    ADD CONSTRAINT "user_performance_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id");
+
+
+
+ALTER TABLE ONLY "public"."zzz_unused_user_performance"
+    ADD CONSTRAINT "user_performance_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id");
 
 
 
@@ -1240,11 +1263,11 @@ CREATE POLICY "Allow read for authenticated users on questions" ON "public"."que
 
 
 
-CREATE POLICY "Allow read testing ability norms" ON "public"."testing_game_ability_norms" FOR SELECT TO "authenticated" USING (true);
+CREATE POLICY "Allow read testing ability norms" ON "public"."game_ability_norms" FOR SELECT TO "authenticated" USING (true);
 
 
 
-CREATE POLICY "Everyone can read global performance history" ON "public"."global_game_performance_history" FOR SELECT TO "authenticated", "anon" USING (true);
+CREATE POLICY "Everyone can read global performance history" ON "public"."zzz_unused_global_game_performance_history" FOR SELECT TO "authenticated", "anon" USING (true);
 
 
 
@@ -1262,35 +1285,39 @@ CREATE POLICY "Users can manage their own game performance data" ON "public"."us
 
 
 
+CREATE POLICY "Users can manage their own performance data" ON "public"."zzz_unused_user_performance" TO "authenticated" USING (("auth"."uid"() = "user_id"));
+
+
+
 CREATE POLICY "Users can manage their own sessions" ON "public"."game_sessions" TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own performance history" ON "public"."user_game_performance_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own performance history" ON "public"."zzz_unused_user_game_performance_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own testing ability score history" ON "public"."testing_user_game_ability_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own testing ability score history" ON "public"."user_game_ability_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own testing category ability history" ON "public"."testing_user_category_ability_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own testing category ability history" ON "public"."user_category_ability_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own testing category ability scores" ON "public"."testing_user_category_ability_scores" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own testing category ability scores" ON "public"."user_category_ability_scores" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own testing game ability scores" ON "public"."testing_user_game_ability_scores" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own testing game ability scores" ON "public"."user_game_ability_scores" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own testing global ability history" ON "public"."testing_user_global_ability_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own testing global ability history" ON "public"."user_global_ability_history" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
-CREATE POLICY "Users can read their own testing global ability score" ON "public"."testing_user_global_ability_scores" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
+CREATE POLICY "Users can read their own testing global ability score" ON "public"."user_global_ability_scores" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "user_id"));
 
 
 
@@ -1309,6 +1336,9 @@ CREATE POLICY "Users can view their own streak data" ON "public"."user_streaks" 
 ALTER TABLE "public"."categories" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."game_ability_norms" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."game_answers" ENABLE ROW LEVEL SECURITY;
 
 
@@ -1318,43 +1348,43 @@ ALTER TABLE "public"."game_sessions" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."games" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."global_game_performance_history" ENABLE ROW LEVEL SECURITY;
-
-
 ALTER TABLE "public"."profiles" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."questions" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."testing_game_ability_norms" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."user_category_ability_history" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."testing_user_category_ability_history" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."user_category_ability_scores" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."testing_user_category_ability_scores" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."user_game_ability_history" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."testing_user_game_ability_history" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."testing_user_game_ability_scores" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."testing_user_global_ability_history" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."testing_user_global_ability_scores" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."user_game_ability_scores" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."user_game_performance" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."user_game_performance_history" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."user_global_ability_history" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."user_global_ability_scores" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."user_streaks" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."zzz_unused_global_game_performance_history" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."zzz_unused_user_game_performance_history" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."zzz_unused_user_performance" ENABLE ROW LEVEL SECURITY;
 
 
 
@@ -1567,21 +1597,9 @@ GRANT ALL ON FUNCTION "public"."handle_new_user"() TO "service_role";
 
 
 
-GRANT ALL ON FUNCTION "public"."process_daily_game_performance_snapshot"() TO "anon";
-GRANT ALL ON FUNCTION "public"."process_daily_game_performance_snapshot"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."process_daily_game_performance_snapshot"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."process_daily_global_game_performance_snapshot"() TO "anon";
-GRANT ALL ON FUNCTION "public"."process_daily_global_game_performance_snapshot"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."process_daily_global_game_performance_snapshot"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."testing_refresh_ability_scores"() TO "anon";
-GRANT ALL ON FUNCTION "public"."testing_refresh_ability_scores"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."testing_refresh_ability_scores"() TO "service_role";
+GRANT ALL ON FUNCTION "public"."refresh_ability_scores"() TO "anon";
+GRANT ALL ON FUNCTION "public"."refresh_ability_scores"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."refresh_ability_scores"() TO "service_role";
 
 
 
@@ -1594,6 +1612,18 @@ GRANT ALL ON FUNCTION "public"."update_user_game_performance_from_session"() TO 
 GRANT ALL ON FUNCTION "public"."update_user_streak_from_session"() TO "anon";
 GRANT ALL ON FUNCTION "public"."update_user_streak_from_session"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."update_user_streak_from_session"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."zzz_process_daily_game_performance_snapshot"() TO "anon";
+GRANT ALL ON FUNCTION "public"."zzz_process_daily_game_performance_snapshot"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."zzz_process_daily_game_performance_snapshot"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."zzz_process_daily_global_game_performance_snapshot"() TO "anon";
+GRANT ALL ON FUNCTION "public"."zzz_process_daily_global_game_performance_snapshot"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."zzz_process_daily_global_game_performance_snapshot"() TO "service_role";
 
 
 
@@ -1630,6 +1660,12 @@ GRANT ALL ON TABLE "public"."daily_insights" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."game_ability_norms" TO "anon";
+GRANT ALL ON TABLE "public"."game_ability_norms" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_ability_norms" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."game_answers" TO "anon";
 GRANT ALL ON TABLE "public"."game_answers" TO "authenticated";
 GRANT ALL ON TABLE "public"."game_answers" TO "service_role";
@@ -1648,12 +1684,6 @@ GRANT ALL ON TABLE "public"."games" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."global_game_performance_history" TO "anon";
-GRANT ALL ON TABLE "public"."global_game_performance_history" TO "authenticated";
-GRANT ALL ON TABLE "public"."global_game_performance_history" TO "service_role";
-
-
-
 GRANT ALL ON TABLE "public"."profiles" TO "anon";
 GRANT ALL ON TABLE "public"."profiles" TO "authenticated";
 GRANT ALL ON TABLE "public"."profiles" TO "service_role";
@@ -1666,45 +1696,27 @@ GRANT ALL ON TABLE "public"."questions" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."testing_game_ability_norms" TO "anon";
-GRANT ALL ON TABLE "public"."testing_game_ability_norms" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_game_ability_norms" TO "service_role";
+GRANT ALL ON TABLE "public"."user_category_ability_history" TO "anon";
+GRANT ALL ON TABLE "public"."user_category_ability_history" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_category_ability_history" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."testing_user_category_ability_history" TO "anon";
-GRANT ALL ON TABLE "public"."testing_user_category_ability_history" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_user_category_ability_history" TO "service_role";
+GRANT ALL ON TABLE "public"."user_category_ability_scores" TO "anon";
+GRANT ALL ON TABLE "public"."user_category_ability_scores" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_category_ability_scores" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."testing_user_category_ability_scores" TO "anon";
-GRANT ALL ON TABLE "public"."testing_user_category_ability_scores" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_user_category_ability_scores" TO "service_role";
+GRANT ALL ON TABLE "public"."user_game_ability_history" TO "anon";
+GRANT ALL ON TABLE "public"."user_game_ability_history" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_game_ability_history" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."testing_user_game_ability_history" TO "anon";
-GRANT ALL ON TABLE "public"."testing_user_game_ability_history" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_user_game_ability_history" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."testing_user_game_ability_scores" TO "anon";
-GRANT ALL ON TABLE "public"."testing_user_game_ability_scores" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_user_game_ability_scores" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."testing_user_global_ability_history" TO "anon";
-GRANT ALL ON TABLE "public"."testing_user_global_ability_history" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_user_global_ability_history" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."testing_user_global_ability_scores" TO "anon";
-GRANT ALL ON TABLE "public"."testing_user_global_ability_scores" TO "authenticated";
-GRANT ALL ON TABLE "public"."testing_user_global_ability_scores" TO "service_role";
+GRANT ALL ON TABLE "public"."user_game_ability_scores" TO "anon";
+GRANT ALL ON TABLE "public"."user_game_ability_scores" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_game_ability_scores" TO "service_role";
 
 
 
@@ -1714,15 +1726,39 @@ GRANT ALL ON TABLE "public"."user_game_performance" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."user_game_performance_history" TO "anon";
-GRANT ALL ON TABLE "public"."user_game_performance_history" TO "authenticated";
-GRANT ALL ON TABLE "public"."user_game_performance_history" TO "service_role";
+GRANT ALL ON TABLE "public"."user_global_ability_history" TO "anon";
+GRANT ALL ON TABLE "public"."user_global_ability_history" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_global_ability_history" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."user_global_ability_scores" TO "anon";
+GRANT ALL ON TABLE "public"."user_global_ability_scores" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_global_ability_scores" TO "service_role";
 
 
 
 GRANT ALL ON TABLE "public"."user_streaks" TO "anon";
 GRANT ALL ON TABLE "public"."user_streaks" TO "authenticated";
 GRANT ALL ON TABLE "public"."user_streaks" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."zzz_unused_global_game_performance_history" TO "anon";
+GRANT ALL ON TABLE "public"."zzz_unused_global_game_performance_history" TO "authenticated";
+GRANT ALL ON TABLE "public"."zzz_unused_global_game_performance_history" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."zzz_unused_user_game_performance_history" TO "anon";
+GRANT ALL ON TABLE "public"."zzz_unused_user_game_performance_history" TO "authenticated";
+GRANT ALL ON TABLE "public"."zzz_unused_user_game_performance_history" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."zzz_unused_user_performance" TO "anon";
+GRANT ALL ON TABLE "public"."zzz_unused_user_performance" TO "authenticated";
+GRANT ALL ON TABLE "public"."zzz_unused_user_performance" TO "service_role";
 
 
 

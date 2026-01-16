@@ -126,7 +126,7 @@ export default function GameFinishScreen() {
         <View className="px-6 flex-row gap-3 mb-10">
           <StatCard
             label="GAME BPI"
-            value={gameStat?.averageScore?.toString() || state.score?.toString() || "0"}
+            value={state.score?.toString() || "0"}
             icon={<Zap size={22} color="#EAB308" fill="#EAB308" />}
             color="yellow"
           />

@@ -15,17 +15,17 @@ type GameSession = Database["public"]["Tables"]["game_sessions"]["Row"];
 type UserGamePerformance =
   Database["public"]["Tables"]["user_game_performance"]["Row"];
 type UserGameAbilityScore =
-  Database["public"]["Tables"]["testing_user_game_ability_scores"]["Row"];
+  Database["public"]["Tables"]["user_game_ability_scores"]["Row"];
 type UserCategoryAbilityScore =
-  Database["public"]["Tables"]["testing_user_category_ability_scores"]["Row"];
+  Database["public"]["Tables"]["user_category_ability_scores"]["Row"];
 type UserGameAbilityHistory =
-  Database["public"]["Tables"]["testing_user_game_ability_history"]["Row"];
+  Database["public"]["Tables"]["user_game_ability_history"]["Row"];
 
 type UserCategoryAbilityHistory =
-  Database["public"]["Tables"]["testing_user_category_ability_history"]["Row"];
+  Database["public"]["Tables"]["user_category_ability_history"]["Row"];
 
 type UserGlobalAbilityHistory =
-  Database["public"]["Tables"]["testing_user_global_ability_history"]["Row"];
+  Database["public"]["Tables"]["user_global_ability_history"]["Row"];
 
 
 
@@ -142,32 +142,32 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
           .select("*")
           .eq("user_id", user.id),
         supabase
-          .from("testing_user_game_ability_scores")
+          .from("user_game_ability_scores")
           .select("*")
           .eq("user_id", user.id),
         supabase
-          .from("testing_user_category_ability_scores")
+          .from("user_category_ability_scores")
           .select("*")
           .eq("user_id", user.id),
         supabase
-          .from("testing_user_global_ability_scores")
+          .from("user_global_ability_scores")
           .select("*")
           .eq("user_id", user.id)
           .maybeSingle(),
         supabase
-          .from("testing_user_game_ability_history")
+          .from("user_game_ability_history")
           .select("game_id, ability_score, snapshot_date")
           .eq("user_id", user.id)
           .gte("snapshot_date", historyStartDate)
           .order("snapshot_date", { ascending: true }),
         supabase
-          .from("testing_user_category_ability_history")
+          .from("user_category_ability_history")
           .select("category_id, ability_score, snapshot_date")
           .eq("user_id", user.id)
           .gte("snapshot_date", historyStartDate)
           .order("snapshot_date", { ascending: true }),
         supabase
-          .from("testing_user_global_ability_history")
+          .from("user_global_ability_history")
           .select("ability_score, snapshot_date")
           .eq("user_id", user.id)
           .gte("snapshot_date", historyStartDate)

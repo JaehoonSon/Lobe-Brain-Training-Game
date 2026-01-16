@@ -265,7 +265,7 @@ export function GameSessionProvider({
       }
 
       const { error: refreshError } = await supabase.rpc(
-        "testing_refresh_ability_scores" as keyof Database["public"]["Functions"]
+        "refresh_ability_scores" as keyof Database["public"]["Functions"]
       );
       if (refreshError) {
         console.error("Failed to refresh ability scores:", refreshError);
