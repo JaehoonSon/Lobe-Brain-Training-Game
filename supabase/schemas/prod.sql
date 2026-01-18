@@ -262,7 +262,7 @@ CREATE OR REPLACE FUNCTION "public"."refresh_ability_scores"() RETURNS "void"
     sigma_floor FLOAT8 := 100;
     z_max FLOAT8 := 4;
 BEGIN
-    INSERT INTO public.testing_game_ability_norms (
+    INSERT INTO public.game_ability_norms (
         game_id,
         mean_raw,
         std_raw,
@@ -304,7 +304,7 @@ BEGIN
           AND gs.created_at < window_end
         ORDER BY gs.user_id, gs.game_id, gs.created_at DESC
     )
-    DELETE FROM public.testing_user_game_ability_scores uga
+    DELETE FROM public.user_game_ability_scores uga
     WHERE NOT EXISTS (
         SELECT 1
         FROM latest_sessions ls
@@ -332,7 +332,7 @@ BEGIN
             COALESCE(gan.std_raw, seed_std) AS std_raw,
             COALESCE(gan.sample_size, 0) AS sample_size
         FROM latest_sessions ls
-        LEFT JOIN public.testing_game_ability_norms gan
+        LEFT JOIN public.game_ability_norms gan
             ON gan.game_id = ls.game_id
     ), blended AS (
         SELECT
@@ -379,7 +379,7 @@ BEGIN
             )::INT4 AS ability_score
         FROM z_scores
     )
-    INSERT INTO public.testing_user_game_ability_scores (
+    INSERT INTO public.user_game_ability_scores (
         user_id,
         game_id,
         last_score_raw,
@@ -401,7 +401,7 @@ BEGIN
         percentile = EXCLUDED.percentile,
         updated_at = EXCLUDED.updated_at;
 
-    INSERT INTO public.testing_user_game_ability_history (
+    INSERT INTO public.user_game_ability_history (
         user_id,
         game_id,
         ability_score,
@@ -416,13 +416,13 @@ BEGIN
         uga.percentile,
         CURRENT_DATE,
         NOW()
-    FROM public.testing_user_game_ability_scores uga
+    FROM public.user_game_ability_scores uga
     ON CONFLICT (user_id, game_id, snapshot_date) DO UPDATE SET
         ability_score = EXCLUDED.ability_score,
         percentile = EXCLUDED.percentile,
         created_at = NOW();
 
-    INSERT INTO public.testing_user_category_ability_scores (
+    INSERT INTO public.user_category_ability_scores (
         user_id,
         category_id,
         ability_score,
@@ -433,7 +433,7 @@ BEGIN
         g.category_id,
         ROUND(AVG(uga.ability_score))::INT4 AS ability_score,
         NOW()
-    FROM public.testing_user_game_ability_scores uga
+    FROM public.user_game_ability_scores uga
     JOIN public.games g ON g.id = uga.game_id
     WHERE g.category_id IS NOT NULL
     GROUP BY uga.user_id, g.category_id
@@ -441,7 +441,7 @@ BEGIN
         ability_score = EXCLUDED.ability_score,
         updated_at = EXCLUDED.updated_at;
 
-    INSERT INTO public.testing_user_category_ability_history (
+    INSERT INTO public.user_category_ability_history (
         user_id,
         category_id,
         ability_score,
@@ -454,12 +454,12 @@ BEGIN
         ucas.ability_score,
         CURRENT_DATE,
         NOW()
-    FROM public.testing_user_category_ability_scores ucas
+    FROM public.user_category_ability_scores ucas
     ON CONFLICT (user_id, category_id, snapshot_date) DO UPDATE SET
         ability_score = EXCLUDED.ability_score,
         created_at = NOW();
 
-    INSERT INTO public.testing_user_global_ability_scores (
+    INSERT INTO public.user_global_ability_scores (
         user_id,
         ability_score,
         updated_at
@@ -468,13 +468,13 @@ BEGIN
         ucas.user_id,
         ROUND(AVG(ucas.ability_score))::INT4 AS ability_score,
         NOW()
-    FROM public.testing_user_category_ability_scores ucas
+    FROM public.user_category_ability_scores ucas
     GROUP BY ucas.user_id
     ON CONFLICT (user_id) DO UPDATE SET
         ability_score = EXCLUDED.ability_score,
         updated_at = EXCLUDED.updated_at;
 
-    INSERT INTO public.testing_user_global_ability_history (
+    INSERT INTO public.user_global_ability_history (
         user_id,
         ability_score,
         snapshot_date,
@@ -485,7 +485,7 @@ BEGIN
         ugas.ability_score,
         CURRENT_DATE,
         NOW()
-    FROM public.testing_user_global_ability_scores ugas
+    FROM public.user_global_ability_scores ugas
     ON CONFLICT (user_id, snapshot_date) DO UPDATE SET
         ability_score = EXCLUDED.ability_score,
         created_at = NOW();
@@ -1823,3 +1823,4 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TAB
 
 
 
+RESET ALL;
