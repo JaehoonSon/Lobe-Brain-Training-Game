@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, useWindowDimensions } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { View, TouchableOpacity, useWindowDimensions, Animated } from "react-native";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
@@ -16,6 +16,32 @@ export function StroopClash({ onComplete, content }: StroopClashProps) {
     const { width } = useWindowDimensions();
     const [hasAnswered, setHasAnswered] = useState(false);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+    // Animation values for new question transition
+    const scaleAnim = useRef(new Animated.Value(0)).current;
+    const opacityAnim = useRef(new Animated.Value(0)).current;
+
+    // Trigger animation when content changes
+    useEffect(() => {
+        // Reset animation values
+        scaleAnim.setValue(0);
+        opacityAnim.setValue(0);
+
+        // Animate in with a bounce effect
+        Animated.parallel([
+            Animated.spring(scaleAnim, {
+                toValue: 1,
+                tension: 100,
+                friction: 8,
+                useNativeDriver: true,
+            }),
+            Animated.timing(opacityAnim, {
+                toValue: 1,
+                duration: 200,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    }, [content.word, content.ink, content.task]);
 
     // Helper to normalize hex to name for comparison if needed, 
     // but we can also store the name in the options and map it.
@@ -78,15 +104,21 @@ export function StroopClash({ onComplete, content }: StroopClashProps) {
                 </View>
             </View>
 
-            {/* Stimulus (The Clash) */}
-            <View className="mb-20 min-h-[120px] justify-center">
+            {/* Stimulus (The Clash) - Animated */}
+            <Animated.View
+                className="mb-20 min-h-[120px] justify-center"
+                style={{
+                    transform: [{ scale: scaleAnim }],
+                    opacity: opacityAnim,
+                }}
+            >
                 <Text
                     className="text-7xl font-black text-center"
                     style={{ color: content.ink, textShadowColor: 'rgba(0,0,0,0.1)', textShadowOffset: { width: 0, height: 4 }, textShadowRadius: 0 }}
                 >
                     {content.word}
                 </Text>
-            </View>
+            </Animated.View>
 
             {/* Options Grid */}
             <View className="flex-row flex-wrap justify-center gap-4">

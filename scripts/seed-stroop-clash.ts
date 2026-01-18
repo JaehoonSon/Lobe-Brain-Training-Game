@@ -3,6 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
+/* -------------------------------------------------------------------------- */
+/*                                   Config                                   */
+/* -------------------------------------------------------------------------- */
+
 const PALETTE = [
   { name: 'Red', hex: '#FF0000' },
   { name: 'Blue', hex: '#0000FF' },
@@ -35,11 +39,32 @@ const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   10: { P: 6, O: 6, IncRate: 0.9, Tasks: ['INK', 'WORD'], SwitchRate: 0.7, LureRate: 0.6, Time: 1400 },
 };
 
+const QUESTIONS_PER_LEVEL = 20;
+
+/* -------------------------------------------------------------------------- */
+/*                                   Helpers                                  */
+/* -------------------------------------------------------------------------- */
+
 function shuffle<T>(array: T[]): T[] {
   return [...array].sort(() => Math.random() - 0.5);
 }
 
-function generateTrial(level: number, prevTask: string | null) {
+interface Question {
+  id: string;
+  game_id: string;
+  difficulty: number;
+  content: {
+    type: 'stroop_clash';
+    word: string;
+    ink: string;
+    task: string;
+    cue: string;
+    options: string[];
+    targetTimeMs: number;
+  };
+}
+
+function generateTrial(level: number, prevTask: string | null): Question {
   const config = LEVEL_CONFIGS[level];
   const palette = shuffle(PALETTE).slice(0, config.P);
   
@@ -102,35 +127,26 @@ function generateTrial(level: number, prevTask: string | null) {
   };
 }
 
-const allQuestions = [];
+/* -------------------------------------------------------------------------- */
+/*                                    Main                                    */
+/* -------------------------------------------------------------------------- */
+
+const outputDir = path.join(process.cwd(), 'scripts', 'output');
+fs.mkdirSync(outputDir, { recursive: true });
+
 for (let level = 1; level <= 10; level++) {
-  let prevTask = null;
-  for (let i = 0; i < 20; i++) {
+  const questions: Question[] = [];
+  let prevTask: string | null = null;
+  
+  for (let i = 0; i < QUESTIONS_PER_LEVEL; i++) {
     const trial = generateTrial(level, prevTask);
-    allQuestions.push(trial);
+    questions.push(trial);
     prevTask = trial.content.task;
   }
+  
+  const outputFile = path.join(outputDir, `stroop_clash_${level}.json`);
+  fs.writeFileSync(outputFile, JSON.stringify(questions, null, 2));
+  console.log(`Generated ${questions.length} questions -> stroop_clash_${level}.json`);
 }
 
-const sql = allQuestions.map(q => {
-  return `INSERT INTO public.questions (id, game_id, difficulty, content) VALUES ('${q.id}', '${q.game_id}', ${q.difficulty}, '${JSON.stringify(q.content).replace(/'/g, "''")}') ON CONFLICT (id) DO NOTHING;`;
-}).join('\n');
-
-const output = `
--- Seed Stroop Clash Game
-INSERT INTO public.games (id, category_id, name, description, instructions, is_active, recommended_rounds)
-VALUES ('stroop_clash', 'focus', 'Stroop Clash', 'Identify the color or the word under pressure.', 'Tap the button that matches the requested task (COLOR or TEXT).', true, 10)
-ON CONFLICT (id) DO UPDATE SET 
-  category_id = EXCLUDED.category_id,
-  name = EXCLUDED.name,
-  description = EXCLUDED.description,
-  instructions = EXCLUDED.instructions,
-  is_active = EXCLUDED.is_active,
-  recommended_rounds = EXCLUDED.recommended_rounds;
-
--- Seed Questions
-${sql}
-`;
-
-fs.writeFileSync(path.join(process.cwd(), 'supabase/migrations/99999999999999_seed_stroop_clash.sql'), output);
-console.log('Seeding file generated at supabase/migrations/99999999999999_seed_stroop_clash.sql');
+console.log('\nDone! Generated 10 files (one per difficulty level).');
