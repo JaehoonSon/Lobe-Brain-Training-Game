@@ -5,9 +5,8 @@ import { Progress } from "~/components/ui/progress";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useOnboarding } from "~/contexts/OnboardingContext";
-import { ChevronLeft, ChevronRight } from "lucide-react-native";
-import { useRouter } from "expo-router";
-import { cn } from "~/lib/utils";
+import { ChevronLeft } from "lucide-react-native";
+
 
 interface WizardLayoutProps {
   title: string;
@@ -31,7 +30,7 @@ export function WizardLayout({
   nextLabel = "Continue",
 }: WizardLayoutProps) {
   const { currentStep, totalSteps, nextStep, prevStep } = useOnboarding();
-  const router = useRouter();
+
 
   const progress = (currentStep / totalSteps) * 100;
 
@@ -51,8 +50,6 @@ export function WizardLayout({
 
     if (currentStep > 1) {
       prevStep();
-    } else {
-      router.back();
     }
   };
 

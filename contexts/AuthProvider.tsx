@@ -8,11 +8,15 @@ import React, {
 import { supabase } from "~/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import * as AppleAuthentication from "expo-apple-authentication";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean; // auth loading (Supabase)
   user: User | null;
+  onboardingComplete: boolean;
+  isProfileLoading: boolean;
   logout: () => Promise<void>;
   signInApple: () => Promise<void>;
   signInGoogle: () => Promise<void>;
@@ -24,33 +28,96 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSigningIn, setIsSigningIn] = useState(false); // Track sign-in in progress
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
+  const [isProfileLoading, setIsProfileLoading] = useState(false);
+
 
   // Debug: Log auth state
   useEffect(() => {
     console.log("=== Auth State Debug ===");
     console.log("user:", user?.id ?? "null");
+    console.log("onboardingComplete:", onboardingComplete);
     console.log("========================");
-  }, [user]);
+  }, [user, onboardingComplete]);
 
   // ----- Supabase session boot + listener -----
   useEffect(() => {
+    let isMounted = true;
+
+    const loadProfile = async (profileUser: User) => {
+      try {
+        setIsProfileLoading(true);
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("onboarding_completed_at")
+          .eq("id", profileUser.id)
+          .maybeSingle();
+
+        if (!isMounted) return;
+
+        if (error) {
+          console.error("Failed to load onboarding status", error);
+          setOnboardingComplete(false);
+          return;
+        }
+
+        if (!profile) {
+          console.warn("Profile missing; signing out");
+          await supabase.auth.signOut();
+          setOnboardingComplete(false);
+          return;
+        }
+
+        setOnboardingComplete(!!profile.onboarding_completed_at);
+      } catch (error) {
+        if (!isMounted) return;
+        console.error("Failed to load onboarding status", error);
+        setOnboardingComplete(false);
+      } finally {
+        if (isMounted) setIsProfileLoading(false);
+      }
+    };
+
     const init = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
-      setIsLoading(false);
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        if (!isMounted) return;
+        const nextUser = session?.user ?? null;
+        setUser(nextUser);
+        if (nextUser) {
+          await loadProfile(nextUser);
+        } else {
+          setOnboardingComplete(false);
+        }
+      } catch (error) {
+        console.error("Failed to load auth session", error);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
     };
     init();
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!isMounted) return;
+      const nextUser = session?.user ?? null;
+      setUser(nextUser);
+      if (nextUser) {
+        await loadProfile(nextUser);
+      } else {
+        setOnboardingComplete(false);
+        setIsProfileLoading(false);
+      }
       setIsLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   // ----- Auth actions -----
@@ -61,6 +128,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     console.log("Signed out from Supabase");
+
+    try {
+      await AsyncStorage.multiRemove([
+        "onboarding_progress:anon",
+        `onboarding_progress:${user?.id ?? "anon"}`,
+      ]);
+    } catch (storageError) {
+      console.error("Failed to clear onboarding storage", storageError);
+    }
 
     console.log("Logout complete");
   };
@@ -101,11 +177,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       isAuthenticated: !!user,
       isLoading: isLoading || isSigningIn, // Include signing in as loading state
       user,
+      onboardingComplete,
+      isProfileLoading,
       logout,
       signInApple,
       signInGoogle,
     }),
-    [user, isLoading, isSigningIn, logout, signInApple]
+    [
+      user,
+      isLoading,
+      isSigningIn,
+      onboardingComplete,
+      isProfileLoading,
+      logout,
+      signInApple,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
