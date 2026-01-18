@@ -15,6 +15,7 @@ import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { BallSort } from "~/components/games/BallSort";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
+import { StroopClash } from "~/components/games/StroopClash";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -269,6 +270,15 @@ export default function GamePlayScreen() {
         if (content.type !== "word_unscramble") return null;
         return (
           <WordUnscramble
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
+      case "stroop_clash":
+        if (content.type !== "stroop_clash") return null;
+        return (
+          <StroopClash
             key={currentQuestionIndex}
             content={content}
             onComplete={handleQuestionComplete}
