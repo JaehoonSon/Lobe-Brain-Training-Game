@@ -95,5 +95,17 @@
     "is_active": true,
     "is_pro_only": false,
     "recommended_rounds": 3
+  },
+  {
+    "id": "stroop_clash",
+    "category_id": "attention",
+    "name": "Stroop Clash",
+    "description": "Identify the color or the word under pressure.",
+    "instructions": "Tap the button that matches the requested task (COLOR or TEXT).",
+    "icon_url": null,
+    "banner_url": null,
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 10
   }
 ]

@@ -13,7 +13,8 @@ VALUES
 ', 'Several test tubes will appear containing a mix of colorful balls. Tap a tube to pick up the top ball, then tap another tube to move it. Sort the balls so that each tube eventually contains only one matching color. The puzzles become more challenging with more tubes and colors as you progress.', 'https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/ball_sort_game_square.png', 'https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/ball_sort_game.jpg', true, false, 5),
 ('word_unscramble', 'language', 'Word Unscramble', 'Rearrange the scrambled letters to form the correct word.', 'Tap letters from the pool to move them into the answer slots. Tap a placed letter to return it to the pool. Use the hint if you get stuck!', 'brain_solving_puzzle.png', 'brain_solving_puzzle.png', true, false, 5),
 ('math_rocket', 'math', 'Math Rocket', 'Keep your rocket afloat by solving math problems! Be quick!', 'Answer math questions to boost your rocket. Don''t let it crash!', 'rocket', NULL, true, false, 3),
-('tangram_puzzle', 'problem_solving', 'Tangram Puzzle', 'Arrange the fragments to recreate the shape.', NULL, 'shapes', NULL, true, false, 3)
+('tangram_puzzle', 'problem_solving', 'Tangram Puzzle', 'Arrange the fragments to recreate the shape.', NULL, 'shapes', NULL, true, false, 3),
+('stroop_clash', 'attention', 'Stroop Clash', 'Identify the color or the word under pressure.', 'Tap the button that matches the requested task (COLOR or TEXT).', NULL, NULL, true, false, 10)
 ON CONFLICT (id) DO UPDATE SET
   category_id = EXCLUDED.category_id,
   name = EXCLUDED.name,
@@ -1001,6 +1002,276 @@ VALUES
 ('536672df-14df-40ff-8f9b-d9d22b06e27b', 'mental_language_discrimination', 9, '{"type":"mental_language_discrimination","sentenceParts":["Her approach was ",", adapting to new information as it became available."],"options":["iterative","itinerant","iconoclastic","idiosyncratic"],"answer":"iterative"}'),
 ('c231751d-f08b-410b-948d-a24725d2e6bd', 'mental_language_discrimination', 9, '{"type":"mental_language_discrimination","sentenceParts":["The evidence was ",", leaving no room for doubt about the conclusion."],"options":["incontrovertible","incongruous","inconsequential","incorrigible"],"answer":"incontrovertible"}'),
 ('df00d558-9107-4e22-a298-c700769ece62', 'mental_language_discrimination', 9, '{"type":"mental_language_discrimination","sentenceParts":["His speech was ",", intended to provoke thought rather than provide answers."],"options":["didactic","dilatory","disparate","dissimulating"],"answer":"didactic"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('d4c0a9ec-df28-43a2-9928-c66bdd9e8c8b', 'stroop_clash', 1, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Purple","Yellow"],"targetTimeMs":4500}'),
+('d41a0183-288a-4eb4-a8be-f319e73a85c2', 'stroop_clash', 1, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Green"],"targetTimeMs":4500}'),
+('6eadddd3-49e3-4474-8be7-e520eed841e6', 'stroop_clash', 1, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Red"],"targetTimeMs":4500}'),
+('2ccac97d-3668-4b4f-ae10-644f6de79d2f', 'stroop_clash', 1, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Red"],"targetTimeMs":4500}'),
+('717b96d1-00af-4f55-b877-3a8b5f9c6955', 'stroop_clash', 1, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Yellow"],"targetTimeMs":4500}'),
+('cc44868c-2978-42b3-a56b-1231eb789290', 'stroop_clash', 1, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Green","Orange"],"targetTimeMs":4500}'),
+('bb911be0-eaee-4d5b-b06b-ff22f6212844', 'stroop_clash', 1, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Orange"],"targetTimeMs":4500}'),
+('778d1e02-8d85-4d8c-a36b-2d193be53b4a', 'stroop_clash', 1, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Yellow"],"targetTimeMs":4500}'),
+('ad096f0e-be96-4325-a818-52e38e2c9551', 'stroop_clash', 1, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Green"],"targetTimeMs":4500}'),
+('a6d40430-58f8-4e89-9b6f-2956784907f1', 'stroop_clash', 1, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Yellow"],"targetTimeMs":4500}'),
+('43bb2559-4890-45a7-8d6e-70c04b0cf019', 'stroop_clash', 1, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Green"],"targetTimeMs":4500}'),
+('bd4dd448-e9b2-4132-adb4-0ef2fece9d8b', 'stroop_clash', 1, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Yellow"],"targetTimeMs":4500}'),
+('7d4caf2e-23b2-4b34-9323-12b851d6544a', 'stroop_clash', 1, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Yellow"],"targetTimeMs":4500}'),
+('f1b20884-ad83-4e35-adea-9cc2bf2a4471', 'stroop_clash', 1, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Orange","Purple"],"targetTimeMs":4500}'),
+('e6fdbd8e-2b2e-44bd-8945-856fe1574512', 'stroop_clash', 1, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Green","Red"],"targetTimeMs":4500}'),
+('0e15c51d-a07d-40c1-b0dd-7e2173625fa5', 'stroop_clash', 1, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Orange"],"targetTimeMs":4500}'),
+('83588655-2b78-48a0-a5b6-d2516c7fd3f1', 'stroop_clash', 1, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Red"],"targetTimeMs":4500}'),
+('dd986ed8-f7cd-4941-9ab1-1d728f92c10a', 'stroop_clash', 1, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Yellow"],"targetTimeMs":4500}'),
+('820806f4-7a8a-4861-83ee-2256bc174f67', 'stroop_clash', 1, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Purple","Yellow"],"targetTimeMs":4500}'),
+('ad27b066-f8fe-44db-b3a7-1f8ac8ea92ad', 'stroop_clash', 1, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Red"],"targetTimeMs":4500}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('6969d503-60c6-4b30-825e-5eb4af876039', 'stroop_clash', 10, '{"type":"stroop_clash","word":"ORANGE","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Red","Green","Purple","Yellow","Blue","Orange"],"targetTimeMs":1400}'),
+('4afc1b84-b972-4d75-8e98-12878cfbdedd', 'stroop_clash', 10, '{"type":"stroop_clash","word":"BLUE","ink":"#008000","task":"INK","cue":"COLOR","options":["Purple","Blue","Yellow","Green","Orange","Red"],"targetTimeMs":1400}'),
+('49da853d-7741-4c21-a195-b49bcab7cf48', 'stroop_clash', 10, '{"type":"stroop_clash","word":"ORANGE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Yellow","Blue","Orange","Green","Red"],"targetTimeMs":1400}'),
+('1532ce6a-9ab0-4398-8945-ba544bbba1a7', 'stroop_clash', 10, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Red","Blue","Orange","Purple","Green","Yellow"],"targetTimeMs":1400}'),
+('f117206d-b86d-4efe-a8a2-3f9bf1333c6e', 'stroop_clash', 10, '{"type":"stroop_clash","word":"YELLOW","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Yellow","Blue","Orange","Green","Red","Purple"],"targetTimeMs":1400}'),
+('c37a71b8-4a3a-4dbb-a518-3582deff278a', 'stroop_clash', 10, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Yellow","Orange","Purple","Red","Blue","Green"],"targetTimeMs":1400}'),
+('39089c3e-8f12-45a0-b543-bb73247864d3', 'stroop_clash', 10, '{"type":"stroop_clash","word":"ORANGE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Purple","Orange","Green","Red","Yellow"],"targetTimeMs":1400}'),
+('59468a8d-fb54-478d-9f59-09fdc58ce3a3', 'stroop_clash', 10, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Green","Orange","Red","Blue","Purple","Yellow"],"targetTimeMs":1400}'),
+('73afe23c-936f-4f40-bafa-60cb4a204b6b', 'stroop_clash', 10, '{"type":"stroop_clash","word":"BLUE","ink":"#008000","task":"INK","cue":"COLOR","options":["Red","Orange","Purple","Yellow","Blue","Green"],"targetTimeMs":1400}'),
+('a1ac4ea8-7cfb-4565-a0d1-df39fc9f8a82', 'stroop_clash', 10, '{"type":"stroop_clash","word":"YELLOW","ink":"#800080","task":"WORD","cue":"TEXT","options":["Purple","Red","Orange","Green","Yellow","Blue"],"targetTimeMs":1400}'),
+('490ac396-c103-4fa7-9045-900229f0607d', 'stroop_clash', 10, '{"type":"stroop_clash","word":"GREEN","ink":"#800080","task":"WORD","cue":"TEXT","options":["Green","Yellow","Red","Purple","Blue","Orange"],"targetTimeMs":1400}'),
+('4f842e6a-1cd4-4ecf-b7c1-9aa5d028b94a', 'stroop_clash', 10, '{"type":"stroop_clash","word":"PURPLE","ink":"#008000","task":"WORD","cue":"TEXT","options":["Red","Yellow","Purple","Orange","Green","Blue"],"targetTimeMs":1400}'),
+('7e98a54c-15d8-4a5a-90cd-c503c63d0a96', 'stroop_clash', 10, '{"type":"stroop_clash","word":"YELLOW","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Red","Yellow","Orange","Purple","Green"],"targetTimeMs":1400}'),
+('7c50803b-360c-4385-b7dd-0393621dd616', 'stroop_clash', 10, '{"type":"stroop_clash","word":"ORANGE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Yellow","Purple","Orange","Red","Green","Blue"],"targetTimeMs":1400}'),
+('29b312ec-ade6-4dfd-8515-03669c747440', 'stroop_clash', 10, '{"type":"stroop_clash","word":"RED","ink":"#800080","task":"WORD","cue":"TEXT","options":["Blue","Purple","Orange","Red","Yellow","Green"],"targetTimeMs":1400}'),
+('ece80212-89ec-4a1a-8743-a9aeecd4e7ce', 'stroop_clash', 10, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Yellow","Red","Purple","Orange","Green","Blue"],"targetTimeMs":1400}'),
+('c5df030f-bde8-4041-b07c-aac0146fd614', 'stroop_clash', 10, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Purple","Yellow","Blue","Orange","Red","Green"],"targetTimeMs":1400}'),
+('b80b1ab4-ccc2-4e5b-bef5-37aff7c9b2e7', 'stroop_clash', 10, '{"type":"stroop_clash","word":"RED","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Green","Yellow","Purple","Orange","Red","Blue"],"targetTimeMs":1400}'),
+('3d99db8c-cd68-4c13-8e3b-146a85ead846', 'stroop_clash', 10, '{"type":"stroop_clash","word":"RED","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Red","Green","Purple","Orange","Yellow"],"targetTimeMs":1400}'),
+('90e6d16d-ff90-42c8-b35b-3b8afdbf55ef', 'stroop_clash', 10, '{"type":"stroop_clash","word":"BLUE","ink":"#FFFF00","task":"WORD","cue":"TEXT","options":["Purple","Green","Yellow","Blue","Red","Orange"],"targetTimeMs":1400}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('f644704b-1e3d-4ec9-a7df-f51ef105fd88', 'stroop_clash', 2, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Purple","Green","Yellow"],"targetTimeMs":4200}'),
+('d9fe6c56-e417-48ac-a2a4-eb4c6844842d', 'stroop_clash', 2, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Green","Blue","Purple"],"targetTimeMs":4200}'),
+('48bb8937-2b73-442b-8928-1e8351c6c828', 'stroop_clash', 2, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Red","Yellow"],"targetTimeMs":4200}'),
+('d257ad75-def7-4a03-8652-b8af7b93fd3a', 'stroop_clash', 2, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Green","Red"],"targetTimeMs":4200}'),
+('4edbf574-0e65-4abe-a78c-3b79948e7b2e', 'stroop_clash', 2, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Blue","Orange"],"targetTimeMs":4200}'),
+('6370aee2-2487-4308-9baf-92d5af4d87eb', 'stroop_clash', 2, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Orange","Purple"],"targetTimeMs":4200}'),
+('08cd6b8c-8623-4f79-bcc1-9d9180ce1cfc', 'stroop_clash', 2, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Orange","Red"],"targetTimeMs":4200}'),
+('29789890-29df-460c-971c-2a7349da1fe5', 'stroop_clash', 2, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Blue","Red","Yellow"],"targetTimeMs":4200}'),
+('87c93fea-0357-4757-bb2c-2477cfca757c', 'stroop_clash', 2, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Red","Yellow","Blue"],"targetTimeMs":4200}'),
+('080cb9d3-135c-4335-91ca-806210c41128', 'stroop_clash', 2, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Yellow","Red","Green"],"targetTimeMs":4200}'),
+('16cf9546-bc95-42d9-bac3-96c5a8402b47', 'stroop_clash', 2, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Red","Yellow","Blue"],"targetTimeMs":4200}'),
+('d0c17042-86f1-4be5-bad4-d901e80eb89f', 'stroop_clash', 2, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Green","Yellow","Blue"],"targetTimeMs":4200}'),
+('ae347e58-dcef-4dde-9a07-6b70f0088788', 'stroop_clash', 2, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Red","Purple","Orange"],"targetTimeMs":4200}'),
+('ef9ee4f0-4f49-42e8-870f-925456bddc1a', 'stroop_clash', 2, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Purple","Yellow"],"targetTimeMs":4200}'),
+('bfc95e27-368d-4708-87df-62e253563069', 'stroop_clash', 2, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Red","Blue"],"targetTimeMs":4200}'),
+('f153ef78-ddef-4e2f-a336-ee89f0a466a2', 'stroop_clash', 2, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Orange","Yellow"],"targetTimeMs":4200}'),
+('2fde8d7f-16a8-4f2f-8c0b-dfe9967a9cae', 'stroop_clash', 2, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Yellow","Orange","Red"],"targetTimeMs":4200}'),
+('a58e8ca8-1f67-4e50-8905-63ea48156a6f', 'stroop_clash', 2, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Green","Blue","Orange"],"targetTimeMs":4200}'),
+('5d81fc7b-8acb-4d70-bddc-41d534b06818', 'stroop_clash', 2, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Purple","Red"],"targetTimeMs":4200}'),
+('925569f7-6965-4cea-9bb7-e192ce8de4c4', 'stroop_clash', 2, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Yellow","Purple","Orange"],"targetTimeMs":4200}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('058f49dc-6a0e-47ed-8c9d-d93075d87f4e', 'stroop_clash', 3, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Red","Orange","Yellow"],"targetTimeMs":3800}'),
+('78e31592-5170-4980-b914-29db57e871ea', 'stroop_clash', 3, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Blue","Yellow"],"targetTimeMs":3800}'),
+('b5d27d6a-002b-4faa-b5ad-b800573c5f8b', 'stroop_clash', 3, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Red","Green"],"targetTimeMs":3800}'),
+('bfd1f2ed-1e91-499f-860e-6454e25ab8f6', 'stroop_clash', 3, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Green","Orange","Purple"],"targetTimeMs":3800}'),
+('c2bc72d0-eb2b-4944-9238-11cf6eb8a37d', 'stroop_clash', 3, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Green","Red"],"targetTimeMs":3800}'),
+('88a87590-9d45-48ed-a13c-e2f97ecbb684', 'stroop_clash', 3, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Yellow","Red","Blue"],"targetTimeMs":3800}'),
+('96308f4d-76cf-4b5f-ae8c-42ba879ae983', 'stroop_clash', 3, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Purple","Red"],"targetTimeMs":3800}'),
+('f825c187-08fa-49aa-96c1-810417a7526c', 'stroop_clash', 3, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Green","Yellow"],"targetTimeMs":3800}'),
+('0e99fe55-042d-4d74-8961-243d72f36c97', 'stroop_clash', 3, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Blue","Red","Yellow"],"targetTimeMs":3800}'),
+('933b6e22-fb18-48ed-9efa-55c9cfb9d0ae', 'stroop_clash', 3, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Purple","Orange","Yellow"],"targetTimeMs":3800}'),
+('64bbe506-80bc-4332-b763-08100364654c', 'stroop_clash', 3, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Green","Orange","Yellow"],"targetTimeMs":3800}'),
+('9cf4e615-abaa-4e6e-bb31-7a4d0f7dd729', 'stroop_clash', 3, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Green","Orange"],"targetTimeMs":3800}'),
+('520f03dd-a84d-4a94-9d0c-bd6fd6c6e79d', 'stroop_clash', 3, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Blue","Red","Orange"],"targetTimeMs":3800}'),
+('73dfff7c-9fbb-497b-a340-bbd11caed1ed', 'stroop_clash', 3, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Red","Yellow","Blue"],"targetTimeMs":3800}'),
+('b17df244-15f4-42cc-8168-28ca2e644574', 'stroop_clash', 3, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Orange","Red","Purple"],"targetTimeMs":3800}'),
+('9d9a5343-05ad-4ea6-b310-e84cdc8e048b', 'stroop_clash', 3, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Yellow","Red"],"targetTimeMs":3800}'),
+('85c4b15b-bbcb-4f7f-aba7-8c53a10165e9', 'stroop_clash', 3, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Blue","Orange"],"targetTimeMs":3800}'),
+('e6dd1348-0249-48a6-b26a-7f50190c803b', 'stroop_clash', 3, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Blue","Red","Green"],"targetTimeMs":3800}'),
+('82646ba3-e952-48cc-9296-3f73ca06aab2', 'stroop_clash', 3, '{"type":"stroop_clash","word":"PURPLE","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Purple","Blue","Yellow"],"targetTimeMs":3800}'),
+('21afdd52-0357-45b6-ac18-36fe34f9055e', 'stroop_clash', 3, '{"type":"stroop_clash","word":"YELLOW","ink":"#008000","task":"INK","cue":"COLOR","options":["Orange","Green","Yellow"],"targetTimeMs":3800}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('ef083de3-2325-40c6-ba95-1e5f63d72a37', 'stroop_clash', 4, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Orange","Yellow","Green"],"targetTimeMs":3300}'),
+('943876fe-b490-45b3-be41-76e14ec88f26', 'stroop_clash', 4, '{"type":"stroop_clash","word":"RED","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Purple","Blue","Yellow","Red"],"targetTimeMs":3300}'),
+('69bf9a7a-3881-4666-940f-b0c128ea0d8c', 'stroop_clash', 4, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Purple","Blue","Orange","Red"],"targetTimeMs":3300}'),
+('d29622cf-ba43-4c0d-b986-2fb102aaf5a9', 'stroop_clash', 4, '{"type":"stroop_clash","word":"GREEN","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Orange","Red","Blue","Green"],"targetTimeMs":3300}'),
+('90ae8d26-f880-48b1-a238-374601bd874f', 'stroop_clash', 4, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Green","Blue","Red"],"targetTimeMs":3300}'),
+('84c14b26-a36d-4b00-ae44-1368ac2ec7c6', 'stroop_clash', 4, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Blue","Purple","Yellow","Orange"],"targetTimeMs":3300}'),
+('a9574e90-1680-4d2b-baca-3e229bd0bd48', 'stroop_clash', 4, '{"type":"stroop_clash","word":"PURPLE","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Blue","Red","Green","Purple"],"targetTimeMs":3300}'),
+('a57d3848-0bd3-4a8e-90c0-36fc0245904d', 'stroop_clash', 4, '{"type":"stroop_clash","word":"ORANGE","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Green","Yellow","Orange","Red"],"targetTimeMs":3300}'),
+('571eb7f3-6b0c-4567-b0e5-311188e71a51', 'stroop_clash', 4, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Blue","Yellow","Green"],"targetTimeMs":3300}'),
+('5fe30798-e728-4543-8251-ab594540fcd8', 'stroop_clash', 4, '{"type":"stroop_clash","word":"GREEN","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Red","Blue","Green"],"targetTimeMs":3300}'),
+('f4778340-2c47-488e-bde0-8aca659de6e3', 'stroop_clash', 4, '{"type":"stroop_clash","word":"RED","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Blue","Purple","Red"],"targetTimeMs":3300}'),
+('a431a072-5011-4aac-8d3c-9e6db4890a46', 'stroop_clash', 4, '{"type":"stroop_clash","word":"GREEN","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Blue","Green","Yellow","Red"],"targetTimeMs":3300}'),
+('ccc53ab0-7a11-4008-92d1-767516a9aa7f', 'stroop_clash', 4, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Purple","Yellow","Red","Orange"],"targetTimeMs":3300}'),
+('c17b6c8c-e74f-4b7f-889e-798bedeafa89', 'stroop_clash', 4, '{"type":"stroop_clash","word":"BLUE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Red","Green","Blue"],"targetTimeMs":3300}'),
+('b512de1f-d7b9-4996-ae4f-0df01653c95a', 'stroop_clash', 4, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Yellow","Purple","Red","Orange"],"targetTimeMs":3300}'),
+('18e38890-139b-4e5f-97d3-cfdb30911f3e', 'stroop_clash', 4, '{"type":"stroop_clash","word":"ORANGE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Green","Blue","Orange","Yellow"],"targetTimeMs":3300}'),
+('148300be-5d21-4bc6-b3c1-901f1b088be4', 'stroop_clash', 4, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Purple","Yellow","Blue"],"targetTimeMs":3300}'),
+('a86069b9-fcc9-424d-9f85-e8925a0a8a5b', 'stroop_clash', 4, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Orange","Red","Blue","Purple"],"targetTimeMs":3300}'),
+('d45c31b5-a418-476d-b2da-4edbaebb6690', 'stroop_clash', 4, '{"type":"stroop_clash","word":"PURPLE","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Blue","Orange","Purple","Red"],"targetTimeMs":3300}'),
+('f0545d9a-3641-4d1f-9821-a4bdbcaf524b', 'stroop_clash', 4, '{"type":"stroop_clash","word":"YELLOW","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Yellow","Orange","Purple"],"targetTimeMs":3300}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('cfe7b016-e9d8-45b3-a998-0b8ec3324a09', 'stroop_clash', 5, '{"type":"stroop_clash","word":"RED","ink":"#800080","task":"INK","cue":"COLOR","options":["Red","Blue","Orange","Purple","Green"],"targetTimeMs":2800}'),
+('0953bbff-2e5b-4fbe-b543-b089c497f261', 'stroop_clash', 5, '{"type":"stroop_clash","word":"RED","ink":"#800080","task":"INK","cue":"COLOR","options":["Purple","Green","Blue","Red","Orange"],"targetTimeMs":2800}'),
+('bf12b4e1-d78a-439e-beb4-6dbc8840cf9b', 'stroop_clash', 5, '{"type":"stroop_clash","word":"GREEN","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Blue","Orange","Purple","Green"],"targetTimeMs":2800}'),
+('20e55b82-5394-4c95-8604-a3b776c24d57', 'stroop_clash', 5, '{"type":"stroop_clash","word":"RED","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Red","Blue","Yellow","Purple","Orange"],"targetTimeMs":2800}'),
+('b29124e2-c118-44e0-a0ab-2e89617dc218', 'stroop_clash', 5, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Yellow","Green","Blue","Red"],"targetTimeMs":2800}'),
+('52d9d37f-ec40-4361-af64-5e8e2b06d748', 'stroop_clash', 5, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Red","Yellow","Blue","Orange"],"targetTimeMs":2800}'),
+('376146e3-6701-465e-a6e9-980b58d7be1e', 'stroop_clash', 5, '{"type":"stroop_clash","word":"PURPLE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Orange","Purple","Yellow","Green"],"targetTimeMs":2800}'),
+('f664be54-502b-4fab-8cbc-bc9379dd5d68', 'stroop_clash', 5, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Yellow","Red","Purple","Blue","Green"],"targetTimeMs":2800}'),
+('b6e5f37e-3658-4261-bedd-0a92d97a764d', 'stroop_clash', 5, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"INK","cue":"COLOR","options":["Orange","Purple","Blue","Green","Red"],"targetTimeMs":2800}'),
+('8c36a85c-84f5-4db1-bf63-bdb7b18ed31f', 'stroop_clash', 5, '{"type":"stroop_clash","word":"ORANGE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Yellow","Orange","Purple","Green"],"targetTimeMs":2800}'),
+('497777a3-f4f7-4ad9-8992-76f3cfb7bd4d', 'stroop_clash', 5, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Blue","Purple","Green","Yellow"],"targetTimeMs":2800}'),
+('5626e566-b4dc-4e45-9672-2d3f753b4c37', 'stroop_clash', 5, '{"type":"stroop_clash","word":"ORANGE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Blue","Green","Purple","Orange","Red"],"targetTimeMs":2800}'),
+('1ec6ad3b-e922-4c30-ac33-2891ca9a5cac', 'stroop_clash', 5, '{"type":"stroop_clash","word":"PURPLE","ink":"#008000","task":"INK","cue":"COLOR","options":["Yellow","Green","Blue","Red","Purple"],"targetTimeMs":2800}'),
+('f2f6db0c-0c58-477b-8591-3958272cb07e', 'stroop_clash', 5, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Orange","Yellow","Red","Blue"],"targetTimeMs":2800}'),
+('7951b463-5ce9-4ce4-ae92-644dff101291', 'stroop_clash', 5, '{"type":"stroop_clash","word":"GREEN","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Blue","Yellow","Orange","Green","Purple"],"targetTimeMs":2800}'),
+('dc0a7c50-cd50-4247-866b-04bd07fc6313', 'stroop_clash', 5, '{"type":"stroop_clash","word":"GREEN","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Purple","Orange","Green","Red","Blue"],"targetTimeMs":2800}'),
+('fdf5787c-8463-4d84-bbb5-bf811f9219cc', 'stroop_clash', 5, '{"type":"stroop_clash","word":"PURPLE","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Orange","Yellow","Purple","Green","Blue"],"targetTimeMs":2800}'),
+('5d42eaa2-7411-4171-a980-f2382a6b1c8c', 'stroop_clash', 5, '{"type":"stroop_clash","word":"RED","ink":"#008000","task":"INK","cue":"COLOR","options":["Yellow","Red","Orange","Blue","Green"],"targetTimeMs":2800}'),
+('56dbfc55-cbb7-4aa4-a478-3bbac072f173', 'stroop_clash', 5, '{"type":"stroop_clash","word":"YELLOW","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Orange","Purple","Yellow","Green"],"targetTimeMs":2800}'),
+('44fa83d8-97f7-474e-9d86-9c60f5973628', 'stroop_clash', 5, '{"type":"stroop_clash","word":"RED","ink":"#008000","task":"INK","cue":"COLOR","options":["Red","Blue","Green","Yellow","Purple"],"targetTimeMs":2800}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('d7188d6d-0ea2-4a0d-881d-73da09f602c5', 'stroop_clash', 6, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Blue","Orange","Red","Yellow","Green","Purple"],"targetTimeMs":2400}'),
+('af708e15-df4a-4c3f-b371-37a2ba088a96', 'stroop_clash', 6, '{"type":"stroop_clash","word":"RED","ink":"#800080","task":"INK","cue":"COLOR","options":["Red","Orange","Purple","Blue","Green","Yellow"],"targetTimeMs":2400}'),
+('baf41c3d-53c3-4f4d-bf20-fb6c48f8640c', 'stroop_clash', 6, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"INK","cue":"COLOR","options":["Green","Yellow","Red","Orange","Purple","Blue"],"targetTimeMs":2400}'),
+('0053c6bc-299d-49ae-ba15-779c4e0b0a4d', 'stroop_clash', 6, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Orange","Green","Purple","Red","Blue"],"targetTimeMs":2400}'),
+('74a434d4-8512-47f1-84ff-ccd732dbca46', 'stroop_clash', 6, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Orange","Yellow","Purple","Green","Red","Blue"],"targetTimeMs":2400}'),
+('e0ccd90e-0073-414a-8b86-2420c9543be8', 'stroop_clash', 6, '{"type":"stroop_clash","word":"RED","ink":"#800080","task":"INK","cue":"COLOR","options":["Green","Orange","Blue","Yellow","Purple","Red"],"targetTimeMs":2400}'),
+('8db52c5f-cc4f-4133-ba1f-f40c9d3cdf02', 'stroop_clash', 6, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Orange","Yellow","Red","Purple","Green","Blue"],"targetTimeMs":2400}'),
+('3dcf28bd-d466-480a-8033-35c45681282f', 'stroop_clash', 6, '{"type":"stroop_clash","word":"BLUE","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Purple","Red","Green","Yellow","Orange"],"targetTimeMs":2400}'),
+('fdbef203-da9c-4933-abb0-0e5ecc43fb81', 'stroop_clash', 6, '{"type":"stroop_clash","word":"GREEN","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Purple","Green","Blue","Orange","Red"],"targetTimeMs":2400}'),
+('aeba1079-937a-427f-a219-c35993b34009', 'stroop_clash', 6, '{"type":"stroop_clash","word":"RED","ink":"#008000","task":"INK","cue":"COLOR","options":["Blue","Red","Green","Orange","Purple","Yellow"],"targetTimeMs":2400}'),
+('e343ff97-5006-4134-afe0-b074303dc917', 'stroop_clash', 6, '{"type":"stroop_clash","word":"GREEN","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Red","Yellow","Green","Blue","Orange","Purple"],"targetTimeMs":2400}'),
+('a5e55ece-d0c5-4932-948f-0a05ba0549ab', 'stroop_clash', 6, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"INK","cue":"COLOR","options":["Yellow","Red","Purple","Orange","Green","Blue"],"targetTimeMs":2400}'),
+('ccf1bec6-4f47-461c-8b95-e55d71ec2811', 'stroop_clash', 6, '{"type":"stroop_clash","word":"RED","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Purple","Green","Blue","Red","Yellow","Orange"],"targetTimeMs":2400}'),
+('c9dd230c-2226-4db1-be48-04765e9454d7', 'stroop_clash', 6, '{"type":"stroop_clash","word":"PURPLE","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Yellow","Blue","Orange","Purple","Red","Green"],"targetTimeMs":2400}'),
+('36a52f46-1a81-41fc-89f6-6636ea8d396c', 'stroop_clash', 6, '{"type":"stroop_clash","word":"BLUE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Green","Red","Blue","Orange","Purple","Yellow"],"targetTimeMs":2400}'),
+('5d47e1c2-0ef0-49da-b709-6a574b310766', 'stroop_clash', 6, '{"type":"stroop_clash","word":"YELLOW","ink":"#008000","task":"INK","cue":"COLOR","options":["Orange","Green","Yellow","Blue","Purple","Red"],"targetTimeMs":2400}'),
+('c7f0f332-3cbb-4d2a-a27b-98f3ac7b1e76', 'stroop_clash', 6, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Blue","Purple","Orange","Yellow","Green","Red"],"targetTimeMs":2400}'),
+('96a5cf03-cd21-4959-8a1e-229c509fc8d4', 'stroop_clash', 6, '{"type":"stroop_clash","word":"PURPLE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Green","Yellow","Red","Purple","Blue","Orange"],"targetTimeMs":2400}'),
+('20f56600-7a76-449a-aee1-a01652e231fc', 'stroop_clash', 6, '{"type":"stroop_clash","word":"ORANGE","ink":"#008000","task":"INK","cue":"COLOR","options":["Purple","Green","Red","Blue","Yellow","Orange"],"targetTimeMs":2400}'),
+('954e4559-34a3-47c2-8608-790b78866479', 'stroop_clash', 6, '{"type":"stroop_clash","word":"RED","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Green","Blue","Red","Purple","Yellow","Orange"],"targetTimeMs":2400}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('b6801939-6396-41cc-a5c9-509a0cf4b2a8', 'stroop_clash', 7, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Green","Red","Blue","Yellow"],"targetTimeMs":2200}'),
+('072d9206-c723-442e-a1e4-f5bb5fc08e61', 'stroop_clash', 7, '{"type":"stroop_clash","word":"BLUE","ink":"#FFFF00","task":"WORD","cue":"TEXT","options":["Red","Yellow","Green","Blue"],"targetTimeMs":2200}'),
+('9604e2a6-e1ce-46ee-bf9f-ea7a6f818860', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Blue","Red","Yellow","Purple"],"targetTimeMs":2200}'),
+('d865adf1-b77b-472f-9a7d-ca423840d196', 'stroop_clash', 7, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Orange","Green","Blue","Purple"],"targetTimeMs":2200}'),
+('28de15ff-98a9-4ae4-847b-24d1b580a06e', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#008000","task":"WORD","cue":"TEXT","options":["Yellow","Purple","Green","Orange"],"targetTimeMs":2200}'),
+('78265f49-6447-4662-902c-160f1ac789db', 'stroop_clash', 7, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Purple","Green","Yellow","Blue"],"targetTimeMs":2200}'),
+('1e46508c-5059-49f3-91e3-1a72c69a6374', 'stroop_clash', 7, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Yellow","Blue","Red","Green"],"targetTimeMs":2200}'),
+('b49facf6-60a5-4c29-94e9-157e2a382c11', 'stroop_clash', 7, '{"type":"stroop_clash","word":"BLUE","ink":"#FFFF00","task":"WORD","cue":"TEXT","options":["Purple","Blue","Yellow","Green"],"targetTimeMs":2200}'),
+('11daefa5-2af1-45fa-b135-f17c2b7f9961', 'stroop_clash', 7, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Orange","Red","Purple","Yellow"],"targetTimeMs":2200}'),
+('0eea19be-fc5a-4ad4-9430-3d6cef4c5b8d', 'stroop_clash', 7, '{"type":"stroop_clash","word":"ORANGE","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Purple","Red","Yellow","Orange"],"targetTimeMs":2200}'),
+('503ca0e9-f673-4dd9-842e-333c5074bfdd', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Red","Blue","Orange","Purple"],"targetTimeMs":2200}'),
+('c57317e0-c453-40ee-ae08-512e4f377efa', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Yellow","Orange","Purple","Green"],"targetTimeMs":2200}'),
+('12bb1831-79f2-4e94-92fc-2ebfe87cf62c', 'stroop_clash', 7, '{"type":"stroop_clash","word":"BLUE","ink":"#FFFF00","task":"WORD","cue":"TEXT","options":["Yellow","Red","Blue","Green"],"targetTimeMs":2200}'),
+('89996109-4187-46be-8083-6a587d05af54', 'stroop_clash', 7, '{"type":"stroop_clash","word":"RED","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Orange","Red","Blue","Yellow"],"targetTimeMs":2200}'),
+('687c5b46-53f2-470e-a5e8-eaf23a23b579', 'stroop_clash', 7, '{"type":"stroop_clash","word":"BLUE","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Blue","Orange","Yellow","Red"],"targetTimeMs":2200}'),
+('9d4ea159-d15e-4524-8231-c1c72637004e', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Blue","Red","Orange","Purple"],"targetTimeMs":2200}'),
+('09a24c0f-c6d5-4563-aa08-f702b1f19293', 'stroop_clash', 7, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Blue","Orange","Red","Green"],"targetTimeMs":2200}'),
+('be648d1a-5c42-48e5-8cb4-590c8bd176dc', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Purple","Yellow","Orange","Blue"],"targetTimeMs":2200}'),
+('5abaa2d0-d005-4902-bf56-37ec172e7a5b', 'stroop_clash', 7, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Green","Purple","Yellow","Orange"],"targetTimeMs":2200}'),
+('75272fad-f94a-4cb1-98af-e4fe2873c4e2', 'stroop_clash', 7, '{"type":"stroop_clash","word":"PURPLE","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Orange","Purple","Yellow","Red"],"targetTimeMs":2200}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('80c3657a-29ae-4ab0-8dfd-29c0e4511f42', 'stroop_clash', 8, '{"type":"stroop_clash","word":"ORANGE","ink":"#800080","task":"INK","cue":"COLOR","options":["Red","Blue","Green","Orange","Purple","Yellow"],"targetTimeMs":1900}'),
+('6aab70b3-28cb-4906-8ffc-5c624a6c9b44', 'stroop_clash', 8, '{"type":"stroop_clash","word":"BLUE","ink":"#0000FF","task":"INK","cue":"COLOR","options":["Yellow","Blue","Red","Green","Orange","Purple"],"targetTimeMs":1900}'),
+('2df86d7f-37bc-4f57-83b5-2b66baf00e2f', 'stroop_clash', 8, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Red","Yellow","Orange","Green","Purple","Blue"],"targetTimeMs":1900}'),
+('1c79ca88-537d-41e6-a4ca-0d09a9cf0ac9', 'stroop_clash', 8, '{"type":"stroop_clash","word":"GREEN","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Yellow","Blue","Red","Purple","Green","Orange"],"targetTimeMs":1900}'),
+('c838c41a-f1a1-46ae-aae0-5d5a1317bcf7', 'stroop_clash', 8, '{"type":"stroop_clash","word":"YELLOW","ink":"#008000","task":"INK","cue":"COLOR","options":["Green","Red","Orange","Purple","Blue","Yellow"],"targetTimeMs":1900}'),
+('95aa810c-515f-4e68-b9d5-36f5e87440c9', 'stroop_clash', 8, '{"type":"stroop_clash","word":"BLUE","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Blue","Yellow","Orange","Green","Purple","Red"],"targetTimeMs":1900}'),
+('70bddaa7-5ec3-4324-b335-e85cb9340588', 'stroop_clash', 8, '{"type":"stroop_clash","word":"YELLOW","ink":"#800080","task":"WORD","cue":"TEXT","options":["Green","Red","Blue","Orange","Yellow","Purple"],"targetTimeMs":1900}'),
+('deccefa0-e035-43e7-9031-068ec4c8a4dc', 'stroop_clash', 8, '{"type":"stroop_clash","word":"RED","ink":"#008000","task":"WORD","cue":"TEXT","options":["Orange","Red","Purple","Yellow","Blue","Green"],"targetTimeMs":1900}'),
+('f71b5fcb-9cf6-4930-85ca-c9353a009dda', 'stroop_clash', 8, '{"type":"stroop_clash","word":"RED","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Green","Orange","Yellow","Red","Purple","Blue"],"targetTimeMs":1900}'),
+('403bfbd9-17ed-4d3f-b487-0b08a40406ba', 'stroop_clash', 8, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Blue","Orange","Green","Red","Yellow","Purple"],"targetTimeMs":1900}'),
+('f93d15b7-39c8-40d0-bdac-d2d8fdf046b7', 'stroop_clash', 8, '{"type":"stroop_clash","word":"YELLOW","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Purple","Orange","Blue","Red","Yellow","Green"],"targetTimeMs":1900}'),
+('9f41abf5-2ef0-42cb-a38c-8e510073f300', 'stroop_clash', 8, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Purple","Yellow","Red","Orange","Green","Blue"],"targetTimeMs":1900}'),
+('c6582e6f-6354-4446-b735-b06883619ae1', 'stroop_clash', 8, '{"type":"stroop_clash","word":"YELLOW","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Blue","Red","Purple","Yellow","Orange","Green"],"targetTimeMs":1900}'),
+('0fc94969-e3ac-4477-8a8a-d80b731c3940', 'stroop_clash', 8, '{"type":"stroop_clash","word":"GREEN","ink":"#008000","task":"WORD","cue":"TEXT","options":["Purple","Orange","Blue","Green","Yellow","Red"],"targetTimeMs":1900}'),
+('872641ee-32de-4ebd-a6f7-ec92f3ba1eb5', 'stroop_clash', 8, '{"type":"stroop_clash","word":"ORANGE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Purple","Green","Red","Yellow","Blue","Orange"],"targetTimeMs":1900}'),
+('734b2df4-3afe-4aa0-aa1d-e9990fd5b067', 'stroop_clash', 8, '{"type":"stroop_clash","word":"YELLOW","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Orange","Purple","Red","Blue","Yellow","Green"],"targetTimeMs":1900}'),
+('c0b148ef-66ca-4c2c-b192-403295193e39', 'stroop_clash', 8, '{"type":"stroop_clash","word":"BLUE","ink":"#FFFF00","task":"WORD","cue":"TEXT","options":["Red","Green","Blue","Purple","Orange","Yellow"],"targetTimeMs":1900}'),
+('9454fe56-06ed-40df-a6b2-73c3d5ef30dc', 'stroop_clash', 8, '{"type":"stroop_clash","word":"PURPLE","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Purple","Blue","Green","Orange","Red","Yellow"],"targetTimeMs":1900}'),
+('090aa95c-f97a-4d6f-a438-d68763e01e87', 'stroop_clash', 8, '{"type":"stroop_clash","word":"ORANGE","ink":"#008000","task":"WORD","cue":"TEXT","options":["Blue","Green","Yellow","Purple","Orange","Red"],"targetTimeMs":1900}'),
+('072bb0b9-dde9-4cf6-ad2a-a4b5b27df63d', 'stroop_clash', 8, '{"type":"stroop_clash","word":"YELLOW","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Purple","Orange","Red","Green","Yellow","Blue"],"targetTimeMs":1900}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('e90dd3bd-521b-43fc-a828-0b74b9217a26', 'stroop_clash', 9, '{"type":"stroop_clash","word":"GREEN","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Orange","Yellow","Blue","Red","Green","Purple"],"targetTimeMs":1600}'),
+('5f9b88c0-0627-4297-b63d-47c06b351f42', 'stroop_clash', 9, '{"type":"stroop_clash","word":"BLUE","ink":"#008000","task":"INK","cue":"COLOR","options":["Purple","Red","Blue","Green","Yellow","Orange"],"targetTimeMs":1600}'),
+('109eeeff-c4b9-4c8e-965d-f46913680913', 'stroop_clash', 9, '{"type":"stroop_clash","word":"YELLOW","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Green","Orange","Yellow","Purple","Blue","Red"],"targetTimeMs":1600}'),
+('5e8b7dae-820f-4859-a103-cc292f5f6b32', 'stroop_clash', 9, '{"type":"stroop_clash","word":"PURPLE","ink":"#008000","task":"WORD","cue":"TEXT","options":["Purple","Green","Blue","Orange","Yellow","Red"],"targetTimeMs":1600}'),
+('3b78d999-319f-4e05-8442-3e3e99ed0ed9', 'stroop_clash', 9, '{"type":"stroop_clash","word":"GREEN","ink":"#800080","task":"INK","cue":"COLOR","options":["Orange","Purple","Red","Green","Blue","Yellow"],"targetTimeMs":1600}'),
+('666c1f73-84f3-430a-a843-64654ab873d4', 'stroop_clash', 9, '{"type":"stroop_clash","word":"GREEN","ink":"#800080","task":"WORD","cue":"TEXT","options":["Purple","Red","Blue","Orange","Yellow","Green"],"targetTimeMs":1600}'),
+('77b63c70-ab54-4f8e-8f5c-ee918cc80d23', 'stroop_clash', 9, '{"type":"stroop_clash","word":"PURPLE","ink":"#800080","task":"INK","cue":"COLOR","options":["Yellow","Orange","Blue","Green","Red","Purple"],"targetTimeMs":1600}'),
+('40fe29aa-9899-4154-a596-fe5056bf5d5a', 'stroop_clash', 9, '{"type":"stroop_clash","word":"PURPLE","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Green","Blue","Red","Purple","Orange","Yellow"],"targetTimeMs":1600}'),
+('4c5e3e17-ef8a-445a-9582-e93c8dd758ff', 'stroop_clash', 9, '{"type":"stroop_clash","word":"BLUE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Blue","Green","Purple","Orange","Red","Yellow"],"targetTimeMs":1600}'),
+('2c4cb97e-6534-4dc5-ad17-bae78de0ce08', 'stroop_clash', 9, '{"type":"stroop_clash","word":"BLUE","ink":"#FFA500","task":"WORD","cue":"TEXT","options":["Blue","Purple","Orange","Red","Green","Yellow"],"targetTimeMs":1600}'),
+('10863b49-1f97-466d-99e1-f0dd707b0a89', 'stroop_clash', 9, '{"type":"stroop_clash","word":"RED","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Purple","Green","Blue","Orange","Red","Yellow"],"targetTimeMs":1600}'),
+('de22a764-f7af-40c1-a51b-21a6edb7fee2', 'stroop_clash', 9, '{"type":"stroop_clash","word":"YELLOW","ink":"#800080","task":"WORD","cue":"TEXT","options":["Green","Blue","Orange","Red","Purple","Yellow"],"targetTimeMs":1600}'),
+('9e8bdf8b-5006-43ff-be17-9668eb639b6f', 'stroop_clash', 9, '{"type":"stroop_clash","word":"ORANGE","ink":"#800080","task":"WORD","cue":"TEXT","options":["Purple","Red","Yellow","Orange","Green","Blue"],"targetTimeMs":1600}'),
+('efe7e568-2007-4976-92a8-72677d081ad8', 'stroop_clash', 9, '{"type":"stroop_clash","word":"RED","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Green","Purple","Yellow","Red","Orange","Blue"],"targetTimeMs":1600}'),
+('efd992c7-7e70-4ba4-866d-0fdd578095a7', 'stroop_clash', 9, '{"type":"stroop_clash","word":"GREEN","ink":"#800080","task":"INK","cue":"COLOR","options":["Green","Red","Blue","Yellow","Purple","Orange"],"targetTimeMs":1600}'),
+('a776b60a-c1f8-4fff-9ee8-a9bee44cc856', 'stroop_clash', 9, '{"type":"stroop_clash","word":"PURPLE","ink":"#FFA500","task":"INK","cue":"COLOR","options":["Red","Green","Yellow","Orange","Blue","Purple"],"targetTimeMs":1600}'),
+('7abf09f1-40f9-45dc-961b-c5acc8b9cae3', 'stroop_clash', 9, '{"type":"stroop_clash","word":"YELLOW","ink":"#FF0000","task":"WORD","cue":"TEXT","options":["Orange","Purple","Red","Green","Yellow","Blue"],"targetTimeMs":1600}'),
+('80fdeb5f-634f-4ec4-8ee2-a854af009ea0', 'stroop_clash', 9, '{"type":"stroop_clash","word":"YELLOW","ink":"#0000FF","task":"WORD","cue":"TEXT","options":["Purple","Yellow","Red","Blue","Orange","Green"],"targetTimeMs":1600}'),
+('21daa0f4-1c36-4834-8324-2b0bdbb3ad36', 'stroop_clash', 9, '{"type":"stroop_clash","word":"RED","ink":"#FFFF00","task":"INK","cue":"COLOR","options":["Yellow","Blue","Red","Orange","Purple","Green"],"targetTimeMs":1600}'),
+('f32447bf-65a8-4efe-940d-969a31c1c683', 'stroop_clash', 9, '{"type":"stroop_clash","word":"GREEN","ink":"#FF0000","task":"INK","cue":"COLOR","options":["Purple","Red","Orange","Green","Yellow","Blue"],"targetTimeMs":1600}')
 ON CONFLICT (id) DO UPDATE SET
   game_id = EXCLUDED.game_id,
   difficulty = EXCLUDED.difficulty,
