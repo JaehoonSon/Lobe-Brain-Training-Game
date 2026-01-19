@@ -65,8 +65,8 @@
     "name": "Word Unscramble",
     "description": "Rearrange the scrambled letters to form the correct word.",
     "instructions": "Tap letters from the pool to move them into the answer slots. Tap a placed letter to return it to the pool. Use the hint if you get stuck!",
-    "icon_url": "brain_solving_puzzle.png",
-    "banner_url": "brain_solving_puzzle.png",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game.jpg",
     "is_active": true,
     "is_pro_only": false,
     "recommended_rounds": 5
@@ -79,7 +79,7 @@
     "instructions": "Answer math questions to boost your rocket. Don't let it crash!",
     "icon_url": "rocket",
     "banner_url": null,
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-01-15 04:20:24.554962+00",
     "is_pro_only": false,
     "recommended_rounds": 3
@@ -92,7 +92,7 @@
     "instructions": null,
     "icon_url": "shapes",
     "banner_url": null,
-    "is_active": true,
+    "is_active": false,
     "is_pro_only": false,
     "recommended_rounds": 3
   },
@@ -102,8 +102,8 @@
     "name": "Stroop Clash",
     "description": "Identify the color or the word under pressure.",
     "instructions": "Tap the button that matches the requested task (COLOR or TEXT).",
-    "icon_url": null,
-    "banner_url": null,
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game.jpg",
     "is_active": true,
     "is_pro_only": false,
     "recommended_rounds": 10
