@@ -273,9 +273,9 @@ skip_nonce_check = false
 
 [auth.external.google]
 enabled = true
-client_id = "119239050721-13t3a3b0k5dm4ngcbc730kot854u9bkh.apps.googleusercontent.com"
+client_id = "119239050721-13t3a3b0k5dm4ngcbc730kot854u9bkh.apps.googleusercontent.com,119239050721-dhiahbraqtnql8v44qkvfcmqiud8fac6.apps.googleusercontent.com"
 secret = "env(AUTH_GOOGLE_SECRET)"
-skip_nonce_check = false
+skip_nonce_check = true
 
 # Allow Solana wallet holders to sign in to your project via the Sign in with Solana (SIWS, EIP-4361) standard.
 # You can configure "web3" rate limit in the [auth.rate_limit] section and set up [auth.captcha] if self-hosting.

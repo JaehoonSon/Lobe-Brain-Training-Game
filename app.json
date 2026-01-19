@@ -24,12 +24,19 @@
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.119239050721-dhiahbraqtnql8v44qkvfcmqiud8fac6"
+            ]
+          }
+        ]
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/brain-app-logo.png",
+        "foregroundImage": "./assets/images/brain_logo_transparent.png",
         "backgroundColor": "#fa8b4b"
       },
       "package": "com.knuceles.ExpoTemplate"
