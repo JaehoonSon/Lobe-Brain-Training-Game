@@ -15,6 +15,18 @@ import { makeRedirectUri } from "expo-auth-session";
 // Required for web browser redirect handling
 WebBrowser.maybeCompleteAuthSession();
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { showErrorToast } from "~/components/ui/toast";
+import * as WebBrowser from "expo-web-browser";
+import { makeRedirectUri } from "expo-auth-session";
+
+// Required for web browser redirect handling
+WebBrowser.maybeCompleteAuthSession();
+import { showErrorToast } from "~/components/ui/toast";
+import * as WebBrowser from "expo-web-browser";
+import { makeRedirectUri } from "expo-auth-session";
+
+// Required for web browser redirect handling
+WebBrowser.maybeCompleteAuthSession();
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -32,7 +44,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSigningIn, setIsSigningIn] = useState(false); // Track sign-in in progress
+  const [isSigningIn, setIsSigningIn] = useState(false);
   const [onboardingComplete, setOnboardingComplete] = useState(false);
   const [isProfileLoading, setIsProfileLoading] = useState(false);
 
@@ -145,6 +157,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInApple = async () => {
     setIsSigningIn(true);
+    setIsSigningIn(true);
     try {
       const cred = await AppleAuthentication.signInAsync({
         requestedScopes: [
@@ -212,12 +225,58 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsSigningIn(false);
     }
+    setIsSigningIn(true);
+    try {
+      // Create redirect URL for your app
+      const redirectUrl = makeRedirectUri();
+      console.log("Google OAuth Redirect URI:", redirectUrl);
+      // Add this URL to Supabase Dashboard > Auth > URL Configuration > Redirect URLs
+
+      // Start OAuth flow - get the URL from Supabase
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: redirectUrl,
+          skipBrowserRedirect: true, // We handle the browser manually
+        },
+      });
+
+      if (error) throw error;
+      if (!data?.url) throw new Error("No OAuth URL from Supabase");
+
+      // Open browser for Google login
+      const result = await WebBrowser.openAuthSessionAsync(
+        data.url,
+        redirectUrl,
+      );
+
+      if (result.type === "success" && result.url) {
+        // Parse the tokens from the URL (Supabase returns them as hash fragments)
+        const hashParams = new URLSearchParams(result.url.split("#")[1]);
+        const access_token = hashParams.get("access_token");
+        const refresh_token = hashParams.get("refresh_token");
+
+        if (access_token && refresh_token) {
+          const { error: sessionError } = await supabase.auth.setSession({
+            access_token,
+            refresh_token,
+          });
+          if (sessionError) throw sessionError;
+        }
+      }
+    } catch (error) {
+      console.log("Google Sign In Error:", error);
+      showErrorToast("Error signing in with Google");
+    } finally {
+      setIsSigningIn(false);
+    }
   };
 
   // ----- Memoized context value -----
   const value = useMemo<AuthContextType>(
     () => ({
       isAuthenticated: !!user,
+      isLoading, // Don't include isSigningIn - it causes screen changes
       isLoading, // Don't include isSigningIn - it causes screen changes
       user,
       onboardingComplete,
