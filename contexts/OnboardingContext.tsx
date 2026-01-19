@@ -40,7 +40,8 @@ export function OnboardingProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, onboardingComplete, isProfileLoading } = useAuth();
+  const { user, onboardingComplete, isProfileLoading, markOnboardingComplete } =
+    useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [data, setData] = useState<OnboardingData>({});
   const [isComplete, setIsComplete] = useState(false);
@@ -177,6 +178,7 @@ export function OnboardingProvider({
 
       console.log("Onboarding data saved successfully");
       setIsComplete(true);
+      markOnboardingComplete(); // Update AuthProvider state to trigger navigation
     } catch (e) {
       console.error("Failed to save onboarding data", e);
     }

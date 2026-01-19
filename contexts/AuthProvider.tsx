@@ -11,6 +11,7 @@ import * as AppleAuthentication from "expo-apple-authentication";
 import { showErrorToast } from "~/components/ui/toast";
 import * as WebBrowser from "expo-web-browser";
 import { makeRedirectUri } from "expo-auth-session";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Required for web browser redirect handling
 WebBrowser.maybeCompleteAuthSession();
@@ -24,6 +25,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   signInApple: () => Promise<void>;
   signInGoogle: () => Promise<void>;
+  markOnboardingComplete: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -259,11 +261,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // ----- Allow external marking of onboarding complete -----
+  const markOnboardingComplete = () => {
+    setOnboardingComplete(true);
+  };
+
   // ----- Memoized context value -----
   const value = useMemo<AuthContextType>(
     () => ({
       isAuthenticated: !!user,
-      isLoading, // Don't include isSigningIn - it causes screen changes
       isLoading, // Don't include isSigningIn - it causes screen changes
       user,
       onboardingComplete,
@@ -271,6 +277,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       logout,
       signInApple,
       signInGoogle,
+      markOnboardingComplete,
     }),
     [
       user,

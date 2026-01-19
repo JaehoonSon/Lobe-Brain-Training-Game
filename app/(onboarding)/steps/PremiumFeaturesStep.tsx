@@ -52,7 +52,7 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
       if (viewableItems.length > 0 && viewableItems[0].index !== null) {
         setCurrentIndex(viewableItems[0].index);
       }
-    }
+    },
   ).current;
 
   const viewabilityConfig = useRef({
@@ -89,10 +89,10 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
                 justifyContent: "center",
               }}
             >
-              <View className="items-center justify-center p-8 mb-8">
+              <View className="items-center justify-center p-4 mb-4">
                 <Image
                   source={item.image}
-                  style={{ width: 280, height: 280, resizeMode: "contain" }}
+                  style={{ width: 200, height: 200, resizeMode: "contain" }}
                 />
               </View>
               <Text className="text-2xl font-bold text-center text-foreground mb-4">
@@ -124,8 +124,9 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
               <Animated.View
                 key={index}
                 layout={LinearTransition.springify().damping(15).stiffness(100)}
-                className={`h-2 rounded-full ${isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
-                  }`}
+                className={`h-2 rounded-full ${
+                  isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
+                }`}
               />
             );
           })}
@@ -136,8 +137,13 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
         entering={FadeInDown.delay(300).duration(600)}
         className="px-6"
       >
-        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
-          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
+        <Button
+          className="w-full rounded-2xl h-12 native:h-16"
+          onPress={onNext}
+        >
+          <Text className="font-bold text-xl text-primary-foreground">
+            Continue
+          </Text>
         </Button>
       </Animated.View>
     </View>
