@@ -14,19 +14,6 @@ import { makeRedirectUri } from "expo-auth-session";
 
 // Required for web browser redirect handling
 WebBrowser.maybeCompleteAuthSession();
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { showErrorToast } from "~/components/ui/toast";
-import * as WebBrowser from "expo-web-browser";
-import { makeRedirectUri } from "expo-auth-session";
-
-// Required for web browser redirect handling
-WebBrowser.maybeCompleteAuthSession();
-import { showErrorToast } from "~/components/ui/toast";
-import * as WebBrowser from "expo-web-browser";
-import { makeRedirectUri } from "expo-auth-session";
-
-// Required for web browser redirect handling
-WebBrowser.maybeCompleteAuthSession();
 
 interface AuthContextType {
   isAuthenticated: boolean;

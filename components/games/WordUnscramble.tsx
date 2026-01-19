@@ -139,9 +139,9 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
     placedLetters.some((l) => l?.id === tileId);
 
   return (
-    <View className="flex-1 items-center justify-between py-10 px-4">
+    <View className="flex-1 items-center py-10 px-4">
       {/* Top Section: Hint and Slots */}
-      <View className="items-center w-full gap-8">
+      <View className="flex-1 items-center justify-center w-full gap-8">
         {content.hint && (
           <View className="bg-secondary/10 px-4 py-2 rounded-lg">
             <Text className="text-secondary text-center text-lg italic">
@@ -164,7 +164,7 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
                   ? "border-primary bg-background"
                   : "border-muted-foreground/30",
                 isError && "border-red-500",
-                isSuccess && "border-green-500"
+                isSuccess && "border-green-500",
               )}
               style={{
                 width: tileSize,
@@ -176,7 +176,7 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
                   className={cn(
                     "text-3xl font-bold",
                     isError && "text-red-500",
-                    isSuccess && "text-green-500"
+                    isSuccess && "text-green-500",
                   )}
                 >
                   {tile.char}
@@ -203,7 +203,7 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
                   "border rounded-xl items-center justify-center shadow-sm transition-all",
                   placed
                     ? "bg-primary border-primary scale-95" // Selected state with primary color
-                    : "bg-card border-border active:scale-95" // Default state
+                    : "bg-card border-border active:scale-95", // Default state
                 )}
                 style={{
                   width: tileSize,
@@ -213,7 +213,7 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
                 <Text
                   className={cn(
                     "text-2xl font-semibold",
-                    placed ? "text-primary-foreground" : "text-foreground"
+                    placed ? "text-primary-foreground" : "text-foreground",
                   )}
                 >
                   {tile.char}
@@ -223,9 +223,9 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
           })}
         </View>
 
-        <Text className="text-center text-muted-foreground mt-8 text-sm">
+        {/* <Text className="text-center text-muted-foreground mt-8 text-sm">
           Tap letters to form the word
-        </Text>
+        </Text> */}
       </View>
     </View>
   );
