@@ -7,8 +7,7 @@ import {
 } from "react-native";
 import { useCallback, useState } from "react";
 import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
-import { OverallPerformanceChart } from "~/components/charts/OverallPerformanceChart";
-import { ComparisonChart } from "~/components/charts/ComparisonChart";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H4, P } from "~/components/ui/typography";
@@ -30,7 +29,8 @@ import {
   BookType,
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
+import { useUserStats, CategoryStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+
 import { router, useFocusEffect } from "expo-router";
 import { cn } from "~/lib/utils";
 import { FeatureCard } from "~/components/FeatureCard";
@@ -71,6 +71,17 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
     variant === "primary" ? "text-primary" : "text-secondary";
   const progressBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
 
+  const validPercentiles = category.gameStats
+    .map((g) => g.percentile)
+    .filter((p): p is number => p !== null);
+
+  const avgPercentile =
+    validPercentiles.length > 0
+      ? Math.round(
+        (validPercentiles.reduce((a, b) => a + b, 0) / validPercentiles.length) * 100
+      )
+      : null;
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -103,7 +114,14 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
                 style={{ width: `${category.progress}%` }}
               />
             </View>
-            <View className="flex-row items-center gap-1">
+            <View className="flex-row items-center gap-2">
+              {avgPercentile !== null && (
+                <View className="bg-muted px-2 py-0.5 rounded">
+                  <Text className="text-xs font-bold text-muted-foreground">
+                    Top {Math.max(1, 100 - avgPercentile)}%
+                  </Text>
+                </View>
+              )}
               <Text className="text-xl font-black text-foreground min-w-[30px] text-right">
                 {category.score}
               </Text>
@@ -145,28 +163,11 @@ function StrengthContent() {
   );
 }
 
-function HistoryContent() {
-  return (
-    <View className="h-24 flex-row items-end justify-between px-4 opacity-60">
-      <View className="w-1/5 h-[30%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[45%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[60%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[50%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[90%] bg-primary rounded-t-sm" />
-    </View>
-  );
-}
+
 
 export default function StatsScreen() {
-  const {
-    overallBPI,
-    overallPercentile,
-    categoryStats,
-    history,
-    isLoading,
-    error,
-    refresh,
-  } = useUserStats();
+  const { overallBPI, categoryStats, isLoading, error, refresh, overallScoreHistory } = useUserStats();
+
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -180,6 +181,20 @@ export default function StatsScreen() {
   const categoriesWithData = categoryStats.filter(
     (c) => c.score !== null
   ).length;
+  const hasHistory = overallScoreHistory.length > 0;
+
+  const allGameStats = categoryStats.flatMap((c) => c.gameStats);
+  const validOverallPercentiles = allGameStats
+    .map((g) => g.percentile)
+    .filter((p): p is number => p !== null);
+
+  const overallAvgPercentile =
+    validOverallPercentiles.length > 0
+      ? Math.round(
+        (validOverallPercentiles.reduce((a, b) => a + b, 0) /
+          validOverallPercentiles.length) * 100
+      )
+      : null;
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -218,9 +233,18 @@ export default function StatsScreen() {
 
             <View className="items-center py-4">
               {hasOverallBPI ? (
-                <Text className="text-8xl font-black text-primary-foreground ">
-                  {overallBPI}
-                </Text>
+                <>
+                  <Text className="text-8xl font-black text-primary-foreground ">
+                    {overallBPI}
+                  </Text>
+                  {overallAvgPercentile !== null && (
+                    <View className="bg-white/20 px-3 py-1 rounded-full mt-2">
+                      <Text className="text-primary-foreground font-bold">
+                        Top {Math.max(1, 100 - overallAvgPercentile)}%
+                      </Text>
+                    </View>
+                  )}
+                </>
               ) : (
                 <Text className="text-6xl font-black text-primary-foreground/30">
                   ---
@@ -229,13 +253,9 @@ export default function StatsScreen() {
             </View>
 
             <View className="mt-4 bg-black/10 rounded-xl p-3 flex-row items-center justify-center border border-black/5">
-              {hasOverallBPI && overallPercentile !== null ? (
+              {hasOverallBPI ? (
                 <Text className="text-primary-foreground font-bold">
-                  Top {Math.max(1, 100 - overallPercentile)}% of users 🏆
-                </Text>
-              ) : hasOverallBPI ? (
-                <Text className="text-primary-foreground font-bold">
-                  Keep playing to see your rank!
+                  Scores update after each game
                 </Text>
               ) : (
                 <Text className="text-primary-foreground/90 font-bold text-center">
@@ -276,27 +296,19 @@ export default function StatsScreen() {
             Detailed Analysis
           </H4>
 
-          {overallPercentile && (
-            <FeatureCard
-              title="How You Compare"
-              variant="secondary"
-              isLocked={true}
-            >
-              <ComparisonChart percentile={overallPercentile} />
-            </FeatureCard>
-          )}
 
           <FeatureCard
             title="Strength Profile"
             variant="primary"
-            isLocked={true}
+            isLocked={false}
           >
             <StrengthProfileChart categoryStats={categoryStats} />
           </FeatureCard>
 
-          {/* <FeatureCard title="Progress History" variant="secondary">
-            <OverallPerformanceChart history={history} />
-          </FeatureCard> */}
+          <FeatureCard title="Progress History" variant="secondary" noPadding>
+            <ScoreHistoryChart history={overallScoreHistory} />
+          </FeatureCard>
+
         </View>
       </ScrollView>
     </SafeAreaView>

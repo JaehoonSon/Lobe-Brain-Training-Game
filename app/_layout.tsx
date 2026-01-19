@@ -52,11 +52,19 @@ const usePlatformSpecificSetup = Platform.select({
 function AppContent() {
   const { isDarkColorScheme } = useColorScheme();
 
-  const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
+  const {
+    isAuthenticated,
+    isLoading: isAuthLoading,
+    onboardingComplete,
+    isProfileLoading,
+  } = useAuth();
   const { isComplete, isLoading: isOnboardingLoading } = useOnboarding();
   const { isPro } = useRevenueCat();
 
-  const isAppLoading = isAuthLoading || isOnboardingLoading;
+  const isAppLoading =
+    isAuthLoading ||
+    isOnboardingLoading ||
+    (isAuthenticated && isProfileLoading);
 
   // Debug: Log auth state for routing decisions
   console.log("=== Root Layout Routing ===");
@@ -64,6 +72,7 @@ function AppContent() {
   console.log("isAuthLoading:", isAuthLoading);
   console.log("isOnboardingLoading:", isOnboardingLoading);
   console.log("isComplete:", isComplete);
+  console.log("onboardingComplete:", onboardingComplete);
   console.log("isPro:", isPro);
   console.log("===========================");
 
@@ -76,12 +85,12 @@ function AppContent() {
       <StatusBar style={isDarkColorScheme ? "light" : "light"} />
       <Stack screenOptions={{ headerShown: false, animation: "none" }}>
         {/* Onboarding Flow: Authenticated but not complete */}
-        <Stack.Protected guard={isAuthenticated && !isComplete}>
+        <Stack.Protected guard={isAuthenticated && !onboardingComplete}>
           <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
         </Stack.Protected>
 
         {/* Authenticated Flow: Authenticated and complete */}
-        <Stack.Protected guard={isAuthenticated && isComplete}>
+        <Stack.Protected guard={isAuthenticated && onboardingComplete}>
           <Stack.Screen
             name="(authenticated)"
             options={{ headerRight: () => <ThemeToggle /> }}

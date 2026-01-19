@@ -2,7 +2,11 @@ import { View } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import Animated, {
+  FadeInDown,
+  FadeInUp,
+  ZoomIn,
+} from "react-native-reanimated";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { ArrowRight } from "lucide-react-native";
 
@@ -34,16 +38,19 @@ export default function InterventionStep({
           className="items-center gap-6"
         >
           {variant === "outro" && (
-            <View className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900 items-center justify-center mb-4">
-              <Text className="text-3xl">🎉</Text>
-            </View>
+            <Animated.Text
+              entering={ZoomIn.springify().damping(12)}
+              className="text-7xl"
+            >
+              🎉
+            </Animated.Text>
           )}
 
-          <Text className="text-4xl font-extrabold text-foreground text-center">
+          <Text className="text-5xl font-extrabold text-foreground text-center">
             {title}
           </Text>
 
-          <Text className="text-xl text-muted-foreground text-center px-4">
+          <Text className="text-2xl text-muted-foreground text-center px-4">
             {description}
           </Text>
         </Animated.View>
@@ -54,7 +61,9 @@ export default function InterventionStep({
           className="w-full rounded-2xl h-12 native:h-16 px-10 flex-row gap-2"
           onPress={onNext}
         >
-          <Text className="font-bold text-xl text-primary-foreground">{buttonText}</Text>
+          <Text className="font-bold text-xl text-primary-foreground">
+            {buttonText}
+          </Text>
           <ArrowRight size={24} color="white" />
         </Button>
       </Animated.View>

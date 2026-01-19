@@ -91,6 +91,17 @@ export const MathRocketContentSchema = z.object({
   winningScore: z.number().optional(),
 });
 
+// 7. Stroop Clash
+export const StroopClashContentSchema = z.object({
+  type: z.literal("stroop_clash"),
+  word: z.string(),          // The text shown
+  ink: z.string(),           // The hex color or color name for rendering
+  task: z.enum(["INK", "WORD"]),
+  cue: z.string(),           // e.g., "COLOR" or "TEXT"
+  options: z.array(z.string()), // Labels for the buttons
+  targetTimeMs: z.number(),  // Optimal time for BPI speed bonus
+});
+
 // Union Schema for all game content
 export const GameContentSchema = z.discriminatedUnion("type", [
   MentalArithmeticContentSchema,
@@ -100,6 +111,7 @@ export const GameContentSchema = z.discriminatedUnion("type", [
   BallSortContentSchema,
   WordUnscrambleContentSchema,
   MathRocketContentSchema,
+  StroopClashContentSchema,
 ]);
 
 export type MentalArithmeticContent = z.infer<typeof MentalArithmeticContentSchema>;
@@ -111,4 +123,5 @@ export type WordleContent = z.infer<typeof WordleContentSchema>;
 export type BallSortContent = z.infer<typeof BallSortContentSchema>;
 export type WordUnscrambleContent = z.infer<typeof WordUnscrambleContentSchema>;
 export type MathRocketContent = z.infer<typeof MathRocketContentSchema>;
+export type StroopClashContent = z.infer<typeof StroopClashContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;

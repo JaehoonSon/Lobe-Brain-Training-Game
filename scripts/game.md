@@ -109,14 +109,17 @@ Used for: mental_language_discrimination
 }
 ```
 
-#### 5. Reaction / Stroop (Focus)
+#### 5. Stroop Clash (Focus)
 
 ```json
 {
-  "type": "stroop_test",
-  "stimulus": { "text": "RED", "color": "blue" },
-  "correct_response": "blue", // User must match the COLOR, not the word
-  "options": ["red", "blue", "green", "yellow"]
+  "type": "stroop_clash",
+  "word": "RED",              // The text shown (uppercase color name)
+  "ink": "#0000FF",           // Hex color the word is rendered in
+  "task": "INK",              // "INK" = identify ink color, "WORD" = identify text
+  "cue": "COLOR",             // Display cue: "COLOR" or "TEXT"
+  "options": ["Red", "Blue", "Green", "Yellow"], // Button labels
+  "targetTimeMs": 2800        // Optimal response time for scoring
 }
 ```
 

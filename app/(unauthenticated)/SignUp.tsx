@@ -10,7 +10,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
 export default function SignUp() {
-  const { signInApple } = useAuth();
+  const { signInApple, signInGoogle } = useAuth();
   const insets = useSafeAreaInsets();
 
   const handleLogin = async () => {
@@ -57,19 +57,23 @@ export default function SignUp() {
             </Text>
           </Button>
 
-          {/* <Button
+          <Button
             variant="secondary"
             className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
-            onPress={() => {
-              // signInGoogle()
-              showErrorToast("Google Sign In not configured yet");
+            onPress={async () => {
+              try {
+                await signInGoogle();
+              } catch (err) {
+                // Error handling is done in AuthProvider mostly, but safety catch here
+                console.log("Google sign in error at UI level", err);
+              }
             }}
           >
             <AntDesign name="google" size={24} color="white" />
             <Text className="font-bold text-xl text-secondary-foreground">
               Continue with Google
             </Text>
-          </Button> */}
+          </Button>
         </Animated.View>
 
         {/* Terms */}

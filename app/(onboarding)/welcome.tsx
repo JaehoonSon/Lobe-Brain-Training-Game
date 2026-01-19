@@ -1,7 +1,9 @@
 import { router } from "expo-router";
 import { View } from "react-native";
+import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
+import { Card } from "~/components/ui/card";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { BrainCircuit, Check, Zap, Brain, Target } from "lucide-react-native";
@@ -31,9 +33,11 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           entering={FadeInDown.duration(600)}
           className="items-center gap-4 mb-8"
         >
-          <View className="bg-primary/10 p-6 rounded-full mb-4">
-            <BrainCircuit size={64} className="text-primary" strokeWidth={3} />
-          </View>
+          <Image
+            source={require("~/assets/images/brain_logo_transparent.png")}
+            style={{ width: 120, height: 120 }}
+            contentFit="contain"
+          />
           <Text className="text-4xl font-extrabold text-foreground text-center leading-[1.1]">
             Welcome to your Personal Plan
           </Text>
@@ -48,17 +52,26 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
             <Animated.View
               key={index}
               entering={FadeInDown.delay(200 + index * 100).duration(600)}
-              className="flex-row items-center gap-4 bg-card p-4 rounded-2xl border-2 border-muted"
             >
-              <View className="p-2 rounded-xl bg-muted">
-                <goal.icon size={24} className="text-foreground" strokeWidth={2.5} />
-              </View>
-              <Text className="font-bold text-lg text-foreground">
-                {goal.label}
-              </Text>
-              <View className="ml-auto">
-                <Check size={20} className="text-green-500" strokeWidth={2.5} />
-              </View>
+              <Card className="flex-row items-center gap-4 p-4">
+                <View className="p-2 rounded-xl bg-muted">
+                  <goal.icon
+                    size={24}
+                    className="text-foreground"
+                    strokeWidth={2.5}
+                  />
+                </View>
+                <Text className="font-bold text-lg text-foreground">
+                  {goal.label}
+                </Text>
+                <View className="ml-auto">
+                  <Check
+                    size={20}
+                    className="text-green-500"
+                    strokeWidth={2.5}
+                  />
+                </View>
+              </Card>
             </Animated.View>
           ))}
         </View>

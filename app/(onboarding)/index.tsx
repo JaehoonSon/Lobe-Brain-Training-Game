@@ -70,20 +70,20 @@ type StepConfig =
 
 export const STEPS: StepConfig[] = [
   {
-    title: "When is your birthday?",
-    description: "We use this to personalize your experience.",
-    step: {
-      type: "custom",
-      component: BirthdaySelectionScreen,
-      fullscreen: true,
-    },
-  },
-  {
     title: "",
     description: "",
     step: {
       type: "custom",
       component: WelcomeScreen,
+      fullscreen: true,
+    },
+  },
+  {
+    title: "When is your birthday?",
+    description: "We use this to personalize your experience.",
+    step: {
+      type: "custom",
+      component: BirthdaySelectionScreen,
       fullscreen: true,
     },
   },

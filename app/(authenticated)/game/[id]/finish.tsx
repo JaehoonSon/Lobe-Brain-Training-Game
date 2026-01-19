@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
-import { View, TouchableOpacity, Image } from "react-native";
+import { useEffect } from "react";
+
+import { View, TouchableOpacity } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useGameSession } from "~/contexts/GameSessionContext";
 import { useGames } from "~/contexts/GamesContext";
+import { useUserStats } from "~/contexts/UserStatsContext";
 import { H1, P } from "~/components/ui/typography";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -17,13 +19,18 @@ import { cn } from "~/lib/utils";
 
 export default function GameFinishScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { state, config, resetSession } = useGameSession();
+  const { state, resetSession } = useGameSession();
   const { games, refreshDailyProgress } = useGames();
+  const { categoryStats, refresh: refreshUserStats } = useUserStats();
 
   const game = games.find((g) => g.id === id);
+  const gameStat = categoryStats
+    .find((c) => c.id === game?.category_id)
+    ?.gameStats.find((g) => g.gameId === id);
 
   useEffect(() => {
     refreshDailyProgress();
+    refreshUserStats();
   }, []);
 
   const accuracy =
@@ -118,7 +125,7 @@ export default function GameFinishScreen() {
         {/* Stat Cards Row */}
         <View className="px-6 flex-row gap-3 mb-10">
           <StatCard
-            label="TOTAL XP"
+            label="GAME BPI"
             value={state.score?.toString() || "0"}
             icon={<Zap size={22} color="#EAB308" fill="#EAB308" />}
             color="yellow"
@@ -166,13 +173,13 @@ function StatCard({ label, value, icon, color }: { label: string; value: string;
   const colorClasses = {
     yellow: "border-yellow-400",
     green: "border-green-500",
-    blue: "border-info"
+    blue: "border-info",
   };
 
   const headerClasses = {
     yellow: "bg-yellow-400",
     green: "bg-green-500",
-    blue: "bg-info"
+    blue: "bg-info",
   };
 
   return (

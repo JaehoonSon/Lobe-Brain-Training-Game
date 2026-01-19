@@ -1,0 +1,382 @@
+[
+  {
+    "id": "b6801939-6396-41cc-a5c9-509a0cf4b2a8",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "RED",
+      "ink": "#FF0000",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Green",
+        "Red",
+        "Blue",
+        "Yellow"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "072d9206-c723-442e-a1e4-f5bb5fc08e61",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "BLUE",
+      "ink": "#FFFF00",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Red",
+        "Yellow",
+        "Green",
+        "Blue"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "9604e2a6-e1ce-46ee-bf9f-ea7a6f818860",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#0000FF",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Blue",
+        "Red",
+        "Yellow",
+        "Purple"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "d865adf1-b77b-472f-9a7d-ca423840d196",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "BLUE",
+      "ink": "#0000FF",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Orange",
+        "Green",
+        "Blue",
+        "Purple"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "28de15ff-98a9-4ae4-847b-24d1b580a06e",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#008000",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Yellow",
+        "Purple",
+        "Green",
+        "Orange"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "78265f49-6447-4662-902c-160f1ac789db",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "BLUE",
+      "ink": "#0000FF",
+      "task": "INK",
+      "cue": "COLOR",
+      "options": [
+        "Purple",
+        "Green",
+        "Yellow",
+        "Blue"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "1e46508c-5059-49f3-91e3-1a72c69a6374",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "RED",
+      "ink": "#FF0000",
+      "task": "INK",
+      "cue": "COLOR",
+      "options": [
+        "Yellow",
+        "Blue",
+        "Red",
+        "Green"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "b49facf6-60a5-4c29-94e9-157e2a382c11",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "BLUE",
+      "ink": "#FFFF00",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Purple",
+        "Blue",
+        "Yellow",
+        "Green"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "11daefa5-2af1-45fa-b135-f17c2b7f9961",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "RED",
+      "ink": "#FF0000",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Orange",
+        "Red",
+        "Purple",
+        "Yellow"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "0eea19be-fc5a-4ad4-9430-3d6cef4c5b8d",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "ORANGE",
+      "ink": "#FF0000",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Purple",
+        "Red",
+        "Yellow",
+        "Orange"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "503ca0e9-f673-4dd9-842e-333c5074bfdd",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#800080",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Red",
+        "Blue",
+        "Orange",
+        "Purple"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "c57317e0-c453-40ee-ae08-512e4f377efa",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#FFA500",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Yellow",
+        "Orange",
+        "Purple",
+        "Green"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "12bb1831-79f2-4e94-92fc-2ebfe87cf62c",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "BLUE",
+      "ink": "#FFFF00",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Yellow",
+        "Red",
+        "Blue",
+        "Green"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "89996109-4187-46be-8083-6a587d05af54",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "RED",
+      "ink": "#FFA500",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Orange",
+        "Red",
+        "Blue",
+        "Yellow"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "687c5b46-53f2-470e-a5e8-eaf23a23b579",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "BLUE",
+      "ink": "#FFA500",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Blue",
+        "Orange",
+        "Yellow",
+        "Red"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "9d4ea159-d15e-4524-8231-c1c72637004e",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#800080",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Blue",
+        "Red",
+        "Orange",
+        "Purple"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "09a24c0f-c6d5-4563-aa08-f702b1f19293",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "RED",
+      "ink": "#FF0000",
+      "task": "WORD",
+      "cue": "TEXT",
+      "options": [
+        "Blue",
+        "Orange",
+        "Red",
+        "Green"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "be648d1a-5c42-48e5-8cb4-590c8bd176dc",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#0000FF",
+      "task": "INK",
+      "cue": "COLOR",
+      "options": [
+        "Purple",
+        "Yellow",
+        "Orange",
+        "Blue"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "5abaa2d0-d005-4902-bf56-37ec172e7a5b",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "ORANGE",
+      "ink": "#FFA500",
+      "task": "INK",
+      "cue": "COLOR",
+      "options": [
+        "Green",
+        "Purple",
+        "Yellow",
+        "Orange"
+      ],
+      "targetTimeMs": 2200
+    }
+  },
+  {
+    "id": "75272fad-f94a-4cb1-98af-e4fe2873c4e2",
+    "game_id": "stroop_clash",
+    "difficulty": 7,
+    "content": {
+      "type": "stroop_clash",
+      "word": "PURPLE",
+      "ink": "#FFFF00",
+      "task": "INK",
+      "cue": "COLOR",
+      "options": [
+        "Orange",
+        "Purple",
+        "Yellow",
+        "Red"
+      ],
+      "targetTimeMs": 2200
+    }
+  }
+]

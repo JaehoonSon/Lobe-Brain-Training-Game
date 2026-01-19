@@ -16,6 +16,7 @@ import { Text } from "~/components/ui/text";
 import { BallSort } from "~/components/games/BallSort";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
 import { MathRocket } from "~/components/games/MathRocket";
+import { StroopClash } from "~/components/games/StroopClash";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -69,7 +70,7 @@ export default function GamePlayScreen() {
         {
           p_game_id: id as string,
           p_count: undefined, // Let RPC use recommended_rounds
-        }
+        },
       );
 
       if (error) throw error;
@@ -137,8 +138,8 @@ export default function GamePlayScreen() {
 
       console.log(
         `Starting round: difficultyRatingUsed=${difficultyRatingUsed}, avgQuestionDifficulty=${avgDifficulty.toFixed(
-          2
-        )}`
+          2,
+        )}`,
       );
 
       // 4. Start the session
@@ -170,7 +171,7 @@ export default function GamePlayScreen() {
 
   const handleQuestionComplete = async (
     accuracy: number,
-    userResponse?: any
+    userResponse?: any,
   ) => {
     const currentQuestion = sessionQuestions[currentQuestionIndex];
     const responseTimeMs = Date.now() - questionStartTimeRef.current;
@@ -284,6 +285,15 @@ export default function GamePlayScreen() {
             onComplete={handleQuestionComplete}
           />
         );
+      case "stroop_clash":
+        if (content.type !== "stroop_clash") return null;
+        return (
+          <StroopClash
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       default:
         return (
           <View className="flex-1 items-center justify-center">
@@ -318,7 +328,7 @@ export default function GamePlayScreen() {
           {session.isPlaying && session.correctCount > 0 && (
             <View className="bg-green-600/80 px-3 py-2 rounded-full">
               <Text className="text-white font-bold">
-                ✓ {session.correctCount}
+                ✓ {Math.round(session.correctCount)}
               </Text>
             </View>
           )}

@@ -29,17 +29,17 @@ import { BlurView } from "expo-blur";
 import { cn } from "~/lib/utils";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-import { useUserStats } from "~/contexts/UserStatsContext";
+import { useUserStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
-import { CategoryPerformanceChart } from "~/components/charts/CategoryPerformanceChart";
-import { ComparisonChart } from "~/components/charts/ComparisonChart";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { categoryStats, isLoading, refresh, history, globalStats } =
-    useUserStats();
+  const { categoryStats, categoryScoreHistory, isLoading, refresh } = useUserStats();
+
   const { games } = useGames();
 
   // Refresh stats when focusing the screen
@@ -49,16 +49,7 @@ export default function CategoryDetailScreen() {
   //   }, [refresh])
   // );
 
-  const categoryHistory = useMemo(() => {
-    const relevantGameIds = new Set(
-      games.filter((g) => g.category_id === id).map((g) => g.id)
-    );
-    return history.filter((h) => relevantGameIds.has(h.game_id));
-  }, [games, history, id]);
-
-  useEffect(() => {
-    console.log("categoryHistory", JSON.stringify(categoryHistory));
-  }, [categoryHistory]);
+  const categoryHistory = categoryScoreHistory[id] || [];
 
   // Floating animation for the brain
   const translateY = useSharedValue(0);
@@ -81,43 +72,24 @@ export default function CategoryDetailScreen() {
   // Find the category stats for this ID
   const category = categoryStats.find((c) => c.id === id);
 
+  // Compute category percentile
+  const gamePercentiles =
+    category?.gameStats
+      .map((gs) => gs.percentile)
+      .filter((p): p is number => p !== null && p !== undefined) ?? [];
+
+  const categoryPercentileRaw =
+    gamePercentiles.length > 0
+      ? gamePercentiles.reduce((a, b) => a + b, 0) / gamePercentiles.length
+      : null;
+
+  const categoryTopPercent =
+    categoryPercentileRaw !== null
+      ? Math.max(1, 100 - Math.round(categoryPercentileRaw * 100))
+      : null;
+
   // Get games in this category
   const categoryGames = games.filter((g) => g.category_id === id);
-
-  // Calculate category-specific percentile using globalStats
-  const categoryPercentile = useMemo(() => {
-    if (!category?.score || categoryGames.length === 0) return null;
-
-    // Get global stats for games in this category
-    const categoryGlobalGames = categoryGames
-      .map((g) => globalStats.get(g.id))
-      .filter((g) => !!g);
-
-    if (categoryGlobalGames.length === 0) return null;
-
-    // Calculate weighted global average for this category
-    const totalWeight = categoryGlobalGames.reduce(
-      (sum, g) => sum + (g?.averageGamesPlayed || 0),
-      0
-    );
-    const weightedScore = categoryGlobalGames.reduce(
-      (sum, g) => sum + (g?.averageScore || 0) * (g?.averageGamesPlayed || 0),
-      0
-    );
-
-    if (totalWeight === 0) return null;
-
-    const globalCategoryBPI = weightedScore / totalWeight;
-
-    // Z-score approximation (same as overall percentile calculation)
-    const stdDev = globalCategoryBPI * 0.25; // Assume 25% std dev
-    if (stdDev === 0) return 50; // If no variance, user is at 50%
-
-    const zScore = (category.score - globalCategoryBPI) / stdDev;
-    // Logistic approximation for cumulative normal distribution
-    const p = 1 / (1 + Math.exp(-1.7 * zScore));
-    return Math.round(p * 100);
-  }, [category?.score, categoryGames, globalStats]);
 
   // Get relevant insights
   const relevantInsights = INSIGHTS.filter(
@@ -166,7 +138,9 @@ export default function CategoryDetailScreen() {
           <ChevronLeft size={24} className="text-foreground" />
         </TouchableOpacity>
         <View className="absolute left-0 right-0 items-center">
-          <H1 className="text-xl">{category.name} BPI</H1>
+          <H1 className="text-xl">{category.name} Score</H1>
+
+
         </View>
       </View>
 
@@ -202,12 +176,12 @@ export default function CategoryDetailScreen() {
                 </Text>
               </View>
 
-              <View className="-mt-1 flex-row">
+              <View className="-mt-1 flex-row flex-wrap gap-2">
                 <View className="bg-primary/10 px-3 py-1 rounded-full border-b-4 border-primary/20 flex-row items-center gap-2">
                   <Text className="text-sm font-black text-primary uppercase tracking-wider">
-                    current bpi
+                    current score
                   </Text>
-                  {hasScore && (
+                  {hasScore && categoryScoreHistory[id]?.length > 0 && (
                     <TrendingUp
                       size={14}
                       className="text-primary"
@@ -215,6 +189,15 @@ export default function CategoryDetailScreen() {
                     />
                   )}
                 </View>
+
+                {categoryTopPercent !== null && (
+                  <View className="bg-accent/10 px-3 py-1 rounded-full border-b-4 border-accent/20 flex-row items-center gap-2">
+                    <Zap size={14} className="text-accent" fill="currentColor" />
+                    <Text className="text-sm font-black text-accent uppercase tracking-wider">
+                      Top {categoryTopPercent}%
+                    </Text>
+                  </View>
+                )}
               </View>
             </Animated.View>
 
@@ -242,21 +225,10 @@ export default function CategoryDetailScreen() {
           <FeatureCard
             title="Performance History"
             variant="secondary"
-            isLocked={true}
+            isLocked={false}
           >
-            <CategoryPerformanceChart history={categoryHistory} />
+            <ScoreHistoryChart history={categoryHistory} />
           </FeatureCard>
-
-          {/* How You Compare Chart */}
-          {categoryPercentile !== null && (
-            <FeatureCard
-              title="How You Compare"
-              variant="primary"
-              isLocked={false}
-            >
-              <ComparisonChart percentile={categoryPercentile} />
-            </FeatureCard>
-          )}
 
           {/* Category Games Section */}
           <Animated.View entering={FadeInDown.delay(400).duration(400)}>
@@ -309,13 +281,15 @@ export default function CategoryDetailScreen() {
                               )}
                             </View>
                             {hasPlayed && gameStats.averageScore && (
-                              <View className="items-end bg-secondary/10 px-3 py-2 rounded-lg">
-                                <P className="text-2xl font-black text-secondary">
-                                  {gameStats.averageScore}
-                                </P>
-                                <Text className="text-[10px] font-black text-secondary/60 text-right">
-                                  AVG BPI
-                                </Text>
+                              <View className="flex-row gap-2">
+                                <View className="items-end bg-secondary/10 px-3 py-2 rounded-lg">
+                                  <P className="text-2xl font-black text-secondary">
+                                    {gameStats.averageScore}
+                                  </P>
+                                  <Text className="text-[10px] font-black text-secondary/60 text-right">
+                                    AVG SCORE
+                                  </Text>
+                                </View>
                               </View>
                             )}
                           </View>
@@ -327,6 +301,8 @@ export default function CategoryDetailScreen() {
               </View>
             )}
           </Animated.View>
+
+
 
           {/* Recommended Insights Section */}
           {relevantInsights.length > 0 && (
