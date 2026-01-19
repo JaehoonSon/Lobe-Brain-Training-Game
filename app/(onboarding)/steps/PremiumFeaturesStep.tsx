@@ -52,7 +52,7 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
       if (viewableItems.length > 0 && viewableItems[0].index !== null) {
         setCurrentIndex(viewableItems[0].index);
       }
-    }
+    },
   ).current;
 
   const viewabilityConfig = useRef({
@@ -77,45 +77,41 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           </Text>
         </Animated.View>
 
-        <View className="flex-1">
-          <FlatList
-            ref={flatListRef}
-            data={slides}
-            renderItem={({ item }) => (
-              <View
-                style={{
-                  width,
-                  paddingHorizontal: 24,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flex: 1,
-                }}
-              >
-                <View className="items-center justify-center p-4 mb-4">
-                  <Image
-                    source={item.image}
-                    style={{ width: 220, height: 220, resizeMode: "contain" }}
-                  />
-                </View>
-                <Text className="text-2xl font-bold text-center text-foreground mb-3">
-                  {item.title}
-                </Text>
-                <Text className="text-lg text-muted-foreground text-center px-4">
-                  {item.description}
-                </Text>
+        <FlatList
+          ref={flatListRef}
+          data={slides}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                width,
+                paddingHorizontal: 24,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <View className="items-center justify-center p-4 mb-4">
+                <Image
+                  source={item.image}
+                  style={{ width: 200, height: 200, resizeMode: "contain" }}
+                />
               </View>
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            bounces={false}
-            keyExtractor={(item) => item.id}
-            onViewableItemsChanged={onViewableItemsChanged}
-            viewabilityConfig={viewabilityConfig}
-            scrollEventThrottle={32}
-            contentContainerStyle={{ alignItems: "center" }}
-          />
-        </View>
+              <Text className="text-2xl font-bold text-center text-foreground mb-4">
+                {item.title}
+              </Text>
+              <Text className="text-lg text-muted-foreground text-center">
+                {item.description}
+              </Text>
+            </View>
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          bounces={false}
+          keyExtractor={(item) => item.id}
+          onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
+          scrollEventThrottle={32}
+        />
 
         {/* Pagination Dots */}
         <View className="flex-row justify-center items-center gap-2 mb-8">
@@ -128,8 +124,9 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
               <Animated.View
                 key={index}
                 layout={LinearTransition.springify().damping(15).stiffness(100)}
-                className={`h-2 rounded-full ${isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
-                  }`}
+                className={`h-2 rounded-full ${
+                  isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
+                }`}
               />
             );
           })}
@@ -140,8 +137,13 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
         entering={FadeInDown.delay(300).duration(600)}
         className="px-6"
       >
-        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
-          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
+        <Button
+          className="w-full rounded-2xl h-12 native:h-16"
+          onPress={onNext}
+        >
+          <Text className="font-bold text-xl text-primary-foreground">
+            Continue
+          </Text>
         </Button>
       </Animated.View>
     </View>
