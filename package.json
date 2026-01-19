@@ -24,6 +24,7 @@
     "@gorhom/bottom-sheet": "^5",
     "@lottiefiles/dotlottie-react": "^0.17.12",
     "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-native-google-signin/google-signin": "^16.1.1",
     "@react-native-masked-view/masked-view": "0.3.2",
     "@react-native-reusables/cli": "^0.6.2",
     "@react-navigation/native": "^7.0.0",

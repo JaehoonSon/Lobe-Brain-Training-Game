@@ -31,15 +31,20 @@ export default function BirthdaySelectionScreen({
   const yearRef = useRef<TextInput>(null);
 
   const handleContinue = () => {
-    if (!day || !month || !year) return;
+    // Save birthday to onboarding context if provided
+    if (day && month && year.length === 4) {
+      const birthday = `${year}-${month.padStart(2, "0")}-${day.padStart(
+        2,
+        "0"
+      )}`;
+      updateData("birthday", birthday);
+    }
+    onNext();
+  };
 
-    // Save birthday to onboarding context
-    const birthday = `${year}-${month.padStart(2, "0")}-${day.padStart(
-      2,
-      "0"
-    )}`;
-    updateData("birthday", birthday);
-
+  const handleSkip = () => {
+    // Clear any partial birthday data and proceed
+    updateData("birthday", null);
     onNext();
   };
 
@@ -179,13 +184,20 @@ export default function BirthdaySelectionScreen({
           </Animated.View>
         </View>
 
-        <Animated.View entering={FadeInUp.delay(400).duration(600)}>
+        <Animated.View entering={FadeInUp.delay(400).duration(600)} className="gap-3">
           <Button
             className="w-full rounded-2xl h-12 native:h-16 px-10"
             onPress={handleContinue}
             disabled={!isValid}
           >
             <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
+          </Button>
+          <Button
+            variant="link"
+            className="w-full"
+            onPress={handleSkip}
+          >
+            <Text className="font-semibold text-base tracking-wide text-muted-foreground">Skip for now</Text>
           </Button>
         </Animated.View>
       </View>

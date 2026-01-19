@@ -236,26 +236,28 @@ export const STEPS: StepConfig[] = [
         "Now, let’s get to know you so we can tailor your training and feedback.",
     },
   },
-  // Step 11: Gender
+  // Step 11: Gender (optional)
   {
-    title: "First, what’s your gender?",
+    title: "What's your gender?",
     description:
-      "This helps us show you how you compare to similar members in our community.",
+      "This helps us show you how you compare to similar members in our community. (Optional)",
     step: {
       type: "selection",
       dataKey: "gender",
       maxSelections: 1,
-      options: ["Male", "Female", "Non-binary"],
+      optional: true,
+      options: ["Male", "Female", "Non-binary", "Prefer not to say"],
     },
   },
-  // Step 11: Education
+  // Step 12: Education (optional)
   {
     title: "What's the highest level of education you've completed?",
-    description: "",
+    description: "(Optional)",
     step: {
       type: "selection",
       dataKey: "education",
       maxSelections: 1,
+      optional: true,
       options: [
         "Some high school",
         "High school",
@@ -265,6 +267,7 @@ export const STEPS: StepConfig[] = [
         "Master's degree",
         "Professional degree",
         "PhD",
+        "Prefer not to say",
       ],
     },
   },

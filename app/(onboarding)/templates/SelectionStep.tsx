@@ -14,6 +14,7 @@ export interface SelectionStepConfig {
     | { label: string; description?: string; icon?: React.ReactNode }
   )[];
   maxSelections?: number;
+  optional?: boolean; // If true, user can proceed without selecting anything
 }
 
 interface SelectionStepProps {
@@ -44,11 +45,13 @@ export function SelectionStep({ config, onNextDisabled }: SelectionStepProps) {
     }
     setSelected(newSelected);
     updateData(config.dataKey, newSelected);
-    onNextDisabled(newSelected.length === 0);
+    // If optional, never disable next button; otherwise require at least one selection
+    onNextDisabled(config.optional ? false : newSelected.length === 0);
   };
 
   useEffect(() => {
-    onNextDisabled(selected.length === 0);
+    // If optional, never disable next button; otherwise require at least one selection
+    onNextDisabled(config.optional ? false : selected.length === 0);
   }, []);
 
   return (
