@@ -62,8 +62,9 @@ function AppContent() {
   const { isPro } = useRevenueCat();
 
   const isAppLoading =
-    isAuthLoading || isOnboardingLoading || (isAuthenticated && isProfileLoading);
-
+    isAuthLoading ||
+    isOnboardingLoading ||
+    (isAuthenticated && isProfileLoading);
 
   // Debug: Log auth state for routing decisions
   console.log("=== Root Layout Routing ===");

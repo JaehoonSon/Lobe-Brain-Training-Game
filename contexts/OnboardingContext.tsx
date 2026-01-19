@@ -5,7 +5,6 @@ import { STEPS } from "~/app/(onboarding)";
 import { supabase } from "~/lib/supabase";
 import { useAuth } from "./AuthProvider";
 
-
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps
 export interface OnboardingData {
@@ -27,7 +26,7 @@ interface OnboardingContextType {
 }
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const ONBOARDING_STORAGE_PREFIX = "onboarding_progress";
@@ -112,7 +111,7 @@ export function OnboardingProvider({
         const storageKey = getOnboardingStorageKey(user?.id);
         await AsyncStorage.setItem(
           storageKey,
-          JSON.stringify({ currentStep, data, isComplete })
+          JSON.stringify({ currentStep, data, isComplete }),
         );
       } catch (e) {
         if (!isMounted) return;
