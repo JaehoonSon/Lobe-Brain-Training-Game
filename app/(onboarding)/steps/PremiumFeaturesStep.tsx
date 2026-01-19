@@ -77,41 +77,45 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           </Text>
         </Animated.View>
 
-        <FlatList
-          ref={flatListRef}
-          data={slides}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                width,
-                paddingHorizontal: 24,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <View className="items-center justify-center p-8 mb-8">
-                <Image
-                  source={item.image}
-                  style={{ width: 280, height: 280, resizeMode: "contain" }}
-                />
+        <View className="flex-1">
+          <FlatList
+            ref={flatListRef}
+            data={slides}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  width,
+                  paddingHorizontal: 24,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flex: 1,
+                }}
+              >
+                <View className="items-center justify-center p-4 mb-4">
+                  <Image
+                    source={item.image}
+                    style={{ width: 220, height: 220, resizeMode: "contain" }}
+                  />
+                </View>
+                <Text className="text-2xl font-bold text-center text-foreground mb-3">
+                  {item.title}
+                </Text>
+                <Text className="text-lg text-muted-foreground text-center px-4">
+                  {item.description}
+                </Text>
               </View>
-              <Text className="text-2xl font-bold text-center text-foreground mb-4">
-                {item.title}
-              </Text>
-              <Text className="text-lg text-muted-foreground text-center">
-                {item.description}
-              </Text>
-            </View>
-          )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          bounces={false}
-          keyExtractor={(item) => item.id}
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
-          scrollEventThrottle={32}
-        />
+            )}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+            bounces={false}
+            keyExtractor={(item) => item.id}
+            onViewableItemsChanged={onViewableItemsChanged}
+            viewabilityConfig={viewabilityConfig}
+            scrollEventThrottle={32}
+            contentContainerStyle={{ alignItems: "center" }}
+          />
+        </View>
 
         {/* Pagination Dots */}
         <View className="flex-row justify-center items-center gap-2 mb-8">
