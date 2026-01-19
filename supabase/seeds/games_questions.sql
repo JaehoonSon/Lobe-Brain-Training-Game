@@ -199,6 +199,226 @@ ON CONFLICT (id) DO UPDATE SET
 
 INSERT INTO public.questions (id, game_id, difficulty, content)
 VALUES
+('7c0cc6e6-1ed2-42cf-b427-f97c8d8d9020', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('5affb492-6e57-4fb1-8141-fd61ca65e0f8', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('924e99cc-6e42-4fd6-bec9-9932c27c7a62', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('3472fb1c-3a6e-46b2-afb6-8a366def2104', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('f5585747-fb1e-4d87-8213-54f9a41846ca', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('36eacb74-f2a4-4bca-8936-daad47454e3d', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('60b62c72-b96d-435b-b6d5-dc28095c5b0c', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('9713cdc4-e454-4e2e-bf0e-d0caabfba3d7', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('0d8f0831-a871-4664-9c54-7f8688f2f686', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('45367552-6e3c-472b-bfba-6a1e6f9d8bcc', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('f0cfbd3a-546e-49fb-b313-43cf6a85fe08', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('a7b0ed3c-a145-4626-bacb-93281c92f566', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('74cafb07-6131-4085-9088-fa251fa63b84', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('e9c8ff7e-fe0e-4f59-9456-a7a5faab7609', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}'),
+('29fb917e-5b05-4996-82db-c8c46b63f3e6', 'math_rocket', 1, '{"operandRange":[1,9],"operators":["+","-"],"gravity":0.3,"thrust":10,"winningScore":10,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('4c4f1447-3317-408f-a28f-54379dd2a759', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('5d970d2c-ec4a-4e6a-8694-a3d1394cdb2a', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('78f4f6ca-ddd6-40e7-95b9-1e14e95b5186', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('3024b674-5ab9-44d3-90e1-921c0f3a609a', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('6d98cb49-0768-4c57-9b3a-454f4c293eee', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('5b5d826e-3d26-4ba1-b074-3fd8794c00a4', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('ba4b9f2d-e5be-4af2-bb02-7a493b7edf9a', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('6b9d6586-07ff-4bd9-bf16-ef54749f0654', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('c1a33b49-b81d-4b12-ae8a-8141296efe47', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('c4ab3fa7-c5e6-44aa-ba5a-c682b97f6f35', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('98e7f134-10c9-475c-a734-6a62d950edda', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('046de265-ae15-4d72-a8a9-79c20f3b91fd', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('dbadf28c-55d7-4c5e-aa51-c3e7ae34f3ab', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('09b9e63f-34d9-4c48-a404-e8d7fbe44fc7', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}'),
+('892c9549-2849-4276-99e0-afbc57f0970d', 'math_rocket', 10, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":20,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('8f7552f8-21a9-4872-bc6d-995e92990c6e', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('4b5b1fe9-7068-444a-8ef5-4156275b81e0', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('464a8b83-ed9f-40f3-a50b-7080b1f24d7e', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('968b06c1-b367-4e71-995f-9e31ca5e9b44', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('7a2b9542-f6b7-46dc-aea9-d35030956916', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('ceb99edb-a5c5-448b-ad10-cf3f391c62b5', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('c8efd50d-75f6-4238-aad4-bd7d2a726de6', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('bbe026f9-b589-47ec-b156-2e56c0ca1392', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('65dd1d98-26d2-4869-bd5b-75a3d6d26f8f', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('b01aca9a-870e-4a36-80c1-e22183e68628', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('d989a93a-6ee2-49b5-9782-819dbfdbc793', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('1a0885bd-9a32-4593-8749-9e6207e4e0c2', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('d1c178f2-44cf-4163-aeac-5c697e2c146b', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('d47b83a7-a24c-49ff-a492-036cdf934ed5', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('2e5d233e-b097-4917-8bba-4c3707202680', 'math_rocket', 2, '{"operandRange":[1,15],"operators":["+","-"],"gravity":0.35,"thrust":10,"winningScore":12,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('631717ec-79c0-46ec-8859-401eee364f7a', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('f509ebac-1726-4146-9682-1d4b645719c6', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('153b8ada-e19d-4acb-b15f-61960e7e66f4', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('05a6ccfa-43b5-4657-a273-43142d10f343', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('22fc368f-2cf7-49b6-9fae-4a1361b3346a', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('a159ad3b-f65f-4372-9c65-9457f32a29a4', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('251792ed-c196-442e-819a-5cd21abe25c0', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('5ed7027a-b6ac-410e-933d-1611adb1f1ab', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('ef0c3ec8-bee4-4473-94b8-2e239ea7a8e4', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('b9fac128-b6ee-49bc-a994-323c1eacb1cf', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('df831064-5e4d-4f10-b476-c6139b74fc4d', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('90b949fa-018d-49e8-bdfe-7f37cfff3456', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('b8ee0c8f-d0f5-4b15-aba3-d4d76af936c9', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('eebde68d-ec3b-4fea-a464-4a110bf0b0d3', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}'),
+('6da635b6-84d0-4f4c-bc62-1d445982fae7', 'math_rocket', 3, '{"operandRange":[1,20],"operators":["+","-"],"gravity":0.4,"thrust":10,"winningScore":12,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('e4116e6f-0045-4564-9647-17f4029196dc', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('bb831435-e78f-4d03-b641-0ecd48d0675e', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('106357eb-8c0c-4247-bfe3-2acc1e8aa6a1', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('4c18ec28-5dc7-4149-8f30-ba364e1200a2', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('49e5c08b-9cc8-463b-8719-5ab6be8d5a90', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('eac89bfa-77a7-48cd-9d3a-e0b0b15fa848', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('e4fb650d-aa2b-4e88-b953-120c1daec3c3', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('61a68062-421b-4975-b59d-adbae84cdba0', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('07f0efa8-7fcb-4bab-9cf6-c2de76fc9768', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('08961294-cfa0-4648-b77f-e2d513e09ccc', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('9e8c7af9-a434-4a2c-bf66-07b3de354ac6', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('b89deadd-fdf6-4b02-873f-0627755392e8', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('6fa4e60e-7f23-4443-98c8-d86c4705dd39', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('aba5fcbf-b2c0-4b98-9fe6-d4eb1249bc3b', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('83e4fd9d-307a-43ee-876e-d81567b04e19', 'math_rocket', 4, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('08711d33-82a6-4384-a369-5e673334a936', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('c71e066c-08e3-4da9-b7d4-0162b14c32e6', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('6bcd12d4-730d-414f-b800-fb3014aa86d5', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('6628c65d-4031-4e9b-bc79-742a526955c7', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('8efaed91-8fe6-481e-a02b-c29e47608ef3', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('76224c8a-5535-46f0-9cb8-17913cdcd936', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('bf69edd6-a333-4c04-8bd9-1944f3987317', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('a55efbfe-8fd0-44ac-8441-2fd1d28b2a99', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('99ea17d0-8c30-4dae-98ed-6d7f5647f9ad', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('dfd03df8-1f34-4032-8f05-562f55279ff6', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('586f71ff-8f89-4bd0-91f1-0e726e075dda', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('a1c770cb-544a-4fdd-9e7a-c35bdc905fe2', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('db2e49a1-ac30-427e-bbb4-1d3a2922dc64', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('a54698cc-97cf-4e12-8f0f-ca18e7a25dda', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('69ccb0c9-2384-4662-8f25-d06d8acac636', 'math_rocket', 5, '{"operandRange":[10,50],"operators":["+","-"],"gravity":0.5,"thrust":10,"winningScore":15,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('a527bc0e-c8c9-4e20-b0ff-a94658e225ee', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('cd51917d-9e3b-45e6-a5f4-1f3cf5fb279b', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('161f34b7-78e1-4d9a-b259-8c25b145defe', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('e5aa9abe-4b97-47b3-92ea-afdf6575e7df', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('0c693b4d-9e6e-4068-8a02-514e070ee7ed', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('63bae697-f933-4efb-ba0c-e253be322a74', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('48cc3274-eb73-4ab0-94ec-b788d5dc0301', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('79cfe652-9375-4aef-a036-a9c089138669', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('733bd1ea-e629-4137-a289-582be75da248', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('ec6a6edd-bfd3-49cf-927a-0edb07512b47', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('1323127d-08b9-4425-aaee-46c71bce7cf5', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('18e786ba-1989-4d9d-9431-753438d58825', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('1030f3ca-dbd1-465a-ba93-098762b7c3f5', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('8feac750-308f-4c5e-928f-a8f856fea5d5', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('a7f8e509-ef4e-4fa7-b9ec-6f89497bccc3', 'math_rocket', 6, '{"operandRange":[10,50],"operators":["+","-","*"],"gravity":0.6,"thrust":10,"winningScore":15,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('180841c9-938a-4369-ad21-17c5e5c4e5c2', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('639d44be-d097-418b-abfe-4eb2de0447c1', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('ed973691-c728-4680-8277-73f38a609f67', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('5c343990-ef69-4b48-bfeb-991375a93ffa', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('ba5fbf83-3a6d-42e9-a25d-e43c3f46620f', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('e4ddc217-a35d-4baf-ab38-9d3392a07597', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('388f52a5-c070-414f-a4f1-d949cabcf6fc', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('09546188-552f-4f65-9234-48c430745af3', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('b41a9b12-550b-42c7-8a86-8b53d1ca56b7', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('0b9520fa-f543-4139-adc9-261a825ddc45', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('53bb8aad-2862-45ec-8043-cdb11f341eaa', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('7a22e92d-137e-4694-ab5c-9c79cb27f2e2', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('cb8f2b24-b417-4934-9bf9-36649537f01f', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('7bc80c10-c998-45bb-93df-f8e584c3538e', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('1037e456-d234-4b9c-be21-94e6241b7397', 'math_rocket', 7, '{"operandRange":[50,200],"operators":["+","-","*","/"],"gravity":0.75,"thrust":10,"winningScore":15,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('942f3d85-66a6-4acc-a77d-4718456a77bd', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('e8bfcd7d-196e-4208-b572-76d947efb6b7', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('c1ffd3a2-1d17-472a-8313-ba2d9dd1bd52', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('8db0853b-4232-4a83-a9f5-43e7c51c4f62', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('2893d66d-a9e8-4f5c-98f5-20edb131da04', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('0ed8b169-fe05-408d-8fd3-bc9c16e4e188', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('2d3af3d2-573e-4214-a494-324c3f387a9b', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('ed5b1328-0ba8-429e-9a08-0593e9434846', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('6dd69676-9d21-4333-a01a-1218e8ec75da', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('48b49320-661c-4f5f-aca0-72d20ad9a900', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('1e331b6b-3d6c-46fa-8cc0-a14a92d781fa', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('ff76eff3-7063-42d6-a03c-4154fe4b8f47', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('050ab260-98c2-4a4f-a4ea-6f99920d9701', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('13afcbb1-3cc9-487d-bdc3-02af89dd95b9', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('49371c1d-7543-4597-a7b8-28526fdd36f4', 'math_rocket', 8, '{"operandRange":[100,500],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
+('1ac8a58e-8140-490c-b246-392cc36ae604', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('ef33d231-4d12-4ea6-b840-8f61041941e5', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('fe5d2a76-478f-4dd7-9ef1-dcafa7377ba7', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('4181cb25-3683-4f74-9059-1f0c791369b7', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('a58ff837-d665-4975-899d-ef2a3a250612', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('9b2b1535-7fb6-4416-a250-3d3fb4e9c958', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('406f54b7-d08c-44f7-8db3-0616fe8bf690', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('fd470e59-5c3c-4a0e-a5ec-f633807f278e', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('61dc009a-8263-4205-ba37-2cd678dcd773', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('1fbdc71b-ab4e-4646-ad5d-e10fc072ebe4', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('4f905d8d-eb98-4875-a259-5d92e2e04537', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('b6d7d9b2-3f32-4535-a421-4ed1dbd87b9e', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('cec73f32-8abe-4137-a542-5885982ae8e7', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('73f29ec3-3f4a-4805-b636-a33e85d27bfe', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}'),
+('7be0b564-302c-4efb-b3a1-cacee31f3f63', 'math_rocket', 9, '{"operandRange":[100,999],"operators":["+","-","*","/"],"gravity":0.8,"thrust":10,"winningScore":15,"type":"math_rocket"}')
+ON CONFLICT (id) DO UPDATE SET
+  game_id = EXCLUDED.game_id,
+  difficulty = EXCLUDED.difficulty,
+  content = EXCLUDED.content;
+
+INSERT INTO public.questions (id, game_id, difficulty, content)
+VALUES
 ('8cbd07e7-4c86-42c5-8901-c61c73c71437', 'memory_matrix', 1, '{"type":"memory_matrix","grid_size":{"rows":3,"cols":3},"target_count":3,"display_time_ms":2000}'),
 ('f00ed979-e72c-40a5-9904-9d0f0c5cc1e2', 'memory_matrix', 1, '{"type":"memory_matrix","grid_size":{"rows":3,"cols":3},"target_count":3,"display_time_ms":2000}'),
 ('a321db61-acf2-4b37-a481-30e0f750b056', 'memory_matrix', 1, '{"type":"memory_matrix","grid_size":{"rows":3,"cols":3},"target_count":3,"display_time_ms":2000}'),
