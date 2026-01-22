@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 import { useGameSession } from "~/contexts/GameSessionContext";
 import { useGames } from "~/contexts/GamesContext";
 import { useUserStats } from "~/contexts/UserStatsContext";
@@ -19,6 +20,7 @@ import { cn } from "~/lib/utils";
 
 export default function GameFinishScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { t } = useTranslation();
   const { state, resetSession } = useGameSession();
   const { games, refreshDailyProgress } = useGames();
   const { categoryStats, refresh: refreshUserStats } = useUserStats();
@@ -46,9 +48,9 @@ export default function GameFinishScreen() {
   if (!state.isFinished) {
     return (
       <View className="flex-1 items-center justify-center bg-background">
-        <P className="text-lg text-muted-foreground">No game results found</P>
+        <P className="text-lg text-muted-foreground">{t('game_finish.no_results')}</P>
         <TouchableOpacity onPress={() => router.back()} className="mt-4">
-          <P className="text-primary font-bold text-lg">Go Back</P>
+          <P className="text-primary font-bold text-lg">{t('common.go_back')}</P>
         </TouchableOpacity>
       </View>
     );
@@ -68,25 +70,25 @@ export default function GameFinishScreen() {
   const getFeedback = () => {
     if (accuracy === 100)
       return {
-        title: "Flawless",
-        sub: "0 mistakes. You're like a pristine, freshwater pearl.",
+        title: t('game_finish.feedback.flawless_title'),
+        sub: t('game_finish.feedback.flawless_sub'),
         color: "text-secondary",
       };
     if (accuracy >= 90)
       return {
-        title: "Amazing",
-        sub: "So close to perfect! Your focus is incredible.",
+        title: t('game_finish.feedback.amazing_title'),
+        sub: t('game_finish.feedback.amazing_sub'),
         color: "text-green-500",
       };
     if (accuracy >= 70)
       return {
-        title: "Great Job",
-        sub: "Solid work! You're making real progress.",
+        title: t('game_finish.feedback.great_job_title'),
+        sub: t('game_finish.feedback.great_job_sub'),
         color: "text-sky-500",
       };
     return {
-      title: "Keep Going",
-      sub: "Every bit of practice helps your brain grow.",
+      title: t('game_finish.feedback.keep_going_title'),
+      sub: t('game_finish.feedback.keep_going_sub'),
       color: "text-orange-500",
     };
   };
@@ -99,7 +101,7 @@ export default function GameFinishScreen() {
         {/* Header - Game Name */}
         <View className="px-6 pt-4 items-center">
           <Text className="text-muted-foreground font-black text-sm uppercase tracking-widest">
-            {game?.name || "Game Complete"}
+            {game?.name || t('game_finish.game_complete')}
           </Text>
         </View>
 
@@ -125,19 +127,19 @@ export default function GameFinishScreen() {
         {/* Stat Cards Row */}
         <View className="px-6 flex-row gap-3 mb-10">
           <StatCard
-            label="GAME BPI"
+            label={t('game_finish.stats.game_bpi')}
             value={state.score?.toString() || "0"}
             icon={<Zap size={22} color="#EAB308" fill="#EAB308" />}
             color="yellow"
           />
           <StatCard
-            label="AMAZING"
+            label={t('game_finish.stats.accuracy')}
             value={`${accuracy}%`}
             icon={<Target size={22} color="#22C55E" strokeWidth={3} />}
             color="green"
           />
           <StatCard
-            label="SPEEDY"
+            label={t('game_finish.stats.speed')}
             value={timeDisplay}
             icon={<Clock size={22} color="#3B82F6" strokeWidth={3} />}
             color="blue"
@@ -151,7 +153,7 @@ export default function GameFinishScreen() {
             onPress={handleGoHome}
           >
             <Text className="text-white font-black text-xl uppercase tracking-widest">
-              Continue
+              {t('game_finish.actions.continue')}
             </Text>
           </Button>
 
@@ -160,7 +162,7 @@ export default function GameFinishScreen() {
             className="mt-8 items-center"
           >
             <Text className="text-muted-foreground font-black text-sm uppercase tracking-widest">
-              Play Again
+              {t('game_finish.actions.play_again')}
             </Text>
           </TouchableOpacity>
         </View>

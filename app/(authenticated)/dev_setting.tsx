@@ -7,8 +7,10 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { router } from "expo-router";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { useTranslation } from "react-i18next";
 
 export default function IndexAuthenticatedScreen() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const { resetOnboarding, prevStep } = useOnboarding();
   const { isPro, presentPaywall } = useRevenueCat();
@@ -34,31 +36,31 @@ export default function IndexAuthenticatedScreen() {
   return (
     <View className="flex-1 bg-background p-4 items-center justify-center">
       <SafeAreaView className="flex-1 items-center justify-center gap-6">
-        <H1 className="text-center">Welcome!</H1>
+        <H1 className="text-center">{t('dev_setting.title')}</H1>
         <P className="text-center text-muted-foreground">
-          You are authenticated as {user?.email}
+          {t('dev_setting.authenticated_as', { email: user?.email })}
         </P>
 
         <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/settings")}>
-          <Text className="text-foreground font-bold">Go to Settings</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.settings')}</Text>
         </Button>
         <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/(onboarding)")}>
-          <Text className="text-foreground font-bold">Go to onboarding</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.onboarding')}</Text>
         </Button>
         <Button variant="outline" className="w-full h-12 px-6" onPress={restartOnboarding}>
-          <Text className="text-foreground font-bold">Restart onboarding</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.restart_onboarding')}</Text>
         </Button>
         <Button variant="outline" className="w-full h-12 px-6" onPress={goBackFewSteps}>
-          <Text className="text-foreground font-bold">Go back few steps</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.go_back_steps')}</Text>
         </Button>
         <Button variant="outline" className="w-full h-12 px-6" onPress={showPaywall}>
-          <Text className="text-foreground font-bold">Present paywall</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.show_paywall')}</Text>
         </Button>
         <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/paywall")}>
-          <Text className="text-foreground font-bold">Go to paywall</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.go_paywall')}</Text>
         </Button>
         <Button variant="outline" className="w-full h-12 px-6" onPress={() => router.push("/components-showcase")}>
-          <Text className="text-foreground font-bold">Component Showcase</Text>
+          <Text className="text-foreground font-bold">{t('dev_setting.buttons.showcase')}</Text>
         </Button>
       </SafeAreaView>
     </View>

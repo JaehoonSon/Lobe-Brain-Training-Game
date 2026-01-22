@@ -10,8 +10,10 @@ import { useGames } from "~/contexts/GamesContext";
 import { Card, ImageCard, CardContent } from "~/components/ui/card";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { useTranslation } from "react-i18next";
 
 export default function GamesScreen() {
+  const { t } = useTranslation();
   const { games, categories, getGamesByCategory } = useGames();
   const { isPro } = useRevenueCat();
 
@@ -24,13 +26,13 @@ export default function GamesScreen() {
       <View className="bg-background z-10 px-6 pt-4 pb-4 border-b border-border/50">
         <AuthenticatedHeader className="mb-4" />
 
-        <H1 className="mb-4 text-3xl font-black">Games</H1>
+        <H1 className="mb-4 text-3xl font-black">{t('games_tab.title')}</H1>
 
         {/* Search Bar */}
         <Card className="flex-row items-center px-4 py-1 h-16">
           <Search size={24} className="text-muted-foreground" />
           <Input
-            placeholder="What do you want to play?"
+            placeholder={t('games_tab.search_placeholder')}
             className="flex-1 bg-transparent border-0 text-xl h-full"
           />
         </Card>
@@ -43,7 +45,7 @@ export default function GamesScreen() {
         <View className="py-6 gap-8">
           {/* Today's Games Section */}
           <View>
-            <H3 className="px-6 mb-4 text-2xl font-black">Today's games</H3>
+            <H3 className="px-6 mb-4 text-2xl font-black">{t('games_tab.sections.todays_games')}</H3>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}

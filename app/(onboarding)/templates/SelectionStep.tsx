@@ -5,6 +5,7 @@ import { useOnboarding } from "~/contexts/OnboardingContext";
 import { Check } from "lucide-react-native";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 export interface SelectionStepConfig {
   type: "selection";
@@ -23,6 +24,7 @@ interface SelectionStepProps {
 }
 
 export function SelectionStep({ config, onNextDisabled }: SelectionStepProps) {
+  const { t } = useTranslation();
   const { data, updateData } = useOnboarding();
   const [selected, setSelected] = useState<string[]>(
     (data as any)[config.dataKey] || []
@@ -57,11 +59,17 @@ export function SelectionStep({ config, onNextDisabled }: SelectionStepProps) {
   return (
     <View className="gap-3">
       {config.options.map((option, index) => {
-        const label = typeof option === "string" ? option : option.label;
-        const description =
+        const optionLabelKey = typeof option === "string" ? option : option.label;
+        const optionDescriptionKey =
           typeof option === "string" ? undefined : option.description;
         const icon = typeof option === "string" ? undefined : option.icon;
-        const isSelected = selected.includes(label);
+
+        const label = t(optionLabelKey);
+        const description = optionDescriptionKey ? t(optionDescriptionKey) : undefined;
+
+        // Use the KEY as the value to store in the database/onboarding state
+        // to maintain consistency regardless of current UI language
+        const isSelected = selected.includes(optionLabelKey);
 
         return (
           <Animated.View
@@ -69,7 +77,7 @@ export function SelectionStep({ config, onNextDisabled }: SelectionStepProps) {
             entering={FadeInDown.delay(index * 100).duration(400)}
           >
             <TouchableOpacity
-              onPress={() => toggleOption(label)}
+              onPress={() => toggleOption(optionLabelKey)}
               activeOpacity={0.8}
               className={`flex-row items-center p-5 rounded-2xl border-2 mb-3 ${isSelected
                 ? "bg-card border-primary"

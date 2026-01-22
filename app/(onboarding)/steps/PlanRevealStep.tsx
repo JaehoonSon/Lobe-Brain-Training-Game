@@ -7,6 +7,7 @@ import { Progress } from "~/components/ui/progress";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { Check, ChevronLeft } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 interface PlanRevealStepProps {
   onNext: () => void;
@@ -17,6 +18,7 @@ export default function PlanRevealStep({
   onNext,
   onBack,
 }: PlanRevealStepProps) {
+  const { t } = useTranslation();
   const { currentStep, totalSteps } = useOnboarding();
   const progress = (currentStep / totalSteps) * 100;
 
@@ -55,25 +57,25 @@ export default function PlanRevealStep({
         <View className="w-full gap-6">
           <View className="items-center gap-2">
             <Text className="text-xl font-bold text-primary uppercase tracking-widest">
-              Personalized For You
+              {t('onboarding.steps.plan_reveal.badge')}
             </Text>
             <Text className="text-5xl font-black text-center text-foreground">
-              Your 30-Day Plan
+              {t('onboarding.steps.plan_reveal.title')}
             </Text>
             <Text className="text-lg text-center text-muted-foreground px-2 leading-6 mt-1">
-              Projected{" "}
+              {t('onboarding.steps.plan_reveal.projection')}{" "}
               <Text className="text-primary font-bold">
-                30-40% BPI increase
+                {t('onboarding.steps.plan_reveal.projection_highlight')}
               </Text>{" "}
-              in first month.
+              {t('onboarding.steps.plan_reveal.projection_suffix')}
             </Text>
           </View>
 
           {/* Value Props */}
           <View className="gap-4 px-4">
-            <Row text="Tailored to your baseline scores" />
-            <Row text="Effective 3x/week schedule" />
-            <Row text="Scientifically proven growth" />
+            <Row text={t('onboarding.steps.plan_reveal.features.baseline')} />
+            <Row text={t('onboarding.steps.plan_reveal.features.schedule')} />
+            <Row text={t('onboarding.steps.plan_reveal.features.proven')} />
           </View>
         </View>
       </ScrollView>
@@ -85,7 +87,7 @@ export default function PlanRevealStep({
           onPress={onNext}
         >
           <Text className="text-xl font-bold text-primary-foreground">
-            Start Training
+            {t('onboarding.steps.plan_reveal.start')}
           </Text>
         </Button>
       </View>

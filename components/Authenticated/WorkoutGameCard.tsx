@@ -4,6 +4,7 @@ import { H4, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
 import { Check, Lock, Play } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
+import { useTranslation } from "react-i18next";
 import { Database } from "~/lib/database.types";
 import { cn } from "~/lib/utils";
 
@@ -25,6 +26,7 @@ export function WorkoutGameCard({
   onPress,
 }: WorkoutGameCardProps) {
   const { colorScheme } = useColorScheme();
+  const { t } = useTranslation();
   const isCompleted = status === "completed";
   const isActive = status === "active";
   const isLocked = status === "locked";
@@ -112,7 +114,7 @@ export function WorkoutGameCard({
                   : "text-muted-foreground"
               )}
             >
-              {game.instructions ? "Daily" : "Focus"} • 2 min
+              {game.instructions ? t('workout_card.daily') : t('workout_card.focus')} • {t('workout_card.duration')}
             </P>
           </View>
 

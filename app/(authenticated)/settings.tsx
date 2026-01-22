@@ -10,6 +10,7 @@ import {
   Crown,
   Cake,
 } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
@@ -31,6 +32,7 @@ const buildNumber =
   "1";
 
 export default function Settings() {
+  const { t } = useTranslation();
   const { user, logout } = useAuth();
   const { isPro, presentPaywall, currentOffering } = useRevenueCat();
   const [birthday, setBirthday] = useState<string | null>(null);
@@ -94,25 +96,25 @@ export default function Settings() {
       playHaptic("light");
       await logout();
     } catch (err) {
-      showErrorToast("Error signing out");
+      showErrorToast(t('common.error_generic'));
     }
   };
 
   const handleDeleteAccount = () => {
     Alert.alert(
-      "Confirm Deletion",
-      "Are you sure you want to delete your account? This action cannot be undone.",
+      t('settings.alerts.delete_confirm_title'),
+      t('settings.alerts.delete_confirm_msg'),
       [
-        { text: "Cancel", style: "cancel" },
+        { text: t('common.cancel'), style: "cancel" },
         {
-          text: "Delete",
+          text: t('settings.alerts.delete_btn'),
           style: "destructive",
           onPress: async () => {
             try {
               playHaptic("light");
               await logout();
             } catch (err) {
-              showErrorToast("Error deleting account");
+              showErrorToast(t('common.error_generic'));
             }
           },
         },
@@ -122,10 +124,10 @@ export default function Settings() {
   };
 
   // Get membership label
-  const membershipLabel = isPro ? ENTITLEMENT_ID : "Member (limited access)";
+  const membershipLabel = isPro ? t('settings.labels.pro_member') : t('settings.labels.free_member');
   const membershipDescription = isPro
-    ? "You have full access to all features"
-    : "Tap to upgrade";
+    ? t('settings.labels.pro_desc')
+    : t('settings.labels.free_desc');
 
   return (
     <View className="flex-1 bg-background">
@@ -136,21 +138,21 @@ export default function Settings() {
       >
         {/* Header */}
         {/* Header */}
-        <H1 className="px-6 pt-6 mb-2 text-3xl font-black">Settings</H1>
+        <H1 className="px-6 pt-6 mb-2 text-3xl font-black">{t('settings.title')}</H1>
 
         {/* Settings List */}
         <View className="px-6">
           {/* My Information Section */}
-          <SectionHeader>My Information</SectionHeader>
+          <SectionHeader>{t('settings.sections.my_info')}</SectionHeader>
           <Card className="overflow-hidden">
             <View className="flex-row items-center px-4 py-3.5">
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <User size={18} className="text-foreground" />
               </View>
               <View className="flex-1">
-                <Muted className="text-sm font-bold">Email</Muted>
+                <Muted className="text-sm font-bold">{t('settings.labels.email')}</Muted>
                 <P className="text-lg font-bold text-foreground">
-                  {user?.email || "Not set"}
+                  {user?.email || t('common.not_set')}
                 </P>
               </View>
             </View>
@@ -162,7 +164,7 @@ export default function Settings() {
                     <Cake size={18} className="text-foreground" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-sm font-bold">Birthday</Muted>
+                    <Muted className="text-sm font-bold">{t('settings.labels.birthday')}</Muted>
                     <P className="text-lg font-bold text-foreground">{birthday}</P>
                   </View>
                 </View>
@@ -171,7 +173,7 @@ export default function Settings() {
           </Card>
 
           {/* Membership Section */}
-          <SectionHeader>Membership</SectionHeader>
+          <SectionHeader>{t('settings.sections.membership')}</SectionHeader>
           <Card className="overflow-hidden">
             <TouchableOpacity
               className="flex-row items-center px-4 py-3.5"
@@ -202,54 +204,54 @@ export default function Settings() {
           </Card>
 
           {/* Legal Section */}
-          <SectionHeader>Legal</SectionHeader>
+          <SectionHeader>{t('settings.sections.legal')}</SectionHeader>
           <Card className="overflow-hidden">
             <SettingRow
               icon={ShieldCheck}
-              label="Privacy Policy"
+              label={t('settings.labels.privacy')}
               onPress={handle_privacy}
             />
             <Divider />
             <SettingRow
               icon={BookText}
-              label="Terms of Service"
+              label={t('settings.labels.terms')}
               onPress={handle_tos}
             />
             <Divider />
             <SettingRow
               icon={BookText}
-              label="License Agreement"
+              label={t('settings.labels.license')}
               onPress={handle_eula}
             />
           </Card>
 
           {/* Account Section */}
-          <SectionHeader>Account</SectionHeader>
+          <SectionHeader>{t('settings.sections.account')}</SectionHeader>
           <Card className="overflow-hidden">
             <SettingRow
               icon={LogOut}
-              label="Logout"
+              label={t('settings.actions.logout')}
               onPress={handleLogout}
               variant="destructive"
             />
             <Divider />
             <SettingRow
               icon={Trash}
-              label="Delete Account"
+              label={t('settings.actions.delete_account')}
               onPress={handleDeleteAccount}
               variant="destructive"
             />
           </Card>
 
           {/* About Section */}
-          <SectionHeader>About</SectionHeader>
+          <SectionHeader>{t('settings.sections.about')}</SectionHeader>
           <Card className="overflow-hidden">
             <View className="flex-row items-center px-4 py-3.5">
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <Info size={18} className="text-foreground" />
               </View>
               <P className="flex-1 text-lg font-bold text-foreground">
-                Version {appVersion} ({buildNumber})
+                {t('settings.labels.version', { version: appVersion, build: buildNumber })}
               </P>
             </View>
           </Card>

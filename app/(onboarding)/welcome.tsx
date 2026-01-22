@@ -6,10 +6,12 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
-import { BrainCircuit, Check, Zap, Brain, Target } from "lucide-react-native";
+import { Zap, Brain, Target } from "lucide-react-native";
 import { CustomStepProps } from "~/app/(onboarding)/index";
+import { useTranslation } from "react-i18next";
 
 export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
   const handleBegin = () => {
@@ -18,9 +20,9 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
   };
 
   const goals = [
-    { icon: Target, label: "Sharpen your focus" },
-    { icon: Brain, label: "Improve your memory" },
-    { icon: Zap, label: "Think faster" },
+    { icon: Target, label: t('onboarding.steps.welcome.goals.focus') },
+    { icon: Brain, label: t('onboarding.steps.welcome.goals.memory') },
+    { icon: Zap, label: t('onboarding.steps.welcome.goals.speed') },
   ];
 
   return (
@@ -39,10 +41,10 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
             contentFit="contain"
           />
           <Text className="text-4xl font-extrabold text-foreground text-center leading-[1.1]">
-            Welcome to your Personal Plan
+            {t('onboarding.steps.welcome.title')}
           </Text>
           <Text className="text-lg text-muted-foreground text-center px-4">
-            We will build a custom plan to help you:
+            {t('onboarding.steps.welcome.subtitle')}
           </Text>
         </Animated.View>
 
@@ -86,7 +88,7 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           onPress={handleBegin}
         >
           <Text className="font-extrabold text-xl tracking-wide uppercase text-primary-foreground">
-            Let&apos;s Begin
+            {t('onboarding.steps.welcome.begin')}
           </Text>
         </Button>
       </Animated.View>

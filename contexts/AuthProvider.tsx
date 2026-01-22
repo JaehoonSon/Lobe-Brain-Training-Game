@@ -8,12 +8,8 @@ import React, {
 import { supabase } from "~/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import * as AppleAuthentication from "expo-apple-authentication";
-import { showErrorToast } from "~/components/ui/toast";
+import { showErrorToast, showSuccessToast } from "~/components/ui/toast";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  GoogleSignin,
-  statusCodes,
-} from "@react-native-google-signin/google-signin";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -28,16 +24,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Configure Google Sign-In
-// iosClientId is required for iOS native Sign-In
-// webClientId is required to get the idToken for Supabase auth
-GoogleSignin.configure({
-  iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
-  webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
-  offlineAccess: true,
-  scopes: ["profile", "email"],
-});
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -155,7 +141,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInApple = async () => {
     setIsSigningIn(true);
-    setIsSigningIn(true);
     try {
       const cred = await AppleAuthentication.signInAsync({
         requestedScopes: [
@@ -177,57 +162,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Google Sign-In is disabled for Expo Go compatibility
+  // To enable, create a development build with native modules
   const signInGoogle = async () => {
-    setIsSigningIn(true);
-    try {
-      // Use native Google Sign-In (same approach as Apple sign-in)
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-
-      if (!userInfo.data?.idToken) {
-        throw new Error("No ID token from Google Sign-In");
-      }
-
-      console.log("Google Sign-In success, authenticating with Supabase...");
-
-      const { data, error } = await supabase.auth.signInWithIdToken({
-        provider: "google",
-        token: userInfo.data.idToken,
-      });
-
-      console.log("Google sign in result:", data, error);
-      if (error) throw error;
-    } catch (error: unknown) {
-      // Handle specific Google Sign-In errors
-      if (
-        error &&
-        typeof error === "object" &&
-        "code" in error &&
-        error.code === statusCodes.SIGN_IN_CANCELLED
-      ) {
-        console.log("User cancelled Google sign in");
-      } else if (
-        error &&
-        typeof error === "object" &&
-        "code" in error &&
-        error.code === statusCodes.IN_PROGRESS
-      ) {
-        console.log("Google sign in already in progress");
-      } else if (
-        error &&
-        typeof error === "object" &&
-        "code" in error &&
-        error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE
-      ) {
-        console.log("Play services not available");
-        showErrorToast("Google Play Services not available");
-      } else {
-        console.log("Google Sign In Error:", error);
-        showErrorToast("Error signing in with Google");
-      }
-    } finally {
-      setIsSigningIn(false);
-    }
+    showErrorToast("Google Sign-In requires a development build");
+    console.log("Google Sign-In is not available in Expo Go");
   };
 
   // ----- Allow external marking of onboarding complete -----
@@ -239,7 +178,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<AuthContextType>(
     () => ({
       isAuthenticated: !!user,
-      isLoading, // Don't include isSigningIn - it causes screen changes
+      isLoading,
       user,
       onboardingComplete,
       isProfileLoading,
@@ -269,3 +208,4 @@ export function useAuth() {
   }
   return context;
 }
+

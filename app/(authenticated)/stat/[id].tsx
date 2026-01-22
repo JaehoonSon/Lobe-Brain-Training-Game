@@ -29,6 +29,7 @@ import { BlurView } from "expo-blur";
 import { cn } from "~/lib/utils";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
+import { useTranslation } from "react-i18next";
 import { useUserStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
 
 import { useGames } from "~/contexts/GamesContext";
@@ -38,6 +39,7 @@ import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { t } = useTranslation();
   const { categoryStats, categoryScoreHistory, isLoading, refresh } = useUserStats();
 
   const { games } = useGames();
@@ -118,7 +120,7 @@ export default function CategoryDetailScreen() {
             <ChevronLeft size={24} className="text-foreground" />
           </TouchableOpacity>
           <View className="absolute left-0 right-0 items-center">
-            <H1 className="text-xl">Category Not Found</H1>
+            <H1 className="text-xl">{t('stat_detail.not_found')}</H1>
           </View>
         </View>
       </SafeAreaView>
@@ -138,9 +140,13 @@ export default function CategoryDetailScreen() {
           <ChevronLeft size={24} className="text-foreground" />
         </TouchableOpacity>
         <View className="absolute left-0 right-0 items-center">
-          <H1 className="text-xl">{category.name} Score</H1>
-
-
+          <H1 className="text-xl">
+            {t('stat_detail.score_title', {
+              name: t(`common.categories.${id.toLowerCase()}`, {
+                defaultValue: category.name,
+              }),
+            })}
+          </H1>
         </View>
       </View>
 
@@ -179,7 +185,7 @@ export default function CategoryDetailScreen() {
               <View className="-mt-1 flex-row flex-wrap gap-2">
                 <View className="bg-primary/10 px-3 py-1 rounded-full border-b-4 border-primary/20 flex-row items-center gap-2">
                   <Text className="text-sm font-black text-primary uppercase tracking-wider">
-                    current score
+                    {t('stat_detail.current_score')}
                   </Text>
                   {hasScore && categoryScoreHistory[id]?.length > 0 && (
                     <TrendingUp
@@ -194,7 +200,7 @@ export default function CategoryDetailScreen() {
                   <View className="bg-accent/10 px-3 py-1 rounded-full border-b-4 border-accent/20 flex-row items-center gap-2">
                     <Zap size={14} className="text-accent" fill="currentColor" />
                     <Text className="text-sm font-black text-accent uppercase tracking-wider">
-                      Top {categoryTopPercent}%
+                      {t('stat_detail.top_percent', { count: categoryTopPercent })}
                     </Text>
                   </View>
                 )}
@@ -223,7 +229,7 @@ export default function CategoryDetailScreen() {
 
           {/* Performance History Chart */}
           <FeatureCard
-            title="Performance History"
+            title={t('stat_detail.history')}
             variant="secondary"
             isLocked={false}
           >
@@ -233,12 +239,18 @@ export default function CategoryDetailScreen() {
           {/* Category Games Section */}
           <Animated.View entering={FadeInDown.delay(400).duration(400)}>
             <View className="flex-row justify-between items-center mb-3">
-              <H4 className="text-lg font-bold">{category.name} Games</H4>
+              <H4 className="text-lg font-bold">
+                {t('stat_detail.games_title', {
+                  name: t(`common.categories.${id.toLowerCase()}`, {
+                    defaultValue: category.name,
+                  }),
+                })}
+              </H4>
             </View>
 
             {categoryGames.length === 0 ? (
               <Muted className="text-center py-8">
-                No games in this category yet.
+                {t('stat_detail.no_games')}
               </Muted>
             ) : (
               <View className="gap-3 mb-8">
@@ -265,17 +277,21 @@ export default function CategoryDetailScreen() {
                                 <View className="flex-row items-center gap-3">
                                   <View className="bg-primary/10 px-2 py-0.5 rounded-md">
                                     <Text className="text-xs font-bold text-primary">
-                                      {gameStats.gamesPlayed} PLAYED
+                                      {t('stat_detail.played_count', {
+                                        count: gameStats.gamesPlayed,
+                                      })}
                                     </Text>
                                   </View>
                                   <Text className="text-xs font-bold text-muted-foreground">
-                                    BEST: {gameStats.highestScore ?? "--"}
+                                    {t('stat_detail.best_score', {
+                                      score: gameStats.highestScore ?? "--",
+                                    })}
                                   </Text>
                                 </View>
                               ) : (
                                 <View className="bg-muted/20 px-2 py-0.5 rounded-md self-start">
                                   <Text className="text-xs font-bold text-muted-foreground">
-                                    NEW
+                                    {t('stat_detail.new_game')}
                                   </Text>
                                 </View>
                               )}
@@ -287,7 +303,7 @@ export default function CategoryDetailScreen() {
                                     {gameStats.averageScore}
                                   </P>
                                   <Text className="text-[10px] font-black text-secondary/60 text-right">
-                                    AVG SCORE
+                                    {t('stat_detail.avg_score_label')}
                                   </Text>
                                 </View>
                               </View>
@@ -307,7 +323,9 @@ export default function CategoryDetailScreen() {
           {/* Recommended Insights Section */}
           {relevantInsights.length > 0 && (
             <Animated.View entering={FadeInDown.delay(600).duration(400)}>
-              <H4 className="text-lg font-bold mb-3">Recommended Reading</H4>
+              <H4 className="text-lg font-bold mb-3">
+                {t('stat_detail.recommended')}
+              </H4>
               <View className="gap-3">
                 {relevantInsights.map((insight) => (
                   <TouchableOpacity

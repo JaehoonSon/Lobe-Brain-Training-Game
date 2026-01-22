@@ -16,6 +16,7 @@ import { Text } from "~/components/ui/text";
 import { BallSort } from "~/components/games/BallSort";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
 import { StroopClash } from "~/components/games/StroopClash";
+import { useTranslation } from "react-i18next";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -24,6 +25,7 @@ interface QuestionData {
 }
 
 export default function GamePlayScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { user } = useAuth();
   const { games, categories } = useGames();
@@ -75,8 +77,8 @@ export default function GamePlayScreen() {
       if (error) throw error;
 
       if (!questions || questions.length === 0) {
-        Alert.alert("Error", "No questions found for this game.", [
-          { text: "Go Back", onPress: () => router.back() },
+        Alert.alert(t('common.error'), t('game.no_questions'), [
+          { text: t('common.go_back'), onPress: () => router.back() },
         ]);
         return;
       }
@@ -101,8 +103,8 @@ export default function GamePlayScreen() {
       }
 
       if (validQuestions.length === 0) {
-        Alert.alert("Error", "No valid questions found.", [
-          { text: "Go Back", onPress: () => router.back() },
+        Alert.alert(t('common.error'), t('game.no_questions_valid'), [
+          { text: t('common.go_back'), onPress: () => router.back() },
         ]);
         return;
       }
@@ -144,7 +146,7 @@ export default function GamePlayScreen() {
       // 4. Start the session
       startRound({
         gameId: id as string,
-        gameName: game?.name || "Game",
+        gameName: game?.name || t('common.game'),
         categoryName: category?.name,
         avgQuestionDifficulty: avgDifficulty,
         difficultyRatingUsed,
@@ -153,8 +155,8 @@ export default function GamePlayScreen() {
       });
     } catch (e) {
       console.error("Error starting round:", e);
-      Alert.alert("Error", "Failed to load game.", [
-        { text: "Go Back", onPress: () => router.back() },
+      Alert.alert(t('common.error'), t('game.error_load'), [
+        { text: t('common.go_back'), onPress: () => router.back() },
       ]);
     } finally {
       setLoading(false);
@@ -204,7 +206,7 @@ export default function GamePlayScreen() {
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator size="large" />
         <Text className="mt-4 text-lg font-medium text-muted-foreground">
-          Preparing round...
+          {t('game.preparing')}
         </Text>
       </View>
     );
@@ -287,7 +289,7 @@ export default function GamePlayScreen() {
       default:
         return (
           <View className="flex-1 items-center justify-center">
-            <Text>Game component not implemented for {id}</Text>
+            <Text>{t('game.not_implemented')} {id}</Text>
           </View>
         );
     }

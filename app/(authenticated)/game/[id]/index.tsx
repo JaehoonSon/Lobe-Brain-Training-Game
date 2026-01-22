@@ -23,8 +23,10 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { useTranslation } from "react-i18next";
 
 export default function GameDetailScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { games, categories } = useGames();
   const { categoryStats } = useUserStats();
@@ -44,9 +46,9 @@ export default function GameDetailScreen() {
     return (
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator />
-        <P className="mt-4 text-lg">Loading game...</P>
+        <P className="mt-4 text-lg">{t('game.loading')}</P>
         <TouchableOpacity onPress={() => router.back()} className="mt-4">
-          <P className="text-primary font-bold text-lg">Go Back</P>
+          <P className="text-primary font-bold text-lg">{t('common.go_back')}</P>
         </TouchableOpacity>
       </View>
     );
@@ -132,7 +134,7 @@ export default function GameDetailScreen() {
           <View className="gap-6">
             {/* BPI Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Avg BPI</H4>
+              <H4 className="font-black text-xl">{t('game.avg_bpi')}</H4>
               {gameStats?.averageScore ? (
                 <View className="flex-row items-center gap-2">
                   <Trophy size={18} className="text-primary" />
@@ -147,7 +149,7 @@ export default function GameDetailScreen() {
 
             {/* Best Score Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Best Score</H4>
+              <H4 className="font-black text-xl">{t('game.best_score')}</H4>
               {gameStats?.highestScore ? (
                 <P className="text-2xl font-black">{gameStats.highestScore}</P>
               ) : (
@@ -157,7 +159,7 @@ export default function GameDetailScreen() {
 
             {/* Difficulty Rating Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Difficulty</H4>
+              <H4 className="font-black text-xl">{t('game.difficulty')}</H4>
               <View className="flex-row items-center gap-2">
                 <View className="flex-row gap-1">
                   {[1, 2, 3, 4, 5].map((level) => (
@@ -178,7 +180,7 @@ export default function GameDetailScreen() {
 
             {/* Badge Progress Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">Badge Progress</H4>
+              <H4 className="font-black text-xl">{t('game.badge_progress')}</H4>
               <View className="flex-row gap-3">
                 <Hexagon
                   size={28}
@@ -239,7 +241,7 @@ export default function GameDetailScreen() {
 
             {/* Total Plays Row */}
             <View className="flex-row justify-between items-center py-3">
-              <H4 className="font-black text-xl">Total Plays</H4>
+              <H4 className="font-black text-xl">{t('game.total_plays')}</H4>
               <P className="text-2xl font-black">
                 {gameStats?.gamesPlayed ?? 0}
               </P>
@@ -279,12 +281,12 @@ export default function GameDetailScreen() {
               <View className="flex-row items-center gap-2">
                 <Lock size={18} color="white" />
                 <Text className="text-white font-black text-lg">
-                  Unlock Pro
+                  {t('game.unlock_pro')}
                 </Text>
               </View>
             ) : (
               <Text className="text-primary-foreground font-black text-lg">
-                Start Game
+                {t('game.start_game')}
               </Text>
             )}
           </Button>
