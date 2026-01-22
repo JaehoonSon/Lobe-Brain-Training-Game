@@ -1,0 +1,14 @@
+{
+    "common": {
+        "welcome": "Bienvenido a Brain App",
+        "today_training": "Entrenamiento de Hoy",
+        "settings": "Ajustes",
+        "language": "Idioma",
+        "save": "Guardar",
+        "cancel": "Cancelar"
+    },
+    "home": {
+        "greeting": "¡Hola, {{name}}!",
+        "start_session": "Iniciar Sesión"
+    }
+}

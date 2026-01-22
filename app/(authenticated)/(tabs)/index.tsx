@@ -31,8 +31,10 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { useDailyInsight } from "~/hooks/useDailyInsight";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const { games, getDailyWorkout, dailyCompletedGameIds, refreshDailyProgress } =
     useGames();
   const { user } = useAuth();
@@ -111,7 +113,7 @@ export default function Dashboard() {
         <View className="px-6 py-6">
           <View className="flex-row justify-between items-end mb-6">
             <View>
-              <H3 className="text-3xl font-black mb-1">Today's Training</H3>
+              <H3 className="text-3xl font-black mb-1">{t('common.today_training')}</H3>
               <P className="text-muted-foreground font-bold">
                 Keep your streak alive! 🔥
               </P>

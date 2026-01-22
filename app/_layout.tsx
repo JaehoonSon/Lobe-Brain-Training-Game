@@ -1,4 +1,5 @@
 import "~/global.css";
+import "~/lib/i18n";
 
 import {
   DarkTheme,
@@ -170,4 +171,4 @@ function useSetAndroidNavigationBar() {
   }, []);
 }
 
-function noop() {}
+function noop() { }
