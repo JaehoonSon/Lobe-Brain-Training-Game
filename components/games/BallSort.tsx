@@ -11,6 +11,7 @@ import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
 import { BallSortContent } from "~/lib/validators/game-content";
+import { useTranslation } from "react-i18next";
 
 // Enable LayoutAnimation for Android
 if (
@@ -39,6 +40,7 @@ const BALL_COLORS = [
 ];
 
 export function BallSort({ onComplete, content }: BallSortProps) {
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const [tubes, setTubes] = useState<number[][]>([]); // Array of tubes, each containing color indices
   const [selectedTubeIndex, setSelectedTubeIndex] = useState<number | null>(
@@ -234,7 +236,7 @@ export function BallSort({ onComplete, content }: BallSortProps) {
       <View className="items-center space-y-2">
         {/* <Text className="text-xl font-bold">Sort the Balls</Text> */}
         <Text className="text-muted-foreground font-medium">
-          Moves: {moves}
+          {t('game.ball_sort.moves', { count: moves })}
         </Text>
       </View>
 

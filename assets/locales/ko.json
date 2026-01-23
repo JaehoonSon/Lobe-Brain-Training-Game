@@ -1,0 +1,604 @@
+{
+    "common": {
+        "welcome": "Brain App에 오신 것을 환영합니다",
+        "today_training": "오늘의 훈련",
+        "settings": "설정",
+        "language": "언어",
+        "save": "저장",
+        "cancel": "취소",
+        "start": "시작",
+        "continue": "계속",
+        "error": "오류",
+        "loading": "로딩 중...",
+        "not_set": "설정되지 않음",
+        "error_generic": "오류가 발생했습니다",
+        "error_signing_in": "로그인 오류",
+        "go_back": "뒤로 가기",
+        "skip": "건너뛰기",
+        "loading_game": "게임 로딩 중...",
+        "game": "게임",
+        "optional": "(선택 사항)",
+        "categories": {
+            "memory": "기억력",
+            "focus": "집중력",
+            "logic": "논리력",
+            "speed": "속도",
+            "language": "언어",
+            "general": "일반"
+        }
+    },
+    "home": {
+        "greeting": "안녕하세요, {{name}}님!",
+        "start_session": "세션 시작"
+    },
+    "unauth": {
+        "landing": {
+            "title": "당신의 마음이 할 수 있는 것을 발견하세요",
+            "subtitle": "무료로 뇌 훈련을 시작하세요.",
+            "get_started": "시작하기",
+            "login": "로그인",
+            "legal": "가입하시면 서비스 약관, 개인정보처리방침 및 캘리포니아 개인정보 보호법에 동의하게 됩니다."
+        },
+        "signup": {
+            "title": "시작해 볼까요",
+            "subtitle": "계정을 만들어 시작하세요",
+            "apple_button": "Apple로 계속하기",
+            "google_button": "Google로 계속하기",
+            "privacy_policy": "개인정보처리방침",
+            "terms_of_service": "서비스 약관",
+            "agreement_intro": "계속하시면 우리의 ",
+            "agreement_and": " 및 "
+        },
+        "welcome": {
+            "title": "Brain App에 오신 것을 환영합니다",
+            "motto": "뇌 훈련. 마음을 날카롭게.",
+            "think_faster": "더 빠르게 생각하기",
+            "think_faster_desc": "정보 처리 속도 향상",
+            "sharpen_focus": "집중력 날카롭게 하기",
+            "sharpen_focus_desc": "집중력 강화",
+            "enhance_memory": "기억력 향상",
+            "enhance_memory_desc": "더 잘 더 오래 기억하세요",
+            "legal_intro": "이 앱을 사용하면 ",
+            "legal_and": " 및 ",
+            "terms": "약관",
+            "privacy": "개인정보처리방침",
+            "get_started": "시작하기"
+        }
+    },
+    "onboarding": {
+        "error_step": "단계 {{step}}을(를) 찾을 수 없습니다.",
+        "steps": {
+            "birthday": {
+                "title": "생일이 언제인가요?",
+                "description": "이 정보를 통해 경험을 맞춤화합니다.",
+                "month": "월",
+                "day": "일",
+                "year": "년",
+                "continue": "계속",
+                "skip": "나중에 하기"
+            },
+            "welcome": {
+                "title": "개인 맞춤형 플랜에 오신 것을 환영합니다",
+                "subtitle": "다음을 도와드리기 위해 맞춤형 플랜을 만들겠습니다:",
+                "goals": {
+                    "focus": "집중력 날카롭게 하기",
+                    "memory": "기억력 향상",
+                    "speed": "더 빠르게 생각하기"
+                },
+                "begin": "시작해 볼까요"
+            },
+            "plan_creation": {
+                "title": "30일 플랜\n생성 중",
+                "subtitle": "선호도를 분석 중..."
+            },
+            "plan_reveal": {
+                "badge": "당신을 위한 맞춤형",
+                "title": "30일 플랜",
+                "projection": "예상",
+                "projection_highlight": "첫 달에 BPI 30-40% 증가",
+                "projection_suffix": ".",
+                "features": {
+                    "baseline": "기준 점수에 맞춤화",
+                    "schedule": "주 3회 효과적인 일정",
+                    "proven": "과학적으로 입증된 성장"
+                },
+                "start": "훈련 시작"
+            },
+            "thank_you": {
+                "title": "마지막 문제였습니다.\n잘하셨어요!",
+                "subtitle_prefix": "이제 성과를 바탕으로",
+                "subtitle_suffix": "에서의 기술을 결정하고 있습니다."
+            },
+            "daily_streak": {
+                "title": "새로운 일일 연속 기록을\n시작했습니다!",
+                "days": [
+                    "일",
+                    "월",
+                    "화",
+                    "수",
+                    "목",
+                    "금",
+                    "토"
+                ],
+                "subtext": "매일 게임을 완료하여 연속 기록을 만드세요."
+            },
+            "premium_features": {
+                "badge": "모든 기능 잠금 해제",
+                "title": "Brain App Premium으로\n더 많은 기능 활용",
+                "slides": [
+                    {
+                        "title": "개인 맞춤형\n일일 추천",
+                        "description": "활동 패턴과 훈련 선호도를 기반으로 생성됩니다."
+                    },
+                    {
+                        "title": "과학에 기반한 게임",
+                        "description": "기술 수준에 맞게 조정되는 게임으로 항상 도전할 수 있습니다."
+                    },
+                    {
+                        "title": "성과 추적",
+                        "description": "뇌 훈련 여정의 진행 상황에 대한 통찰력을 얻으세요."
+                    }
+                ]
+            },
+            "interests": {
+                "title": "관심사부터 시작해 볼까요",
+                "subtitle": "최대 3개 선택",
+                "options": [
+                    "마음을 활동적이고 도전적으로 유지하고 싶어요",
+                    "스스로 발전하는 것을 좋아해요",
+                    "기억력과 주의력을 훈련하고 싶어요",
+                    "내 뇌가 어떻게 작동하는지 궁금해요",
+                    "스트레스를 관리하고 더 나은 습관을 형성하고 싶어요"
+                ]
+            },
+            "affirmations": {
+                "muscle": {
+                    "headline": "뇌는 근육과 같습니다.",
+                    "subtext": "매일 훈련하세요. 하루 몇 분만으로도 평생 습관을 만들 수 있습니다."
+                },
+                "community": {
+                    "headline": "좋은 회사입니다",
+                    "subtext": "1억 명 이상이 Brain App에서 기억력을 훈련했습니다 — 많은 분들이 매일 훈련합니다!"
+                },
+                "focus": {
+                    "headline": "레이저 집중력이 준비되었습니다.",
+                    "subtext": "주의력 훈련은 가장 중요할 때 집중하는 데 도움이 될 수 있습니다."
+                },
+                "solved": {
+                    "headline": "해결되었습니다!",
+                    "subtext": "마음을 날카롭고 유연하게 유지하려면 매일 논리력에 도전하세요."
+                },
+                "transition": {
+                    "headline": "목표에 관한 것이었습니다",
+                    "subtext": "이제 훈련과 피드백을 맞춤화할 수 있도록 당신을 알아가 보겠습니다."
+                },
+                "meet_you": {
+                    "headline": "만나서 반가워요!",
+                    "subtext": "다음으로 현재 수준에 맞게 훈련 프로그램을 조정하겠습니다."
+                },
+                "baseline": {
+                    "headline": "이제 기준 점수가 있으니",
+                    "subtext": "당신을 위한 프로그램을 설계해 보겠습니다."
+                }
+            },
+            "goals": {
+                "memory": {
+                    "title": "기억력",
+                    "description": "기억력의 어떤 측면을 훈련하고 싶나요?",
+                    "options": {
+                        "working": "작업 기억",
+                        "working_desc": "정보 유지 및 조작",
+                        "face": "얼굴-이름 회상",
+                        "face_desc": "사람들의 이름 기억 및 연결",
+                        "spatial": "공간 기억",
+                        "spatial_desc": "위치 및 위치 저장 및 회상",
+                        "long_term": "장기 기억",
+                        "long_term_desc": "나중에 회상할 정보 유지"
+                    }
+                },
+                "attention": {
+                    "title": "주의력",
+                    "description": "주의력의 어떤 측면을 개선하고 싶나요?",
+                    "options": {
+                        "productivity": "생산성",
+                        "productivity_desc": "업무에 더 오래 집중",
+                        "multitasking": "멀티태스킹",
+                        "multitasking_desc": "업무 간 효율적으로 전환",
+                        "concentration": "집중력",
+                        "concentration_desc": "방해 요소 피하기",
+                        "dividing": "분할 주의력",
+                        "dividing_desc": "여러 소스에 동시에 집중"
+                    }
+                },
+                "problem_solving": {
+                    "title": "문제 해결",
+                    "description": "어떤 기술을 날카롭게 하고 싶나요?",
+                    "options": {
+                        "logic": "논리적 추론",
+                        "logic_desc": "논증 분석 및 아이디어 연결",
+                        "math": "수학 기술",
+                        "math_desc": "더 빠르고 정확하게 계산",
+                        "planning": "계획",
+                        "planning_desc": "미리 생각하고 전략 세우기",
+                        "spatial": "공간 지각",
+                        "spatial_desc": "객체 시각화 및 조작"
+                    }
+                }
+            },
+            "profile": {
+                "gender": {
+                    "title": "성별은 무엇인가요?",
+                    "description": "이 정보는 커뮤니티의 유사한 회원들과 비교하는 데 도움이 됩니다. (선택 사항)",
+                    "options": [
+                        "남성",
+                        "여성",
+                        "비이분법적",
+                        "말하고 싶지 않음"
+                    ]
+                },
+                "education": {
+                    "title": "완료한 최고 학력은 무엇인가요?",
+                    "options": [
+                        "고등학교 중퇴",
+                        "고등학교 졸업",
+                        "대학교 중퇴",
+                        "전문학사",
+                        "학사",
+                        "석사",
+                        "전문 학위",
+                        "박사",
+                        "말하고 싶지 않음"
+                    ]
+                },
+                "referral": {
+                    "title": "Brain App에 대해 어떻게 알게 되셨나요?",
+                    "options": [
+                        "의사 또는 의료 서비스 제공자",
+                        "친구 또는 가족",
+                        "App Store",
+                        "Play Store",
+                        "소셜 미디어 (예: Facebook)",
+                        "검색 (예: Google)",
+                        "기타"
+                    ]
+                }
+            },
+            "difficulty": {
+                "title": "원하시는 난이도는?",
+                "options": {
+                    "standard": "표준 (권장)",
+                    "standard_desc": "재미와 난이도의 균형을 선호합니다.",
+                    "advanced": "고급",
+                    "advanced_desc": "열심히 하려고 합니다."
+                }
+            },
+            "encouragement": {
+                "title": "어떤 종류의 격려가 동기를 유지하는 데 도움이 되나요?",
+                "options": {
+                    "high_fives": "응원",
+                    "high_fives_desc": "모든 성공을 축하하세요.",
+                    "tough_love": "엄격한 사랑",
+                    "tough_love_desc": "궤도를 유지하도록 밀어주세요."
+                }
+            },
+            "frequency": {
+                "exercise_title": "운동은 얼마나 자주 하나요?",
+                "training_title": "일주일에 며칠 훈련할 수 있나요?",
+                "training_subtitle": "5일 훈련하는 사람들이 성과가 가장 큽니다.",
+                "options": {
+                    "daily": "매일 또는 거의 매일",
+                    "few_times": "일주일에 몇 번",
+                    "once_less": "일주일에 한 번 또는 그 이하",
+                    "rarely": "거의 또는 전혀 안 함",
+                    "3_days": "일주일에 3일",
+                    "4_days": "일주일에 4일",
+                    "5_days": "일주일에 5일",
+                    "6_days": "일주일에 6일",
+                    "7_days": "매일"
+                }
+            },
+            "sleep": {
+                "title": "보통 밤에 몇 시간 주무세요?",
+                "options": {
+                    "4_less": "4시간 이하",
+                    "5_6": "5-6시간",
+                    "7_8": "7-8시간",
+                    "9_more": "9시간 이상"
+                }
+            }
+        },
+        "games": {
+            "next_challenge": "다음 도전",
+            "see_results": "결과 보기",
+            "arithmetic": {
+                "title": "암산",
+                "description": "수치 처리 속도와 정확도를 테스트합니다.",
+                "outro_title": "잘하셨어요!",
+                "outro_description": "이것은 양적 추론 능력을 측정했습니다."
+            },
+            "language": {
+                "title": "언어 유창성",
+                "description": "이제 언어 처리와 어휘력을 테스트해 보겠습니다.",
+                "outro_title": "훌륭해요!",
+                "outro_description": "이것은 언어 식별 능력을 측정했습니다."
+            },
+            "matrix": {
+                "title": "기억 매트릭스",
+                "description": "공간 기억과 회상 능력을 테스트해 보겠습니다.",
+                "outro_title": "훌륭해요!",
+                "outro_description": "이것은 공간 기억을 측정했습니다."
+            }
+        }
+    },
+    "settings": {
+        "title": "설정",
+        "sections": {
+            "my_info": "내 정보",
+            "membership": "멤버십",
+            "legal": "법적 정보",
+            "account": "계정",
+            "about": "정보"
+        },
+        "labels": {
+            "email": "이메일",
+            "birthday": "생일",
+            "pro_member": "Pro 회원",
+            "free_member": "회원 (제한된 액세스)",
+            "pro_desc": "모든 기능에 전체 액세스",
+            "free_desc": "탭하여 업그레이드",
+            "privacy": "개인정보처리방침",
+            "terms": "서비스 약관",
+            "license": "라이선스 계약",
+            "version": "버전 {{version}} ({{build}})"
+        },
+        "actions": {
+            "logout": "로그아웃",
+            "delete_account": "계정 삭제"
+        },
+        "alerts": {
+            "delete_confirm_title": "삭제 확인",
+            "delete_confirm_msg": "계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+            "delete_btn": "삭제"
+        }
+    },
+    "dashboard": {
+        "welcome_streak": "연속 기록을 유지하세요! 🔥",
+        "loading_workout": "운동 로딩 중...",
+        "daily_insight": {
+            "title": "일일 통찰",
+            "loading": "로딩 중...",
+            "fact_loading": "오늘의 뇌 팩트를 가져오는 중...",
+            "did_you_know": "알고 계셨나요?",
+            "fallback": "당신의 뇌는 놀랍습니다! 새로운 팩트를 보려면 내일 다시 오세요.",
+            "source": "출처: {{source}}"
+        },
+        "community": {
+            "title": "커뮤니티 및 성장",
+            "global_challenge": "글로벌 챌린지",
+            "elite_focus": "엘리트 집중력",
+            "challenge_desc": "오늘 모두 {{gameName}}을(를) 하고 있습니다! 상위 10%에 진출할 수 있나요?",
+            "sessions_finished": "오늘 {{count}}개 세션 완료",
+            "loading_activity": "활동 로딩 중..."
+        },
+        "quick_play": {
+            "title": "빠른 플레이",
+            "tap_to_start": "탭하여 시작",
+            "coming_soon": "더 많은 게임이 곧 출시됩니다!"
+        }
+    },
+    "games_tab": {
+        "title": "게임",
+        "search_placeholder": "무엇을 하고 싶으신가요?",
+        "sections": {
+            "todays_games": "오늘의 게임",
+            "coming_soon": "곧 출시"
+        },
+        "categories": {
+            "speed": "속도",
+            "memory": "기억력",
+            "attention": "주의력",
+            "flexibility": "유연성",
+            "problem_solving": "문제 해결"
+        },
+        "footer_msg": "매주 새로운 도전이 옵니다. 계속 훈련하세요!"
+    },
+    "stats": {
+        "title": "내 통계",
+        "bpi": {
+            "overall_performance": "전반적인 성과",
+            "brain_index": "뇌 지수",
+            "top_percentile": "상위 {{count}}%",
+            "update_msg": "점수는 게임마다 업데이트됩니다",
+            "unlock_msg": "잠금 해제하려면 {{count}}개 카테고리를 더 플레이하세요"
+        },
+        "training_areas": "훈련 영역",
+        "categories": {
+            "no_games": "플레이한 게임 없음"
+        },
+        "analysis": {
+            "title": "상세 분석",
+            "strength_profile": "강점 프로필",
+            "progress_history": "진행 기록"
+        },
+        "error_loading": "통계를 불러올 수 없습니다."
+    },
+    "insights": {
+        "title": "통찰",
+        "daily_read": {
+            "title": "일일 읽기",
+            "read_time": "{{count}}분 읽기"
+        },
+        "explore": {
+            "title": "탐색",
+            "categories": {
+                "sleep": "수면",
+                "focus": "집중력",
+                "productivity": "생산성",
+                "stress": "스트레스"
+            }
+        },
+        "articles": {
+            "science_of_sleep": {
+                "title": "수면의 과학",
+                "description": "수면이 기억 고착화와 집중력에 미치는 영향."
+            },
+            "focus_techniques": {
+                "title": "집중 기술",
+                "description": "딥 워크 및 달성 방법."
+            },
+            "growth_mindset": {
+                "title": "성장 마인드셋",
+                "description": "신경 가소성 이해하기."
+            }
+        }
+    },
+    "tabs": {
+        "today": "오늘",
+        "games": "게임",
+        "stats": "통계",
+        "insights": "통찰",
+        "showcase": "쇼케이스"
+    },
+    "streak": {
+        "title": "훈련 연속 기록",
+        "this_week": "이번 주",
+        "stats": "내 통계",
+        "current_streak": "현재 연속 기록",
+        "best_streak": "최고 연속 기록",
+        "days_count": "{{count}}일",
+        "days_count_plural": "{{count}}일",
+        "next_milestone": "다음 마일스톤",
+        "upcoming_reward": "다음 보상:",
+        "reward_badge": "{{count}}일 배지",
+        "why_title": "연속 기록이 중요한 이유",
+        "logic_1": "지속적인 뇌 훈련은 다음을 통해 신경 경로를 강화합니다",
+        "neuroplasticity": "신경 가소성",
+        "logic_2": ": 뇌가 자신을 재구성하는 능력.",
+        "logic_3": "신체 운동과 마찬가지로, 매일 정신 운동은 인지 '근육 기억'을 구축합니다. 연구에 따르면 정기적인 연습은 다음을 향상시킵니다:",
+        "benefit_1": "작업 기억 및 집중력",
+        "benefit_2": "정보 처리 속도 및 반응 시간",
+        "benefit_3": "문제 해결 및 정신적 유연성",
+        "keep_alive": "이러한 이점을 극대화하려면 연속 기록을 유지하세요! 🧠"
+    },
+    "game": {
+        "loading": "게임 로딩 중...",
+        "details": "게임 세부정보",
+        "avg_bpi": "평균 BPI",
+        "best_score": "최고 점수",
+        "difficulty": "난이도",
+        "badge_progress": "배지 진행률",
+        "total_plays": "총 플레이 횟수",
+        "unlock_pro": "Pro 잠금 해제",
+        "start_game": "게임 시작",
+        "preparing": "라운드 준비 중...",
+        "no_questions": "이 게임에 대한 질문을 찾을 수 없습니다.",
+        "no_questions_valid": "유효한 질문을 찾을 수 없습니다.",
+        "game_not_found": "게임을 찾을 수 없습니다",
+        "error_load": "게임을 로드하는 데 실패했습니다.",
+        "not_implemented": "게임 구성 요소가 구현되지 않음:",
+        "memory_matrix": {
+            "title": "메모리 매트릭스",
+            "memorize": "패턴을 기억하세요...",
+            "recall": "{{count}}개의 타일을 선택하세요",
+            "checking": "확인 중...",
+            "loading": "로드 중..."
+        },
+        "wordle": {
+            "title": "Wordle",
+            "subtitle": "{{count}}글자 단어 맞추기",
+            "win": "정답입니다! 🎉",
+            "lose": "단어는: {{word}}"
+        },
+        "ball_sort": {
+            "title": "공 정렬",
+            "subtitle": "색상별로 공을 정렬하세요",
+            "moves": "이동: {{count}}회",
+            "complete": "완벽합니다! 🎉"
+        },
+        "word_unscramble": {
+            "title": "단어 섞기",
+            "subtitle": "섞인 글자를 풀어보세요",
+            "hint": "힌트: {{hint}}",
+            "correct": "정답입니다! 🎉"
+        },
+        "stroop_clash": {
+            "title": "스트룹 충돌",
+            "subtitle": "텍스트의 색상을 선택하세요",
+            "score": "점수: {{count}}",
+            "tap_color": "색상 탭",
+            "tap_text": "텍스트 탭"
+        }
+    },
+    "game_finish": {
+        "game_complete": "게임 완료",
+        "no_results": "게임 결과를 찾을 수 없습니다",
+        "feedback": {
+            "flawless_title": "완벽함",
+            "flawless_sub": "0개의 오류. 당신은 깨끗한 민물 진주와 같습니다.",
+            "amazing_title": "놀라워요",
+            "amazing_sub": "완벽에 아주 가까워요! 당신의 집중력은 놀랍습니다.",
+            "great_job_title": "잘했어요",
+            "great_job_sub": "훌륭한 작업! 진짜 발전하고 있습니다.",
+            "keep_going_title": "계속하세요",
+            "keep_going_sub": "모든 연습은 뇌 성장에 도움이 됩니다."
+        },
+        "stats": {
+            "game_bpi": "게임 BPI",
+            "accuracy": "놀라움",
+            "speed": "빠름"
+        },
+        "actions": {
+            "continue": "계속",
+            "play_again": "다시 플레이"
+        }
+    },
+    "stat_detail": {
+        "not_found": "카테고리를 찾을 수 없습니다",
+        "score_title": "{{name}} 점수",
+        "current_score": "현재 점수",
+        "top_percent": "상위 {{count}}%",
+        "history": "성과 기록",
+        "games_title": "{{name}} 게임",
+        "no_games": "이 카테고리에는 아직 게임이 없습니다.",
+        "played_count": "{{count}} 플레이됨",
+        "best_score": "최고: {{score}}",
+        "new_game": "새로운",
+        "avg_score_label": "평균 점수",
+        "recommended": "추천 읽기"
+    },
+    "customer_center": {
+        "title": "고객 센터"
+    },
+    "workout_card": {
+        "daily": "일일",
+        "focus": "집중력",
+        "duration": "2분"
+    },
+    "not_found": {
+        "title": "이런!",
+        "message": "이 화면은 존재하지 않습니다.",
+        "go_home": "홈 화면으로 가세요!"
+    },
+    "feature_card": {
+        "unlock": "잠금 해제",
+        "pro": "PRO",
+        "premium_msg": "이 기능은 프리미엄 구독으로 사용할 수 있습니다."
+    },
+    "dev_setting": {
+        "title": "환영합니다!",
+        "authenticated_as": "{{email}}(으)로 인증되었습니다",
+        "buttons": {
+            "settings": "설정으로 이동",
+            "onboarding": "온보딩으로 이동",
+            "restart_onboarding": "온보딩 다시 시작",
+            "go_back_steps": "몇 단계 뒤로 가기",
+            "show_paywall": "결제 화면 표시",
+            "go_paywall": "결제 화면으로 이동",
+            "showcase": "구성 요소 쇼케이스"
+        }
+    },
+    "showcase": {
+        "title": "구성 요소 쇼케이스",
+        "subtitle": "\"Juicy\" 디자인 시스템과 일치하도록 업데이트된 모든 UI 구성 요소"
+    }
+}

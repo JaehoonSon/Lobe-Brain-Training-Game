@@ -495,7 +495,39 @@
         "no_questions_valid": "No se encontraron preguntas válidas.",
         "game_not_found": "Juego no encontrado",
         "error_load": "Error al cargar el juego.",
-        "not_implemented": "Componente de juego no implementado para"
+        "not_implemented": "Componente de juego no implementado para",
+        "memory_matrix": {
+            "title": "Matriz de memoria",
+            "memorize": "Recuerda el patrón...",
+            "recall": "Selecciona {{count}} casillas",
+            "checking": "Comprobando...",
+            "loading": "Cargando..."
+        },
+        "wordle": {
+            "title": "Wordle",
+            "subtitle": "Adivina la palabra de {{count}} letras",
+            "win": "¡Lo conseguiste! 🎉",
+            "lose": "La palabra era: {{word}}"
+        },
+        "ball_sort": {
+            "title": "Ordenar bolas",
+            "subtitle": "Ordena las bolas por color",
+            "moves": "Movimientos: {{count}}",
+            "complete": "¡Perfecto! 🎉"
+        },
+        "word_unscramble": {
+            "title": "Desordenar palabras",
+            "subtitle": "Desordena las letras",
+            "hint": "Pista: {{hint}}",
+            "correct": "¡Correcto! 🎉"
+        },
+        "stroop_clash": {
+            "title": "Choque Stroop",
+            "subtitle": "Selecciona el color del texto",
+            "score": "Puntuación: {{count}}",
+            "tap_color": "Toca el color",
+            "tap_text": "Toca el texto"
+        }
     },
     "game_finish": {
         "game_complete": "Juego completado",

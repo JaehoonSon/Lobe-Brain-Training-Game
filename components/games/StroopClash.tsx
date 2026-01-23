@@ -6,6 +6,7 @@ import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
 import { StroopClashContent } from "~/lib/validators/game-content";
 import { PaintBucket, Type } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 interface StroopClashProps {
     onComplete: (accuracy: number, userResponse?: any) => void;
@@ -13,6 +14,7 @@ interface StroopClashProps {
 }
 
 export function StroopClash({ onComplete, content }: StroopClashProps) {
+    const { t } = useTranslation();
     const { width } = useWindowDimensions();
     const [hasAnswered, setHasAnswered] = useState(false);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -99,7 +101,7 @@ export function StroopClash({ onComplete, content }: StroopClashProps) {
                         <Type color="white" size={24} strokeWidth={3} />
                     )}
                     <Text className="text-xl font-black text-white uppercase">
-                        {content.task === "INK" ? "Tap the Color" : "Tap the Text"}
+                        {content.task === "INK" ? t('game.stroop_clash.tap_color') : t('game.stroop_clash.tap_text')}
                     </Text>
                 </View>
             </View>

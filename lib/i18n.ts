@@ -3,10 +3,26 @@ import { initReactI18next } from 'react-i18next';
 import * as Localization from 'expo-localization';
 import en from '../assets/locales/en.json';
 import es from '../assets/locales/es.json';
+import ko from '../assets/locales/ko.json';
+import zhCN from '../assets/locales/zh-CN.json';
+import ja from '../assets/locales/ja.json';
+import pt from '../assets/locales/pt.json';
+import de from '../assets/locales/de.json';
+import fr from '../assets/locales/fr.json';
+import hi from '../assets/locales/hi.json';
+import ru from '../assets/locales/ru.json';
 
 const resources = {
   en: { translation: en },
   es: { translation: es },
+  ko: { translation: ko },
+  zh: { translation: zhCN },
+  ja: { translation: ja },
+  pt: { translation: pt },
+  de: { translation: de },
+  fr: { translation: fr },
+  hi: { translation: hi },
+  ru: { translation: ru },
 };
 
 const getDeviceLocale = () => {
@@ -24,7 +40,7 @@ i18n
     lng: getDeviceLocale(),
     fallbackLng: 'en',
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
     react: {
       useSuspense: false,

@@ -6,7 +6,7 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
-import { Zap, Brain, Target } from "lucide-react-native";
+import { Zap, Brain, Target, Check } from "lucide-react-native";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { useTranslation } from "react-i18next";
 

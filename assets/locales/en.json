@@ -495,7 +495,39 @@
         "no_questions_valid": "No valid questions found.",
         "game_not_found": "Game not found",
         "error_load": "Failed to load game.",
-        "not_implemented": "Game component not implemented for"
+        "not_implemented": "Game component not implemented for",
+        "memory_matrix": {
+            "title": "Memory Matrix",
+            "memorize": "Remember the pattern...",
+            "recall": "Select {{count}} tiles",
+            "checking": "Checking...",
+            "loading": "Loading..."
+        },
+        "wordle": {
+            "title": "Wordle",
+            "subtitle": "Guess the {{count}}-letter word",
+            "win": "You got it! 🎉",
+            "lose": "The word was: {{word}}"
+        },
+        "ball_sort": {
+            "title": "Ball Sort",
+            "subtitle": "Sort the balls by color",
+            "moves": "Moves: {{count}}",
+            "complete": "Perfect! 🎉"
+        },
+        "word_unscramble": {
+            "title": "Word Unscramble",
+            "subtitle": "Unscramble the letters",
+            "hint": "Hint: {{hint}}",
+            "correct": "Correct! 🎉"
+        },
+        "stroop_clash": {
+            "title": "Stroop Clash",
+            "subtitle": "Select the color of the text",
+            "score": "Score: {{count}}",
+            "tap_color": "Tap the Color",
+            "tap_text": "Tap the Text"
+        }
     },
     "game_finish": {
         "game_complete": "Game Complete",
