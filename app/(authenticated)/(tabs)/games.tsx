@@ -70,6 +70,8 @@ export default function GamesScreen() {
                           bottom: 0,
                         }}
                         contentFit="cover"
+                        cachePolicy="disk"
+                        transition={200}
                       />
                     ) : (
                       <View
@@ -130,6 +132,8 @@ export default function GamesScreen() {
                               bottom: 0,
                             }}
                             contentFit="cover"
+                            cachePolicy="disk"
+                            transition={200}
                           />
                         ) : (
                           <View

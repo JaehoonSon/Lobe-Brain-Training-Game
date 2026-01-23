@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { View } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { appMetadata } from "~/config";
@@ -9,13 +9,17 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export default function SignUp() {
   const { t } = useTranslation();
   const { signInApple, signInGoogle } = useAuth();
   const insets = useSafeAreaInsets();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
+    if (isLoading) return; // Prevent double-click
+    setIsLoading(true);
     try {
       await signInApple();
       // Stack.Protected guards will automatically route to onboarding
@@ -23,6 +27,7 @@ export default function SignUp() {
     } catch (err) {
       console.log("sign in error", err);
       showErrorToast(t('common.error_generic'));
+      setIsLoading(false); // Only reset on error, not on success (navigation happens)
     }
   };
 
@@ -52,11 +57,18 @@ export default function SignUp() {
           <Button
             className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
             onPress={handleLogin}
+            disabled={isLoading}
           >
-            <AntDesign name="apple" size={24} color="white" />
-            <Text className="font-bold text-xl text-primary-foreground">
-              {t('unauth.signup.apple_button')}
-            </Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <>
+                <AntDesign name="apple" size={24} color="white" />
+                <Text className="font-bold text-xl text-primary-foreground">
+                  {t('unauth.signup.apple_button')}
+                </Text>
+              </>
+            )}
           </Button>
         </Animated.View>
 
@@ -81,3 +93,4 @@ export default function SignUp() {
     </View >
   );
 }
+

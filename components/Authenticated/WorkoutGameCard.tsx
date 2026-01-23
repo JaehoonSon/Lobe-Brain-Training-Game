@@ -1,4 +1,5 @@
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { H4, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
@@ -86,7 +87,13 @@ export function WorkoutGameCard({
             )}
           >
             {game.icon_url ? (
-              <Image source={{ uri: game.icon_url }} className="w-full h-full" resizeMode="cover" />
+              <Image
+                source={{ uri: game.icon_url }}
+                style={{ width: "100%", height: "100%" }}
+                contentFit="cover"
+                cachePolicy="disk"
+                transition={200}
+              />
             ) : (
               <Play
                 size={24}

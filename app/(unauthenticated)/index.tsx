@@ -4,6 +4,7 @@ import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CloudBackground } from "~/components/CloudBackground";
+import { useAuth } from "~/contexts/AuthProvider";
 import {
   BookOpen,
   Zap,
@@ -24,6 +25,7 @@ export default function IndexUnauthenticatedScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
+  const { isAuthenticated } = useAuth();
 
   return (
     <View className="flex-1 bg-background">
@@ -105,6 +107,14 @@ export default function IndexUnauthenticatedScreen() {
       >
         {/* Spacer to push content to bottom when possible */}
         <View className="flex-1" />
+
+        {isAuthenticated ? (
+          <View className="bg-destructive/10 border border-destructive/20 rounded-lg p-3 mb-6 mx-4">
+            <Text className="text-destructive font-medium text-center text-sm">
+              Having trouble loading your profile. Please try again.
+            </Text>
+          </View>
+        ) : null}
 
         <View className="items-center gap-3 mb-4">
 

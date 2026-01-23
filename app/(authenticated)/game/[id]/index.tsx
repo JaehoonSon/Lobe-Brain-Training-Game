@@ -1,10 +1,10 @@
 import {
   View,
   ScrollView,
-  Image,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
+import { Image } from "expo-image";
 import { useLocalSearchParams, router } from "expo-router";
 import { useGames } from "~/contexts/GamesContext";
 import { useUserStats } from "~/contexts/UserStatsContext";
@@ -70,8 +70,10 @@ export default function GameDetailScreen() {
           {game.banner_url ? (
             <Image
               source={{ uri: game.banner_url }}
-              className="w-full h-full"
-              resizeMode="cover"
+              style={{ width: "100%", height: "100%" }}
+              contentFit="cover"
+              cachePolicy="disk"
+              transition={300}
             />
           ) : (
             <View className="flex-1 items-center justify-center bg-muted">

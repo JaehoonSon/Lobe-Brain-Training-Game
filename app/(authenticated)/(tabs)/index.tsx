@@ -20,8 +20,15 @@ import {
 } from "lucide-react-native";
 import { router } from "expo-router";
 import { cn } from "~/lib/utils";
+import i18n from "~/lib/i18n";
 import { Database } from "~/lib/database.types";
 import { supabase } from "~/lib/supabase";
+import {
+  buildTranslationMap,
+  fetchContentTranslations,
+  resolveTranslation,
+} from "~/lib/content-translations";
+import { normalizeLocale } from "~/lib/locale";
 import { useState, useEffect } from "react";
 import React from "react";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
@@ -50,6 +57,10 @@ export default function Dashboard() {
     game_name: string;
     sessions_count: number;
   } | null>(null);
+  const [dailyChallengeName, setDailyChallengeName] = useState<string | null>(
+    null
+  );
+  const [locale, setLocale] = useState(() => normalizeLocale(i18n.language));
 
   // Fetch the global daily challenge (same game for everyone)
   useEffect(() => {
@@ -61,12 +72,36 @@ export default function Dashboard() {
       console.log('[Daily Challenge] Response:', { data, error });
 
       if (!error && data && data.length > 0) {
-        setDailyChallengeGame(data[0]);
-        setCommunityCount(data[0].sessions_count);
+        const challenge = data[0];
+        setDailyChallengeGame(challenge);
+        setCommunityCount(challenge.sessions_count);
+
+        try {
+          const translations = await fetchContentTranslations(
+            "game",
+            [challenge.game_id],
+            ["name"],
+            locale
+          );
+          const translationMap = buildTranslationMap(translations);
+          setDailyChallengeName(
+            resolveTranslation(
+              translationMap,
+              challenge.game_id,
+              "name",
+              challenge.game_name
+            )
+          );
+        } catch (translationError) {
+          console.error("Error loading challenge translations:", translationError);
+          setDailyChallengeName(challenge.game_name);
+        }
+      } else {
+        setDailyChallengeName(null);
       }
     }
     fetchDailyChallenge();
-  }, []);
+  }, [locale]);
 
   React.useEffect(() => {
     // In a real app, you might want to wrap this in useMemo or similar if the date changes
@@ -90,6 +125,18 @@ export default function Dashboard() {
 
   // Fetch today's brain fact
   const { insight, isLoading: insightLoading } = useDailyInsight();
+
+  useEffect(() => {
+    const handleLanguageChange = (nextLocale: string) => {
+      setLocale(normalizeLocale(nextLocale));
+    };
+
+    i18n.on("languageChanged", handleLanguageChange);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, []);
 
   // Mock progress for now
   // const [completedGameIds, setCompletedGameIds] = useState<string[]>([]);
@@ -216,7 +263,13 @@ export default function Dashboard() {
                       <Text className="text-[10px] font-black text-white uppercase tracking-wider">{t('dashboard.community.global_challenge')}</Text>
                     </View>
                     <H4 className="text-white font-black text-2xl mb-1">{t('dashboard.community.elite_focus')}</H4>
-                    <P className="text-white/80 font-bold leading-5">{t('dashboard.community.challenge_desc', { gameName: dailyChallengeGame?.game_name || t('common.loading') })}</P>
+                    <P className="text-white/80 font-bold leading-5">
+                      {t('dashboard.community.challenge_desc', {
+                        gameName: dailyChallengeName ||
+                          dailyChallengeGame?.game_name ||
+                          t('common.loading'),
+                      })}
+                    </P>
                   </View>
                   <View className="w-16 h-16 bg-white/10 rounded-2xl items-center justify-center border border-white/20">
                     <Globe size={32} color="white" strokeWidth={2.5} />

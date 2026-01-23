@@ -37,7 +37,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: getDeviceLocale(),
+    lng: "ko",
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,

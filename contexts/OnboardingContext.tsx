@@ -32,8 +32,8 @@ const OnboardingContext = createContext<OnboardingContextType | undefined>(
 const ONBOARDING_STORAGE_PREFIX = "onboarding_progress";
 const TOTAL_STEPS = STEPS.length;
 
-const getOnboardingStorageKey = (userId?: string | null) =>
-  `${ONBOARDING_STORAGE_PREFIX}:${userId ?? "anon"}`;
+const getOnboardingStorageKey = (userId: string) =>
+  `${ONBOARDING_STORAGE_PREFIX}:${userId}`;
 
 export function OnboardingProvider({
   children,
@@ -48,13 +48,8 @@ export function OnboardingProvider({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      setIsComplete(false);
-      return;
-    }
-
     if (!isProfileLoading) {
-      setIsComplete(onboardingComplete);
+      setIsComplete(!!user && onboardingComplete);
     }
   }, [user, onboardingComplete, isProfileLoading]);
   const lastStep = currentStep === TOTAL_STEPS;
@@ -69,7 +64,14 @@ export function OnboardingProvider({
 
     const loadProgress = async () => {
       try {
-        const storageKey = getOnboardingStorageKey(user?.id);
+        if (!user?.id) {
+          setCurrentStep(1);
+          setData({});
+          setIsComplete(false);
+          return;
+        }
+
+        const storageKey = getOnboardingStorageKey(user.id);
         const saved = await AsyncStorage.getItem(storageKey);
         if (!isMounted) return;
 
@@ -84,9 +86,6 @@ export function OnboardingProvider({
           setData({});
         }
 
-        if (!user) {
-          setIsComplete(false);
-        }
       } catch (e) {
         console.error("Failed to load onboarding progress", e);
         setIsComplete(false);
@@ -109,7 +108,8 @@ export function OnboardingProvider({
 
     const saveProgress = async () => {
       try {
-        const storageKey = getOnboardingStorageKey(user?.id);
+        if (!user?.id) return;
+        const storageKey = getOnboardingStorageKey(user.id);
         await AsyncStorage.setItem(
           storageKey,
           JSON.stringify({ currentStep, data, isComplete }),
@@ -157,10 +157,7 @@ export function OnboardingProvider({
     console.log("Completing onboarding");
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-    if (!user) {
-      setIsComplete(true);
-      return;
-    }
+    if (!user) return;
 
     try {
       const { error } = await supabase
@@ -179,6 +176,12 @@ export function OnboardingProvider({
       console.log("Onboarding data saved successfully");
       setIsComplete(true);
       markOnboardingComplete(); // Update AuthProvider state to trigger navigation
+      try {
+        const storageKey = getOnboardingStorageKey(user.id);
+        await AsyncStorage.removeItem(storageKey);
+      } catch (e) {
+        console.error("Failed to clear onboarding progress", e);
+      }
     } catch (e) {
       console.error("Failed to save onboarding data", e);
     }
@@ -186,11 +189,11 @@ export function OnboardingProvider({
 
   const resetOnboarding = async () => {
     try {
-      const storageKey = getOnboardingStorageKey(user?.id);
+      if (!user?.id) return;
+      const storageKey = getOnboardingStorageKey(user.id);
       await AsyncStorage.removeItem(storageKey);
       setCurrentStep(1);
       setData({});
-      if (!user) return;
 
       const { error } = await supabase
         .from("profiles")

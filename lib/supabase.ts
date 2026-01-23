@@ -17,3 +17,12 @@ export const supabase = createClient<Database>(supabaseUrl, supabasePublishableK
     detectSessionInUrl: false,
   },
 });
+
+export const supabaseUntyped = createClient(supabaseUrl, supabasePublishableKey, {
+  auth: {
+    storage: AsyncStorage,
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: false,
+  },
+});

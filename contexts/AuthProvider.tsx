@@ -87,9 +87,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const nextUser = session?.user ?? null;
         setUser(nextUser);
         if (nextUser) {
-          await loadProfile(nextUser);
+          loadProfile(nextUser);
         } else {
           setOnboardingComplete(false);
+          setIsProfileLoading(false);
         }
       } catch (error) {
         console.error("Failed to load auth session", error);
@@ -106,7 +107,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const nextUser = session?.user ?? null;
       setUser(nextUser);
       if (nextUser) {
-        await loadProfile(nextUser);
+        loadProfile(nextUser);
       } else {
         setOnboardingComplete(false);
         setIsProfileLoading(false);
@@ -128,10 +129,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     console.log("Signed out from Supabase");
 
     try {
-      await AsyncStorage.multiRemove([
-        "onboarding_progress:anon",
-        `onboarding_progress:${user?.id ?? "anon"}`,
-      ]);
+      if (user?.id) {
+        await AsyncStorage.multiRemove([
+          `onboarding_progress:${user.id}`,
+        ]);
+      }
     } catch (storageError) {
       console.error("Failed to clear onboarding storage", storageError);
     }
