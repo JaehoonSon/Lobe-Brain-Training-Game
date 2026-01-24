@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lobe",
     "slug": "lobe",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/brain_logo.png",
     "scheme": "lobe",
@@ -13,9 +13,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#fe7939"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "appStoreUrl": "https://apps.apple.com/us/app/elysia-photo-glow/id6749180620",
       "usesAppleSignIn": true,
