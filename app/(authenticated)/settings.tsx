@@ -25,6 +25,13 @@ import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
 import { appMetadata } from "~/config";
 import { supabase } from "~/lib/supabase";
+import { normalizeLocale } from "~/lib/locale";
+import {
+  getPreferredLanguage,
+  setPreferredLanguage,
+  setSystemLanguage,
+  SYSTEM_LANGUAGE_VALUE,
+} from "~/lib/i18n";
 import {
   Select,
   SelectContent,
@@ -49,6 +56,7 @@ const SUPPORTED_LANGUAGES: Option[] = [
   { value: "ru", label: "Русский" },
 ];
 
+
 // Get version info from app.json via expo-constants
 const appVersion = Constants.expoConfig?.version ?? "1.0.0";
 const buildNumber =
@@ -57,10 +65,13 @@ const buildNumber =
   "1";
 
 export default function Settings() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { user, logout } = useAuth();
   const { isPro, presentPaywall, currentOffering } = useRevenueCat();
   const [birthday, setBirthday] = useState<string | null>(null);
+  const [languagePreference, setLanguagePreference] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -92,6 +103,22 @@ export default function Settings() {
 
     fetchProfile();
   }, [user]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadPreference = async () => {
+      const storedLanguage = await getPreferredLanguage();
+      if (!isActive) return;
+      setLanguagePreference(storedLanguage);
+    };
+
+    loadPreference();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   const handleMembershipPress = async () => {
     playHaptic("soft");
@@ -128,7 +155,13 @@ export default function Settings() {
   const handleLanguageChange = (val: Option | null) => {
     if (val) {
       playHaptic("medium");
-      i18n.changeLanguage(val.value);
+      if (val.value === SYSTEM_LANGUAGE_VALUE) {
+        setLanguagePreference(SYSTEM_LANGUAGE_VALUE);
+        void setSystemLanguage();
+        return;
+      }
+      setLanguagePreference(val.value);
+      void setPreferredLanguage(val.value);
     }
   };
 
@@ -160,6 +193,19 @@ export default function Settings() {
   const membershipDescription = isPro
     ? t('settings.labels.pro_desc')
     : t('settings.labels.free_desc');
+
+  const systemOption: Option = {
+    value: SYSTEM_LANGUAGE_VALUE,
+    label: t("common.system"),
+  };
+  const resolvedPreference = languagePreference ?? SYSTEM_LANGUAGE_VALUE;
+  const selectedLanguage =
+    resolvedPreference === SYSTEM_LANGUAGE_VALUE
+      ? systemOption
+      : SUPPORTED_LANGUAGES.find(
+        (lang) => lang && lang.value === normalizeLocale(resolvedPreference)
+      ) ?? systemOption;
+  const languageOptions = [systemOption, ...SUPPORTED_LANGUAGES];
 
   return (
     <View className="flex-1 bg-background">
@@ -212,10 +258,7 @@ export default function Settings() {
                 <Languages size={18} className="text-foreground" />
               </View>
               <View className="flex-1">
-                <Select
-                  value={SUPPORTED_LANGUAGES.find((l) => l && l.value === i18n.language) || SUPPORTED_LANGUAGES[0]}
-                  onValueChange={handleLanguageChange}
-                >
+                <Select value={selectedLanguage} onValueChange={handleLanguageChange}>
                   <SelectTrigger className="border-0 bg-transparent px-3 h-12 w-full shadow-none active:bg-muted/20">
                     <SelectValue
                       className="text-lg font-bold text-foreground"
@@ -225,7 +268,7 @@ export default function Settings() {
                   <SelectContent className="w-[250px] native:w-[280px]" portalHost="settings-portal">
                     <SelectGroup>
                       <SelectLabel>{t('common.language')}</SelectLabel>
-                      {SUPPORTED_LANGUAGES.map((lang) => lang && (
+                      {languageOptions.map((lang) => lang && (
                         <SelectItem
                           key={lang.value}
                           label={lang.label}
