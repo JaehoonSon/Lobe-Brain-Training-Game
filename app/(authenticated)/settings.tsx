@@ -9,12 +9,14 @@ import {
   Info,
   Crown,
   Cake,
+  Languages,
+  Check,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
+import { PortalHost } from "@rn-primitives/portal";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { showErrorToast } from "~/components/ui/toast";
 import { H1, H2, Muted, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
@@ -23,6 +25,29 @@ import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
 import { appMetadata } from "~/config";
 import { supabase } from "~/lib/supabase";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+  Option,
+} from "~/components/ui/select";
+
+const SUPPORTED_LANGUAGES: Option[] = [
+  { value: "en", label: "English" },
+  { value: "es", label: "Español" },
+  { value: "ko", label: "한국어" },
+  { value: "zh", label: "中文" },
+  { value: "ja", label: "日本語" },
+  { value: "pt", label: "Português" },
+  { value: "de", label: "Deutsch" },
+  { value: "fr", label: "Français" },
+  { value: "hi", label: "हिन्दी" },
+  { value: "ru", label: "Русский" },
+];
 
 // Get version info from app.json via expo-constants
 const appVersion = Constants.expoConfig?.version ?? "1.0.0";
@@ -32,7 +57,7 @@ const buildNumber =
   "1";
 
 export default function Settings() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user, logout } = useAuth();
   const { isPro, presentPaywall, currentOffering } = useRevenueCat();
   const [birthday, setBirthday] = useState<string | null>(null);
@@ -97,6 +122,13 @@ export default function Settings() {
       await logout();
     } catch (err) {
       showErrorToast(t('common.error_generic'));
+    }
+  };
+
+  const handleLanguageChange = (val: Option | null) => {
+    if (val) {
+      playHaptic("medium");
+      i18n.changeLanguage(val.value);
     }
   };
 
@@ -170,6 +202,41 @@ export default function Settings() {
                 </View>
               </>
             )}
+          </Card>
+
+          {/* Preferences Section */}
+          <SectionHeader>{t('common.language')}</SectionHeader>
+          <Card className="overflow-hidden">
+            <View className="flex-row items-center px-4 py-1">
+              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
+                <Languages size={18} className="text-foreground" />
+              </View>
+              <View className="flex-1">
+                <Select
+                  value={SUPPORTED_LANGUAGES.find((l) => l && l.value === i18n.language) || SUPPORTED_LANGUAGES[0]}
+                  onValueChange={handleLanguageChange}
+                >
+                  <SelectTrigger className="border-0 bg-transparent px-3 h-12 w-full shadow-none active:bg-muted/20">
+                    <SelectValue
+                      className="text-lg font-bold text-foreground"
+                      placeholder={t('common.language')}
+                    />
+                  </SelectTrigger>
+                  <SelectContent className="w-[250px] native:w-[280px]" portalHost="settings-portal">
+                    <SelectGroup>
+                      <SelectLabel>{t('common.language')}</SelectLabel>
+                      {SUPPORTED_LANGUAGES.map((lang) => lang && (
+                        <SelectItem
+                          key={lang.value}
+                          label={lang.label}
+                          value={lang.value}
+                        />
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </View>
+            </View>
           </Card>
 
           {/* Membership Section */}
@@ -257,6 +324,8 @@ export default function Settings() {
           </Card>
         </View>
       </ScrollView>
+
+      <PortalHost name="settings-portal" />
     </View>
   );
 }

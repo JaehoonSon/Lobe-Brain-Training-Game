@@ -24,6 +24,25 @@ const buttonVariants = cva(
   }
 );
 
+const buttonTextVariants = cva(
+  "text-sm native:text-base font-semibold",
+  {
+    variants: {
+      variant: {
+        default: "text-primary-foreground",
+        destructive: "text-destructive-foreground",
+        outline: "text-foreground group-active:text-accent-foreground",
+        secondary: "text-secondary-foreground",
+        ghost: "text-foreground group-active:text-accent-foreground",
+        link: "text-primary group-active:underline",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
 type ButtonProps = React.ComponentProps<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
@@ -41,5 +60,5 @@ function Button({ ref, className, variant, ...props }: ButtonProps) {
   );
 }
 
-export { Button, buttonVariants };
+export { Button, buttonVariants, buttonTextVariants };
 export type { ButtonProps };

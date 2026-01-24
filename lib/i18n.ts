@@ -1,6 +1,7 @@
-import i18n from 'i18next';
+import i18n, { ThirdPartyModule } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import * as Localization from 'expo-localization';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import en from '../assets/locales/en.json';
 import es from '../assets/locales/es.json';
 import ko from '../assets/locales/ko.json';
@@ -33,11 +34,38 @@ const getDeviceLocale = () => {
   return 'en';
 };
 
+const LANGUAGE_KEY = 'user-language';
+
+const languageDetector: any = {
+  type: 'languageDetector',
+  async: true,
+  init: () => { },
+  detect: async (callback: (lng: string) => void) => {
+    try {
+      const savedLanguage = await AsyncStorage.getItem(LANGUAGE_KEY);
+      if (savedLanguage) {
+        return callback(savedLanguage);
+      }
+    } catch (error) {
+      console.log('Error reading language', error);
+    }
+    const deviceLocale = getDeviceLocale();
+    callback(deviceLocale);
+  },
+  cacheUserLanguage: async (lng: string) => {
+    try {
+      await AsyncStorage.setItem(LANGUAGE_KEY, lng);
+    } catch (error) {
+      console.log('Error saving language', error);
+    }
+  },
+};
+
 i18n
   .use(initReactI18next)
+  .use(languageDetector as any)
   .init({
     resources,
-    lng: "ko",
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
