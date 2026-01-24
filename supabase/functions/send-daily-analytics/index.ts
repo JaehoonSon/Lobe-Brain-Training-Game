@@ -127,7 +127,7 @@ Deno.serve(async (req) => {
     // Or just put them all in 'to'.
     
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: "Lobe Service <onboarding@resend.dev>", // Update this if user has a domain
+      from: "Lobe Service <analytics@theblucks.com>", // Update this if user has a domain
       to: recipients,
       subject: `Daily Analytics Report - ${dateStr}`,
       html: emailHtml,
