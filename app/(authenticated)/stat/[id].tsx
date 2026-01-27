@@ -128,6 +128,10 @@ export default function CategoryDetailScreen() {
   }
 
   const hasScore = category.score !== null;
+  const scoreText = hasScore ? String(category.score) : "--";
+  const extraDigits = Math.max(0, scoreText.length - 4);
+  const scoreFontSize = scoreText.length >= 4 ? Math.max(60, 72 - extraDigits * 6) : 88;
+  const scoreLineHeight = scoreFontSize + 2;
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -166,19 +170,23 @@ export default function CategoryDetailScreen() {
               <View className="relative">
                 {/* 3D Drop Shadow Text Layer */}
                 <Text
-                  className="text-8xl font-black text-primary/20 absolute top-1.5 left-1.5"
-                  style={{ lineHeight: 90 }}
+                  className="font-black text-primary/20 absolute top-1.5 left-1.5"
+                  style={{ fontSize: scoreFontSize, lineHeight: scoreLineHeight }}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  minimumFontScale={0.8}
                 >
-                  {hasScore ? category.score : "--"}
+                  {scoreText}
                 </Text>
                 {/* Main Text Layer */}
                 <Text
-                  className="text-8xl font-black text-primary"
-                  style={{
-                    lineHeight: 90,
-                  }}
+                  className="font-black text-primary"
+                  style={{ fontSize: scoreFontSize, lineHeight: scoreLineHeight }}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  minimumFontScale={0.8}
                 >
-                  {hasScore ? category.score : "--"}
+                  {scoreText}
                 </Text>
               </View>
 
