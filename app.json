@@ -52,6 +52,7 @@
       "expo-apple-authentication",
       "expo-video",
       "expo-localization",
+      "expo-notifications",
       [
         "expo-build-properties",
         {

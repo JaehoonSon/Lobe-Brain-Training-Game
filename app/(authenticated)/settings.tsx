@@ -11,6 +11,7 @@ import {
   Cake,
   Languages,
   Check,
+  Bell,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
@@ -25,6 +26,8 @@ import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
 import { appMetadata } from "~/config";
 import { supabase } from "~/lib/supabase";
+import { useNotifications } from "~/contexts/NotificationProvider";
+import { Switch } from "~/components/ui/switch";
 import { normalizeLocale } from "~/lib/locale";
 import {
   getPreferredLanguage,
@@ -56,7 +59,6 @@ const SUPPORTED_LANGUAGES: Option[] = [
   { value: "ru", label: "Русский" },
 ];
 
-
 // Get version info from app.json via expo-constants
 const appVersion = Constants.expoConfig?.version ?? "1.0.0";
 const buildNumber =
@@ -70,8 +72,11 @@ export default function Settings() {
   const { isPro, presentPaywall, currentOffering } = useRevenueCat();
   const [birthday, setBirthday] = useState<string | null>(null);
   const [languagePreference, setLanguagePreference] = useState<string | null>(
-    null
+    null,
   );
+  const { expoPushToken, requestPermission, disableNotifications } =
+    useNotifications();
+  const isNotificationsEnabled = expoPushToken !== null;
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -148,7 +153,7 @@ export default function Settings() {
       playHaptic("light");
       await logout();
     } catch (err) {
-      showErrorToast(t('common.error_generic'));
+      showErrorToast(t("common.error_generic"));
     }
   };
 
@@ -167,32 +172,34 @@ export default function Settings() {
 
   const handleDeleteAccount = () => {
     Alert.alert(
-      t('settings.alerts.delete_confirm_title'),
-      t('settings.alerts.delete_confirm_msg'),
+      t("settings.alerts.delete_confirm_title"),
+      t("settings.alerts.delete_confirm_msg"),
       [
-        { text: t('common.cancel'), style: "cancel" },
+        { text: t("common.cancel"), style: "cancel" },
         {
-          text: t('settings.alerts.delete_btn'),
+          text: t("settings.alerts.delete_btn"),
           style: "destructive",
           onPress: async () => {
             try {
               playHaptic("light");
               await logout();
             } catch (err) {
-              showErrorToast(t('common.error_generic'));
+              showErrorToast(t("common.error_generic"));
             }
           },
         },
       ],
-      { cancelable: true }
+      { cancelable: true },
     );
   };
 
   // Get membership label
-  const membershipLabel = isPro ? t('settings.labels.pro_member') : t('settings.labels.free_member');
+  const membershipLabel = isPro
+    ? t("settings.labels.pro_member")
+    : t("settings.labels.free_member");
   const membershipDescription = isPro
-    ? t('settings.labels.pro_desc')
-    : t('settings.labels.free_desc');
+    ? t("settings.labels.pro_desc")
+    : t("settings.labels.free_desc");
 
   const systemOption: Option = {
     value: SYSTEM_LANGUAGE_VALUE,
@@ -202,9 +209,9 @@ export default function Settings() {
   const selectedLanguage =
     resolvedPreference === SYSTEM_LANGUAGE_VALUE
       ? systemOption
-      : SUPPORTED_LANGUAGES.find(
-        (lang) => lang && lang.value === normalizeLocale(resolvedPreference)
-      ) ?? systemOption;
+      : (SUPPORTED_LANGUAGES.find(
+          (lang) => lang && lang.value === normalizeLocale(resolvedPreference),
+        ) ?? systemOption);
   const languageOptions = [systemOption, ...SUPPORTED_LANGUAGES];
 
   return (
@@ -216,21 +223,25 @@ export default function Settings() {
       >
         {/* Header */}
         {/* Header */}
-        <H1 className="px-6 pt-6 mb-2 text-3xl font-black">{t('settings.title')}</H1>
+        <H1 className="px-6 pt-6 mb-2 text-3xl font-black">
+          {t("settings.title")}
+        </H1>
 
         {/* Settings List */}
         <View className="px-6">
           {/* My Information Section */}
-          <SectionHeader>{t('settings.sections.my_info')}</SectionHeader>
+          <SectionHeader>{t("settings.sections.my_info")}</SectionHeader>
           <Card className="overflow-hidden">
             <View className="flex-row items-center px-4 py-3.5">
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <User size={18} className="text-foreground" />
               </View>
               <View className="flex-1">
-                <Muted className="text-sm font-bold">{t('settings.labels.email')}</Muted>
+                <Muted className="text-sm font-bold">
+                  {t("settings.labels.email")}
+                </Muted>
                 <P className="text-lg font-bold text-foreground">
-                  {user?.email || t('common.not_set')}
+                  {user?.email || t("common.not_set")}
                 </P>
               </View>
             </View>
@@ -242,57 +253,27 @@ export default function Settings() {
                     <Cake size={18} className="text-foreground" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-sm font-bold">{t('settings.labels.birthday')}</Muted>
-                    <P className="text-lg font-bold text-foreground">{birthday}</P>
+                    <Muted className="text-sm font-bold">
+                      {t("settings.labels.birthday")}
+                    </Muted>
+                    <P className="text-lg font-bold text-foreground">
+                      {birthday}
+                    </P>
                   </View>
                 </View>
               </>
             )}
           </Card>
 
-          {/* Preferences Section */}
-          <SectionHeader>{t('common.language')}</SectionHeader>
-          <Card className="overflow-hidden">
-            <View className="flex-row items-center px-4 py-1">
-              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
-                <Languages size={18} className="text-foreground" />
-              </View>
-              <View className="flex-1">
-                <Select value={selectedLanguage} onValueChange={handleLanguageChange}>
-                  <SelectTrigger className="border-0 bg-transparent px-3 h-12 w-full shadow-none active:bg-muted/20">
-                    <SelectValue
-                      className="text-lg font-bold text-foreground"
-                      placeholder={t('common.language')}
-                    />
-                  </SelectTrigger>
-                  <SelectContent className="w-[250px] native:w-[280px]" portalHost="settings-portal">
-                    <SelectGroup>
-                      <SelectLabel>{t('common.language')}</SelectLabel>
-                      {languageOptions.map((lang) => lang && (
-                        <SelectItem
-                          key={lang.value}
-                          label={lang.label}
-                          value={lang.value}
-                        />
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </View>
-            </View>
-          </Card>
-
           {/* Membership Section */}
-          <SectionHeader>{t('settings.sections.membership')}</SectionHeader>
+          <SectionHeader>{t("settings.sections.membership")}</SectionHeader>
           <Card className="overflow-hidden">
             <TouchableOpacity
               className="flex-row items-center px-4 py-3.5"
               onPress={handleMembershipPress}
               activeOpacity={0.6}
             >
-              <View
-                className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted"
-              >
+              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <Crown
                   size={18}
                   className={isPro ? "text-primary" : "text-foreground"}
@@ -300,12 +281,15 @@ export default function Settings() {
               </View>
               <View className="flex-1">
                 <P
-                  className={`text-lg font-black ${isPro ? "text-primary" : "text-foreground"
-                    }`}
+                  className={`text-lg font-black ${
+                    isPro ? "text-primary" : "text-foreground"
+                  }`}
                 >
                   {membershipLabel}
                 </P>
-                <Muted className="text-sm font-bold">{membershipDescription}</Muted>
+                <Muted className="text-sm font-bold">
+                  {membershipDescription}
+                </Muted>
               </View>
               {!isPro && (
                 <ChevronRight size={18} className="text-muted-foreground" />
@@ -313,55 +297,125 @@ export default function Settings() {
             </TouchableOpacity>
           </Card>
 
+          {/* Notifications Section */}
+          <SectionHeader>{t("settings.sections.notifications")}</SectionHeader>
+          <Card className="overflow-hidden">
+            <View className="flex-row items-center px-4 py-3.5">
+              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
+                <Bell size={18} className="text-foreground" />
+              </View>
+              <View className="flex-1">
+                <P className="text-lg font-bold text-foreground">
+                  {t("settings.labels.push_notifications")}
+                </P>
+              </View>
+              <Switch
+                checked={isNotificationsEnabled}
+                onCheckedChange={async (checked) => {
+                  playHaptic("medium");
+                  if (checked) {
+                    await requestPermission();
+                  } else {
+                    await disableNotifications();
+                  }
+                }}
+              />
+            </View>
+          </Card>
+
+          {/* Preferences Section */}
+          <SectionHeader>{t("common.language")}</SectionHeader>
+          <Card className="overflow-hidden">
+            <View className="flex-row items-center px-4 py-1">
+              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
+                <Languages size={18} className="text-foreground" />
+              </View>
+              <View className="flex-1">
+                <Select
+                  value={selectedLanguage}
+                  onValueChange={handleLanguageChange}
+                >
+                  <SelectTrigger className="border-0 bg-transparent px-3 h-12 w-full shadow-none active:bg-muted/20">
+                    <SelectValue
+                      className="text-lg font-bold text-foreground"
+                      placeholder={t("common.language")}
+                    />
+                  </SelectTrigger>
+                  <SelectContent
+                    className="w-[250px] native:w-[280px]"
+                    portalHost="settings-portal"
+                  >
+                    <SelectGroup>
+                      <SelectLabel>{t("common.language")}</SelectLabel>
+                      {languageOptions.map(
+                        (lang) =>
+                          lang && (
+                            <SelectItem
+                              key={lang.value}
+                              label={lang.label}
+                              value={lang.value}
+                            />
+                          ),
+                      )}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </View>
+            </View>
+          </Card>
+
           {/* Legal Section */}
-          <SectionHeader>{t('settings.sections.legal')}</SectionHeader>
+          <SectionHeader>{t("settings.sections.legal")}</SectionHeader>
           <Card className="overflow-hidden">
             <SettingRow
               icon={ShieldCheck}
-              label={t('settings.labels.privacy')}
+              label={t("settings.labels.privacy")}
               onPress={handle_privacy}
             />
             <Divider />
             <SettingRow
               icon={BookText}
-              label={t('settings.labels.terms')}
+              label={t("settings.labels.terms")}
               onPress={handle_tos}
             />
             <Divider />
             <SettingRow
               icon={BookText}
-              label={t('settings.labels.license')}
+              label={t("settings.labels.license")}
               onPress={handle_eula}
             />
           </Card>
 
           {/* Account Section */}
-          <SectionHeader>{t('settings.sections.account')}</SectionHeader>
+          <SectionHeader>{t("settings.sections.account")}</SectionHeader>
           <Card className="overflow-hidden">
             <SettingRow
               icon={LogOut}
-              label={t('settings.actions.logout')}
+              label={t("settings.actions.logout")}
               onPress={handleLogout}
               variant="destructive"
             />
             <Divider />
             <SettingRow
               icon={Trash}
-              label={t('settings.actions.delete_account')}
+              label={t("settings.actions.delete_account")}
               onPress={handleDeleteAccount}
               variant="destructive"
             />
           </Card>
 
           {/* About Section */}
-          <SectionHeader>{t('settings.sections.about')}</SectionHeader>
+          <SectionHeader>{t("settings.sections.about")}</SectionHeader>
           <Card className="overflow-hidden">
             <View className="flex-row items-center px-4 py-3.5">
               <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
                 <Info size={18} className="text-foreground" />
               </View>
               <P className="flex-1 text-lg font-bold text-foreground">
-                {t('settings.labels.version', { version: appVersion, build: buildNumber })}
+                {t("settings.labels.version", {
+                  version: appVersion,
+                  build: buildNumber,
+                })}
               </P>
             </View>
           </Card>
@@ -381,8 +435,6 @@ function SectionHeader({ children }: { children: React.ReactNode }) {
     </P>
   );
 }
-
-
 
 function Divider() {
   return <View className="h-px bg-border/50 ml-14" />;
@@ -410,8 +462,9 @@ function SettingRow({
       activeOpacity={0.6}
     >
       <View
-        className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${isDestructive ? "bg-destructive/10" : "bg-muted"
-          }`}
+        className={`w-8 h-8 rounded-lg items-center justify-center mr-3 ${
+          isDestructive ? "bg-destructive/10" : "bg-muted"
+        }`}
       >
         <Icon
           size={18}
@@ -419,8 +472,9 @@ function SettingRow({
         />
       </View>
       <P
-        className={`flex-1 text-lg font-bold ${isDestructive ? "text-destructive" : "text-foreground"
-          }`}
+        className={`flex-1 text-lg font-bold ${
+          isDestructive ? "text-destructive" : "text-foreground"
+        }`}
       >
         {label}
       </P>
