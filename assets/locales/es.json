@@ -69,6 +69,12 @@
   "onboarding": {
     "error_step": "Paso {{step}} no encontrado.",
     "steps": {
+      "notifications": {
+        "title": "No te pierdas tu entrenamiento",
+        "description": "Es mucho más probable que aprendas más con la práctica constante. Recibe recordatorios diarios para mantener tu racha.",
+        "enable_button": "Activar notificaciones",
+        "skip_button": "Quizás más tarde"
+      },
       "birthday": {
         "title": "¿Cuándo es tu cumpleaños?",
         "description": "Usamos esto para personalizar tu experiencia.",
@@ -117,7 +123,7 @@
       },
       "premium_features": {
         "badge": "Desbloquea Todo",
-        "title": "Obtén más con\nBrain App Premium",
+        "title": "Obtén más con\nLobe Pro",
         "slides": [
           {
             "title": "Recomendaciones\ndiarias personalizadas",

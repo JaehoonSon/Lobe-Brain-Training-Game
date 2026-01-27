@@ -69,6 +69,12 @@
   "onboarding": {
     "error_step": "Étape {{step}} introuvable.",
     "steps": {
+      "notifications": {
+        "title": "Ne manquez pas votre entraînement",
+        "description": "Vous êtes bien plus susceptible d'apprendre davantage avec une pratique régulière. Recevez des rappels quotidiens pour garder votre série.",
+        "enable_button": "Activer les notifications",
+        "skip_button": "Peut-être plus tard"
+      },
       "birthday": {
         "title": "Quelle est votre date de naissance ?",
         "description": "Nous l'utilisons pour personnaliser votre expérience.",
@@ -117,7 +123,7 @@
       },
       "premium_features": {
         "badge": "Débloquez tout",
-        "title": "Obtenez plus avec\nBrain App Premium",
+        "title": "Obtenez plus avec\nLobe Pro",
         "slides": [
           {
             "title": "Recommandations\nquotidiennes personnalisées",

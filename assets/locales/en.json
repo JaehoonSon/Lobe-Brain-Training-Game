@@ -69,6 +69,12 @@
   "onboarding": {
     "error_step": "Step {{step}} not found.",
     "steps": {
+      "notifications": {
+        "title": "Don't miss your training",
+        "description": "You are way more likely to learn more with consistent practice. Get daily reminders to keep your streak alive.",
+        "enable_button": "Enable Notifications",
+        "skip_button": "Maybe Later"
+      },
       "birthday": {
         "title": "When is your birthday?",
         "description": "We use this to personalize your experience.",
@@ -117,7 +123,7 @@
       },
       "premium_features": {
         "badge": "Unlock Everything",
-        "title": "Get more with\nBrain App Premium",
+        "title": "Get more with\nLobe Pro",
         "slides": [
           {
             "title": "Personalized daily\nrecommendations",

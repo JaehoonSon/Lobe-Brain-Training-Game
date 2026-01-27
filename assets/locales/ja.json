@@ -69,6 +69,12 @@
   "onboarding": {
     "error_step": "ステップ{{step}}が見つかりません。",
     "steps": {
+      "notifications": {
+        "title": "トレーニングをお見逃しなく",
+        "description": "継続的に練習することで、より多くのことを学べる可能性が高まります。毎日のリマインダーを受け取り、ストリークを維持しましょう。",
+        "enable_button": "通知を有効にする",
+        "skip_button": "後で"
+      },
       "birthday": {
         "title": "誕生日はいつですか？",
         "description": "パーソナライズされた体験を提供するために使用します。",
@@ -117,7 +123,7 @@
       },
       "premium_features": {
         "badge": "全ての機能をアンロック",
-        "title": "Brain App Premiumで\nもっと多くの機能を",
+        "title": "Lobe Proで\nもっと多くの機能を",
         "slides": [
           {
             "title": "パーソナライズされた\n毎日のおすすめ",

@@ -20,7 +20,9 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
-  const slidesData = t('onboarding.steps.premium_features.slides', { returnObjects: true }) as any[];
+  const slidesData = t("onboarding.steps.premium_features.slides", {
+    returnObjects: true,
+  }) as any[];
 
   const slides = slidesData.map((slide, index) => ({
     ...slide,
@@ -61,10 +63,10 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           className="pt-4 px-6 items-center"
         >
           <Text className="text-xl font-bold text-primary uppercase tracking-widest mb-2">
-            {t('onboarding.steps.premium_features.badge')}
+            {t("onboarding.steps.premium_features.badge")}
           </Text>
           <Text className="text-4xl font-black text-center text-foreground mb-4">
-            {t('onboarding.steps.premium_features.title')}
+            {t("onboarding.steps.premium_features.title")}
           </Text>
         </Animated.View>
 
@@ -115,8 +117,9 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
               <Animated.View
                 key={index}
                 layout={LinearTransition.springify().damping(15).stiffness(100)}
-                className={`h-2 rounded-full ${isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
-                  }`}
+                className={`h-2 rounded-full ${
+                  isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
+                }`}
               />
             );
           })}
@@ -132,7 +135,7 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           onPress={onNext}
         >
           <Text className="font-bold text-xl text-primary-foreground">
-            {t('common.continue')}
+            {t("common.continue")}
           </Text>
         </Button>
       </Animated.View>

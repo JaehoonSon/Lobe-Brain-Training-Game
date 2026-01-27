@@ -69,6 +69,12 @@
   "onboarding": {
     "error_step": "Schritt {{step}} nicht gefunden.",
     "steps": {
+      "notifications": {
+        "title": "Verpassen Sie Ihr Training nicht",
+        "description": "Mit konsequenter Übung lernen Sie viel wahrscheinlicher mehr. Erhalten Sie tägliche Erinnerungen, um Ihren Streak am Leben zu erhalten.",
+        "enable_button": "Benachrichtigungen aktivieren",
+        "skip_button": "Vielleicht später"
+      },
       "birthday": {
         "title": "Wann ist Ihr Geburtstag?",
         "description": "Wir verwenden dies, um Ihre Erfahrung zu personalisieren.",
@@ -117,7 +123,7 @@
       },
       "premium_features": {
         "badge": "Alles freischalten",
-        "title": "Mehr erhalten mit\nBrain App Premium",
+        "title": "Mehr erhalten mit\nLobe Pro",
         "slides": [
           {
             "title": "Personalisierte täglichliche\nEmpfehlungen",

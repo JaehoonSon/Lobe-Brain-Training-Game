@@ -69,6 +69,12 @@
   "onboarding": {
     "error_step": "未找到步骤 {{step}}。",
     "steps": {
+      "notifications": {
+        "title": "不要错过你的训练",
+        "description": "通过持续的练习，你更有可能学到更多。获取每日提醒以保持你的连胜。",
+        "enable_button": "启用通知",
+        "skip_button": "稍后再说"
+      },
       "birthday": {
         "title": "您的生日是？",
         "description": "我们会使用此信息为您个性化体验。",
@@ -117,7 +123,7 @@
       },
       "premium_features": {
         "badge": "解锁全部功能",
-        "title": "Brain App Premium\n带来更多功能",
+        "title": "使用 Lobe Pro\n获得更多功能",
         "slides": [
           {
             "title": "个性化的每日\n推荐",

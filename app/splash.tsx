@@ -2,9 +2,11 @@ import { SplashScreen } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
+import LottieView from "lottie-react-native";
 
 const SPLASH_BG_COLOR = "#fe7939"; // Primary Theme Orange
-const MIN_DISPLAY_TIME = 2000; // reduced from 5000ms
+const MIN_DISPLAY_TIME = 600; // 600ms delay
+
 const PROFILE_LOAD_FALLBACK_MS = 8000;
 
 export function SplashScreenController() {
@@ -67,6 +69,16 @@ export function SplashScreenController() {
         style={styles.image}
         resizeMode="contain"
       />
+      {minTimeElapsed && (
+        <View style={styles.lottieContainer}>
+          <LottieView
+            source={require("~/assets/animations/dotloading.lottie.json")}
+            autoPlay
+            loop
+            style={styles.lottie}
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -82,6 +94,18 @@ const styles = StyleSheet.create({
   image: {
     width: "80%",
     height: "80%",
+  },
+  lottieContainer: {
+    position: "absolute",
+    bottom: 50,
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  lottie: {
+    width: "100%",
+    height: "100%",
   },
 });
 

@@ -30,6 +30,7 @@ import PlanRevealStep from "./steps/PlanRevealStep";
 import PaywallScreen from "../paywall";
 import DailyStreakStep from "./steps/DailyStreakStep";
 import PremiumFeaturesStep from "./steps/PremiumFeaturesStep";
+import NotificationPermissionStep from "./steps/NotificationPermissionStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -164,15 +165,18 @@ export const STEPS: StepConfig[] = [
       options: [
         {
           label: "onboarding.steps.goals.attention.options.productivity",
-          description: "onboarding.steps.goals.attention.options.productivity_desc",
+          description:
+            "onboarding.steps.goals.attention.options.productivity_desc",
         },
         {
           label: "onboarding.steps.goals.attention.options.multitasking",
-          description: "onboarding.steps.goals.attention.options.multitasking_desc",
+          description:
+            "onboarding.steps.goals.attention.options.multitasking_desc",
         },
         {
           label: "onboarding.steps.goals.attention.options.concentration",
-          description: "onboarding.steps.goals.attention.options.concentration_desc",
+          description:
+            "onboarding.steps.goals.attention.options.concentration_desc",
         },
         {
           label: "onboarding.steps.goals.attention.options.dividing",
@@ -202,19 +206,23 @@ export const STEPS: StepConfig[] = [
       options: [
         {
           label: "onboarding.steps.goals.problem_solving.options.logic",
-          description: "onboarding.steps.goals.problem_solving.options.logic_desc",
+          description:
+            "onboarding.steps.goals.problem_solving.options.logic_desc",
         },
         {
           label: "onboarding.steps.goals.problem_solving.options.math",
-          description: "onboarding.steps.goals.problem_solving.options.math_desc",
+          description:
+            "onboarding.steps.goals.problem_solving.options.math_desc",
         },
         {
           label: "onboarding.steps.goals.problem_solving.options.planning",
-          description: "onboarding.steps.goals.problem_solving.options.planning_desc",
+          description:
+            "onboarding.steps.goals.problem_solving.options.planning_desc",
         },
         {
           label: "onboarding.steps.goals.problem_solving.options.spatial",
-          description: "onboarding.steps.goals.problem_solving.options.spatial_desc",
+          description:
+            "onboarding.steps.goals.problem_solving.options.spatial_desc",
         },
       ],
     },
@@ -523,7 +531,7 @@ export const STEPS: StepConfig[] = [
       ],
     },
   },
-  // Step: Sleep Duration
+  // // Step: Sleep Duration
   {
     title: "onboarding.steps.sleep.title",
     description: "",
@@ -539,7 +547,7 @@ export const STEPS: StepConfig[] = [
       ],
     },
   },
-  // Step: Training Frequency
+  // // Step: Training Frequency
   {
     title: "onboarding.steps.frequency.training_title",
     description: "onboarding.steps.frequency.training_subtitle",
@@ -554,6 +562,16 @@ export const STEPS: StepConfig[] = [
         "onboarding.steps.frequency.options.6_days",
         "onboarding.steps.frequency.options.7_days",
       ],
+    },
+  },
+  // Step: Notification Permission
+  {
+    title: "Notification Permission",
+    description: "",
+    step: {
+      type: "custom",
+      component: NotificationPermissionStep,
+      fullscreen: true,
     },
   },
   // Step: Plan Creation Loading
@@ -608,9 +626,9 @@ export default function OnboardingOrchestrator() {
 
   if (!stepConfig) {
     return (
-      <WizardLayout title={t('common.error')} nextDisabled>
+      <WizardLayout title={t("common.error")} nextDisabled>
         <Text className="text-destructive text-center text-xl">
-          {t('onboarding.error_step', { step: currentStep })}
+          {t("onboarding.error_step", { step: currentStep })}
         </Text>
       </WizardLayout>
     );
@@ -674,13 +692,19 @@ export default function OnboardingOrchestrator() {
             onBack={handlePrev}
             title={t(stepConfig.step.title)}
             description={t(stepConfig.step.description)}
-            buttonText={stepConfig.step.buttonText ? t(stepConfig.step.buttonText) : undefined}
+            buttonText={
+              stepConfig.step.buttonText
+                ? t(stepConfig.step.buttonText)
+                : undefined
+            }
             variant={stepConfig.step.variant}
           />
         );
       }
       default:
-        return <Text className="text-destructive">{t('common.error_generic')}</Text>;
+        return (
+          <Text className="text-destructive">{t("common.error_generic")}</Text>
+        );
     }
   };
 
