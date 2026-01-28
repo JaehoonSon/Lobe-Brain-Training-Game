@@ -54,12 +54,62 @@ export function useAnalytics() {
 
 function AnalyticsBridge({ children }: { children: React.ReactNode }) {
   const posthog = usePostHog();
-  const { user } = useAuth();
+  const { user, isLoading: isAuthLoading } = useAuth();
   const appState = useRef(AppState.currentState);
   const sessionStartTime = useRef<Date | null>(null);
   const hasTrackedInitialOpen = useRef(false);
+  const hasIdentifiedUser = useRef(false);
 
-  // Track app_opened and session_start
+  // Identify user when auth resolves
+  useEffect(() => {
+    if (!posthog || isAuthLoading) return;
+
+    if (user?.id && !hasIdentifiedUser.current) {
+      hasIdentifiedUser.current = true;
+      posthog.identify(user.id, {
+        $set: {
+          email: user.email ?? null,
+        },
+        $set_once: {
+          first_seen_at: new Date().toISOString(),
+        },
+      });
+    } else if (!user?.id && hasIdentifiedUser.current) {
+      // User signed out
+      hasIdentifiedUser.current = false;
+      posthog.reset();
+    }
+  }, [posthog, user?.id, user?.email, isAuthLoading]);
+
+  // Track app_opened and session_start AFTER auth resolves
+  useEffect(() => {
+    if (!posthog || isAuthLoading) return;
+    if (hasTrackedInitialOpen.current) return;
+
+    const appVersion = Constants.expoConfig?.version ?? "unknown";
+    const buildNumber =
+      Constants.expoConfig?.ios?.buildNumber ??
+      Constants.expoConfig?.android?.versionCode?.toString() ??
+      "unknown";
+
+    // Auth has resolved - now we can track with correct identity
+    hasTrackedInitialOpen.current = true;
+    sessionStartTime.current = new Date();
+
+    posthog.capture("app_opened", {
+      open_type: "cold_start",
+      app_version: appVersion,
+      app_build: buildNumber,
+      platform: Platform.OS,
+    });
+
+    posthog.capture("session_start", {
+      app_version: appVersion,
+      platform: Platform.OS,
+    });
+  }, [posthog, isAuthLoading]);
+
+  // Track app state changes (foreground/background)
   useEffect(() => {
     if (!posthog) return;
 
@@ -69,25 +119,6 @@ function AnalyticsBridge({ children }: { children: React.ReactNode }) {
       Constants.expoConfig?.android?.versionCode?.toString() ??
       "unknown";
 
-    // Track initial app open (cold start)
-    if (!hasTrackedInitialOpen.current) {
-      hasTrackedInitialOpen.current = true;
-      sessionStartTime.current = new Date();
-
-      posthog.capture("app_opened", {
-        open_type: "cold_start",
-        app_version: appVersion,
-        app_build: buildNumber,
-        platform: Platform.OS,
-      });
-
-      posthog.capture("session_start", {
-        app_version: appVersion,
-        platform: Platform.OS,
-      });
-    }
-
-    // Track app state changes (foreground/background)
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       // App came to foreground from background
       if (
@@ -130,23 +161,6 @@ function AnalyticsBridge({ children }: { children: React.ReactNode }) {
       subscription.remove();
     };
   }, [posthog]);
-
-  useEffect(() => {
-    if (!posthog) return;
-
-    if (user?.id) {
-      posthog.identify(user.id, {
-        $set: {
-          email: user.email ?? null,
-        },
-        $set_once: {
-          first_seen_at: new Date().toISOString(),
-        },
-      });
-    } else {
-      posthog.reset();
-    }
-  }, [posthog, user?.email, user?.id]);
 
   const value = useMemo<AnalyticsContextValue>(
     () => ({
