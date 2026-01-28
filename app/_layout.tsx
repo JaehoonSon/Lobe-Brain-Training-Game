@@ -30,6 +30,7 @@ import {
 import Toast from "react-native-toast-message";
 import { toastConfig } from "~/components/ui/toast";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { NotificationProvider } from "~/contexts/NotificationProvider";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -167,10 +168,12 @@ export default function RootLayout() {
           <PostHogProvider>
             <OnboardingProvider>
               <RevenueCatProvider>
+                <NotificationProvider>
                 <SplashScreenController />
-                <AppContent />
-                <Toast config={toastConfig} />
-              </RevenueCatProvider>
+                  <AppContent />
+                  <Toast config={toastConfig} />
+                </NotificationProvider>
+            </RevenueCatProvider>
             </OnboardingProvider>
           </PostHogProvider>
         </AuthProvider>

@@ -1,605 +1,600 @@
 {
-    "common": {
-        "welcome": "Willkommen bei Brain App",
-        "today_training": "Heutiges Training",
-        "settings": "Einstellungen",
-        "language": "Sprache",
-        "system": "System",
-        "save": "Speichern",
-        "cancel": "Abbrechen",
-        "start": "Starten",
+  "common": {
+    "welcome": "Willkommen bei Brain App",
+    "today_training": "Heutiges Training",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "system": "System",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "start": "Starten",
+    "continue": "Weiter",
+    "error": "Fehler",
+    "loading": "Wird geladen...",
+    "not_set": "Nicht festgelegt",
+    "error_generic": "Ein Fehler ist aufgetreten",
+    "error_signing_in": "Fehler beim Anmelden",
+    "go_back": "Zurück",
+    "skip": "Überspringen",
+    "loading_game": "Spiel wird geladen...",
+    "game": "Spiel",
+    "optional": "(Optional)",
+    "categories": {
+      "memory": "Gedächtnis",
+      "focus": "Fokus",
+      "logic": "Logik",
+      "speed": "Geschwindigkeit",
+      "language": "Sprache",
+      "general": "Allgemein"
+    }
+  },
+  "home": {
+    "greeting": "Hallo, {{name}}!",
+    "start_session": "Sitzung starten"
+  },
+  "unauth": {
+    "landing": {
+      "title": "Entdecken Sie, was Ihr Geist tun kann",
+      "subtitle": "Registrieren Sie sich kostenlos, um Ihr Gehirn zu trainieren.",
+      "get_started": "Loslegen",
+      "login": "Anmelden",
+      "legal": "Durch die Registrierung stimmen Sie unseren Nutzungsbedingungen, der Datenschutzerklärung und der CA-Datenschutzerklärung zu."
+    },
+    "signup": {
+      "title": "Lass uns anfangen",
+      "subtitle": "Erstellen Sie Ihr Konto, um zu beginnen",
+      "apple_button": "Mit Apple fortfahren",
+      "google_button": "Mit Google fortfahren",
+      "privacy_policy": "Datenschutzerklärung",
+      "terms_of_service": "Nutzungsbedingungen",
+      "agreement_intro": "Mit dem Fortfahren stimmen Sie unseren ",
+      "agreement_and": " und "
+    },
+    "welcome": {
+      "title": "Willkommen bei Brain App",
+      "motto": "Trainieren Sie Ihr Gehirn. Schärfen Sie Ihren Verstand.",
+      "think_faster": "Schneller denken",
+      "think_faster_desc": "Verbessern Sie Ihre Verarbeitungsgeschwindigkeit",
+      "sharpen_focus": "Fokus schärfen",
+      "sharpen_focus_desc": "Steigern Sie Ihre Konzentration",
+      "enhance_memory": "Gedächtnis verbessern",
+      "enhance_memory_desc": "Besser und länger erinnern",
+      "legal_intro": "Durch die Nutzung dieser App stimmen Sie unseren ",
+      "legal_and": " und ",
+      "terms": "Bedingungen",
+      "privacy": "Datenschutzerklärung",
+      "get_started": "Loslegen"
+    }
+  },
+  "onboarding": {
+    "error_step": "Schritt {{step}} nicht gefunden.",
+    "steps": {
+      "notifications": {
+        "title": "Verpassen Sie Ihr Training nicht",
+        "description": "Mit konsequenter Übung lernen Sie viel wahrscheinlicher mehr. Erhalten Sie tägliche Erinnerungen, um Ihren Streak am Leben zu erhalten.",
+        "enable_button": "Benachrichtigungen aktivieren",
+        "skip_button": "Vielleicht später"
+      },
+      "birthday": {
+        "title": "Wann ist Ihr Geburtstag?",
+        "description": "Wir verwenden dies, um Ihre Erfahrung zu personalisieren.",
+        "month": "Monat",
+        "day": "Tag",
+        "year": "Jahr",
         "continue": "Weiter",
-        "error": "Fehler",
-        "loading": "Wird geladen...",
-        "not_set": "Nicht festgelegt",
-        "error_generic": "Ein Fehler ist aufgetreten",
-        "error_signing_in": "Fehler beim Anmelden",
-        "go_back": "Zurück",
-        "skip": "Überspringen",
-        "loading_game": "Spiel wird geladen...",
-        "game": "Spiel",
-        "optional": "(Optional)",
-        "categories": {
-            "memory": "Gedächtnis",
-            "focus": "Fokus",
-            "logic": "Logik",
-            "speed": "Geschwindigkeit",
-            "language": "Sprache",
-            "general": "Allgemein"
-        }
-    },
-    "home": {
-        "greeting": "Hallo, {{name}}!",
-        "start_session": "Sitzung starten"
-    },
-    "unauth": {
-        "landing": {
-            "title": "Entdecken Sie, was Ihr Geist tun kann",
-            "subtitle": "Registrieren Sie sich kostenlos, um Ihr Gehirn zu trainieren.",
-            "get_started": "Loslegen",
-            "login": "Anmelden",
-            "legal": "Durch die Registrierung stimmen Sie unseren Nutzungsbedingungen, der Datenschutzerklärung und der CA-Datenschutzerklärung zu."
+        "skip": "Für jetzt überspringen"
+      },
+      "welcome": {
+        "title": "Willkommen in Ihrem persönlichen Plan",
+        "subtitle": "Wir erstellen einen maßgeschneiderten Plan, um Ihnen zu helfen:",
+        "goals": {
+          "focus": "Schärfen Sie Ihren Fokus",
+          "memory": "Verbessern Sie Ihr Gedächtnis",
+          "speed": "Schneller denken"
         },
-        "signup": {
-            "title": "Lass uns anfangen",
-            "subtitle": "Erstellen Sie Ihr Konto, um zu beginnen",
-            "apple_button": "Mit Apple fortfahren",
-            "google_button": "Mit Google fortfahren",
-            "privacy_policy": "Datenschutzerklärung",
-            "terms_of_service": "Nutzungsbedingungen",
-            "agreement_intro": "Mit dem Fortfahren stimmen Sie unseren ",
-            "agreement_and": " und "
+        "begin": "Lass uns anfangen"
+      },
+      "plan_creation": {
+        "title": "Erstellung Ihres\n30-Tage-Plans",
+        "subtitle": "Analyse Ihrer Vorlieben..."
+      },
+      "plan_reveal": {
+        "badge": "Personalisiert für Sie",
+        "title": "Ihr 30-Tage-Plan",
+        "projection": "Prognostiziert",
+        "projection_highlight": "30-40% BPI-Zuwachs",
+        "projection_suffix": "im ersten Monat.",
+        "features": {
+          "baseline": "An Ihre Basiswerte angepasst",
+          "schedule": "Effektiver 3x/Woche-Zeitplan",
+          "proven": "Wissenschaftlich bewiesenes Wachstum"
         },
-        "welcome": {
-            "title": "Willkommen bei Brain App",
-            "motto": "Trainieren Sie Ihr Gehirn. Schärfen Sie Ihren Verstand.",
-            "think_faster": "Schneller denken",
-            "think_faster_desc": "Verbessern Sie Ihre Verarbeitungsgeschwindigkeit",
-            "sharpen_focus": "Fokus schärfen",
-            "sharpen_focus_desc": "Steigern Sie Ihre Konzentration",
-            "enhance_memory": "Gedächtnis verbessern",
-            "enhance_memory_desc": "Besser und länger erinnern",
-            "legal_intro": "Durch die Nutzung dieser App stimmen Sie unseren ",
-            "legal_and": " und ",
-            "terms": "Bedingungen",
-            "privacy": "Datenschutzerklärung",
-            "get_started": "Loslegen"
-        }
-    },
-    "onboarding": {
-        "error_step": "Schritt {{step}} nicht gefunden.",
-        "steps": {
-            "birthday": {
-                "title": "Wann ist Ihr Geburtstag?",
-                "description": "Wir verwenden dies, um Ihre Erfahrung zu personalisieren.",
-                "month": "Monat",
-                "day": "Tag",
-                "year": "Jahr",
-                "continue": "Weiter",
-                "skip": "Für jetzt überspringen"
-            },
-            "welcome": {
-                "title": "Willkommen in Ihrem persönlichen Plan",
-                "subtitle": "Wir erstellen einen maßgeschneiderten Plan, um Ihnen zu helfen:",
-                "goals": {
-                    "focus": "Schärfen Sie Ihren Fokus",
-                    "memory": "Verbessern Sie Ihr Gedächtnis",
-                    "speed": "Schneller denken"
-                },
-                "begin": "Lass uns anfangen"
-            },
-            "plan_creation": {
-                "title": "Erstellung Ihres\n30-Tage-Plans",
-                "subtitle": "Analyse Ihrer Vorlieben..."
-            },
-            "plan_reveal": {
-                "badge": "Personalisiert für Sie",
-                "title": "Ihr 30-Tage-Plan",
-                "projection": "Prognostiziert",
-                "projection_highlight": "30-40% BPI-Zuwachs",
-                "projection_suffix": "im ersten Monat.",
-                "features": {
-                    "baseline": "An Ihre Basiswerte angepasst",
-                    "schedule": "Effektiver 3x/Woche-Zeitplan",
-                    "proven": "Wissenschaftlich bewiesenes Wachstum"
-                },
-                "start": "Training starten"
-            },
-            "thank_you": {
-                "title": "Das war der letzte.\nGroßartige Arbeit!",
-                "subtitle_prefix": "Wir bestimmen jetzt Ihre Fähigkeiten in",
-                "subtitle_suffix": "basierend auf Ihrer Leistung."
-            },
-            "daily_streak": {
-                "title": "Sie haben eine neue\nTägliche Serie gestartet!",
-                "days": [
-                    "S",
-                    "M",
-                    "D",
-                    "M",
-                    "D",
-                    "F",
-                    "S"
-                ],
-                "subtext": "Absolvieren Sie täglich ein Spiel, um Ihre Serie aufzubauen."
-            },
-            "premium_features": {
-                "badge": "Alles freischalten",
-                "title": "Mehr erhalten mit\nBrain App Premium",
-                "slides": [
-                    {
-                        "title": "Personalisierte täglichliche\nEmpfehlungen",
-                        "description": "Erstellt unter Verwendung Ihrer Aktivitätsmuster und Trainingsvorlieben."
-                    },
-                    {
-                        "title": "Wissenschaftlich basierte Spiele",
-                        "description": "Bleiben Sie stets herausgefordert mit Spielen, die sich Ihrem Fähigkeitsniveau anpassen."
-                    },
-                    {
-                        "title": "Leistungsverfolgung",
-                        "description": "Erhalten Sie Einblicke in Ihren Fortschritt während Ihrer Gehirn-Trainingsreise."
-                    }
-                ]
-            },
-            "interests": {
-                "title": "Lass uns mit Ihren Interessen beginnen",
-                "subtitle": "Wählen Sie bis zu 3",
-                "options": [
-                    "Ich möchte meinen Geist aktiv und herausgefordert halten",
-                    "Ich mag es, mich selbst zu verbessern",
-                    "Ich möchte mein Gedächtnis und meine Aufmerksamkeit trainieren",
-                    "Ich bin neugierig, wie mein Gehirn funktioniert",
-                    "Ich möchte Stress bewältigen und bessere Gewohnheiten aufbauen"
-                ]
-            },
-            "affirmations": {
-                "muscle": {
-                    "headline": "Das Gehirn ist wie ein Muskel.",
-                    "subtext": "Trainieren Sie es täglich. Nur wenige Minuten pro Tag können eine lebenslange Gewohnheit schaffen."
-                },
-                "community": {
-                    "headline": "Sie sind in guter Gesellschaft",
-                    "subtext": "Über 100 Millionen Menschen haben ihr Gedächtnis auf Brain App trainiert — viele tun es täglich!"
-                },
-                "focus": {
-                    "headline": "Laser-Fokus geladen.",
-                    "subtext": "Das Training Ihrer Aufmerksamkeit kann Ihnen helfen, in der Zone zu bleiben, wenn es am meisten zählt."
-                },
-                "solved": {
-                    "headline": "Gelöst!",
-                    "subtext": "Fordern Sie Ihre Logik täglich, um Ihren Verstand scharf und flexibel zu halten."
-                },
-                "transition": {
-                    "headline": "Das ging um Ihre Ziele",
-                    "subtext": "Lassen Sie uns Sie jetzt besser kennenlernen, damit wir Ihr Training und Feedback anpassen können."
-                },
-                "meet_you": {
-                    "headline": "Schön, Sie kennenzulernen!",
-                    "subtext": "Als Nächstes kalibrieren wir Ihr Trainingsprogramm an Ihr aktuelles Niveau."
-                },
-                "baseline": {
-                    "headline": "Jetzt, da wir Ihre Basiswerte haben",
-                    "subtext": "Lassen Sie uns einen Programm nur für Sie entwerfen."
-                }
-            },
-            "goals": {
-                "memory": {
-                    "title": "Gedächtnis",
-                    "description": "Welche Aspekte Ihres Gedächtnisses möchten Sie trainieren?",
-                    "options": {
-                        "working": "Arbeitsgedächtnis",
-                        "working_desc": "Informationen behalten und bearbeiten",
-                        "face": "Gesichts-Namen-Erinnerung",
-                        "face_desc": "Namen von Personen erinnern und zuordnen",
-                        "spatial": "Räumliches Gedächtnis",
-                        "spatial_desc": "Speichern und Erinnern von Orten und Positionen",
-                        "long_term": "Langzeitgedächtnis",
-                        "long_term_desc": "Informationen für zukünftige Erinnerung behalten"
-                    }
-                },
-                "attention": {
-                    "title": "Aufmerksamkeit",
-                    "description": "Welche Aspekte Ihrer Aufmerksamkeit möchten Sie verbessern?",
-                    "options": {
-                        "productivity": "Produktivität",
-                        "productivity_desc": "Länger bei Aufgaben fokussiert bleiben",
-                        "multitasking": "Multitasking",
-                        "multitasking_desc": "Effizient zwischen Aufgaben wechseln",
-                        "concentration": "Konzentration",
-                        "concentration_desc": "Ablenkungen vermeiden",
-                        "dividing": "Aufmerksamkeit teilen",
-                        "dividing_desc": "Auf mehrere Quellen gleichzeitig fokussieren"
-                    }
-                },
-                "problem_solving": {
-                    "title": "Problemlösung",
-                    "description": "Welche Fähigkeiten möchten Sie schärfen?",
-                    "options": {
-                        "logic": "Logisches Denken",
-                        "logic_desc": "Argumente analysieren und Ideen verknüpfen",
-                        "math": "Mathematik-Fähigkeiten",
-                        "math_desc": "Schneller und genauer rechnen",
-                        "planning": "Planung",
-                        "planning_desc": "Vorausdenken und strategisieren",
-                        "spatial": "Räumliche Orientierung",
-                        "spatial_desc": "Objekte visualisieren und manipulieren"
-                    }
-                }
-            },
-            "profile": {
-                "gender": {
-                    "title": "Was ist Ihr Geschlecht?",
-                    "description": "Dies hilft uns, Ihnen zu zeigen, wie Sie sich mit ähnlichen Mitgliedern in unserer Community vergleichen. (Optional)",
-                    "options": [
-                        "Männlich",
-                        "Weiblich",
-                        "Nicht-binär",
-                        "Keine Angabe"
-                    ]
-                },
-                "education": {
-                    "title": "Was ist der höchste Bildungsabschluss, den Sie abgeschlossen haben?",
-                    "options": [
-                        "Teilweise abgeschlossene weiterführende Schule",
-                        "Weiterführende Schule",
-                        "Teilweise abgeschlossene Hochschule/Universität",
-                        "Associate Degree",
-                        "Hochschulabschluss (BA/BS)",
-                        "Master",
-                        "Berufsabschluss",
-                        "Promotion",
-                        "Keine Angabe"
-                    ]
-                },
-                "referral": {
-                    "title": "Wie haben Sie von Brain App erfahren?",
-                    "options": [
-                        "Arzt oder Gesundheitsdienstleister",
-                        "Freund oder Familie",
-                        "App Store",
-                        "Play Store",
-                        "Soziale Medien (z.B. Facebook)",
-                        "Suche (z.B. Google)",
-                        "Anderes"
-                    ]
-                }
-            },
-            "difficulty": {
-                "title": "Welcher Schwierigkeitsgrad möchten Sie?",
-                "options": {
-                    "standard": "Standard (empfohlen)",
-                    "standard_desc": "Ich mag den Ausgleich zwischen Spaß und Herausforderung.",
-                    "advanced": "Fortgeschritten",
-                    "advanced_desc": "Ich bin hier, um hart zu arbeiten."
-                }
-            },
-            "encouragement": {
-                "title": "Welche Art der Ermutigung hilft Ihnen, motiviert zu bleiben?",
-                "options": {
-                    "high_fives": "High-Fives",
-                    "high_fives_desc": "Feiern Sie alle meine Erfolge.",
-                    "tough_love": "Tough Love",
-                    "tough_love_desc": "Drängen Sie mich, auf dem richtigen Kurs zu bleiben."
-                }
-            },
-            "frequency": {
-                "exercise_title": "Wie oft trainieren Sie physisch?",
-                "training_title": "An wie vielen Tagen pro Woche können Sie trainieren?",
-                "training_subtitle": "Personen, die 5 Tage trainieren, erzielen die größten Leistungssteigerungen.",
-                "options": {
-                    "daily": "Täglich oder fast täglich",
-                    "few_times": "Ein paar Mal pro Woche",
-                    "once_less": "Einmal pro Woche oder weniger",
-                    "rarely": "Selten oder nie",
-                    "3_days": "3 Tage pro Woche",
-                    "4_days": "4 Tage pro Woche",
-                    "5_days": "5 Tage pro Woche",
-                    "6_days": "6 Tage pro Woche",
-                    "7_days": "7 Tage pro Woche"
-                }
-            },
-            "sleep": {
-                "title": "Wie viel Schlaf erhalten Sie normalerweise jede Nacht?",
-                "options": {
-                    "4_less": "4 Stunden oder weniger",
-                    "5_6": "5-6 Stunden",
-                    "7_8": "7-8 Stunden",
-                    "9_more": "9 Stunden oder mehr"
-                }
-            }
-        },
-        "games": {
-            "next_challenge": "Nächste Herausforderung",
-            "see_results": "Ergebnisse anzeigen",
-            "arithmetic": {
-                "title": "Kopfrechnen",
-                "description": "Wir werden Ihre numerische Verarbeitungsgeschwindigkeit und Genauigkeit testen.",
-                "outro_title": "Großartige Arbeit!",
-                "outro_description": "Das hat Ihre quantitativen Denkfähigkeiten gemessen."
-            },
-            "language": {
-                "title": "Verbale Flüssigkeit",
-                "description": "Lassen Sie uns jetzt Ihre Sprachverarbeitung und Ihren Wortschatz testen.",
-                "outro_title": "Ausgezeichnet!",
-                "outro_description": "Das hat Ihre verbale Unterscheidungsfähigkeiten gemessen."
-            },
-            "matrix": {
-                "title": "Gedächtnismatrix",
-                "description": "Lassen Sie uns Ihr räumliches Gedächtnis und Ihre Erinnerung testen.",
-                "outro_title": "Großartige Arbeit!",
-                "outro_description": "Das hat Ihr räumliches Gedächtnis gemessen."
-            }
-        }
-    },
-    "settings": {
-        "title": "Einstellungen",
-        "sections": {
-            "my_info": "Meine Informationen",
-            "membership": "Mitgliedschaft",
-            "legal": "Rechtliches",
-            "account": "Konto",
-            "about": "Über"
-        },
-        "labels": {
-            "email": "E-Mail",
-            "birthday": "Geburtstag",
-            "pro_member": "Pro-Mitglied",
-            "free_member": "Mitglied (eingeschränkter Zugang)",
-            "pro_desc": "Sie haben vollen Zugang zu allen Funktionen",
-            "free_desc": "Tippen zum Upgraden",
-            "privacy": "Datenschutzerklärung",
-            "terms": "Nutzungsbedingungen",
-            "license": "Lizenzvereinbarung",
-            "version": "Version {{version}} ({{build}})"
-        },
-        "actions": {
-            "logout": "Abmelden",
-            "delete_account": "Konto löschen"
-        },
-        "alerts": {
-            "delete_confirm_title": "Löschung bestätigen",
-            "delete_confirm_msg": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
-            "delete_btn": "Löschen"
-        }
-    },
-    "dashboard": {
-        "welcome_streak": "Halten Sie Ihre Serie am Laufen! 🔥",
-        "loading_workout": "Training wird geladen...",
-        "daily_insight": {
-            "title": "Täglicher Einblick",
-            "loading": "Wird geladen...",
-            "fact_loading": "Heutiges Gehirnwissen wird abgerufen...",
-            "did_you_know": "Wussten Sie?",
-            "fallback": "Ihr Gehirn ist erstaunlich! Schauen Sie morgen für ein neues Fakt.",
-            "source": "Quelle: {{source}}"
+        "start": "Training starten"
+      },
+      "thank_you": {
+        "title": "Das war der letzte.\nGroßartige Arbeit!",
+        "subtitle_prefix": "Wir bestimmen jetzt Ihre Fähigkeiten in",
+        "subtitle_suffix": "basierend auf Ihrer Leistung."
+      },
+      "daily_streak": {
+        "title": "Sie haben eine neue\nTägliche Serie gestartet!",
+        "days": ["S", "M", "D", "M", "D", "F", "S"],
+        "subtext": "Absolvieren Sie täglich ein Spiel, um Ihre Serie aufzubauen."
+      },
+      "premium_features": {
+        "badge": "Alles freischalten",
+        "title": "Mehr erhalten mit\nLobe Pro",
+        "slides": [
+          {
+            "title": "Personalisierte täglichliche\nEmpfehlungen",
+            "description": "Erstellt unter Verwendung Ihrer Aktivitätsmuster und Trainingsvorlieben."
+          },
+          {
+            "title": "Wissenschaftlich basierte Spiele",
+            "description": "Bleiben Sie stets herausgefordert mit Spielen, die sich Ihrem Fähigkeitsniveau anpassen."
+          },
+          {
+            "title": "Leistungsverfolgung",
+            "description": "Erhalten Sie Einblicke in Ihren Fortschritt während Ihrer Gehirn-Trainingsreise."
+          }
+        ]
+      },
+      "interests": {
+        "title": "Lass uns mit Ihren Interessen beginnen",
+        "subtitle": "Wählen Sie bis zu 3",
+        "options": [
+          "Ich möchte meinen Geist aktiv und herausgefordert halten",
+          "Ich mag es, mich selbst zu verbessern",
+          "Ich möchte mein Gedächtnis und meine Aufmerksamkeit trainieren",
+          "Ich bin neugierig, wie mein Gehirn funktioniert",
+          "Ich möchte Stress bewältigen und bessere Gewohnheiten aufbauen"
+        ]
+      },
+      "affirmations": {
+        "muscle": {
+          "headline": "Das Gehirn ist wie ein Muskel.",
+          "subtext": "Trainieren Sie es täglich. Nur wenige Minuten pro Tag können eine lebenslange Gewohnheit schaffen."
         },
         "community": {
-            "title": "Community & Wachstum",
-            "global_challenge": "GLOBALE HERAUSFORDERUNG",
-            "elite_focus": "Elite-Fokus",
-            "challenge_desc": "Alle spielen heute {{gameName}}! Können Sie die Top 10% erreichen?",
-            "sessions_finished": "{{count}} Sitzungen heute abgeschlossen",
-            "loading_activity": "Aktivität wird geladen..."
+          "headline": "Sie sind in guter Gesellschaft",
+          "subtext": "Über 100 Millionen Menschen haben ihr Gedächtnis auf Brain App trainiert — viele tun es täglich!"
         },
-        "quick_play": {
-            "title": "SCHNELL SPIELEN",
-            "tap_to_start": "TIPPEN ZUM STARTEN",
-            "coming_soon": "Weitere Spiele kommen bald!"
+        "focus": {
+          "headline": "Laser-Fokus geladen.",
+          "subtext": "Das Training Ihrer Aufmerksamkeit kann Ihnen helfen, in der Zone zu bleiben, wenn es am meisten zählt."
+        },
+        "solved": {
+          "headline": "Gelöst!",
+          "subtext": "Fordern Sie Ihre Logik täglich, um Ihren Verstand scharf und flexibel zu halten."
+        },
+        "transition": {
+          "headline": "Das ging um Ihre Ziele",
+          "subtext": "Lassen Sie uns Sie jetzt besser kennenlernen, damit wir Ihr Training und Feedback anpassen können."
+        },
+        "meet_you": {
+          "headline": "Schön, Sie kennenzulernen!",
+          "subtext": "Als Nächstes kalibrieren wir Ihr Trainingsprogramm an Ihr aktuelles Niveau."
+        },
+        "baseline": {
+          "headline": "Jetzt, da wir Ihre Basiswerte haben",
+          "subtext": "Lassen Sie uns einen Programm nur für Sie entwerfen."
         }
+      },
+      "goals": {
+        "memory": {
+          "title": "Gedächtnis",
+          "description": "Welche Aspekte Ihres Gedächtnisses möchten Sie trainieren?",
+          "options": {
+            "working": "Arbeitsgedächtnis",
+            "working_desc": "Informationen behalten und bearbeiten",
+            "face": "Gesichts-Namen-Erinnerung",
+            "face_desc": "Namen von Personen erinnern und zuordnen",
+            "spatial": "Räumliches Gedächtnis",
+            "spatial_desc": "Speichern und Erinnern von Orten und Positionen",
+            "long_term": "Langzeitgedächtnis",
+            "long_term_desc": "Informationen für zukünftige Erinnerung behalten"
+          }
+        },
+        "attention": {
+          "title": "Aufmerksamkeit",
+          "description": "Welche Aspekte Ihrer Aufmerksamkeit möchten Sie verbessern?",
+          "options": {
+            "productivity": "Produktivität",
+            "productivity_desc": "Länger bei Aufgaben fokussiert bleiben",
+            "multitasking": "Multitasking",
+            "multitasking_desc": "Effizient zwischen Aufgaben wechseln",
+            "concentration": "Konzentration",
+            "concentration_desc": "Ablenkungen vermeiden",
+            "dividing": "Aufmerksamkeit teilen",
+            "dividing_desc": "Auf mehrere Quellen gleichzeitig fokussieren"
+          }
+        },
+        "problem_solving": {
+          "title": "Problemlösung",
+          "description": "Welche Fähigkeiten möchten Sie schärfen?",
+          "options": {
+            "logic": "Logisches Denken",
+            "logic_desc": "Argumente analysieren und Ideen verknüpfen",
+            "math": "Mathematik-Fähigkeiten",
+            "math_desc": "Schneller und genauer rechnen",
+            "planning": "Planung",
+            "planning_desc": "Vorausdenken und strategisieren",
+            "spatial": "Räumliche Orientierung",
+            "spatial_desc": "Objekte visualisieren und manipulieren"
+          }
+        }
+      },
+      "profile": {
+        "gender": {
+          "title": "Was ist Ihr Geschlecht?",
+          "description": "Dies hilft uns, Ihnen zu zeigen, wie Sie sich mit ähnlichen Mitgliedern in unserer Community vergleichen. (Optional)",
+          "options": ["Männlich", "Weiblich", "Nicht-binär", "Keine Angabe"]
+        },
+        "education": {
+          "title": "Was ist der höchste Bildungsabschluss, den Sie abgeschlossen haben?",
+          "options": [
+            "Teilweise abgeschlossene weiterführende Schule",
+            "Weiterführende Schule",
+            "Teilweise abgeschlossene Hochschule/Universität",
+            "Associate Degree",
+            "Hochschulabschluss (BA/BS)",
+            "Master",
+            "Berufsabschluss",
+            "Promotion",
+            "Keine Angabe"
+          ]
+        },
+        "referral": {
+          "title": "Wie haben Sie von Brain App erfahren?",
+          "options": [
+            "Arzt oder Gesundheitsdienstleister",
+            "Freund oder Familie",
+            "App Store",
+            "Play Store",
+            "Soziale Medien (z.B. Facebook)",
+            "Suche (z.B. Google)",
+            "Anderes"
+          ]
+        }
+      },
+      "difficulty": {
+        "title": "Welcher Schwierigkeitsgrad möchten Sie?",
+        "options": {
+          "standard": "Standard (empfohlen)",
+          "standard_desc": "Ich mag den Ausgleich zwischen Spaß und Herausforderung.",
+          "advanced": "Fortgeschritten",
+          "advanced_desc": "Ich bin hier, um hart zu arbeiten."
+        }
+      },
+      "encouragement": {
+        "title": "Welche Art der Ermutigung hilft Ihnen, motiviert zu bleiben?",
+        "options": {
+          "high_fives": "High-Fives",
+          "high_fives_desc": "Feiern Sie alle meine Erfolge.",
+          "tough_love": "Tough Love",
+          "tough_love_desc": "Drängen Sie mich, auf dem richtigen Kurs zu bleiben."
+        }
+      },
+      "frequency": {
+        "exercise_title": "Wie oft trainieren Sie physisch?",
+        "training_title": "An wie vielen Tagen pro Woche können Sie trainieren?",
+        "training_subtitle": "Personen, die 5 Tage trainieren, erzielen die größten Leistungssteigerungen.",
+        "options": {
+          "daily": "Täglich oder fast täglich",
+          "few_times": "Ein paar Mal pro Woche",
+          "once_less": "Einmal pro Woche oder weniger",
+          "rarely": "Selten oder nie",
+          "3_days": "3 Tage pro Woche",
+          "4_days": "4 Tage pro Woche",
+          "5_days": "5 Tage pro Woche",
+          "6_days": "6 Tage pro Woche",
+          "7_days": "7 Tage pro Woche"
+        }
+      },
+      "sleep": {
+        "title": "Wie viel Schlaf erhalten Sie normalerweise jede Nacht?",
+        "options": {
+          "4_less": "4 Stunden oder weniger",
+          "5_6": "5-6 Stunden",
+          "7_8": "7-8 Stunden",
+          "9_more": "9 Stunden oder mehr"
+        }
+      }
     },
-    "games_tab": {
-        "title": "Spiele",
-        "search_placeholder": "Was möchten Sie spielen?",
-        "sections": {
-            "todays_games": "Heutige Spiele",
-            "coming_soon": "BALD VERFÜGBAR"
-        },
-        "categories": {
-            "speed": "Geschwindigkeit",
-            "memory": "Gedächtnis",
-            "attention": "Aufmerksamkeit",
-            "flexibility": "Flexibilität",
-            "problem_solving": "Problemlösung"
-        },
-        "footer_msg": "Jeden Monat neue Herausforderungen. Weiter trainieren!"
+    "games": {
+      "next_challenge": "Nächste Herausforderung",
+      "see_results": "Ergebnisse anzeigen",
+      "arithmetic": {
+        "title": "Kopfrechnen",
+        "description": "Wir werden Ihre numerische Verarbeitungsgeschwindigkeit und Genauigkeit testen.",
+        "outro_title": "Großartige Arbeit!",
+        "outro_description": "Das hat Ihre quantitativen Denkfähigkeiten gemessen."
+      },
+      "language": {
+        "title": "Verbale Flüssigkeit",
+        "description": "Lassen Sie uns jetzt Ihre Sprachverarbeitung und Ihren Wortschatz testen.",
+        "outro_title": "Ausgezeichnet!",
+        "outro_description": "Das hat Ihre verbale Unterscheidungsfähigkeiten gemessen."
+      },
+      "matrix": {
+        "title": "Gedächtnismatrix",
+        "description": "Lassen Sie uns Ihr räumliches Gedächtnis und Ihre Erinnerung testen.",
+        "outro_title": "Großartige Arbeit!",
+        "outro_description": "Das hat Ihr räumliches Gedächtnis gemessen."
+      }
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "sections": {
+      "my_info": "Meine Informationen",
+      "membership": "Mitgliedschaft",
+      "legal": "Rechtliches",
+      "account": "Konto",
+      "about": "Über",
+      "notifications": "Benachrichtigungen"
+    },
+    "labels": {
+      "email": "E-Mail",
+      "birthday": "Geburtstag",
+      "pro_member": "Pro-Mitglied",
+      "free_member": "Mitglied (eingeschränkter Zugang)",
+      "pro_desc": "Sie haben vollen Zugang zu allen Funktionen",
+      "free_desc": "Tippen zum Upgraden",
+      "privacy": "Datenschutzerklärung",
+      "terms": "Nutzungsbedingungen",
+      "license": "Lizenzvereinbarung",
+      "version": "Version {{version}} ({{build}})",
+      "push_notifications": "Push-Benachrichtigungen"
+    },
+    "actions": {
+      "logout": "Abmelden",
+      "delete_account": "Konto löschen"
+    },
+    "alerts": {
+      "delete_confirm_title": "Löschung bestätigen",
+      "delete_confirm_msg": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "delete_btn": "Löschen"
+    }
+  },
+  "dashboard": {
+    "welcome_streak": "Halten Sie Ihre Serie am Laufen! 🔥",
+    "loading_workout": "Training wird geladen...",
+    "daily_insight": {
+      "title": "Täglicher Einblick",
+      "loading": "Wird geladen...",
+      "fact_loading": "Heutiges Gehirnwissen wird abgerufen...",
+      "did_you_know": "Wussten Sie?",
+      "fallback": "Ihr Gehirn ist erstaunlich! Schauen Sie morgen für ein neues Fakt.",
+      "source": "Quelle: {{source}}"
+    },
+    "community": {
+      "title": "Community & Wachstum",
+      "global_challenge": "GLOBALE HERAUSFORDERUNG",
+      "elite_focus": "Elite-Fokus",
+      "challenge_desc": "Alle spielen heute {{gameName}}! Können Sie die Top 10% erreichen?",
+      "sessions_finished": "{{count}} Sitzungen heute abgeschlossen",
+      "loading_activity": "Aktivität wird geladen..."
+    },
+    "quick_play": {
+      "title": "SCHNELL SPIELEN",
+      "tap_to_start": "TIPPEN ZUM STARTEN",
+      "coming_soon": "Weitere Spiele kommen bald!"
+    }
+  },
+  "games_tab": {
+    "title": "Spiele",
+    "search_placeholder": "Was möchten Sie spielen?",
+    "sections": {
+      "todays_games": "Heutige Spiele",
+      "coming_soon": "BALD VERFÜGBAR"
+    },
+    "categories": {
+      "speed": "Geschwindigkeit",
+      "memory": "Gedächtnis",
+      "attention": "Aufmerksamkeit",
+      "flexibility": "Flexibilität",
+      "problem_solving": "Problemlösung"
+    },
+    "footer_msg": "Jeden Monat neue Herausforderungen. Weiter trainieren!"
+  },
+  "stats": {
+    "title": "Meine Statistiken",
+    "bpi": {
+      "overall_performance": "GESAMTLEISTUNG",
+      "brain_index": "Gehirn-Index",
+      "top_percentile": "Top {{count}}%",
+      "update_msg": "Werte werden nach jedem Spiel aktualisiert",
+      "unlock_msg": "Spielen Sie {{count}} weitere Kategorien, um freizuschalten"
+    },
+    "training_areas": "Trainingsbereiche",
+    "categories": {
+      "no_games": "Keine Spiele gespielt"
+    },
+    "analysis": {
+      "title": "Detaillierte Analyse",
+      "strength_profile": "Stärkenprofil",
+      "progress_history": "Fortschrittsverlauf"
+    },
+    "error_loading": "Statistiken konnten nicht geladen werden."
+  },
+  "insights": {
+    "title": "Einblicke",
+    "daily_read": {
+      "title": "Tägliche Lektüre",
+      "read_time": "{{count}} Min. Lesezeit"
+    },
+    "explore": {
+      "title": "Erkunden",
+      "categories": {
+        "sleep": "Schlaf",
+        "focus": "Fokus",
+        "productivity": "Produktivität",
+        "stress": "Stress"
+      }
+    },
+    "articles": {
+      "science_of_sleep": {
+        "title": "Die Wissenschaft des Schlafs",
+        "description": "Wie Schlaf die Gedächtniskonsolidierung und den Fokus beeinflusst."
+      },
+      "focus_techniques": {
+        "title": "Fokus-Techniken",
+        "description": "Tiefes Arbeiten und wie man es erreicht."
+      },
+      "growth_mindset": {
+        "title": "Wachstumsdenkweise",
+        "description": "Verständnis der Neuroplastizität."
+      }
+    }
+  },
+  "tabs": {
+    "today": "Heute",
+    "games": "Spiele",
+    "stats": "Statistiken",
+    "insights": "Einblicke",
+    "showcase": "Vitrine"
+  },
+  "streak": {
+    "title": "Trainings-Serie",
+    "this_week": "Diese Woche",
+    "stats": "Ihre Statistiken",
+    "current_streak": "Aktuelle Serie",
+    "best_streak": "Beste Serie",
+    "days_count": "{{count}} Tag",
+    "days_count_plural": "{{count}} Tage",
+    "next_milestone": "Nächstes Meilenstein",
+    "upcoming_reward": "Bevorstehende Belohnung:",
+    "reward_badge": "{{count}}-Tage-Abzeichen",
+    "why_title": "Warum Serien wichtig sind",
+    "logic_1": "Konsistentes Gehirntraining stärkt neuronale Pfade durch einen Prozess namens",
+    "neuroplasticity": "Neuroplastizität",
+    "logic_2": ": die Fähigkeit Ihres Gehirns, sich selbst neu zu verdrahten.",
+    "logic_3": "Genau wie körperliches Training bauen tägliche mentale Workouts kognitive 'Muskelgedächtnis' auf. Forschung zeigt, dass regelmäßige Übung verbessert:",
+    "benefit_1": "Arbeitsgedächtnis und Fokus",
+    "benefit_2": "Verarbeitungsgeschwindigkeit und Reaktionszeit",
+    "benefit_3": "Problemlösung und geistige Flexibilität",
+    "keep_alive": "Halten Sie Ihre Serie am Laufen, um diese Vorteile zu maximieren! 🧠"
+  },
+  "game": {
+    "loading": "Spiel wird geladen...",
+    "details": "Spieldetails",
+    "avg_bpi": "Durchschn. BPI",
+    "best_score": "Bester Punktwert",
+    "difficulty": "Schwierigkeitsgrad",
+    "badge_progress": "Abzeichen-Fortschritt",
+    "total_plays": "Gesamtspiele",
+    "unlock_pro": "Pro freischalten",
+    "start_game": "Spiel starten",
+    "preparing": "Runde wird vorbereitet...",
+    "no_questions": "Keine Fragen für dieses Spiel gefunden.",
+    "no_questions_valid": "Keine gültigen Fragen gefunden.",
+    "game_not_found": "Spiel nicht gefunden",
+    "error_load": "Spiel konnte nicht geladen werden.",
+    "not_implemented": "Spielkomponente nicht implementiert für",
+    "memory_matrix": {
+      "title": "Gedächtnismatrix",
+      "memorize": "Merken Sie das Muster...",
+      "recall": "Wählen Sie {{count}} Kacheln",
+      "checking": "Überprüfung...",
+      "loading": "Wird geladen..."
+    },
+    "wordle": {
+      "title": "Wordle",
+      "subtitle": "Raten Sie das {{count}}-Buchstaben-Wort",
+      "win": "Sie haben es! 🎉",
+      "lose": "Das Wort war: {{word}}"
+    },
+    "ball_sort": {
+      "title": "Ball-Sortierung",
+      "subtitle": "Sortieren Sie die Bälle nach Farbe",
+      "moves": "Züge: {{count}}",
+      "complete": "Perfekt! 🎉"
+    },
+    "word_unscramble": {
+      "title": "Wörter entwirren",
+      "subtitle": "Entwirren Sie die Buchstaben",
+      "hint": "Tipp: {{hint}}",
+      "correct": "Richtig! 🎉"
+    },
+    "stroop_clash": {
+      "title": "Stroop-Konflikt",
+      "subtitle": "Wählen Sie die Farbe des Textes",
+      "score": "Punkte: {{count}}",
+      "tap_color": "Auf die Farbe tippen",
+      "tap_text": "Auf den Text tippen"
+    }
+  },
+  "game_finish": {
+    "game_complete": "Spiel abgeschlossen",
+    "no_results": "Keine Spielergebnisse gefunden",
+    "feedback": {
+      "flawless_title": "Fehlerlos",
+      "flawless_sub": "0 Fehler. Sie sind wie eine makellose Süßwasserperle.",
+      "amazing_title": "Erstaunlich",
+      "amazing_sub": "So nah an der Perfektion! Ihr Fokus ist unglaublich.",
+      "great_job_title": "Großartige Arbeit",
+      "great_job_sub": "Solide Arbeit! Sie machen echte Fortschritte.",
+      "keep_going_title": "Weitermachen",
+      "keep_going_sub": "Jedes bisschen Übung hilft Ihrem Gehirn zu wachsen."
     },
     "stats": {
-        "title": "Meine Statistiken",
-        "bpi": {
-            "overall_performance": "GESAMTLEISTUNG",
-            "brain_index": "Gehirn-Index",
-            "top_percentile": "Top {{count}}%",
-            "update_msg": "Werte werden nach jedem Spiel aktualisiert",
-            "unlock_msg": "Spielen Sie {{count}} weitere Kategorien, um freizuschalten"
-        },
-        "training_areas": "Trainingsbereiche",
-        "categories": {
-            "no_games": "Keine Spiele gespielt"
-        },
-        "analysis": {
-            "title": "Detaillierte Analyse",
-            "strength_profile": "Stärkenprofil",
-            "progress_history": "Fortschrittsverlauf"
-        },
-        "error_loading": "Statistiken konnten nicht geladen werden."
+      "game_bpi": "SPIEL-BPI",
+      "accuracy": "UNGlaublich",
+      "speed": "SCHNELL"
     },
-    "insights": {
-        "title": "Einblicke",
-        "daily_read": {
-            "title": "Tägliche Lektüre",
-            "read_time": "{{count}} Min. Lesezeit"
-        },
-        "explore": {
-            "title": "Erkunden",
-            "categories": {
-                "sleep": "Schlaf",
-                "focus": "Fokus",
-                "productivity": "Produktivität",
-                "stress": "Stress"
-            }
-        },
-        "articles": {
-            "science_of_sleep": {
-                "title": "Die Wissenschaft des Schlafs",
-                "description": "Wie Schlaf die Gedächtniskonsolidierung und den Fokus beeinflusst."
-            },
-            "focus_techniques": {
-                "title": "Fokus-Techniken",
-                "description": "Tiefes Arbeiten und wie man es erreicht."
-            },
-            "growth_mindset": {
-                "title": "Wachstumsdenkweise",
-                "description": "Verständnis der Neuroplastizität."
-            }
-        }
-    },
-    "tabs": {
-        "today": "Heute",
-        "games": "Spiele",
-        "stats": "Statistiken",
-        "insights": "Einblicke",
-        "showcase": "Vitrine"
-    },
-    "streak": {
-        "title": "Trainings-Serie",
-        "this_week": "Diese Woche",
-        "stats": "Ihre Statistiken",
-        "current_streak": "Aktuelle Serie",
-        "best_streak": "Beste Serie",
-        "days_count": "{{count}} Tag",
-        "days_count_plural": "{{count}} Tage",
-        "next_milestone": "Nächstes Meilenstein",
-        "upcoming_reward": "Bevorstehende Belohnung:",
-        "reward_badge": "{{count}}-Tage-Abzeichen",
-        "why_title": "Warum Serien wichtig sind",
-        "logic_1": "Konsistentes Gehirntraining stärkt neuronale Pfade durch einen Prozess namens",
-        "neuroplasticity": "Neuroplastizität",
-        "logic_2": ": die Fähigkeit Ihres Gehirns, sich selbst neu zu verdrahten.",
-        "logic_3": "Genau wie körperliches Training bauen tägliche mentale Workouts kognitive 'Muskelgedächtnis' auf. Forschung zeigt, dass regelmäßige Übung verbessert:",
-        "benefit_1": "Arbeitsgedächtnis und Fokus",
-        "benefit_2": "Verarbeitungsgeschwindigkeit und Reaktionszeit",
-        "benefit_3": "Problemlösung und geistige Flexibilität",
-        "keep_alive": "Halten Sie Ihre Serie am Laufen, um diese Vorteile zu maximieren! 🧠"
-    },
-    "game": {
-        "loading": "Spiel wird geladen...",
-        "details": "Spieldetails",
-        "avg_bpi": "Durchschn. BPI",
-        "best_score": "Bester Punktwert",
-        "difficulty": "Schwierigkeitsgrad",
-        "badge_progress": "Abzeichen-Fortschritt",
-        "total_plays": "Gesamtspiele",
-        "unlock_pro": "Pro freischalten",
-        "start_game": "Spiel starten",
-        "preparing": "Runde wird vorbereitet...",
-        "no_questions": "Keine Fragen für dieses Spiel gefunden.",
-        "no_questions_valid": "Keine gültigen Fragen gefunden.",
-        "game_not_found": "Spiel nicht gefunden",
-        "error_load": "Spiel konnte nicht geladen werden.",
-        "not_implemented": "Spielkomponente nicht implementiert für",
-        "memory_matrix": {
-            "title": "Gedächtnismatrix",
-            "memorize": "Merken Sie das Muster...",
-            "recall": "Wählen Sie {{count}} Kacheln",
-            "checking": "Überprüfung...",
-            "loading": "Wird geladen..."
-        },
-        "wordle": {
-            "title": "Wordle",
-            "subtitle": "Raten Sie das {{count}}-Buchstaben-Wort",
-            "win": "Sie haben es! 🎉",
-            "lose": "Das Wort war: {{word}}"
-        },
-        "ball_sort": {
-            "title": "Ball-Sortierung",
-            "subtitle": "Sortieren Sie die Bälle nach Farbe",
-            "moves": "Züge: {{count}}",
-            "complete": "Perfekt! 🎉"
-        },
-        "word_unscramble": {
-            "title": "Wörter entwirren",
-            "subtitle": "Entwirren Sie die Buchstaben",
-            "hint": "Tipp: {{hint}}",
-            "correct": "Richtig! 🎉"
-        },
-        "stroop_clash": {
-            "title": "Stroop-Konflikt",
-            "subtitle": "Wählen Sie die Farbe des Textes",
-            "score": "Punkte: {{count}}",
-            "tap_color": "Auf die Farbe tippen",
-            "tap_text": "Auf den Text tippen"
-        }
-    },
-    "game_finish": {
-        "game_complete": "Spiel abgeschlossen",
-        "no_results": "Keine Spielergebnisse gefunden",
-        "feedback": {
-            "flawless_title": "Fehlerlos",
-            "flawless_sub": "0 Fehler. Sie sind wie eine makellose Süßwasserperle.",
-            "amazing_title": "Erstaunlich",
-            "amazing_sub": "So nah an der Perfektion! Ihr Fokus ist unglaublich.",
-            "great_job_title": "Großartige Arbeit",
-            "great_job_sub": "Solide Arbeit! Sie machen echte Fortschritte.",
-            "keep_going_title": "Weitermachen",
-            "keep_going_sub": "Jedes bisschen Übung hilft Ihrem Gehirn zu wachsen."
-        },
-        "stats": {
-            "game_bpi": "SPIEL-BPI",
-            "accuracy": "UNGlaublich",
-            "speed": "SCHNELL"
-        },
-        "actions": {
-            "continue": "Weiter",
-            "play_again": "Nochmal spielen"
-        }
-    },
-    "stat_detail": {
-        "not_found": "Kategorie nicht gefunden",
-        "score_title": "{{name}}-Punktwert",
-        "current_score": "aktueller Punktwert",
-        "top_percent": "Top {{count}}%",
-        "history": "Leistungsverlauf",
-        "games_title": "{{name}}-Spiele",
-        "no_games": "Noch keine Spiele in dieser Kategorie.",
-        "played_count": "{{count}} GESPIELT",
-        "best_score": "BESTE: {{score}}",
-        "new_game": "NEU",
-        "avg_score_label": "DURCHSCHN. PUNKTZAHL",
-        "recommended": "Empfohlene Lektüre"
-    },
-    "customer_center": {
-        "title": "Kundencenter"
-    },
-    "workout_card": {
-        "daily": "Täglich",
-        "focus": "Fokus",
-        "duration": "2 Min"
-    },
-    "not_found": {
-        "title": "Ups!",
-        "message": "Dieser Bildschirm existiert nicht.",
-        "go_home": "Zum Startbildschirm gehen!"
-    },
-    "feature_card": {
-        "unlock": "FREISCHALTEN",
-        "pro": "PRO",
-        "premium_msg": "Diese Funktion ist mit einem Premium-Abo verfügbar."
-    },
-    "dev_setting": {
-        "title": "Willkommen!",
-        "authenticated_as": "Sie sind als {{email}} authentifiziert",
-        "buttons": {
-            "settings": "Zu den Einstellungen gehen",
-            "onboarding": "Zum Onboarding gehen",
-            "restart_onboarding": "Onboarding neu starten",
-            "go_back_steps": "Ein paar Schritte zurückgehen",
-            "show_paywall": "Paywall präsentieren",
-            "go_paywall": "Zur Paywall gehen",
-            "showcase": "Komponenten-Vitrine"
-        }
-    },
-    "showcase": {
-        "title": "Komponenten-Vitrine",
-        "subtitle": "Alle UI-Komponenten aktualisiert, um dem \"Saftigen\" Design-System zu entsprechen"
+    "actions": {
+      "continue": "Weiter",
+      "play_again": "Nochmal spielen"
     }
+  },
+  "stat_detail": {
+    "not_found": "Kategorie nicht gefunden",
+    "score_title": "{{name}}-Punktwert",
+    "current_score": "aktueller Punktwert",
+    "top_percent": "Top {{count}}%",
+    "history": "Leistungsverlauf",
+    "games_title": "{{name}}-Spiele",
+    "no_games": "Noch keine Spiele in dieser Kategorie.",
+    "played_count": "{{count}} GESPIELT",
+    "best_score": "BESTE: {{score}}",
+    "new_game": "NEU",
+    "avg_score_label": "DURCHSCHN. PUNKTZAHL",
+    "recommended": "Empfohlene Lektüre"
+  },
+  "customer_center": {
+    "title": "Kundencenter"
+  },
+  "workout_card": {
+    "daily": "Täglich",
+    "focus": "Fokus",
+    "duration": "2 Min"
+  },
+  "not_found": {
+    "title": "Ups!",
+    "message": "Dieser Bildschirm existiert nicht.",
+    "go_home": "Zum Startbildschirm gehen!"
+  },
+  "feature_card": {
+    "unlock": "FREISCHALTEN",
+    "pro": "PRO",
+    "premium_msg": "Diese Funktion ist mit einem Premium-Abo verfügbar."
+  },
+  "dev_setting": {
+    "title": "Willkommen!",
+    "authenticated_as": "Sie sind als {{email}} authentifiziert",
+    "buttons": {
+      "settings": "Zu den Einstellungen gehen",
+      "onboarding": "Zum Onboarding gehen",
+      "restart_onboarding": "Onboarding neu starten",
+      "go_back_steps": "Ein paar Schritte zurückgehen",
+      "show_paywall": "Paywall präsentieren",
+      "go_paywall": "Zur Paywall gehen",
+      "showcase": "Komponenten-Vitrine"
+    }
+  },
+  "showcase": {
+    "title": "Komponenten-Vitrine",
+    "subtitle": "Alle UI-Komponenten aktualisiert, um dem \"Saftigen\" Design-System zu entsprechen"
+  }
 }

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lobe",
     "slug": "lobe",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/brain_logo.png",
     "scheme": "lobe",
@@ -15,7 +15,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "appStoreUrl": "https://apps.apple.com/us/app/elysia-photo-glow/id6749180620",
+      "appStoreUrl": "https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720",
       "usesAppleSignIn": true,
       "supportsTablet": false,
       "buildNumber": "1",
@@ -52,6 +52,7 @@
       "expo-apple-authentication",
       "expo-video",
       "expo-localization",
+      "expo-notifications",
       [
         "expo-build-properties",
         {

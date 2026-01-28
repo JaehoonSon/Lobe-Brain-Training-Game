@@ -6,10 +6,28 @@ import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { useTranslation } from "react-i18next";
 import Svg, { Path } from "react-native-svg";
+import { useEffect, useState } from "react";
+import { StoreReview } from "~/lib/StoreReview";
 
 export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      StoreReview.requestReview(true);
+    }, 2000);
+
+    const enableButtonTimer = setTimeout(() => {
+      setIsNextDisabled(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(enableButtonTimer);
+    };
+  }, []);
 
   return (
     <View
@@ -22,7 +40,7 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
           className="items-center gap-6 mb-12"
         >
           <Text className="text-3xl font-bold text-foreground text-center">
-            {t('onboarding.steps.thank_you.title')}
+            {t("onboarding.steps.thank_you.title")}
           </Text>
 
           {/* Bell Curve */}
@@ -41,18 +59,32 @@ export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
           </View>
 
           <Text className="text-xl text-muted-foreground text-center px-4">
-            {t('onboarding.steps.thank_you.subtitle_prefix')}{" "}
-            <Text className="text-xl font-bold text-primary">{t('common.categories.memory')}</Text>,{" "}
-            <Text className="text-xl font-bold text-primary">{t('games_tab.categories.attention')}</Text>, and{" "}
-            <Text className="text-xl font-bold text-primary">{t('games_tab.categories.problem_solving')}</Text>{" "}
-            {t('onboarding.steps.thank_you.subtitle_suffix')}
+            {t("onboarding.steps.thank_you.subtitle_prefix")}{" "}
+            <Text className="text-xl font-bold text-primary">
+              {t("common.categories.memory")}
+            </Text>
+            ,{" "}
+            <Text className="text-xl font-bold text-primary">
+              {t("games_tab.categories.attention")}
+            </Text>
+            , and{" "}
+            <Text className="text-xl font-bold text-primary">
+              {t("games_tab.categories.problem_solving")}
+            </Text>{" "}
+            {t("onboarding.steps.thank_you.subtitle_suffix")}
           </Text>
         </Animated.View>
       </View>
 
       <Animated.View entering={FadeInUp.delay(400).duration(600)}>
-        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
-          <Text className="font-bold text-xl text-primary-foreground">{t('common.continue')}</Text>
+        <Button
+          className="w-full rounded-2xl h-12 native:h-16"
+          onPress={onNext}
+          disabled={isNextDisabled}
+        >
+          <Text className="font-bold text-xl text-primary-foreground">
+            {t("common.continue")}
+          </Text>
         </Button>
       </Animated.View>
     </View>

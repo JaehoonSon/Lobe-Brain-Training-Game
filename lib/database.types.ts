@@ -348,6 +348,47 @@ export type Database = {
         }
         Relationships: []
       }
+      push_tokens: {
+        Row: {
+          created_at: string
+          device_name: string | null
+          device_type: string | null
+          expo_push_token: string
+          id: string
+          is_active: boolean
+          profile_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          device_name?: string | null
+          device_type?: string | null
+          expo_push_token: string
+          id?: string
+          is_active?: boolean
+          profile_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          device_name?: string | null
+          device_type?: string | null
+          expo_push_token?: string
+          id?: string
+          is_active?: boolean
+          profile_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "push_tokens_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       questions: {
         Row: {
           content: Json
