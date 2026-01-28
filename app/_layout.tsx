@@ -21,6 +21,7 @@ import {
   RevenueCatProvider,
   useRevenueCat,
 } from "~/contexts/RevenueCatProvider";
+import { PostHogProvider } from "~/contexts/PostHogProvider";
 import { SplashScreenController } from "./splash";
 import {
   OnboardingProvider,
@@ -163,13 +164,15 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <AppThemeProvider>
         <AuthProvider>
-          <OnboardingProvider>
-            <RevenueCatProvider>
-              <SplashScreenController />
-              <AppContent />
-              <Toast config={toastConfig} />
-            </RevenueCatProvider>
-          </OnboardingProvider>
+          <PostHogProvider>
+            <OnboardingProvider>
+              <RevenueCatProvider>
+                <SplashScreenController />
+                <AppContent />
+                <Toast config={toastConfig} />
+              </RevenueCatProvider>
+            </OnboardingProvider>
+          </PostHogProvider>
         </AuthProvider>
       </AppThemeProvider>
     </GestureHandlerRootView>

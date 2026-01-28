@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import {
   ChevronRight,
@@ -30,6 +30,7 @@ import PlanRevealStep from "./steps/PlanRevealStep";
 import PaywallScreen from "../paywall";
 import DailyStreakStep from "./steps/DailyStreakStep";
 import PremiumFeaturesStep from "./steps/PremiumFeaturesStep";
+import { useAnalytics } from "~/contexts/PostHogProvider";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -600,8 +601,10 @@ export const STEPS: StepConfig[] = [
 
 export default function OnboardingOrchestrator() {
   const { t } = useTranslation();
-  const { currentStep, nextStep, prevStep } = useOnboarding();
+  const { currentStep, nextStep, prevStep, totalSteps } = useOnboarding();
+  const { track } = useAnalytics();
   const [isNextDisabled, setIsNextDisabled] = useState(true);
+  const hasStartedRef = useRef(false);
 
   const stepIndex = currentStep - 1; // Steps are 1-indexed
   const stepConfig = STEPS[stepIndex];
@@ -617,6 +620,15 @@ export default function OnboardingOrchestrator() {
   }
 
   const handleNext = () => {
+    if (stepConfig) {
+      track("onboarding_step_complete", {
+        step_index: currentStep,
+        total_steps: totalSteps,
+        step_type: stepConfig.step.type,
+        step_title_key: stepConfig.title || undefined,
+        step_description_key: stepConfig.description || undefined,
+      });
+    }
     nextStep();
     setIsNextDisabled(true);
   };
@@ -624,6 +636,25 @@ export default function OnboardingOrchestrator() {
   const handlePrev = () => {
     prevStep();
   };
+
+  useEffect(() => {
+    if (!stepConfig) return;
+
+    if (!hasStartedRef.current && currentStep === 1) {
+      hasStartedRef.current = true;
+      track("onboarding_started", {
+        total_steps: totalSteps,
+      });
+    }
+
+    track("onboarding_step_view", {
+      step_index: currentStep,
+      total_steps: totalSteps,
+      step_type: stepConfig.step.type,
+      step_title_key: stepConfig.title || undefined,
+      step_description_key: stepConfig.description || undefined,
+    });
+  }, [currentStep, stepConfig, totalSteps, track]);
 
   // Render the appropriate template based on step type
   const renderStep = () => {

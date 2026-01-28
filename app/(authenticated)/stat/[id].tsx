@@ -23,7 +23,7 @@ import {
   Lightbulb,
   ChevronRight,
 } from "lucide-react-native";
-import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { H1, H4, P, Muted } from "~/components/ui/typography";
 import { BlurView } from "expo-blur";
 import { cn } from "~/lib/utils";
@@ -129,9 +129,7 @@ export default function CategoryDetailScreen() {
 
   const hasScore = category.score !== null;
   const scoreText = hasScore ? String(category.score) : "--";
-  const extraDigits = Math.max(0, scoreText.length - 4);
-  const scoreFontSize = scoreText.length >= 4 ? Math.max(60, 72 - extraDigits * 6) : 88;
-  const scoreLineHeight = scoreFontSize + 2;
+  const useCompactScore = scoreText.length >= 4;
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -161,7 +159,6 @@ export default function CategoryDetailScreen() {
       >
         <View className="px-6">
           {/* Hero BPI Section */}
-          {/* Hero BPI Section - Juicy Tactile Style */}
           <View className="mb-10 pt-6 flex-row items-center justify-between px-2">
             <Animated.View
               entering={FadeInDown.delay(200).duration(600)}
@@ -169,25 +166,25 @@ export default function CategoryDetailScreen() {
             >
               <View className="relative">
                 {/* 3D Drop Shadow Text Layer */}
-                <Text
-                  className="font-black text-primary/20 absolute top-1.5 left-1.5"
-                  style={{ fontSize: scoreFontSize, lineHeight: scoreLineHeight }}
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                  minimumFontScale={0.8}
-                >
-                  {scoreText}
-                </Text>
+                {useCompactScore ? (
+                  <Text className="font-black text-primary/20 absolute top-1.5 left-1.5 leading-none tracking-tight text-7xl">
+                    {scoreText}
+                  </Text>
+                ) : (
+                  <Text className="font-black text-primary/20 absolute top-1.5 left-1.5 leading-none tracking-tight text-8xl">
+                    {scoreText}
+                  </Text>
+                )}
                 {/* Main Text Layer */}
-                <Text
-                  className="font-black text-primary"
-                  style={{ fontSize: scoreFontSize, lineHeight: scoreLineHeight }}
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                  minimumFontScale={0.8}
-                >
-                  {scoreText}
-                </Text>
+                {useCompactScore ? (
+                  <Text className="font-black text-primary leading-none tracking-tight text-7xl">
+                    {scoreText}
+                  </Text>
+                ) : (
+                  <Text className="font-black text-primary leading-none tracking-tight text-8xl">
+                    {scoreText}
+                  </Text>
+                )}
               </View>
 
               <View className="-mt-1 flex-row flex-wrap gap-2">

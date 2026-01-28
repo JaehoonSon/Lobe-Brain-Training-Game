@@ -17,6 +17,7 @@ import { BallSort } from "~/components/games/BallSort";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
 import { StroopClash } from "~/components/games/StroopClash";
 import { useTranslation } from "react-i18next";
+import { useAnalytics } from "~/contexts/PostHogProvider";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -26,6 +27,7 @@ interface QuestionData {
 
 export default function GamePlayScreen() {
   const { t } = useTranslation();
+  const { track } = useAnalytics();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { user } = useAuth();
   const { games, categories } = useGames();
@@ -153,6 +155,15 @@ export default function GamePlayScreen() {
         userId: user?.id || "anonymous",
         totalQuestions: validQuestions.length,
       });
+
+      track("retention_game_session_start", {
+        game_id: id,
+        game_name: game?.name ?? undefined,
+        category_name: category?.name ?? undefined,
+        total_questions: validQuestions.length,
+        avg_question_difficulty: avgDifficulty,
+        difficulty_rating_used: difficultyRatingUsed,
+      });
     } catch (e) {
       console.error("Error starting round:", e);
       Alert.alert(t('common.error'), t('game.error_load'), [
@@ -197,6 +208,17 @@ export default function GamePlayScreen() {
     } else {
       // End of round - calculate and save BPI, then navigate to finish
       await endRound();
+      const durationMs = session.startTime
+        ? Date.now() - session.startTime
+        : undefined;
+
+      track("retention_game_session_complete", {
+        game_id: id,
+        game_name: game?.name ?? undefined,
+        category_name: category?.name ?? undefined,
+        total_questions: sessionQuestions.length,
+        duration_ms: durationMs,
+      });
       router.replace(`/game/${id}/finish`);
     }
   };

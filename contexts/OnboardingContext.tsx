@@ -4,6 +4,7 @@ import * as Haptics from "expo-haptics";
 import { STEPS } from "~/app/(onboarding)";
 import { supabase } from "~/lib/supabase";
 import { useAuth } from "./AuthProvider";
+import { useAnalytics } from "~/contexts/PostHogProvider";
 
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps
@@ -42,6 +43,7 @@ export function OnboardingProvider({
 }) {
   const { user, onboardingComplete, isProfileLoading, markOnboardingComplete } =
     useAuth();
+  const { track } = useAnalytics();
   const [currentStep, setCurrentStep] = useState(1);
   const [data, setData] = useState<OnboardingData>({});
   const [isComplete, setIsComplete] = useState(false);
@@ -176,6 +178,9 @@ export function OnboardingProvider({
       console.log("Onboarding data saved successfully");
       setIsComplete(true);
       markOnboardingComplete(); // Update AuthProvider state to trigger navigation
+      track("onboarding_completed", {
+        total_steps: TOTAL_STEPS,
+      });
       try {
         const storageKey = getOnboardingStorageKey(user.id);
         await AsyncStorage.removeItem(storageKey);
