@@ -4,6 +4,7 @@ import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CloudBackground } from "~/components/CloudBackground";
+import { useAuth } from "~/contexts/AuthProvider";
 import {
   BookOpen,
   Zap,
@@ -18,10 +19,13 @@ import {
   Sparkles,
   GraduationCap,
 } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 export default function IndexUnauthenticatedScreen() {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
+  const { isAuthenticated } = useAuth();
 
   return (
     <View className="flex-1 bg-background">
@@ -104,16 +108,24 @@ export default function IndexUnauthenticatedScreen() {
         {/* Spacer to push content to bottom when possible */}
         <View className="flex-1" />
 
-        <View className="items-center gap-4 mb-4 pt-4">
+        {isAuthenticated ? (
+          <View className="bg-destructive/10 border border-destructive/20 rounded-lg p-3 mb-6 mx-4">
+            <Text className="text-destructive font-medium text-center text-sm">
+              Having trouble loading your profile. Please try again.
+            </Text>
+          </View>
+        ) : null}
 
-          <Text className="text-5xl font-extrabold leading-[1.1] text-slate-400">
+        <View className="items-center gap-3 mb-4">
+
+          <Text className="text-4xl font-extrabold leading-tight text-slate-400">
             Lobe
           </Text>
-          <Text className="text-5xl font-extrabold text-center leading-[1.1] text-foreground">
-            Discover what your mind can do
+          <Text className="text-4xl font-extrabold text-center leading-tight text-foreground">
+            {t('unauth.landing.title')}
           </Text>
-          <Text className="text-2xl text-muted-foreground text-center px-4">
-            Sign up to train your brain for free.
+          <Text className="text-xl text-muted-foreground text-center px-4">
+            {t('unauth.landing.subtitle')}
           </Text>
         </View>
 
@@ -123,7 +135,7 @@ export default function IndexUnauthenticatedScreen() {
             className="w-full h-12 native:h-16 px-10 rounded-2xl"
             onPress={() => router.push("/(unauthenticated)/SignUp")}
           >
-            <Text className="font-bold text-2xl text-primary-foreground">Get started</Text>
+            <Text className="font-bold text-2xl text-primary-foreground">{t('unauth.landing.get_started')}</Text>
           </Button>
 
           <Button
@@ -131,13 +143,13 @@ export default function IndexUnauthenticatedScreen() {
             className="w-full h-12 native:h-16 px-10 rounded-2xl border-2"
             onPress={() => router.push("/(unauthenticated)/SignUp")}
           >
-            <Text className="font-bold text-2xl text-primary">Log in</Text>
+            <Text className="font-bold text-2xl text-primary">{t('unauth.landing.login')}</Text>
           </Button>
         </View>
 
         {/* Legal Text */}
         <Text className="text-sm text-muted-foreground text-center px-8 leading-5 mt-4">
-          By signing up, you agree to our Terms of Service, Privacy Policy, and CA Privacy.
+          {t('unauth.landing.legal')}
         </Text>
       </View>
     </View>

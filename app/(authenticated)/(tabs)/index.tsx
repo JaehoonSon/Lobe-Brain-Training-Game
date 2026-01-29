@@ -20,8 +20,15 @@ import {
 } from "lucide-react-native";
 import { router } from "expo-router";
 import { cn } from "~/lib/utils";
+import i18n from "~/lib/i18n";
 import { Database } from "~/lib/database.types";
 import { supabase } from "~/lib/supabase";
+import {
+  buildTranslationMap,
+  fetchContentTranslations,
+  resolveTranslation,
+} from "~/lib/content-translations";
+import { normalizeLocale } from "~/lib/locale";
 import { useState, useEffect } from "react";
 import React from "react";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
@@ -31,8 +38,10 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { useDailyInsight } from "~/hooks/useDailyInsight";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const { games, getDailyWorkout, dailyCompletedGameIds, refreshDailyProgress } =
     useGames();
   const { user } = useAuth();
@@ -48,6 +57,10 @@ export default function Dashboard() {
     game_name: string;
     sessions_count: number;
   } | null>(null);
+  const [dailyChallengeName, setDailyChallengeName] = useState<string | null>(
+    null
+  );
+  const [locale, setLocale] = useState(() => normalizeLocale(i18n.language));
 
   // Fetch the global daily challenge (same game for everyone)
   useEffect(() => {
@@ -59,12 +72,36 @@ export default function Dashboard() {
       console.log('[Daily Challenge] Response:', { data, error });
 
       if (!error && data && data.length > 0) {
-        setDailyChallengeGame(data[0]);
-        setCommunityCount(data[0].sessions_count);
+        const challenge = data[0];
+        setDailyChallengeGame(challenge);
+        setCommunityCount(challenge.sessions_count);
+
+        try {
+          const translations = await fetchContentTranslations(
+            "game",
+            [challenge.game_id],
+            ["name"],
+            locale
+          );
+          const translationMap = buildTranslationMap(translations);
+          setDailyChallengeName(
+            resolveTranslation(
+              translationMap,
+              challenge.game_id,
+              "name",
+              challenge.game_name
+            )
+          );
+        } catch (translationError) {
+          console.error("Error loading challenge translations:", translationError);
+          setDailyChallengeName(challenge.game_name);
+        }
+      } else {
+        setDailyChallengeName(null);
       }
     }
     fetchDailyChallenge();
-  }, []);
+  }, [locale]);
 
   React.useEffect(() => {
     // In a real app, you might want to wrap this in useMemo or similar if the date changes
@@ -89,6 +126,18 @@ export default function Dashboard() {
   // Fetch today's brain fact
   const { insight, isLoading: insightLoading } = useDailyInsight();
 
+  useEffect(() => {
+    const handleLanguageChange = (nextLocale: string) => {
+      setLocale(normalizeLocale(nextLocale));
+    };
+
+    i18n.on("languageChanged", handleLanguageChange);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, []);
+
   // Mock progress for now
   // const [completedGameIds, setCompletedGameIds] = useState<string[]>([]);
 
@@ -111,9 +160,9 @@ export default function Dashboard() {
         <View className="px-6 py-6">
           <View className="flex-row justify-between items-end mb-6">
             <View>
-              <H3 className="text-3xl font-black mb-1">Today's Training</H3>
+              <H3 className="text-3xl font-black mb-1">{t('common.today_training')}</H3>
               <P className="text-muted-foreground font-bold">
-                Keep your streak alive! 🔥
+                {t('dashboard.welcome_streak')}
               </P>
             </View>
             {/* <Link href="/(authenticated)/(tabs)/games" asChild>
@@ -159,13 +208,13 @@ export default function Dashboard() {
           ) : (
             <Card variant="muted" className="p-6 items-center justify-center">
               <P className="text-muted-foreground text-center">
-                Loading workout...
+                {t('dashboard.loading_workout')}
               </P>
             </Card>
           )}
 
           <View className="mt-8">
-            <H3 className="mb-4 text-2xl font-black">Daily Insight</H3>
+            <H3 className="mb-4 text-2xl font-black">{t('dashboard.daily_insight.title')}</H3>
             <Card variant="muted" className="p-4 flex-row items-start">
               <View className="w-12 h-12 bg-white rounded-xl mr-4 items-center justify-center shrink-0">
                 <Lightbulb className="text-secondary" size={24} strokeWidth={2.5} />
@@ -173,28 +222,28 @@ export default function Dashboard() {
               <View className="flex-1">
                 {insightLoading ? (
                   <>
-                    <H4 className="text-secondary font-black text-xl mb-1">Loading...</H4>
+                    <H4 className="text-secondary font-black text-xl mb-1">{t('dashboard.daily_insight.loading')}</H4>
                     <P className="text-muted-foreground text-sm font-bold">
-                      Fetching today's brain fact...
+                      {t('dashboard.daily_insight.fact_loading')}
                     </P>
                   </>
                 ) : insight ? (
                   <>
-                    <H4 className="text-info font-black text-xl mb-1">Did you know?</H4>
+                    <H4 className="text-info font-black text-xl mb-1">{t('dashboard.daily_insight.did_you_know')}</H4>
                     <P className="text-muted-foreground text-sm font-bold mb-2">
                       {insight.content}
                     </P>
                     {insight.source && (
                       <Muted className="text-xs italic">
-                        Source: {insight.source}
+                        {t('dashboard.daily_insight.source', { source: insight.source })}
                       </Muted>
                     )}
                   </>
                 ) : (
                   <>
-                    <H4 className="text-secondary font-black text-xl mb-1">Did you know?</H4>
+                    <H4 className="text-secondary font-black text-xl mb-1">{t('dashboard.daily_insight.did_you_know')}</H4>
                     <P className="text-muted-foreground text-sm font-bold">
-                      Your brain is amazing! Check back tomorrow for a new fact.
+                      {t('dashboard.daily_insight.fallback')}
                     </P>
                   </>
                 )}
@@ -203,7 +252,7 @@ export default function Dashboard() {
           </View>
 
           <View className="mt-10">
-            <H3 className="mb-4 text-2xl font-black">Community & Growth</H3>
+            <H3 className="mb-4 text-2xl font-black">{t('dashboard.community.title')}</H3>
 
             {/* Global Challenge Card */}
             <TouchableOpacity onPress={() => handlePlayGame(dailyChallengeGame?.game_id || '')} activeOpacity={0.8}>
@@ -211,10 +260,16 @@ export default function Dashboard() {
                 <View className="flex-row justify-between items-start mb-4">
                   <View className="flex-1">
                     <View className="bg-white/20 self-start px-2 py-0.5 rounded-md mb-2">
-                      <Text className="text-[10px] font-black text-white uppercase tracking-wider">GLOBAL CHALLENGE</Text>
+                      <Text className="text-[10px] font-black text-white uppercase tracking-wider">{t('dashboard.community.global_challenge')}</Text>
                     </View>
-                    <H4 className="text-white font-black text-2xl mb-1">Elite Focus</H4>
-                    <P className="text-white/80 font-bold leading-5">Everyone is playing {dailyChallengeGame?.game_name || 'Loading...'} today! Can you reach the top 10%?</P>
+                    <H4 className="text-white font-black text-2xl mb-1">{t('dashboard.community.elite_focus')}</H4>
+                    <P className="text-white/80 font-bold leading-5">
+                      {t('dashboard.community.challenge_desc', {
+                        gameName: dailyChallengeName ||
+                          dailyChallengeGame?.game_name ||
+                          t('common.loading'),
+                      })}
+                    </P>
                   </View>
                   <View className="w-16 h-16 bg-white/10 rounded-2xl items-center justify-center border border-white/20">
                     <Globe size={32} color="white" strokeWidth={2.5} />
@@ -223,8 +278,8 @@ export default function Dashboard() {
                 <View className="bg-white rounded-2xl py-3 items-center">
                   <Text className="text-info-edge font-black uppercase text-sm tracking-widest">
                     {communityCount !== null
-                      ? `${communityCount} Sessions Finished Today`
-                      : "Loading Activity..."}
+                      ? t('dashboard.community.sessions_finished', { count: communityCount })
+                      : t('dashboard.community.loading_activity')}
                   </Text>
                 </View>
               </Card>
@@ -241,7 +296,7 @@ export default function Dashboard() {
                     )}>
                       <View className="flex-row justify-between items-start">
                         <View className="bg-white/20 self-start px-2 py-0.5 rounded-md">
-                          <Text className="text-[10px] font-black text-white uppercase tracking-wider">QUICK PLAY</Text>
+                          <Text className="text-[10px] font-black text-white uppercase tracking-wider">{t('dashboard.quick_play.title')}</Text>
                         </View>
                         <Zap size={20} color="white" />
                       </View>
@@ -249,7 +304,7 @@ export default function Dashboard() {
                         <H4 className="text-white font-black text-lg text-center" numberOfLines={2}>{game.name}</H4>
                       </View>
                       <View className="bg-white/10 py-1.5 rounded-lg items-center">
-                        <Text className="text-white font-black text-[10px] uppercase tracking-widest">TAP TO START</Text>
+                        <Text className="text-white font-black text-[10px] uppercase tracking-widest">{t('dashboard.quick_play.tap_to_start')}</Text>
                       </View>
                     </Card>
                   </TouchableOpacity>
@@ -257,7 +312,7 @@ export default function Dashboard() {
               ))}
               {quickPlayGames.length === 0 && (
                 <Card variant="muted" className="flex-1 h-44 items-center justify-center border-b-[6px]">
-                  <Text className="text-muted-foreground font-bold">More games coming soon!</Text>
+                  <Text className="text-muted-foreground font-bold">{t('dashboard.quick_play.coming_soon')}</Text>
                 </Card>
               )}
             </View>

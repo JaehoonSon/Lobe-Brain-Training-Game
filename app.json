@@ -2,10 +2,10 @@
   "expo": {
     "name": "Lobe",
     "slug": "lobe",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/brain_logo.png",
-    "scheme": "myapp",
+    "scheme": "lobe",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -15,21 +15,29 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "appStoreUrl": "https://apps.apple.com/us/app/elysia-photo-glow/id6749180620",
+      "appStoreUrl": "https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720",
       "usesAppleSignIn": true,
       "supportsTablet": false,
       "buildNumber": "1",
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.119239050721-dhiahbraqtnql8v44qkvfcmqiud8fac6"
+            ]
+          }
+        ]
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/brain-app-logo.png",
+        "foregroundImage": "./assets/images/brain_logo_transparent.png",
         "backgroundColor": "#fa8b4b"
       },
       "package": "com.knuceles.ExpoTemplate"
@@ -44,6 +52,7 @@
       "expo-apple-authentication",
       "expo-video",
       "expo-localization",
+      "expo-notifications",
       [
         "expo-build-properties",
         {
@@ -55,7 +64,8 @@
           }
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      "@react-native-google-signin/google-signin"
     ],
     "experiments": {
       "typedRoutes": true

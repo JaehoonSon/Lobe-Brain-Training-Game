@@ -5,14 +5,16 @@ import { StyleSheet, View, Text } from "react-native";
 // Assuming it is available as per request context.
 // import { CustomerCenter } from 'react-native-purchases-ui';
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function CustomerCenterScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
       {/* CustomerCenter component might not be available in all versions or requires check */}
-      <Text>Customer Center</Text>
+      <Text>{t('customer_center.title')}</Text>
       {/* <CustomerCenter
         onDismiss={() => {
             router.back();

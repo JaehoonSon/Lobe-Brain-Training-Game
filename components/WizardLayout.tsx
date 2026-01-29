@@ -5,9 +5,9 @@ import { Progress } from "~/components/ui/progress";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useOnboarding } from "~/contexts/OnboardingContext";
-import { ChevronLeft, ChevronRight } from "lucide-react-native";
-import { useRouter } from "expo-router";
-import { cn } from "~/lib/utils";
+import { ChevronLeft } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+
 
 interface WizardLayoutProps {
   title: string;
@@ -28,10 +28,12 @@ export function WizardLayout({
   onPrev,
   showSkip = false,
   nextDisabled = false,
-  nextLabel = "Continue",
+  nextLabel,
 }: WizardLayoutProps) {
+  const { t } = useTranslation();
   const { currentStep, totalSteps, nextStep, prevStep } = useOnboarding();
-  const router = useRouter();
+  const finalNextLabel = nextLabel || t('common.continue');
+
 
   const progress = (currentStep / totalSteps) * 100;
 
@@ -51,8 +53,6 @@ export function WizardLayout({
 
     if (currentStep > 1) {
       prevStep();
-    } else {
-      router.back();
     }
   };
 
@@ -74,7 +74,7 @@ export function WizardLayout({
 
         {showSkip && (
           <Button variant="ghost" className="h-9 px-3" onPress={nextStep}>
-            <Text className="text-muted-foreground">Skip</Text>
+            <Text className="text-muted-foreground">{t('common.skip')}</Text>
           </Button>
         )}
       </View>
@@ -108,7 +108,7 @@ export function WizardLayout({
           onPress={handleNextPress}
           disabled={nextDisabled}
         >
-          <Text className="text-xl font-bold text-primary-foreground">{nextLabel}</Text>
+          <Text className="text-xl font-bold text-primary-foreground">{finalNextLabel}</Text>
         </Button>
       </View>
     </SafeAreaView>

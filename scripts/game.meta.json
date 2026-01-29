@@ -1,0 +1,111 @@
+[
+  {
+    "id": "memory_matrix",
+    "category_id": "memory",
+    "name": "Memory Matrix",
+    "description": "Test and improve your visual working memory by remembering patterns on a grid.",
+    "instructions": "A grid of tiles will briefly light up in a pattern. Memorize the pattern before it disappears. When the grid resets, tap the tiles that were highlighted. Patterns become larger and more complex as you progress.",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/memory-matrix-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/memory_matrix_game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 3
+  },
+  {
+    "id": "mental_arithmetic",
+    "category_id": "math",
+    "name": "Mental Arithmetic",
+    "description": "Solve math problems quickly and accurately using only mental calculation.",
+    "instructions": "You will be shown a math problem. Calculate the answer mentally and select or enter the correct result. Answer as quickly and accurately as possible. Difficulty and speed increase over time.",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/mental-arithmetic-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/mental_arithmetic_game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 8
+  },
+  {
+    "id": "mental_language_discrimination",
+    "category_id": "language",
+    "name": "Language Discrimination",
+    "description": "Improve language precision by choosing the correct word or phrase in context.",
+    "instructions": "You will see a sentence with a missing word or phrase. Select the option that best completes the sentence. Pay attention to grammar, meaning, and subtle differences between choices.",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/mental-language-discrimination-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/mental-language-discrimination-game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 8
+  },
+  {
+    "id": "wordle",
+    "category_id": "language",
+    "name": "Wordle",
+    "description": "Guess the hidden word by using letter clues from each attempt.",
+    "instructions": "You have a limited number of guesses to find the secret word. After each guess, letters will be highlighted: green means correct position, yellow means the letter exists but in a different position, and gray means the letter is not in the word.",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/wordle-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/wordle-game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 1
+  },
+  {
+    "id": "ball_sort",
+    "category_id": "attention",
+    "name": "Ball Sort",
+    "description": "Sort all matching colorful balls into their own tubes using strategic moves.\r\n\r\n",
+    "instructions": "Several test tubes will appear containing a mix of colorful balls. Tap a tube to pick up the top ball, then tap another tube to move it. Sort the balls so that each tube eventually contains only one matching color. The puzzles become more challenging with more tubes and colors as you progress.",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/ball_sort_game_square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/ball_sort_game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 5
+  },
+  {
+    "id": "word_unscramble",
+    "category_id": "language",
+    "name": "Word Unscramble",
+    "description": "Rearrange the scrambled letters to form the correct word.",
+    "instructions": "Tap letters from the pool to move them into the answer slots. Tap a placed letter to return it to the pool. Use the hint if you get stuck!",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 5
+  },
+  {
+    "id": "math_rocket",
+    "category_id": "math",
+    "name": "Math Rocket",
+    "description": "Keep your rocket afloat by solving math problems! Be quick!",
+    "instructions": "Answer math questions to boost your rocket. Don't let it crash!",
+    "icon_url": "rocket",
+    "banner_url": null,
+    "is_active": false,
+    "created_at": "2026-01-15 04:20:24.554962+00",
+    "is_pro_only": false,
+    "recommended_rounds": 3
+  },
+  {
+    "id": "tangram_puzzle",
+    "category_id": "problem_solving",
+    "name": "Tangram Puzzle",
+    "description": "Arrange the fragments to recreate the shape.",
+    "instructions": null,
+    "icon_url": "shapes",
+    "banner_url": null,
+    "is_active": false,
+    "is_pro_only": false,
+    "recommended_rounds": 3
+  },
+  {
+    "id": "stroop_clash",
+    "category_id": "attention",
+    "name": "Stroop Clash",
+    "description": "Identify the color or the word under pressure.",
+    "instructions": "Tap the button that matches the requested task (COLOR or TEXT).",
+    "icon_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game-square.png",
+    "banner_url": "https://rvpbpvbzmtwkmbcxegmg.supabase.co/storage/v1/object/public/game-assets/stroop-clash-game.jpg",
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 10
+  }
+]

@@ -14,19 +14,31 @@ import { Database } from "~/lib/database.types";
 type GameSession = Database["public"]["Tables"]["game_sessions"]["Row"];
 type UserGamePerformance =
   Database["public"]["Tables"]["user_game_performance"]["Row"];
-type UserGamePerformanceHistory =
-  Database["public"]["Tables"]["user_game_performance_history"]["Row"];
-type GlobalGamePerformanceHistory =
-  Database["public"]["Tables"]["global_game_performance_history"]["Row"];
+type UserGameAbilityScore =
+  Database["public"]["Tables"]["user_game_ability_scores"]["Row"];
+type UserCategoryAbilityScore =
+  Database["public"]["Tables"]["user_category_ability_scores"]["Row"];
+type UserGameAbilityHistory =
+  Database["public"]["Tables"]["user_game_ability_history"]["Row"];
+
+type UserCategoryAbilityHistory =
+  Database["public"]["Tables"]["user_category_ability_history"]["Row"];
+
+type UserGlobalAbilityHistory =
+  Database["public"]["Tables"]["user_global_ability_history"]["Row"];
+
+
 
 export interface GameStats {
   gameId: string;
   gameName: string;
   categoryId: string;
   averageScore: number | null;
+  percentile: number | null;
   highestScore: number | null;
   gamesPlayed: number;
   currentRating: number; // Difficulty rating 1-10
+
 }
 
 export interface GlobalStats {
@@ -49,23 +61,30 @@ export interface CategoryStats {
   gameStats: GameStats[];
 }
 
+export interface ScoreHistoryPoint {
+  date: string;
+  score: number;
+}
+
 export interface UserStatsContextValue {
   overallBPI: number | null;
+  overallPercentile: number | null;
   currentStreak: number;
   totalGamesPlayed: number;
   categoryStats: CategoryStats[];
   recentSessions: GameSession[];
-  history: UserGamePerformanceHistory[];
-  globalStats: Map<string, GlobalStats>;
-  overallPercentile: number | null;
+  overallScoreHistory: ScoreHistoryPoint[];
+  categoryScoreHistory: Record<string, ScoreHistoryPoint[]>;
+  gameScoreHistory: Record<string, ScoreHistoryPoint[]>;
   isLoading: boolean;
   error: Error | null;
   refresh: () => Promise<void>;
 }
 
-// Maximum expected BPI for normalization (used for progress bars)
-// Based on scoring formula: Base(100) + Speed(50) = 150 max performance × 1.1 difficulty multiplier ≈ 165
-const MAX_EXPECTED_BPI = 165;
+
+const MAX_EXPECTED_BPI = 2000;
+
+
 
 // Minimum categories required for Overall BPI calculation
 const MIN_CATEGORIES_FOR_OVERALL = 3;
@@ -78,13 +97,14 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
 
   const [categoryStats, setCategoryStats] = useState<CategoryStats[]>([]);
   const [recentSessions, setRecentSessions] = useState<GameSession[]>([]);
-  const [history, setHistory] = useState<UserGamePerformanceHistory[]>([]);
-  const [globalStats, setGlobalStats] = useState<Map<string, GlobalStats>>(
-    new Map()
-  );
   const [currentStreak, setCurrentStreak] = useState(0);
+  const [globalScore, setGlobalScore] = useState<number | null>(null);
+  const [overallScoreHistory, setOverallScoreHistory] = useState<ScoreHistoryPoint[]>([]);
+  const [categoryScoreHistory, setCategoryScoreHistory] = useState<Record<string, ScoreHistoryPoint[]>>({});
+  const [gameScoreHistory, setGameScoreHistory] = useState<Record<string, ScoreHistoryPoint[]>>({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
 
   const fetchStats = useCallback(async () => {
     if (!user?.id) {
@@ -96,95 +116,150 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(true);
       setError(null);
 
-      // Fetch recent game sessions for display (averages come from user_game_performance)
-      const { data: sessions, error: sessionsError } = await supabase
-        .from("game_sessions")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false })
-        .limit(20);
+      const historyStart = new Date();
+      historyStart.setDate(historyStart.getDate() - 30);
+      const historyStartDate = historyStart.toISOString().slice(0, 10);
+
+      const [
+        { data: sessions, error: sessionsError },
+        { data: gamePerformance, error: perfError },
+        { data: gameAbilityScores, error: percentilesError },
+        { data: categoryAbilityScores, error: categoryAbilityScoresError },
+        { data: globalScoreRow, error: globalScoreError },
+        { data: gameAbilityHistory, error: gameHistoryError },
+        { data: categoryAbilityHistory, error: categoryHistoryError },
+        { data: globalAbilityHistory, error: globalHistoryError },
+        { data: streakData, error: streakError },
+      ] = await Promise.all([
+        supabase
+          .from("game_sessions")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", { ascending: false })
+          .limit(20),
+        supabase
+          .from("user_game_performance")
+          .select("*")
+          .eq("user_id", user.id),
+        supabase
+          .from("user_game_ability_scores")
+          .select("*")
+          .eq("user_id", user.id),
+        supabase
+          .from("user_category_ability_scores")
+          .select("*")
+          .eq("user_id", user.id),
+        supabase
+          .from("user_global_ability_scores")
+          .select("*")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+        supabase
+          .from("user_game_ability_history")
+          .select("game_id, ability_score, snapshot_date")
+          .eq("user_id", user.id)
+          .gte("snapshot_date", historyStartDate)
+          .order("snapshot_date", { ascending: true }),
+        supabase
+          .from("user_category_ability_history")
+          .select("category_id, ability_score, snapshot_date")
+          .eq("user_id", user.id)
+          .gte("snapshot_date", historyStartDate)
+          .order("snapshot_date", { ascending: true }),
+        supabase
+          .from("user_global_ability_history")
+          .select("ability_score, snapshot_date")
+          .eq("user_id", user.id)
+          .gte("snapshot_date", historyStartDate)
+          .order("snapshot_date", { ascending: true }),
+        supabase
+          .from("user_streaks")
+          .select("current_streak")
+          .eq("user_id", user.id)
+          .single(),
+      ]);
+
 
       if (sessionsError) throw sessionsError;
-
-      // Fetch per-game aggregates (for averages, highs, games played, difficulty rating)
-      const { data: gamePerformance, error: perfError } = await supabase
-        .from("user_game_performance")
-        .select("*")
-        .eq("user_id", user.id);
-
       if (perfError) throw perfError;
-
-      // Fetch performance history
-      const { data: historyData, error: historyError } = await supabase
-        .from("user_game_performance_history")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false });
-
-      if (historyError) throw historyError;
-
-      // Fetch streak data
-      const { data: streakData, error: streakError } = await supabase
-        .from("user_streaks")
-        .select("current_streak")
-        .eq("user_id", user.id)
-        .single();
-
+      if (percentilesError) throw percentilesError;
+      if (categoryAbilityScoresError) throw categoryAbilityScoresError;
+      if (globalScoreError) throw globalScoreError;
+      if (gameHistoryError) throw gameHistoryError;
+      if (categoryHistoryError) throw categoryHistoryError;
+      if (globalHistoryError) throw globalHistoryError;
       if (streakError && streakError.code !== "PGRST116") {
-        // PGRST116 means no rows found, which is fine for a new user
+
         throw streakError;
       }
 
-      // Fetch Global Performance History (Latest only)
-      const { data: globalData, error: globalError } = await supabase
-        .from("global_game_performance_history")
-        .select("*")
-        .order("snapshot_date", { ascending: false });
-
-      if (globalError) throw globalError;
-
-      // Process global stats
-      const latestGlobalStats = new Map<string, GlobalStats>();
-      const processedGames = new Set<string>();
-
-      (globalData || []).forEach((row) => {
-        if (!processedGames.has(row.game_id)) {
-          // Calculate Global Average Score Per Game
-          const avgGamesPlayed = row.games_played_count || 1;
-          const avgTotalScore = row.total_score || 0;
-          const avgScorePerGame = Math.round(avgTotalScore / avgGamesPlayed);
-
-          latestGlobalStats.set(row.game_id, {
-            gameId: row.game_id,
-            averageScore: avgScorePerGame,
-            averageDifficulty: row.difficulty_rating,
-            averageGamesPlayed: avgGamesPlayed,
-            averageHighestScore: row.highest_score || 0,
-          });
-          processedGames.add(row.game_id);
-        }
-      });
-
       setRecentSessions(sessions || []);
-      setHistory(historyData || []);
       setCurrentStreak(streakData?.current_streak ?? 0);
-      setGlobalStats(latestGlobalStats);
+      setGlobalScore(globalScoreRow?.ability_score ?? null);
 
-      // Build a map of game_id -> UserGamePerformance
       const performanceMap = new Map<string, UserGamePerformance>();
+
       (gamePerformance || []).forEach((perf) => {
         performanceMap.set(perf.game_id, perf);
       });
 
-      // Build a map of game_id -> category_id and game_id -> game
-      const gameToCategoryMap = new Map<string, string>();
-      const gameMap = new Map<string, (typeof games)[0]>();
-      games.forEach((game) => {
-        gameMap.set(game.id, game);
-        if (game.category_id) {
-          gameToCategoryMap.set(game.id, game.category_id);
-        }
+      const abilityScoreMap = new Map<string, UserGameAbilityScore>();
+
+      (gameAbilityScores || []).forEach((abilityScore) => {
+        abilityScoreMap.set(abilityScore.game_id, abilityScore);
       });
+
+      const categoryAbilityScoreMap = new Map<string, UserCategoryAbilityScore>();
+      (categoryAbilityScores || []).forEach((score) => {
+        categoryAbilityScoreMap.set(score.category_id, score);
+      });
+
+      const gameHistoryRows = (gameAbilityHistory || []) as UserGameAbilityHistory[];
+      const categoryHistoryRows =
+        (categoryAbilityHistory || []) as UserCategoryAbilityHistory[];
+      const globalHistoryRows =
+        (globalAbilityHistory || []) as UserGlobalAbilityHistory[];
+
+      const gameHistory: Record<string, ScoreHistoryPoint[]> = {};
+      gameHistoryRows.forEach((row) => {
+        const date = row.snapshot_date;
+        if (!date) return;
+        const gameId = row.game_id;
+        const gamePoints = gameHistory[gameId] || [];
+        gamePoints.push({ date, score: row.ability_score });
+        gameHistory[gameId] = gamePoints;
+      });
+
+      Object.values(gameHistory).forEach((points) => {
+        points.sort((a, b) => a.date.localeCompare(b.date));
+      });
+
+      const categoryHistory: Record<string, ScoreHistoryPoint[]> = {};
+      categoryHistoryRows.forEach((row) => {
+        const date = row.snapshot_date;
+        if (!date) return;
+        const categoryId = row.category_id;
+        const points = categoryHistory[categoryId] || [];
+        points.push({ date, score: row.ability_score });
+        categoryHistory[categoryId] = points;
+      });
+
+      Object.values(categoryHistory).forEach((points) => {
+        points.sort((a, b) => a.date.localeCompare(b.date));
+      });
+
+      const overallHistory = globalHistoryRows
+        .filter((row) => row.snapshot_date)
+        .map((row) => ({
+          date: row.snapshot_date as string,
+          score: row.ability_score,
+        }))
+        .sort((a, b) => a.date.localeCompare(b.date));
+
+      setGameScoreHistory(gameHistory);
+      setCategoryScoreHistory(categoryHistory);
+      setOverallScoreHistory(overallHistory);
+
 
       // Calculate per-game stats from aggregates
       const allGameStats: GameStats[] = games
@@ -193,18 +268,19 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
           const perf = performanceMap.get(game.id);
 
           const gamesPlayed = perf?.games_played_count ?? 0;
-          const averageScore =
-            perf && gamesPlayed > 0
-              ? Math.round((perf.total_score || 0) / gamesPlayed)
-              : null;
+          const abilityScore = abilityScoreMap.get(game.id);
+          const averageScore = abilityScore?.ability_score ?? null;
+          const percentile = abilityScore?.percentile ?? null;
           const highestScore = perf?.highest_score ?? null;
           const currentRating = perf?.difficulty_rating ?? 1.0;
+
 
           return {
             gameId: game.id,
             gameName: game.name,
             categoryId: game.category_id!,
             averageScore,
+            percentile,
             highestScore,
             gamesPlayed,
             currentRating,
@@ -223,29 +299,14 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       const stats: CategoryStats[] = categories.map((category) => {
         const gameStats = categoryGameStatsMap.get(category.id) || [];
 
-        // Aggregate across all games in this category
-        const gamesWithScores = gameStats.filter(
-          (gs) => gs.averageScore !== null
-        );
         const totalGamesPlayed = gameStats.reduce(
           (sum, gs) => sum + gs.gamesPlayed,
           0
         );
-
-        // Category average weighted by games played (games with more plays have more influence)
-        const totalPlaysWithScores = gamesWithScores.reduce(
-          (sum, gs) => sum + gs.gamesPlayed,
-          0
-        );
         const categoryAverageScore =
-          totalPlaysWithScores > 0
-            ? Math.round(
-                gamesWithScores.reduce(
-                  (sum, gs) => sum + (gs.averageScore ?? 0) * gs.gamesPlayed,
-                  0
-                ) / totalPlaysWithScores
-              )
-            : null;
+          categoryAbilityScoreMap.get(category.id)?.ability_score ?? null;
+
+
 
         // Category highest = max of all game highest scores
         const allHighestScores = gameStats
@@ -258,9 +319,9 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         const progress =
           categoryAverageScore !== null
             ? Math.min(
-                100,
-                Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
-              )
+              100,
+              Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
+            )
             : 0;
 
         return {
@@ -287,110 +348,54 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
     fetchStats();
   }, [fetchStats]);
 
-  // Calculate Overall BPI weighted by games played per category
   const categoriesWithScores = categoryStats.filter((c) => c.score !== null);
-  const totalCategoryPlays = categoriesWithScores.reduce(
-    (sum, c) => sum + c.gamesPlayed,
-    0
-  );
   const overallBPI =
-    categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL &&
-    totalCategoryPlays > 0
+    globalScore ??
+    (categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL
       ? Math.round(
-          categoriesWithScores.reduce(
-            (sum, c) => sum + (c.score ?? 0) * c.gamesPlayed,
-            0
-          ) / totalCategoryPlays
-        )
-      : null;
+        categoriesWithScores.reduce((sum, c) => sum + (c.score ?? 0), 0) /
+        categoriesWithScores.length
+      )
+      : null);
+
 
   const totalGamesPlayed = categoryStats.reduce(
     (sum, c) => sum + c.gamesPlayed,
     0
   );
 
-  // Calculate Global BPI for comparison
-  let globalBPI: number | null = null;
-  if (globalStats.size > 0) {
-    const globalCategoryStats = categories.map((category) => {
-      const categoryGames = games.filter((g) => g.category_id === category.id);
-      const categoryGlobalGames = categoryGames
-        .map((g) => globalStats.get(g.id))
-        .filter((g): g is GlobalStats => !!g);
-
-      if (categoryGlobalGames.length === 0) return { score: null, weight: 0 };
-
-      const totalWeight = categoryGlobalGames.reduce(
-        (sum, g) => sum + g.averageGamesPlayed,
-        0
-      );
-      const weightedScore = categoryGlobalGames.reduce(
-        (sum, g) => sum + g.averageScore * g.averageGamesPlayed,
-        0
-      );
-
-      return {
-        score: totalWeight > 0 ? weightedScore / totalWeight : null,
-        weight: totalWeight,
-      };
-    });
-
-    const validGlobalCategories = globalCategoryStats.filter(
-      (c) => c.score !== null
-    );
-    const totalGlobalWeight = validGlobalCategories.reduce(
-      (sum, c) => sum + c.weight,
-      0
-    );
-
-    if (validGlobalCategories.length > 0 && totalGlobalWeight > 0) {
-      globalBPI = Math.round(
-        validGlobalCategories.reduce(
-          (sum, c) => sum + (c.score ?? 0) * c.weight,
-          0
-        ) / totalGlobalWeight
-      );
-    }
-  }
-
-  // Overall Percentile Calculation (User vs Global BPI)
-  let overallPercentile: number | null = null;
-  if (overallBPI !== null && globalBPI !== null && globalBPI > 0) {
-    // Z-score approximation
-    const stdDev = globalBPI * 0.25; // Assume 25% std dev
-    const zScore = (overallBPI - globalBPI) / stdDev;
-    // Logistic approximation for cumulative normal distribution
-    const p = 1 / (1 + Math.exp(-1.7 * zScore));
-    overallPercentile = Math.round(p * 100);
-  }
+  const overallPercentile: number | null = null;
 
   const value = useMemo<UserStatsContextValue>(
     () => ({
       overallBPI,
+      overallPercentile,
       currentStreak,
       totalGamesPlayed,
       categoryStats,
       recentSessions,
-      history,
-      globalStats,
-      overallPercentile,
+      overallScoreHistory,
+      categoryScoreHistory,
+      gameScoreHistory,
       isLoading,
       error,
       refresh: fetchStats,
     }),
     [
       overallBPI,
+      overallPercentile,
       currentStreak,
       totalGamesPlayed,
       categoryStats,
       recentSessions,
-      history,
-      globalStats,
-      overallPercentile,
+      overallScoreHistory,
+      categoryScoreHistory,
+      gameScoreHistory,
       isLoading,
       error,
       fetchStats,
     ]
+
   );
 
   return (
@@ -409,4 +414,8 @@ export function useUserStats(): UserStatsContextValue {
 }
 
 // Re-export types for backward compatibility
-export type { GameStats as GameStatsType, CategoryStats as CategoryStatsType };
+export type {
+  GameStats as GameStatsType,
+  CategoryStats as CategoryStatsType,
+};
+

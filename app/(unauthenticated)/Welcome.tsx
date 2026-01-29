@@ -7,8 +7,10 @@ import { Card, CardContent } from "~/components/ui/card";
 import { BrainCircuit, Sparkles, Zap, Target, ArrowRight } from "lucide-react-native";
 import { router } from "expo-router";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 const WelcomeScreen = () => {
+  const { t } = useTranslation();
   const handleGetStarted = () => {
     router.push("/(unauthenticated)");
   };
@@ -28,10 +30,10 @@ const WelcomeScreen = () => {
               <BrainCircuit size={64} className="text-primary" strokeWidth={3} />
             </View>
             <H1 className="text-4xl font-black text-center mb-3">
-              Welcome to Brain App
+              {t('unauth.welcome.title')}
             </H1>
             <Muted className="text-lg font-bold text-center">
-              Train your brain. Sharpen your mind.
+              {t('unauth.welcome.motto')}
             </Muted>
           </Animated.View>
 
@@ -47,10 +49,10 @@ const WelcomeScreen = () => {
                   </View>
                   <View className="flex-1">
                     <H2 className="text-lg font-black text-foreground mb-1">
-                      Think Faster
+                      {t('unauth.welcome.think_faster')}
                     </H2>
                     <Muted className="text-sm font-bold">
-                      Improve your processing speed
+                      {t('unauth.welcome.think_faster_desc')}
                     </Muted>
                   </View>
                   <ArrowRight size={20} className="text-muted-foreground" />
@@ -66,10 +68,10 @@ const WelcomeScreen = () => {
                   </View>
                   <View className="flex-1">
                     <H2 className="text-lg font-black text-foreground mb-1">
-                      Sharpen Focus
+                      {t('unauth.welcome.sharpen_focus')}
                     </H2>
                     <Muted className="text-sm font-bold">
-                      Boost your concentration
+                      {t('unauth.welcome.sharpen_focus_desc')}
                     </Muted>
                   </View>
                   <ArrowRight size={20} className="text-muted-foreground" />
@@ -85,10 +87,10 @@ const WelcomeScreen = () => {
                   </View>
                   <View className="flex-1">
                     <H2 className="text-lg font-black text-foreground mb-1">
-                      Enhance Memory
+                      {t('unauth.welcome.enhance_memory')}
                     </H2>
                     <Muted className="text-sm font-bold">
-                      Remember better, longer
+                      {t('unauth.welcome.enhance_memory_desc')}
                     </Muted>
                   </View>
                   <ArrowRight size={20} className="text-muted-foreground" />
@@ -102,14 +104,14 @@ const WelcomeScreen = () => {
             className="items-center mb-8"
           >
             <Muted className="text-center text-sm font-bold">
-              By using this App, you agree to our{" "}
+              {t('unauth.welcome.legal_intro')}
               <TouchableOpacity onPress={() => { }}>
-                <Muted className="text-primary font-black underline">Terms</Muted>
+                <Muted className="text-primary font-black underline">{t('unauth.welcome.terms')}</Muted>
               </TouchableOpacity>{" "}
-              and{" "}
+              {t('unauth.welcome.legal_and')}
               <TouchableOpacity onPress={() => { }}>
                 <Muted className="text-primary font-black underline">
-                  Privacy Policy
+                  {t('unauth.welcome.privacy')}
                 </Muted>
               </TouchableOpacity>
             </Muted>
@@ -124,7 +126,7 @@ const WelcomeScreen = () => {
               onPress={handleGetStarted}
             >
               <P className="text-white font-black text-xl tracking-wide uppercase">
-                Get Started
+                {t('unauth.welcome.get_started')}
               </P>
             </Button>
           </Animated.View>

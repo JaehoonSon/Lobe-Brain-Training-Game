@@ -1,0 +1,600 @@
+{
+  "common": {
+    "welcome": "Brain Appへようこそ",
+    "today_training": "今日のトレーニング",
+    "settings": "設定",
+    "language": "言語",
+    "system": "システム",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "start": "スタート",
+    "continue": "続ける",
+    "error": "エラー",
+    "loading": "読み込み中...",
+    "not_set": "未設定",
+    "error_generic": "エラーが発生しました",
+    "error_signing_in": "サインインエラー",
+    "go_back": "戻る",
+    "skip": "スキップ",
+    "loading_game": "ゲーム読み込み中...",
+    "game": "ゲーム",
+    "optional": "(任意)",
+    "categories": {
+      "memory": "記憶",
+      "focus": "集中力",
+      "logic": "論理",
+      "speed": "スピード",
+      "language": "言語",
+      "general": "全般"
+    }
+  },
+  "home": {
+    "greeting": "こんにちは、{{name}}さん！",
+    "start_session": "セッション開始"
+  },
+  "unauth": {
+    "landing": {
+      "title": "あなたの心の可能性を発見",
+      "subtitle": "無料で脳トレーニングを始めましょう。",
+      "get_started": "始める",
+      "login": "ログイン",
+      "legal": "登録することで、当社の利用規約、プライバシーポリシー、およびCAプライバシーに同意したものとみなされます。"
+    },
+    "signup": {
+      "title": "始めましょう",
+      "subtitle": "アカウントを作成して始めましょう",
+      "apple_button": "Appleで続ける",
+      "google_button": "Googleで続ける",
+      "privacy_policy": "プライバシーポリシー",
+      "terms_of_service": "利用規約",
+      "agreement_intro": "続行することで、当社の",
+      "agreement_and": "と"
+    },
+    "welcome": {
+      "title": "Brain Appへようこそ",
+      "motto": "脳を鍛える。心を研ぎ澄ませる。",
+      "think_faster": "もっと速く考える",
+      "think_faster_desc": "処理速度を向上させる",
+      "sharpen_focus": "集中力を高める",
+      "sharpen_focus_desc": "集中力をブースト",
+      "enhance_memory": "記憶力を強化",
+      "enhance_memory_desc": "よりよく、より長く記憶する",
+      "legal_intro": "このアプリを使用することで、当社の",
+      "legal_and": "と",
+      "terms": "利用規約",
+      "privacy": "プライバシーポリシー",
+      "get_started": "始める"
+    }
+  },
+  "onboarding": {
+    "error_step": "ステップ{{step}}が見つかりません。",
+    "steps": {
+      "notifications": {
+        "title": "トレーニングをお見逃しなく",
+        "description": "継続的に練習することで、より多くのことを学べる可能性が高まります。毎日のリマインダーを受け取り、ストリークを維持しましょう。",
+        "enable_button": "通知を有効にする",
+        "skip_button": "後で"
+      },
+      "birthday": {
+        "title": "誕生日はいつですか？",
+        "description": "パーソナライズされた体験を提供するために使用します。",
+        "month": "月",
+        "day": "日",
+        "year": "年",
+        "continue": "続ける",
+        "skip": "今はスキップ"
+      },
+      "welcome": {
+        "title": "パーソナルプランへようこそ",
+        "subtitle": "あなたのお役に立つカスタムプランを作成します：",
+        "goals": {
+          "focus": "集中力を高める",
+          "memory": "記憶力を向上させる",
+          "speed": "もっと速く考える"
+        },
+        "begin": "始めましょう"
+      },
+      "plan_creation": {
+        "title": "30日プランを\n作成中",
+        "subtitle": "設定を分析中..."
+      },
+      "plan_reveal": {
+        "badge": "あなたのためにカスタマイズ",
+        "title": "あなたの30日プラン",
+        "projection": "予測",
+        "projection_highlight": "BPI30〜40%上昇",
+        "projection_suffix": "（1ヶ月目）",
+        "features": {
+          "baseline": "ベースラインスコアに合わせて調整",
+          "schedule": "週3回の効果的なスケジュール",
+          "proven": "科学的に証明された成長"
+        },
+        "start": "トレーニングを開始"
+      },
+      "thank_you": {
+        "title": "最後の問題でした。\n素晴らしいですね！",
+        "subtitle_prefix": "あなたの",
+        "subtitle_suffix": "のスキルをパフォーマンスに基づいて判定しています。"
+      },
+      "daily_streak": {
+        "title": "新しい毎日連続記録が\n始まりました！",
+        "days": ["日", "月", "火", "水", "木", "金", "土"],
+        "subtext": "毎日ゲームをクリアして連続記録を続けましょう。"
+      },
+      "premium_features": {
+        "badge": "全ての機能をアンロック",
+        "title": "Lobe Proで\nもっと多くの機能を",
+        "slides": [
+          {
+            "title": "パーソナライズされた\n毎日のおすすめ",
+            "description": "アクティビティパターンとトレーニング設定を使用して生成されます。"
+          },
+          {
+            "title": "科学に基づいたゲーム",
+            "description": "スキルレベルに合わせて調整されるゲームで常に挑戦し続けられます。"
+          },
+          {
+            "title": "パフォーマンスの追跡",
+            "description": "脳トレーニングの旅全体を通して、進捗に関する洞察を得られます。"
+          }
+        ]
+      },
+      "interests": {
+        "title": "まずは興味から始めましょう",
+        "subtitle": "最大3つを選択",
+        "options": [
+          "心を活発に保ち、挑戦し続けたい",
+          "自分を追い込んで上達したい",
+          "記憶力と注意力を鍛えたい",
+          "脳がどのように機能しているか興味がある",
+          "ストレスを管理し、より良い習慣を身につけたい"
+        ]
+      },
+      "affirmations": {
+        "muscle": {
+          "headline": "脳は筋肉のようなものです。",
+          "subtext": "毎日鍛えましょう。毎日数分で生涯続く習慣を作れます。"
+        },
+        "community": {
+          "headline": "素晴らしい仲間たちと",
+          "subtext": "1億人以上の人がBrain Appで記憶力をトレーニングしています — 多くの人が毎日実践しています！"
+        },
+        "focus": {
+          "headline": "レーザーのような集中力",
+          "subtext": "注意力をトレーニングすると、最も重要な時に集中状態を保つことができます。"
+        },
+        "solved": {
+          "headline": "解決済み！",
+          "subtext": "毎日論理を鍛えて、心を鋭く柔軟に保ちましょう。"
+        },
+        "transition": {
+          "headline": "これはあなたの目標についてでした",
+          "subtext": "では、トレーニングとフィードバックをカスタマイズできるよう、あなたについて知りましょう。"
+        },
+        "meet_you": {
+          "headline": "お会いできて嬉しいです！",
+          "subtext": "次に、現在のレベルに合わせてトレーニングプログラムを調整します。"
+        },
+        "baseline": {
+          "headline": "ベースラインスコアが揃いました",
+          "subtext": "あなたのためのプログラムを設計しましょう。"
+        }
+      },
+      "goals": {
+        "memory": {
+          "title": "記憶",
+          "description": "どのような記憶力をトレーニングしますか？",
+          "options": {
+            "working": "ワーキングメモリ",
+            "working_desc": "情報を保持・操作する",
+            "face": "顔と名前の記憶",
+            "face_desc": "人の名前を思い出して一致させる",
+            "spatial": "空間記憶",
+            "spatial_desc": "場所と位置を記憶・思い出す",
+            "long_term": "長期記憶",
+            "long_term_desc": "将来のために情報を保持する"
+          }
+        },
+        "attention": {
+          "title": "注意力",
+          "description": "どのような注意力を向上させますか？",
+          "options": {
+            "productivity": "生産性",
+            "productivity_desc": "より長くタスクに集中する",
+            "multitasking": "マルチタスク",
+            "multitasking_desc": "タスクを効率的に切り替える",
+            "concentration": "集中",
+            "concentration_desc": "気が散らないようにする",
+            "dividing": "注意の分割",
+            "dividing_desc": "複数の対象に同時に集中する"
+          }
+        },
+        "problem_solving": {
+          "title": "問題解決",
+          "description": "どのスキルを鍛えますか？",
+          "options": {
+            "logic": "論理的推論",
+            "logic_desc": "論理を分析しアイデアをつなぐ",
+            "math": "数学スキル",
+            "math_desc": "より速く、より正確に計算する",
+            "planning": "計画",
+            "planning_desc": "先を見通し戦略を立てる",
+            "spatial": "空間認識",
+            "spatial_desc": "オブジェクトを視覚化して操作する"
+          }
+        }
+      },
+      "profile": {
+        "gender": {
+          "title": "性別は？",
+          "description": "これはコミュニティの類似メンバーと比較して表示するのに役立ちます。（任意）",
+          "options": ["男性", "女性", "ノンバイナリー", "回答しない"]
+        },
+        "education": {
+          "title": "最終学歴は？",
+          "options": [
+            "高校中退",
+            "高校卒業",
+            "大学中退",
+            "準学士",
+            "学士号",
+            "修士号",
+            "専門職学位",
+            "博士号",
+            "回答しない"
+          ]
+        },
+        "referral": {
+          "title": "Brain Appをどのように知りましたか？",
+          "options": [
+            "医師または医療提供者",
+            "友人や家族",
+            "App Store",
+            "Play Store",
+            "ソーシャルメディア（Facebookなど）",
+            "検索（Googleなど）",
+            "その他"
+          ]
+        }
+      },
+      "difficulty": {
+        "title": "難易度は？",
+        "options": {
+          "standard": "標準（推奨）",
+          "standard_desc": "楽しさと難しさのバランスを好みます。",
+          "advanced": "上級",
+          "advanced_desc": "一生懸命頑張りたいです。"
+        }
+      },
+      "encouragement": {
+        "title": "どのような励ましがモチベーションを維持するのに役立ちますか？",
+        "options": {
+          "high_fives": "ハイタッチ",
+          "high_fives_desc": "すべての成功を祝ってください。",
+          "tough_love": "スパルタ",
+          "tough_love_desc": "軌道に乗るよう押してください。"
+        }
+      },
+      "frequency": {
+        "exercise_title": "どのくらい運動しますか？",
+        "training_title": "週に何日トレーニングできますか？",
+        "training_subtitle": "週5日実践する人が最もパフォーマンスが向上します。",
+        "options": {
+          "daily": "毎日またはほぼ毎日",
+          "few_times": "週に数回",
+          "once_less": "週に1回以下",
+          "rarely": "ほとんどしない、またはしない",
+          "3_days": "週3日",
+          "4_days": "週4日",
+          "5_days": "週5日",
+          "6_days": "週6日",
+          "7_days": "週7日"
+        }
+      },
+      "sleep": {
+        "title": "通常どのくらい睡眠をとりますか？",
+        "options": {
+          "4_less": "4時間以下",
+          "5_6": "5〜6時間",
+          "7_8": "7〜8時間",
+          "9_more": "9時間以上"
+        }
+      }
+    },
+    "games": {
+      "next_challenge": "次のチャレンジ",
+      "see_results": "結果を見る",
+      "arithmetic": {
+        "title": "暗算",
+        "description": "数値処理速度と精度をテストします。",
+        "outro_title": "素晴らしいですね！",
+        "outro_description": "それはあなたの量的推論スキルを測定しました。"
+      },
+      "language": {
+        "title": "言語流暢性",
+        "description": "言語処理と語彙力をテストしましょう。",
+        "outro_title": "素晴らしい！",
+        "outro_description": "それはあなたの言語弁別スキルを測定しました。"
+      },
+      "matrix": {
+        "title": "記憶マトリックス",
+        "description": "空間記憶と想起をテストしましょう。",
+        "outro_title": "よくできました！",
+        "outro_description": "それはあなたの空間記憶を測定しました。"
+      }
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "sections": {
+      "my_info": "マイ情報",
+      "membership": "メンバーシップ",
+      "legal": "法的情報",
+      "account": "アカウント",
+      "about": "について",
+      "notifications": "通知"
+    },
+    "labels": {
+      "email": "メールアドレス",
+      "birthday": "誕生日",
+      "pro_member": "Proメンバー",
+      "free_member": "メンバー（制限付きアクセス）",
+      "pro_desc": "すべての機能にフルアクセスできます",
+      "free_desc": "タップしてアップグレード",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "license": "ライセンス契約",
+      "version": "バージョン {{version}} ({{build}})",
+      "push_notifications": "プッシュ通知"
+    },
+    "actions": {
+      "logout": "ログアウト",
+      "delete_account": "アカウント削除"
+    },
+    "alerts": {
+      "delete_confirm_title": "削除の確認",
+      "delete_confirm_msg": "アカウントを削除してもよろしいですか？この操作は元に戻せません。",
+      "delete_btn": "削除"
+    }
+  },
+  "dashboard": {
+    "welcome_streak": "連続記録を続けよう！ 🔥",
+    "loading_workout": "ワークアウト読み込み中...",
+    "daily_insight": {
+      "title": "毎日の洞察",
+      "loading": "読み込み中...",
+      "fact_loading": "今日の脳の豆知識を取得中...",
+      "did_you_know": "ご存知ですか？",
+      "fallback": "脳はすごいです！明日新しい豆知識をチェックしてください。",
+      "source": "ソース: {{source}}"
+    },
+    "community": {
+      "title": "コミュニティと成長",
+      "global_challenge": "グローバルチャレンジ",
+      "elite_focus": "エリート集中力",
+      "challenge_desc": "今日は全員が{{gameName}}をプレイしています！上位10％に入れますか？",
+      "sessions_finished": "今日{{count}}セッション完了",
+      "loading_activity": "アクティビティ読み込み中..."
+    },
+    "quick_play": {
+      "title": "クイックプレイ",
+      "tap_to_start": "タップしてスタート",
+      "coming_soon": "さらに多くのゲームが近日登場！"
+    }
+  },
+  "games_tab": {
+    "title": "ゲーム",
+    "search_placeholder": "何をプレイしますか？",
+    "sections": {
+      "todays_games": "今日のゲーム",
+      "coming_soon": "近日公開"
+    },
+    "categories": {
+      "speed": "スピード",
+      "memory": "記憶",
+      "attention": "注意力",
+      "flexibility": "柔軟性",
+      "problem_solving": "問題解決"
+    },
+    "footer_msg": "毎週新しいチャレンジが登場します。トレーニングを続けましょう！"
+  },
+  "stats": {
+    "title": "マイ統計",
+    "bpi": {
+      "overall_performance": "総合パフォーマンス",
+      "brain_index": "ブレインインデックス",
+      "top_percentile": "上位{{count}}％",
+      "update_msg": "スコアは各ゲーム後に更新されます",
+      "unlock_msg": "アンロックするにはさらに{{count}}カテゴリをプレイ"
+    },
+    "training_areas": "トレーニング領域",
+    "categories": {
+      "no_games": "プレイしたゲームはありません"
+    },
+    "analysis": {
+      "title": "詳細分析",
+      "strength_profile": "強みプロファイル",
+      "progress_history": "進捗履歴"
+    },
+    "error_loading": "統計を読み込めませんでした。"
+  },
+  "insights": {
+    "title": "インサイト",
+    "daily_read": {
+      "title": "毎日の読み物",
+      "read_time": "{{count}}分で読める"
+    },
+    "explore": {
+      "title": "探検",
+      "categories": {
+        "sleep": "睡眠",
+        "focus": "集中力",
+        "productivity": "生産性",
+        "stress": "ストレス"
+      }
+    },
+    "articles": {
+      "science_of_sleep": {
+        "title": "睡眠の科学",
+        "description": "睡眠が記憶の定着と集中力に与える影響。"
+      },
+      "focus_techniques": {
+        "title": "集中力テクニック",
+        "description": "ディープワークとその達成方法。"
+      },
+      "growth_mindset": {
+        "title": "成長マインドセット",
+        "description": "神経可塑性の理解。"
+      }
+    }
+  },
+  "tabs": {
+    "today": "今日",
+    "games": "ゲーム",
+    "stats": "統計",
+    "insights": "インサイト",
+    "showcase": "ショーケース"
+  },
+  "streak": {
+    "title": "トレーニング連続記録",
+    "this_week": "今週",
+    "stats": "あなたの統計",
+    "current_streak": "現在の連続記録",
+    "best_streak": "最高連続記録",
+    "days_count": "{{count}}日",
+    "days_count_plural": "{{count}}日",
+    "next_milestone": "次のマイルストーン",
+    "upcoming_reward": "次の報酬：",
+    "reward_badge": "{{count}}日バッジ",
+    "why_title": "連続記録が重要な理由",
+    "logic_1": "一貫した脳トレーニングは、",
+    "neuroplasticity": "神経可塑性",
+    "logic_2": "と呼ばれるプロセスを通じて神経経路を強化します：脳が自己再配線する能力。",
+    "logic_3": "フィジカルエクササイズと同様、毎日の脳トレは認知的「マッスルメモリー」を構築します。研究によると、定期的な練習は以下を改善します：",
+    "benefit_1": "ワーキングメモリと集中力",
+    "benefit_2": "処理速度と反応時間",
+    "benefit_3": "問題解決と精神的柔軟性",
+    "keep_alive": "これらのメリットを最大化するために連続記録を続けよう！ 🧠"
+  },
+  "game": {
+    "loading": "ゲーム読み込み中...",
+    "details": "ゲーム詳細",
+    "avg_bpi": "平均BPI",
+    "best_score": "ベストスコア",
+    "difficulty": "難易度",
+    "badge_progress": "バッジ進捗",
+    "total_plays": "総プレイ回数",
+    "unlock_pro": "Proをアンロック",
+    "start_game": "ゲーム開始",
+    "preparing": "ラウンド準備中...",
+    "no_questions": "このゲームの問題が見つかりません。",
+    "no_questions_valid": "有効な問題が見つかりません。",
+    "game_not_found": "ゲームが見つかりません",
+    "error_load": "ゲームの読み込みに失敗しました。",
+    "not_implemented": "のゲームコンポーネントが実装されていません",
+    "memory_matrix": {
+      "title": "記憶マトリックス",
+      "memorize": "パターンを覚えて...",
+      "recall": "{{count}}個のタイルを選択",
+      "checking": "確認中...",
+      "loading": "読み込み中..."
+    },
+    "wordle": {
+      "title": "Wordle",
+      "subtitle": "{{count}}文字の単語を当てて",
+      "win": "正解です！ 🎉",
+      "lose": "単語は: {{word}}"
+    },
+    "ball_sort": {
+      "title": "ボールソート",
+      "subtitle": "色でボールを並べ替えて",
+      "moves": "手数: {{count}}",
+      "complete": "完璧！ 🎉"
+    },
+    "word_unscramble": {
+      "title": "ワードアンラムブル",
+      "subtitle": "文字を並べ替えて",
+      "hint": "ヒント: {{hint}}",
+      "correct": "正解！ 🎉"
+    },
+    "stroop_clash": {
+      "title": "ストループクラッシュ",
+      "subtitle": "テキストの色を選択して",
+      "score": "スコア: {{count}}",
+      "tap_color": "色をタップ",
+      "tap_text": "テキストをタップ"
+    }
+  },
+  "game_finish": {
+    "game_complete": "ゲーム完了",
+    "no_results": "ゲーム結果が見つかりません",
+    "feedback": {
+      "flawless_title": "完璧",
+      "flawless_sub": "0ミス。あなたは真珠のように完璧です。",
+      "amazing_title": "素晴らしい",
+      "amazing_sub": "完璧に近い！集中力が凄いですね。",
+      "great_job_title": "よくやった！",
+      "great_job_sub": "しっかりやりました！本当に進歩しています。",
+      "keep_going_title": "続けよう",
+      "keep_going_sub": "すべての練習が脳の成長に役立ちます。"
+    },
+    "stats": {
+      "game_bpi": "ゲームBPI",
+      "accuracy": "素晴らしい",
+      "speed": "高速"
+    },
+    "actions": {
+      "continue": "続ける",
+      "play_again": "もう一度プレイ"
+    }
+  },
+  "stat_detail": {
+    "not_found": "カテゴリが見つかりません",
+    "score_title": "{{name}}スコア",
+    "current_score": "現在のスコア",
+    "top_percent": "上位{{count}}％",
+    "history": "パフォーマンス履歴",
+    "games_title": "{{name}}ゲーム",
+    "no_games": "まだこのカテゴリにはゲームがありません。",
+    "played_count": "{{count}}回プレイ済み",
+    "best_score": "ベスト: {{score}}",
+    "new_game": "新規",
+    "avg_score_label": "平均スコア",
+    "recommended": "おすすめ読書"
+  },
+  "customer_center": {
+    "title": "カスタマーセンター"
+  },
+  "workout_card": {
+    "daily": "毎日",
+    "focus": "集中力",
+    "duration": "2分"
+  },
+  "not_found": {
+    "title": "おっと！",
+    "message": "この画面は存在しません。",
+    "go_home": "ホーム画面へ！"
+  },
+  "feature_card": {
+    "unlock": "アンロック",
+    "pro": "PRO",
+    "premium_msg": "この機能はプレミアムサブスクリプションで利用できます。"
+  },
+  "dev_setting": {
+    "title": "ようこそ！",
+    "authenticated_as": "{{email}}として認証されています",
+    "buttons": {
+      "settings": "設定へ",
+      "onboarding": "オンボーディングへ",
+      "restart_onboarding": "オンボーディングを再開",
+      "go_back_steps": "数ステップ戻る",
+      "show_paywall": "ペイウォールを表示",
+      "go_paywall": "ペイウォールへ",
+      "showcase": "コンポーネントショーケース"
+    }
+  },
+  "showcase": {
+    "title": "コンポーネントショーケース",
+    "subtitle": "すべてのUIコンポーネントが「ジューシー」デザインシステムに合わせて更新されました"
+  }
+}

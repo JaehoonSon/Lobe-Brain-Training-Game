@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { View } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { appMetadata } from "~/config";
@@ -8,19 +8,26 @@ import { showErrorToast } from "~/components/ui/toast";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 export default function SignUp() {
-  const { signInApple } = useAuth();
+  const { t } = useTranslation();
+  const { signInApple, signInGoogle } = useAuth();
   const insets = useSafeAreaInsets();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
+    if (isLoading) return; // Prevent double-click
+    setIsLoading(true);
     try {
       await signInApple();
       // Stack.Protected guards will automatically route to onboarding
       // since isAuthenticated=true and isComplete=false for new users
     } catch (err) {
       console.log("sign in error", err);
-      showErrorToast("Error Signing in");
+      showErrorToast(t('common.error_generic'));
+      setIsLoading(false); // Only reset on error, not on success (navigation happens)
     }
   };
 
@@ -36,10 +43,10 @@ export default function SignUp() {
           className="items-center gap-4"
         >
           <Text className="text-5xl font-extrabold text-center text-foreground">
-            Let's Start
+            {t('unauth.signup.title')}
           </Text>
           <Text className="text-xl text-muted-foreground text-center">
-            Create your account to begin
+            {t('unauth.signup.subtitle')}
           </Text>
         </Animated.View>
       </View>
@@ -50,46 +57,40 @@ export default function SignUp() {
           <Button
             className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
             onPress={handleLogin}
+            disabled={isLoading}
           >
-            <AntDesign name="apple" size={24} color="white" />
-            <Text className="font-bold text-xl text-primary-foreground">
-              Continue with Apple
-            </Text>
+            {isLoading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <>
+                <AntDesign name="apple" size={24} color="white" />
+                <Text className="font-bold text-xl text-primary-foreground">
+                  {t('unauth.signup.apple_button')}
+                </Text>
+              </>
+            )}
           </Button>
-
-          {/* <Button
-            variant="secondary"
-            className="w-full h-12 native:h-16 px-10 rounded-2xl flex-row gap-3 mb-6"
-            onPress={() => {
-              // signInGoogle()
-              showErrorToast("Google Sign In not configured yet");
-            }}
-          >
-            <AntDesign name="google" size={24} color="white" />
-            <Text className="font-bold text-xl text-secondary-foreground">
-              Continue with Google
-            </Text>
-          </Button> */}
         </Animated.View>
 
         {/* Terms */}
         <Animated.View entering={FadeInUp.delay(400).duration(600)}>
           <Text className="text-sm text-muted-foreground text-center px-8">
-            By continuing, you agree to our{" "}
+            {t('unauth.signup.agreement_intro')}
             <Link href={appMetadata.privacyPolicyUrl}>
               <Text className="text-sm font-bold underline text-foreground">
-                Privacy Policy
+                {t('unauth.signup.privacy_policy')}
               </Text>
             </Link>{" "}
-            and{" "}
+            {t('unauth.signup.agreement_and')}
             <Link href={appMetadata.endUserLicenseAgreementUrl}>
               <Text className="text-sm font-bold underline text-foreground">
-                Terms of Service
+                {t('unauth.signup.terms_of_service')}
               </Text>
             </Link>
           </Text>
         </Animated.View>
       </View>
-    </View>
+    </View >
   );
 }
+

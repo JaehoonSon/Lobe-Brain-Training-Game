@@ -16,6 +16,7 @@ import { supabase } from "~/lib/supabase";
 import { useAuth } from "~/contexts/AuthProvider";
 import { Database } from "~/lib/database.types";
 import LottieView from "lottie-react-native";
+import { useTranslation } from "react-i18next";
 
 type UserStreak = Database["public"]["Tables"]["user_streaks"]["Row"];
 
@@ -77,6 +78,7 @@ function getCompletedDaysThisWeek(
 }
 
 export default function StreakScreen() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [streakData, setStreakData] = useState<UserStreak | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -151,7 +153,7 @@ export default function StreakScreen() {
 
         {/* Centered title */}
         <View className="absolute left-0 right-0 items-center">
-          <H1 className="text-3xl font-black">Training Streak</H1>
+          <H1 className="text-3xl font-black">{t('streak.title')}</H1>
         </View>
       </View>
 
@@ -176,7 +178,7 @@ export default function StreakScreen() {
           </Animated.View>
 
           {/* Weekly Days Row */}
-          <SectionHeader>This Week</SectionHeader>
+          <SectionHeader>{t('streak.this_week')}</SectionHeader>
           <Card className="mb-2 overflow-hidden border-border/50 bg-card">
             <CardContent className="p-4">
               <Animated.View
@@ -192,13 +194,12 @@ export default function StreakScreen() {
                   return (
                     <View key={index} className="items-center gap-1.5">
                       <View
-                        className={`w-9 h-9 rounded-full items-center justify-center ${
-                          isCompleted
-                            ? "bg-orange-500/20"
-                            : isPast
+                        className={`w-9 h-9 rounded-full items-center justify-center ${isCompleted
+                          ? "bg-orange-500/20"
+                          : isPast
                             ? "bg-destructive/10"
                             : "bg-muted"
-                        }`}
+                          }`}
                       >
                         {isCompleted ? (
                           <Flame size={18} color="#F97316" fill="#F97316" />
@@ -207,13 +208,12 @@ export default function StreakScreen() {
                         ) : null}
                       </View>
                       <P
-                        className={`text-xs ${
-                          isToday
-                            ? "font-black text-foreground"
-                            : isCompleted
+                        className={`text-xs ${isToday
+                          ? "font-black text-foreground"
+                          : isCompleted
                             ? "font-bold text-foreground"
                             : "font-medium text-muted-foreground"
-                        }`}
+                          }`}
                       >
                         {day}
                       </P>
@@ -225,7 +225,7 @@ export default function StreakScreen() {
           </Card>
 
           {/* Stats Section */}
-          <SectionHeader>Your Stats</SectionHeader>
+          <SectionHeader>{t('streak.stats')}</SectionHeader>
           <Card className="mb-2 overflow-hidden border-border/50 bg-card">
             <CardContent className="p-0">
               <Animated.View entering={FadeInDown.delay(400).duration(600)}>
@@ -235,9 +235,9 @@ export default function StreakScreen() {
                     <Flame size={20} color="#F97316" fill="#F97316" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-xs font-bold">Current Streak</Muted>
+                    <Muted className="text-xs font-bold">{t('streak.current_streak')}</Muted>
                     <P className="text-2xl font-black text-foreground">
-                      {currentStreak} day{currentStreak !== 1 ? "s" : ""}
+                      {t(currentStreak === 1 ? 'streak.days_count' : 'streak.days_count_plural', { count: currentStreak })}
                     </P>
                   </View>
                 </View>
@@ -250,9 +250,9 @@ export default function StreakScreen() {
                     <Trophy size={20} color="#EAB308" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-xs font-bold">Best Streak</Muted>
+                    <Muted className="text-xs font-bold">{t('streak.best_streak')}</Muted>
                     <P className="text-2xl font-black text-foreground">
-                      {bestStreak} day{bestStreak !== 1 ? "s" : ""}
+                      {t(bestStreak === 1 ? 'streak.days_count' : 'streak.days_count_plural', { count: bestStreak })}
                     </P>
                   </View>
                 </View>
@@ -261,7 +261,7 @@ export default function StreakScreen() {
           </Card>
 
           {/* Milestone Section */}
-          <SectionHeader>Next Milestone</SectionHeader>
+          <SectionHeader>{t('streak.next_milestone')}</SectionHeader>
           <Card className="overflow-hidden border-border/50 bg-card">
             <CardContent className="p-4">
               <Animated.View entering={FadeInDown.delay(600).duration(600)}>
@@ -309,10 +309,10 @@ export default function StreakScreen() {
                 {/* Upcoming Reward Text */}
                 <View className="items-center mt-2">
                   <Muted className="text-xs uppercase tracking-wider">
-                    Upcoming Reward:
+                    {t('streak.upcoming_reward')}
                   </Muted>
                   <P className="text-foreground font-bold text-sm">
-                    {nextMilestone} Day Badge
+                    {t('streak.reward_badge', { count: nextMilestone })}
                   </P>
                 </View>
               </Animated.View>
@@ -320,43 +320,40 @@ export default function StreakScreen() {
           </Card>
 
           {/* Why Streaks Matter Section */}
-          <SectionHeader>Why Streaks Matter</SectionHeader>
+          <SectionHeader>{t('streak.why_title')}</SectionHeader>
           <Card className="overflow-hidden border-border/50 bg-card">
             <CardContent className="p-4">
               <Animated.View entering={FadeInDown.delay(800).duration(600)}>
                 <P className="text-foreground leading-6 mb-3">
-                  Consistent brain training strengthens neural pathways through
-                  a process called{" "}
-                  <P className="font-bold text-primary">neuroplasticity</P>:
-                  your brain's ability to rewire itself.
+                  {t('streak.logic_1')}{" "}
+                  <P className="font-bold text-primary">{t('streak.neuroplasticity')}</P>
+                  {t('streak.logic_2')}
                 </P>
                 <P className="text-muted-foreground leading-6 mb-3">
-                  Just like physical exercise, daily mental workouts build
-                  cognitive "muscle memory." Research shows that regular
-                  practice improves:
+                  {t('streak.logic_3')}
                 </P>
                 <View className="gap-2 ml-2">
                   <View className="flex-row items-start gap-2">
                     <P className="text-primary">•</P>
                     <P className="text-muted-foreground flex-1">
-                      Working memory and focus
+                      {t('streak.benefit_1')}
                     </P>
                   </View>
                   <View className="flex-row items-start gap-2">
                     <P className="text-primary">•</P>
                     <P className="text-muted-foreground flex-1">
-                      Processing speed and reaction time
+                      {t('streak.benefit_2')}
                     </P>
                   </View>
                   <View className="flex-row items-start gap-2">
                     <P className="text-primary">•</P>
                     <P className="text-muted-foreground flex-1">
-                      Problem-solving and mental flexibility
+                      {t('streak.benefit_3')}
                     </P>
                   </View>
                 </View>
                 <P className="text-muted-foreground leading-6 mt-3">
-                  Keep your streak alive to maximize these benefits! 🧠
+                  {t('streak.keep_alive')}
                 </P>
               </Animated.View>
             </CardContent>

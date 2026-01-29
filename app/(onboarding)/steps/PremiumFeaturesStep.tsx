@@ -12,35 +12,28 @@ import Animated, {
   useSharedValue,
   LinearTransition,
 } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("window");
 
-const slides = [
-  {
-    id: "1",
-    title: "Personalized daily\nrecommendations",
-    description:
-      "Generated using your activity patterns and training preferences.",
-    image: require("~/assets/premium_recommendations.png"), // Placeholder for now, user will need to move generated files
-  },
-  {
-    id: "2",
-    title: "Games based on science",
-    description:
-      "Always stay challenged with games that adapt to your skill level.",
-    image: require("~/assets/premium_science.png"),
-  },
-  {
-    id: "3",
-    title: "Performance tracking",
-    description:
-      "Gain insights into your progress throughout your brain-training journey.",
-    image: require("~/assets/premium_tracking.png"),
-  },
-];
-
 export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+
+  const slidesData = t("onboarding.steps.premium_features.slides", {
+    returnObjects: true,
+  }) as any[];
+
+  const slides = slidesData.map((slide, index) => ({
+    ...slide,
+    id: (index + 1).toString(),
+    image: [
+      require("~/assets/premium_recommendations.png"),
+      require("~/assets/premium_science.png"),
+      require("~/assets/premium_tracking.png"),
+    ][index],
+  }));
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Ref for FlatList
@@ -52,7 +45,7 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
       if (viewableItems.length > 0 && viewableItems[0].index !== null) {
         setCurrentIndex(viewableItems[0].index);
       }
-    }
+    },
   ).current;
 
   const viewabilityConfig = useRef({
@@ -70,10 +63,10 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
           className="pt-4 px-6 items-center"
         >
           <Text className="text-xl font-bold text-primary uppercase tracking-widest mb-2">
-            Unlock Everything
+            {t("onboarding.steps.premium_features.badge")}
           </Text>
           <Text className="text-4xl font-black text-center text-foreground mb-4">
-            Get more with{"\n"}Brain App Premium
+            {t("onboarding.steps.premium_features.title")}
           </Text>
         </Animated.View>
 
@@ -89,10 +82,10 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
                 justifyContent: "center",
               }}
             >
-              <View className="items-center justify-center p-8 mb-8">
+              <View className="items-center justify-center p-4 mb-4">
                 <Image
                   source={item.image}
-                  style={{ width: 280, height: 280, resizeMode: "contain" }}
+                  style={{ width: 200, height: 200, resizeMode: "contain" }}
                 />
               </View>
               <Text className="text-2xl font-bold text-center text-foreground mb-4">
@@ -124,8 +117,9 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
               <Animated.View
                 key={index}
                 layout={LinearTransition.springify().damping(15).stiffness(100)}
-                className={`h-2 rounded-full ${isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
-                  }`}
+                className={`h-2 rounded-full ${
+                  isActive ? "bg-primary w-6" : "bg-primary/20 w-2"
+                }`}
               />
             );
           })}
@@ -136,8 +130,13 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
         entering={FadeInDown.delay(300).duration(600)}
         className="px-6"
       >
-        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
-          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
+        <Button
+          className="w-full rounded-2xl h-12 native:h-16"
+          onPress={onNext}
+        >
+          <Text className="font-bold text-xl text-primary-foreground">
+            {t("common.continue")}
+          </Text>
         </Button>
       </Animated.View>
     </View>

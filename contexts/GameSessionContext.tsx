@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import { supabase } from "~/lib/supabase";
 import { calculateBPI } from "~/lib/scoring";
-import { Json } from "~/lib/database.types";
+import { Database, Json } from "~/lib/database.types";
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -90,6 +91,7 @@ export function GameSessionProvider({
   const [state, setState] = useState<RoundSessionState>(initialState);
   const [config, setConfig] = useState<RoundSessionConfig | null>(null);
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
+  const answersRef = useRef<AnswerRecord[]>([]);
 
   // Use ref for config during endRound to avoid stale closure issues
   const configRef = useRef<RoundSessionConfig | null>(null);
@@ -122,6 +124,7 @@ export function GameSessionProvider({
     configRef.current = newConfig;
     setConfig(newConfig);
     setAnswers([]);
+    answersRef.current = [];
 
     setState({
       isPlaying: true,
@@ -138,11 +141,12 @@ export function GameSessionProvider({
    * Records a question result
    */
   const recordAnswer = useCallback((answer: AnswerRecord) => {
+    answersRef.current = [...answersRef.current, answer];
     setAnswers((prev) => [...prev, answer]);
 
     setState((prev) => ({
       ...prev,
-      correctCount: prev.correctCount + (answer.accuracy === 1.0 ? 1 : 0),
+      correctCount: prev.correctCount + answer.accuracy,
     }));
   }, []);
 
@@ -165,10 +169,11 @@ export function GameSessionProvider({
     } = currentConfig;
 
     // Get current answers from ref to avoid stale state
-    const currentAnswers = answers;
-    const correctCount = currentAnswers.filter(
-      (a) => a.accuracy === 1.0
-    ).length;
+    const currentAnswers = answersRef.current;
+    const accuracySum = currentAnswers.reduce(
+      (sum, a) => sum + a.accuracy,
+      0
+    );
 
     // Clamp difficulty values
     const avgQDifficulty = Math.max(0, Math.min(10, avgQuestionDifficulty));
@@ -176,10 +181,7 @@ export function GameSessionProvider({
 
     // Calculate overall accuracy
     const accuracy =
-      currentAnswers.length > 0
-        ? currentAnswers.reduce((sum, a) => sum + a.accuracy, 0) /
-          currentAnswers.length
-        : 0;
+      currentAnswers.length > 0 ? accuracySum / currentAnswers.length : 0;
 
     // Per-game target times (ms per question)
     const targetPerQuestionMsByGame: Record<string, number | null> = {
@@ -195,9 +197,9 @@ export function GameSessionProvider({
     const avgResponseTimeMs =
       currentAnswers.length > 0
         ? Math.round(
-            currentAnswers.reduce((sum, a) => sum + a.responseTimeMs, 0) /
-              currentAnswers.length
-          )
+          currentAnswers.reduce((sum, a) => sum + a.responseTimeMs, 0) /
+          currentAnswers.length
+        )
         : null;
 
     const bpi = calculateBPI({
@@ -205,9 +207,9 @@ export function GameSessionProvider({
       difficulty: avgQDifficulty,
       ...(targetPerQ && avgResponseTimeMs !== null
         ? {
-            targetTimeMs: targetPerQ,
-            actualTimeMs: avgResponseTimeMs,
-          }
+          targetTimeMs: targetPerQ,
+          actualTimeMs: avgResponseTimeMs,
+        }
         : {}),
     });
 
@@ -217,7 +219,7 @@ export function GameSessionProvider({
       isFinished: true,
       score: bpi,
       durationMs,
-      correctCount,
+      correctCount: accuracySum,
     }));
 
     // Save to database
@@ -232,7 +234,8 @@ export function GameSessionProvider({
           avg_response_time_ms: avgResponseTimeMs,
           score: bpi,
           duration_seconds: Math.round(durationMs / 1000),
-          correct_count: correctCount,
+          correct_count: accuracySum,
+
           total_questions: totalQuestions,
           metadata: metadata ?? null,
         })
@@ -263,12 +266,19 @@ export function GameSessionProvider({
 
         console.log("Saved", currentAnswers.length, "answers to game_answers");
       }
+
+      const { error: refreshError } = await supabase.rpc(
+        "refresh_ability_scores" as keyof Database["public"]["Functions"]
+      );
+      if (refreshError) {
+        console.error("Failed to refresh ability scores:", refreshError);
+      }
     } catch (err) {
       console.error("Failed to save game session:", err);
     }
 
     return bpi;
-  }, [state.startTime, answers]);
+  }, [state.startTime]);
 
   /**
    * Resets the session for a new round
@@ -277,6 +287,7 @@ export function GameSessionProvider({
     setState(initialState);
     setConfig(null);
     setAnswers([]);
+    answersRef.current = [];
     configRef.current = null;
   }, []);
 

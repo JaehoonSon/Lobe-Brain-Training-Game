@@ -1,185 +1,199 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
-  Text,
-  useColorScheme,
-  Dimensions,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
+import { format } from "date-fns";
 import { LineChart } from "react-native-gifted-charts";
+import { Text } from "~/components/ui/text";
+import { P } from "~/components/ui/typography";
 import { cn } from "~/lib/utils";
+import { ScoreHistoryPoint } from "~/contexts/UserStatsContext";
 
-export type ChartRange = "90D" | "6M" | "1Y" | "ALL";
+export type ChartRange = "1W" | "1M" | "3M" | "6M" | "1Y" | "ALL";
 
 interface ScoreHistoryChartProps {
-  data: { value: number; label?: string; date?: string }[];
-  range: ChartRange;
-  onRangeChange: (range: ChartRange) => void;
-  height?: number;
-  loading?: boolean;
+  history: ScoreHistoryPoint[];
+  lineColor?: string;
 }
 
 export function ScoreHistoryChart({
-  data,
-  range,
-  onRangeChange,
-  height = 220,
+  history,
+  lineColor = "#d925b5"
 }: ScoreHistoryChartProps) {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
+  const { width: screenWidth } = useWindowDimensions();
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+  // Use measured container width, fallback to screen-based calculation
+  const chartWidth = containerWidth ? containerWidth - 60 : screenWidth - 160;
+  const [range, setRange] = useState<ChartRange>("3M");
 
-  // Colors
-  const lineColor = isDark ? "#ffffff" : "#fa8b4b"; // Primary orange / white
-  const textColor = isDark ? "#9ca3af" : "#6b7280"; // gray-400 / gray-500
-  const gridColor = isDark ? "#374151" : "#e5e7eb"; // gray-700 / gray-200
+  if (history.length === 0) {
+    return (
+      <P className="text-center py-8">
+        No history yet
+      </P>
+    );
+  }
 
-  // Calculate width
-  const screenWidth = Dimensions.get("window").width;
-  const chartWidth = screenWidth - 64; // Account for card padding
+  // If container width hasn't been measured yet, render a placeholder to get its dimensions
+  if (containerWidth === null) {
+    return (
+      <View
+        style={{ height: 280, width: '100%' }}
+        onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
+      />
+    );
+  }
 
-  // Fallback for empty data to show grid
-  const hasData = data && data.length > 0;
-  const displayData = hasData ? data : [{ value: 0 }, { value: 100 }]; // Dummy for grid
+  // Filter by range
+  const now = new Date();
+  let cutoffDate: Date | null = null;
 
-  // Prepare chart data
-  const chartData = displayData.map((item) => ({
-    ...item,
-    labelTextStyle: { color: textColor, fontSize: 10 },
-    dataPointText: undefined, // Ensure no floating text
-  }));
+  if (range === "1W") {
+    cutoffDate = new Date(now);
+    cutoffDate.setDate(cutoffDate.getDate() - 7);
+  } else if (range === "1M") {
+    cutoffDate = new Date(now);
+    cutoffDate.setDate(cutoffDate.getDate() - 30);
+  } else if (range === "3M") {
+    cutoffDate = new Date(now);
+    cutoffDate.setDate(cutoffDate.getDate() - 90);
+  } else if (range === "6M") {
+    cutoffDate = new Date(now);
+    cutoffDate.setMonth(cutoffDate.getMonth() - 6);
+  } else if (range === "1Y") {
+    cutoffDate = new Date(now);
+    cutoffDate.setFullYear(cutoffDate.getFullYear() - 1);
+  }
 
-  const Ranges: ChartRange[] = ["90D", "6M", "1Y", "ALL"];
+  const filteredHistory = cutoffDate
+    ? history.filter((h) => new Date(h.date) >= cutoffDate!)
+    : history;
+
+  // Sort by date to ensure chronological order
+  const sortedHistory = [...filteredHistory].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  // Calculate "nice interval" labeling - like Y-axis, show clean grid markers only
+  // Don't force first/last labels, just show points on the step grid
+  const labelIndices = new Set<number>();
+  if (sortedHistory.length > 1) {
+    const startDate = new Date(sortedHistory[0].date);
+    const endDate = new Date(sortedHistory[sortedHistory.length - 1].date);
+    const rangeDays = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+
+    // Choose step: aim for ~4-5 labels
+    let stepDays = 2;
+    if (rangeDays <= 10) stepDays = 2;
+    else if (rangeDays <= 30) stepDays = Math.ceil(rangeDays / 5);
+    else if (rangeDays <= 90) stepDays = 14;
+    else if (rangeDays <= 180) stepDays = 30;
+    else stepDays = 60;
+
+    // Find data points that fall on the step grid (multiples of stepDays from start)
+    const startTime = startDate.getTime();
+    for (let i = 0; i < sortedHistory.length; i++) {
+      const pointDate = new Date(sortedHistory[i].date);
+      const daysSinceStart = Math.round((pointDate.getTime() - startTime) / (1000 * 60 * 60 * 24));
+
+      // Label if this day is a multiple of stepDays
+      if (daysSinceStart % stepDays === 0) {
+        labelIndices.add(i);
+      }
+    }
+  } else if (sortedHistory.length === 1) {
+    labelIndices.add(0);
+  }
+
+  // Transform data
+  const chartData = sortedHistory.map((point, index) => {
+    // Show label if it's in our pre-calculated set
+    const showLabel = labelIndices.has(index);
+
+    return {
+      value: point.score,
+      label: showLabel ? format(new Date(point.date), "MMM d") : "",
+      labelTextStyle: { color: "#6b7280", fontSize: 10, width: 40, marginLeft: 0 },
+      dataPointLabelComponent: () => null,
+    };
+  });
+
+  const maxScore = Math.max(...chartData.map((d) => d.value), 100);
+
+  // Round maxValue to nice intervals (multiples of 200)
+  const roundedMax = Math.ceil(maxScore / 200) * 200;
+
+  // Format Y-axis labels
+  const formatY = (val: string) => {
+    const num = Number(val);
+    if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+    return String(Math.round(num));
+  };
+
+  const Ranges: ChartRange[] = ["1W", "1M", "3M", "6M", "1Y", "ALL"];
 
   return (
-    <View className="w-full">
-      <View style={{ height: height + 20 }}>
-        {/* Empty State Overlay */}
-        {!hasData && (
-          <View className="absolute inset-0 z-10 items-center justify-center">
-            <Text className="text-muted-foreground font-medium">
-              No data for this period
-            </Text>
-          </View>
-        )}
-
+    <View>
+      <View
+        style={{ height: 280, width: '100%', paddingVertical: 8, paddingHorizontal: 4 }}
+        onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width - 16)}
+      >
         <LineChart
           data={chartData}
-          height={height}
           width={chartWidth}
-          // Line Style
+          height={220}
           curved
-          curveType={1}
-          color={hasData ? lineColor : "transparent"}
-          thickness={3}
-          // Area (Subtle gradient or none based on preference, screenshots show none/minimal)
-          areaChart={false}
-          // Data Points
-          hideDataPoints={false}
-          dataPointsColor={hasData ? lineColor : "transparent"}
-          dataPointsRadius={3}
-          // Axes
-          yAxisThickness={0}
-          xAxisThickness={0}
-          yAxisTextStyle={{ color: textColor, fontSize: 11 }}
-          xAxisColor="transparent"
-          yAxisColor="transparent"
-          // Grid
+          color={lineColor}
+          thickness={2}
+          hideDataPoints={chartData.length > 20}
+          dataPointsColor={lineColor}
+          dataPointsRadius={4}
+          yAxisThickness={2}
+          yAxisColor="#e5e7eb"
+          yAxisTextStyle={{ color: "#6b7280", fontSize: 10 }}
+          yAxisLabelWidth={30}
+          formatYLabel={formatY}
+          noOfSections={3}
+          xAxisThickness={2}
+          xAxisColor="#e5e7eb"
+          xAxisLabelTextStyle={{ color: "#6b7280", fontSize: 10, marginTop: 4 }}
           hideRules={false}
           rulesType="dashed"
-          rulesColor={gridColor}
-          dashWidth={4}
-          dashGap={4}
-          noOfSections={4}
-          maxValue={800} // Keep consistency
-          // Spacing
-          spacing={hasData ? Math.max(40, chartWidth / data.length) : 40}
-          initialSpacing={20}
-          endSpacing={20}
-          // Animation
+          rulesColor="#f3f4f6"
+          maxValue={roundedMax}
+          yAxisOffset={0}
+          adjustToWidth={true}
           isAnimated
-          animationDuration={600}
-          // Tooltip (Pointer)
-          pointerConfig={{
-            pointerStripHeight: height,
-            pointerStripColor: gridColor,
-            pointerStripWidth: 1,
-            pointerColor: lineColor,
-            radius: 6,
-            pointerLabelWidth: 100,
-            pointerLabelHeight: 90,
-            activatePointersOnLongPress: false,
-            autoAdjustPointerLabelPosition: true,
-            pointerLabelComponent: (items: any) => {
-              const item = items[0];
-              return (
-                <View
-                  style={{
-                    backgroundColor: "#1f2937", // Always dark for tooltip
-                    paddingHorizontal: 10,
-                    paddingVertical: 6,
-                    borderRadius: 8,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 4,
-                    elevation: 5,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginTop: -30,
-                    marginLeft: -40,
-                  }}
-                >
-                  <Text className="text-white font-bold text-base">
-                    {item.value}
-                  </Text>
-                  {item.label && (
-                    <Text className="text-gray-300 text-[10px]">
-                      {item.label}
-                    </Text>
-                  )}
-                </View>
-              );
-            },
-          }}
         />
       </View>
-      <RangeTabs range={range} onChange={onRangeChange} />
-    </View>
-  );
-}
 
-interface RangeTabsProps {
-  range: ChartRange;
-  onChange: (range: ChartRange) => void;
-}
-
-export function RangeTabs({ range, onChange }: RangeTabsProps) {
-  const Ranges: ChartRange[] = ["90D", "6M", "1Y", "ALL"];
-
-  return (
-    <View className="flex-row bg-muted/30 p-1 rounded-2xl mt-4 mx-4">
-      {Ranges.map((r) => {
-        const isActive = range === r;
-        return (
-          <TouchableOpacity
-            key={r}
-            onPress={() => onChange(r)}
-            className={cn(
-              "flex-1 py-1.5 items-center justify-center rounded-xl",
-              isActive ? "bg-background shadow-sm" : ""
-            )}
-          >
-            <Text
+      {/* Range Selector */}
+      <View className="flex-row bg-muted/30 p-1.5 rounded-2xl mx-4">
+        {Ranges.map((r) => {
+          const isActive = range === r;
+          return (
+            <TouchableOpacity
+              key={r}
+              onPress={() => setRange(r)}
               className={cn(
-                "text-xs font-bold",
-                isActive ? "text-foreground" : "text-muted-foreground"
+                "flex-1 py-2.5 items-center justify-center rounded-xl",
+                isActive ? "bg-primary shadow-sm" : ""
               )}
             >
-              {r}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
+              <Text
+                className={cn(
+                  "text-sm font-bold",
+                  isActive ? "text-white" : "text-muted-foreground"
+                )}
+              >
+                {r}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
     </View>
   );
 }

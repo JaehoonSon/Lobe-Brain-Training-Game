@@ -4,9 +4,10 @@ import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
 import { MemoryMatrixContent } from "~/lib/validators/game-content";
+import { useTranslation } from "react-i18next";
 
 interface MemoryMatrixProps {
-  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
+  onComplete: (accuracy: number) => void; // 0.0 to 1.0
   content: MemoryMatrixContent;
   difficulty?: number;
 }
@@ -21,7 +22,7 @@ type GamePhase = "memorize" | "recall" | "result";
 function generateTargets(
   rows: number,
   cols: number,
-  targetCount: number
+  targetCount: number,
 ): number[] {
   const totalTiles = rows * cols;
   const targets = new Set<number>();
@@ -34,7 +35,12 @@ function generateTargets(
   return Array.from(targets);
 }
 
-export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatrixProps) {
+export function MemoryMatrix({
+  onComplete,
+  content,
+  difficulty = 1,
+}: MemoryMatrixProps) {
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const [phase, setPhase] = useState<GamePhase>("memorize");
   const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
@@ -52,7 +58,10 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
   const gap = 12;
   const horizontalPadding = 48; // 24px padding on each side
   const availableWidth = width - horizontalPadding;
-  const tileSize = Math.min(64, Math.floor((availableWidth - (cols - 1) * gap) / cols));
+  const tileSize = Math.min(
+    64,
+    Math.floor((availableWidth - (cols - 1) * gap) / cols),
+  );
 
   // Initialize game on mount/content change
   useEffect(() => {
@@ -97,7 +106,9 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
   const checkResult = (selections: number[]) => {
     setPhase("result");
 
-    const correctPicks = selections.filter(s => activeTiles.includes(s)).length;
+    const correctPicks = selections.filter((s) =>
+      activeTiles.includes(s),
+    ).length;
     const accuracy = correctPicks / targetCount;
     const isPerfect = accuracy === 1.0;
 
@@ -138,7 +149,7 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
   if (activeTiles.length === 0) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text className="text-muted-foreground">Loading...</Text>
+        <Text className="text-muted-foreground">{t('game.memory_matrix.loading')}</Text>
       </View>
     );
   }
@@ -147,12 +158,12 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
     <View className="flex-1 items-center justify-center p-6">
       <View className="mb-12 items-center">
         <Text className="text-5xl font-extrabold mb-4 text-center">
-          Memory Matrix
+          {t('game.memory_matrix.title')}
         </Text>
         <Text className="text-xl text-muted-foreground text-center">
-          {phase === "memorize" && "Remember the pattern..."}
-          {phase === "recall" && `Select ${targetCount} tiles`}
-          {phase === "result" && "Checking..."}
+          {phase === "memorize" && t('game.memory_matrix.memorize')}
+          {phase === "recall" && t('game.memory_matrix.recall', { count: targetCount })}
+          {phase === "result" && t('game.memory_matrix.checking')}
         </Text>
       </View>
 
@@ -174,7 +185,8 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
                 state === "active" && "bg-primary border-primary",
                 state === "correct" && "bg-green-500 border-green-600",
                 state === "incorrect" && "bg-destructive border-destructive",
-                state === "missed" && "bg-yellow-400 border-yellow-500 opacity-50"
+                state === "missed" &&
+                "bg-yellow-400 border-yellow-500 opacity-50",
               )}
               style={{ width: tileSize, height: tileSize }}
               disabled={phase !== "recall"}
@@ -183,11 +195,11 @@ export function MemoryMatrix({ onComplete, content, difficulty = 1 }: MemoryMatr
         })}
       </View>
 
-      {phase === "recall" && (
+      {/* {phase === "recall" && (
         <Text className="mt-6 text-muted-foreground">
           {selectedTiles.length} / {targetCount} selected
         </Text>
-      )}
+      )} */}
     </View>
   );
 }

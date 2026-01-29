@@ -7,8 +7,7 @@ import {
 } from "react-native";
 import { useCallback, useState } from "react";
 import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
-import { OverallPerformanceChart } from "~/components/charts/OverallPerformanceChart";
-import { ComparisonChart } from "~/components/charts/ComparisonChart";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H4, P } from "~/components/ui/typography";
@@ -30,10 +29,12 @@ import {
   BookType,
 } from "lucide-react-native";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
+import { useUserStats, CategoryStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+
 import { router, useFocusEffect } from "expo-router";
 import { cn } from "~/lib/utils";
 import { FeatureCard } from "~/components/FeatureCard";
+import { useTranslation } from "react-i18next";
 // --- Components ---
 
 function getCategoryIcon(categoryName: string) {
@@ -59,6 +60,7 @@ interface CategoryRowProps {
 }
 
 function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
+  const { t } = useTranslation();
   const hasScore = category.score !== null;
   const IconComponent = getCategoryIcon(category.name);
 
@@ -70,6 +72,17 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
   const iconColorClass =
     variant === "primary" ? "text-primary" : "text-secondary";
   const progressBgClass = variant === "primary" ? "bg-primary" : "bg-secondary";
+
+  const validPercentiles = category.gameStats
+    .map((g) => g.percentile)
+    .filter((p): p is number => p !== null);
+
+  const avgPercentile =
+    validPercentiles.length > 0
+      ? Math.round(
+        (validPercentiles.reduce((a, b) => a + b, 0) / validPercentiles.length) * 100
+      )
+      : null;
 
   return (
     <TouchableOpacity
@@ -103,7 +116,14 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
                 style={{ width: `${category.progress}%` }}
               />
             </View>
-            <View className="flex-row items-center gap-1">
+            <View className="flex-row items-center gap-2">
+              {avgPercentile !== null && (
+                <View className="bg-muted px-2 py-0.5 rounded">
+                  <Text className="text-xs font-bold text-muted-foreground">
+                    {t('stats.bpi.top_percentile', { count: Math.max(1, 100 - avgPercentile) })}
+                  </Text>
+                </View>
+              )}
               <Text className="text-xl font-black text-foreground min-w-[30px] text-right">
                 {category.score}
               </Text>
@@ -113,7 +133,7 @@ function CategoryRow({ category, isLast, index, onPress }: CategoryRowProps) {
         ) : (
           <View className="flex-1 flex-row items-center justify-between">
             <P className="text-muted-foreground text-sm font-bold">
-              No games played
+              {t('stats.categories.no_games')}
             </P>
             <ChevronRight size={20} className="text-muted-foreground" />
           </View>
@@ -145,28 +165,12 @@ function StrengthContent() {
   );
 }
 
-function HistoryContent() {
-  return (
-    <View className="h-24 flex-row items-end justify-between px-4 opacity-60">
-      <View className="w-1/5 h-[30%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[45%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[60%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[50%] bg-muted rounded-t-sm" />
-      <View className="w-1/5 h-[90%] bg-primary rounded-t-sm" />
-    </View>
-  );
-}
+
 
 export default function StatsScreen() {
-  const {
-    overallBPI,
-    overallPercentile,
-    categoryStats,
-    history,
-    isLoading,
-    error,
-    refresh,
-  } = useUserStats();
+  const { t } = useTranslation();
+  const { overallBPI, categoryStats, isLoading, error, refresh, overallScoreHistory } = useUserStats();
+
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -180,6 +184,20 @@ export default function StatsScreen() {
   const categoriesWithData = categoryStats.filter(
     (c) => c.score !== null
   ).length;
+  const hasHistory = overallScoreHistory.length > 0;
+
+  const allGameStats = categoryStats.flatMap((c) => c.gameStats);
+  const validOverallPercentiles = allGameStats
+    .map((g) => g.percentile)
+    .filter((p): p is number => p !== null);
+
+  const overallAvgPercentile =
+    validOverallPercentiles.length > 0
+      ? Math.round(
+        (validOverallPercentiles.reduce((a, b) => a + b, 0) /
+          validOverallPercentiles.length) * 100
+      )
+      : null;
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-background">
@@ -197,7 +215,7 @@ export default function StatsScreen() {
       >
         <View className="px-6 pb-6">
           {/* Page Title */}
-          <H1 className="mb-6 pt-4 text-3xl font-black">My stats</H1>
+          <H1 className="mb-6 pt-4 text-3xl font-black">{t('stats.title')}</H1>
 
           {/* BPI HERO CARD */}
           {/* Use standard bg-primary/border-primary classes */}
@@ -205,10 +223,10 @@ export default function StatsScreen() {
             <View className="flex-row justify-between items-start mb-6">
               <View>
                 <P className="text-primary-foreground/80 text-sm font-black tracking-widest uppercase mb-1">
-                  OVERALL PERFORMANCE
+                  {t('stats.bpi.overall_performance')}
                 </P>
                 <H4 className="text-3xl font-black text-primary-foreground">
-                  Brain Index
+                  {t('stats.bpi.brain_index')}
                 </H4>
               </View>
               <View className="bg-white/20 p-2 rounded-xl">
@@ -218,9 +236,18 @@ export default function StatsScreen() {
 
             <View className="items-center py-4">
               {hasOverallBPI ? (
-                <Text className="text-8xl font-black text-primary-foreground ">
-                  {overallBPI}
-                </Text>
+                <>
+                  <Text className="text-8xl font-black text-primary-foreground ">
+                    {overallBPI}
+                  </Text>
+                  {overallAvgPercentile !== null && (
+                    <View className="bg-white/20 px-3 py-1 rounded-full mt-2">
+                      <Text className="text-primary-foreground font-bold">
+                        {t('stats.bpi.top_percentile', { count: Math.max(1, 100 - overallAvgPercentile) })}
+                      </Text>
+                    </View>
+                  )}
+                </>
               ) : (
                 <Text className="text-6xl font-black text-primary-foreground/30">
                   ---
@@ -229,24 +256,20 @@ export default function StatsScreen() {
             </View>
 
             <View className="mt-4 bg-black/10 rounded-xl p-3 flex-row items-center justify-center border border-black/5">
-              {hasOverallBPI && overallPercentile !== null ? (
+              {hasOverallBPI ? (
                 <Text className="text-primary-foreground font-bold">
-                  Top {Math.max(1, 100 - overallPercentile)}% of users 🏆
-                </Text>
-              ) : hasOverallBPI ? (
-                <Text className="text-primary-foreground font-bold">
-                  Keep playing to see your rank!
+                  {t('stats.bpi.update_msg')}
                 </Text>
               ) : (
                 <Text className="text-primary-foreground/90 font-bold text-center">
-                  Play {3 - categoriesWithData} more categories to unlock
+                  {t('stats.bpi.unlock_msg', { count: 3 - categoriesWithData })}
                 </Text>
               )}
             </View>
           </Card>
 
           {/* TRAINING AREAS HEADER */}
-          <H4 className="mb-4 text-2xl font-black px-1 py-1">Training Areas</H4>
+          <H4 className="mb-4 text-2xl font-black px-1 py-1">{t('stats.training_areas')}</H4>
 
           {/* CATEGORIES LIST - UNIFIED CARD */}
           <Card className="mb-8 bg-card">
@@ -254,7 +277,7 @@ export default function StatsScreen() {
               <ActivityIndicator size="large" className="py-8 text-primary" />
             ) : error ? (
               <P className="text-destructive text-center py-8 font-bold">
-                Could not load stats.
+                {t('stats.error_loading')}
               </P>
             ) : (
               <View>
@@ -273,30 +296,22 @@ export default function StatsScreen() {
 
           {/* Premium Sections - Updated Visuals */}
           <H4 className="mb-4 text-2xl font-black px-1 py-1">
-            Detailed Analysis
+            {t('stats.analysis.title')}
           </H4>
 
-          {overallPercentile && (
-            <FeatureCard
-              title="How You Compare"
-              variant="secondary"
-              isLocked={true}
-            >
-              <ComparisonChart percentile={overallPercentile} />
-            </FeatureCard>
-          )}
 
           <FeatureCard
-            title="Strength Profile"
+            title={t('stats.analysis.strength_profile')}
             variant="primary"
-            isLocked={true}
+            isLocked={false}
           >
             <StrengthProfileChart categoryStats={categoryStats} />
           </FeatureCard>
 
-          {/* <FeatureCard title="Progress History" variant="secondary">
-            <OverallPerformanceChart history={history} />
-          </FeatureCard> */}
+          <FeatureCard title={t('stats.analysis.progress_history')} variant="secondary" noPadding>
+            <ScoreHistoryChart history={overallScoreHistory} />
+          </FeatureCard>
+
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,4 +1,5 @@
 import "~/global.css";
+import "~/lib/i18n";
 
 import {
   DarkTheme,
@@ -20,6 +21,7 @@ import {
   RevenueCatProvider,
   useRevenueCat,
 } from "~/contexts/RevenueCatProvider";
+import { PostHogProvider } from "~/contexts/PostHogProvider";
 import { SplashScreenController } from "./splash";
 import {
   OnboardingProvider,
@@ -28,6 +30,7 @@ import {
 import Toast from "react-native-toast-message";
 import { toastConfig } from "~/components/ui/toast";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { NotificationProvider } from "~/contexts/NotificationProvider";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -37,6 +40,8 @@ const DARK_THEME: Theme = {
   ...DarkTheme,
   colors: NAV_THEME.dark,
 };
+
+const PROFILE_LOAD_FALLBACK_MS = 8000;
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -52,11 +57,40 @@ const usePlatformSpecificSetup = Platform.select({
 function AppContent() {
   const { isDarkColorScheme } = useColorScheme();
 
-  const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
+  const {
+    isAuthenticated,
+    isLoading: isAuthLoading,
+    onboardingComplete,
+    isProfileLoading,
+  } = useAuth();
   const { isComplete, isLoading: isOnboardingLoading } = useOnboarding();
   const { isPro } = useRevenueCat();
 
-  const isAppLoading = isAuthLoading || isOnboardingLoading;
+  const [profileLoadTimedOut, setProfileLoadTimedOut] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!isAuthenticated || !isProfileLoading) {
+      setProfileLoadTimedOut(false);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      setProfileLoadTimedOut(true);
+    }, PROFILE_LOAD_FALLBACK_MS);
+
+    return () => clearTimeout(timer);
+  }, [isAuthenticated, isProfileLoading]);
+
+  const isAppLoading =
+    isAuthLoading ||
+    isOnboardingLoading ||
+    (isAuthenticated && isProfileLoading && !profileLoadTimedOut);
+
+  const allowUnauthenticated = !isAuthenticated || profileLoadTimedOut;
+  const allowOnboarding =
+    isAuthenticated && !onboardingComplete && !profileLoadTimedOut;
+  const allowAuthenticated =
+    isAuthenticated && onboardingComplete && !profileLoadTimedOut;
 
   // Debug: Log auth state for routing decisions
   console.log("=== Root Layout Routing ===");
@@ -64,6 +98,7 @@ function AppContent() {
   console.log("isAuthLoading:", isAuthLoading);
   console.log("isOnboardingLoading:", isOnboardingLoading);
   console.log("isComplete:", isComplete);
+  console.log("onboardingComplete:", onboardingComplete);
   console.log("isPro:", isPro);
   console.log("===========================");
 
@@ -76,12 +111,12 @@ function AppContent() {
       <StatusBar style={isDarkColorScheme ? "light" : "light"} />
       <Stack screenOptions={{ headerShown: false, animation: "none" }}>
         {/* Onboarding Flow: Authenticated but not complete */}
-        <Stack.Protected guard={isAuthenticated && !isComplete}>
+        <Stack.Protected guard={allowOnboarding}>
           <Stack.Screen name="(onboarding)" options={{ headerShown: false }} />
         </Stack.Protected>
 
         {/* Authenticated Flow: Authenticated and complete */}
-        <Stack.Protected guard={isAuthenticated && isComplete}>
+        <Stack.Protected guard={allowAuthenticated}>
           <Stack.Screen
             name="(authenticated)"
             options={{ headerRight: () => <ThemeToggle /> }}
@@ -89,7 +124,7 @@ function AppContent() {
         </Stack.Protected>
 
         {/* Unauthenticated Flow: Not authenticated */}
-        <Stack.Protected guard={!isAuthenticated}>
+        <Stack.Protected guard={allowUnauthenticated}>
           <Stack.Screen
             name="(unauthenticated)"
             options={{ headerShown: false }}
@@ -130,13 +165,17 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <AppThemeProvider>
         <AuthProvider>
-          <OnboardingProvider>
-            <RevenueCatProvider>
-              <SplashScreenController />
-              <AppContent />
-              <Toast config={toastConfig} />
+          <PostHogProvider>
+            <OnboardingProvider>
+              <RevenueCatProvider>
+                <NotificationProvider>
+                <SplashScreenController />
+                  <AppContent />
+                  <Toast config={toastConfig} />
+                </NotificationProvider>
             </RevenueCatProvider>
-          </OnboardingProvider>
+            </OnboardingProvider>
+          </PostHogProvider>
         </AuthProvider>
       </AppThemeProvider>
     </GestureHandlerRootView>
