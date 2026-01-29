@@ -59,7 +59,7 @@ export function MentalLanguageDiscrimination({
         </Text>
       </View>
 
-      <View className="flex-row flex-wrap gap-4 w-full justify-center">
+      <View className="gap-4 w-full items-center px-6">
         {choices.map((choice, index) => {
           const isSelected = selectedChoice === choice;
           const isCorrectAnswer = choice === content.answer;
@@ -78,7 +78,7 @@ export function MentalLanguageDiscrimination({
               key={index}
               variant={variant}
               className={cn(
-                "rounded-3xl active:scale-95 shadow-xl",
+                "rounded-3xl active:scale-95 shadow-xl w-full h-20",
                 hasAnswered &&
                 isCorrectAnswer &&
                 "bg-green-600 border-green-700",
@@ -88,7 +88,6 @@ export function MentalLanguageDiscrimination({
                 "bg-red-600 border-red-700",
                 hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
               )}
-              style={{ width: 150, height: 110 }}
               onPress={() => handleChoice(choice)}
               disabled={hasAnswered}
             >
