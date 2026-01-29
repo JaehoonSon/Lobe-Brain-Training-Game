@@ -7,7 +7,7 @@ import * as Haptics from "expo-haptics";
 import { MentalLanguageDiscriminationContent } from "~/lib/validators/game-content";
 
 interface MentalLanguageDiscriminationProps {
-  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
+  onComplete: (accuracy: number) => void; // 0.0 to 1.0
   content: MentalLanguageDiscriminationContent;
 }
 
@@ -18,8 +18,6 @@ export function MentalLanguageDiscrimination({
   const [choices, setChoices] = useState<string[]>([]);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
-
-
 
   useEffect(() => {
     // Shuffle choices from content options
@@ -80,13 +78,13 @@ export function MentalLanguageDiscrimination({
               className={cn(
                 "rounded-3xl active:scale-95 shadow-xl w-full h-20",
                 hasAnswered &&
-                isCorrectAnswer &&
-                "bg-green-600 border-green-700",
+                  isCorrectAnswer &&
+                  "bg-green-600 border-green-700",
                 hasAnswered &&
-                !isCorrectAnswer &&
-                isSelected &&
-                "bg-red-600 border-red-700",
-                hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
+                  !isCorrectAnswer &&
+                  isSelected &&
+                  "bg-red-600 border-red-700",
+                hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20",
               )}
               onPress={() => handleChoice(choice)}
               disabled={hasAnswered}
@@ -95,7 +93,7 @@ export function MentalLanguageDiscrimination({
                 className={cn(
                   "text-2xl font-black text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white",
-                  hasAnswered && !isCorrectAnswer && isSelected && "text-white"
+                  hasAnswered && !isCorrectAnswer && isSelected && "text-white",
                 )}
               >
                 {choice}

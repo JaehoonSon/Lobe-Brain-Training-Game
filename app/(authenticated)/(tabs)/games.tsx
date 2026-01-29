@@ -54,13 +54,13 @@ export default function GamesScreen() {
       <View className="bg-background z-10 px-6 pt-4 pb-4 border-b border-border/50">
         <AuthenticatedHeader className="mb-4" />
 
-        <H1 className="mb-4 text-3xl font-black">{t('games_tab.title')}</H1>
+        <H1 className="mb-4 text-3xl font-black">{t("games_tab.title")}</H1>
 
         {/* Search Bar */}
         <Card className="flex-row items-center px-4 py-1 h-16">
           <Search size={24} className="text-muted-foreground" />
           <Input
-            placeholder={t('games_tab.search_placeholder')}
+            placeholder={t("games_tab.search_placeholder")}
             className="flex-1 bg-transparent border-0 text-xl h-full"
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -75,7 +75,9 @@ export default function GamesScreen() {
         <View className="py-6 gap-8">
           {!normalizedQuery && (
             <View>
-              <H3 className="px-6 mb-4 text-2xl font-black">{t('games_tab.sections.todays_games')}</H3>
+              <H3 className="px-6 mb-4 text-2xl font-black">
+                {t("games_tab.sections.todays_games")}
+              </H3>
               <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -106,7 +108,13 @@ export default function GamesScreen() {
                       ) : (
                         <View
                           className="items-center justify-center bg-muted"
-                          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                          }}
                         >
                           <Zap size={36} className="text-muted-foreground" />
                         </View>
@@ -169,7 +177,13 @@ export default function GamesScreen() {
                         ) : (
                           <View
                             className="items-center justify-center bg-muted"
-                            style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                            }}
                           >
                             <Zap size={36} className="text-muted-foreground" />
                           </View>
