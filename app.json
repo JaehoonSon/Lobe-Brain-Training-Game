@@ -14,6 +14,10 @@
       "backgroundColor": "#fe7939"
     },
     "assetBundlePatterns": ["**/*"],
+    "locales": {
+      "ja": "./languages/japanese.json",
+      "es": "./languages/spanish.json"
+    },
     "ios": {
       "appStoreUrl": "https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720",
       "usesAppleSignIn": true,
@@ -22,6 +26,9 @@
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true,
+        "NSCameraUsageDescription": "We use the camera to take your profile photo.",
+        "NSPhotoLibraryUsageDescription": "We access your photo library to choose a profile photo.",
+        "NSPhotoLibraryAddUsageDescription": "We save your profile photo to your photo library.",
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
@@ -51,7 +58,15 @@
       "expo-router",
       "expo-apple-authentication",
       "expo-video",
-      "expo-localization",
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": ["en", "ja", "es"],
+            "android": ["en", "ja", "es"]
+          }
+        }
+      ],
       "expo-notifications",
       [
         "expo-build-properties",

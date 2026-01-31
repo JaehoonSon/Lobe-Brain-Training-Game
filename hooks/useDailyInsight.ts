@@ -26,7 +26,7 @@ export function useDailyInsight() {
     async function fetchDailyInsight() {
       try {
         setIsLoading(true);
-        
+
         const { data, error: fetchError } = await supabase
           .rpc("get_daily_insight")
           .single();
@@ -41,7 +41,7 @@ export function useDailyInsight() {
           "insight",
           [data.id],
           ["content", "source", "category"],
-          locale
+          locale,
         );
         const translationMap = buildTranslationMap(translations);
 
@@ -51,23 +51,18 @@ export function useDailyInsight() {
             translationMap,
             data.id,
             "content",
-            data.content
+            data.content,
           ),
           source: data.source
-            ? resolveTranslation(
-              translationMap,
-              data.id,
-              "source",
-              data.source
-            )
+            ? resolveTranslation(translationMap, data.id, "source", data.source)
             : null,
           category: data.category
             ? resolveTranslation(
-              translationMap,
-              data.id,
-              "category",
-              data.category
-            )
+                translationMap,
+                data.id,
+                "category",
+                data.category,
+              )
             : null,
         };
 
