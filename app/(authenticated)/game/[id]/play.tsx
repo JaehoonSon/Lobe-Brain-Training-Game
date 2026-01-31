@@ -300,19 +300,19 @@ export default function GamePlayScreen() {
             onComplete={handleQuestionComplete}
           />
         );
-      case "stroop_clash":
-        if (content.type !== "stroop_clash") return null;
+      case "math_rocket":
+        if (content.type !== "math_rocket") return null;
         return (
-          <StroopClash
+          <MathRocket
             key={currentQuestionIndex}
             content={content}
             onComplete={handleQuestionComplete}
           />
         );
-      case "math_rocket":
-        if (content.type !== "math_rocket") return null;
+      case "stroop_clash":
+        if (content.type !== "stroop_clash") return null;
         return (
-          <MathRocket
+          <StroopClash
             key={currentQuestionIndex}
             content={content}
             onComplete={handleQuestionComplete}
