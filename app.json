@@ -16,7 +16,8 @@
     "assetBundlePatterns": ["**/*"],
     "locales": {
       "ja": "./languages/japanese.json",
-      "es": "./languages/spanish.json"
+      "es": "./languages/spanish.json",
+      "zh-Hans": "./languages/chinese-simplified.json"
     },
     "ios": {
       "appStoreUrl": "https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720",
@@ -62,8 +63,8 @@
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": ["en", "ja", "es"],
-            "android": ["en", "ja", "es"]
+            "ios": ["en", "ja", "es", "zh-Hans"],
+            "android": ["en", "ja", "es", "zh-Hans"]
           }
         }
       ],
