@@ -31,6 +31,7 @@ import Toast from "react-native-toast-message";
 import { toastConfig } from "~/components/ui/toast";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NotificationProvider } from "~/contexts/NotificationProvider";
+import Tenjin from "react-native-tenjin";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -146,8 +147,26 @@ import {
 } from "@expo-google-fonts/nunito";
 import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
 
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+
 export default function RootLayout() {
   usePlatformSpecificSetup();
+  React.useEffect(() => {
+    const initTenjin = async () => {
+      try {
+        const { status } = await requestTrackingPermissionsAsync();
+
+        Tenjin.initialize(process.env.EXPO_PUBLIC_TENJIN_API_KEY!);
+        Tenjin.connect();
+
+        console.log("Tenjin connected with ATT status:", status);
+      } catch (error) {
+        console.error("Tenjin initialization failed", error);
+      }
+    };
+
+    initTenjin();
+  }, []);
 
   const [fontsLoaded] = useFonts({
     Nunito_400Regular,
@@ -169,11 +188,11 @@ export default function RootLayout() {
             <OnboardingProvider>
               <RevenueCatProvider>
                 <NotificationProvider>
-                <SplashScreenController />
+                  <SplashScreenController />
                   <AppContent />
                   <Toast config={toastConfig} />
                 </NotificationProvider>
-            </RevenueCatProvider>
+              </RevenueCatProvider>
             </OnboardingProvider>
           </PostHogProvider>
         </AuthProvider>

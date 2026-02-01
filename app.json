@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lobe",
     "slug": "lobe",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/brain_logo.png",
     "scheme": "lobe",
@@ -26,6 +26,7 @@
       "buildNumber": "1",
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
+        "NSUserTrackingUsageDescription": "We use your data to improve your experience.",
         "CFBundleAllowMixedLocalizations": true,
         "NSCameraUsageDescription": "We use the camera to take your profile photo.",
         "NSPhotoLibraryUsageDescription": "We access your photo library to choose a profile photo.",
@@ -81,7 +82,14 @@
         }
       ],
       "expo-web-browser",
-      "@react-native-google-signin/google-signin"
+      "@react-native-google-signin/google-signin",
+      "expo-tracking-transparency",
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

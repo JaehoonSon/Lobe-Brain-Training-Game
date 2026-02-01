@@ -5,11 +5,13 @@
   },
   "build": {
     "development": {
+      "autoIncrement": true,
       "environment": "development",
       "developmentClient": true,
       "distribution": "internal"
     },
     "preview": {
+      "autoIncrement": true,
       "distribution": "internal"
     },
     "production": {

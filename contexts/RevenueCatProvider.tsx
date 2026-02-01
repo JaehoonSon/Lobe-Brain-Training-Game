@@ -6,6 +6,7 @@ import Purchases, {
   PurchasesOffering,
 } from "react-native-purchases";
 import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
+import Tenjin from "react-native-tenjin";
 
 // Config
 const API_KEY = __DEV__
@@ -69,6 +70,27 @@ export const RevenueCatProvider = ({
     };
 
     init();
+  }, []);
+
+  // Initialize Tenjin attribution
+  useEffect(() => {
+    const initTenjinAttribution = async () => {
+      try {
+        if (Platform.OS === "ios") {
+          await Purchases.collectDeviceIdentifiers();
+        }
+
+        Tenjin.getAnalyticsInstallationId((id) => {
+          if (id) {
+            Purchases.setTenjinAnalyticsInstallationID(id);
+          }
+        });
+      } catch (e) {
+        console.error("Error setting Tenjin attribution:", e);
+      }
+    };
+
+    initTenjinAttribution();
   }, []);
 
   // Sync user identity
@@ -136,9 +158,36 @@ export const RevenueCatProvider = ({
 
   const purchasePackage = async (pack: PurchasesPackage) => {
     try {
-      const { customerInfo } = await Purchases.purchasePackage(pack);
+      const { customerInfo, transaction } =
+        await Purchases.purchasePackage(pack);
       setCustomerInfo(customerInfo);
       checkEntitlement(customerInfo);
+
+      if (transaction) {
+        if (
+          Platform.OS === "ios" &&
+          transaction.transactionIdentifier &&
+          "appStoreReceipt" in transaction
+        ) {
+          // @ts-ignore
+          const receipt = transaction.appStoreReceipt as string;
+          Tenjin.transactionWithReceipt(
+            pack.product.identifier,
+            pack.product.currencyCode,
+            1,
+            pack.product.price,
+            transaction.transactionIdentifier,
+            receipt,
+          );
+        } else {
+          Tenjin.transaction(
+            pack.product.identifier,
+            pack.product.currencyCode,
+            1,
+            pack.product.price,
+          );
+        }
+      }
     } catch (e: any) {
       if (!e.userCancelled) {
         console.error("Purchase error:", e);
@@ -163,9 +212,14 @@ export const RevenueCatProvider = ({
     offering?: PurchasesOffering,
   ): Promise<boolean> => {
     try {
+      // Capture state before paywall
+      const prevInfo = await Purchases.getCustomerInfo();
+
       const paywallResult = offering
         ? await RevenueCatUI.presentPaywall({ offering })
         : await RevenueCatUI.presentPaywall();
+
+      console.log("Paywall result:", paywallResult);
 
       switch (paywallResult) {
         case PAYWALL_RESULT.NOT_PRESENTED:
@@ -173,8 +227,45 @@ export const RevenueCatProvider = ({
         case PAYWALL_RESULT.CANCELLED:
           return false;
         case PAYWALL_RESULT.PURCHASED:
-        case PAYWALL_RESULT.RESTORED:
+        case PAYWALL_RESULT.RESTORED: {
+          // If purchased, we try to identify what was bought to track it manually
+          if (paywallResult === PAYWALL_RESULT.PURCHASED) {
+            const newInfo = await Purchases.getCustomerInfo();
+
+            // Find the new product
+            const prevProducts = prevInfo.allPurchasedProductIdentifiers;
+            const newProducts = newInfo.allPurchasedProductIdentifiers;
+            const purchasedProductIds = newProducts.filter(
+              (id) => !prevProducts.includes(id),
+            );
+
+            // Look for product details in the offering (or current offering)
+            const targetOffering = offering || currentOffering;
+
+            if (purchasedProductIds.length > 0 && targetOffering) {
+              purchasedProductIds.forEach((productId) => {
+                const product = targetOffering.availablePackages.find(
+                  (p) => p.product.identifier === productId,
+                )?.product;
+                if (product) {
+                  // We don't have the transaction ID/receipt here easily from presentPaywall
+                  // So we fall back to standard transaction tracking
+                  console.log(
+                    "Tracking Tenjin transaction for:",
+                    product.identifier,
+                  );
+                  Tenjin.transaction(
+                    product.identifier,
+                    product.currencyCode,
+                    1,
+                    product.price,
+                  );
+                }
+              });
+            }
+          }
           return true;
+        }
         default:
           return false;
       }

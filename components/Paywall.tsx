@@ -1,7 +1,9 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import RevenueCatUI from "react-native-purchases-ui";
 import { CustomerInfo } from "react-native-purchases";
+import Tenjin from "react-native-tenjin";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 type PaywallProps = {
   onPurchaseCompleted: (customerInfo: CustomerInfo) => void;
@@ -16,11 +18,47 @@ export default function Paywall({
   onDismiss,
   options,
 }: PaywallProps) {
+  const { currentOffering } = useRevenueCat();
+
   return (
     <View style={styles.container}>
       <RevenueCatUI.Paywall
-        onPurchaseCompleted={({ customerInfo }) => {
+        onPurchaseCompleted={({ customerInfo, storeTransaction }) => {
           console.log("Purchase completed:", customerInfo);
+
+          if (storeTransaction) {
+            const product = currentOffering?.availablePackages.find(
+              (p) =>
+                p.product.identifier === storeTransaction.productIdentifier,
+            )?.product;
+
+            if (product) {
+              if (
+                Platform.OS === "ios" &&
+                storeTransaction.transactionIdentifier &&
+                "appStoreReceipt" in storeTransaction
+              ) {
+                // @ts-ignore
+                const receipt = storeTransaction.appStoreReceipt as string;
+                Tenjin.transactionWithReceipt(
+                  product.identifier,
+                  product.currencyCode,
+                  1,
+                  product.price,
+                  storeTransaction.transactionIdentifier,
+                  receipt,
+                );
+              } else {
+                Tenjin.transaction(
+                  product.identifier,
+                  product.currencyCode,
+                  1,
+                  product.price,
+                );
+              }
+            }
+          }
+
           onPurchaseCompleted(customerInfo);
         }}
         onRestoreCompleted={({ customerInfo }) => {
