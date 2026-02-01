@@ -41,6 +41,7 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   );
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [score, setScore] = useState(0);
+  const [totalAttempts, setTotalAttempts] = useState(0);
 
   const rocketY = useSharedValue(PLAYABLE_HEIGHT * 0.15);
   const velocity = useSharedValue(0);
@@ -139,8 +140,10 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   const handleGameOver = useCallback(() => {
     setGameState("game_over");
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-    onComplete(0.0);
-  }, [onComplete]);
+    // Avoid divide by zero if user crashes immediately
+    const accuracy = totalAttempts > 0 ? score / totalAttempts : 0.0;
+    onComplete(accuracy);
+  }, [onComplete, score, totalAttempts]);
 
   // Physics loop running on UI thread
   useFrameCallback(() => {
@@ -176,6 +179,10 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   const handleAnswer = (choice: number) => {
     if (gameState !== "playing" || !currentQuestion) return;
 
+    // Increment attempts for every answer
+    const newTotalAttempts = totalAttempts + 1;
+    setTotalAttempts(newTotalAttempts);
+
     if (choice === currentQuestion.answer) {
       velocity.value = -THRUST;
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -184,7 +191,9 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
         if (newScore >= WINNING_SCORE) {
           setGameState("won");
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-          onComplete(1.0);
+          // Calculate final accuracy
+          const accuracy = newScore / newTotalAttempts;
+          onComplete(accuracy);
         }
         return newScore;
       });

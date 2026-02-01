@@ -122,8 +122,12 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
         setIsSuccess(true);
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
+        // Calculate penalized accuracy: 100% minus 10% per failed attempt, floor at 10%
+        const penalty = attempts * 0.1;
+        const accuracy = Math.max(0.1, 1.0 - penalty);
+
         setTimeout(() => {
-          onComplete(1.0);
+          onComplete(accuracy);
         }, 1000);
       } else {
         // Error
@@ -132,7 +136,7 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       }
     }
-  }, [placedLetters, targetWord, isSuccess, onComplete]);
+  }, [placedLetters, targetWord, isSuccess, onComplete, attempts]);
 
   const tileSize = Math.min(50, (SCREEN_WIDTH - 40) / (targetWord.length || 5));
 
