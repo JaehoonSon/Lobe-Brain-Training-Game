@@ -81,7 +81,17 @@ export const WordUnscrambleContentSchema = z.object({
   hint: z.string().optional(),
 });
 
-// 7. Stroop Clash
+// 7. Math Rocket
+export const MathRocketContentSchema = z.object({
+  type: z.literal("math_rocket"),
+  operandRange: z.tuple([z.number(), z.number()]).optional(),
+  operators: z.array(z.enum(["+", "-", "x", "*", "/"])).optional(),
+  gravity: z.number().optional(),
+  thrust: z.number().optional(),
+  winningScore: z.number().optional(),
+});
+
+// 8. Stroop Clash
 export const StroopClashContentSchema = z.object({
   type: z.literal("stroop_clash"),
   word: z.string(),          // The text shown
@@ -101,9 +111,12 @@ export const GameContentSchema = z.discriminatedUnion("type", [
   BallSortContentSchema,
   WordUnscrambleContentSchema,
   StroopClashContentSchema,
+  MathRocketContentSchema,
 ]);
 
-export type MentalArithmeticContent = z.infer<typeof MentalArithmeticContentSchema>;
+export type MentalArithmeticContent = z.infer<
+  typeof MentalArithmeticContentSchema
+>;
 export type MemoryMatrixContent = z.infer<typeof MemoryMatrixContentSchema>;
 export type MentalLanguageDiscriminationContent = z.infer<
   typeof MentalLanguageDiscriminationContentSchema
@@ -112,4 +125,5 @@ export type WordleContent = z.infer<typeof WordleContentSchema>;
 export type BallSortContent = z.infer<typeof BallSortContentSchema>;
 export type WordUnscrambleContent = z.infer<typeof WordUnscrambleContentSchema>;
 export type StroopClashContent = z.infer<typeof StroopClashContentSchema>;
+export type MathRocketContent = z.infer<typeof MathRocketContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;

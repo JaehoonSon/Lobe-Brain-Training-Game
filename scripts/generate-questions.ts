@@ -62,6 +62,16 @@ const WordUnscrambleSchema = z.object({
   word: z.string(),
 });
 
+// 7. Math Rocket
+const MathRocketSchema = z.object({
+  type: z.literal('math_rocket'),
+  operandRange: z.tuple([z.number(), z.number()]),
+  operators: z.array(z.enum(['+', '-', '*', '/'])),
+  gravity: z.number().optional(),
+  thrust: z.number().optional(),
+  winningScore: z.number().optional(),
+});
+
 /* -------------------------------------------------------------------------- */
 /*                         Game → Schema Type Mapping                          */
 /* -------------------------------------------------------------------------- */
@@ -73,6 +83,7 @@ const GameSchemas = {
   wordle: WordleSchema,
   ball_sort: BallSortSchema,
   word_unscramble: WordUnscrambleSchema,
+  math_rocket: MathRocketSchema,
 } as const;
 
 type GameId = keyof typeof GameSchemas;
@@ -294,6 +305,37 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
       - 6-8: Educated/Professional vocabulary (e.g. PROCESS, DYNAMIC, LOGIC).
       - 9-10: Challenging academic words, but NOT obscure/archaic (e.g. ALGORITHM, SYMPHONY, PHENOMENON). 
         Avoid words longer than 10 letters unless they are very common.
+
+      Output ONLY valid JSON.
+      `;
+    }
+
+    case 'math_rocket': {
+      return `
+      Generate ${count} unique Math Rocket game configurations for difficulty ${difficulty}/10.
+
+      Instead of generating questions, generate the *parameters* for the game to generate questions on the fly.
+      
+      Parameters:
+      - operandRange: [min, max] (e.g. [1, 9] for easy, [10, 50] for hard)
+      - operators: ["+", "-", "*", "/"] (mix based on difficulty)
+      - gravity: 0.5 (easy) to 1.5 (hard) (Note: Component scales this by 0.1, so effective gravity is 0.05-0.15)
+      - thrust: 10 (standard)
+      - winningScore: 10 to 20
+      
+      Difficulty Guide:
+      - 1: Single digit addition/subtraction. Low gravity (0.5).
+      - 5: Double digit addition/subtraction. Medium gravity (1.0).
+      - 10: Triple digit addition/subtraction, Mixed operators. High gravity (1.5).
+
+      Example:
+      {
+        "operandRange": [1, 10],
+        "operators": ["+", "-"],
+        "gravity": 0.4,
+        "thrust": 10,
+        "winningScore": 10
+      }
 
       Output ONLY valid JSON.
       `;

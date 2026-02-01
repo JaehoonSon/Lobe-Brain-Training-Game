@@ -18,6 +18,7 @@ import { WordUnscramble } from "~/components/games/WordUnscramble";
 import { StroopClash } from "~/components/games/StroopClash";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "~/contexts/PostHogProvider";
+import { MathRocket } from "~/components/games/MathRocket";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -73,14 +74,14 @@ export default function GamePlayScreen() {
         {
           p_game_id: id as string,
           p_count: undefined, // Let RPC use recommended_rounds
-        }
+        },
       );
 
       if (error) throw error;
 
       if (!questions || questions.length === 0) {
-        Alert.alert(t('common.error'), t('game.no_questions'), [
-          { text: t('common.go_back'), onPress: () => router.back() },
+        Alert.alert(t("common.error"), t("game.no_questions"), [
+          { text: t("common.go_back"), onPress: () => router.back() },
         ]);
         return;
       }
@@ -105,8 +106,8 @@ export default function GamePlayScreen() {
       }
 
       if (validQuestions.length === 0) {
-        Alert.alert(t('common.error'), t('game.no_questions_valid'), [
-          { text: t('common.go_back'), onPress: () => router.back() },
+        Alert.alert(t("common.error"), t("game.no_questions_valid"), [
+          { text: t("common.go_back"), onPress: () => router.back() },
         ]);
         return;
       }
@@ -141,14 +142,14 @@ export default function GamePlayScreen() {
 
       console.log(
         `Starting round: difficultyRatingUsed=${difficultyRatingUsed}, avgQuestionDifficulty=${avgDifficulty.toFixed(
-          2
-        )}`
+          2,
+        )}`,
       );
 
       // 4. Start the session
       startRound({
         gameId: id as string,
-        gameName: game?.name || t('common.game'),
+        gameName: game?.name || t("common.game"),
         categoryName: category?.name,
         avgQuestionDifficulty: avgDifficulty,
         difficultyRatingUsed,
@@ -166,8 +167,8 @@ export default function GamePlayScreen() {
       });
     } catch (e) {
       console.error("Error starting round:", e);
-      Alert.alert(t('common.error'), t('game.error_load'), [
-        { text: t('common.go_back'), onPress: () => router.back() },
+      Alert.alert(t("common.error"), t("game.error_load"), [
+        { text: t("common.go_back"), onPress: () => router.back() },
       ]);
     } finally {
       setLoading(false);
@@ -183,7 +184,7 @@ export default function GamePlayScreen() {
 
   const handleQuestionComplete = async (
     accuracy: number,
-    userResponse?: any
+    userResponse?: any,
   ) => {
     const currentQuestion = sessionQuestions[currentQuestionIndex];
     const responseTimeMs = Date.now() - questionStartTimeRef.current;
@@ -228,7 +229,7 @@ export default function GamePlayScreen() {
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator size="large" />
         <Text className="mt-4 text-lg font-medium text-muted-foreground">
-          {t('game.preparing')}
+          {t("game.preparing")}
         </Text>
       </View>
     );
@@ -299,6 +300,15 @@ export default function GamePlayScreen() {
             onComplete={handleQuestionComplete}
           />
         );
+      case "math_rocket":
+        if (content.type !== "math_rocket") return null;
+        return (
+          <MathRocket
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
       case "stroop_clash":
         if (content.type !== "stroop_clash") return null;
         return (
@@ -311,7 +321,9 @@ export default function GamePlayScreen() {
       default:
         return (
           <View className="flex-1 items-center justify-center">
-            <Text>{t('game.not_implemented')} {id}</Text>
+            <Text>
+              {t("game.not_implemented")} {id}
+            </Text>
           </View>
         );
     }
@@ -319,10 +331,14 @@ export default function GamePlayScreen() {
 
   return (
     <View className="flex-1 bg-background">
-      {/* Header Row - Respects Safe Area */}
+      {/* Game Content - Full Screen */}
+      <View className="absolute inset-0">{renderGame()}</View>
+
+      {/* Header Row - Absolute overlay on top */}
       <View
-        className="flex-row items-center justify-between px-6 z-20"
-        style={{ paddingTop: insets.top + 12 }}
+        className="absolute left-0 right-0 flex-row items-center justify-between px-6 z-20"
+        style={{ top: insets.top + 12 }}
+        pointerEvents="box-none"
       >
         {/* Close Button */}
         <TouchableOpacity
@@ -339,7 +355,6 @@ export default function GamePlayScreen() {
             <View className="bg-green-600/80 px-3 py-2 rounded-full">
               <Text className="text-white font-bold">
                 ✓ {Math.round(session.correctCount)}
-
               </Text>
             </View>
           )}
@@ -352,9 +367,6 @@ export default function GamePlayScreen() {
           </View>
         </View>
       </View>
-
-      {/* Game Content */}
-      <View className="flex-1">{renderGame()}</View>
     </View>
   );
 }
