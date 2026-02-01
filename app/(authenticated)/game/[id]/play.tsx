@@ -15,10 +15,10 @@ import { X } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { BallSort } from "~/components/games/BallSort";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
-import { MathRocket } from "~/components/games/MathRocket";
 import { StroopClash } from "~/components/games/StroopClash";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "~/contexts/PostHogProvider";
+import { MathRocket } from "~/components/games/MathRocket";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -80,8 +80,8 @@ export default function GamePlayScreen() {
       if (error) throw error;
 
       if (!questions || questions.length === 0) {
-        Alert.alert(t('common.error'), t('game.no_questions'), [
-          { text: t('common.go_back'), onPress: () => router.back() },
+        Alert.alert(t("common.error"), t("game.no_questions"), [
+          { text: t("common.go_back"), onPress: () => router.back() },
         ]);
         return;
       }
@@ -106,8 +106,8 @@ export default function GamePlayScreen() {
       }
 
       if (validQuestions.length === 0) {
-        Alert.alert(t('common.error'), t('game.no_questions_valid'), [
-          { text: t('common.go_back'), onPress: () => router.back() },
+        Alert.alert(t("common.error"), t("game.no_questions_valid"), [
+          { text: t("common.go_back"), onPress: () => router.back() },
         ]);
         return;
       }
@@ -149,7 +149,7 @@ export default function GamePlayScreen() {
       // 4. Start the session
       startRound({
         gameId: id as string,
-        gameName: game?.name || t('common.game'),
+        gameName: game?.name || t("common.game"),
         categoryName: category?.name,
         avgQuestionDifficulty: avgDifficulty,
         difficultyRatingUsed,
@@ -167,8 +167,8 @@ export default function GamePlayScreen() {
       });
     } catch (e) {
       console.error("Error starting round:", e);
-      Alert.alert(t('common.error'), t('game.error_load'), [
-        { text: t('common.go_back'), onPress: () => router.back() },
+      Alert.alert(t("common.error"), t("game.error_load"), [
+        { text: t("common.go_back"), onPress: () => router.back() },
       ]);
     } finally {
       setLoading(false);
@@ -229,7 +229,7 @@ export default function GamePlayScreen() {
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator size="large" />
         <Text className="mt-4 text-lg font-medium text-muted-foreground">
-          {t('game.preparing')}
+          {t("game.preparing")}
         </Text>
       </View>
     );
@@ -321,7 +321,9 @@ export default function GamePlayScreen() {
       default:
         return (
           <View className="flex-1 items-center justify-center">
-            <Text>{t('game.not_implemented')} {id}</Text>
+            <Text>
+              {t("game.not_implemented")} {id}
+            </Text>
           </View>
         );
     }

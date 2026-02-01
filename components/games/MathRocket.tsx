@@ -7,6 +7,7 @@ import { MathRocketContent } from "~/lib/validators/game-content";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  useDerivedValue,
   interpolate,
   Extrapolation,
   useFrameCallback,
@@ -16,6 +17,8 @@ import Animated, {
 const { width, height } = Dimensions.get("window");
 const ROCKET_SIZE = 100;
 const PLAYABLE_HEIGHT = height * 0.75;
+const ALTIMETER_HEIGHT = 180;
+const ALTIMETER_INDICATOR = 14;
 
 interface MathRocketProps {
   onComplete: (accuracy: number) => void;
@@ -40,6 +43,7 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   const rocketY = useSharedValue(PLAYABLE_HEIGHT * 0.15);
   const velocity = useSharedValue(0);
   const isPlaying = useSharedValue(true);
+  const flamePulse = useSharedValue(0);
 
   // Game constants as shared values for UI thread access
   const GRAVITY = (content.gravity ?? 0.5) * 0.050;
@@ -123,6 +127,11 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
     "worklet";
     if (!isPlaying.value) return;
 
+    flamePulse.value += 0.2;
+    if (flamePulse.value > Math.PI * 2) {
+      flamePulse.value = 0;
+    }
+
     // Apply gravity
     velocity.value += gravityValue.value;
     let newY = rocketY.value + velocity.value;
@@ -165,8 +174,54 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   };
 
   const rocketStyle = useAnimatedStyle(() => {
+    const rotate = interpolate(
+      velocity.value,
+      [-8, 0, 8],
+      [-18, 0, 18],
+      Extrapolation.CLAMP
+    );
+
     return {
-      transform: [{ translateY: rocketY.value }],
+      transform: [{ translateY: rocketY.value }, { rotate: `${rotate}deg` }],
+    };
+  });
+
+  const flameStyle = useAnimatedStyle(() => {
+    const thrustIntensity = interpolate(
+      velocity.value,
+      [-THRUST * 1.2, 0],
+      [1.0, 0.2],
+      Extrapolation.CLAMP
+    );
+
+    const flicker = 0.75 + 0.25 * Math.sin(flamePulse.value);
+
+    return {
+      position: "absolute",
+      bottom: -6,
+      opacity: Math.max(0.35, thrustIntensity) * flicker,
+      transform: [{ scale: thrustIntensity * flicker }],
+    };
+  });
+
+  const altitudeProgress = useDerivedValue(() => {
+    const maxY = PLAYABLE_HEIGHT - ROCKET_SIZE;
+    return 1 - Math.min(Math.max(rocketY.value / maxY, 0), 1);
+  });
+
+  const altimeterIndicatorStyle = useAnimatedStyle(() => {
+    const travel = ALTIMETER_HEIGHT - ALTIMETER_INDICATOR;
+    return {
+      transform: [
+        {
+          translateY: interpolate(
+            altitudeProgress.value,
+            [0, 1],
+            [travel, 0],
+            Extrapolation.CLAMP
+          ),
+        },
+      ],
     };
   });
 
@@ -183,6 +238,17 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
 
       {/* Rocket Play Area */}
       <View style={{ height: PLAYABLE_HEIGHT }} className="w-full">
+        {/* Altimeter */}
+        <View className="absolute right-4 top-6 items-center">
+          <View className="w-3 rounded-full bg-white/20" style={{ height: ALTIMETER_HEIGHT }}>
+            <Animated.View
+              className="absolute left-0 right-0 mx-auto rounded-full bg-primary"
+              style={[{ height: ALTIMETER_INDICATOR }, altimeterIndicatorStyle]}
+            />
+          </View>
+          <Text className="mt-2 text-xs font-bold text-white/70">ALT</Text>
+        </View>
+
         <Animated.View
           style={[
             rocketStyle,
@@ -193,6 +259,11 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
           <Image
             source={require("~/assets/images/games/math-rocket/rocket.png")}
             style={{ width: ROCKET_SIZE, height: ROCKET_SIZE }}
+            resizeMode="contain"
+          />
+          <Animated.Image
+            source={require("~/assets/images/games/math-rocket/fire.png")}
+            style={[{ width: 48, height: 48, backgroundColor: "transparent" }, flameStyle]}
             resizeMode="contain"
           />
         </Animated.View>
