@@ -12,13 +12,15 @@ import Animated, {
   Extrapolation,
   useFrameCallback,
   runOnJS,
+  withRepeat,
+  withTiming,
+  Easing,
+  cancelAnimation,
 } from "react-native-reanimated";
 
 const { width, height } = Dimensions.get("window");
 const ROCKET_SIZE = 100;
 const PLAYABLE_HEIGHT = height * 0.75;
-const ALTIMETER_HEIGHT = 180;
-const ALTIMETER_INDICATOR = 14;
 
 interface MathRocketProps {
   onComplete: (accuracy: number) => void;
@@ -44,22 +46,40 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   const velocity = useSharedValue(0);
   const isPlaying = useSharedValue(true);
   const flamePulse = useSharedValue(0);
+  const backgroundOffset = useSharedValue(0);
+  const viewHeight = useSharedValue(height);
 
   // Game constants as shared values for UI thread access
-  const GRAVITY = (content.gravity ?? 0.5) * 0.050;
+  const GRAVITY = (content.gravity ?? 0.5) * 0.04;
   const THRUST = (content.thrust ?? 10) / 5; // DB 10 = physics 2
   const WINNING_SCORE = content.winningScore ?? 10;
 
   const gravityValue = useSharedValue(GRAVITY);
 
-  // Update gravity when content changes
+  // Update gravity when content changes or score increases
   useEffect(() => {
-    gravityValue.value = GRAVITY;
-  }, [GRAVITY]);
+    // Basic progression: Increase gravity by 5% for every point scored
+    const difficultyMultiplier = 1 + (score * 0.05);
+    gravityValue.value = GRAVITY * difficultyMultiplier;
+  }, [GRAVITY, score]);
 
   // Sync isPlaying with gameState
   useEffect(() => {
     isPlaying.value = gameState === "playing";
+    
+    if (gameState === "playing") {
+      backgroundOffset.value = 0;
+      backgroundOffset.value = withRepeat(
+        // Fast constant loop for forward motion sensation
+        withTiming(viewHeight.value, { duration: 1800, easing: Easing.linear }),
+        -1,
+        false
+      );
+    } else {
+      cancelAnimation(backgroundOffset);
+    }
+
+    return () => cancelAnimation(backgroundOffset);
   }, [gameState]);
 
   useEffect(() => {
@@ -136,8 +156,9 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
     velocity.value += gravityValue.value;
     let newY = rocketY.value + velocity.value;
 
-    // Floor collision - game over
-    if (newY > PLAYABLE_HEIGHT - ROCKET_SIZE) {
+    // Off-screen collision - game over
+    // Let it fall completely past the playable area (PLAYABLE_HEIGHT)
+    if (newY > PLAYABLE_HEIGHT) {
       isPlaying.value = false;
       runOnJS(handleGameOver)();
       return;
@@ -177,12 +198,15 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
     const rotate = interpolate(
       velocity.value,
       [-8, 0, 8],
-      [-18, 0, 18],
+      [-3, 0, 3], // Very subtle tilt
       Extrapolation.CLAMP
     );
 
     return {
-      transform: [{ translateY: rocketY.value }, { rotate: `${rotate}deg` }],
+      transform: [
+        { translateY: rocketY.value } as const,
+        { rotate: `${rotate}deg` } as const,
+      ],
     };
   });
 
@@ -203,52 +227,43 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
       transform: [{ scale: thrustIntensity * flicker }],
     };
   });
-
-  const altitudeProgress = useDerivedValue(() => {
-    const maxY = PLAYABLE_HEIGHT - ROCKET_SIZE;
-    return 1 - Math.min(Math.max(rocketY.value / maxY, 0), 1);
+  const backgroundStyle1 = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: backgroundOffset.value }],
+    };
   });
 
-  const altimeterIndicatorStyle = useAnimatedStyle(() => {
-    const travel = ALTIMETER_HEIGHT - ALTIMETER_INDICATOR;
+  const backgroundStyle2 = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          translateY: interpolate(
-            altitudeProgress.value,
-            [0, 1],
-            [travel, 0],
-            Extrapolation.CLAMP
-          ),
-        },
-      ],
+      transform: [{ translateY: backgroundOffset.value - viewHeight.value }],
     };
   });
 
   if (!currentQuestion) return null;
 
   return (
-    <View className="flex-1">
-      {/* Background */}
-      <Image
+    <View 
+      className="flex-1"
+      onLayout={(e) => {
+        viewHeight.value = e.nativeEvent.layout.height;
+      }}
+    >
+      {/* Background Tiling */}
+      <Animated.Image
         source={require("~/assets/images/games/math-rocket/background.png")}
         className="absolute inset-0 w-full h-full"
+        style={backgroundStyle1}
+        resizeMode="cover"
+      />
+      <Animated.Image
+        source={require("~/assets/images/games/math-rocket/background.png")}
+        className="absolute inset-0 w-full h-full"
+        style={backgroundStyle2}
         resizeMode="cover"
       />
 
       {/* Rocket Play Area */}
       <View style={{ height: PLAYABLE_HEIGHT }} className="w-full">
-        {/* Altimeter */}
-        <View className="absolute right-4 top-6 items-center">
-          <View className="w-3 rounded-full bg-white/20" style={{ height: ALTIMETER_HEIGHT }}>
-            <Animated.View
-              className="absolute left-0 right-0 mx-auto rounded-full bg-primary"
-              style={[{ height: ALTIMETER_INDICATOR }, altimeterIndicatorStyle]}
-            />
-          </View>
-          <Text className="mt-2 text-xs font-bold text-white/70">ALT</Text>
-        </View>
-
         <Animated.View
           style={[
             rocketStyle,
@@ -267,20 +282,6 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
             resizeMode="contain"
           />
         </Animated.View>
-
-        {/* Ground Indicator */}
-        <View
-          className="absolute bottom-0 left-0 right-0 h-4"
-          style={{
-            backgroundColor: '#8B4513',
-            borderTopWidth: 3,
-            borderTopColor: '#654321',
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: -2 },
-            shadowOpacity: 0.3,
-            shadowRadius: 4,
-          }}
-        />
       </View>
 
       {/* Question & Answers */}
