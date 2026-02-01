@@ -72,6 +72,15 @@ const MathRocketSchema = z.object({
   winningScore: z.number().optional(),
 });
 
+// 8. Odd One Out
+const OddOneOutSchema = z.object({
+  type: z.literal('odd_one_out'),
+  target: z.string(),
+  distractor: z.string(),
+  rows: z.number(),
+  cols: z.number(),
+});
+
 /* -------------------------------------------------------------------------- */
 /*                         Game → Schema Type Mapping                          */
 /* -------------------------------------------------------------------------- */
@@ -84,6 +93,7 @@ const GameSchemas = {
   ball_sort: BallSortSchema,
   word_unscramble: WordUnscrambleSchema,
   math_rocket: MathRocketSchema,
+  odd_one_out: OddOneOutSchema,
 } as const;
 
 type GameId = keyof typeof GameSchemas;
@@ -336,6 +346,24 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
         "thrust": 10,
         "winningScore": 10
       }
+
+      Output ONLY valid JSON.
+      `;
+    }
+
+    case 'odd_one_out': {
+      return `
+      Generate ${count} unique Odd One Out game configurations for difficulty ${difficulty}/10.
+
+      Content:
+      - 'target': The unique item (e.g. "👻").
+      - 'distractor': The common item filling the grid (e.g. "💀").
+      - 'rows' and 'cols': Grid dimensions.
+
+      Difficulty Guide:
+      - 1-3: Small grid (3x3, 4x4). Very distinct target vs distractor (e.g. 🐶 vs 🐱).
+      - 4-7: Medium grid (5x5, 6x6). Similar items (e.g. ⭕️ vs 🔘).
+      - 8-10: Large grid (7x7, 8x8). Very similar items (e.g. 6 vs 9, Q vs O, ☘️ vs 🍀).
 
       Output ONLY valid JSON.
       `;

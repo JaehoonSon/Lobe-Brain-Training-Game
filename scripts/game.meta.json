@@ -107,5 +107,17 @@
     "is_active": true,
     "is_pro_only": false,
     "recommended_rounds": 10
+  },
+  {
+    "id": "odd_one_out",
+    "category_id": "attention",
+    "name": "Odd One Out",
+    "description": "Find the unique item among distractors as fast as possible.",
+    "instructions": "A grid of items will appear. All items are identical except one. Tap the unique item before time runs out!",
+    "icon_url": "search",
+    "banner_url": null,
+    "is_active": true,
+    "is_pro_only": false,
+    "recommended_rounds": 5
   }
 ]

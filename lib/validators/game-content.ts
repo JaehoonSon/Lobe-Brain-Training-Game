@@ -102,6 +102,15 @@ export const StroopClashContentSchema = z.object({
   targetTimeMs: z.number(),  // Optimal time for BPI speed bonus
 });
 
+// 9. Odd One Out
+export const OddOneOutContentSchema = z.object({
+  type: z.literal("odd_one_out"),
+  target: z.string(),       // The unique item (e.g. "O")
+  distractor: z.string(),   // The common item (e.g. "Q")
+  rows: z.number().min(2),
+  cols: z.number().min(2),
+});
+
 // Union Schema for all game content
 export const GameContentSchema = z.discriminatedUnion("type", [
   MentalArithmeticContentSchema,
@@ -112,6 +121,7 @@ export const GameContentSchema = z.discriminatedUnion("type", [
   WordUnscrambleContentSchema,
   StroopClashContentSchema,
   MathRocketContentSchema,
+  OddOneOutContentSchema,
 ]);
 
 export type MentalArithmeticContent = z.infer<
@@ -126,4 +136,5 @@ export type BallSortContent = z.infer<typeof BallSortContentSchema>;
 export type WordUnscrambleContent = z.infer<typeof WordUnscrambleContentSchema>;
 export type StroopClashContent = z.infer<typeof StroopClashContentSchema>;
 export type MathRocketContent = z.infer<typeof MathRocketContentSchema>;
+export type OddOneOutContent = z.infer<typeof OddOneOutContentSchema>;
 export type GameContent = z.infer<typeof GameContentSchema>;

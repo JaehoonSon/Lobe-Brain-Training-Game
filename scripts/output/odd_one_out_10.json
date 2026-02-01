@@ -1,0 +1,602 @@
+[
+  {
+    "id": "59667e66-76a9-4a79-b178-0b2889c72c7c",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "6",
+      "distractor": "9",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "52e6380d-c4af-4d65-9295-d1b98175826f",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "Q",
+      "distractor": "O",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "72c96ede-700b-4360-b857-ed47527cdd05",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "☘️",
+      "distractor": "🍀",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "bd897bd1-176a-4d09-8262-505d3d7c8672",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "I",
+      "distractor": "l",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "c60014e2-698e-4c15-a04d-b46d2fa3b531",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "0",
+      "distractor": "O",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "8fe504ba-ddd6-49aa-b522-d36838b242c2",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "b",
+      "distractor": "d",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "c8c4ed5c-f776-438a-a893-af7fdf493c43",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "p",
+      "distractor": "q",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "d7fc087a-abf8-4fac-9123-b4041ed4638e",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "S",
+      "distractor": "5",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "1ab228de-dfc9-43d8-80e6-397ef8ca454a",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "Z",
+      "distractor": "2",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "ca4477c8-4c62-4512-9372-d0d6961d3662",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "g",
+      "distractor": "9",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "1f1b0c6a-aaf1-4013-a291-ef0b2b67fffe",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "C",
+      "distractor": "c",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "024d1a10-740b-49dc-a0d5-be232c4af211",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "U",
+      "distractor": "V",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "5064ab2b-2c86-4dfa-9e6e-be1b304e7581",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "M",
+      "distractor": "W",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "4d5775a3-afa8-4ec5-a482-ea2ef23f0f16",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "N",
+      "distractor": "H",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "9296efd3-242d-4509-bf52-80367029addd",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "F",
+      "distractor": "E",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "2e1a4397-c0ad-4f77-b5d0-0c87dc726f04",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "T",
+      "distractor": "I",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "80f9c477-3c0a-4023-9412-b57361417e68",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "X",
+      "distractor": "K",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "429f802c-2924-49e5-b7d9-bbf0606fb356",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "Y",
+      "distractor": "V",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "f846d75d-e8e8-4841-891e-c31e2466eb21",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "J",
+      "distractor": "L",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "80b03c9c-6add-47bf-9515-a6838a85fe00",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "P",
+      "distractor": "R",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "986c75af-b232-47e6-aad0-9f1c9b856578",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "B",
+      "distractor": "8",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "f189ddd9-7214-4a0c-bae6-ec484439e4a7",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "D",
+      "distractor": "O",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "416729a6-845d-43b7-b32a-1abc3d2faac5",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "G",
+      "distractor": "6",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "94db4b7c-016d-42df-8dbb-78049c343f92",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "S",
+      "distractor": "$",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "d861ec5c-ad4d-4d59-ac2d-ddcd30f23e47",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "&",
+      "distractor": "%",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "f26b3d03-d4de-4c0e-8c7e-02b4c220a026",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "#",
+      "distractor": "№",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "da735ab1-86b9-4727-968a-f9f0346d7a71",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "@",
+      "distractor": "&",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "ad260108-c275-42da-8294-d23c3ce21442",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "*",
+      "distractor": "+",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "7d4dd62f-d9e0-4361-ae13-48189b2b096f",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "-",
+      "distractor": "_",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "c2d5f746-ff2c-49be-bf9e-c023e13c3d97",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "=",
+      "distractor": "≡",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "9a994953-ebca-4c1b-be1b-4bd52be7c352",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "≈",
+      "distractor": "≅",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "93f63421-865f-44da-a0b8-14f1cfbe6393",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "≤",
+      "distractor": "≥",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "88e64d82-5acd-4c26-aa77-3774cc22c6aa",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "≠",
+      "distractor": "≈",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "cc95263c-54a9-446d-92d2-6b1a2f6ee958",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "∞",
+      "distractor": "8",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "ce782572-35fd-4a35-887b-1c4a0a5aee4c",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "π",
+      "distractor": "n",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "38a84f45-2711-4283-8081-e612732d5c5b",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "θ",
+      "distractor": "0",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "5e212e41-8fda-42cb-b7db-56c5a073d139",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "α",
+      "distractor": "a",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "8648b65a-cb29-4ccb-868a-728ef052bade",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "β",
+      "distractor": "B",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "c9bce0c4-756d-4294-845b-e9f6d08d8196",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "γ",
+      "distractor": "y",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "47115f32-2c61-49c0-91b5-362bf982131f",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "δ",
+      "distractor": "d",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "4f01a933-e3ad-4b11-9ee1-b4715b04747c",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "ε",
+      "distractor": "e",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "0fcbe34f-3787-41bb-964e-8e04c71f5e3a",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "ζ",
+      "distractor": "z",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "87a5d4b5-88a1-4a56-b220-a453a0523494",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "η",
+      "distractor": "n",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "5d574977-591c-4f21-9e73-8dd103d012f0",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "ι",
+      "distractor": "i",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "e5d080e7-349a-4cdf-b6e6-48ce0ec12561",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "κ",
+      "distractor": "k",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "5a2c5de7-0198-443f-be15-3e6dc20b2124",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "λ",
+      "distractor": "l",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "d0a8bc42-b906-4eae-9b61-f5a6e6dd2ef4",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "μ",
+      "distractor": "u",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "a44f47d6-b164-46bd-9534-15cda9b3a660",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "ν",
+      "distractor": "v",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "f60a5eae-a0d3-4037-bf8e-7d86b28fc1ae",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "ξ",
+      "distractor": "x",
+      "rows": 8,
+      "cols": 8,
+      "type": "odd_one_out"
+    }
+  },
+  {
+    "id": "2ebf5ccc-ea77-4c12-9bde-0c4f7598361c",
+    "game_id": "odd_one_out",
+    "difficulty": 10,
+    "content": {
+      "target": "ο",
+      "distractor": "o",
+      "rows": 7,
+      "cols": 7,
+      "type": "odd_one_out"
+    }
+  }
+]

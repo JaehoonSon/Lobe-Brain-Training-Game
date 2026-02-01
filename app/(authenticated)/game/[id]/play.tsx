@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useLocalSearchParams, router } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { supabase } from "~/lib/supabase";
 import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MemoryMatrix } from "~/components/games/MemoryMatrix";
@@ -19,6 +19,7 @@ import { StroopClash } from "~/components/games/StroopClash";
 import { useTranslation } from "react-i18next";
 import { useAnalytics } from "~/contexts/PostHogProvider";
 import { MathRocket } from "~/components/games/MathRocket";
+import { OddOneOut } from "~/components/games/OddOneOut";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)
@@ -27,6 +28,7 @@ interface QuestionData {
 }
 
 export default function GamePlayScreen() {
+  const router = useRouter();
   const { t } = useTranslation();
   const { track } = useAnalytics();
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -220,6 +222,7 @@ export default function GamePlayScreen() {
         total_questions: sessionQuestions.length,
         duration_ms: durationMs,
       });
+      console.log(`Round complete, navigating to: /game/${id}/finish`);
       router.replace(`/game/${id}/finish`);
     }
   };
@@ -313,6 +316,15 @@ export default function GamePlayScreen() {
         if (content.type !== "stroop_clash") return null;
         return (
           <StroopClash
+            key={currentQuestionIndex}
+            content={content}
+            onComplete={handleQuestionComplete}
+          />
+        );
+      case "odd_one_out":
+        if (content.type !== "odd_one_out") return null;
+        return (
+          <OddOneOut
             key={currentQuestionIndex}
             content={content}
             onComplete={handleQuestionComplete}
