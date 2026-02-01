@@ -91,6 +91,7 @@ export function GameSessionProvider({
   const [state, setState] = useState<RoundSessionState>(initialState);
   const [config, setConfig] = useState<RoundSessionConfig | null>(null);
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
+  const answersRef = useRef<AnswerRecord[]>([]);
 
   // Use ref for config during endRound to avoid stale closure issues
   const configRef = useRef<RoundSessionConfig | null>(null);
@@ -123,6 +124,7 @@ export function GameSessionProvider({
     configRef.current = newConfig;
     setConfig(newConfig);
     setAnswers([]);
+    answersRef.current = [];
 
     setState({
       isPlaying: true,
@@ -139,6 +141,7 @@ export function GameSessionProvider({
    * Records a question result
    */
   const recordAnswer = useCallback((answer: AnswerRecord) => {
+    answersRef.current = [...answersRef.current, answer];
     setAnswers((prev) => [...prev, answer]);
 
     setState((prev) => ({
@@ -166,7 +169,7 @@ export function GameSessionProvider({
     } = currentConfig;
 
     // Get current answers from ref to avoid stale state
-    const currentAnswers = answers;
+    const currentAnswers = answersRef.current;
     const accuracySum = currentAnswers.reduce(
       (sum, a) => sum + a.accuracy,
       0
@@ -275,7 +278,7 @@ export function GameSessionProvider({
     }
 
     return bpi;
-  }, [state.startTime, answers]);
+  }, [state.startTime]);
 
   /**
    * Resets the session for a new round
@@ -284,6 +287,7 @@ export function GameSessionProvider({
     setState(initialState);
     setConfig(null);
     setAnswers([]);
+    answersRef.current = [];
     configRef.current = null;
   }, []);
 

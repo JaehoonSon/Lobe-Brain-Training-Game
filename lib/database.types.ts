@@ -63,6 +63,36 @@ export type Database = {
         }
         Relationships: []
       }
+      content_translations: {
+        Row: {
+          created_at: string
+          entity_id: string
+          entity_type: string
+          field: string
+          id: string
+          locale: string
+          text: string
+        }
+        Insert: {
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          field: string
+          id?: string
+          locale: string
+          text: string
+        }
+        Update: {
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          field?: string
+          id?: string
+          locale?: string
+          text?: string
+        }
+        Relationships: []
+      }
       daily_insights: {
         Row: {
           category: string | null
@@ -285,6 +315,7 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          created_at: string | null
           full_name: string | null
           id: string
           onboarding_completed_at: string | null
@@ -295,6 +326,7 @@ export type Database = {
         }
         Insert: {
           avatar_url?: string | null
+          created_at?: string | null
           full_name?: string | null
           id: string
           onboarding_completed_at?: string | null
@@ -305,6 +337,7 @@ export type Database = {
         }
         Update: {
           avatar_url?: string | null
+          created_at?: string | null
           full_name?: string | null
           id?: string
           onboarding_completed_at?: string | null
@@ -314,6 +347,47 @@ export type Database = {
           website?: string | null
         }
         Relationships: []
+      }
+      push_tokens: {
+        Row: {
+          created_at: string
+          device_name: string | null
+          device_type: string | null
+          expo_push_token: string
+          id: string
+          is_active: boolean
+          profile_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          device_name?: string | null
+          device_type?: string | null
+          expo_push_token: string
+          id?: string
+          is_active?: boolean
+          profile_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          device_name?: string | null
+          device_type?: string | null
+          expo_push_token?: string
+          id?: string
+          is_active?: boolean
+          profile_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "push_tokens_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       questions: {
         Row: {
@@ -594,140 +668,25 @@ export type Database = {
         }
         Relationships: []
       }
-      zzz_unused_global_game_performance_history: {
-        Row: {
-          created_at: string | null
-          difficulty_rating: number
-          game_id: string
-          games_played_count: number
-          highest_score: number | null
-          id: string
-          snapshot_date: string
-          total_score: number
-        }
-        Insert: {
-          created_at?: string | null
-          difficulty_rating: number
-          game_id: string
-          games_played_count: number
-          highest_score?: number | null
-          id?: string
-          snapshot_date?: string
-          total_score: number
-        }
-        Update: {
-          created_at?: string | null
-          difficulty_rating?: number
-          game_id?: string
-          games_played_count?: number
-          highest_score?: number | null
-          id?: string
-          snapshot_date?: string
-          total_score?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "global_game_performance_history_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      zzz_unused_user_game_performance_history: {
-        Row: {
-          created_at: string | null
-          difficulty_rating: number
-          game_id: string
-          games_played_count: number
-          highest_score: number | null
-          id: string
-          last_played_at: string | null
-          perf_created_at: string | null
-          snapshot_date: string
-          total_score: number
-          user_id: string
-        }
-        Insert: {
-          created_at?: string | null
-          difficulty_rating: number
-          game_id: string
-          games_played_count: number
-          highest_score?: number | null
-          id?: string
-          last_played_at?: string | null
-          perf_created_at?: string | null
-          snapshot_date?: string
-          total_score: number
-          user_id: string
-        }
-        Update: {
-          created_at?: string | null
-          difficulty_rating?: number
-          game_id?: string
-          games_played_count?: number
-          highest_score?: number | null
-          id?: string
-          last_played_at?: string | null
-          perf_created_at?: string | null
-          snapshot_date?: string
-          total_score?: number
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_game_performance_history_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      zzz_unused_user_performance: {
-        Row: {
-          created_at: string | null
-          current_rating: number | null
-          game_id: string
-          games_played_count: number | null
-          highest_score: number | null
-          last_played_at: string | null
-          user_id: string
-        }
-        Insert: {
-          created_at?: string | null
-          current_rating?: number | null
-          game_id: string
-          games_played_count?: number | null
-          highest_score?: number | null
-          last_played_at?: string | null
-          user_id: string
-        }
-        Update: {
-          created_at?: string | null
-          current_rating?: number | null
-          game_id?: string
-          games_played_count?: number | null
-          highest_score?: number | null
-          last_played_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "user_performance_game_id_fkey"
-            columns: ["game_id"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      get_content_translations: {
+        Args: {
+          p_entity_ids: string[]
+          p_entity_type: string
+          p_fields: string[]
+          p_locale: string
+        }
+        Returns: {
+          entity_id: string
+          field: string
+          text: string
+        }[]
+      }
+      get_daily_analytics_summary: { Args: never; Returns: Json }
       get_daily_challenge: {
         Args: never
         Returns: {
@@ -757,14 +716,6 @@ export type Database = {
         }[]
       }
       refresh_ability_scores: { Args: never; Returns: undefined }
-      zzz_process_daily_game_performance_snapshot: {
-        Args: never
-        Returns: undefined
-      }
-      zzz_process_daily_global_game_performance_snapshot: {
-        Args: never
-        Returns: undefined
-      }
     }
     Enums: {
       [_ in never]: never

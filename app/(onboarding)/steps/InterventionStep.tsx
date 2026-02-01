@@ -9,6 +9,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { ArrowRight } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 export interface InterventionStepProps extends CustomStepProps {
   title: string;
@@ -22,10 +23,12 @@ export default function InterventionStep({
   onBack,
   title,
   description,
-  buttonText = "Continue",
+  buttonText,
   variant = "intro",
 }: InterventionStepProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+  const finalButtonText = buttonText || t('common.continue');
 
   return (
     <View
@@ -62,7 +65,7 @@ export default function InterventionStep({
           onPress={onNext}
         >
           <Text className="font-bold text-xl text-primary-foreground">
-            {buttonText}
+            {finalButtonText}
           </Text>
           <ArrowRight size={24} color="white" />
         </Button>

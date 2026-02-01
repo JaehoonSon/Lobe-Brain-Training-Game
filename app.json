@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lobe",
     "slug": "lobe",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/brain_logo.png",
     "scheme": "lobe",
@@ -14,22 +14,38 @@
       "backgroundColor": "#fe7939"
     },
     "assetBundlePatterns": ["**/*"],
+    "locales": {
+      "ja": "./languages/japanese.json",
+      "es": "./languages/spanish.json",
+      "zh-Hans": "./languages/chinese-simplified.json"
+    },
     "ios": {
-      "appStoreUrl": "https://apps.apple.com/us/app/elysia-photo-glow/id6749180620",
+      "appStoreUrl": "https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720",
       "usesAppleSignIn": true,
       "supportsTablet": false,
       "buildNumber": "1",
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
+        "NSCameraUsageDescription": "We use the camera to take your profile photo.",
+        "NSPhotoLibraryUsageDescription": "We access your photo library to choose a profile photo.",
+        "NSPhotoLibraryAddUsageDescription": "We save your profile photo to your photo library.",
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.119239050721-dhiahbraqtnql8v44qkvfcmqiud8fac6"
+            ]
+          }
+        ]
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/brain-app-logo.png",
+        "foregroundImage": "./assets/images/brain_logo_transparent.png",
         "backgroundColor": "#fa8b4b"
       },
       "package": "com.knuceles.ExpoTemplate"
@@ -43,7 +59,16 @@
       "expo-router",
       "expo-apple-authentication",
       "expo-video",
-      "expo-localization",
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": ["en", "ja", "es", "zh-Hans"],
+            "android": ["en", "ja", "es", "zh-Hans"]
+          }
+        }
+      ],
+      "expo-notifications",
       [
         "expo-build-properties",
         {

@@ -12,11 +12,13 @@ import { useState, useRef } from "react";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { useOnboarding } from "~/contexts/OnboardingContext";
+import { useTranslation } from "react-i18next";
 
 export default function BirthdaySelectionScreen({
   onNext,
   onBack,
 }: CustomStepProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { updateData } = useOnboarding();
   const [day, setDay] = useState("");
@@ -31,15 +33,20 @@ export default function BirthdaySelectionScreen({
   const yearRef = useRef<TextInput>(null);
 
   const handleContinue = () => {
-    if (!day || !month || !year) return;
+    // Save birthday to onboarding context if provided
+    if (day && month && year.length === 4) {
+      const birthday = `${year}-${month.padStart(2, "0")}-${day.padStart(
+        2,
+        "0"
+      )}`;
+      updateData("birthday", birthday);
+    }
+    onNext();
+  };
 
-    // Save birthday to onboarding context
-    const birthday = `${year}-${month.padStart(2, "0")}-${day.padStart(
-      2,
-      "0"
-    )}`;
-    updateData("birthday", birthday);
-
+  const handleSkip = () => {
+    // Clear any partial birthday data and proceed
+    updateData("birthday", null);
     onNext();
   };
 
@@ -95,10 +102,10 @@ export default function BirthdaySelectionScreen({
         <View className="flex-1 justify-center gap-8">
           <Animated.View entering={FadeInDown.duration(600)} className="gap-2">
             <Text className="text-4xl font-extrabold text-foreground text-center">
-              When is your birthday?
+              {t('onboarding.steps.birthday.title')}
             </Text>
             <Text className="text-xl text-muted-foreground text-center">
-              We use this to personalize your experience.
+              {t('onboarding.steps.birthday.description')}
             </Text>
           </Animated.View>
 
@@ -126,7 +133,7 @@ export default function BirthdaySelectionScreen({
                 className={`text-xs font-bold uppercase tracking-wider ${focused === "month" ? "text-primary" : "text-muted-foreground"
                   }`}
               >
-                Month
+                {t('onboarding.steps.birthday.month')}
               </Text>
             </View>
 
@@ -150,7 +157,7 @@ export default function BirthdaySelectionScreen({
                 className={`text-xs font-bold uppercase tracking-wider ${focused === "day" ? "text-primary" : "text-muted-foreground"
                   }`}
               >
-                Day
+                {t('onboarding.steps.birthday.day')}
               </Text>
             </View>
 
@@ -173,19 +180,26 @@ export default function BirthdaySelectionScreen({
                 className={`text-xs font-bold uppercase tracking-wider ${focused === "year" ? "text-primary" : "text-muted-foreground"
                   }`}
               >
-                Year
+                {t('onboarding.steps.birthday.year')}
               </Text>
             </View>
           </Animated.View>
         </View>
 
-        <Animated.View entering={FadeInUp.delay(400).duration(600)}>
+        <Animated.View entering={FadeInUp.delay(400).duration(600)} className="gap-3">
           <Button
             className="w-full rounded-2xl h-12 native:h-16 px-10"
             onPress={handleContinue}
             disabled={!isValid}
           >
-            <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
+            <Text className="font-bold text-xl text-primary-foreground">{t('onboarding.steps.birthday.continue')}</Text>
+          </Button>
+          <Button
+            variant="link"
+            className="w-full"
+            onPress={handleSkip}
+          >
+            <Text className="font-semibold text-base tracking-wide text-muted-foreground">{t('onboarding.steps.birthday.skip')}</Text>
           </Button>
         </Animated.View>
       </View>

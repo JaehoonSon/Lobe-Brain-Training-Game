@@ -1,9 +1,11 @@
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity } from "react-native";
+import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { H4, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
 import { Check, Lock, Play } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
+import { useTranslation } from "react-i18next";
 import { Database } from "~/lib/database.types";
 import { cn } from "~/lib/utils";
 
@@ -25,6 +27,7 @@ export function WorkoutGameCard({
   onPress,
 }: WorkoutGameCardProps) {
   const { colorScheme } = useColorScheme();
+  const { t } = useTranslation();
   const isCompleted = status === "completed";
   const isActive = status === "active";
   const isLocked = status === "locked";
@@ -84,7 +87,13 @@ export function WorkoutGameCard({
             )}
           >
             {game.icon_url ? (
-              <Image source={{ uri: game.icon_url }} className="w-full h-full" resizeMode="cover" />
+              <Image
+                source={{ uri: game.icon_url }}
+                style={{ width: "100%", height: "100%" }}
+                contentFit="cover"
+                cachePolicy="disk"
+                transition={200}
+              />
             ) : (
               <Play
                 size={24}
@@ -112,7 +121,7 @@ export function WorkoutGameCard({
                   : "text-muted-foreground"
               )}
             >
-              {game.instructions ? "Daily" : "Focus"} • 2 min
+              {game.instructions ? t('workout_card.daily') : t('workout_card.focus')} • {t('workout_card.duration')}
             </P>
           </View>
 

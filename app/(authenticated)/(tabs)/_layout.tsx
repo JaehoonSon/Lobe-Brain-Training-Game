@@ -7,11 +7,13 @@ import {
   LayoutTemplate,
 } from "lucide-react-native";
 import { useColorScheme } from "react-native";
+import { useTranslation } from "react-i18next";
 
 // Toggle this to show/hide the tab bar UI
 const SHOW_TAB_BAR = true;
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme();
 
   // Colors from global.css design system
@@ -55,7 +57,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Today",
+          title: t('tabs.today'),
           tabBarIcon: ({ color }) => (
             <Sun color={color} size={24} strokeWidth={2.5} />
           ),
@@ -64,7 +66,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="games"
         options={{
-          title: "Games",
+          title: t('tabs.games'),
           tabBarIcon: ({ color }) => (
             <Gamepad2 color={color} size={24} strokeWidth={2.5} />
           ),
@@ -73,7 +75,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="stats"
         options={{
-          title: "Stats",
+          title: t('tabs.stats'),
           tabBarIcon: ({ color }) => (
             <BarChart3 color={color} size={24} strokeWidth={2.5} />
           ),
@@ -82,7 +84,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="insights"
         options={{
-          title: "Insights",
+          title: t('tabs.insights'),
           tabBarIcon: ({ color }) => (
             <Lightbulb color={color} size={24} strokeWidth={2.5} />
           ),
@@ -91,7 +93,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="components-showcase"
         options={{
-          title: "Showcase",
+          title: t('tabs.showcase'),
           tabBarIcon: ({ color }) => (
             <LayoutTemplate color={color} size={24} strokeWidth={2.5} />
           ),

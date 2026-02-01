@@ -31,7 +31,10 @@ export default function Paywall({
           console.log("Paywall dismissed");
           onDismiss();
         }}
-        {...options}
+        options={{
+          displayCloseButton: true,
+          ...options,
+        }}
       />
     </View>
   );

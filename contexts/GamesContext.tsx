@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import i18n from "~/lib/i18n";
 import { supabase } from "~/lib/supabase";
+import {
+  buildTranslationMap,
+  fetchContentTranslations,
+  resolveTranslation,
+} from "~/lib/content-translations";
+import { normalizeLocale } from "~/lib/locale";
 import { Database } from "~/lib/database.types";
 
 type Game = Database["public"]["Tables"]["games"]["Row"];
@@ -25,6 +32,7 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
   const [dailyCompletedGameIds, setDailyCompletedGameIds] = useState<string[]>(
     []
   );
+  const [locale, setLocale] = useState(() => normalizeLocale(i18n.language));
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -65,17 +73,70 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
       if (gamesResult.error) throw gamesResult.error;
       if (categoriesResult.error) throw categoriesResult.error;
 
-      setGames(gamesResult.data || []);
-
       const activeGames = gamesResult.data || [];
       const allCategories = categoriesResult.data || [];
 
-      // Filter categories that have at least one active game
+      const gameIds = activeGames.map((game) => game.id);
+      const categoryIds = allCategories.map((category) => category.id);
+
+      const [gameTranslations, categoryTranslations] = await Promise.all([
+        fetchContentTranslations(
+          "game",
+          gameIds,
+          ["name", "description", "instructions"],
+          locale
+        ),
+        fetchContentTranslations(
+          "category",
+          categoryIds,
+          ["name", "description"],
+          locale
+        ),
+      ]);
+
+      const gameTranslationMap = buildTranslationMap(gameTranslations);
+      const categoryTranslationMap = buildTranslationMap(categoryTranslations);
+
+      const localizedGames = activeGames.map((game) => ({
+        ...game,
+        name: resolveTranslation(gameTranslationMap, game.id, "name", game.name),
+        description: resolveTranslation(
+          gameTranslationMap,
+          game.id,
+          "description",
+          game.description
+        ),
+        instructions: resolveTranslation(
+          gameTranslationMap,
+          game.id,
+          "instructions",
+          game.instructions
+        ),
+      }));
+
+      setGames(localizedGames);
+
       const categoriesWithGames = allCategories.filter((category) =>
         activeGames.some((game) => game.category_id === category.id)
       );
 
-      setCategories(categoriesWithGames);
+      const localizedCategories = categoriesWithGames.map((category) => ({
+        ...category,
+        name: resolveTranslation(
+          categoryTranslationMap,
+          category.id,
+          "name",
+          category.name
+        ),
+        description: resolveTranslation(
+          categoryTranslationMap,
+          category.id,
+          "description",
+          category.description
+        ),
+      }));
+
+      setCategories(localizedCategories);
 
       // Also fetch progress
       await fetchDailyProgress();
@@ -89,6 +150,18 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     fetchData();
+  }, [locale]);
+
+  useEffect(() => {
+    const handleLanguageChange = (nextLocale: string) => {
+      setLocale(normalizeLocale(nextLocale));
+    };
+
+    i18n.on("languageChanged", handleLanguageChange);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
   }, []);
 
   const refreshDailyProgress = async () => {

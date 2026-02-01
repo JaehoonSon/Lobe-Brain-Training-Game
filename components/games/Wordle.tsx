@@ -4,6 +4,7 @@ import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
 import { WordleContent } from "~/lib/validators/game-content";
+import { useTranslation } from "react-i18next";
 
 interface WordleProps {
   onComplete: (accuracy: number) => void; // 0.0 to 1.0
@@ -23,6 +24,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const TILE_GAP = 6;
 
 export function Wordle({ onComplete, content }: WordleProps) {
+  const { t } = useTranslation();
   const targetWord = content.word.toUpperCase();
   const wordLength = targetWord.length;
   const maxGuesses = content.max_guesses;
@@ -246,9 +248,9 @@ export function Wordle({ onComplete, content }: WordleProps) {
                       (status === "correct" ||
                         status === "present" ||
                         status === "absent") &&
-                        "text-white",
+                      "text-white",
                       (status === "empty" || status === "filled") &&
-                        "text-foreground"
+                      "text-foreground"
                     )}
                   >
                     {letter}
@@ -265,8 +267,8 @@ export function Wordle({ onComplete, content }: WordleProps) {
           <View className="bg-black/80 px-6 py-3 rounded-xl">
             <Text className="text-white text-xl font-bold">
               {guesses[guesses.length - 1] === targetWord
-                ? "You got it! 🎉"
-                : `The word was: ${targetWord}`}
+                ? t('game.wordle.win')
+                : t('game.wordle.lose', { word: targetWord })}
             </Text>
           </View>
         </View>

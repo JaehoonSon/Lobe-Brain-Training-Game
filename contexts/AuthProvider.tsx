@@ -8,12 +8,8 @@ import React, {
 import { supabase } from "~/lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import * as AppleAuthentication from "expo-apple-authentication";
-import { showErrorToast } from "~/components/ui/toast";
-import * as WebBrowser from "expo-web-browser";
-import { makeRedirectUri } from "expo-auth-session";
-
-// Required for web browser redirect handling
-WebBrowser.maybeCompleteAuthSession();
+import { showErrorToast, showSuccessToast } from "~/components/ui/toast";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -24,6 +20,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   signInApple: () => Promise<void>;
   signInGoogle: () => Promise<void>;
+  markOnboardingComplete: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -90,9 +87,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const nextUser = session?.user ?? null;
         setUser(nextUser);
         if (nextUser) {
-          await loadProfile(nextUser);
+          loadProfile(nextUser);
         } else {
           setOnboardingComplete(false);
+          setIsProfileLoading(false);
         }
       } catch (error) {
         console.error("Failed to load auth session", error);
@@ -109,7 +107,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const nextUser = session?.user ?? null;
       setUser(nextUser);
       if (nextUser) {
-        await loadProfile(nextUser);
+        loadProfile(nextUser);
       } else {
         setOnboardingComplete(false);
         setIsProfileLoading(false);
@@ -131,10 +129,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     console.log("Signed out from Supabase");
 
     try {
-      await AsyncStorage.multiRemove([
-        "onboarding_progress:anon",
-        `onboarding_progress:${user?.id ?? "anon"}`,
-      ]);
+      if (user?.id) {
+        await AsyncStorage.multiRemove([
+          `onboarding_progress:${user.id}`,
+        ]);
+      }
     } catch (storageError) {
       console.error("Failed to clear onboarding storage", storageError);
     }
@@ -143,7 +142,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signInApple = async () => {
-    setIsSigningIn(true);
     setIsSigningIn(true);
     try {
       const cred = await AppleAuthentication.signInAsync({
@@ -166,111 +164,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Google Sign-In is disabled for Expo Go compatibility
+  // To enable, create a development build with native modules
   const signInGoogle = async () => {
-    setIsSigningIn(true);
-    try {
-      // Create redirect URL for your app
-      const redirectUrl = makeRedirectUri();
-      console.log("Google OAuth Redirect URI:", redirectUrl);
-      // Add this URL to Supabase Dashboard > Auth > URL Configuration > Redirect URLs
+    showErrorToast("Google Sign-In requires a development build");
+    console.log("Google Sign-In is not available in Expo Go");
+  };
 
-      // Start OAuth flow - get the URL from Supabase
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: redirectUrl,
-          skipBrowserRedirect: true, // We handle the browser manually
-        },
-      });
-
-      if (error) throw error;
-      if (!data?.url) throw new Error("No OAuth URL from Supabase");
-
-      // Open browser for Google login
-      const result = await WebBrowser.openAuthSessionAsync(
-        data.url,
-        redirectUrl,
-      );
-
-      if (result.type === "success" && result.url) {
-        // Parse the tokens from the URL (Supabase returns them as hash fragments)
-        const hashParams = new URLSearchParams(result.url.split("#")[1]);
-        const access_token = hashParams.get("access_token");
-        const refresh_token = hashParams.get("refresh_token");
-
-        if (access_token && refresh_token) {
-          const { error: sessionError } = await supabase.auth.setSession({
-            access_token,
-            refresh_token,
-          });
-          if (sessionError) throw sessionError;
-        }
-      }
-    } catch (error) {
-      console.log("Google Sign In Error:", error);
-      showErrorToast("Error signing in with Google");
-    } finally {
-      setIsSigningIn(false);
-    }
-    setIsSigningIn(true);
-    try {
-      // Create redirect URL for your app
-      const redirectUrl = makeRedirectUri();
-      console.log("Google OAuth Redirect URI:", redirectUrl);
-      // Add this URL to Supabase Dashboard > Auth > URL Configuration > Redirect URLs
-
-      // Start OAuth flow - get the URL from Supabase
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: redirectUrl,
-          skipBrowserRedirect: true, // We handle the browser manually
-        },
-      });
-
-      if (error) throw error;
-      if (!data?.url) throw new Error("No OAuth URL from Supabase");
-
-      // Open browser for Google login
-      const result = await WebBrowser.openAuthSessionAsync(
-        data.url,
-        redirectUrl,
-      );
-
-      if (result.type === "success" && result.url) {
-        // Parse the tokens from the URL (Supabase returns them as hash fragments)
-        const hashParams = new URLSearchParams(result.url.split("#")[1]);
-        const access_token = hashParams.get("access_token");
-        const refresh_token = hashParams.get("refresh_token");
-
-        if (access_token && refresh_token) {
-          const { error: sessionError } = await supabase.auth.setSession({
-            access_token,
-            refresh_token,
-          });
-          if (sessionError) throw sessionError;
-        }
-      }
-    } catch (error) {
-      console.log("Google Sign In Error:", error);
-      showErrorToast("Error signing in with Google");
-    } finally {
-      setIsSigningIn(false);
-    }
+  // ----- Allow external marking of onboarding complete -----
+  const markOnboardingComplete = () => {
+    setOnboardingComplete(true);
   };
 
   // ----- Memoized context value -----
   const value = useMemo<AuthContextType>(
     () => ({
       isAuthenticated: !!user,
-      isLoading, // Don't include isSigningIn - it causes screen changes
-      isLoading, // Don't include isSigningIn - it causes screen changes
+      isLoading,
       user,
       onboardingComplete,
       isProfileLoading,
       logout,
       signInApple,
       signInGoogle,
+      markOnboardingComplete,
     }),
     [
       user,
@@ -293,3 +210,4 @@ export function useAuth() {
   }
   return context;
 }
+

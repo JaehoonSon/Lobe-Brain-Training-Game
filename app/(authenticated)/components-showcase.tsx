@@ -14,8 +14,10 @@ import { H1, H2, H3, H4, P, Large, Small, Muted, Code, Lead } from '~/components
 import { Info, Check, X } from 'lucide-react-native';
 import { Label } from '~/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
+import { useTranslation } from 'react-i18next';
 
 export default function ComponentShowcase() {
+  const { t } = useTranslation();
   const [checked, setChecked] = React.useState(false);
   const [switchOn, setSwitchOn] = React.useState(false);
   const [tabValue, setTabValue] = React.useState('tab1');
@@ -25,9 +27,9 @@ export default function ComponentShowcase() {
     <SafeAreaView className="flex-1 bg-background">
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 100 }}>
         <View className="px-6 pb-6 pt-4">
-          <H1 className="text-3xl font-black mb-2">Component Showcase</H1>
+          <H1 className="text-3xl font-black mb-2">{t('showcase.title')}</H1>
           <P className="mb-6 text-muted-foreground">
-            All UI components updated to match the "Juicy" design system
+            {t('showcase.subtitle')}
           </P>
 
           <Card className="mb-6">

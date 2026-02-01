@@ -9,6 +9,7 @@ import Animated, {
     withTiming,
     Easing
 } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 interface PlanCreationStepProps {
     onNext: () => void;
@@ -16,6 +17,7 @@ interface PlanCreationStepProps {
 }
 
 export default function PlanCreationStep({ onNext }: PlanCreationStepProps) {
+    const { t } = useTranslation();
     const scale = useSharedValue(1);
     const opacity = useSharedValue(0.5);
 
@@ -55,10 +57,10 @@ export default function PlanCreationStep({ onNext }: PlanCreationStepProps) {
 
                 <View className="items-center gap-3">
                     <Text className="text-3xl font-bold text-center text-foreground">
-                        Creating your{"\n"}30-Day Plan
+                        {t('onboarding.steps.plan_creation.title')}
                     </Text>
                     <Text className="text-xl text-muted-foreground text-center">
-                        Analyzing your preferences...
+                        {t('onboarding.steps.plan_creation.subtitle')}
                     </Text>
                 </View>
             </View>

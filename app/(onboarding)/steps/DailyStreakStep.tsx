@@ -6,10 +6,12 @@ import { CustomStepProps } from "~/app/(onboarding)/index";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { Flame } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 export default function DailyStreakStep({ onNext }: CustomStepProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const days = ["S", "M", "T", "W", "T", "F", "S"];
+  const days = t('onboarding.steps.daily_streak.days', { returnObjects: true }) as string[];
   const activeDayIndex = new Date().getDay();
 
   return (
@@ -21,7 +23,7 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
         {/* Title */}
         <Animated.View entering={FadeInDown.duration(600).springify()}>
           <Text className="text-4xl font-extrabold text-foreground text-center mb-12">
-            You’ve started a new{"\n"}Daily Streak!
+            {t('onboarding.steps.daily_streak.title')}
           </Text>
         </Animated.View>
 
@@ -75,7 +77,7 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
         {/* Subtext */}
         <Animated.View entering={FadeInDown.delay(600).duration(600)}>
           <Text className="text-xl text-muted-foreground text-center px-8">
-            Complete a game every day to build your streak.
+            {t('onboarding.steps.daily_streak.subtext')}
           </Text>
         </Animated.View>
       </View>
@@ -83,7 +85,7 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
       {/* Continue Button */}
       <Animated.View entering={FadeInDown.delay(800).duration(600)}>
         <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
-          <Text className="font-bold text-xl text-primary-foreground">Continue</Text>
+          <Text className="font-bold text-xl text-primary-foreground">{t('common.continue')}</Text>
         </Button>
       </Animated.View>
     </View>

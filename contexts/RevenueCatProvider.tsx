@@ -28,7 +28,7 @@ interface RevenueCatContextType {
 }
 
 const RevenueCatContext = createContext<RevenueCatContextType | undefined>(
-  undefined
+  undefined,
 );
 
 import { useAuth } from "./AuthProvider";
@@ -38,7 +38,7 @@ export const RevenueCatProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { user } = useAuth();
+  const { user, isLoading: isAuthLoading } = useAuth();
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo | null>(null);
   const [currentOffering, setCurrentOffering] =
     useState<PurchasesOffering | null>(null);
@@ -73,7 +73,11 @@ export const RevenueCatProvider = ({
 
   // Sync user identity
   useEffect(() => {
+    // Wait for auth to finish loading before making decisions
+    if (isAuthLoading) return;
+
     const identifyUser = async () => {
+      // If the user is logged in, log them into RevenueCat
       if (user?.id) {
         try {
           const { customerInfo } = await Purchases.logIn(user.id);
@@ -82,10 +86,25 @@ export const RevenueCatProvider = ({
         } catch (e) {
           console.error("Error logging in to RevenueCat:", e);
         }
+      } else {
+        // If the user is logged out (and we aren't loading), ensure we logout of RevenueCat
+        // This resets to an anonymous ID and prevents data leaks between users
+        try {
+          // Check if we are already anonymous to avoid unnecessary calls/ID resets?
+          // For now, robust security prefers ensuring logout.
+          const info = await Purchases.logOut();
+          setCustomerInfo(info);
+          checkEntitlement(info);
+        } catch (e) {
+          console.error("Error logging out of RevenueCat:", e);
+        }
       }
     };
+
+    // Only run this if we aren't loading auth state (to avoid premature logout on app start)
+    // Note: RevenueCatProvider relies on AuthProvider's user state.
     identifyUser();
-  }, [user?.id]);
+  }, [user?.id, isAuthLoading]);
 
   useEffect(() => {
     const customerInfoUpdated = async (info: CustomerInfo) => {
@@ -141,7 +160,7 @@ export const RevenueCatProvider = ({
   };
 
   const presentPaywall = async (
-    offering?: PurchasesOffering
+    offering?: PurchasesOffering,
   ): Promise<boolean> => {
     try {
       const paywallResult = offering
@@ -166,7 +185,7 @@ export const RevenueCatProvider = ({
   };
 
   const presentPaywallIfNeeded = async (
-    requiredEntitlement: string = ENTITLEMENT_ID
+    requiredEntitlement: string = ENTITLEMENT_ID,
   ): Promise<boolean> => {
     try {
       const paywallResult = await RevenueCatUI.presentPaywallIfNeeded({

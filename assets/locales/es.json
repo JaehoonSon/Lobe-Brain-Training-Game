@@ -1,0 +1,605 @@
+{
+  "common": {
+    "welcome": "Bienvenido a Brain App",
+    "today_training": "Entrenamiento de hoy",
+    "settings": "Ajustes",
+    "language": "Idioma",
+    "system": "Sistema",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "start": "Empezar",
+    "continue": "Continuar",
+    "error": "Error",
+    "loading": "Cargando...",
+    "not_set": "No establecido",
+    "error_generic": "Ocurrió un error",
+    "error_signing_in": "Error al iniciar sesión",
+    "go_back": "Volver",
+    "skip": "Saltar",
+    "loading_game": "Cargando juego...",
+    "game": "Juego",
+    "optional": "(Opcional)",
+    "categories": {
+      "memory": "Memoria",
+      "focus": "Enfoque",
+      "logic": "Lógica",
+      "speed": "Velocidad",
+      "language": "Lenguaje",
+      "general": "General"
+    }
+  },
+  "home": {
+    "greeting": "¡Hola, {{name}}!",
+    "start_session": "Iniciar Sesión"
+  },
+  "unauth": {
+    "landing": {
+      "title": "Descubre lo que tu mente puede hacer",
+      "subtitle": "Regístrate para entrenar tu cerebro gratis.",
+      "get_started": "Comenzar",
+      "login": "Iniciar sesión",
+      "legal": "Al registrarte, aceptas nuestros Términos de Servicio, Política de Privacidad y Privacidad de CA."
+    },
+    "signup": {
+      "title": "Comencemos",
+      "subtitle": "Crea tu cuenta para empezar",
+      "apple_button": "Continuar con Apple",
+      "google_button": "Continuar con Google",
+      "privacy_policy": "Política de Privacidad",
+      "terms_of_service": "Términos de Servicio",
+      "agreement_intro": "Al continuar, aceptas nuestra ",
+      "agreement_and": " y "
+    },
+    "welcome": {
+      "title": "Bienvenido a Brain App",
+      "motto": "Entrena tu cerebro. Agudiza tu mente.",
+      "think_faster": "Piensa más rápido",
+      "think_faster_desc": "Mejora tu velocidad de procesamiento",
+      "sharpen_focus": "Agudiza tu enfoque",
+      "sharpen_focus_desc": "Aumenta tu concentración",
+      "enhance_memory": "Mejora tu memoria",
+      "enhance_memory_desc": "Recuerda mejor y durante más tiempo",
+      "legal_intro": "Al usar esta aplicación, aceptas nuestros ",
+      "legal_and": " y ",
+      "terms": "Términos",
+      "privacy": "Política de Privacidad",
+      "get_started": "Comenzar"
+    }
+  },
+  "onboarding": {
+    "error_step": "Paso {{step}} no encontrado.",
+    "steps": {
+      "notifications": {
+        "title": "No te pierdas tu entrenamiento",
+        "description": "Es mucho más probable que aprendas más con la práctica constante. Recibe recordatorios diarios para mantener tu racha.",
+        "enable_button": "Activar notificaciones",
+        "skip_button": "Quizás más tarde"
+      },
+      "birthday": {
+        "title": "¿Cuándo es tu cumpleaños?",
+        "description": "Usamos esto para personalizar tu experiencia.",
+        "month": "Mes",
+        "day": "Día",
+        "year": "Año",
+        "continue": "Continuar",
+        "skip": "Saltar por ahora"
+      },
+      "welcome": {
+        "title": "Bienvenido a tu Plan Personal",
+        "subtitle": "Crearemos un plan personalizado para ayudarte a:",
+        "goals": {
+          "focus": "Agudizar tu enfoque",
+          "memory": "Mejorar tu memoria",
+          "speed": "Pensar más rápido"
+        },
+        "begin": "Empecemos"
+      },
+      "plan_creation": {
+        "title": "Creando tu\nPlan de 30 Días",
+        "subtitle": "Analizando tus preferencias..."
+      },
+      "plan_reveal": {
+        "badge": "Personalizado Para Ti",
+        "title": "Tu Plan de 30 Días",
+        "projection": "Proyectado",
+        "projection_highlight": "Aumento del 30-40% del BPI",
+        "projection_suffix": "en el primer mes.",
+        "features": {
+          "baseline": "Adaptado a tus puntuaciones iniciales",
+          "schedule": "Calendario eficaz de 3 veces por semana",
+          "proven": "Crecimiento científicamente probado"
+        },
+        "start": "Empezar Entrenamiento"
+      },
+      "thank_you": {
+        "title": "Esa fue la última.\n¡Bien hecho!",
+        "subtitle_prefix": "Ahora estamos determinando tus habilidades en",
+        "subtitle_suffix": "basándonos en tu rendimiento."
+      },
+      "daily_streak": {
+        "title": "¡Has empezado una nueva\nRacha Diaria!",
+        "days": ["D", "L", "M", "M", "J", "V", "S"],
+        "subtext": "Completa un juego cada día para aumentar tu racha."
+      },
+      "premium_features": {
+        "badge": "Desbloquea Todo",
+        "title": "Obtén más con\nLobe Pro",
+        "slides": [
+          {
+            "title": "Recomendaciones\ndiarias personalizadas",
+            "description": "Generadas a partir de tus patrones de actividad y preferencias de entrenamiento."
+          },
+          {
+            "title": "Juegos basados en la ciencia",
+            "description": "Mantente siempre desafiado con juegos que se adaptan a tu nivel de habilidad."
+          },
+          {
+            "title": "Seguimiento del rendimiento",
+            "description": "Obtén información sobre tu progreso a lo largo de tu viaje de entrenamiento cerebral."
+          }
+        ]
+      },
+      "interests": {
+        "title": "Comencemos con tus intereses",
+        "subtitle": "Selecciona hasta 3",
+        "options": [
+          "Quiero mantener mi mente activa y desafiada",
+          "Me gusta esforzarme para mejorar",
+          "Quiero entrenar mi memoria y atención",
+          "Tengo curiosidad por saber cómo funciona mi cerebro",
+          "Me gustaría controlar el estrés y crear mejores hábitos"
+        ]
+      },
+      "affirmations": {
+        "muscle": {
+          "headline": "El cerebro es como un músculo.",
+          "subtext": "Entrénalo a diario. Solo unos minutos al día pueden crear un hábito de por vida."
+        },
+        "community": {
+          "headline": "Estás en buena compañía",
+          "subtext": "Más de 100 millones de personas han entrenado su memoria en Brain App — ¡muchos lo hacen a diario!"
+        },
+        "focus": {
+          "headline": "Enfoque láser cargado.",
+          "subtext": "Entrenar tu atención puede ayudarte a mantenerte concentrado cuando más importa."
+        },
+        "solved": {
+          "headline": "¡Resuelto!",
+          "subtext": "Desafía tu lógica a diario para mantener tu mente ágil y flexible."
+        },
+        "transition": {
+          "headline": "Eso fue sobre tus metas",
+          "subtext": "Ahora, vamos a conocerte para que podamos adaptar tu entrenamiento y comentarios."
+        },
+        "meet_you": {
+          "headline": "¡Encantado de conocerte!",
+          "subtext": "A continuación, calibraremos tu programa de entrenamiento según tu nivel actual."
+        },
+        "baseline": {
+          "headline": "Ahora que tenemos tus puntuaciones iniciales",
+          "subtext": "Diseñemos un programa solo para ti."
+        }
+      },
+      "goals": {
+        "memory": {
+          "title": "Memoria",
+          "description": "¿Qué aspectos de tu memoria te gustaría entrenar?",
+          "options": {
+            "working": "Memoria de trabajo",
+            "working_desc": "Retener y manipular información",
+            "face": "Recuerdo de nombres y caras",
+            "face_desc": "Recordar y asociar nombres de personas",
+            "spatial": "Memoria espacial",
+            "spatial_desc": "Almacenar y recordar ubicaciones y posiciones",
+            "long_term": "Memoria a largo plazo",
+            "long_term_desc": "Retener información para su posterior recuerdo"
+          }
+        },
+        "attention": {
+          "title": "Atención",
+          "description": "¿Qué aspectos de tu atención te gustaría mejorar?",
+          "options": {
+            "productivity": "Productividad",
+            "productivity_desc": "Mantener la concentración en las tareas durante más tiempo",
+            "multitasking": "Multitarea",
+            "multitasking_desc": "Cambiar de una tarea a otra con eficacia",
+            "concentration": "Concentración",
+            "concentration_desc": "Evitar distracciones",
+            "dividing": "Atención dividida",
+            "dividing_desc": "Concentrarse en varias fuentes a la vez"
+          }
+        },
+        "problem_solving": {
+          "title": "Resolución de problemas",
+          "description": "¿Qué habilidades quieres agudizar?",
+          "options": {
+            "logic": "Razonamiento lógico",
+            "logic_desc": "Analizar argumentos y conectar ideas",
+            "math": "Habilidades matemáticas",
+            "math_desc": "Calcular con mayor rapidez y precisión",
+            "planning": "Planificación",
+            "planning_desc": "Anticiparse y trazar estrategias",
+            "spatial": "Orientación espacial",
+            "spatial_desc": "Visualizar y manipular objetos"
+          }
+        }
+      },
+      "profile": {
+        "gender": {
+          "title": "¿Cuál es tu género?",
+          "description": "Esto nos ayuda a mostrarte cómo te comparas con otros miembros similares de nuestra comunidad. (Opcional)",
+          "options": [
+            "Masculino",
+            "Femenino",
+            "No binario",
+            "Prefiero no decirlo"
+          ]
+        },
+        "education": {
+          "title": "¿Cuál es el nivel más alto de educación que has completado?",
+          "options": [
+            "Algo de secundaria",
+            "Secundaria",
+            "Algo de universidad",
+            "Título técnico",
+            "Título universitario (Grado)",
+            "Maestría",
+            "Título profesional",
+            "Doctorado",
+            "Prefiero no decirlo"
+          ]
+        },
+        "referral": {
+          "title": "¿Cómo te enteraste de Brain App?",
+          "options": [
+            "Médico o profesional sanitario",
+            "Amigo o familiar",
+            "App Store",
+            "Play Store",
+            "Redes sociales (ej. Facebook)",
+            "Búsqueda (ej. Google)",
+            "Otro"
+          ]
+        }
+      },
+      "difficulty": {
+        "title": "¿Qué nivel de dificultad te gustaría?",
+        "options": {
+          "standard": "Estándar (recomendado)",
+          "standard_desc": "Me gusta equilibrar la diversión con la dificultad.",
+          "advanced": "Avanzado",
+          "advanced_desc": "Estoy aquí para esforzarme al máximo."
+        }
+      },
+      "encouragement": {
+        "title": "¿Qué tipo de motivación te ayuda a seguir adelante?",
+        "options": {
+          "high_fives": "Choca esos cinco",
+          "high_fives_desc": "Celebra todos mis éxitos.",
+          "tough_love": "Dureza necesaria",
+          "tough_love_desc": "Oblígame a no perder el rumbo."
+        }
+      },
+      "frequency": {
+        "exercise_title": "¿Con qué frecuencia haces ejercicio?",
+        "training_title": "¿Cuántos días a la semana puedes entrenar?",
+        "training_subtitle": "Las personas que entrenan 5 días ven los mejores resultados.",
+        "options": {
+          "daily": "Diariamente o casi a diario",
+          "few_times": "Varias veces por semana",
+          "once_less": "Una vez por semana o menos",
+          "rarely": "Rara vez o nunca",
+          "3_days": "3 días a la semana",
+          "4_days": "4 días a la semana",
+          "5_days": "5 días a la semana",
+          "6_days": "6 días a la semana",
+          "7_days": "7 días a la semana"
+        }
+      },
+      "sleep": {
+        "title": "¿Cuántas horas sueles dormir cada noche?",
+        "options": {
+          "4_less": "4 horas o menos",
+          "5_6": "5-6 horas",
+          "7_8": "7-8 horas",
+          "9_more": "9 horas o más"
+        }
+      }
+    },
+    "games": {
+      "next_challenge": "Siguiente desafío",
+      "see_results": "Ver resultados",
+      "arithmetic": {
+        "title": "Cálculo mental",
+        "description": "Evaluaremos tu velocidad y precisión en el procesamiento numérico.",
+        "outro_title": "¡Buen trabajo!",
+        "outro_description": "Eso ha medido tus habilidades de razonamiento cuantitativo."
+      },
+      "language": {
+        "title": "Fluidez verbal",
+        "description": "Ahora evaluaremos tu procesamiento del lenguaje y vocabulario.",
+        "outro_title": "¡Excelente!",
+        "outro_description": "Eso ha medido tus habilidades de discriminación verbal."
+      },
+      "matrix": {
+        "title": "Matriz de memoria",
+        "description": "Evaluaremos tu memoria espacial y capacidad de recuerdo.",
+        "outro_title": "¡Gran trabajo!",
+        "outro_description": "Eso ha medido tu memoria espacial."
+      }
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "sections": {
+      "my_info": "Mi información",
+      "membership": "Membresía",
+      "legal": "Legal",
+      "account": "Cuenta",
+      "about": "Acerca de",
+      "notifications": "Notificaciones"
+    },
+    "labels": {
+      "email": "Correo electrónico",
+      "birthday": "Cumpleaños",
+      "pro_member": "Miembro Pro",
+      "free_member": "Miembro (acceso limitado)",
+      "pro_desc": "Tienes acceso total a todas las funciones",
+      "free_desc": "Toca para mejorar",
+      "privacy": "Política de privacidad",
+      "terms": "Términos de servicio",
+      "license": "Acuerdo de licencia",
+      "version": "Versión {{version}} ({{build}})",
+      "push_notifications": "Notificaciones push"
+    },
+    "actions": {
+      "logout": "Cerrar sesión",
+      "delete_account": "Eliminar cuenta"
+    },
+    "alerts": {
+      "delete_confirm_title": "Confirmar eliminación",
+      "delete_confirm_msg": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.",
+      "delete_btn": "Eliminar"
+    }
+  },
+  "dashboard": {
+    "welcome_streak": "¡Mantén tu racha viva! 🔥",
+    "loading_workout": "Cargando entrenamiento...",
+    "daily_insight": {
+      "title": "Dato del día",
+      "loading": "Cargando...",
+      "fact_loading": "Obteniendo dato curioso de hoy...",
+      "did_you_know": "¿Sabías que?",
+      "fallback": "¡Tu cerebro es increíble! Vuelve mañana para un nuevo dato.",
+      "source": "Fuente: {{source}}"
+    },
+    "community": {
+      "title": "Comunidad y crecimiento",
+      "global_challenge": "DESAFÍO GLOBAL",
+      "elite_focus": "Enfoque de élite",
+      "challenge_desc": "¡Hoy todos juegan {{gameName}}! ¿Puedes llegar al top 10%?",
+      "sessions_finished": "{{count}} sesiones terminadas hoy",
+      "loading_activity": "Cargando actividad..."
+    },
+    "quick_play": {
+      "title": "JUEGO RÁPIDO",
+      "tap_to_start": "TOCA PARA COMENZAR",
+      "coming_soon": "¡Más juegos próximamente!"
+    }
+  },
+  "games_tab": {
+    "title": "Juegos",
+    "search_placeholder": "¿A qué quieres jugar?",
+    "sections": {
+      "todays_games": "Juegos de hoy",
+      "coming_soon": "PRÓXIMAMENTE"
+    },
+    "categories": {
+      "speed": "Velocidad",
+      "memory": "Memoria",
+      "attention": "Atención",
+      "flexibility": "Flexibilidad",
+      "problem_solving": "Resolución de problemas"
+    },
+    "footer_msg": "Llegan nuevos desafíos cada semana. ¡Sigue entrenando!"
+  },
+  "stats": {
+    "title": "Estadísticas",
+    "bpi": {
+      "overall_performance": "RENDIMIENTO GENERAL",
+      "brain_index": "Índice Cerebral",
+      "top_percentile": "Top {{count}}%",
+      "update_msg": "Las puntuaciones se actualizan tras cada juego",
+      "unlock_msg": "Juega en {{count}} categorías más para desbloquear"
+    },
+    "training_areas": "Áreas de entrenamiento",
+    "categories": {
+      "no_games": "Sin juegos jugados"
+    },
+    "analysis": {
+      "title": "Análisis detallado",
+      "strength_profile": "Perfil de fortalezas",
+      "progress_history": "Historial de progreso"
+    },
+    "error_loading": "No se pudieron cargar las estadísticas."
+  },
+  "insights": {
+    "title": "Perspectivas",
+    "daily_read": {
+      "title": "Lectura diaria",
+      "read_time": "{{count}} min de lectura"
+    },
+    "explore": {
+      "title": "Explorar",
+      "categories": {
+        "sleep": "Sueño",
+        "focus": "Enfoque",
+        "productivity": "Productividad",
+        "stress": "Estrés"
+      }
+    },
+    "articles": {
+      "science_of_sleep": {
+        "title": "La ciencia del sueño",
+        "description": "Cómo afecta el sueño a la consolidación de la memoria y el enfoque."
+      },
+      "focus_techniques": {
+        "title": "Técnicas de enfoque",
+        "description": "Trabajo profundo y cómo lograrlo."
+      },
+      "growth_mindset": {
+        "title": "Mentalidad de crecimiento",
+        "description": "Entendiendo la plasticidad neuronal."
+      }
+    }
+  },
+  "tabs": {
+    "today": "Hoy",
+    "games": "Juegos",
+    "stats": "Estadísticas",
+    "insights": "Artículos",
+    "showcase": "Muestra"
+  },
+  "streak": {
+    "title": "Racha de entrenamiento",
+    "this_week": "Esta semana",
+    "stats": "Tus estadísticas",
+    "current_streak": "Racha actual",
+    "best_streak": "Mejor racha",
+    "days_count": "{{count}} día",
+    "days_count_plural": "{{count}} días",
+    "next_milestone": "Próximo hito",
+    "upcoming_reward": "Próxima recompensa:",
+    "reward_badge": "Insignia de {{count}} días",
+    "why_title": "Por qué importan las rachas",
+    "logic_1": "El entrenamiento cerebral constante fortalece las vías neuronales a través de un proceso llamado",
+    "neuroplasticity": "neuroplasticidad",
+    "logic_2": ": la capacidad de tu cerebro para reorganizarse. ",
+    "logic_3": "Al igual que el ejercicio físico, los entrenamientos mentales diarios desarrollan la \"memoria muscular\" cognitiva. La investigación muestra que la práctica regular mejora:",
+    "benefit_1": "Memoria de trabajo y enfoque",
+    "benefit_2": "Velocidad de procesamiento y tiempo de reacción",
+    "benefit_3": "Resolución de problemas y flexibilidad mental",
+    "keep_alive": "¡Mantén viva tu racha para maximizar estos beneficios! 🧠"
+  },
+  "game": {
+    "loading": "Cargando juego...",
+    "details": "Detalles del juego",
+    "avg_bpi": "BPI medio",
+    "best_score": "Mejor puntuación",
+    "difficulty": "Dificultad",
+    "badge_progress": "Progreso de insignias",
+    "total_plays": "Partidas totales",
+    "unlock_pro": "Desbloquear Pro",
+    "start_game": "Empezar juego",
+    "preparing": "Preparando ronda...",
+    "no_questions": "No se encontraron preguntas para este juego.",
+    "no_questions_valid": "No se encontraron preguntas válidas.",
+    "game_not_found": "Juego no encontrado",
+    "error_load": "Error al cargar el juego.",
+    "not_implemented": "Componente de juego no implementado para",
+    "memory_matrix": {
+      "title": "Matriz de memoria",
+      "memorize": "Recuerda el patrón...",
+      "recall": "Selecciona {{count}} casillas",
+      "checking": "Comprobando...",
+      "loading": "Cargando..."
+    },
+    "wordle": {
+      "title": "Wordle",
+      "subtitle": "Adivina la palabra de {{count}} letras",
+      "win": "¡Lo conseguiste! 🎉",
+      "lose": "La palabra era: {{word}}"
+    },
+    "ball_sort": {
+      "title": "Ordenar bolas",
+      "subtitle": "Ordena las bolas por color",
+      "moves": "Movimientos: {{count}}",
+      "complete": "¡Perfecto! 🎉"
+    },
+    "word_unscramble": {
+      "title": "Desordenar palabras",
+      "subtitle": "Desordena las letras",
+      "hint": "Pista: {{hint}}",
+      "correct": "¡Correcto! 🎉"
+    },
+    "stroop_clash": {
+      "title": "Choque Stroop",
+      "subtitle": "Selecciona el color del texto",
+      "score": "Puntuación: {{count}}",
+      "tap_color": "Toca el color",
+      "tap_text": "Toca el texto"
+    }
+  },
+  "game_finish": {
+    "game_complete": "Juego completado",
+    "no_results": "No se encontraron resultados del juego",
+    "feedback": {
+      "flawless_title": "Impecable",
+      "flawless_sub": "0 errores. Eres como una perla de agua dulce prístina.",
+      "amazing_title": "Increíble",
+      "amazing_sub": "¡Tan cerca de la perfección! Tu enfoque es increíble.",
+      "great_job_title": "Buen trabajo",
+      "great_job_sub": "¡Trabajo sólido! Estás progresando de verdad.",
+      "keep_going_title": "Sigue así",
+      "keep_going_sub": "Cada pequeña práctica ayuda a tu cerebro a crecer."
+    },
+    "stats": {
+      "game_bpi": "BPI DEL JUEGO",
+      "accuracy": "INCREÍBLE",
+      "speed": "RÁPIDO"
+    },
+    "actions": {
+      "continue": "Continuar",
+      "play_again": "Jugar de nuevo"
+    }
+  },
+  "stat_detail": {
+    "not_found": "Categoría no encontrada",
+    "score_title": "Puntuación de {{name}}",
+    "current_score": "puntuación actual",
+    "top_percent": "Top {{count}}%",
+    "history": "Historial de rendimiento",
+    "games_title": "Juegos de {{name}}",
+    "no_games": "Aún no hay juegos en esta categoría.",
+    "played_count": "{{count}} JUGADOS",
+    "best_score": "MEJOR: {{score}}",
+    "new_game": "NUEVO",
+    "avg_score_label": "PUNTUACIÓN MEDIA",
+    "recommended": "Lectura recomendada"
+  },
+  "customer_center": {
+    "title": "Centro de atención al cliente"
+  },
+  "workout_card": {
+    "daily": "Diario",
+    "focus": "Enfoque",
+    "duration": "2 min"
+  },
+  "not_found": {
+    "title": "¡Vaya!",
+    "message": "Esta pantalla no existe.",
+    "go_home": "¡Ir a la pantalla de inicio!"
+  },
+  "feature_card": {
+    "unlock": "DESBLOQUEAR",
+    "pro": "PRO",
+    "premium_msg": "Esta función está disponible con una suscripción Premium."
+  },
+  "dev_setting": {
+    "title": "¡Bienvenido!",
+    "authenticated_as": "Estás autenticado como {{email}}",
+    "buttons": {
+      "settings": "Ir a Ajustes",
+      "onboarding": "Ir a Incorporación",
+      "restart_onboarding": "Reiniciar Incorporación",
+      "go_back_steps": "Retroceder unos pasos",
+      "show_paywall": "Presentar muro de pago",
+      "go_paywall": "Ir al muro de pago",
+      "showcase": "Escaparate de Componentes"
+    }
+  },
+  "showcase": {
+    "title": "Escaparate de Componentes",
+    "subtitle": "Todos los componentes de la interfaz de usuario actualizados para que coincidan con el sistema de diseño \"Juicy\""
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import {
   ChevronRight,
@@ -10,6 +10,7 @@ import {
 import { Text } from "~/components/ui/text";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { WizardLayout } from "~/components/WizardLayout";
+import { useTranslation } from "react-i18next";
 import {
   SelectionStep,
   SelectionStepConfig,
@@ -29,6 +30,8 @@ import PlanRevealStep from "./steps/PlanRevealStep";
 import PaywallScreen from "../paywall";
 import DailyStreakStep from "./steps/DailyStreakStep";
 import PremiumFeaturesStep from "./steps/PremiumFeaturesStep";
+import { useAnalytics } from "~/contexts/PostHogProvider";
+import NotificationPermissionStep from "./steps/NotificationPermissionStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.
@@ -79,8 +82,8 @@ export const STEPS: StepConfig[] = [
     },
   },
   {
-    title: "When is your birthday?",
-    description: "We use this to personalize your experience.",
+    title: "onboarding.steps.birthday.title",
+    description: "onboarding.steps.birthday.description",
     step: {
       type: "custom",
       component: BirthdaySelectionScreen,
@@ -89,18 +92,18 @@ export const STEPS: StepConfig[] = [
   },
   // Step 1: Interests
   {
-    title: "Let's start with your interests",
-    description: "Select up to 3",
+    title: "onboarding.steps.interests.title",
+    description: "onboarding.steps.interests.subtitle",
     step: {
       type: "selection",
       dataKey: "interests",
       maxSelections: 3,
       options: [
-        "I want to keep my mind active and challenged",
-        "I like pushing myself to improve",
-        "I want to train my memory and attention",
-        "I'm curious about how my brain works",
-        "I'd like to manage stress and build better habits",
+        "onboarding.steps.interests.options.0",
+        "onboarding.steps.interests.options.1",
+        "onboarding.steps.interests.options.2",
+        "onboarding.steps.interests.options.3",
+        "onboarding.steps.interests.options.4",
       ],
     },
   },
@@ -111,34 +114,33 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/brain_lifting_cute.png"), // Using the new CUTE brain
-      headline: "The brain is like a muscle.",
-      subtext:
-        "Train it daily. Just a few minutes each day can build a lifelong habit.",
+      headline: "onboarding.steps.affirmations.muscle.headline",
+      subtext: "onboarding.steps.affirmations.muscle.subtext",
     },
   },
   // Step 3: Memory
   {
-    title: "Memory",
-    description: "What aspects of your memory would you like to train?",
+    title: "onboarding.steps.goals.memory.title",
+    description: "onboarding.steps.goals.memory.description",
     step: {
       type: "selection",
       dataKey: "memory_goals",
       options: [
         {
-          label: "Working Memory",
-          description: "Hold and manipulate information",
+          label: "onboarding.steps.goals.memory.options.working",
+          description: "onboarding.steps.goals.memory.options.working_desc",
         },
         {
-          label: "Face-name Recall",
-          description: "Recall and match people's names",
+          label: "onboarding.steps.goals.memory.options.face",
+          description: "onboarding.steps.goals.memory.options.face_desc",
         },
         {
-          label: "Spatial Memory",
-          description: "Store and recall locations and positions",
+          label: "onboarding.steps.goals.memory.options.spatial",
+          description: "onboarding.steps.goals.memory.options.spatial_desc",
         },
         {
-          label: "Long-term Memory",
-          description: "Retain information for future recall",
+          label: "onboarding.steps.goals.memory.options.long_term",
+          description: "onboarding.steps.goals.memory.options.long_term_desc",
         },
       ],
     },
@@ -150,28 +152,36 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/community_avatars.png"),
-      headline: "You're in Good Company",
-      subtext:
-        "Over 100 million people have trained their memory on Brain App — many do it daily!",
+      headline: "onboarding.steps.affirmations.community.headline",
+      subtext: "onboarding.steps.affirmations.community.subtext",
     },
   },
   // Step 5: Focus Goal
   {
-    title: "Attention",
-    description: "What aspects of your attention would you like to improve?",
+    title: "onboarding.steps.goals.attention.title",
+    description: "onboarding.steps.goals.attention.description",
     step: {
       type: "selection",
       dataKey: "focus_goals",
       options: [
-        { label: "Productivity", description: "Stay focused on tasks longer" },
         {
-          label: "Multitasking",
-          description: "Switch between tasks efficiently",
+          label: "onboarding.steps.goals.attention.options.productivity",
+          description:
+            "onboarding.steps.goals.attention.options.productivity_desc",
         },
-        { label: "Concentration", description: "Avoid distractions" },
         {
-          label: "Dividing Attention",
-          description: "Focus on multiple sources at once",
+          label: "onboarding.steps.goals.attention.options.multitasking",
+          description:
+            "onboarding.steps.goals.attention.options.multitasking_desc",
+        },
+        {
+          label: "onboarding.steps.goals.attention.options.concentration",
+          description:
+            "onboarding.steps.goals.attention.options.concentration_desc",
+        },
+        {
+          label: "onboarding.steps.goals.attention.options.dividing",
+          description: "onboarding.steps.goals.attention.options.dividing_desc",
         },
       ],
     },
@@ -183,31 +193,37 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/brain_focus_archery.png"),
-      headline: "Laser Focus Loaded.",
-      subtext:
-        "Training your attention can help you stay in the zone when it matters most.",
+      headline: "onboarding.steps.affirmations.focus.headline",
+      subtext: "onboarding.steps.affirmations.focus.subtext",
     },
   },
   // Step 7: Problem Solving Goal
   {
-    title: "Problem Solving",
-    description: "What skills do you want to sharpen?",
+    title: "onboarding.steps.goals.problem_solving.title",
+    description: "onboarding.steps.goals.problem_solving.description",
     step: {
       type: "selection",
       dataKey: "problem_solving_goals",
       options: [
         {
-          label: "Logical Reasoning",
-          description: "Analyze arguments and connect ideas",
+          label: "onboarding.steps.goals.problem_solving.options.logic",
+          description:
+            "onboarding.steps.goals.problem_solving.options.logic_desc",
         },
         {
-          label: "Math Skills",
-          description: "Calculate faster and more accurately",
+          label: "onboarding.steps.goals.problem_solving.options.math",
+          description:
+            "onboarding.steps.goals.problem_solving.options.math_desc",
         },
-        { label: "Planning", description: "Think ahead and strategize" },
         {
-          label: "Spatial Orientation",
-          description: "Visualize and manipulate objects",
+          label: "onboarding.steps.goals.problem_solving.options.planning",
+          description:
+            "onboarding.steps.goals.problem_solving.options.planning_desc",
+        },
+        {
+          label: "onboarding.steps.goals.problem_solving.options.spatial",
+          description:
+            "onboarding.steps.goals.problem_solving.options.spatial_desc",
         },
       ],
     },
@@ -219,9 +235,8 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/brain_solving_puzzle.png"),
-      headline: "Solved!",
-      subtext:
-        "Challenge your logic daily to keep your mind sharp and flexible.",
+      headline: "onboarding.steps.affirmations.solved.headline",
+      subtext: "onboarding.steps.affirmations.solved.subtext",
     },
   },
   // Step 9: Goals Transition
@@ -231,59 +246,65 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/yellow_character_cute.png"),
-      headline: "That was about your goals",
-      subtext:
-        "Now, let’s get to know you so we can tailor your training and feedback.",
+      headline: "onboarding.steps.affirmations.transition.headline",
+      subtext: "onboarding.steps.affirmations.transition.subtext",
     },
   },
-  // Step 11: Gender
+  // Step 11: Gender (optional)
   {
-    title: "First, what’s your gender?",
-    description:
-      "This helps us show you how you compare to similar members in our community.",
+    title: "onboarding.steps.profile.gender.title",
+    description: "onboarding.steps.profile.gender.description",
     step: {
       type: "selection",
       dataKey: "gender",
       maxSelections: 1,
-      options: ["Male", "Female", "Non-binary"],
+      optional: true,
+      options: [
+        "onboarding.steps.profile.gender.options.0",
+        "onboarding.steps.profile.gender.options.1",
+        "onboarding.steps.profile.gender.options.2",
+        "onboarding.steps.profile.gender.options.3",
+      ],
     },
   },
-  // Step 11: Education
+  // Step 12: Education (optional)
   {
-    title: "What's the highest level of education you've completed?",
-    description: "",
+    title: "onboarding.steps.profile.education.title",
+    description: "common.optional",
     step: {
       type: "selection",
       dataKey: "education",
       maxSelections: 1,
+      optional: true,
       options: [
-        "Some high school",
-        "High school",
-        "Some college",
-        "Associate degree",
-        "College degree (BA/BS)",
-        "Master's degree",
-        "Professional degree",
-        "PhD",
+        "onboarding.steps.profile.education.options.0",
+        "onboarding.steps.profile.education.options.1",
+        "onboarding.steps.profile.education.options.2",
+        "onboarding.steps.profile.education.options.3",
+        "onboarding.steps.profile.education.options.4",
+        "onboarding.steps.profile.education.options.5",
+        "onboarding.steps.profile.education.options.6",
+        "onboarding.steps.profile.education.options.7",
+        "onboarding.steps.profile.education.options.8",
       ],
     },
   },
   // Step 12: Referral Source
   {
-    title: "How did you hear about Brain App?",
+    title: "onboarding.steps.profile.referral.title",
     description: "",
     step: {
       type: "selection",
       dataKey: "referral_source",
       maxSelections: 1,
       options: [
-        "Doctor or Healthcare Provider",
-        "Friend or family",
-        "App Store",
-        "Play Store",
-        "Social media (e.g. Facebook)",
-        "Search (e.g. Google)",
-        "Other",
+        "onboarding.steps.profile.referral.options.0",
+        "onboarding.steps.profile.referral.options.1",
+        "onboarding.steps.profile.referral.options.2",
+        "onboarding.steps.profile.referral.options.3",
+        "onboarding.steps.profile.referral.options.4",
+        "onboarding.steps.profile.referral.options.5",
+        "onboarding.steps.profile.referral.options.6",
       ],
     },
   },
@@ -294,9 +315,8 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/yellow_character_cute.png"),
-      headline: "Great to meet you!",
-      subtext:
-        "Next, we'll calibrate your training program to your current level.",
+      headline: "onboarding.steps.affirmations.meet_you.headline",
+      subtext: "onboarding.steps.affirmations.meet_you.subtext",
     },
   },
   // --- Game 1: Mental Arithmetic ---
@@ -306,9 +326,9 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "intervention",
       component: InterventionStep,
-      title: "Mental Math",
-      description: "We'll test your numerical processing speed and accuracy.",
-      buttonText: "Start",
+      title: "onboarding.games.arithmetic.title",
+      description: "onboarding.games.arithmetic.description",
+      buttonText: "common.start",
       variant: "intro",
     },
   },
@@ -330,9 +350,9 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "intervention",
       component: InterventionStep,
-      title: "Great job!",
-      description: "That measured your quantitative reasoning skills.",
-      buttonText: "Next Challenge",
+      title: "onboarding.games.arithmetic.outro_title",
+      description: "onboarding.games.arithmetic.outro_description",
+      buttonText: "onboarding.games.next_challenge",
       variant: "outro",
     },
   },
@@ -344,9 +364,9 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "intervention",
       component: InterventionStep,
-      title: "Verbal Fluency",
-      description: "Now let's test your language processing and vocabulary.",
-      buttonText: "Start",
+      title: "onboarding.games.language.title",
+      description: "onboarding.games.language.description",
+      buttonText: "common.start",
       variant: "intro",
     },
   },
@@ -368,9 +388,9 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "intervention",
       component: InterventionStep,
-      title: "Excellent!",
-      description: "That measured your verbal discrimination skills.",
-      buttonText: "Next Challenge",
+      title: "onboarding.games.language.outro_title",
+      description: "onboarding.games.language.outro_description",
+      buttonText: "onboarding.games.next_challenge",
       variant: "outro",
     },
   },
@@ -381,9 +401,9 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "intervention",
       component: InterventionStep,
-      title: "Memory Matrix",
-      description: "Let's test your spatial memory and recall.",
-      buttonText: "Start",
+      title: "onboarding.games.matrix.title",
+      description: "onboarding.games.matrix.description",
+      buttonText: "common.start",
       variant: "intro",
     },
   },
@@ -405,9 +425,9 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "intervention",
       component: InterventionStep,
-      title: "Great work!",
-      description: "That measured your spatial memory.",
-      buttonText: "See Results",
+      title: "onboarding.games.matrix.outro_title",
+      description: "onboarding.games.matrix.outro_description",
+      buttonText: "onboarding.games.see_results",
       variant: "outro",
     },
   },
@@ -438,13 +458,13 @@ export const STEPS: StepConfig[] = [
     step: {
       type: "affirmation",
       image: require("~/assets/brain_program_design.png"),
-      headline: "Now that we have your baseline scores",
-      subtext: "Let's design a program just for you.",
+      headline: "onboarding.steps.affirmations.baseline.headline",
+      subtext: "onboarding.steps.affirmations.baseline.subtext",
     },
   },
   // Step: Difficulty
   {
-    title: "What difficulty level would you like?",
+    title: "onboarding.steps.difficulty.title",
     description: "",
     step: {
       type: "selection",
@@ -452,13 +472,13 @@ export const STEPS: StepConfig[] = [
       maxSelections: 1,
       options: [
         {
-          label: "Standard (recommended)",
-          description: "I like to balance fun with difficulty.",
+          label: "onboarding.steps.difficulty.options.standard",
+          description: "onboarding.steps.difficulty.options.standard_desc",
           icon: <Zap size={24} color="#F59E0B" fill="#F59E0B" />, // Amber Zap
         },
         {
-          label: "Advanced",
-          description: "I'm here to work hard.",
+          label: "onboarding.steps.difficulty.options.advanced",
+          description: "onboarding.steps.difficulty.options.advanced_desc",
           icon: (
             <View className="flex-row">
               <Zap size={24} color="#EF4444" fill="#EF4444" />
@@ -476,7 +496,7 @@ export const STEPS: StepConfig[] = [
   },
   // Step: Encouragement
   {
-    title: "What kind of encouragement helps you stay motivated?",
+    title: "onboarding.steps.encouragement.title",
     description: "",
     step: {
       type: "selection",
@@ -484,13 +504,13 @@ export const STEPS: StepConfig[] = [
       maxSelections: 1,
       options: [
         {
-          label: "High fives",
-          description: "Celebrate all my successes.",
+          label: "onboarding.steps.encouragement.options.high_fives",
+          description: "onboarding.steps.encouragement.options.high_fives_desc",
           icon: <Hand size={24} color="#EF4444" fill="#EF4444" />, // Red Hand
         },
         {
-          label: "Tough love",
-          description: "Push me to stay on track.",
+          label: "onboarding.steps.encouragement.options.tough_love",
+          description: "onboarding.steps.encouragement.options.tough_love_desc",
           icon: <PartyPopper size={24} color="#10B981" />, // Greenish PartyPopper matching the cone shape/vibe
         },
       ],
@@ -498,46 +518,61 @@ export const STEPS: StepConfig[] = [
   },
   // Step: Exercise Frequency
   {
-    title: "How often do you exercise?",
+    title: "onboarding.steps.frequency.exercise_title",
     description: "",
     step: {
       type: "selection",
       dataKey: "exercise_frequency",
       maxSelections: 1,
       options: [
-        "Daily or almost daily",
-        "A few times per week",
-        "Once a week or less",
-        "Rarely or never",
+        "onboarding.steps.frequency.options.daily",
+        "onboarding.steps.frequency.options.few_times",
+        "onboarding.steps.frequency.options.once_less",
+        "onboarding.steps.frequency.options.rarely",
       ],
     },
   },
-  // Step: Sleep Duration
+  // // Step: Sleep Duration
   {
-    title: "How much sleep do you usually get each night?",
+    title: "onboarding.steps.sleep.title",
     description: "",
     step: {
       type: "selection",
       dataKey: "sleep_duration",
       maxSelections: 1,
-      options: ["4 hours or less", "5-6 hours", "7-8 hours", "9 hours or more"],
+      options: [
+        "onboarding.steps.sleep.options.4_less",
+        "onboarding.steps.sleep.options.5_6",
+        "onboarding.steps.sleep.options.7_8",
+        "onboarding.steps.sleep.options.9_more",
+      ],
     },
   },
-  // Step: Training Frequency
+  // // Step: Training Frequency
   {
-    title: "How many days a week can you train?",
-    description: "People who do 5 days see the most gains in performance.",
+    title: "onboarding.steps.frequency.training_title",
+    description: "onboarding.steps.frequency.training_subtitle",
     step: {
       type: "selection",
       dataKey: "training_frequency",
       maxSelections: 1,
       options: [
-        "3 days a week",
-        "4 days a week",
-        "5 days a week",
-        "6 days a week",
-        "7 days a week",
+        "onboarding.steps.frequency.options.3_days",
+        "onboarding.steps.frequency.options.4_days",
+        "onboarding.steps.frequency.options.5_days",
+        "onboarding.steps.frequency.options.6_days",
+        "onboarding.steps.frequency.options.7_days",
       ],
+    },
+  },
+  // Step: Notification Permission
+  {
+    title: "Notification Permission",
+    description: "",
+    step: {
+      type: "custom",
+      component: NotificationPermissionStep,
+      fullscreen: true,
     },
   },
   // Step: Plan Creation Loading
@@ -583,23 +618,35 @@ export const STEPS: StepConfig[] = [
 // --- Orchestrator ---
 
 export default function OnboardingOrchestrator() {
-  const { currentStep, nextStep, prevStep } = useOnboarding();
+  const { t } = useTranslation();
+  const { currentStep, nextStep, prevStep, totalSteps } = useOnboarding();
+  const { track } = useAnalytics();
   const [isNextDisabled, setIsNextDisabled] = useState(true);
+  const hasStartedRef = useRef(false);
 
   const stepIndex = currentStep - 1; // Steps are 1-indexed
   const stepConfig = STEPS[stepIndex];
 
   if (!stepConfig) {
     return (
-      <WizardLayout title="Error" nextDisabled>
+      <WizardLayout title={t("common.error")} nextDisabled>
         <Text className="text-destructive text-center text-xl">
-          Step {currentStep} not found.
+          {t("onboarding.error_step", { step: currentStep })}
         </Text>
       </WizardLayout>
     );
   }
 
   const handleNext = () => {
+    if (stepConfig) {
+      track("onboarding_step_complete", {
+        step_index: currentStep,
+        total_steps: totalSteps,
+        step_type: stepConfig.step.type,
+        step_title_key: stepConfig.title || undefined,
+        step_description_key: stepConfig.description || undefined,
+      });
+    }
     nextStep();
     setIsNextDisabled(true);
   };
@@ -607,6 +654,25 @@ export default function OnboardingOrchestrator() {
   const handlePrev = () => {
     prevStep();
   };
+
+  useEffect(() => {
+    if (!stepConfig) return;
+
+    if (!hasStartedRef.current && currentStep === 1) {
+      hasStartedRef.current = true;
+      track("onboarding_started", {
+        total_steps: totalSteps,
+      });
+    }
+
+    track("onboarding_step_view", {
+      step_index: currentStep,
+      total_steps: totalSteps,
+      step_type: stepConfig.step.type,
+      step_title_key: stepConfig.title || undefined,
+      step_description_key: stepConfig.description || undefined,
+    });
+  }, [currentStep, stepConfig, totalSteps, track]);
 
   // Render the appropriate template based on step type
   const renderStep = () => {
@@ -655,15 +721,21 @@ export default function OnboardingOrchestrator() {
             key={currentStep}
             onNext={handleNext}
             onBack={handlePrev}
-            title={stepConfig.step.title}
-            description={stepConfig.step.description}
-            buttonText={stepConfig.step.buttonText}
+            title={t(stepConfig.step.title)}
+            description={t(stepConfig.step.description)}
+            buttonText={
+              stepConfig.step.buttonText
+                ? t(stepConfig.step.buttonText)
+                : undefined
+            }
             variant={stepConfig.step.variant}
           />
         );
       }
       default:
-        return <Text className="text-destructive">Unknown step type</Text>;
+        return (
+          <Text className="text-destructive">{t("common.error_generic")}</Text>
+        );
     }
   };
 
@@ -679,8 +751,8 @@ export default function OnboardingOrchestrator() {
 
   return (
     <WizardLayout
-      title={stepConfig.title}
-      description={stepConfig.description}
+      title={stepConfig.title ? t(stepConfig.title) : ""}
+      description={stepConfig.description ? t(stepConfig.description) : ""}
       onNext={handleNext}
       onPrev={handlePrev}
       nextDisabled={isNextDisabled}

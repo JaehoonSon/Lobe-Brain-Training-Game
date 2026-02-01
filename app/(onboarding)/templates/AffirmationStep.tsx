@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View, Image, ImageSourcePropType } from "react-native";
 import { Text } from "~/components/ui/text";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { useTranslation } from "react-i18next";
 
 export interface AffirmationStepConfig {
   type: "affirmation";
@@ -19,6 +20,7 @@ export function AffirmationStep({
   config,
   onNextDisabled,
 }: AffirmationStepProps) {
+  const { t } = useTranslation();
   useEffect(() => {
     onNextDisabled(false); // No input needed, always enabled
   }, []);
@@ -36,12 +38,12 @@ export function AffirmationStep({
       </Animated.View>
       <Animated.View entering={FadeInDown.delay(300).duration(600)}>
         <Text className="text-3xl font-extrabold text-center text-foreground mb-4">
-          {config.headline}
+          {t(config.headline)}
         </Text>
       </Animated.View>
       <Animated.View entering={FadeInDown.delay(500).duration(600)}>
         <Text className="text-lg text-muted-foreground text-center">
-          {config.subtext}
+          {t(config.subtext)}
         </Text>
       </Animated.View>
     </View>
