@@ -1,9 +1,7 @@
 {
   "ios": {
     "CFBundleDisplayName": "Lobe",
-    "NSCameraUsageDescription": "我们使用相机为您的个人资料拍照",
-    "NSPhotoLibraryUsageDescription": "我们访问您的照片库以选择个人资料照片",
-    "NSPhotoLibraryAddUsageDescription": "我们将您的个人资料照片保存到您的照片库"
+    "NSUserTrackingUsageDescription": "我们需要使用您的数据来改善您的体验。"
   },
   "android": {
     "app_name": "Lobe"

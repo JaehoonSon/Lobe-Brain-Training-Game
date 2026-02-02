@@ -26,11 +26,9 @@
       "buildNumber": "1",
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
+        "CFBundleLocalizations": ["en", "ja", "es", "zh-Hans"],
         "NSUserTrackingUsageDescription": "We use your data to improve your experience.",
         "CFBundleAllowMixedLocalizations": true,
-        "NSCameraUsageDescription": "We use the camera to take your profile photo.",
-        "NSPhotoLibraryUsageDescription": "We access your photo library to choose a profile photo.",
-        "NSPhotoLibraryAddUsageDescription": "We save your profile photo to your photo library.",
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true

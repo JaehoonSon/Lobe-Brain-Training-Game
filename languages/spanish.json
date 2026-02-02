@@ -1,9 +1,7 @@
 {
   "ios": {
     "CFBundleDisplayName": "Lobe",
-    "NSCameraUsageDescription": "Usamos la cámara para tomar tu foto de perfil",
-    "NSPhotoLibraryUsageDescription": "Accedemos a tu biblioteca de fotos para seleccionar una foto de perfil",
-    "NSPhotoLibraryAddUsageDescription": "Guardamos tu foto de perfil en tu biblioteca de fotos"
+    "NSUserTrackingUsageDescription": "Usamos sus datos para mejorar su experiencia."
   },
   "android": {
     "app_name": "Lobe"

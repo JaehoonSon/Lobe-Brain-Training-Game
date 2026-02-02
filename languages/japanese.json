@@ -1,9 +1,7 @@
 {
   "ios": {
     "CFBundleDisplayName": "Lobe",
-    "NSCameraUsageDescription": "プロフィール写真を撮影するためにカメラを使用します",
-    "NSPhotoLibraryUsageDescription": "プロフィール写真を選択するためにフォトライブラリにアクセスします",
-    "NSPhotoLibraryAddUsageDescription": "プロフィール写真を保存するためにフォトライブラリに追加します"
+    "NSUserTrackingUsageDescription": "お客様の体験を向上させるためにデータを使用します。"
   },
   "android": {
     "app_name": "Lobe"
