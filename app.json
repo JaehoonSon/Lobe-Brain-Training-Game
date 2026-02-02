@@ -15,6 +15,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "locales": {
+      "en": "./languages/english.json",
       "ja": "./languages/japanese.json",
       "es": "./languages/spanish.json",
       "zh-Hans": "./languages/chinese-simplified.json"
