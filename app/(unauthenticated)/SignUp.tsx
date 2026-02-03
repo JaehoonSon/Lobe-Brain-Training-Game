@@ -26,7 +26,7 @@ export default function SignUp() {
       // since isAuthenticated=true and isComplete=false for new users
     } catch (err) {
       console.log("sign in error", err);
-      showErrorToast(t('common.error_generic'));
+      showErrorToast(t("common.error_generic"));
       setIsLoading(false); // Only reset on error, not on success (navigation happens)
     }
   };
@@ -43,10 +43,10 @@ export default function SignUp() {
           className="items-center gap-4"
         >
           <Text className="text-5xl font-extrabold text-center text-foreground">
-            {t('unauth.signup.title')}
+            {t("unauth.signup.title")}
           </Text>
           <Text className="text-xl text-muted-foreground text-center">
-            {t('unauth.signup.subtitle')}
+            {t("unauth.signup.subtitle")}
           </Text>
         </Animated.View>
       </View>
@@ -65,7 +65,7 @@ export default function SignUp() {
               <>
                 <AntDesign name="apple" size={24} color="white" />
                 <Text className="font-bold text-xl text-primary-foreground">
-                  {t('unauth.signup.apple_button')}
+                  {t("unauth.signup.apple_button")}
                 </Text>
               </>
             )}
@@ -75,22 +75,21 @@ export default function SignUp() {
         {/* Terms */}
         <Animated.View entering={FadeInUp.delay(400).duration(600)}>
           <Text className="text-sm text-muted-foreground text-center px-8">
-            {t('unauth.signup.agreement_intro')}
+            {t("unauth.signup.agreement_intro")}
             <Link href={appMetadata.privacyPolicyUrl}>
               <Text className="text-sm font-bold underline text-foreground">
-                {t('unauth.signup.privacy_policy')}
+                {t("unauth.signup.privacy_policy")}
               </Text>
             </Link>{" "}
-            {t('unauth.signup.agreement_and')}
+            {t("unauth.signup.agreement_and")}
             <Link href={appMetadata.endUserLicenseAgreementUrl}>
               <Text className="text-sm font-bold underline text-foreground">
-                {t('unauth.signup.terms_of_service')}
+                {t("unauth.signup.terms_of_service")}
               </Text>
             </Link>
           </Text>
         </Animated.View>
       </View>
-    </View >
+    </View>
   );
 }
-

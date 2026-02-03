@@ -10,6 +10,7 @@ import type { User } from "@supabase/supabase-js";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { showErrorToast, showSuccessToast } from "~/components/ui/toast";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Tenjin from "react-native-tenjin";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -130,9 +131,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       if (user?.id) {
-        await AsyncStorage.multiRemove([
-          `onboarding_progress:${user.id}`,
-        ]);
+        await AsyncStorage.multiRemove([`onboarding_progress:${user.id}`]);
       }
     } catch (storageError) {
       console.error("Failed to clear onboarding storage", storageError);
@@ -159,6 +158,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       console.log("Apple sign in result:", data, error);
       if (error) throw error;
+      Tenjin.eventWithName("login");
     } finally {
       setIsSigningIn(false);
     }
@@ -210,4 +210,3 @@ export function useAuth() {
   }
   return context;
 }
-

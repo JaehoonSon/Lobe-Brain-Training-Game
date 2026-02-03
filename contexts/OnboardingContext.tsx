@@ -5,6 +5,7 @@ import { STEPS } from "~/app/(onboarding)";
 import { supabase } from "~/lib/supabase";
 import { useAuth } from "./AuthProvider";
 import { useAnalytics } from "~/contexts/PostHogProvider";
+import Tenjin from "react-native-tenjin";
 
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps
@@ -87,7 +88,6 @@ export function OnboardingProvider({
           setCurrentStep(1);
           setData({});
         }
-
       } catch (e) {
         console.error("Failed to load onboarding progress", e);
         setIsComplete(false);
@@ -181,6 +181,7 @@ export function OnboardingProvider({
       track("onboarding_completed", {
         total_steps: TOTAL_STEPS,
       });
+      Tenjin.eventWithName("complete_tutorial");
       try {
         const storageKey = getOnboardingStorageKey(user.id);
         await AsyncStorage.removeItem(storageKey);
