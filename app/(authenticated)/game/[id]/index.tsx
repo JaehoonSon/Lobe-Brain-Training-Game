@@ -46,9 +46,11 @@ export default function GameDetailScreen() {
     return (
       <View className="flex-1 items-center justify-center bg-background">
         <ActivityIndicator />
-        <P className="mt-4 text-lg">{t('game.loading')}</P>
+        <P className="mt-4 text-lg">{t("game.loading")}</P>
         <TouchableOpacity onPress={() => router.back()} className="mt-4">
-          <P className="text-primary font-bold text-lg">{t('common.go_back')}</P>
+          <P className="text-primary font-bold text-lg">
+            {t("common.go_back")}
+          </P>
         </TouchableOpacity>
       </View>
     );
@@ -84,12 +86,12 @@ export default function GameDetailScreen() {
           <LinearGradient
             colors={["transparent", "rgba(0,0,0,0.6)"]}
             style={{
-              position: 'absolute',
+              position: "absolute",
               bottom: 0,
               left: 0,
               right: 0,
               height: 180,
-              justifyContent: 'flex-end',
+              justifyContent: "flex-end",
               paddingHorizontal: 24,
               paddingBottom: 24,
               zIndex: 10,
@@ -98,7 +100,7 @@ export default function GameDetailScreen() {
             <H1
               className="text-white text-4xl font-black"
               style={{
-                textShadowColor: 'rgba(0, 0, 0, 0.9)',
+                textShadowColor: "rgba(0, 0, 0, 0.9)",
                 textShadowOffset: { width: 0, height: 2 },
                 textShadowRadius: 8,
               }}
@@ -136,7 +138,7 @@ export default function GameDetailScreen() {
           <View className="gap-6">
             {/* BPI Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">{t('game.avg_bpi')}</H4>
+              <H4 className="font-black text-xl">{t("game.avg_bpi")}</H4>
               {gameStats?.averageScore ? (
                 <View className="flex-row items-center gap-2">
                   <Trophy size={18} className="text-primary" />
@@ -151,7 +153,7 @@ export default function GameDetailScreen() {
 
             {/* Best Score Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">{t('game.best_score')}</H4>
+              <H4 className="font-black text-xl">{t("game.best_score")}</H4>
               {gameStats?.highestScore ? (
                 <P className="text-2xl font-black">{gameStats.highestScore}</P>
               ) : (
@@ -161,16 +163,17 @@ export default function GameDetailScreen() {
 
             {/* Difficulty Rating Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">{t('game.difficulty')}</H4>
+              <H4 className="font-black text-xl">{t("game.difficulty")}</H4>
               <View className="flex-row items-center gap-2">
                 <View className="flex-row gap-1">
                   {[1, 2, 3, 4, 5].map((level) => (
                     <View
                       key={level}
-                      className={`w-3 h-3 rounded-full ${level <= Math.round(gameStats?.currentRating ?? 1)
-                        ? "bg-secondary"
-                        : "bg-muted"
-                        }`}
+                      className={`w-3 h-3 rounded-full ${
+                        level <= Math.round(gameStats?.currentRating ?? 1)
+                          ? "bg-secondary"
+                          : "bg-muted"
+                      }`}
                     />
                   ))}
                 </View>
@@ -182,7 +185,7 @@ export default function GameDetailScreen() {
 
             {/* Badge Progress Row */}
             <View className="flex-row justify-between items-center py-3 border-b border-border/50">
-              <H4 className="font-black text-xl">{t('game.badge_progress')}</H4>
+              <H4 className="font-black text-xl">{t("game.badge_progress")}</H4>
               <View className="flex-row gap-3">
                 <Hexagon
                   size={28}
@@ -243,7 +246,7 @@ export default function GameDetailScreen() {
 
             {/* Total Plays Row */}
             <View className="flex-row justify-between items-center py-3">
-              <H4 className="font-black text-xl">{t('game.total_plays')}</H4>
+              <H4 className="font-black text-xl">{t("game.total_plays")}</H4>
               <P className="text-2xl font-black">
                 {gameStats?.gamesPlayed ?? 0}
               </P>
@@ -283,12 +286,12 @@ export default function GameDetailScreen() {
               <View className="flex-row items-center gap-2">
                 <Lock size={18} color="white" />
                 <Text className="text-white font-black text-lg">
-                  {t('game.unlock_pro')}
+                  {t("game.unlock_pro")}
                 </Text>
               </View>
             ) : (
               <Text className="text-primary-foreground font-black text-lg">
-                {t('game.start_game')}
+                {t("game.start_game")}
               </Text>
             )}
           </Button>

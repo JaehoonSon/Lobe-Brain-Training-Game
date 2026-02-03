@@ -42,8 +42,12 @@ import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
   const { t } = useTranslation();
-  const { games, getDailyWorkout, dailyCompletedGameIds, refreshDailyProgress } =
-    useGames();
+  const {
+    games,
+    getDailyWorkout,
+    dailyCompletedGameIds,
+    refreshDailyProgress,
+  } = useGames();
   const { user } = useAuth();
   const [dailyGames, setDailyGames] = useState<
     Database["public"]["Tables"]["games"]["Row"][]
@@ -58,18 +62,18 @@ export default function Dashboard() {
     sessions_count: number;
   } | null>(null);
   const [dailyChallengeName, setDailyChallengeName] = useState<string | null>(
-    null
+    null,
   );
   const [locale, setLocale] = useState(() => normalizeLocale(i18n.language));
 
   // Fetch the global daily challenge (same game for everyone)
   useEffect(() => {
     async function fetchDailyChallenge() {
-      console.log('[Daily Challenge] Fetching...');
+      console.log("[Daily Challenge] Fetching...");
 
       const { data, error } = await supabase.rpc("get_daily_challenge");
 
-      console.log('[Daily Challenge] Response:', { data, error });
+      console.log("[Daily Challenge] Response:", { data, error });
 
       if (!error && data && data.length > 0) {
         const challenge = data[0];
@@ -81,7 +85,7 @@ export default function Dashboard() {
             "game",
             [challenge.game_id],
             ["name"],
-            locale
+            locale,
           );
           const translationMap = buildTranslationMap(translations);
           setDailyChallengeName(
@@ -89,11 +93,14 @@ export default function Dashboard() {
               translationMap,
               challenge.game_id,
               "name",
-              challenge.game_name
-            )
+              challenge.game_name,
+            ),
           );
         } catch (translationError) {
-          console.error("Error loading challenge translations:", translationError);
+          console.error(
+            "Error loading challenge translations:",
+            translationError,
+          );
           setDailyChallengeName(challenge.game_name);
         }
       } else {
@@ -110,8 +117,8 @@ export default function Dashboard() {
       setDailyGames(workout);
 
       // Pick two games not in the daily workout for Quick Play
-      const workoutIds = new Set(workout.map(g => g.id));
-      const others = games.filter(g => !workoutIds.has(g.id)).slice(0, 2);
+      const workoutIds = new Set(workout.map((g) => g.id));
+      const others = games.filter((g) => !workoutIds.has(g.id)).slice(0, 2);
       setQuickPlayGames(others);
     }
   }, [getDailyWorkout, user?.id, games]);
@@ -120,7 +127,7 @@ export default function Dashboard() {
   useFocusEffect(
     useCallback(() => {
       refreshDailyProgress();
-    }, [refreshDailyProgress])
+    }, [refreshDailyProgress]),
   );
 
   // Fetch today's brain fact
@@ -160,9 +167,11 @@ export default function Dashboard() {
         <View className="px-6 py-6">
           <View className="flex-row justify-between items-end mb-6">
             <View>
-              <H3 className="text-3xl font-black mb-1">{t('common.today_training')}</H3>
+              <H3 className="text-3xl font-black mb-1">
+                {t("common.today_training")}
+              </H3>
               <P className="text-muted-foreground font-bold">
-                {t('dashboard.welcome_streak')}
+                {t("dashboard.welcome_streak")}
               </P>
             </View>
             {/* <Link href="/(authenticated)/(tabs)/games" asChild>
@@ -208,42 +217,56 @@ export default function Dashboard() {
           ) : (
             <Card variant="muted" className="p-6 items-center justify-center">
               <P className="text-muted-foreground text-center">
-                {t('dashboard.loading_workout')}
+                {t("dashboard.loading_workout")}
               </P>
             </Card>
           )}
 
           <View className="mt-8">
-            <H3 className="mb-4 text-2xl font-black">{t('dashboard.daily_insight.title')}</H3>
+            <H3 className="mb-4 text-2xl font-black">
+              {t("dashboard.daily_insight.title")}
+            </H3>
             <Card variant="muted" className="p-4 flex-row items-start">
               <View className="w-12 h-12 bg-white rounded-xl mr-4 items-center justify-center shrink-0">
-                <Lightbulb className="text-secondary" size={24} strokeWidth={2.5} />
+                <Lightbulb
+                  className="text-secondary"
+                  size={24}
+                  strokeWidth={2.5}
+                />
               </View>
               <View className="flex-1">
                 {insightLoading ? (
                   <>
-                    <H4 className="text-secondary font-black text-xl mb-1">{t('dashboard.daily_insight.loading')}</H4>
+                    <H4 className="text-secondary font-black text-xl mb-1">
+                      {t("dashboard.daily_insight.loading")}
+                    </H4>
                     <P className="text-muted-foreground text-sm font-bold">
-                      {t('dashboard.daily_insight.fact_loading')}
+                      {t("dashboard.daily_insight.fact_loading")}
                     </P>
                   </>
                 ) : insight ? (
                   <>
-                    <H4 className="text-info font-black text-xl mb-1">{t('dashboard.daily_insight.did_you_know')}</H4>
+                    <H4 className="text-info font-black text-xl mb-1">
+                      {t("dashboard.daily_insight.did_you_know")}
+                    </H4>
                     <P className="text-muted-foreground text-sm font-bold mb-2">
                       {insight.content}
                     </P>
                     {insight.source && (
                       <Muted className="text-xs italic">
-                        {t('dashboard.daily_insight.source', { source: insight.source })}
+                        {t("dashboard.daily_insight.source", {
+                          source: insight.source,
+                        })}
                       </Muted>
                     )}
                   </>
                 ) : (
                   <>
-                    <H4 className="text-secondary font-black text-xl mb-1">{t('dashboard.daily_insight.did_you_know')}</H4>
+                    <H4 className="text-secondary font-black text-xl mb-1">
+                      {t("dashboard.daily_insight.did_you_know")}
+                    </H4>
                     <P className="text-muted-foreground text-sm font-bold">
-                      {t('dashboard.daily_insight.fallback')}
+                      {t("dashboard.daily_insight.fallback")}
                     </P>
                   </>
                 )}
@@ -252,22 +275,32 @@ export default function Dashboard() {
           </View>
 
           <View className="mt-10">
-            <H3 className="mb-4 text-2xl font-black">{t('dashboard.community.title')}</H3>
+            <H3 className="mb-4 text-2xl font-black">
+              {t("dashboard.community.title")}
+            </H3>
 
             {/* Global Challenge Card */}
-            <TouchableOpacity onPress={() => handlePlayGame(dailyChallengeGame?.game_id || '')} activeOpacity={0.8}>
+            <TouchableOpacity
+              onPress={() => handlePlayGame(dailyChallengeGame?.game_id || "")}
+              activeOpacity={0.8}
+            >
               <Card className="bg-info-edge border-b-[8px] border-black/20 p-5">
                 <View className="flex-row justify-between items-start mb-4">
                   <View className="flex-1">
                     <View className="bg-white/20 self-start px-2 py-0.5 rounded-md mb-2">
-                      <Text className="text-[10px] font-black text-white uppercase tracking-wider">{t('dashboard.community.global_challenge')}</Text>
+                      <Text className="text-[10px] font-black text-white uppercase tracking-wider">
+                        {t("dashboard.community.global_challenge")}
+                      </Text>
                     </View>
-                    <H4 className="text-white font-black text-2xl mb-1">{t('dashboard.community.elite_focus')}</H4>
+                    <H4 className="text-white font-black text-2xl mb-1">
+                      {t("dashboard.community.elite_focus")}
+                    </H4>
                     <P className="text-white/80 font-bold leading-5">
-                      {t('dashboard.community.challenge_desc', {
-                        gameName: dailyChallengeName ||
+                      {t("dashboard.community.challenge_desc", {
+                        gameName:
+                          dailyChallengeName ||
                           dailyChallengeGame?.game_name ||
-                          t('common.loading'),
+                          t("common.loading"),
                       })}
                     </P>
                   </View>
@@ -278,8 +311,10 @@ export default function Dashboard() {
                 <View className="bg-white rounded-2xl py-3 items-center">
                   <Text className="text-info-edge font-black uppercase text-sm tracking-widest">
                     {communityCount !== null
-                      ? t('dashboard.community.sessions_finished', { count: communityCount })
-                      : t('dashboard.community.loading_activity')}
+                      ? t("dashboard.community.sessions_finished", {
+                          count: communityCount,
+                        })
+                      : t("dashboard.community.loading_activity")}
                   </Text>
                 </View>
               </Card>
@@ -289,30 +324,52 @@ export default function Dashboard() {
             <View className="flex-row gap-4 mt-6">
               {quickPlayGames.map((game, idx) => (
                 <View key={game.id} className="flex-1">
-                  <TouchableOpacity onPress={() => handlePlayGame(game.id)} activeOpacity={0.8}>
-                    <Card variant={idx === 0 ? "primary" : "secondary"} className={cn(
-                      "p-4 h-44 justify-between",
-                      idx === 0 ? "border-b-[6px] border-primary-edge" : "border-b-[6px] border-secondary-edge"
-                    )}>
+                  <TouchableOpacity
+                    onPress={() => handlePlayGame(game.id)}
+                    activeOpacity={0.8}
+                  >
+                    <Card
+                      variant={idx === 0 ? "primary" : "secondary"}
+                      className={cn(
+                        "p-4 h-44 justify-between",
+                        idx === 0
+                          ? "border-b-[6px] border-primary-edge"
+                          : "border-b-[6px] border-secondary-edge",
+                      )}
+                    >
                       <View className="flex-row justify-between items-start">
                         <View className="bg-white/20 self-start px-2 py-0.5 rounded-md">
-                          <Text className="text-[10px] font-black text-white uppercase tracking-wider">{t('dashboard.quick_play.title')}</Text>
+                          <Text className="text-[10px] font-black text-white uppercase tracking-wider">
+                            {t("dashboard.quick_play.title")}
+                          </Text>
                         </View>
                         <Zap size={20} color="white" />
                       </View>
                       <View className="flex-1 justify-center items-center py-2">
-                        <H4 className="text-white font-black text-lg text-center" numberOfLines={2}>{game.name}</H4>
+                        <H4
+                          className="text-white font-black text-lg text-center"
+                          numberOfLines={2}
+                        >
+                          {game.name}
+                        </H4>
                       </View>
                       <View className="bg-white/10 py-1.5 rounded-lg items-center">
-                        <Text className="text-white font-black text-[10px] uppercase tracking-widest">{t('dashboard.quick_play.tap_to_start')}</Text>
+                        <Text className="text-white font-black text-[10px] uppercase tracking-widest">
+                          {t("dashboard.quick_play.tap_to_start")}
+                        </Text>
                       </View>
                     </Card>
                   </TouchableOpacity>
                 </View>
               ))}
               {quickPlayGames.length === 0 && (
-                <Card variant="muted" className="flex-1 h-44 items-center justify-center border-b-[6px]">
-                  <Text className="text-muted-foreground font-bold">{t('dashboard.quick_play.coming_soon')}</Text>
+                <Card
+                  variant="muted"
+                  className="flex-1 h-44 items-center justify-center border-b-[6px]"
+                >
+                  <Text className="text-muted-foreground font-bold">
+                    {t("dashboard.quick_play.coming_soon")}
+                  </Text>
                 </Card>
               )}
             </View>

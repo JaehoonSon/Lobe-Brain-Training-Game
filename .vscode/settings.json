@@ -36,5 +36,7 @@
     "fs",
     "http",
     "net"
-  ]
+  ],
+  "eslint.format.enable": false,
+  "eslint.enable": false
 }

@@ -15,7 +15,7 @@ export default function AuthenticatedLayout() {
   // Double-check: If user somehow got here without auth, redirect away
   if (!isAuthenticated) {
     console.log(
-      "Authenticated layout: User should not be here, redirecting..."
+      "Authenticated layout: User should not be here, redirecting...",
     );
     return <Redirect href="/" />;
   }
@@ -28,6 +28,7 @@ export default function AuthenticatedLayout() {
           <Stack.Screen
             name="game/[id]"
             options={{
+              gestureEnabled: false,
               presentation: "card",
               animation: "slide_from_right",
             }}

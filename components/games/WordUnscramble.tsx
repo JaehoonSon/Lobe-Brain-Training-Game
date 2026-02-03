@@ -136,7 +136,7 @@ export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       }
     }
-  }, [placedLetters, targetWord, isSuccess, onComplete, attempts]);
+  }, [placedLetters, targetWord, isSuccess, onComplete]);
 
   const tileSize = Math.min(50, (SCREEN_WIDTH - 40) / (targetWord.length || 5));
 
