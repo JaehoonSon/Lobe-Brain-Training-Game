@@ -1,0 +1,9 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "Lobe",
+    "NSUserTrackingUsageDescription": "고객님의 경험을 개선하기 위해 데이터를 사용합니다."
+  },
+  "android": {
+    "app_name": "Lobe"
+  }
+}

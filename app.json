@@ -16,9 +16,16 @@
     "assetBundlePatterns": ["**/*"],
     "locales": {
       "en": "./languages/english.json",
-      "ja": "./languages/japanese.json",
       "es": "./languages/spanish.json",
-      "zh-Hans": "./languages/chinese-simplified.json"
+      "ja": "./languages/japanese.json",
+      "zh-Hans": "./languages/chinese-simplified.json",
+      "pt-PT": "./languages/portuguese.json",
+      "de": "./languages/german.json",
+      "fr": "./languages/french.json",
+      "hi": "./languages/hindi.json",
+      "ru": "./languages/russian.json",
+      "ko": "./languages/korean.json",
+      "pt-BR": "./languages/portuguese-brazil.json"
     },
     "ios": {
       "appStoreUrl": "https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720",
@@ -27,7 +34,19 @@
       "buildNumber": "1",
       "bundleIdentifier": "com.theblucks.brainapp",
       "infoPlist": {
-        "CFBundleLocalizations": ["en", "ja", "es", "zh-Hans"],
+        "CFBundleLocalizations": [
+          "en",
+          "es",
+          "ja",
+          "zh-Hans",
+          "pt-PT",
+          "de",
+          "fr",
+          "hi",
+          "ru",
+          "ko",
+          "pt-BR"
+        ],
         "NSUserTrackingUsageDescription": "We use your data to improve your experience.",
         "CFBundleAllowMixedLocalizations": true,
         "ITSAppUsesNonExemptEncryption": false,
@@ -59,15 +78,39 @@
       "expo-router",
       "expo-apple-authentication",
       "expo-video",
-      [
-        "expo-localization",
-        {
-          "supportedLocales": {
-            "ios": ["en", "ja", "es", "zh-Hans"],
-            "android": ["en", "ja", "es", "zh-Hans"]
+        [
+          "expo-localization",
+          {
+            "supportedLocales": {
+              "ios": [
+                "en",
+                "es",
+                "ja",
+                "zh-Hans",
+                "pt-PT",
+                "de",
+                "fr",
+                "hi",
+                "ru",
+                "ko",
+                "pt-BR"
+              ],
+              "android": [
+                "en",
+                "es",
+                "ja",
+                "zh-Hans",
+                "pt-PT",
+                "de",
+                "fr",
+                "hi",
+                "ru",
+                "ko",
+                "pt-BR"
+              ]
+            }
           }
-        }
-      ],
+        ],
       "expo-notifications",
       [
         "expo-build-properties",
