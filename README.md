@@ -9,7 +9,7 @@ Lobe is a React Native/Expo mobile app that helps users improve their cognitive 
 ## 📱 App Information
 
 - **Version:** 1.0.4
-- **Platform:** iOS & Android
+- **Platform:** iOS & Android (primarily built for iOS)
 - **Bundle ID (iOS):** com.theblucks.brainapp
 - **Package (Android):** com.knuceles.ExpoTemplate
 - **App Store:** [Download on iOS](https://apps.apple.com/us/app/lobe-brain-training-games/id6757370720)
@@ -127,12 +127,41 @@ npm run dev
 
 ### Environment Setup
 
-Create a `.env` file in the root directory with your Supabase credentials:
+Create a `.env` file in the root directory with the following configuration:
 
 ```env
-EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Supabase
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=required
+EXPO_PUBLIC_SUPABASE_SECRET_KEY=required
+EXPO_PUBLIC_SUPABASE_URL=required
+
+# Payment
+EXPO_PUBLIC_REVENUECAT_API_KEY=required
+
+# Auth
+EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID=required
+EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID=required
+AUTH_APPLE_SECRET=required
+AUTH_GOOGLE_SECRET=optional
+
+# Posthog
+EXPO_PUBLIC_POSTHOG_KEY=optional
+EXPO_PUBLIC_POSTHOG_HOST=optional
+
+# MMP
+EXPO_PUBLIC_TENJIN_API_KEY=optional
 ```
+
+**Required Variables:**
+- **Supabase**: Backend database credentials (URL, publishable key, secret key)
+- **RevenueCat**: Subscription management API key
+- **Google Auth**: Client IDs for web and iOS authentication
+- **Apple Auth**: Secret key for Apple Sign-In
+
+**Optional Variables:**
+- **PostHog**: Analytics platform (key and host)
+- **Tenjin**: Mobile measurement partner for attribution tracking
+- **Google Auth Secret**: Additional Google authentication configuration
 
 ## 📜 Available Scripts
 
