@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lobe",
     "slug": "lobe",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/brain_logo.png",
     "scheme": "lobe",
@@ -99,6 +99,13 @@
       "eas": {
         "projectId": "586a70a9-4ec7-4ec2-a30a-220fd0ebf9d4"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/586a70a9-4ec7-4ec2-a30a-220fd0ebf9d4",
+      "checkAutomatically": "ON_LOAD"
     }
   }
 }
