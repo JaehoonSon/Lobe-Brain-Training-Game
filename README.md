@@ -131,25 +131,25 @@ Create a `.env` file in the root directory with the following configuration:
 
 ```env
 # Supabase
-EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=required
-EXPO_PUBLIC_SUPABASE_SECRET_KEY=required
-EXPO_PUBLIC_SUPABASE_URL=required
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+EXPO_PUBLIC_SUPABASE_SECRET_KEY=your_supabase_secret_key
+EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 
 # Payment
-EXPO_PUBLIC_REVENUECAT_API_KEY=required
+EXPO_PUBLIC_REVENUECAT_API_KEY=your_revenuecat_api_key
 
 # Auth
-EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID=required
-EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID=required
-AUTH_APPLE_SECRET=required
-AUTH_GOOGLE_SECRET=optional
+EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID=your_google_web_client_id
+EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID=your_google_ios_client_id
+AUTH_APPLE_SECRET=your_apple_secret
+AUTH_GOOGLE_SECRET=your_google_secret
 
-# Posthog
-EXPO_PUBLIC_POSTHOG_KEY=optional
-EXPO_PUBLIC_POSTHOG_HOST=optional
+# PostHog
+EXPO_PUBLIC_POSTHOG_KEY=your_posthog_key
+EXPO_PUBLIC_POSTHOG_HOST=https://app.posthog.com
 
 # MMP
-EXPO_PUBLIC_TENJIN_API_KEY=optional
+EXPO_PUBLIC_TENJIN_API_KEY=your_tenjin_api_key
 ```
 
 **Required Variables:**
