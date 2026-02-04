@@ -34,7 +34,7 @@ const AnalyticsContext = createContext<AnalyticsContextValue>({
 });
 
 const cleanProperties = (
-  properties?: AnalyticsPropertiesInput
+  properties?: AnalyticsPropertiesInput,
 ): AnalyticsProperties | undefined => {
   if (!properties) return undefined;
 
@@ -154,7 +154,7 @@ function AnalyticsBridge({ children }: { children: React.ReactNode }) {
 
     const subscription = AppState.addEventListener(
       "change",
-      handleAppStateChange
+      handleAppStateChange,
     );
 
     return () => {
@@ -177,7 +177,7 @@ function AnalyticsBridge({ children }: { children: React.ReactNode }) {
         posthog?.reset();
       },
     }),
-    [posthog]
+    [posthog],
   );
 
   return (
@@ -189,7 +189,8 @@ function AnalyticsBridge({ children }: { children: React.ReactNode }) {
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   const apiKey = process.env.EXPO_PUBLIC_POSTHOG_KEY ?? "";
-  const host = process.env.EXPO_PUBLIC_POSTHOG_HOST ?? "https://app.posthog.com";
+  const host =
+    process.env.EXPO_PUBLIC_POSTHOG_HOST ?? "https://app.posthog.com";
 
   if (!apiKey) {
     return (
@@ -206,7 +207,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       apiKey={apiKey}
       options={{
         host,
-        captureAppLifecycleEvents: false, // We handle this manually for more control
+        captureAppLifecycleEvents: true, // We handle this manually for more control
         flushAt: 20,
       }}
       autocapture={{
