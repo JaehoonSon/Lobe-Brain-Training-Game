@@ -1,5 +1,6 @@
 import { router } from "expo-router";
-import { View, useWindowDimensions, Image } from "react-native";
+import { View, useWindowDimensions } from "react-native";
+import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -34,13 +35,13 @@ export default function IndexUnauthenticatedScreen() {
         <CloudBackground skyColor="#7dd3fc">
           {/* Scattered Icons in the Sky */}
           <View className="w-full max-w-sm aspect-square relative mt-12">
-
             {/* Center - App Logo */}
             <View className="absolute top-[30%] left-[35%] rotate-[5deg] bg-card rounded-2xl border-b-4 border-border shadow-sm  overflow-hidden">
               <Image
                 source={require("~/assets/images/brain_logo_transparent.png")}
                 style={{ width: 100, height: 100 }}
-                resizeMode="contain"
+                contentFit="contain"
+                cachePolicy="disk"
               />
             </View>
 
@@ -76,7 +77,6 @@ export default function IndexUnauthenticatedScreen() {
               <Palette size={28} color="#f97316" strokeWidth={2.5} />
             </View>
 
-
             {/* Bottom Cluster */}
             <View className="absolute bottom-[20%] left-[20%] rotate-[5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
               <Gamepad2 size={40} color="#8b5cf6" strokeWidth={2.5} />
@@ -95,7 +95,6 @@ export default function IndexUnauthenticatedScreen() {
             <View className="absolute top-[15%] right-[35%] rotate-[-10deg]">
               <Sparkles size={20} color="#60a5fa" fill="#60a5fa" />
             </View>
-
           </View>
         </CloudBackground>
       </View>
@@ -103,7 +102,10 @@ export default function IndexUnauthenticatedScreen() {
       {/* Content Area (Below Clouds) */}
       <View
         className="flex-1 px-6 pb-8 z-20"
-        style={{ paddingBottom: insets.bottom + 16, paddingTop: insets.top + 24 }}
+        style={{
+          paddingBottom: insets.bottom + 16,
+          paddingTop: insets.top + 24,
+        }}
       >
         {/* Spacer to push content to bottom when possible */}
         <View className="flex-1" />
@@ -117,15 +119,14 @@ export default function IndexUnauthenticatedScreen() {
         ) : null}
 
         <View className="items-center gap-3 mb-4">
-
           <Text className="text-4xl font-extrabold leading-tight text-slate-400">
             Lobe
           </Text>
           <Text className="text-4xl font-extrabold text-center leading-tight text-foreground">
-            {t('unauth.landing.title')}
+            {t("unauth.landing.title")}
           </Text>
           <Text className="text-xl text-muted-foreground text-center px-4">
-            {t('unauth.landing.subtitle')}
+            {t("unauth.landing.subtitle")}
           </Text>
         </View>
 
@@ -135,7 +136,9 @@ export default function IndexUnauthenticatedScreen() {
             className="w-full h-12 native:h-16 px-10 rounded-2xl"
             onPress={() => router.push("/(unauthenticated)/SignUp")}
           >
-            <Text className="font-bold text-2xl text-primary-foreground">{t('unauth.landing.get_started')}</Text>
+            <Text className="font-bold text-2xl text-primary-foreground">
+              {t("unauth.landing.get_started")}
+            </Text>
           </Button>
 
           <Button
@@ -143,13 +146,15 @@ export default function IndexUnauthenticatedScreen() {
             className="w-full h-12 native:h-16 px-10 rounded-2xl border-2"
             onPress={() => router.push("/(unauthenticated)/SignUp")}
           >
-            <Text className="font-bold text-2xl text-primary">{t('unauth.landing.login')}</Text>
+            <Text className="font-bold text-2xl text-primary">
+              {t("unauth.landing.login")}
+            </Text>
           </Button>
         </View>
 
         {/* Legal Text */}
         <Text className="text-sm text-muted-foreground text-center px-8 leading-5 mt-4">
-          {t('unauth.landing.legal')}
+          {t("unauth.landing.legal")}
         </Text>
       </View>
     </View>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { View, Image, ImageSourcePropType } from "react-native";
+import { View, ImageSourcePropType } from "react-native";
+import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
@@ -34,6 +35,7 @@ export function AffirmationStep({
         <Image
           source={config.image}
           style={{ width: 256, height: 256, resizeMode: "contain" }}
+          cachePolicy="memory"
         />
       </Animated.View>
       <Animated.View entering={FadeInDown.delay(300).duration(600)}>

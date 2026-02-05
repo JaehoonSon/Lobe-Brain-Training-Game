@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
+import { Image } from "expo-image";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -48,7 +49,8 @@ export default function PlanRevealStep({
             <Image
               source={require("~/assets/brain_growth_chart.png")}
               style={{ width: 280, height: 280 }}
-              resizeMode="contain"
+              contentFit="contain"
+              cachePolicy="memory"
             />
           </Animated.View>
         </View>
@@ -57,25 +59,25 @@ export default function PlanRevealStep({
         <View className="w-full gap-6">
           <View className="items-center gap-2">
             <Text className="text-xl font-bold text-primary uppercase tracking-widest">
-              {t('onboarding.steps.plan_reveal.badge')}
+              {t("onboarding.steps.plan_reveal.badge")}
             </Text>
             <Text className="text-5xl font-black text-center text-foreground">
-              {t('onboarding.steps.plan_reveal.title')}
+              {t("onboarding.steps.plan_reveal.title")}
             </Text>
             <Text className="text-lg text-center text-muted-foreground px-2 leading-6 mt-1">
-              {t('onboarding.steps.plan_reveal.projection')}{" "}
+              {t("onboarding.steps.plan_reveal.projection")}{" "}
               <Text className="text-primary font-bold">
-                {t('onboarding.steps.plan_reveal.projection_highlight')}
+                {t("onboarding.steps.plan_reveal.projection_highlight")}
               </Text>{" "}
-              {t('onboarding.steps.plan_reveal.projection_suffix')}
+              {t("onboarding.steps.plan_reveal.projection_suffix")}
             </Text>
           </View>
 
           {/* Value Props */}
           <View className="gap-4 px-4">
-            <Row text={t('onboarding.steps.plan_reveal.features.baseline')} />
-            <Row text={t('onboarding.steps.plan_reveal.features.schedule')} />
-            <Row text={t('onboarding.steps.plan_reveal.features.proven')} />
+            <Row text={t("onboarding.steps.plan_reveal.features.baseline")} />
+            <Row text={t("onboarding.steps.plan_reveal.features.schedule")} />
+            <Row text={t("onboarding.steps.plan_reveal.features.proven")} />
           </View>
         </View>
       </ScrollView>
@@ -87,7 +89,7 @@ export default function PlanRevealStep({
           onPress={onNext}
         >
           <Text className="text-xl font-bold text-primary-foreground">
-            {t('onboarding.steps.plan_reveal.start')}
+            {t("onboarding.steps.plan_reveal.start")}
           </Text>
         </Button>
       </View>

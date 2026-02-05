@@ -1,8 +1,9 @@
 import { SplashScreen } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useEffect, useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import LottieView from "lottie-react-native";
+import { Image } from "expo-image";
 
 const SPLASH_BG_COLOR = "#fe7939"; // Primary Theme Orange
 const MIN_DISPLAY_TIME = 600; // 600ms delay
@@ -67,7 +68,8 @@ export function SplashScreenController() {
       <Image
         source={require("~/assets/images/brain_logo.png")}
         style={styles.image}
-        resizeMode="contain"
+        contentFit="contain"
+        cachePolicy="disk"
       />
       {minTimeElapsed && (
         <View style={styles.lottieContainer}>

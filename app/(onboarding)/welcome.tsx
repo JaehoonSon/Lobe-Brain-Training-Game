@@ -20,9 +20,9 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
   };
 
   const goals = [
-    { icon: Target, label: t('onboarding.steps.welcome.goals.focus') },
-    { icon: Brain, label: t('onboarding.steps.welcome.goals.memory') },
-    { icon: Zap, label: t('onboarding.steps.welcome.goals.speed') },
+    { icon: Target, label: t("onboarding.steps.welcome.goals.focus") },
+    { icon: Brain, label: t("onboarding.steps.welcome.goals.memory") },
+    { icon: Zap, label: t("onboarding.steps.welcome.goals.speed") },
   ];
 
   return (
@@ -39,12 +39,13 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
             source={require("~/assets/images/brain_logo_transparent.png")}
             style={{ width: 120, height: 120 }}
             contentFit="contain"
+            cachePolicy="disk"
           />
           <Text className="text-4xl font-extrabold text-foreground text-center leading-[1.1]">
-            {t('onboarding.steps.welcome.title')}
+            {t("onboarding.steps.welcome.title")}
           </Text>
           <Text className="text-lg text-muted-foreground text-center px-4">
-            {t('onboarding.steps.welcome.subtitle')}
+            {t("onboarding.steps.welcome.subtitle")}
           </Text>
         </Animated.View>
 
@@ -88,7 +89,7 @@ export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
           onPress={handleBegin}
         >
           <Text className="font-extrabold text-xl tracking-wide uppercase text-primary-foreground">
-            {t('onboarding.steps.welcome.begin')}
+            {t("onboarding.steps.welcome.begin")}
           </Text>
         </Button>
       </Animated.View>

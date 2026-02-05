@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { View, Image, Dimensions, FlatList, ViewToken } from "react-native";
+import { View, Dimensions, FlatList, ViewToken } from "react-native";
+import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { CustomStepProps } from "~/app/(onboarding)/index";
@@ -86,6 +87,7 @@ export default function PremiumFeaturesStep({ onNext }: CustomStepProps) {
                 <Image
                   source={item.image}
                   style={{ width: 200, height: 200, resizeMode: "contain" }}
+                  cachePolicy="memory"
                 />
               </View>
               <Text className="text-2xl font-bold text-center text-foreground mb-4">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Image } from "react-native";
+import { View } from "react-native";
+import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { useNotifications } from "~/contexts/NotificationProvider";
@@ -49,6 +50,7 @@ export default function NotificationPermissionStep({
               resizeMode: "contain",
               zIndex: 100,
             }}
+            cachePolicy="memory"
           />
           <View className="absolute">
             <Svg
