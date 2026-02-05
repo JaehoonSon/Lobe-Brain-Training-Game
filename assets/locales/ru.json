@@ -350,7 +350,8 @@
       "terms": "Условия использования",
       "license": "Лицензионное соглашение",
       "version": "Версия {{version}} ({{build}})",
-      "push_notifications": "Push-уведомления"
+      "push_notifications": "Push-уведомления",
+      "language_instruction": "Выберите предпочтительный язык интерфейса приложения."
     },
     "actions": {
       "logout": "Выйти",

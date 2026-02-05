@@ -345,7 +345,8 @@
       "terms": "Terms of Service",
       "license": "License Agreement",
       "version": "Version {{version}} ({{build}})",
-      "push_notifications": "Push Notifications"
+      "push_notifications": "Push Notifications",
+      "language_instruction": "Select your preferred language for the application interface."
     },
     "actions": {
       "logout": "Logout",

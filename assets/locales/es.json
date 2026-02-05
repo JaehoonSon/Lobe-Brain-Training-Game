@@ -350,7 +350,8 @@
       "terms": "Términos de servicio",
       "license": "Acuerdo de licencia",
       "version": "Versión {{version}} ({{build}})",
-      "push_notifications": "Notificaciones push"
+      "push_notifications": "Notificaciones push",
+      "language_instruction": "Seleccione su idioma preferido para la interfaz de la aplicación."
     },
     "actions": {
       "logout": "Cerrar sesión",

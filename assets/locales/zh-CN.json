@@ -345,7 +345,8 @@
       "terms": "服务条款",
       "license": "许可协议",
       "version": "版本 {{version}} ({{build}})",
-      "push_notifications": "推送通知"
+      "push_notifications": "推送通知",
+      "language_instruction": "为应用程序界面选择您偏好的语言。"
     },
     "actions": {
       "logout": "退出登录",

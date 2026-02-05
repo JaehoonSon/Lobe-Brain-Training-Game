@@ -349,7 +349,8 @@
       "terms": "Termos de Serviço",
       "license": "Contrato de Licença",
       "version": "Versão {{version}} ({{build}})",
-      "push_notifications": "Notificações push"
+      "push_notifications": "Notificações push",
+      "language_instruction": "Selecione o idioma de sua preferência para a interface do aplicativo."
     },
     "actions": {
       "logout": "Sair",

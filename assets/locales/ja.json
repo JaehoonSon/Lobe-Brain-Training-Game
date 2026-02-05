@@ -345,7 +345,8 @@
       "terms": "利用規約",
       "license": "ライセンス契約",
       "version": "バージョン {{version}} ({{build}})",
-      "push_notifications": "プッシュ通知"
+      "push_notifications": "プッシュ通知",
+      "language_instruction": "アプリケーションインターフェースに使用する優先言語を選択してください。"
     },
     "actions": {
       "logout": "ログアウト",

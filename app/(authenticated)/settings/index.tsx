@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   ChevronRight,
   LogOut,
@@ -14,6 +14,7 @@ import {
   Bell,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { useRouter, useFocusEffect } from "expo-router";
 import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import * as WebBrowser from "expo-web-browser";
@@ -35,24 +36,16 @@ import {
   setSystemLanguage,
   SYSTEM_LANGUAGE_VALUE,
 } from "~/lib/i18n";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-  Option,
-} from "~/components/ui/select";
+import { Option } from "~/components/ui/select";
 
 const SUPPORTED_LANGUAGES: Option[] = [
   { value: "en", label: "English" },
   { value: "es", label: "Español" },
   { value: "ko", label: "한국어" },
-  { value: "zh", label: "中文" },
+  { value: "zh-Hans", label: "中文" },
   { value: "ja", label: "日本語" },
-  { value: "pt", label: "Português" },
+  { value: "pt-BR", label: "Português (Brasil)" },
+  { value: "pt-PT", label: "Português (Portugal)" },
   { value: "de", label: "Deutsch" },
   { value: "fr", label: "Français" },
   { value: "hi", label: "हिन्दी" },
@@ -68,6 +61,7 @@ const buildNumber =
 
 export default function Settings() {
   const { t } = useTranslation();
+  const router = useRouter();
   const { user, logout } = useAuth();
   const { isPro, presentPaywall, currentOffering } = useRevenueCat();
   const [birthday, setBirthday] = useState<string | null>(null);
@@ -109,21 +103,23 @@ export default function Settings() {
     fetchProfile();
   }, [user]);
 
-  useEffect(() => {
-    let isActive = true;
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
 
-    const loadPreference = async () => {
-      const storedLanguage = await getPreferredLanguage();
-      if (!isActive) return;
-      setLanguagePreference(storedLanguage);
-    };
+      const loadPreference = async () => {
+        const storedLanguage = await getPreferredLanguage();
+        if (!isActive) return;
+        setLanguagePreference(storedLanguage);
+      };
 
-    loadPreference();
+      loadPreference();
 
-    return () => {
-      isActive = false;
-    };
-  }, []);
+      return () => {
+        isActive = false;
+      };
+    }, [])
+  );
 
   const handleMembershipPress = async () => {
     playHaptic("soft");
@@ -154,19 +150,6 @@ export default function Settings() {
       await logout();
     } catch (err) {
       showErrorToast(t("common.error_generic"));
-    }
-  };
-
-  const handleLanguageChange = (val: Option | null) => {
-    if (val) {
-      playHaptic("medium");
-      if (val.value === SYSTEM_LANGUAGE_VALUE) {
-        setLanguagePreference(SYSTEM_LANGUAGE_VALUE);
-        void setSystemLanguage();
-        return;
-      }
-      setLanguagePreference(val.value);
-      void setPreferredLanguage(val.value);
     }
   };
 
@@ -212,7 +195,6 @@ export default function Settings() {
       : (SUPPORTED_LANGUAGES.find(
           (lang) => lang && lang.value === normalizeLocale(resolvedPreference),
         ) ?? systemOption);
-  const languageOptions = [systemOption, ...SUPPORTED_LANGUAGES];
 
   return (
     <View className="flex-1 bg-background">
@@ -326,42 +308,14 @@ export default function Settings() {
           {/* Preferences Section */}
           <SectionHeader>{t("common.language")}</SectionHeader>
           <Card className="overflow-hidden">
-            <View className="flex-row items-center px-4 py-1">
-              <View className="w-8 h-8 rounded-lg items-center justify-center mr-3 bg-muted">
-                <Languages size={18} className="text-foreground" />
-              </View>
-              <View className="flex-1">
-                <Select
-                  value={selectedLanguage}
-                  onValueChange={handleLanguageChange}
-                >
-                  <SelectTrigger className="border-0 bg-transparent px-3 h-12 w-full shadow-none active:bg-muted/20">
-                    <SelectValue
-                      className="text-lg font-bold text-foreground"
-                      placeholder={t("common.language")}
-                    />
-                  </SelectTrigger>
-                  <SelectContent
-                    className="w-[250px] native:w-[280px]"
-                    portalHost="settings-portal"
-                  >
-                    <SelectGroup>
-                      <SelectLabel>{t("common.language")}</SelectLabel>
-                      {languageOptions.map(
-                        (lang) =>
-                          lang && (
-                            <SelectItem
-                              key={lang.value}
-                              label={lang.label}
-                              value={lang.value}
-                            />
-                          ),
-                      )}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </View>
-            </View>
+            <SettingRow
+              icon={Languages}
+              label={selectedLanguage.label}
+              onPress={() => {
+                playHaptic("soft");
+                router.push("/settings/language");
+              }}
+            />
           </Card>
 
           {/* Legal Section */}

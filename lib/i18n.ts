@@ -7,7 +7,8 @@ import es from '../assets/locales/es.json';
 import ko from '../assets/locales/ko.json';
 import zhCN from '../assets/locales/zh-CN.json';
 import ja from '../assets/locales/ja.json';
-import pt from '../assets/locales/pt.json';
+import ptBR from '../assets/locales/pt-BR.json';
+import ptPT from '../assets/locales/pt-PT.json';
 import de from '../assets/locales/de.json';
 import fr from '../assets/locales/fr.json';
 import hi from '../assets/locales/hi.json';
@@ -17,9 +18,10 @@ const resources = {
   en: { translation: en },
   es: { translation: es },
   ko: { translation: ko },
-  zh: { translation: zhCN },
+  "zh-Hans": { translation: zhCN },
   ja: { translation: ja },
-  pt: { translation: pt },
+  "pt-BR": { translation: ptBR },
+  "pt-PT": { translation: ptPT },
   de: { translation: de },
   fr: { translation: fr },
   hi: { translation: hi },
@@ -143,8 +145,6 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
-    supportedLngs: Object.keys(resources),
-    load: "languageOnly",
     interpolation: {
       escapeValue: false,
     },
@@ -157,7 +157,7 @@ export const setPreferredLanguage = async (lng: string) => {
   await writeStoredLanguage(lng);
   await writeStoredLanguageMode(LANGUAGE_MODE_CUSTOM);
 
-  await i18n.changeLanguage(lng);
+    await i18n.changeLanguage(lng);
 };
 
 export const getPreferredLanguage = async () => {

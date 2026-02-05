@@ -1,6 +1,6 @@
 import * as SelectPrimitive from '@rn-primitives/select';
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Check } from '~/lib/icons/Check';
 import { ChevronDown } from '~/lib/icons/ChevronDown';
@@ -93,7 +93,7 @@ function SelectContent({
         <Animated.View className='z-50' entering={FadeIn} exiting={FadeOut}>
           <SelectPrimitive.Content
             className={cn(
-              'relative z-50 min-w-[8rem] rounded-xl border-2 border-border bg-popover shadow-md shadow-foreground/10 py-2 px-1',
+              'relative z-50 min-w-[8rem] rounded-xl border-2 border-border bg-popover shadow-md shadow-foreground/10 py-2 px-1 native:max-h-80',
               open
                 ? 'web:zoom-in-95 web:animate-in web:fade-in-0'
                 : 'web:zoom-out-95 web:animate-out web:fade-out-0',
@@ -110,7 +110,13 @@ function SelectContent({
                 'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
               )}
             >
-              {children}
+              {Platform.OS === 'web' ? (
+                children
+              ) : (
+                <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+                  {children}
+                </ScrollView>
+              )}
             </SelectPrimitive.Viewport>
             <SelectScrollDownButton />
           </SelectPrimitive.Content>

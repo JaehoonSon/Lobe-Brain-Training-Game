@@ -345,7 +345,8 @@
       "terms": "सेवा की शर्तें",
       "license": "लाइसेंस समझौता",
       "version": "संस्करण {{version}} ({{build}})",
-      "push_notifications": "पुश सूचनाएं"
+      "push_notifications": "पुश सूचनाएं",
+      "language_instruction": "एप्लिकेशन इंटरफ़ेस के लिए अपनी पसंदीदा भाषा चुनें।"
     },
     "actions": {
       "logout": "लॉग आउट",

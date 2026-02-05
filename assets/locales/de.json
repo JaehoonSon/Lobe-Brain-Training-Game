@@ -345,7 +345,8 @@
       "terms": "Nutzungsbedingungen",
       "license": "Lizenzvereinbarung",
       "version": "Version {{version}} ({{build}})",
-      "push_notifications": "Push-Benachrichtigungen"
+      "push_notifications": "Push-Benachrichtigungen",
+      "language_instruction": "Wählen Sie Ihre bevorzugte Sprache für die Benutzeroberfläche der App aus."
     },
     "actions": {
       "logout": "Abmelden",

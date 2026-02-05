@@ -19,7 +19,7 @@
       "es": "./languages/spanish.json",
       "ja": "./languages/japanese.json",
       "zh-Hans": "./languages/chinese-simplified.json",
-      "pt-PT": "./languages/portuguese.json",
+      "pt-PT": "./languages/portuguese-portugal.json",
       "de": "./languages/german.json",
       "fr": "./languages/french.json",
       "hi": "./languages/hindi.json",

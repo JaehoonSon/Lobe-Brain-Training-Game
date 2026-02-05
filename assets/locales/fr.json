@@ -345,7 +345,8 @@
       "terms": "Conditions d'utilisation",
       "license": "Contrat de licence",
       "version": "Version {{version}} ({{build}})",
-      "push_notifications": "Notifications push"
+      "push_notifications": "Notifications push",
+      "language_instruction": "Sélectionnez votre langue préférée pour l'interface de l'application."
     },
     "actions": {
       "logout": "Se déconnecter",
