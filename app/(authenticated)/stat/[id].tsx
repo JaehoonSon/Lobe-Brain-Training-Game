@@ -40,7 +40,8 @@ import { INSIGHTS } from "~/lib/insights-data";
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useTranslation();
-  const { categoryStats, categoryScoreHistory, isLoading, refresh } = useUserStats();
+  const { categoryStats, categoryScoreHistory, isLoading, refresh } =
+    useUserStats();
 
   const { games } = useGames();
 
@@ -60,10 +61,10 @@ export default function CategoryDetailScreen() {
     translateY.value = withRepeat(
       withSequence(
         withTiming(-10, { duration: 2000 }),
-        withTiming(0, { duration: 2000 })
+        withTiming(0, { duration: 2000 }),
       ),
       -1,
-      true
+      true,
     );
   }, []);
 
@@ -95,7 +96,7 @@ export default function CategoryDetailScreen() {
 
   // Get relevant insights
   const relevantInsights = INSIGHTS.filter(
-    (i) => i.category.toLowerCase() === category?.name.toLowerCase()
+    (i) => i.category.toLowerCase() === category?.name.toLowerCase(),
   );
 
   if (isLoading) {
@@ -120,7 +121,7 @@ export default function CategoryDetailScreen() {
             <ChevronLeft size={24} className="text-foreground" />
           </TouchableOpacity>
           <View className="absolute left-0 right-0 items-center">
-            <H1 className="text-xl">{t('stat_detail.not_found')}</H1>
+            <H1 className="text-xl">{t("stat_detail.not_found")}</H1>
           </View>
         </View>
       </SafeAreaView>
@@ -143,7 +144,7 @@ export default function CategoryDetailScreen() {
         </TouchableOpacity>
         <View className="absolute left-0 right-0 items-center">
           <H1 className="text-xl">
-            {t('stat_detail.score_title', {
+            {t("stat_detail.score_title", {
               name: t(`common.categories.${id.toLowerCase()}`, {
                 defaultValue: category.name,
               }),
@@ -190,7 +191,7 @@ export default function CategoryDetailScreen() {
               <View className="-mt-1 flex-row flex-wrap gap-2">
                 <View className="bg-primary/10 px-3 py-1 rounded-full border-b-4 border-primary/20 flex-row items-center gap-2">
                   <Text className="text-sm font-black text-primary uppercase tracking-wider">
-                    {t('stat_detail.current_score')}
+                    {t("stat_detail.current_score")}
                   </Text>
                   {hasScore && categoryScoreHistory[id]?.length > 0 && (
                     <TrendingUp
@@ -203,9 +204,15 @@ export default function CategoryDetailScreen() {
 
                 {categoryTopPercent !== null && (
                   <View className="bg-accent/10 px-3 py-1 rounded-full border-b-4 border-accent/20 flex-row items-center gap-2">
-                    <Zap size={14} className="text-accent" fill="currentColor" />
+                    <Zap
+                      size={14}
+                      className="text-accent"
+                      fill="currentColor"
+                    />
                     <Text className="text-sm font-black text-accent uppercase tracking-wider">
-                      {t('stat_detail.top_percent', { count: categoryTopPercent })}
+                      {t("stat_detail.top_percent", {
+                        count: categoryTopPercent,
+                      })}
                     </Text>
                   </View>
                 )}
@@ -226,6 +233,7 @@ export default function CategoryDetailScreen() {
                 <Image
                   source={require("~/assets/brain_workout_clay_3d.png")}
                   style={{ width: 160, height: 160 }}
+                  cachePolicy="disk"
                   contentFit="contain"
                 />
               </Animated.View>
@@ -234,7 +242,7 @@ export default function CategoryDetailScreen() {
 
           {/* Performance History Chart */}
           <FeatureCard
-            title={t('stat_detail.history')}
+            title={t("stat_detail.history")}
             variant="secondary"
             isLocked={false}
           >
@@ -245,7 +253,7 @@ export default function CategoryDetailScreen() {
           <Animated.View entering={FadeInDown.delay(400).duration(400)}>
             <View className="flex-row justify-between items-center mb-3">
               <H4 className="text-lg font-bold">
-                {t('stat_detail.games_title', {
+                {t("stat_detail.games_title", {
                   name: t(`common.categories.${id.toLowerCase()}`, {
                     defaultValue: category.name,
                   }),
@@ -255,13 +263,13 @@ export default function CategoryDetailScreen() {
 
             {categoryGames.length === 0 ? (
               <Muted className="text-center py-8">
-                {t('stat_detail.no_games')}
+                {t("stat_detail.no_games")}
               </Muted>
             ) : (
               <View className="gap-3 mb-8">
                 {categoryGames.map((game) => {
                   const gameStats = category.gameStats.find(
-                    (gs) => gs.gameId === game.id
+                    (gs) => gs.gameId === game.id,
                   );
                   const hasPlayed = gameStats && gameStats.gamesPlayed > 0;
 
@@ -282,13 +290,13 @@ export default function CategoryDetailScreen() {
                                 <View className="flex-row items-center gap-3">
                                   <View className="bg-primary/10 px-2 py-0.5 rounded-md">
                                     <Text className="text-xs font-bold text-primary">
-                                      {t('stat_detail.played_count', {
+                                      {t("stat_detail.played_count", {
                                         count: gameStats.gamesPlayed,
                                       })}
                                     </Text>
                                   </View>
                                   <Text className="text-xs font-bold text-muted-foreground">
-                                    {t('stat_detail.best_score', {
+                                    {t("stat_detail.best_score", {
                                       score: gameStats.highestScore ?? "--",
                                     })}
                                   </Text>
@@ -296,7 +304,7 @@ export default function CategoryDetailScreen() {
                               ) : (
                                 <View className="bg-muted/20 px-2 py-0.5 rounded-md self-start">
                                   <Text className="text-xs font-bold text-muted-foreground">
-                                    {t('stat_detail.new_game')}
+                                    {t("stat_detail.new_game")}
                                   </Text>
                                 </View>
                               )}
@@ -308,7 +316,7 @@ export default function CategoryDetailScreen() {
                                     {gameStats.averageScore}
                                   </P>
                                   <Text className="text-[10px] font-black text-secondary/60 text-right">
-                                    {t('stat_detail.avg_score_label')}
+                                    {t("stat_detail.avg_score_label")}
                                   </Text>
                                 </View>
                               </View>
@@ -323,13 +331,11 @@ export default function CategoryDetailScreen() {
             )}
           </Animated.View>
 
-
-
           {/* Recommended Insights Section */}
           {relevantInsights.length > 0 && (
             <Animated.View entering={FadeInDown.delay(600).duration(400)}>
               <H4 className="text-lg font-bold mb-3">
-                {t('stat_detail.recommended')}
+                {t("stat_detail.recommended")}
               </H4>
               <View className="gap-3">
                 {relevantInsights.map((insight) => (

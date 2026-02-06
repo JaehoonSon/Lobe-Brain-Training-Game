@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Image, Dimensions } from "react-native";
+import { View, Dimensions } from "react-native";
+import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import * as Haptics from "expo-haptics";
@@ -37,7 +38,7 @@ interface Question {
 
 export function MathRocket({ onComplete, content }: MathRocketProps) {
   const [gameState, setGameState] = useState<"playing" | "game_over" | "won">(
-    "playing"
+    "playing",
   );
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [score, setScore] = useState(0);
@@ -60,21 +61,21 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   // Update gravity when content changes or score increases
   useEffect(() => {
     // Basic progression: Increase gravity by 5% for every point scored
-    const difficultyMultiplier = 1 + (score * 0.05);
+    const difficultyMultiplier = 1 + score * 0.05;
     gravityValue.value = GRAVITY * difficultyMultiplier;
   }, [GRAVITY, score]);
 
   // Sync isPlaying with gameState
   useEffect(() => {
     isPlaying.value = gameState === "playing";
-    
+
     if (gameState === "playing") {
       backgroundOffset.value = 0;
       backgroundOffset.value = withRepeat(
         // Fast constant loop for forward motion sensation
         withTiming(viewHeight.value, { duration: 1800, easing: Easing.linear }),
         -1,
-        false
+        false,
       );
     } else {
       cancelAnimation(backgroundOffset);
@@ -208,7 +209,7 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
       velocity.value,
       [-8, 0, 8],
       [-3, 0, 3], // Very subtle tilt
-      Extrapolation.CLAMP
+      Extrapolation.CLAMP,
     );
 
     return {
@@ -224,7 +225,7 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
       velocity.value,
       [-THRUST * 1.2, 0],
       [1.0, 0.2],
-      Extrapolation.CLAMP
+      Extrapolation.CLAMP,
     );
 
     const flicker = 0.75 + 0.25 * Math.sin(flamePulse.value);
@@ -251,7 +252,7 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
   if (!currentQuestion) return null;
 
   return (
-    <View 
+    <View
       className="flex-1"
       onLayout={(e) => {
         viewHeight.value = e.nativeEvent.layout.height;
@@ -283,11 +284,15 @@ export function MathRocket({ onComplete, content }: MathRocketProps) {
           <Image
             source={require("~/assets/images/games/math-rocket/rocket.png")}
             style={{ width: ROCKET_SIZE, height: ROCKET_SIZE }}
-            resizeMode="contain"
+            contentFit="contain"
+            cachePolicy="disk"
           />
           <Animated.Image
             source={require("~/assets/images/games/math-rocket/fire.png")}
-            style={[{ width: 48, height: 48, backgroundColor: "transparent" }, flameStyle]}
+            style={[
+              { width: 48, height: 48, backgroundColor: "transparent" },
+              flameStyle,
+            ]}
             resizeMode="contain"
           />
         </Animated.View>
