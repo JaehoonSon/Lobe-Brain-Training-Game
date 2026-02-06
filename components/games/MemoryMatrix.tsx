@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { View, TouchableOpacity, useWindowDimensions } from "react-native";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 interface MemoryMatrixProps {
   onComplete: (accuracy: number) => void; // 0.0 to 1.0
   content: MemoryMatrixContent;
-  difficulty?: number;
 }
 
 type TileState = "hidden" | "active" | "correct" | "incorrect" | "missed";
@@ -35,11 +34,7 @@ function generateTargets(
   return Array.from(targets);
 }
 
-export function MemoryMatrix({
-  onComplete,
-  content,
-  difficulty = 1,
-}: MemoryMatrixProps) {
+export function MemoryMatrix({ onComplete, content }: MemoryMatrixProps) {
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const [phase, setPhase] = useState<GamePhase>("memorize");
@@ -149,7 +144,9 @@ export function MemoryMatrix({
   if (activeTiles.length === 0) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text className="text-muted-foreground">{t('game.memory_matrix.loading')}</Text>
+        <Text className="text-muted-foreground">
+          {t("game.memory_matrix.loading")}
+        </Text>
       </View>
     );
   }
@@ -158,12 +155,13 @@ export function MemoryMatrix({
     <View className="flex-1 items-center justify-center p-6">
       <View className="mb-12 items-center">
         <Text className="text-5xl font-extrabold mb-4 text-center">
-          {t('game.memory_matrix.title')}
+          {t("game.memory_matrix.title")}
         </Text>
         <Text className="text-xl text-muted-foreground text-center">
-          {phase === "memorize" && t('game.memory_matrix.memorize')}
-          {phase === "recall" && t('game.memory_matrix.recall', { count: targetCount })}
-          {phase === "result" && t('game.memory_matrix.checking')}
+          {phase === "memorize" && t("game.memory_matrix.memorize")}
+          {phase === "recall" &&
+            t("game.memory_matrix.recall", { count: targetCount })}
+          {phase === "result" && t("game.memory_matrix.checking")}
         </Text>
       </View>
 
@@ -186,7 +184,7 @@ export function MemoryMatrix({
                 state === "correct" && "bg-green-500 border-green-600",
                 state === "incorrect" && "bg-destructive border-destructive",
                 state === "missed" &&
-                "bg-yellow-400 border-yellow-500 opacity-50",
+                  "bg-yellow-400 border-yellow-500 opacity-50",
               )}
               style={{ width: tileSize, height: tileSize }}
               disabled={phase !== "recall"}

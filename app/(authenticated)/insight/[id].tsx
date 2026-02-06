@@ -137,13 +137,13 @@ export default function InsightDetailScreen() {
           <View
             className={cn(
               "px-3 py-1 rounded-full bg-primary/10",
-              insight.color && `bg-[${insight.color}]/10`
+              insight.color && `bg-[${insight.color}]/10`,
             )}
           >
             <Text
               className={cn(
                 "font-bold text-xs uppercase text-primary",
-                insight.color && `text-[${insight.color}]`
+                insight.color && `text-[${insight.color}]`,
               )}
               style={{ color: insight.color }}
             >

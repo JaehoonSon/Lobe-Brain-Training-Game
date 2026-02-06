@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export default function SignUp() {
   const { t } = useTranslation();
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const { signInApple, signInGoogle } = useAuth();
   const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(false);

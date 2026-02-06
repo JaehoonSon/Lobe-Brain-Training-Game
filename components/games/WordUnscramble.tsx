@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { View, TouchableOpacity, Dimensions } from "react-native";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
 import { WordUnscrambleContent } from "~/lib/validators/game-content";
-import { RefreshCw } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
 
 interface WordUnscrambleProps {
   onComplete: (accuracy: number) => void;
@@ -20,7 +18,7 @@ interface LetterTile {
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export function WordUnscramble({ onComplete, content }: WordUnscrambleProps) {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [targetWord, setTargetWord] = useState<string>("");
   const [scrambledPool, setScrambledPool] = useState<LetterTile[]>([]);
   const [placedLetters, setPlacedLetters] = useState<(LetterTile | null)[]>([]);

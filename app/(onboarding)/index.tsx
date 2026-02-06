@@ -1,12 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
-import {
-  ChevronRight,
-  ArrowLeft,
-  Zap,
-  Hand,
-  PartyPopper,
-} from "lucide-react-native";
+import { Zap, Hand, PartyPopper } from "lucide-react-native";
 import { Text } from "~/components/ui/text";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { WizardLayout } from "~/components/WizardLayout";

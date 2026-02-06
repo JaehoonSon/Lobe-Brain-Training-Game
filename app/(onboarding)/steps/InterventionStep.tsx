@@ -20,6 +20,7 @@ export interface InterventionStepProps extends CustomStepProps {
 
 export default function InterventionStep({
   onNext,
+  // eslint-disable-next-line unused-imports/no-unused-vars
   onBack,
   title,
   description,
@@ -28,7 +29,7 @@ export default function InterventionStep({
 }: InterventionStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const finalButtonText = buttonText || t('common.continue');
+  const finalButtonText = buttonText || t("common.continue");
 
   return (
     <View

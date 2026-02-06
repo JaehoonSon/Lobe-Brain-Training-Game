@@ -57,7 +57,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: t('tabs.today'),
+          title: t("tabs.today"),
           tabBarIcon: ({ color }) => (
             <Sun color={color} size={24} strokeWidth={2.5} />
           ),
@@ -66,7 +66,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="games"
         options={{
-          title: t('tabs.games'),
+          title: t("tabs.games"),
           tabBarIcon: ({ color }) => (
             <Gamepad2 color={color} size={24} strokeWidth={2.5} />
           ),
@@ -75,7 +75,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="stats"
         options={{
-          title: t('tabs.stats'),
+          title: t("tabs.stats"),
           tabBarIcon: ({ color }) => (
             <BarChart3 color={color} size={24} strokeWidth={2.5} />
           ),
@@ -84,7 +84,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="insights"
         options={{
-          title: t('tabs.insights'),
+          title: t("tabs.insights"),
           tabBarIcon: ({ color }) => (
             <Lightbulb color={color} size={24} strokeWidth={2.5} />
           ),
@@ -93,7 +93,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="components-showcase"
         options={{
-          title: t('tabs.showcase'),
+          title: t("tabs.showcase"),
           tabBarIcon: ({ color }) => (
             <LayoutTemplate color={color} size={24} strokeWidth={2.5} />
           ),

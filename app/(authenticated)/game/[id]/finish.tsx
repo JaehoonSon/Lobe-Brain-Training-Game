@@ -20,12 +20,9 @@ export default function GameFinishScreen() {
   const { t } = useTranslation();
   const { state, resetSession } = useGameSession();
   const { games, refreshDailyProgress } = useGames();
-  const { categoryStats, refresh: refreshUserStats } = useUserStats();
+  const { refresh: refreshUserStats } = useUserStats();
 
   const game = games.find((g) => g.id === id);
-  const gameStat = categoryStats
-    .find((c) => c.id === game?.category_id)
-    ?.gameStats.find((g) => g.gameId === id);
 
   useEffect(() => {
     refreshDailyProgress();

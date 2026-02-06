@@ -29,10 +29,10 @@ export default function LoadingScreen() {
       scale.value = withRepeat(
         withSequence(
           withTiming(1.2, { duration: 600 }),
-          withTiming(1.0, { duration: 600 })
+          withTiming(1.0, { duration: 600 }),
         ),
         -1,
-        true
+        true,
       );
     }
   }, [showImage, scale]);

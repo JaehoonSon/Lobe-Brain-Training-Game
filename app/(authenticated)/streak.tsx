@@ -11,7 +11,6 @@ import { Flame, Trophy, Target, X } from "lucide-react-native";
 import { router } from "expo-router";
 import { H1, P, Muted } from "~/components/ui/typography";
 import { Card, CardContent } from "~/components/ui/card";
-import Svg, { Circle } from "react-native-svg";
 import { supabase } from "~/lib/supabase";
 import { useAuth } from "~/contexts/AuthProvider";
 import { Database } from "~/lib/database.types";
@@ -41,7 +40,7 @@ function getNextMilestone(currentStreak: number): number {
  */
 function getCompletedDaysThisWeek(
   lastPlayedDate: string | null,
-  currentStreak: number
+  currentStreak: number,
 ): number[] {
   if (!lastPlayedDate || currentStreak <= 0) return [];
 
@@ -115,19 +114,12 @@ export default function StreakScreen() {
   const currentStreak = streakData?.current_streak ?? 0;
   const bestStreak = streakData?.best_streak ?? 0;
   const nextMilestone = getNextMilestone(currentStreak);
-  const daysToMilestone = nextMilestone - currentStreak;
   const completedDays = getCompletedDaysThisWeek(
     streakData?.last_played_date ?? null,
-    currentStreak
+    currentStreak,
   );
 
-  // Progress ring calculations
-  const size = 160;
-  const strokeWidth = 8;
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
   const progress = nextMilestone > 0 ? currentStreak / nextMilestone : 0;
-  const strokeDashoffset = circumference * (1 - progress);
 
   if (isLoading) {
     return (
@@ -153,7 +145,7 @@ export default function StreakScreen() {
 
         {/* Centered title */}
         <View className="absolute left-0 right-0 items-center">
-          <H1 className="text-3xl font-black">{t('streak.title')}</H1>
+          <H1 className="text-3xl font-black">{t("streak.title")}</H1>
         </View>
       </View>
 
@@ -178,7 +170,7 @@ export default function StreakScreen() {
           </Animated.View>
 
           {/* Weekly Days Row */}
-          <SectionHeader>{t('streak.this_week')}</SectionHeader>
+          <SectionHeader>{t("streak.this_week")}</SectionHeader>
           <Card className="mb-2 overflow-hidden border-border/50 bg-card">
             <CardContent className="p-4">
               <Animated.View
@@ -194,12 +186,13 @@ export default function StreakScreen() {
                   return (
                     <View key={index} className="items-center gap-1.5">
                       <View
-                        className={`w-9 h-9 rounded-full items-center justify-center ${isCompleted
-                          ? "bg-orange-500/20"
-                          : isPast
-                            ? "bg-destructive/10"
-                            : "bg-muted"
-                          }`}
+                        className={`w-9 h-9 rounded-full items-center justify-center ${
+                          isCompleted
+                            ? "bg-orange-500/20"
+                            : isPast
+                              ? "bg-destructive/10"
+                              : "bg-muted"
+                        }`}
                       >
                         {isCompleted ? (
                           <Flame size={18} color="#F97316" fill="#F97316" />
@@ -208,12 +201,13 @@ export default function StreakScreen() {
                         ) : null}
                       </View>
                       <P
-                        className={`text-xs ${isToday
-                          ? "font-black text-foreground"
-                          : isCompleted
-                            ? "font-bold text-foreground"
-                            : "font-medium text-muted-foreground"
-                          }`}
+                        className={`text-xs ${
+                          isToday
+                            ? "font-black text-foreground"
+                            : isCompleted
+                              ? "font-bold text-foreground"
+                              : "font-medium text-muted-foreground"
+                        }`}
                       >
                         {day}
                       </P>
@@ -225,7 +219,7 @@ export default function StreakScreen() {
           </Card>
 
           {/* Stats Section */}
-          <SectionHeader>{t('streak.stats')}</SectionHeader>
+          <SectionHeader>{t("streak.stats")}</SectionHeader>
           <Card className="mb-2 overflow-hidden border-border/50 bg-card">
             <CardContent className="p-0">
               <Animated.View entering={FadeInDown.delay(400).duration(600)}>
@@ -235,9 +229,16 @@ export default function StreakScreen() {
                     <Flame size={20} color="#F97316" fill="#F97316" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-xs font-bold">{t('streak.current_streak')}</Muted>
+                    <Muted className="text-xs font-bold">
+                      {t("streak.current_streak")}
+                    </Muted>
                     <P className="text-2xl font-black text-foreground">
-                      {t(currentStreak === 1 ? 'streak.days_count' : 'streak.days_count_plural', { count: currentStreak })}
+                      {t(
+                        currentStreak === 1
+                          ? "streak.days_count"
+                          : "streak.days_count_plural",
+                        { count: currentStreak },
+                      )}
                     </P>
                   </View>
                 </View>
@@ -250,9 +251,16 @@ export default function StreakScreen() {
                     <Trophy size={20} color="#EAB308" />
                   </View>
                   <View className="flex-1">
-                    <Muted className="text-xs font-bold">{t('streak.best_streak')}</Muted>
+                    <Muted className="text-xs font-bold">
+                      {t("streak.best_streak")}
+                    </Muted>
                     <P className="text-2xl font-black text-foreground">
-                      {t(bestStreak === 1 ? 'streak.days_count' : 'streak.days_count_plural', { count: bestStreak })}
+                      {t(
+                        bestStreak === 1
+                          ? "streak.days_count"
+                          : "streak.days_count_plural",
+                        { count: bestStreak },
+                      )}
                     </P>
                   </View>
                 </View>
@@ -261,7 +269,7 @@ export default function StreakScreen() {
           </Card>
 
           {/* Milestone Section */}
-          <SectionHeader>{t('streak.next_milestone')}</SectionHeader>
+          <SectionHeader>{t("streak.next_milestone")}</SectionHeader>
           <Card className="overflow-hidden border-border/50 bg-card">
             <CardContent className="p-4">
               <Animated.View entering={FadeInDown.delay(600).duration(600)}>
@@ -309,10 +317,10 @@ export default function StreakScreen() {
                 {/* Upcoming Reward Text */}
                 <View className="items-center mt-2">
                   <Muted className="text-xs uppercase tracking-wider">
-                    {t('streak.upcoming_reward')}
+                    {t("streak.upcoming_reward")}
                   </Muted>
                   <P className="text-foreground font-bold text-sm">
-                    {t('streak.reward_badge', { count: nextMilestone })}
+                    {t("streak.reward_badge", { count: nextMilestone })}
                   </P>
                 </View>
               </Animated.View>
@@ -320,40 +328,42 @@ export default function StreakScreen() {
           </Card>
 
           {/* Why Streaks Matter Section */}
-          <SectionHeader>{t('streak.why_title')}</SectionHeader>
+          <SectionHeader>{t("streak.why_title")}</SectionHeader>
           <Card className="overflow-hidden border-border/50 bg-card">
             <CardContent className="p-4">
               <Animated.View entering={FadeInDown.delay(800).duration(600)}>
                 <P className="text-foreground leading-6 mb-3">
-                  {t('streak.logic_1')}{" "}
-                  <P className="font-bold text-primary">{t('streak.neuroplasticity')}</P>
-                  {t('streak.logic_2')}
+                  {t("streak.logic_1")}{" "}
+                  <P className="font-bold text-primary">
+                    {t("streak.neuroplasticity")}
+                  </P>
+                  {t("streak.logic_2")}
                 </P>
                 <P className="text-muted-foreground leading-6 mb-3">
-                  {t('streak.logic_3')}
+                  {t("streak.logic_3")}
                 </P>
                 <View className="gap-2 ml-2">
                   <View className="flex-row items-start gap-2">
                     <P className="text-primary">•</P>
                     <P className="text-muted-foreground flex-1">
-                      {t('streak.benefit_1')}
+                      {t("streak.benefit_1")}
                     </P>
                   </View>
                   <View className="flex-row items-start gap-2">
                     <P className="text-primary">•</P>
                     <P className="text-muted-foreground flex-1">
-                      {t('streak.benefit_2')}
+                      {t("streak.benefit_2")}
                     </P>
                   </View>
                   <View className="flex-row items-start gap-2">
                     <P className="text-primary">•</P>
                     <P className="text-muted-foreground flex-1">
-                      {t('streak.benefit_3')}
+                      {t("streak.benefit_3")}
                     </P>
                   </View>
                 </View>
                 <P className="text-muted-foreground leading-6 mt-3">
-                  {t('streak.keep_alive')}
+                  {t("streak.keep_alive")}
                 </P>
               </Animated.View>
             </CardContent>

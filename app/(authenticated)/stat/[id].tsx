@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   View,
   ScrollView,
@@ -18,19 +18,16 @@ import Animated, {
 import {
   ChevronLeft,
   Zap,
-  Lock,
   TrendingUp,
   Lightbulb,
   ChevronRight,
 } from "lucide-react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { H1, H4, P, Muted } from "~/components/ui/typography";
-import { BlurView } from "expo-blur";
-import { cn } from "~/lib/utils";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 import { useTranslation } from "react-i18next";
-import { useUserStats, ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+import { useUserStats } from "~/contexts/UserStatsContext";
 
 import { useGames } from "~/contexts/GamesContext";
 import { FeatureCard } from "~/components/FeatureCard";
@@ -40,8 +37,7 @@ import { INSIGHTS } from "~/lib/insights-data";
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useTranslation();
-  const { categoryStats, categoryScoreHistory, isLoading, refresh } =
-    useUserStats();
+  const { categoryStats, categoryScoreHistory, isLoading } = useUserStats();
 
   const { games } = useGames();
 

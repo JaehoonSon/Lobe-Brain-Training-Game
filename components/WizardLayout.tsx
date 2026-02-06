@@ -8,7 +8,6 @@ import { useOnboarding } from "~/contexts/OnboardingContext";
 import { ChevronLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 
-
 interface WizardLayoutProps {
   title: string;
   description?: string;
@@ -32,8 +31,7 @@ export function WizardLayout({
 }: WizardLayoutProps) {
   const { t } = useTranslation();
   const { currentStep, totalSteps, nextStep, prevStep } = useOnboarding();
-  const finalNextLabel = nextLabel || t('common.continue');
-
+  const finalNextLabel = nextLabel || t("common.continue");
 
   const progress = (currentStep / totalSteps) * 100;
 
@@ -74,7 +72,7 @@ export function WizardLayout({
 
         {showSkip && (
           <Button variant="ghost" className="h-9 px-3" onPress={nextStep}>
-            <Text className="text-muted-foreground">{t('common.skip')}</Text>
+            <Text className="text-muted-foreground">{t("common.skip")}</Text>
           </Button>
         )}
       </View>
@@ -108,7 +106,9 @@ export function WizardLayout({
           onPress={handleNextPress}
           disabled={nextDisabled}
         >
-          <Text className="text-xl font-bold text-primary-foreground">{finalNextLabel}</Text>
+          <Text className="text-xl font-bold text-primary-foreground">
+            {finalNextLabel}
+          </Text>
         </Button>
       </View>
     </SafeAreaView>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View } from "react-native";
 import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
@@ -19,6 +19,7 @@ export default function NotificationPermissionStep({
   const handleEnable = async () => {
     setIsLoading(true);
     try {
+      // eslint-disable-next-line unused-imports/no-unused-vars
       const granted = await requestPermission();
       // We proceed regardless of the result, as the user has made a choice (or system logic ran)
       // Ideally we might want to show a specialized message if denied, but standard flow is just to move on.

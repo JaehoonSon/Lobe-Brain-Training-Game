@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
+import { View, TouchableOpacity, useWindowDimensions } from "react-native";
 import { format } from "date-fns";
 import { LineChart } from "react-native-gifted-charts";
 import { Text } from "~/components/ui/text";
@@ -20,7 +16,7 @@ interface ScoreHistoryChartProps {
 
 export function ScoreHistoryChart({
   history,
-  lineColor = "#d925b5"
+  lineColor = "#d925b5",
 }: ScoreHistoryChartProps) {
   const { width: screenWidth } = useWindowDimensions();
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
@@ -29,18 +25,14 @@ export function ScoreHistoryChart({
   const [range, setRange] = useState<ChartRange>("3M");
 
   if (history.length === 0) {
-    return (
-      <P className="text-center py-8">
-        No history yet
-      </P>
-    );
+    return <P className="text-center py-8">No history yet</P>;
   }
 
   // If container width hasn't been measured yet, render a placeholder to get its dimensions
   if (containerWidth === null) {
     return (
       <View
-        style={{ height: 280, width: '100%' }}
+        style={{ height: 280, width: "100%" }}
         onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
       />
     );
@@ -73,7 +65,7 @@ export function ScoreHistoryChart({
 
   // Sort by date to ensure chronological order
   const sortedHistory = [...filteredHistory].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
 
   // Calculate "nice interval" labeling - like Y-axis, show clean grid markers only
@@ -82,7 +74,9 @@ export function ScoreHistoryChart({
   if (sortedHistory.length > 1) {
     const startDate = new Date(sortedHistory[0].date);
     const endDate = new Date(sortedHistory[sortedHistory.length - 1].date);
-    const rangeDays = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+    const rangeDays = Math.ceil(
+      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
+    );
 
     // Choose step: aim for ~4-5 labels
     let stepDays = 2;
@@ -96,7 +90,9 @@ export function ScoreHistoryChart({
     const startTime = startDate.getTime();
     for (let i = 0; i < sortedHistory.length; i++) {
       const pointDate = new Date(sortedHistory[i].date);
-      const daysSinceStart = Math.round((pointDate.getTime() - startTime) / (1000 * 60 * 60 * 24));
+      const daysSinceStart = Math.round(
+        (pointDate.getTime() - startTime) / (1000 * 60 * 60 * 24),
+      );
 
       // Label if this day is a multiple of stepDays
       if (daysSinceStart % stepDays === 0) {
@@ -115,7 +111,12 @@ export function ScoreHistoryChart({
     return {
       value: point.score,
       label: showLabel ? format(new Date(point.date), "MMM d") : "",
-      labelTextStyle: { color: "#6b7280", fontSize: 10, width: 40, marginLeft: 0 },
+      labelTextStyle: {
+        color: "#6b7280",
+        fontSize: 10,
+        width: 40,
+        marginLeft: 0,
+      },
       dataPointLabelComponent: () => null,
     };
   });
@@ -137,7 +138,12 @@ export function ScoreHistoryChart({
   return (
     <View>
       <View
-        style={{ height: 280, width: '100%', paddingVertical: 8, paddingHorizontal: 4 }}
+        style={{
+          height: 280,
+          width: "100%",
+          paddingVertical: 8,
+          paddingHorizontal: 4,
+        }}
         onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width - 16)}
       >
         <LineChart
@@ -179,13 +185,13 @@ export function ScoreHistoryChart({
               onPress={() => setRange(r)}
               className={cn(
                 "flex-1 py-2.5 items-center justify-center rounded-xl",
-                isActive ? "bg-primary shadow-sm" : ""
+                isActive ? "bg-primary shadow-sm" : "",
               )}
             >
               <Text
                 className={cn(
                   "text-sm font-bold",
-                  isActive ? "text-white" : "text-muted-foreground"
+                  isActive ? "text-white" : "text-muted-foreground",
                 )}
               >
                 {r}

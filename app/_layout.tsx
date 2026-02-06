@@ -33,10 +33,23 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NotificationProvider } from "~/contexts/NotificationProvider";
 import Tenjin from "react-native-tenjin";
 
+import {
+  useFonts,
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+  Nunito_900Black,
+} from "@expo-google-fonts/nunito";
+import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
+
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
   colors: NAV_THEME.light,
 };
+// eslint-disable-next-line unused-imports/no-unused-vars
 const DARK_THEME: Theme = {
   ...DarkTheme,
   colors: NAV_THEME.dark,
@@ -136,18 +149,6 @@ function AppContent() {
     </ThemeProvider>
   );
 }
-
-import {
-  useFonts,
-  Nunito_400Regular,
-  Nunito_600SemiBold,
-  Nunito_700Bold,
-  Nunito_800ExtraBold,
-  Nunito_900Black,
-} from "@expo-google-fonts/nunito";
-import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
-
-import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 
 export default function RootLayout() {
   usePlatformSpecificSetup();

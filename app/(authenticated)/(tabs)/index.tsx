@@ -1,24 +1,11 @@
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  useColorScheme,
-  Image,
-} from "react-native";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H3, H4, P, Muted, Large } from "~/components/ui/typography";
-import { Card, CardHeader, CardContent } from "~/components/ui/card";
+import { H3, H4, P, Muted } from "~/components/ui/typography";
+import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 
-import {
-  Zap,
-  Lightbulb,
-  Globe,
-  TrendingUp,
-  Users,
-  Trophy,
-} from "lucide-react-native";
-import { router } from "expo-router";
+import { Zap, Lightbulb, Globe } from "lucide-react-native";
+import { router, useFocusEffect } from "expo-router";
 import { cn } from "~/lib/utils";
 import i18n from "~/lib/i18n";
 import { Database } from "~/lib/database.types";
@@ -29,14 +16,11 @@ import {
   resolveTranslation,
 } from "~/lib/content-translations";
 import { normalizeLocale } from "~/lib/locale";
-import { useState, useEffect } from "react";
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
 import { useGames } from "~/contexts/GamesContext";
 import { useAuth } from "~/contexts/AuthProvider";
-import { useFocusEffect } from "expo-router";
-import { useCallback } from "react";
 import { useDailyInsight } from "~/hooks/useDailyInsight";
 import { useTranslation } from "react-i18next";
 

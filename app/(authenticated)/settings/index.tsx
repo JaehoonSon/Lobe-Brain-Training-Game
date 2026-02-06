@@ -10,7 +10,6 @@ import {
   Crown,
   Cake,
   Languages,
-  Check,
   Bell,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
@@ -20,22 +19,17 @@ import { PortalHost } from "@rn-primitives/portal";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import { showErrorToast } from "~/components/ui/toast";
-import { H1, H2, Muted, P } from "~/components/ui/typography";
+import { H1, Muted, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
 import { useAuth } from "~/contexts/AuthProvider";
-import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
 import { appMetadata } from "~/config";
 import { supabase } from "~/lib/supabase";
 import { useNotifications } from "~/contexts/NotificationProvider";
 import { Switch } from "~/components/ui/switch";
 import { normalizeLocale } from "~/lib/locale";
-import {
-  getPreferredLanguage,
-  setPreferredLanguage,
-  setSystemLanguage,
-  SYSTEM_LANGUAGE_VALUE,
-} from "~/lib/i18n";
+import { getPreferredLanguage, SYSTEM_LANGUAGE_VALUE } from "~/lib/i18n";
 import { Option } from "~/components/ui/select";
 
 const SUPPORTED_LANGUAGES: Option[] = [
@@ -63,7 +57,7 @@ export default function Settings() {
   const { t } = useTranslation();
   const router = useRouter();
   const { user, logout } = useAuth();
-  const { isPro, presentPaywall, currentOffering } = useRevenueCat();
+  const { isPro, presentPaywall } = useRevenueCat();
   const [birthday, setBirthday] = useState<string | null>(null);
   const [languagePreference, setLanguagePreference] = useState<string | null>(
     null,
@@ -118,7 +112,7 @@ export default function Settings() {
       return () => {
         isActive = false;
       };
-    }, [])
+    }, []),
   );
 
   const handleMembershipPress = async () => {
@@ -148,7 +142,7 @@ export default function Settings() {
     try {
       playHaptic("light");
       await logout();
-    } catch (err) {
+    } catch (_err) {
       showErrorToast(t("common.error_generic"));
     }
   };
@@ -166,7 +160,7 @@ export default function Settings() {
             try {
               playHaptic("light");
               await logout();
-            } catch (err) {
+            } catch (_) {
               showErrorToast(t("common.error_generic"));
             }
           },
@@ -313,7 +307,7 @@ export default function Settings() {
               label={selectedLanguage.label}
               onPress={() => {
                 playHaptic("soft");
-                router.push("/settings/language");
+                router.push("../settings/language");
               }}
             />
           </Card>

@@ -1,12 +1,6 @@
 import React, { useMemo } from "react";
 import { View, useColorScheme, Dimensions } from "react-native";
-import Svg, {
-  Polygon,
-  Line,
-  Circle,
-  Text as SvgText,
-  G,
-} from "react-native-svg";
+import Svg, { Polygon, Line, Circle, Text as SvgText } from "react-native-svg";
 import { CategoryStats } from "~/contexts/UserStatsContext";
 
 interface StrengthProfileChartProps {

@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { View, useWindowDimensions } from "react-native";
+import { View } from "react-native";
 import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
@@ -25,7 +25,6 @@ import { useTranslation } from "react-i18next";
 export default function IndexUnauthenticatedScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const { width } = useWindowDimensions();
   const { isAuthenticated } = useAuth();
 
   return (

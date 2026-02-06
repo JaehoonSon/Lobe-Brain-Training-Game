@@ -15,7 +15,7 @@ export default function IndexAuthenticatedScreen() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { resetOnboarding, prevStep } = useOnboarding();
-  const { isPro, presentPaywall } = useRevenueCat();
+  const { presentPaywall } = useRevenueCat();
   const { requestPermission, expoPushToken } = useNotifications();
 
   const restartOnboarding = async () => {

@@ -7,7 +7,7 @@ import * as Haptics from "expo-haptics";
 import { MentalArithmeticContent } from "~/lib/validators/game-content";
 
 interface MentalArithmeticProps {
-  onComplete: (accuracy: number) => void;  // 0.0 to 1.0
+  onComplete: (accuracy: number) => void; // 0.0 to 1.0
   content: MentalArithmeticContent;
 }
 
@@ -26,8 +26,6 @@ export function MentalArithmetic({
   const [choices, setChoices] = useState<number[]>([]);
   const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
-
-
 
   useEffect(() => {
     generateNewQuestion();
@@ -82,7 +80,7 @@ export function MentalArithmetic({
     n1: number,
     n2: number,
     op: "+" | "-" | "x" | "*" | "/",
-    ans: number
+    ans: number,
   ) => {
     setQuestion({ num1: n1, num2: n2, operator: op, answer: ans });
 
@@ -160,13 +158,13 @@ export function MentalArithmetic({
               className={cn(
                 "rounded-3xl active:scale-95 shadow-xl",
                 hasAnswered &&
-                isCorrectAnswer &&
-                "bg-green-600 border-green-700",
+                  isCorrectAnswer &&
+                  "bg-green-600 border-green-700",
                 hasAnswered &&
-                !isCorrectAnswer &&
-                isSelected &&
-                "bg-red-600 border-red-700",
-                hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20"
+                  !isCorrectAnswer &&
+                  isSelected &&
+                  "bg-red-600 border-red-700",
+                hasAnswered && !isCorrectAnswer && !isSelected && "opacity-20",
               )}
               style={{ width: 150, height: 120 }}
               onPress={() => handleChoice(choice)}
@@ -176,7 +174,7 @@ export function MentalArithmetic({
                 className={cn(
                   "text-4xl font-black text-primary-foreground",
                   hasAnswered && isCorrectAnswer && "text-white",
-                  hasAnswered && !isCorrectAnswer && isSelected && "text-white"
+                  hasAnswered && !isCorrectAnswer && isSelected && "text-white",
                 )}
               >
                 {choice}

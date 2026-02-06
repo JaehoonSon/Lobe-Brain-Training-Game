@@ -52,9 +52,10 @@ export function OddOneOut({ onComplete, content }: OddOneOutProps) {
   const gapSize = 8;
   const totalGapSpace = gapSize * (content.cols - 1);
   const itemSize = (availableWidth - totalGapSpace) / content.cols;
-  
+
   // Font size adjustment based on grid density
-  const fontSize = content.cols > 6 ? "text-xl" : content.cols > 4 ? "text-3xl" : "text-4xl";
+  const fontSize =
+    content.cols > 6 ? "text-xl" : content.cols > 4 ? "text-3xl" : "text-4xl";
 
   return (
     <View className="flex-1 items-center justify-center p-6 bg-background">
@@ -64,32 +65,32 @@ export function OddOneOut({ onComplete, content }: OddOneOutProps) {
         </Text>
       </View>
 
-      <View 
-        style={{ 
+      <View
+        style={{
           width: availableWidth,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
+          flexDirection: "row",
+          flexWrap: "wrap",
           gap: gapSize,
-          justifyContent: 'center'
+          justifyContent: "center",
         }}
       >
         {Array.from({ length: content.rows * content.cols }).map((_, i) => {
           const isTarget = i === correctIndex;
           const char = isTarget ? content.target : content.distractor;
-          
+
           let itemStyle = "bg-card border-border border-b-4";
           let translateY = 0;
-          
+
           if (hasAnswered) {
-             if (isTarget) {
-                 itemStyle = "bg-green-500 border-green-600 border-b-0";
-                 translateY = 4;
-             } else if (i === selectedIndex) {
-                 itemStyle = "bg-destructive border-destructive-edge border-b-0";
-                 translateY = 4;
-             } else {
-                 itemStyle = "bg-card border-border opacity-30 border-b-4";
-             }
+            if (isTarget) {
+              itemStyle = "bg-green-500 border-green-600 border-b-0";
+              translateY = 4;
+            } else if (i === selectedIndex) {
+              itemStyle = "bg-destructive border-destructive-edge border-b-0";
+              translateY = 4;
+            } else {
+              itemStyle = "bg-card border-border opacity-30 border-b-4";
+            }
           }
 
           return (
@@ -101,14 +102,20 @@ export function OddOneOut({ onComplete, content }: OddOneOutProps) {
               style={{
                 width: itemSize,
                 height: itemSize,
-                transform: [{ translateY }]
+                transform: [{ translateY }],
               }}
               className={cn(
                 "items-center justify-center rounded-xl",
-                itemStyle
+                itemStyle,
               )}
             >
-              <Text className={cn("font-black text-card-foreground", fontSize, hasAnswered && isTarget && "text-white")}>
+              <Text
+                className={cn(
+                  "font-black text-card-foreground",
+                  fontSize,
+                  hasAnswered && isTarget && "text-white",
+                )}
+              >
                 {char}
               </Text>
             </TouchableOpacity>

@@ -4,7 +4,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { H1, H2, P, Muted } from "~/components/ui/typography";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
-import { BrainCircuit, Sparkles, Zap, Target, ArrowRight } from "lucide-react-native";
+import {
+  BrainCircuit,
+  Sparkles,
+  Zap,
+  Target,
+  ArrowRight,
+} from "lucide-react-native";
 import { router } from "expo-router";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
@@ -27,13 +33,17 @@ const WelcomeScreen = () => {
             className="items-center mb-8"
           >
             <View className="bg-primary/10 p-6 rounded-full mb-6 border-2 border-primary/20">
-              <BrainCircuit size={64} className="text-primary" strokeWidth={3} />
+              <BrainCircuit
+                size={64}
+                className="text-primary"
+                strokeWidth={3}
+              />
             </View>
             <H1 className="text-4xl font-black text-center mb-3">
-              {t('unauth.welcome.title')}
+              {t("unauth.welcome.title")}
             </H1>
             <Muted className="text-lg font-bold text-center">
-              {t('unauth.welcome.motto')}
+              {t("unauth.welcome.motto")}
             </Muted>
           </Animated.View>
 
@@ -49,10 +59,10 @@ const WelcomeScreen = () => {
                   </View>
                   <View className="flex-1">
                     <H2 className="text-lg font-black text-foreground mb-1">
-                      {t('unauth.welcome.think_faster')}
+                      {t("unauth.welcome.think_faster")}
                     </H2>
                     <Muted className="text-sm font-bold">
-                      {t('unauth.welcome.think_faster_desc')}
+                      {t("unauth.welcome.think_faster_desc")}
                     </Muted>
                   </View>
                   <ArrowRight size={20} className="text-muted-foreground" />
@@ -64,14 +74,18 @@ const WelcomeScreen = () => {
               <CardContent>
                 <View className="flex-row items-center gap-4 p-2">
                   <View className="w-14 h-14 rounded-xl bg-secondary/10 items-center justify-center">
-                    <Target size={28} className="text-secondary" strokeWidth={2.5} />
+                    <Target
+                      size={28}
+                      className="text-secondary"
+                      strokeWidth={2.5}
+                    />
                   </View>
                   <View className="flex-1">
                     <H2 className="text-lg font-black text-foreground mb-1">
-                      {t('unauth.welcome.sharpen_focus')}
+                      {t("unauth.welcome.sharpen_focus")}
                     </H2>
                     <Muted className="text-sm font-bold">
-                      {t('unauth.welcome.sharpen_focus_desc')}
+                      {t("unauth.welcome.sharpen_focus_desc")}
                     </Muted>
                   </View>
                   <ArrowRight size={20} className="text-muted-foreground" />
@@ -83,14 +97,18 @@ const WelcomeScreen = () => {
               <CardContent>
                 <View className="flex-row items-center gap-4 p-2">
                   <View className="w-14 h-14 rounded-xl bg-accent/10 items-center justify-center">
-                    <Sparkles size={28} className="text-accent" strokeWidth={2.5} />
+                    <Sparkles
+                      size={28}
+                      className="text-accent"
+                      strokeWidth={2.5}
+                    />
                   </View>
                   <View className="flex-1">
                     <H2 className="text-lg font-black text-foreground mb-1">
-                      {t('unauth.welcome.enhance_memory')}
+                      {t("unauth.welcome.enhance_memory")}
                     </H2>
                     <Muted className="text-sm font-bold">
-                      {t('unauth.welcome.enhance_memory_desc')}
+                      {t("unauth.welcome.enhance_memory_desc")}
                     </Muted>
                   </View>
                   <ArrowRight size={20} className="text-muted-foreground" />
@@ -104,14 +122,16 @@ const WelcomeScreen = () => {
             className="items-center mb-8"
           >
             <Muted className="text-center text-sm font-bold">
-              {t('unauth.welcome.legal_intro')}
-              <TouchableOpacity onPress={() => { }}>
-                <Muted className="text-primary font-black underline">{t('unauth.welcome.terms')}</Muted>
-              </TouchableOpacity>{" "}
-              {t('unauth.welcome.legal_and')}
-              <TouchableOpacity onPress={() => { }}>
+              {t("unauth.welcome.legal_intro")}
+              <TouchableOpacity onPress={() => {}}>
                 <Muted className="text-primary font-black underline">
-                  {t('unauth.welcome.privacy')}
+                  {t("unauth.welcome.terms")}
+                </Muted>
+              </TouchableOpacity>{" "}
+              {t("unauth.welcome.legal_and")}
+              <TouchableOpacity onPress={() => {}}>
+                <Muted className="text-primary font-black underline">
+                  {t("unauth.welcome.privacy")}
                 </Muted>
               </TouchableOpacity>
             </Muted>
@@ -126,7 +146,7 @@ const WelcomeScreen = () => {
               onPress={handleGetStarted}
             >
               <P className="text-white font-black text-xl tracking-wide uppercase">
-                {t('unauth.welcome.get_started')}
+                {t("unauth.welcome.get_started")}
               </P>
             </Button>
           </Animated.View>

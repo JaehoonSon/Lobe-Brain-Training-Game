@@ -1,10 +1,8 @@
 import { View, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
-import { Link } from "expo-router";
 import { H4, P } from "~/components/ui/typography";
 import { Card } from "~/components/ui/card";
 import { Check, Lock, Play } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
 import { useTranslation } from "react-i18next";
 import { Database } from "~/lib/database.types";
 import { cn } from "~/lib/utils";
@@ -14,7 +12,6 @@ type Game = Database["public"]["Tables"]["games"]["Row"];
 interface WorkoutGameCardProps {
   game: Game;
   status: "locked" | "active" | "completed";
-  index: number;
   isLast: boolean;
   onPress: () => void;
 }
@@ -22,11 +19,9 @@ interface WorkoutGameCardProps {
 export function WorkoutGameCard({
   game,
   status,
-  index,
   isLast,
   onPress,
 }: WorkoutGameCardProps) {
-  const { colorScheme } = useColorScheme();
   const { t } = useTranslation();
   const isCompleted = status === "completed";
   const isActive = status === "active";
@@ -44,7 +39,7 @@ export function WorkoutGameCard({
           <View
             className={cn(
               "absolute top-6 bottom-[-24px] w-[2px]",
-              isCompleted ? "bg-primary" : "bg-muted-foreground/20"
+              isCompleted ? "bg-primary" : "bg-muted-foreground/20",
             )}
           />
         )}
@@ -57,7 +52,7 @@ export function WorkoutGameCard({
               ? "border-primary bg-primary"
               : isActive
                 ? "border-primary"
-                : "border-muted-foreground/30"
+                : "border-muted-foreground/30",
           )}
         >
           {isCompleted && <Check size={14} color="white" strokeWidth={3} />}
@@ -76,14 +71,14 @@ export function WorkoutGameCard({
           variant={isActive ? "primary" : "default"}
           className={cn(
             "flex-row items-center p-4",
-            isLocked && "opacity-60 bg-muted/20"
+            isLocked && "opacity-60 bg-muted/20",
           )}
         >
           {/* Game Icon Placeholder */}
           <View
             className={cn(
               "w-14 h-14 rounded-xl items-center justify-center mr-4 overflow-hidden",
-              isActive ? "bg-white/20" : "bg-muted/20"
+              isActive ? "bg-white/20" : "bg-muted/20",
             )}
           >
             {game.icon_url ? (
@@ -97,7 +92,9 @@ export function WorkoutGameCard({
             ) : (
               <Play
                 size={24}
-                className={isActive ? "text-primary-foreground" : "text-foreground"}
+                className={
+                  isActive ? "text-primary-foreground" : "text-foreground"
+                }
                 fill={isActive ? "currentColor" : "none"}
               />
             )}
@@ -108,7 +105,7 @@ export function WorkoutGameCard({
               className={cn(
                 "text-lg font-black mb-1",
                 isActive ? "text-primary-foreground" : "text-foreground",
-                isCompleted && "text-muted-foreground line-through"
+                isCompleted && "text-muted-foreground line-through",
               )}
             >
               {game.name}
@@ -118,10 +115,13 @@ export function WorkoutGameCard({
                 "text-sm font-bold",
                 isActive
                   ? "text-primary-foreground/90"
-                  : "text-muted-foreground"
+                  : "text-muted-foreground",
               )}
             >
-              {game.instructions ? t('workout_card.daily') : t('workout_card.focus')} • {t('workout_card.duration')}
+              {game.instructions
+                ? t("workout_card.daily")
+                : t("workout_card.focus")}{" "}
+              • {t("workout_card.duration")}
             </P>
           </View>
 

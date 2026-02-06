@@ -11,7 +11,9 @@ import { useTranslation } from "react-i18next";
 export default function DailyStreakStep({ onNext }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const days = t('onboarding.steps.daily_streak.days', { returnObjects: true }) as string[];
+  const days = t("onboarding.steps.daily_streak.days", {
+    returnObjects: true,
+  }) as string[];
   const activeDayIndex = new Date().getDay();
 
   return (
@@ -23,7 +25,7 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
         {/* Title */}
         <Animated.View entering={FadeInDown.duration(600).springify()}>
           <Text className="text-4xl font-extrabold text-foreground text-center mb-12">
-            {t('onboarding.steps.daily_streak.title')}
+            {t("onboarding.steps.daily_streak.title")}
           </Text>
         </Animated.View>
 
@@ -51,8 +53,9 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
             return (
               <View key={index} className="items-center gap-3">
                 <View
-                  className={`w-4 h-4 rounded-full ${isActive ? "bg-transparent" : "bg-muted"
-                    } justify-center items-center`}
+                  className={`w-4 h-4 rounded-full ${
+                    isActive ? "bg-transparent" : "bg-muted"
+                  } justify-center items-center`}
                 >
                   {isActive && (
                     <Flame
@@ -64,8 +67,9 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
                   )}
                 </View>
                 <Text
-                  className={`text-sm font-bold ${isActive ? "text-foreground" : "text-muted-foreground"
-                    }`}
+                  className={`text-sm font-bold ${
+                    isActive ? "text-foreground" : "text-muted-foreground"
+                  }`}
                 >
                   {day}
                 </Text>
@@ -77,15 +81,20 @@ export default function DailyStreakStep({ onNext }: CustomStepProps) {
         {/* Subtext */}
         <Animated.View entering={FadeInDown.delay(600).duration(600)}>
           <Text className="text-xl text-muted-foreground text-center px-8">
-            {t('onboarding.steps.daily_streak.subtext')}
+            {t("onboarding.steps.daily_streak.subtext")}
           </Text>
         </Animated.View>
       </View>
 
       {/* Continue Button */}
       <Animated.View entering={FadeInDown.delay(800).duration(600)}>
-        <Button className="w-full rounded-2xl h-12 native:h-16" onPress={onNext}>
-          <Text className="font-bold text-xl text-primary-foreground">{t('common.continue')}</Text>
+        <Button
+          className="w-full rounded-2xl h-12 native:h-16"
+          onPress={onNext}
+        >
+          <Text className="font-bold text-xl text-primary-foreground">
+            {t("common.continue")}
+          </Text>
         </Button>
       </Animated.View>
     </View>

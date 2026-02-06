@@ -7,10 +7,6 @@ import { CustomStepProps } from "~/app/(onboarding)/index";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   FadeInDown,
-  useAnimatedStyle,
-  withSpring,
-  withTiming,
-  useSharedValue,
   LinearTransition,
 } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";

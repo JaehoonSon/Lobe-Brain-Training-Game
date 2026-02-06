@@ -62,7 +62,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
 
       return result;
     },
-    [targetWord]
+    [targetWord],
   );
 
   const updateKeyStatuses = useCallback(
@@ -86,7 +86,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
         return updated;
       });
     },
-    []
+    [],
   );
 
   // Calculate accuracy based on letter correctness
@@ -118,7 +118,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
       // Scale to 0-50% range for losses (never higher than a win)
       return bestGuessScore * 0.5;
     },
-    [maxGuesses, wordLength, evaluateGuess]
+    [maxGuesses, wordLength, evaluateGuess],
   );
 
   const submitGuess = useCallback(() => {
@@ -174,7 +174,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
         setCurrentGuess((prev) => prev + key);
       }
     },
-    [currentGuess, gameOver, submitGuess]
+    [currentGuess, gameOver, submitGuess],
   );
 
   const getTileStatus = (rowIndex: number, colIndex: number): TileStatus => {
@@ -234,7 +234,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
                     status === "filled" && "bg-card border-foreground",
                     status === "correct" && "bg-green-600 border-green-700",
                     status === "present" && "bg-yellow-500 border-yellow-600",
-                    status === "absent" && "bg-zinc-600 border-zinc-700"
+                    status === "absent" && "bg-zinc-600 border-zinc-700",
                   )}
                   style={{
                     width: tileSize,
@@ -248,9 +248,9 @@ export function Wordle({ onComplete, content }: WordleProps) {
                       (status === "correct" ||
                         status === "present" ||
                         status === "absent") &&
-                      "text-white",
+                        "text-white",
                       (status === "empty" || status === "filled") &&
-                      "text-foreground"
+                        "text-foreground",
                     )}
                   >
                     {letter}
@@ -267,8 +267,8 @@ export function Wordle({ onComplete, content }: WordleProps) {
           <View className="bg-black/80 px-6 py-3 rounded-xl">
             <Text className="text-white text-xl font-bold">
               {guesses[guesses.length - 1] === targetWord
-                ? t('game.wordle.win')
-                : t('game.wordle.lose', { word: targetWord })}
+                ? t("game.wordle.win")
+                : t("game.wordle.lose", { word: targetWord })}
             </Text>
           </View>
         </View>
@@ -296,7 +296,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
                     status === "unused" && "bg-zinc-400 dark:bg-zinc-600",
                     status === "correct" && "bg-green-600",
                     status === "present" && "bg-yellow-500",
-                    status === "absent" && "bg-zinc-700"
+                    status === "absent" && "bg-zinc-700",
                   )}
                   style={{
                     width: isWide ? 55 : 32,
@@ -309,7 +309,7 @@ export function Wordle({ onComplete, content }: WordleProps) {
                       isWide ? "text-xs" : "text-base",
                       status === "unused"
                         ? "text-black dark:text-white"
-                        : "text-white"
+                        : "text-white",
                     )}
                   >
                     {key}

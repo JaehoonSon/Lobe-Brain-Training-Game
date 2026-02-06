@@ -9,7 +9,7 @@ import Svg, { Path } from "react-native-svg";
 import { useEffect, useState } from "react";
 import { StoreReview } from "~/lib/StoreReview";
 
-export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
+export default function ThankYouScreen({ onNext }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [isNextDisabled, setIsNextDisabled] = useState(true);

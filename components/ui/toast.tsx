@@ -114,7 +114,7 @@ const defaultToastOptions: Partial<ToastOptions> = {
 export const showSuccessToast = (
   title: string,
   message?: string,
-  options?: Partial<ToastOptions>
+  options?: Partial<ToastOptions>,
 ): void => {
   const config = { ...defaultToastOptions, ...options };
 
@@ -131,7 +131,7 @@ export const showSuccessToast = (
 export const showErrorToast = (
   title: string,
   message?: string,
-  options?: Partial<ToastOptions>
+  options?: Partial<ToastOptions>,
 ): void => {
   const config = { ...defaultToastOptions, ...options, visibilityTime: 5000 };
 
@@ -148,7 +148,7 @@ export const showErrorToast = (
 export const showInfoToast = (
   title: string,
   message?: string,
-  options?: Partial<ToastOptions>
+  options?: Partial<ToastOptions>,
 ): void => {
   const config = { ...defaultToastOptions, ...options, visibilityTime: 3000 };
 
@@ -165,7 +165,7 @@ export const showInfoToast = (
 export const showWarningToast = (
   title: string,
   message?: string,
-  options?: Partial<ToastOptions>
+  options?: Partial<ToastOptions>,
 ): void => {
   const config = { ...defaultToastOptions, ...options };
 
@@ -184,7 +184,7 @@ export const showToast = (
   type: ToastType,
   title: string,
   message?: string,
-  options?: Partial<ToastOptions>
+  options?: Partial<ToastOptions>,
 ): void => {
   const toastFunctions = {
     success: showSuccessToast,

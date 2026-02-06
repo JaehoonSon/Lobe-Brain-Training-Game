@@ -8,7 +8,6 @@ import { MathRocketContent } from "~/lib/validators/game-content";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  useDerivedValue,
   interpolate,
   Extrapolation,
   useFrameCallback,

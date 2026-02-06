@@ -4,9 +4,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "*"
-      ]
+      "~/*": ["*"]
     },
     "jsx": "react-jsx",
     "resolveJsonModule": true
@@ -19,5 +17,6 @@
     "expo-env.d.ts",
     "nativewind-env.d.ts",
     "app/(unauthenticated)/Paywall.tsx.bak"
-  ]
+  ],
+  "exclude": ["supabase/functions"]
 }

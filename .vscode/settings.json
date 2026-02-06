@@ -20,7 +20,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "deno.enablePaths": ["supabase/functions"],
-  "deno.importMap": "./supabase/functions/import_map.json",
+  "deno.config": "./supabase/functions/deno.json",
   "deno.lint": true,
   "deno.unstable": [
     "bare-node-builtins",
@@ -37,6 +37,9 @@
     "http",
     "net"
   ],
-  "eslint.format.enable": false,
-  "eslint.enable": false
+  "eslint.format.enable": true,
+  "eslint.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
 }

@@ -24,6 +24,7 @@ export interface GameStepProps extends CustomStepProps {
   gameConfig: GameConfig;
 }
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
   const { updateData } = useOnboarding();
   const [roundIndex, setRoundIndex] = useState(0);
@@ -43,7 +44,7 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
     setLoading(true);
     try {
       console.log(
-        `Fetching onboarding questions for ${gameConfig.type} via RPC...`
+        `Fetching onboarding questions for ${gameConfig.type} via RPC...`,
       );
 
       const { data: questionsData, error } = await supabase.rpc(
@@ -51,7 +52,7 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
         {
           p_game_id: gameConfig.type,
           p_count: TOTAL_ROUNDS,
-        }
+        },
       );
 
       if (error) throw error;

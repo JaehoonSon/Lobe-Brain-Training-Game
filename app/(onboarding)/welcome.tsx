@@ -1,4 +1,3 @@
-import { router } from "expo-router";
 import { View } from "react-native";
 import { Image } from "expo-image";
 import { Text } from "~/components/ui/text";
@@ -10,7 +9,7 @@ import { Zap, Brain, Target, Check } from "lucide-react-native";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { useTranslation } from "react-i18next";
 
-export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
+export default function WelcomeScreen({ onNext }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
