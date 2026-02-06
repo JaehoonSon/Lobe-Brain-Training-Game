@@ -15,6 +15,38 @@ module.exports = defineConfig([
       "import/no-duplicates": "off",
       "import/namespace": "off",
       "import/no-unresolved": "off",
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            ["parent", "sibling", "index"],
+          ],
+          pathGroups: [
+            {
+              pattern: "react",
+              group: "builtin",
+              position: "before",
+            },
+            {
+              pattern: "react-native",
+              group: "builtin",
+            },
+            {
+              pattern: "~/**",
+              group: "internal",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["react"],
+          "newlines-between": "never",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
       // Disable base rules and use unused-imports instead (auto-fixable)
       "@typescript-eslint/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",

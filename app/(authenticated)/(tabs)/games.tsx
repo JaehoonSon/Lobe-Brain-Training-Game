@@ -1,16 +1,16 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
 import { useMemo, useState } from "react";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H3, H4, Muted } from "~/components/ui/typography";
-import { Input } from "~/components/ui/input";
-import { Search, Lock, Zap } from "lucide-react-native";
 import { router } from "expo-router";
-import { useGames } from "~/contexts/GamesContext";
-import { Card, ImageCard } from "~/components/ui/card";
-import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { Search, Lock, Zap } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
+import { Card, ImageCard } from "~/components/ui/card";
+import { Input } from "~/components/ui/input";
+import { H1, H3, H4, Muted } from "~/components/ui/typography";
+import { useGames } from "~/contexts/GamesContext";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 
 export default function GamesScreen() {
   const { t } = useTranslation();

@@ -126,7 +126,6 @@
     "eslint": "^9.0.0",
     "eslint-config-expo": "~10.0.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-unused-imports": "^4.3.0",
@@ -134,5 +133,14 @@
     "supabase": "^2.31.8",
     "typescript": "~5.9.2"
   },
-  "private": true
+  "private": true,
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "supabase",
+      "unrs-resolver"
+    ],
+    "onlyBuiltDependencies": [
+      "unrs-resolver"
+    ]
+  }
 }
