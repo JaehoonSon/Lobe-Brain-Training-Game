@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Image } from "expo-image";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 import {
   BookOpen,
   Gamepad2,
@@ -16,10 +16,12 @@ import {
   Zap,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import Animated, { ZoomIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CloudBackground } from "~/components/CloudBackground";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
+import { appMetadata } from "~/config";
 import { useAuth } from "~/contexts/AuthProvider";
 
 export default function IndexUnauthenticatedScreen() {
@@ -35,65 +37,133 @@ export default function IndexUnauthenticatedScreen() {
           {/* Scattered Icons in the Sky */}
           <View className="w-full max-w-sm aspect-square relative mt-12">
             {/* Center - App Logo */}
-            <View className="absolute top-[30%] left-[35%] rotate-[5deg] bg-card rounded-2xl border-b-4 border-border shadow-sm  overflow-hidden">
-              <Image
-                source={require("~/assets/images/brain_logo_transparent.png")}
-                style={{ width: 100, height: 100 }}
-                contentFit="contain"
-                cachePolicy="disk"
-              />
-            </View>
+            <Animated.View
+              entering={ZoomIn.delay(700).springify()}
+              className="absolute top-[30%] left-[35%]"
+            >
+              <View className="rotate-[5deg] bg-primary rounded-2xl border-b-4 border-primary shadow-sm  overflow-hidden">
+                <Image
+                  source={require("~/assets/images/brain_logo_transparent.png")}
+                  style={{ width: 100, height: 100 }}
+                  contentFit="contain"
+                  cachePolicy="disk"
+                />
+              </View>
+            </Animated.View>
 
             {/* Top Left Cluster */}
-            <View className="absolute top-[5%] left-[10%] rotate-[-15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
-              <Rocket size={32} color="#f43f5e" strokeWidth={2.5} />
-            </View>
-            <View className="absolute top-[9%] left-[25%] rotate-[10deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
-              <Trophy size={40} color="#f59e0b" strokeWidth={2.5} />
-            </View>
+            <Animated.View
+              entering={ZoomIn.delay(500).springify()}
+              className="absolute top-[5%] left-[10%]"
+            >
+              <View className="rotate-[-15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Rocket size={32} color="#f43f5e" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(600).springify()}
+              className="absolute top-[9%] left-[25%] z-10"
+            >
+              <View className="rotate-[10deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Trophy size={40} color="#f59e0b" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
 
             {/* Top Right Cluster */}
-            <View className="absolute top-[8%] right-[25%] rotate-[15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
-              <Target size={32} color="#ec4899" strokeWidth={2.5} />
-            </View>
-            <View className="absolute top-[20%] right-[5%] rotate-[-5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
-              <Zap size={44} color="#eab308" strokeWidth={2.5} />
-            </View>
+            <Animated.View
+              entering={ZoomIn.delay(700).springify()}
+              className="absolute top-[8%] right-[25%]"
+            >
+              <View className="rotate-[15deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Target size={32} color="#ec4899" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(800).springify()}
+              className="absolute top-[20%] right-[5%] z-10"
+            >
+              <View className="rotate-[-5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Zap size={44} color="#eab308" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
 
             {/* Middle Left */}
-            <View className="absolute top-[45%] left-[5%] rotate-[-20deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm">
-              <BookOpen size={36} color="#ec4899" strokeWidth={2.5} />
-            </View>
-            <View className="absolute top-[30%] left-[-5%] rotate-[10deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
-              <Music size={24} color="#8b5cf6" strokeWidth={2.5} />
-            </View>
+            <Animated.View
+              entering={ZoomIn.delay(900).springify()}
+              className="absolute top-[45%] left-[5%]"
+            >
+              <View className="rotate-[-20deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <BookOpen size={36} color="#ec4899" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(1000).springify()}
+              className="absolute top-[30%] left-[-5%]"
+            >
+              <View className="rotate-[10deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
+                <Music size={24} color="#8b5cf6" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
 
             {/* Middle Right */}
-            <View className="absolute top-[50%] right-[10%] rotate-[20deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
-              <Puzzle size={36} color="#10b981" strokeWidth={2.5} />
-            </View>
-            <View className="absolute top-[35%] right-[-10%] rotate-[-15deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
-              <Palette size={28} color="#f97316" strokeWidth={2.5} />
-            </View>
+            <Animated.View
+              entering={ZoomIn.delay(1100).springify()}
+              className="absolute top-[50%] right-[10%]"
+            >
+              <View className="rotate-[20deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Puzzle size={36} color="#10b981" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(1200).springify()}
+              className="absolute top-[35%] right-[-10%]"
+            >
+              <View className="rotate-[-15deg] p-2 bg-card rounded-lg border-b-2 border-border shadow-sm">
+                <Palette size={28} color="#f97316" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
 
             {/* Bottom Cluster */}
-            <View className="absolute bottom-[20%] left-[20%] rotate-[5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm z-10">
-              <Gamepad2 size={40} color="#8b5cf6" strokeWidth={2.5} />
-            </View>
-            <View className="absolute bottom-[20%] right-[25%] rotate-[-10deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
-              <Lightbulb size={32} color="#22c55e" strokeWidth={2.5} />
-            </View>
-            <View className="absolute bottom-[20%] inset-x-0 items-center z-0">
+            <Animated.View
+              entering={ZoomIn.delay(1300).springify()}
+              className="absolute bottom-[20%] left-[20%] z-10"
+            >
+              <View className="rotate-[5deg] p-3 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Gamepad2 size={40} color="#8b5cf6" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(1400).springify()}
+              className="absolute bottom-[20%] right-[25%]"
+            >
+              <View className="rotate-[-10deg] p-2 bg-card rounded-xl border-b-4 border-border shadow-sm">
+                <Lightbulb size={32} color="#22c55e" strokeWidth={2.5} />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(1500).springify()}
+              className="absolute bottom-[20%] inset-x-0 items-center z-0"
+            >
               <View className="p-2 bg-card rounded-lg border-b-4 border-border rotate-[-5deg]">
                 <GraduationCap size={36} color="#3b82f6" strokeWidth={2.5} />
               </View>
-            </View>
-            <View className="absolute bottom-[45%] left-[10%] rotate-[25deg]">
-              <Sparkles size={24} color="#fbbf24" fill="#fbbf24" />
-            </View>
-            <View className="absolute top-[15%] right-[35%] rotate-[-10deg]">
-              <Sparkles size={20} color="#60a5fa" fill="#60a5fa" />
-            </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(1600).springify()}
+              className="absolute bottom-[45%] left-[10%]"
+            >
+              <View className="rotate-[25deg]">
+                <Sparkles size={24} color="#fbbf24" fill="#fbbf24" />
+              </View>
+            </Animated.View>
+            <Animated.View
+              entering={ZoomIn.delay(1700).springify()}
+              className="absolute top-[15%] right-[35%]"
+            >
+              <View className="rotate-[-10deg]">
+                <Sparkles size={20} color="#60a5fa" fill="#60a5fa" />
+              </View>
+            </Animated.View>
           </View>
         </CloudBackground>
       </View>
@@ -152,9 +222,22 @@ export default function IndexUnauthenticatedScreen() {
         </View>
 
         {/* Legal Text */}
-        <Text className="text-sm text-muted-foreground text-center px-8 leading-5 mt-4">
-          {t("unauth.landing.legal")}
-        </Text>
+        <View className="mt-4">
+          <Text className="text-sm text-muted-foreground text-center px-8 leading-5">
+            {t("unauth.signup.agreement_intro")}
+            <Link href={appMetadata.privacyPolicyUrl}>
+              <Text className="text-sm font-bold underline text-foreground">
+                {t("unauth.signup.privacy_policy")}
+              </Text>
+            </Link>{" "}
+            {t("unauth.signup.agreement_and")}
+            <Link href={appMetadata.endUserLicenseAgreementUrl}>
+              <Text className="text-sm font-bold underline text-foreground">
+                {t("unauth.signup.terms_of_service")}
+              </Text>
+            </Link>
+          </Text>
+        </View>
       </View>
     </View>
   );
