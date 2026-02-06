@@ -1,6 +1,6 @@
-import * as Slot from "@rn-primitives/slot";
 import * as React from "react";
 import { Platform, Text as RNText } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import { cn } from "~/lib/utils";
 
 type TypographyProps = React.ComponentProps<typeof RNText> & {
@@ -16,7 +16,7 @@ function H1({ className, asChild = false, ...props }: TypographyProps) {
       aria-level="1"
       className={cn(
         "web:scroll-m-20 text-4xl text-foreground font-sans font-black lg:text-5xl web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -31,7 +31,7 @@ function H2({ className, asChild = false, ...props }: TypographyProps) {
       aria-level="2"
       className={cn(
         "web:scroll-m-20 border-b border-border pb-2 text-3xl text-foreground font-sans font-black first:mt-0 web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -46,7 +46,7 @@ function H3({ className, asChild = false, ...props }: TypographyProps) {
       aria-level="3"
       className={cn(
         "web:scroll-m-20 text-2xl text-foreground font-sans font-bold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -61,7 +61,7 @@ function H4({ className, asChild = false, ...props }: TypographyProps) {
       aria-level="4"
       className={cn(
         "web:scroll-m-20 text-xl text-foreground font-sans font-bold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -74,7 +74,7 @@ function P({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       className={cn(
         "text-base text-foreground font-sans font-semibold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -89,7 +89,7 @@ function BlockQuote({ className, asChild = false, ...props }: TypographyProps) {
       role={Platform.OS === "web" ? "blockquote" : undefined}
       className={cn(
         "mt-6 native:mt-4 border-l-2 border-border pl-6 native:pl-3 text-base text-foreground font-semibold italic web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -104,7 +104,7 @@ function Code({ className, asChild = false, ...props }: TypographyProps) {
       role={Platform.OS === "web" ? "code" : undefined}
       className={cn(
         "relative rounded-md bg-muted px-[0.3rem] py-[0.2rem] text-sm text-foreground font-bold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -117,7 +117,7 @@ function Lead({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       className={cn(
         "text-xl text-muted-foreground font-sans font-semibold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -130,7 +130,7 @@ function Large({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       className={cn(
         "text-xl text-foreground font-sans font-bold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -143,7 +143,7 @@ function Small({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       className={cn(
         "text-sm text-foreground font-sans font-semibold web:select-text",
-        className
+        className,
       )}
       {...props}
     />
@@ -156,7 +156,7 @@ function Muted({ className, asChild = false, ...props }: TypographyProps) {
     <Component
       className={cn(
         "text-sm text-muted-foreground font-sans font-semibold web:select-text",
-        className
+        className,
       )}
       {...props}
     />

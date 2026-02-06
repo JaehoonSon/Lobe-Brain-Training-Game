@@ -1,5 +1,5 @@
 import React from "react";
-import { Text as RNText, TextProps, TextStyle, View } from "react-native";
+import { Text as RNText, TextProps, TextStyle } from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -23,7 +23,12 @@ export default function GradientText({
         <RNText
           style={[
             style,
-            { fontSize, fontWeight: "bold", paddingVertical: 4, paddingHorizontal: 4 },
+            {
+              fontSize,
+              fontWeight: "bold",
+              paddingVertical: 4,
+              paddingHorizontal: 4,
+            },
           ]}
           {...props}
         >

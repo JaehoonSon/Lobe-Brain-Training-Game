@@ -5,14 +5,14 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import Constants from "expo-constants";
 import { AppState, AppStateStatus, Platform } from "react-native";
+import type { JsonType, PostHogEventProperties } from "@posthog/core";
+import Constants from "expo-constants";
 import {
   PostHogProvider as RNPostHogProvider,
   usePostHog,
 } from "posthog-react-native";
 import { useAuth } from "~/contexts/AuthProvider";
-import type { JsonType, PostHogEventProperties } from "@posthog/core";
 
 type AnalyticsPropertiesInput = Record<string, JsonType | undefined>;
 type AnalyticsProperties = PostHogEventProperties;

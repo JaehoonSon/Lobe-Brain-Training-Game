@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { ComponentProps } from "react";
-// import { Text as RNText } from "react-native";
 import { Text as RNText } from "./text";
+// import { Text as RNText } from "react-native";
 import * as Haptics from "expo-haptics";
 
 export type TypeWriterProps = ComponentProps<typeof RNText> & {

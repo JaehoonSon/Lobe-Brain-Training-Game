@@ -1,19 +1,15 @@
-import React, { useState, useRef } from "react";
-import { View, Dimensions, FlatList, ViewToken } from "react-native";
+import React, { useRef, useState } from "react";
+import { Dimensions, FlatList, View, ViewToken } from "react-native";
 import { Image } from "expo-image";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { CustomStepProps } from "~/app/(onboarding)/index";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 import Animated, {
   FadeInDown,
-  useAnimatedStyle,
-  withSpring,
-  withTiming,
-  useSharedValue,
   LinearTransition,
 } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CustomStepProps } from "~/app/(onboarding)/index";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 
 const { width } = Dimensions.get("window");
 

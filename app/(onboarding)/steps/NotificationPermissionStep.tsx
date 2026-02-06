@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View } from "react-native";
-import { Image } from "expo-image";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useNotifications } from "~/contexts/NotificationProvider";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
 import { CustomStepProps } from "../index";
+import { Image } from "expo-image";
+import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import Svg, { Path } from "react-native-svg";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { useNotifications } from "~/contexts/NotificationProvider";
 
 export default function NotificationPermissionStep({
   onNext,
@@ -19,6 +19,7 @@ export default function NotificationPermissionStep({
   const handleEnable = async () => {
     setIsLoading(true);
     try {
+      // eslint-disable-next-line unused-imports/no-unused-vars
       const granted = await requestPermission();
       // We proceed regardless of the result, as the user has made a choice (or system logic ran)
       // Ideally we might want to show a specialized message if denied, but standard flow is just to move on.

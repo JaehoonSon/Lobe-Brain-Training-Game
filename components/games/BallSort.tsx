@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  View,
-  TouchableOpacity,
-  useWindowDimensions,
   LayoutAnimation,
   Platform,
+  TouchableOpacity,
   UIManager,
+  View,
+  useWindowDimensions,
 } from "react-native";
+import * as Haptics from "expo-haptics";
+import { useTranslation } from "react-i18next";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
-import * as Haptics from "expo-haptics";
 import { BallSortContent } from "~/lib/validators/game-content";
-import { useTranslation } from "react-i18next";
 
 // Enable LayoutAnimation for Android
 if (
@@ -44,7 +44,7 @@ export function BallSort({ onComplete, content }: BallSortProps) {
   const { width } = useWindowDimensions();
   const [tubes, setTubes] = useState<number[][]>([]); // Array of tubes, each containing color indices
   const [selectedTubeIndex, setSelectedTubeIndex] = useState<number | null>(
-    null
+    null,
   );
   const [moves, setMoves] = useState<number>(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -100,7 +100,7 @@ export function BallSort({ onComplete, content }: BallSortProps) {
 
     const shuffledTubes: number[][] = Array.from(
       { length: tubeCount },
-      () => []
+      () => [],
     );
     let ballIdx = 0;
 
@@ -236,7 +236,7 @@ export function BallSort({ onComplete, content }: BallSortProps) {
       <View className="items-center space-y-2">
         {/* <Text className="text-xl font-bold">Sort the Balls</Text> */}
         <Text className="text-muted-foreground font-medium">
-          {t('game.ball_sort.moves', { count: moves })}
+          {t("game.ball_sort.moves", { count: moves })}
         </Text>
       </View>
 
@@ -256,7 +256,7 @@ export function BallSort({ onComplete, content }: BallSortProps) {
                   "items-center justify-end rounded-b-full border-2 bg-black/5 dark:bg-white/5",
                   isSelected
                     ? "border-primary"
-                    : "border-zinc-300 dark:border-zinc-700"
+                    : "border-zinc-300 dark:border-zinc-700",
                 )}
                 style={{
                   width: tubeWidth,

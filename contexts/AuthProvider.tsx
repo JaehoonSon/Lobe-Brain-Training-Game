@@ -5,12 +5,12 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { supabase } from "~/lib/supabase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { User } from "@supabase/supabase-js";
 import * as AppleAuthentication from "expo-apple-authentication";
-import { showErrorToast, showSuccessToast } from "~/components/ui/toast";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Tenjin from "react-native-tenjin";
+import { showErrorToast, showSuccessToast } from "~/components/ui/toast";
+import { supabase } from "~/lib/supabase";
 
 interface AuthContextType {
   isAuthenticated: boolean;

@@ -1,16 +1,15 @@
-import { router } from "expo-router";
 import { View } from "react-native";
 import { Image } from "expo-image";
-import { Text } from "~/components/ui/text";
+import { Brain, Check, Target, Zap } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CustomStepProps } from "~/app/(onboarding)/index";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
-import { Zap, Brain, Target, Check } from "lucide-react-native";
-import { CustomStepProps } from "~/app/(onboarding)/index";
-import { useTranslation } from "react-i18next";
+import { Text } from "~/components/ui/text";
 
-export default function WelcomeScreen({ onNext, onBack }: CustomStepProps) {
+export default function WelcomeScreen({ onNext }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 

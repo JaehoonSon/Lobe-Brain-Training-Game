@@ -1,19 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { View, Animated } from "react-native";
-import Svg, { Circle, G, Defs, LinearGradient, Stop } from "react-native-svg";
+import { useEffect, useRef } from "react";
+import { Animated, View } from "react-native";
+import Svg, { Circle, Defs, G, LinearGradient, Stop } from "react-native-svg";
 import { Text } from "~/components/ui/text";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 interface ComparisonChartProps {
   percentile: number; // 0-100
-  isLoading?: boolean;
 }
 
-export function ComparisonChart({
-  percentile,
-  isLoading = false,
-}: ComparisonChartProps) {
+export function ComparisonChart({ percentile }: ComparisonChartProps) {
   const animatedValue = useRef(new Animated.Value(0)).current;
   const size = 140;
   const strokeWidth = 14;

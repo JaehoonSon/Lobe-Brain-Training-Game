@@ -1,37 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
+import PaywallScreen from "../paywall";
+import BirthdaySelectionScreen from "./birthday";
+import DailyStreakStep from "./steps/DailyStreakStep";
+import InterventionStep, {
+  InterventionStepProps,
+} from "./steps/InterventionStep";
+import NotificationPermissionStep from "./steps/NotificationPermissionStep";
+import PlanCreationStep from "./steps/PlanCreationStep";
+import PlanRevealStep from "./steps/PlanRevealStep";
+import PremiumFeaturesStep from "./steps/PremiumFeaturesStep";
+import ThankYouScreen from "./steps/thankyou";
 import {
-  ChevronRight,
-  ArrowLeft,
-  Zap,
-  Hand,
-  PartyPopper,
-} from "lucide-react-native";
-import { Text } from "~/components/ui/text";
-import { useOnboarding } from "~/contexts/OnboardingContext";
-import { WizardLayout } from "~/components/WizardLayout";
-import { useTranslation } from "react-i18next";
-import {
-  SelectionStep,
-  SelectionStepConfig,
   AffirmationStep,
   AffirmationStepConfig,
   GameStep,
   GameStepProps,
+  SelectionStep,
+  SelectionStepConfig,
 } from "./templates";
-import BirthdaySelectionScreen from "./birthday";
 import WelcomeScreen from "./welcome";
-import ThankYouScreen from "./steps/thankyou";
-import InterventionStep, {
-  InterventionStepProps,
-} from "./steps/InterventionStep";
-import PlanCreationStep from "./steps/PlanCreationStep";
-import PlanRevealStep from "./steps/PlanRevealStep";
-import PaywallScreen from "../paywall";
-import DailyStreakStep from "./steps/DailyStreakStep";
-import PremiumFeaturesStep from "./steps/PremiumFeaturesStep";
+import { Hand, PartyPopper, Zap } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+import { WizardLayout } from "~/components/WizardLayout";
+import { Text } from "~/components/ui/text";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 import { useAnalytics } from "~/contexts/PostHogProvider";
-import NotificationPermissionStep from "./steps/NotificationPermissionStep";
 
 // --- Step Configuration ---
 // Each step is just data. Templates render them.

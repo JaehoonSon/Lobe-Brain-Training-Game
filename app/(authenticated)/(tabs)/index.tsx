@@ -1,44 +1,27 @@
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  useColorScheme,
-  Image,
-} from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { router, useFocusEffect } from "expo-router";
+import { Globe, Lightbulb, Zap } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H3, H4, P, Muted, Large } from "~/components/ui/typography";
-import { Card, CardHeader, CardContent } from "~/components/ui/card";
+import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
+import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
+import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-
-import {
-  Zap,
-  Lightbulb,
-  Globe,
-  TrendingUp,
-  Users,
-  Trophy,
-} from "lucide-react-native";
-import { router } from "expo-router";
-import { cn } from "~/lib/utils";
-import i18n from "~/lib/i18n";
-import { Database } from "~/lib/database.types";
-import { supabase } from "~/lib/supabase";
+import { H3, H4, Muted, P } from "~/components/ui/typography";
+import { useAuth } from "~/contexts/AuthProvider";
+import { useGames } from "~/contexts/GamesContext";
+import { useDailyInsight } from "~/hooks/useDailyInsight";
 import {
   buildTranslationMap,
   fetchContentTranslations,
   resolveTranslation,
 } from "~/lib/content-translations";
+import { Database } from "~/lib/database.types";
+import i18n from "~/lib/i18n";
 import { normalizeLocale } from "~/lib/locale";
-import { useState, useEffect } from "react";
-import React from "react";
-import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
-import { useGames } from "~/contexts/GamesContext";
-import { useAuth } from "~/contexts/AuthProvider";
-import { useFocusEffect } from "expo-router";
-import { useCallback } from "react";
-import { useDailyInsight } from "~/hooks/useDailyInsight";
-import { useTranslation } from "react-i18next";
+import { supabase } from "~/lib/supabase";
+import { cn } from "~/lib/utils";
 
 export default function Dashboard() {
   const { t } = useTranslation();

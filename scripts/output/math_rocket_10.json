@@ -4,16 +4,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -25,16 +17,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -46,16 +30,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -67,16 +43,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -88,16 +56,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -109,16 +69,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -130,16 +82,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -151,16 +95,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -172,16 +108,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -193,16 +121,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -214,16 +134,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -235,16 +147,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -256,16 +160,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -277,16 +173,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,
@@ -298,16 +186,8 @@
     "game_id": "math_rocket",
     "difficulty": 10,
     "content": {
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-",
-        "*",
-        "/"
-      ],
+      "operandRange": [100, 999],
+      "operators": ["+", "-", "*", "/"],
       "gravity": 0.8,
       "thrust": 10,
       "winningScore": 20,

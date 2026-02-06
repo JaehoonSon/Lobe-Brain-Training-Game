@@ -1,42 +1,52 @@
-import "~/global.css";
-import "~/lib/i18n";
-
+import * as React from "react";
+import { Appearance, Platform } from "react-native";
+import { SplashScreenController } from "./splash";
+import {
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+  Nunito_900Black,
+  useFonts,
+} from "@expo-google-fonts/nunito";
 import {
   DarkTheme,
   DefaultTheme,
   Theme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { PortalHost } from "@rn-primitives/portal";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
-import { Appearance, Platform } from "react-native";
-import { NAV_THEME } from "~/lib/constants";
-import { useColorScheme } from "~/lib/useColorScheme";
-import { PortalHost } from "@rn-primitives/portal";
+import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Tenjin from "react-native-tenjin";
+import Toast from "react-native-toast-message";
 import { ThemeToggle } from "~/components/ThemeToggle";
-import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
+import { toastConfig } from "~/components/ui/toast";
 import { AuthProvider, useAuth } from "~/contexts/AuthProvider";
-import {
-  RevenueCatProvider,
-  useRevenueCat,
-} from "~/contexts/RevenueCatProvider";
-import { PostHogProvider } from "~/contexts/PostHogProvider";
-import { SplashScreenController } from "./splash";
+import { NotificationProvider } from "~/contexts/NotificationProvider";
 import {
   OnboardingProvider,
   useOnboarding,
 } from "~/contexts/OnboardingContext";
-import Toast from "react-native-toast-message";
-import { toastConfig } from "~/components/ui/toast";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { NotificationProvider } from "~/contexts/NotificationProvider";
-import Tenjin from "react-native-tenjin";
+import { PostHogProvider } from "~/contexts/PostHogProvider";
+import {
+  RevenueCatProvider,
+  useRevenueCat,
+} from "~/contexts/RevenueCatProvider";
+import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
+import "~/global.css";
+import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
+import { NAV_THEME } from "~/lib/constants";
+import "~/lib/i18n";
+import { useColorScheme } from "~/lib/useColorScheme";
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
   colors: NAV_THEME.light,
 };
+// eslint-disable-next-line unused-imports/no-unused-vars
 const DARK_THEME: Theme = {
   ...DarkTheme,
   colors: NAV_THEME.dark,
@@ -136,18 +146,6 @@ function AppContent() {
     </ThemeProvider>
   );
 }
-
-import {
-  useFonts,
-  Nunito_400Regular,
-  Nunito_600SemiBold,
-  Nunito_700Bold,
-  Nunito_800ExtraBold,
-  Nunito_900Black,
-} from "@expo-google-fonts/nunito";
-import { ThemeProvider as AppThemeProvider } from "~/contexts/ThemeContext";
-
-import { requestTrackingPermissionsAsync } from "expo-tracking-transparency";
 
 export default function RootLayout() {
   usePlatformSpecificSetup();

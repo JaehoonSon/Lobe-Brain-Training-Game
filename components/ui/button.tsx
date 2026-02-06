@@ -1,6 +1,6 @@
-import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { Pressable } from "react-native";
+import { type VariantProps, cva } from "class-variance-authority";
 import { cn } from "~/lib/utils";
 
 const buttonVariants = cva(
@@ -8,11 +8,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary border-b-4 border-primary-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-90",
-        destructive: "bg-destructive border-b-4 border-destructive-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-90",
+        default:
+          "bg-primary border-b-4 border-primary-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-90",
+        destructive:
+          "bg-destructive border-b-4 border-destructive-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-90",
         outline:
           "border-2 border-input bg-background web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
-        secondary: "bg-secondary border-b-4 border-secondary-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-80",
+        secondary:
+          "bg-secondary border-b-4 border-secondary-edge active:border-b-0 active:translate-y-1 active:mt-1 web:hover:opacity-80",
         ghost:
           "web:hover:bg-accent web:hover:text-accent-foreground active:bg-accent",
         link: "web:underline-offset-4 web:hover:underline web:focus:underline",
@@ -21,27 +24,24 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
-const buttonTextVariants = cva(
-  "text-sm native:text-base font-semibold",
-  {
-    variants: {
-      variant: {
-        default: "text-primary-foreground",
-        destructive: "text-destructive-foreground",
-        outline: "text-foreground group-active:text-accent-foreground",
-        secondary: "text-secondary-foreground",
-        ghost: "text-foreground group-active:text-accent-foreground",
-        link: "text-primary group-active:underline",
-      },
+const buttonTextVariants = cva("text-sm native:text-base font-semibold", {
+  variants: {
+    variant: {
+      default: "text-primary-foreground",
+      destructive: "text-destructive-foreground",
+      outline: "text-foreground group-active:text-accent-foreground",
+      secondary: "text-secondary-foreground",
+      ghost: "text-foreground group-active:text-accent-foreground",
+      link: "text-primary group-active:underline",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 type ButtonProps = React.ComponentProps<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
@@ -51,7 +51,7 @@ function Button({ ref, className, variant, ...props }: ButtonProps) {
     <Pressable
       className={cn(
         props.disabled && "opacity-50 web:pointer-events-none",
-        buttonVariants({ variant, className })
+        buttonVariants({ variant, className }),
       )}
       ref={ref}
       role="button"

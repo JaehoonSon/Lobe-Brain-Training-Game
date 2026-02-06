@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
-import { View, ActivityIndicator, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Alert, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
 import { CustomStepProps } from "~/app/(onboarding)/index";
+import { MemoryMatrix } from "~/components/games/MemoryMatrix";
 import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
-import { MemoryMatrix } from "~/components/games/MemoryMatrix";
+import { Button } from "~/components/ui/button";
 import { Progress } from "~/components/ui/progress";
+import { Text } from "~/components/ui/text";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 import { supabase } from "~/lib/supabase";
 import { GameContentSchema } from "~/lib/validators/game-content";
-
-import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export interface GameConfig {
   type:
@@ -24,6 +23,7 @@ export interface GameStepProps extends CustomStepProps {
   gameConfig: GameConfig;
 }
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
   const { updateData } = useOnboarding();
   const [roundIndex, setRoundIndex] = useState(0);
@@ -43,7 +43,7 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
     setLoading(true);
     try {
       console.log(
-        `Fetching onboarding questions for ${gameConfig.type} via RPC...`
+        `Fetching onboarding questions for ${gameConfig.type} via RPC...`,
       );
 
       const { data: questionsData, error } = await supabase.rpc(
@@ -51,7 +51,7 @@ export function GameStep({ onNext, onBack, gameConfig }: GameStepProps) {
         {
           p_game_id: gameConfig.type,
           p_count: TOTAL_ROUNDS,
-        }
+        },
       );
 
       if (error) throw error;

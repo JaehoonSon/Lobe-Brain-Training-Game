@@ -1,31 +1,30 @@
-import { router } from "expo-router";
-import { View, useWindowDimensions } from "react-native";
+import { View } from "react-native";
 import { Image } from "expo-image";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { CloudBackground } from "~/components/CloudBackground";
-import { useAuth } from "~/contexts/AuthProvider";
+import { router } from "expo-router";
 import {
   BookOpen,
-  Zap,
-  Trophy,
   Gamepad2,
+  GraduationCap,
   Lightbulb,
-  Puzzle,
-  Rocket,
-  Target,
   Music,
   Palette,
+  Puzzle,
+  Rocket,
   Sparkles,
-  GraduationCap,
+  Target,
+  Trophy,
+  Zap,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CloudBackground } from "~/components/CloudBackground";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { useAuth } from "~/contexts/AuthProvider";
 
 export default function IndexUnauthenticatedScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const { width } = useWindowDimensions();
   const { isAuthenticated } = useAuth();
 
   return (

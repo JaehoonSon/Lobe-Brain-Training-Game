@@ -1,25 +1,25 @@
-import React, { useEffect, useState, useRef } from "react";
-import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import React, { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, Alert, TouchableOpacity, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { supabase } from "~/lib/supabase";
-import { MentalArithmetic } from "~/components/games/MentalArithmetic";
-import { MemoryMatrix } from "~/components/games/MemoryMatrix";
-import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
-import { Wordle } from "~/components/games/Wordle";
-import { GameContentSchema, GameContent } from "~/lib/validators/game-content";
-import { useGameSession, AnswerRecord } from "~/contexts/GameSessionContext";
-import { useGames } from "~/contexts/GamesContext";
-import { useAuth } from "~/contexts/AuthProvider";
 import { X } from "lucide-react-native";
-import { Text } from "~/components/ui/text";
-import { BallSort } from "~/components/games/BallSort";
-import { WordUnscramble } from "~/components/games/WordUnscramble";
-import { StroopClash } from "~/components/games/StroopClash";
 import { useTranslation } from "react-i18next";
-import { useAnalytics } from "~/contexts/PostHogProvider";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BallSort } from "~/components/games/BallSort";
 import { MathRocket } from "~/components/games/MathRocket";
+import { MemoryMatrix } from "~/components/games/MemoryMatrix";
+import { MentalArithmetic } from "~/components/games/MentalArithmetic";
+import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
 import { OddOneOut } from "~/components/games/OddOneOut";
+import { StroopClash } from "~/components/games/StroopClash";
+import { WordUnscramble } from "~/components/games/WordUnscramble";
+import { Wordle } from "~/components/games/Wordle";
+import { Text } from "~/components/ui/text";
+import { useAuth } from "~/contexts/AuthProvider";
+import { AnswerRecord, useGameSession } from "~/contexts/GameSessionContext";
+import { useGames } from "~/contexts/GamesContext";
+import { useAnalytics } from "~/contexts/PostHogProvider";
+import { supabase } from "~/lib/supabase";
+import { GameContent, GameContentSchema } from "~/lib/validators/game-content";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)

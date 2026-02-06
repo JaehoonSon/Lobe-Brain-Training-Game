@@ -1,27 +1,23 @@
 import * as React from "react";
 import { Text, TextProps, View, ViewProps } from "react-native";
+import { type VariantProps, cva } from "class-variance-authority";
 import { TextClassContext } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 
-import { cva, type VariantProps } from "class-variance-authority";
-
-const cardVariants = cva(
-  "rounded-xl border-2 border-b-4",
-  {
-    variants: {
-      variant: {
-        default: "bg-card border-border",
-        primary: "bg-primary border-primary-edge",
-        secondary: "bg-secondary border-secondary-edge",
-        accent: "bg-accent border-accent-edge",
-        muted: "bg-muted border-muted-foreground/20",
-      },
+const cardVariants = cva("rounded-xl border-2 border-b-4", {
+  variants: {
+    variant: {
+      default: "bg-card border-border",
+      primary: "bg-primary border-primary-edge",
+      secondary: "bg-secondary border-secondary-edge",
+      accent: "bg-accent border-accent-edge",
+      muted: "bg-muted border-muted-foreground/20",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 /**
  * Card component with "Juicy" 3D border effect.
@@ -33,9 +29,10 @@ function Card({
   children,
   style,
   ...props
-}: ViewProps & VariantProps<typeof cardVariants> & {
-  ref?: React.RefObject<View>;
-}) {
+}: ViewProps &
+  VariantProps<typeof cardVariants> & {
+    ref?: React.RefObject<View>;
+  }) {
   return (
     <View
       className={cn(cardVariants({ variant }), className)}
@@ -62,7 +59,10 @@ function ImageCard({
   return (
     <View
       className={cn("rounded-xl", className)}
-      style={[{ position: "relative", overflow: "hidden", borderRadius: 12 }, style]}
+      style={[
+        { position: "relative", overflow: "hidden", borderRadius: 12 },
+        style,
+      ]}
       {...props}
     >
       {/* Inner clipping container */}
@@ -112,10 +112,7 @@ function CardTitle({
     <Text
       role="heading"
       aria-level={3}
-      className={cn(
-        "text-2xl text-card-foreground font-semibold",
-        className
-      )}
+      className={cn("text-2xl text-card-foreground font-semibold", className)}
       {...props}
     />
   );

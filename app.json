@@ -78,39 +78,39 @@
       "expo-router",
       "expo-apple-authentication",
       "expo-video",
-        [
-          "expo-localization",
-          {
-            "supportedLocales": {
-              "ios": [
-                "en",
-                "es",
-                "ja",
-                "zh-Hans",
-                "pt-PT",
-                "de",
-                "fr",
-                "hi",
-                "ru",
-                "ko",
-                "pt-BR"
-              ],
-              "android": [
-                "en",
-                "es",
-                "ja",
-                "zh-Hans",
-                "pt-PT",
-                "de",
-                "fr",
-                "hi",
-                "ru",
-                "ko",
-                "pt-BR"
-              ]
-            }
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": [
+              "en",
+              "es",
+              "ja",
+              "zh-Hans",
+              "pt-PT",
+              "de",
+              "fr",
+              "hi",
+              "ru",
+              "ko",
+              "pt-BR"
+            ],
+            "android": [
+              "en",
+              "es",
+              "ja",
+              "zh-Hans",
+              "pt-PT",
+              "de",
+              "fr",
+              "hi",
+              "ru",
+              "ko",
+              "pt-BR"
+            ]
           }
-        ],
+        }
+      ],
       "expo-notifications",
       [
         "expo-build-properties",

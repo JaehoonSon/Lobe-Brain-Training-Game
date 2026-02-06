@@ -9,10 +9,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Yellow"
-      ],
+      "options": ["Purple", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -26,10 +23,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Yellow",
-        "Green"
-      ],
+      "options": ["Yellow", "Green"],
       "targetTimeMs": 4500
     }
   },
@@ -43,10 +37,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Yellow",
-        "Red"
-      ],
+      "options": ["Yellow", "Red"],
       "targetTimeMs": 4500
     }
   },
@@ -60,10 +51,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Red"
-      ],
+      "options": ["Purple", "Red"],
       "targetTimeMs": 4500
     }
   },
@@ -77,10 +65,7 @@
       "ink": "#FF0000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Red",
-        "Yellow"
-      ],
+      "options": ["Red", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -94,10 +79,7 @@
       "ink": "#FFA500",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Orange"
-      ],
+      "options": ["Green", "Orange"],
       "targetTimeMs": 4500
     }
   },
@@ -111,10 +93,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Orange"
-      ],
+      "options": ["Purple", "Orange"],
       "targetTimeMs": 4500
     }
   },
@@ -128,10 +107,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Yellow"
-      ],
+      "options": ["Purple", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -145,10 +121,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Blue",
-        "Green"
-      ],
+      "options": ["Blue", "Green"],
       "targetTimeMs": 4500
     }
   },
@@ -162,10 +135,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Yellow"
-      ],
+      "options": ["Green", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -179,10 +149,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Green"
-      ],
+      "options": ["Purple", "Green"],
       "targetTimeMs": 4500
     }
   },
@@ -196,10 +163,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Yellow"
-      ],
+      "options": ["Purple", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -213,10 +177,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Yellow"
-      ],
+      "options": ["Green", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -230,10 +191,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Orange",
-        "Purple"
-      ],
+      "options": ["Orange", "Purple"],
       "targetTimeMs": 4500
     }
   },
@@ -247,10 +205,7 @@
       "ink": "#FF0000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Red"
-      ],
+      "options": ["Green", "Red"],
       "targetTimeMs": 4500
     }
   },
@@ -264,10 +219,7 @@
       "ink": "#FF0000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Red",
-        "Orange"
-      ],
+      "options": ["Red", "Orange"],
       "targetTimeMs": 4500
     }
   },
@@ -281,10 +233,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Yellow",
-        "Red"
-      ],
+      "options": ["Yellow", "Red"],
       "targetTimeMs": 4500
     }
   },
@@ -298,10 +247,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Yellow"
-      ],
+      "options": ["Green", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -315,10 +261,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Yellow"
-      ],
+      "options": ["Purple", "Yellow"],
       "targetTimeMs": 4500
     }
   },
@@ -332,10 +275,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Red"
-      ],
+      "options": ["Green", "Red"],
       "targetTimeMs": 4500
     }
   }

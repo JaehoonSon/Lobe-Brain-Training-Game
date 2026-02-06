@@ -12,7 +12,7 @@ export const fetchContentTranslations = async (
   entityType: string,
   entityIds: string[],
   fields: string[],
-  locale: string
+  locale: string,
 ) => {
   if (entityIds.length === 0) return [] as TranslationRow[];
 
@@ -23,7 +23,7 @@ export const fetchContentTranslations = async (
       p_entity_ids: entityIds,
       p_fields: fields,
       p_locale: locale,
-    }
+    },
   );
 
   if (error) throw error;
@@ -44,7 +44,7 @@ export const resolveTranslation = (
   map: TranslationMap,
   entityId: string,
   field: string,
-  fallback: string | null
+  fallback: string | null,
 ) => {
   return map[entityId]?.[field] ?? fallback ?? "";
 };

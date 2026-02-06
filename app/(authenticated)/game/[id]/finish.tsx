@@ -1,31 +1,27 @@
 import { useEffect } from "react";
-
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import LottieView from "lottie-react-native";
+import { Clock, Target, Zap } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { H1, P } from "~/components/ui/typography";
 import { useGameSession } from "~/contexts/GameSessionContext";
 import { useGames } from "~/contexts/GamesContext";
 import { useUserStats } from "~/contexts/UserStatsContext";
-import { H1, P } from "~/components/ui/typography";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { Clock, Target, Zap } from "lucide-react-native";
-import LottieView from "lottie-react-native";
-import { cn } from "~/lib/utils";
 import { StoreReview } from "~/lib/StoreReview";
+import { cn } from "~/lib/utils";
 
 export default function GameFinishScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useTranslation();
   const { state, resetSession } = useGameSession();
   const { games, refreshDailyProgress } = useGames();
-  const { categoryStats, refresh: refreshUserStats } = useUserStats();
+  const { refresh: refreshUserStats } = useUserStats();
 
   const game = games.find((g) => g.id === id);
-  const gameStat = categoryStats
-    .find((c) => c.id === game?.category_id)
-    ?.gameStats.find((g) => g.gameId === id);
 
   useEffect(() => {
     refreshDailyProgress();

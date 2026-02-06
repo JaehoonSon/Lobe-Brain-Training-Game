@@ -9,12 +9,7 @@
         "The committee's decision was ",
         " and left no room for debate."
       ],
-      "options": [
-        "peremptory",
-        "preemptive",
-        "precursory",
-        "precipitous"
-      ],
+      "options": ["peremptory", "preemptive", "precursory", "precipitous"],
       "answer": "peremptory"
     }
   },
@@ -28,12 +23,7 @@
         "Her argument was so ",
         " that it convinced even the skeptics."
       ],
-      "options": [
-        "cogent",
-        "coherent",
-        "cohesive",
-        "coincident"
-      ],
+      "options": ["cogent", "coherent", "cohesive", "coincident"],
       "answer": "cogent"
     }
   },
@@ -47,12 +37,7 @@
         "The treaty's ",
         " clauses were subject to intense scrutiny."
       ],
-      "options": [
-        "abstruse",
-        "obtuse",
-        "recondite",
-        "arcane"
-      ],
+      "options": ["abstruse", "obtuse", "recondite", "arcane"],
       "answer": "abstruse"
     }
   },
@@ -66,12 +51,7 @@
         "He spoke with such ",
         " that his words seemed to hang in the air."
       ],
-      "options": [
-        "gravitas",
-        "gravity",
-        "gravitation",
-        "graveness"
-      ],
+      "options": ["gravitas", "gravity", "gravitation", "graveness"],
       "answer": "gravitas"
     }
   },
@@ -85,12 +65,7 @@
         "The artist's work was praised for its ",
         " use of color and form."
       ],
-      "options": [
-        "laconic",
-        "lacunar",
-        "lacustrine",
-        "lacunal"
-      ],
+      "options": ["laconic", "lacunar", "lacustrine", "lacunal"],
       "answer": "laconic"
     }
   },
@@ -104,12 +79,7 @@
         "Her response was ",
         " and failed to address the core issue."
       ],
-      "options": [
-        "evasive",
-        "elusive",
-        "illusive",
-        "allusive"
-      ],
+      "options": ["evasive", "elusive", "illusive", "allusive"],
       "answer": "evasive"
     }
   },
@@ -123,12 +93,7 @@
         "The novel's plot was ",
         " and kept readers guessing until the end."
       ],
-      "options": [
-        "convoluted",
-        "involved",
-        "entangled",
-        "intricate"
-      ],
+      "options": ["convoluted", "involved", "entangled", "intricate"],
       "answer": "convoluted"
     }
   },
@@ -142,12 +107,7 @@
         "His management style was ",
         " and often alienated his team."
       ],
-      "options": [
-        "peremptory",
-        "preemptive",
-        "precursory",
-        "precipitous"
-      ],
+      "options": ["peremptory", "preemptive", "precursory", "precipitous"],
       "answer": "peremptory"
     }
   },
@@ -161,12 +121,7 @@
         "The scientist's theory was ",
         " and challenged established norms."
       ],
-      "options": [
-        "heretical",
-        "heterodox",
-        "heterogeneous",
-        "heterologous"
-      ],
+      "options": ["heretical", "heterodox", "heterogeneous", "heterologous"],
       "answer": "heretical"
     }
   },
@@ -176,16 +131,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her speech was ",
-        " and moved the audience to tears."
-      ],
-      "options": [
-        "poignant",
-        "pungent",
-        "piquant",
-        "piercing"
-      ],
+      "sentenceParts": ["Her speech was ", " and moved the audience to tears."],
+      "options": ["poignant", "pungent", "piquant", "piercing"],
       "answer": "poignant"
     }
   },
@@ -199,12 +146,7 @@
         "The agreement was ",
         " and required careful negotiation."
       ],
-      "options": [
-        "tortuous",
-        "torturous",
-        "tortious",
-        "tortoise"
-      ],
+      "options": ["tortuous", "torturous", "tortious", "tortoise"],
       "answer": "tortuous"
     }
   },
@@ -218,12 +160,7 @@
         "His explanation was ",
         " and left many questions unanswered."
       ],
-      "options": [
-        "cursory",
-        "cursive",
-        "curative",
-        "curatorial"
-      ],
+      "options": ["cursory", "cursive", "curative", "curatorial"],
       "answer": "cursory"
     }
   },
@@ -237,12 +174,7 @@
         "The landscape was ",
         " and inspired awe in all who saw it."
       ],
-      "options": [
-        "sublime",
-        "subliminal",
-        "sublimate",
-        "subluxation"
-      ],
+      "options": ["sublime", "subliminal", "sublimate", "subluxation"],
       "answer": "sublime"
     }
   },
@@ -252,16 +184,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her criticism was ",
-        " and focused on minor flaws."
-      ],
-      "options": [
-        "captious",
-        "cautious",
-        "capacious",
-        "capitous"
-      ],
+      "sentenceParts": ["Her criticism was ", " and focused on minor flaws."],
+      "options": ["captious", "cautious", "capacious", "capitous"],
       "answer": "captious"
     }
   },
@@ -275,12 +199,7 @@
         "The policy's impact was ",
         " and affected various sectors differently."
       ],
-      "options": [
-        "differential",
-        "deferential",
-        "different",
-        "differing"
-      ],
+      "options": ["differential", "deferential", "different", "differing"],
       "answer": "differential"
     }
   },
@@ -290,16 +209,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His demeanor was ",
-        " and put everyone at ease."
-      ],
-      "options": [
-        "avuncular",
-        "avascular",
-        "avaricious",
-        "aviary"
-      ],
+      "sentenceParts": ["His demeanor was ", " and put everyone at ease."],
+      "options": ["avuncular", "avascular", "avaricious", "aviary"],
       "answer": "avuncular"
     }
   },
@@ -309,16 +220,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The report was ",
-        " and omitted key details."
-      ],
-      "options": [
-        "elliptical",
-        "ellipsoid",
-        "elliptic",
-        "ellipsis"
-      ],
+      "sentenceParts": ["The report was ", " and omitted key details."],
+      "options": ["elliptical", "ellipsoid", "elliptic", "ellipsis"],
       "answer": "elliptical"
     }
   },
@@ -351,12 +254,7 @@
         "The debate became ",
         " and focused on trivial points."
       ],
-      "options": [
-        "picayune",
-        "picaresque",
-        "picador",
-        "piccalilli"
-      ],
+      "options": ["picayune", "picaresque", "picador", "piccalilli"],
       "answer": "picayune"
     }
   },
@@ -370,12 +268,7 @@
         "His writing style was ",
         " and full of obscure references."
       ],
-      "options": [
-        "recondite",
-        "recumbent",
-        "reclusive",
-        "recreant"
-      ],
+      "options": ["recondite", "recumbent", "reclusive", "recreant"],
       "answer": "recondite"
     }
   },
@@ -389,12 +282,7 @@
         "The solution was ",
         " and solved the problem elegantly."
       ],
-      "options": [
-        "ingenious",
-        "ingenuous",
-        "ingenerate",
-        "ingressive"
-      ],
+      "options": ["ingenious", "ingenuous", "ingenerate", "ingressive"],
       "answer": "ingenious"
     }
   },
@@ -408,12 +296,7 @@
         "Her remarks were ",
         " and intended to provoke thought."
       ],
-      "options": [
-        "provocative",
-        "provident",
-        "provisory",
-        "provenance"
-      ],
+      "options": ["provocative", "provident", "provisory", "provenance"],
       "answer": "provocative"
     }
   },
@@ -427,12 +310,7 @@
         "The evidence was ",
         " and pointed clearly to the culprit."
       ],
-      "options": [
-        "inculpatory",
-        "exculpatory",
-        "culpable",
-        "inculcate"
-      ],
+      "options": ["inculpatory", "exculpatory", "culpable", "inculcate"],
       "answer": "inculpatory"
     }
   },
@@ -442,16 +320,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His tone was ",
-        " and suggested hidden meanings."
-      ],
-      "options": [
-        "oracular",
-        "oratorical",
-        "orbicular",
-        "ordinate"
-      ],
+      "sentenceParts": ["His tone was ", " and suggested hidden meanings."],
+      "options": ["oracular", "oratorical", "orbicular", "ordinate"],
       "answer": "oracular"
     }
   },
@@ -461,10 +331,7 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The analysis was ",
-        " and considered every angle."
-      ],
+      "sentenceParts": ["The analysis was ", " and considered every angle."],
       "options": [
         "comprehensive",
         "comprehensible",
@@ -480,16 +347,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her apology seemed ",
-        " and lacked sincerity."
-      ],
-      "options": [
-        "perfunctory",
-        "perforated",
-        "perfervid",
-        "perfidious"
-      ],
+      "sentenceParts": ["Her apology seemed ", " and lacked sincerity."],
+      "options": ["perfunctory", "perforated", "perfervid", "perfidious"],
       "answer": "perfunctory"
     }
   },
@@ -503,12 +362,7 @@
         "The strategy was ",
         " and adapted to changing conditions."
       ],
-      "options": [
-        "nimble",
-        "nimbus",
-        "niminy-piminy",
-        "nimbostratus"
-      ],
+      "options": ["nimble", "nimbus", "niminy-piminy", "nimbostratus"],
       "answer": "nimble"
     }
   },
@@ -518,16 +372,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His argument was ",
-        " and based on flawed logic."
-      ],
-      "options": [
-        "specious",
-        "spacious",
-        "speciose",
-        "speckled"
-      ],
+      "sentenceParts": ["His argument was ", " and based on flawed logic."],
+      "options": ["specious", "spacious", "speciose", "speckled"],
       "answer": "specious"
     }
   },
@@ -541,12 +387,7 @@
         "The description was ",
         " and painted a vivid picture."
       ],
-      "options": [
-        "evocative",
-        "provocative",
-        "convulsive",
-        "revocative"
-      ],
+      "options": ["evocative", "provocative", "convulsive", "revocative"],
       "answer": "evocative"
     }
   },
@@ -556,16 +397,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her leadership was ",
-        " and inspired great loyalty."
-      ],
-      "options": [
-        "charismatic",
-        "characteristic",
-        "charitable",
-        "charlatan"
-      ],
+      "sentenceParts": ["Her leadership was ", " and inspired great loyalty."],
+      "options": ["charismatic", "characteristic", "charitable", "charlatan"],
       "answer": "charismatic"
     }
   },
@@ -579,12 +412,7 @@
         "The proposal was ",
         " and required further discussion."
       ],
-      "options": [
-        "tentative",
-        "tendentious",
-        "tenacious",
-        "tenebrous"
-      ],
+      "options": ["tentative", "tendentious", "tenacious", "tenebrous"],
       "answer": "tentative"
     }
   },
@@ -594,16 +422,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His behavior was ",
-        " and showed a lack of respect."
-      ],
-      "options": [
-        "contumelious",
-        "contumacious",
-        "contiguous",
-        "contingent"
-      ],
+      "sentenceParts": ["His behavior was ", " and showed a lack of respect."],
+      "options": ["contumelious", "contumacious", "contiguous", "contingent"],
       "answer": "contumelious"
     }
   },
@@ -617,12 +437,7 @@
         "The interpretation was ",
         " and open to multiple readings."
       ],
-      "options": [
-        "ambiguous",
-        "ambivalent",
-        "ambidextrous",
-        "ambient"
-      ],
+      "options": ["ambiguous", "ambivalent", "ambidextrous", "ambient"],
       "answer": "ambiguous"
     }
   },
@@ -636,12 +451,7 @@
         "Her insight was ",
         " and revealed underlying patterns."
       ],
-      "options": [
-        "penetrating",
-        "penitent",
-        "penurious",
-        "penumbral"
-      ],
+      "options": ["penetrating", "penitent", "penurious", "penumbral"],
       "answer": "penetrating"
     }
   },
@@ -651,16 +461,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The agreement was ",
-        " and legally binding."
-      ],
-      "options": [
-        "executory",
-        "executive",
-        "execrable",
-        "exegetical"
-      ],
+      "sentenceParts": ["The agreement was ", " and legally binding."],
+      "options": ["executory", "executive", "execrable", "exegetical"],
       "answer": "executory"
     }
   },
@@ -674,12 +476,7 @@
         "His critique was ",
         " and focused on structural flaws."
       ],
-      "options": [
-        "architectonic",
-        "archival",
-        "archaic",
-        "archetypal"
-      ],
+      "options": ["architectonic", "archival", "archaic", "archetypal"],
       "answer": "architectonic"
     }
   },
@@ -693,12 +490,7 @@
         "The narrative was ",
         " and skipped between times and places."
       ],
-      "options": [
-        "discontinuous",
-        "disconsolate",
-        "discordant",
-        "discreet"
-      ],
+      "options": ["discontinuous", "disconsolate", "discordant", "discreet"],
       "answer": "discontinuous"
     }
   },
@@ -708,16 +500,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her manner was ",
-        " and put people off."
-      ],
-      "options": [
-        "supercilious",
-        "superficial",
-        "superfluous",
-        "supernal"
-      ],
+      "sentenceParts": ["Her manner was ", " and put people off."],
+      "options": ["supercilious", "superficial", "superfluous", "supernal"],
       "answer": "supercilious"
     }
   },
@@ -731,12 +515,7 @@
         "The theory was ",
         " and challenged conventional wisdom."
       ],
-      "options": [
-        "iconoclastic",
-        "iconographic",
-        "iconic",
-        "icosahedral"
-      ],
+      "options": ["iconoclastic", "iconographic", "iconic", "icosahedral"],
       "answer": "iconoclastic"
     }
   },
@@ -746,16 +525,8 @@
     "difficulty": 7,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His response was ",
-        " and avoided direct answers."
-      ],
-      "options": [
-        "equivocal",
-        "equitable",
-        "equinoctial",
-        "equipollent"
-      ],
+      "sentenceParts": ["His response was ", " and avoided direct answers."],
+      "options": ["equivocal", "equitable", "equinoctial", "equipollent"],
       "answer": "equivocal"
     }
   }

@@ -1,18 +1,18 @@
-import { ChevronLeft, Check, Languages } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
+import { Check, ChevronLeft } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { Card } from "~/components/ui/card";
-import { H1, P, Muted } from "~/components/ui/typography";
+import { H1, Muted, P } from "~/components/ui/typography";
 import { playHaptic } from "~/lib/hapticSound";
-import { normalizeLocale } from "~/lib/locale";
 import {
+  SYSTEM_LANGUAGE_VALUE,
   getPreferredLanguage,
   setPreferredLanguage,
   setSystemLanguage,
-  SYSTEM_LANGUAGE_VALUE,
 } from "~/lib/i18n";
+import { normalizeLocale } from "~/lib/locale";
 
 const SUPPORTED_LANGUAGES = [
   { value: "en", label: "English" },
@@ -44,7 +44,7 @@ export default function LanguageSettings() {
   const handleLanguageSelect = async (value: string) => {
     playHaptic("medium");
     setCurrentLanguage(value);
-    
+
     try {
       if (value === SYSTEM_LANGUAGE_VALUE) {
         await setSystemLanguage();
@@ -52,9 +52,9 @@ export default function LanguageSettings() {
         await setPreferredLanguage(value);
       }
     } catch (error) {
-      console.error('[LanguageSettings] Error changing language:', error);
+      console.error("[LanguageSettings] Error changing language:", error);
     }
-    
+
     // Briefly delay before going back to show the selection
     setTimeout(() => {
       router.back();
@@ -71,7 +71,7 @@ export default function LanguageSettings() {
     <View className="flex-1 bg-background">
       {/* Header */}
       <View className="flex-row items-center px-6 pt-6 mb-4">
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => router.back()}
           className="mr-4 p-2 -ml-2 rounded-full active:bg-muted"
         >
@@ -80,7 +80,7 @@ export default function LanguageSettings() {
         <H1 className="text-3xl font-black">{t("common.language")}</H1>
       </View>
 
-      <ScrollView 
+      <ScrollView
         className="flex-1 px-6"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 40 }}
@@ -88,8 +88,8 @@ export default function LanguageSettings() {
         <Card className="overflow-hidden mb-6">
           {languages.map((lang, index) => {
             const isLast = index === languages.length - 1;
-            const isSelected = 
-              lang.value === SYSTEM_LANGUAGE_VALUE 
+            const isSelected =
+              lang.value === SYSTEM_LANGUAGE_VALUE
                 ? resolvedLanguage === SYSTEM_LANGUAGE_VALUE
                 : normalizeLocale(resolvedLanguage) === lang.value;
 
@@ -100,7 +100,9 @@ export default function LanguageSettings() {
                   onPress={() => handleLanguageSelect(lang.value)}
                 >
                   <View className={`flex-1 flex-row items-center`}>
-                     <P className={`text-lg ${isSelected ? "font-black text-primary" : "font-bold text-foreground"}`}>
+                    <P
+                      className={`text-lg ${isSelected ? "font-black text-primary" : "font-bold text-foreground"}`}
+                    >
                       {lang.label}
                     </P>
                   </View>
@@ -113,9 +115,12 @@ export default function LanguageSettings() {
             );
           })}
         </Card>
-        
+
         <Muted className="text-center px-4">
-          {t("settings.labels.language_instruction", "Select your preferred language for the application interface.")}
+          {t(
+            "settings.labels.language_instruction",
+            "Select your preferred language for the application interface.",
+          )}
         </Muted>
       </ScrollView>
     </View>

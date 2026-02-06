@@ -1,14 +1,14 @@
-import * as ProgressPrimitive from '@rn-primitives/progress';
-import * as React from 'react';
-import { Platform, View } from 'react-native';
+import * as React from "react";
+import { Platform, View } from "react-native";
+import * as ProgressPrimitive from "@rn-primitives/progress";
 import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
   withSpring,
-} from 'react-native-reanimated';
-import { cn } from '~/lib/utils';
+} from "react-native-reanimated";
+import { cn } from "~/lib/utils";
 
 function Progress({
   className,
@@ -20,7 +20,10 @@ function Progress({
 }) {
   return (
     <ProgressPrimitive.Root
-      className={cn('relative h-3 w-full overflow-hidden rounded-full bg-muted/40', className)}
+      className={cn(
+        "relative h-3 w-full overflow-hidden rounded-full bg-muted/40",
+        className,
+      )}
       {...props}
     >
       <Indicator value={value} className={indicatorClassName} />
@@ -30,32 +33,46 @@ function Progress({
 
 export { Progress };
 
-function Indicator({ value, className }: { value: number | undefined | null; className?: string }) {
+function Indicator({
+  value,
+  className,
+}: {
+  value: number | undefined | null;
+  className?: string;
+}) {
   const progress = useDerivedValue(() => value ?? 0);
 
   const indicator = useAnimatedStyle(() => {
     return {
       width: withSpring(
         `${interpolate(progress.value, [0, 100], [1, 100], Extrapolation.CLAMP)}%`,
-        { overshootClamping: true }
+        { overshootClamping: true },
       ),
     };
   });
 
-  if (Platform.OS === 'web') {
+  if (Platform.OS === "web") {
     return (
       <View
-        className={cn('h-full w-full flex-1 bg-primary web:transition-all', className)}
+        className={cn(
+          "h-full w-full flex-1 bg-primary web:transition-all",
+          className,
+        )}
         style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}
       >
-        <ProgressPrimitive.Indicator className={cn('h-full w-full', className)} />
+        <ProgressPrimitive.Indicator
+          className={cn("h-full w-full", className)}
+        />
       </View>
     );
   }
 
   return (
     <ProgressPrimitive.Indicator asChild>
-      <Animated.View style={indicator} className={cn('h-full bg-primary', className)} />
+      <Animated.View
+        style={indicator}
+        className={cn("h-full bg-primary", className)}
+      />
     </ProgressPrimitive.Indicator>
   );
 }

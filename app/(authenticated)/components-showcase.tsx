@@ -1,36 +1,48 @@
-import * as React from 'react';
-import { SafeAreaView, ScrollView, View, Text } from 'react-native';
-import { Button } from '~/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Textarea } from '~/components/ui/textarea';
-import { Badge } from '~/components/ui/badge';
-import { Checkbox } from '~/components/ui/checkbox';
-import { Switch } from '~/components/ui/switch';
-import { Progress } from '~/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
-import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
-import { H1, H2, H3, H4, P, Large, Small, Muted, Code, Lead } from '~/components/ui/typography';
-import { Info, Check, X } from 'lucide-react-native';
-import { Label } from '~/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { Check, Info, X } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Checkbox } from "~/components/ui/checkbox";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Progress } from "~/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Switch } from "~/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Textarea } from "~/components/ui/textarea";
+import {
+  Code,
+  H1,
+  H2,
+  H3,
+  H4,
+  Large,
+  Lead,
+  Muted,
+  P,
+  Small,
+} from "~/components/ui/typography";
 
 export default function ComponentShowcase() {
   const { t } = useTranslation();
   const [checked, setChecked] = React.useState(false);
   const [switchOn, setSwitchOn] = React.useState(false);
-  const [tabValue, setTabValue] = React.useState('tab1');
-  const [radioValue, setRadioValue] = React.useState('option1');
+  const [tabValue, setTabValue] = React.useState("tab1");
+  const [radioValue, setRadioValue] = React.useState("option1");
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 100 }}>
+      <ScrollView
+        className="flex-1"
+        contentContainerStyle={{ paddingBottom: 100 }}
+      >
         <View className="px-6 pb-6 pt-4">
-          <H1 className="text-3xl font-black mb-2">{t('showcase.title')}</H1>
-          <P className="mb-6 text-muted-foreground">
-            {t('showcase.subtitle')}
-          </P>
+          <H1 className="text-3xl font-black mb-2">{t("showcase.title")}</H1>
+          <P className="mb-6 text-muted-foreground">{t("showcase.subtitle")}</P>
 
           <Card className="mb-6">
             <CardHeader>
@@ -40,7 +52,9 @@ export default function ComponentShowcase() {
               <H2>Heading 2</H2>
               <H3>Heading 3</H3>
               <H4>Heading 4</H4>
-              <P className="mb-2">This is a paragraph with semibold text for better readability.</P>
+              <P className="mb-2">
+                This is a paragraph with semibold text for better readability.
+              </P>
               <Large>Large text for emphasis</Large>
               <Small>Small text for secondary information</Small>
               <Muted>Muted text for subtle hints</Muted>
@@ -63,12 +77,16 @@ export default function ComponentShowcase() {
 
               <H4 className="mb-2">Primary Hero Card</H4>
               <Card className="mb-4 bg-primary p-4">
-                <P className="text-primary-foreground font-bold">Hero card with primary background.</P>
+                <P className="text-primary-foreground font-bold">
+                  Hero card with primary background.
+                </P>
               </Card>
 
               <H4 className="mb-2">Secondary Hero Card</H4>
               <Card className="mb-4 bg-secondary p-4">
-                <P className="text-secondary-foreground font-bold">Hero card with secondary background.</P>
+                <P className="text-secondary-foreground font-bold">
+                  Hero card with secondary background.
+                </P>
               </Card>
             </CardContent>
           </Card>
@@ -79,17 +97,49 @@ export default function ComponentShowcase() {
             </CardHeader>
             <CardContent className="gap-4">
               <View className="flex flex-wrap gap-3">
-                <Button><Text className="text-primary-foreground font-bold">Default</Text></Button>
-                <Button variant="secondary"><Text className="text-secondary-foreground font-bold">Secondary</Text></Button>
-                <Button variant="destructive"><Text className="text-destructive-foreground font-bold">Destructive</Text></Button>
-                <Button variant="outline"><Text className="text-foreground font-bold">Outline</Text></Button>
-                <Button variant="ghost"><Text className="text-foreground font-bold">Ghost</Text></Button>
+                <Button>
+                  <Text className="text-primary-foreground font-bold">
+                    Default
+                  </Text>
+                </Button>
+                <Button variant="secondary">
+                  <Text className="text-secondary-foreground font-bold">
+                    Secondary
+                  </Text>
+                </Button>
+                <Button variant="destructive">
+                  <Text className="text-destructive-foreground font-bold">
+                    Destructive
+                  </Text>
+                </Button>
+                <Button variant="outline">
+                  <Text className="text-foreground font-bold">Outline</Text>
+                </Button>
+                <Button variant="ghost">
+                  <Text className="text-foreground font-bold">Ghost</Text>
+                </Button>
               </View>
               <View className="flex flex-wrap gap-3">
-                <Button className="h-9 px-3"><Text className="text-primary-foreground font-bold">Small</Text></Button>
-                <Button className="h-10 px-4 py-2 native:h-12 native:px-5 native:py-3"><Text className="text-primary-foreground font-bold">Default</Text></Button>
-                <Button className="h-11 px-8 native:h-14"><Text className="text-primary-foreground font-bold">Large</Text></Button>
-                <Button className="h-12 px-10 native:h-16"><Text className="text-primary-foreground font-bold">Extra Large</Text></Button>
+                <Button className="h-9 px-3">
+                  <Text className="text-primary-foreground font-bold">
+                    Small
+                  </Text>
+                </Button>
+                <Button className="h-10 px-4 py-2 native:h-12 native:px-5 native:py-3">
+                  <Text className="text-primary-foreground font-bold">
+                    Default
+                  </Text>
+                </Button>
+                <Button className="h-11 px-8 native:h-14">
+                  <Text className="text-primary-foreground font-bold">
+                    Large
+                  </Text>
+                </Button>
+                <Button className="h-12 px-10 native:h-16">
+                  <Text className="text-primary-foreground font-bold">
+                    Extra Large
+                  </Text>
+                </Button>
               </View>
             </CardContent>
           </Card>
@@ -100,10 +150,24 @@ export default function ComponentShowcase() {
             </CardHeader>
             <CardContent>
               <View className="flex flex-wrap gap-3">
-                <Badge><Text className="text-primary-foreground font-bold">Default</Text></Badge>
-                <Badge variant="secondary"><Text className="text-secondary-foreground font-bold">Secondary</Text></Badge>
-                <Badge variant="destructive"><Text className="text-destructive-foreground font-bold">Destructive</Text></Badge>
-                <Badge variant="outline"><Text className="text-foreground font-bold">Outline</Text></Badge>
+                <Badge>
+                  <Text className="text-primary-foreground font-bold">
+                    Default
+                  </Text>
+                </Badge>
+                <Badge variant="secondary">
+                  <Text className="text-secondary-foreground font-bold">
+                    Secondary
+                  </Text>
+                </Badge>
+                <Badge variant="destructive">
+                  <Text className="text-destructive-foreground font-bold">
+                    Destructive
+                  </Text>
+                </Badge>
+                <Badge variant="outline">
+                  <Text className="text-foreground font-bold">Outline</Text>
+                </Badge>
               </View>
             </CardContent>
           </Card>
@@ -120,13 +184,18 @@ export default function ComponentShowcase() {
 
               <View>
                 <Label className="mb-2">Textarea</Label>
-                <Textarea placeholder="Enter longer text here..." numberOfLines={4} />
+                <Textarea
+                  placeholder="Enter longer text here..."
+                  numberOfLines={4}
+                />
               </View>
 
               <View className="flex items-center gap-4">
                 <View className="flex-row items-center gap-2">
                   <Checkbox checked={checked} onCheckedChange={setChecked} />
-                  <Text className="text-foreground font-semibold">Checkbox</Text>
+                  <Text className="text-foreground font-semibold">
+                    Checkbox
+                  </Text>
                 </View>
                 <View className="flex-row items-center gap-2">
                   <Switch checked={switchOn} onCheckedChange={setSwitchOn} />
@@ -140,15 +209,21 @@ export default function ComponentShowcase() {
                   <View className="flex flex-row items-center gap-4">
                     <View className="flex-row items-center gap-2">
                       <RadioGroupItem value="option1" />
-                      <Text className="text-foreground font-semibold">Option 1</Text>
+                      <Text className="text-foreground font-semibold">
+                        Option 1
+                      </Text>
                     </View>
                     <View className="flex-row items-center gap-2">
                       <RadioGroupItem value="option2" />
-                      <Text className="text-foreground font-semibold">Option 2</Text>
+                      <Text className="text-foreground font-semibold">
+                        Option 2
+                      </Text>
                     </View>
                     <View className="flex-row items-center gap-2">
                       <RadioGroupItem value="option3" />
-                      <Text className="text-foreground font-semibold">Option 3</Text>
+                      <Text className="text-foreground font-semibold">
+                        Option 3
+                      </Text>
                     </View>
                   </View>
                 </RadioGroup>
@@ -183,9 +258,15 @@ export default function ComponentShowcase() {
             <CardContent>
               <Tabs value={tabValue} onValueChange={setTabValue}>
                 <TabsList>
-                  <TabsTrigger value="tab1"><Text>Tab 1</Text></TabsTrigger>
-                  <TabsTrigger value="tab2"><Text>Tab 2</Text></TabsTrigger>
-                  <TabsTrigger value="tab3"><Text>Tab 3</Text></TabsTrigger>
+                  <TabsTrigger value="tab1">
+                    <Text>Tab 1</Text>
+                  </TabsTrigger>
+                  <TabsTrigger value="tab2">
+                    <Text>Tab 2</Text>
+                  </TabsTrigger>
+                  <TabsTrigger value="tab3">
+                    <Text>Tab 3</Text>
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="tab1">
                   <View className="py-4">
@@ -213,15 +294,21 @@ export default function ComponentShowcase() {
             <CardContent className="gap-4">
               <Alert icon={Info}>
                 <AlertTitle>Information</AlertTitle>
-                <AlertDescription>This is an informational alert message.</AlertDescription>
+                <AlertDescription>
+                  This is an informational alert message.
+                </AlertDescription>
               </Alert>
               <Alert icon={Check} variant="default">
                 <AlertTitle>Success</AlertTitle>
-                <AlertDescription>Your changes have been saved successfully.</AlertDescription>
+                <AlertDescription>
+                  Your changes have been saved successfully.
+                </AlertDescription>
               </Alert>
               <Alert icon={X} variant="destructive">
                 <AlertTitle>Error</AlertTitle>
-                <AlertDescription>Something went wrong. Please try again.</AlertDescription>
+                <AlertDescription>
+                  Something went wrong. Please try again.
+                </AlertDescription>
               </Alert>
             </CardContent>
           </Card>

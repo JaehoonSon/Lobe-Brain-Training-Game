@@ -1,6 +1,6 @@
+import LoadingScreen from "../Loading";
 import { Redirect, Stack } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
-import LoadingScreen from "../Loading";
 import { GamesProvider } from "~/contexts/GamesContext";
 import { UserStatsProvider } from "~/contexts/UserStatsContext";
 

@@ -1,13 +1,13 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H4, P, Muted } from "~/components/ui/typography";
-import { Card, CardContent } from "~/components/ui/card";
-import { Lightbulb, ChevronRight } from "lucide-react-native";
-import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { INSIGHTS } from "~/lib/insights-data";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
-import { Text } from "~/components/ui/text";
+import { ChevronRight, Lightbulb } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
+import { Card, CardContent } from "~/components/ui/card";
+import { Text } from "~/components/ui/text";
+import { H1, H4, P } from "~/components/ui/typography";
+import { INSIGHTS } from "~/lib/insights-data";
 
 export default function InsightsScreen() {
   const { t } = useTranslation();
@@ -28,12 +28,12 @@ export default function InsightsScreen() {
       >
         <View className="px-6 pb-6 pt-4">
           {/* Page Title */}
-          <H1 className="mb-6 text-3xl font-black">{t('insights.title')}</H1>
+          <H1 className="mb-6 text-3xl font-black">{t("insights.title")}</H1>
 
           {/* Daily Read Section */}
           <View className="mb-8">
             <P className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-3">
-              {t('insights.daily_read.title')}
+              {t("insights.daily_read.title")}
             </P>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -44,7 +44,10 @@ export default function InsightsScreen() {
                   <View className="flex-row justify-between items-start mb-4">
                     <View className="bg-white/20 px-3 py-1 rounded-full">
                       <Text className="text-white text-xs font-bold uppercase">
-                        {t(`common.categories.${dailyInsight.category.toLowerCase()}`, { defaultValue: dailyInsight.category })}
+                        {t(
+                          `common.categories.${dailyInsight.category.toLowerCase()}`,
+                          { defaultValue: dailyInsight.category },
+                        )}
                       </Text>
                     </View>
                     <Lightbulb size={24} className="text-white" />
@@ -68,7 +71,7 @@ export default function InsightsScreen() {
 
           {/* Explore Section */}
           <P className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-4">
-            {t('insights.explore.title')}
+            {t("insights.explore.title")}
           </P>
 
           <View className="gap-4">
@@ -92,7 +95,10 @@ export default function InsightsScreen() {
                           className="text-[10px] font-black uppercase tracking-wide"
                           style={{ color: insight.color || "#71717a" }}
                         >
-                          {t(`common.categories.${insight.category.toLowerCase()}`, { defaultValue: insight.category })}
+                          {t(
+                            `common.categories.${insight.category.toLowerCase()}`,
+                            { defaultValue: insight.category },
+                          )}
                         </Text>
                         <Text className="text-[10px] font-bold text-muted-foreground">
                           {insight.readTime}

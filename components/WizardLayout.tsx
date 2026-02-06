@@ -1,13 +1,12 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Progress } from "~/components/ui/progress";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useOnboarding } from "~/contexts/OnboardingContext";
+import { ScrollView, View } from "react-native";
 import { ChevronLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Progress } from "~/components/ui/progress";
+import { Text } from "~/components/ui/text";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 
 interface WizardLayoutProps {
   title: string;
@@ -32,8 +31,7 @@ export function WizardLayout({
 }: WizardLayoutProps) {
   const { t } = useTranslation();
   const { currentStep, totalSteps, nextStep, prevStep } = useOnboarding();
-  const finalNextLabel = nextLabel || t('common.continue');
-
+  const finalNextLabel = nextLabel || t("common.continue");
 
   const progress = (currentStep / totalSteps) * 100;
 
@@ -74,7 +72,7 @@ export function WizardLayout({
 
         {showSkip && (
           <Button variant="ghost" className="h-9 px-3" onPress={nextStep}>
-            <Text className="text-muted-foreground">{t('common.skip')}</Text>
+            <Text className="text-muted-foreground">{t("common.skip")}</Text>
           </Button>
         )}
       </View>
@@ -108,7 +106,9 @@ export function WizardLayout({
           onPress={handleNextPress}
           disabled={nextDisabled}
         >
-          <Text className="text-xl font-bold text-primary-foreground">{finalNextLabel}</Text>
+          <Text className="text-xl font-bold text-primary-foreground">
+            {finalNextLabel}
+          </Text>
         </Button>
       </View>
     </SafeAreaView>

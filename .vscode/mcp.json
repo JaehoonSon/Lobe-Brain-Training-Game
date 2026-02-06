@@ -1,9 +1,9 @@
 {
-	"servers": {
-		"superwall-docs": {
-			"url": "https://mcp.superwall.com/mcp",
-			"type": "http"
-		}
-	},
-	"inputs": []
+  "servers": {
+    "superwall-docs": {
+      "url": "https://mcp.superwall.com/mcp",
+      "type": "http"
+    }
+  },
+  "inputs": []
 }

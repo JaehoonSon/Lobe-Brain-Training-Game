@@ -25,14 +25,11 @@ Deno.serve(async (req) => {
       throw new Error("Missing ANALYTICS_EMAIL_RECIPIENTS");
     }
 
-    const supabase = createClient(
-      SUPABASE_URL!,
-      SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
 
     // 1. Fetch Analytics Data
     const { data: analytics, error: analyticsError } = await supabase.rpc(
-      "get_daily_analytics_summary"
+      "get_daily_analytics_summary",
     );
 
     if (analyticsError) {
@@ -46,17 +43,17 @@ Deno.serve(async (req) => {
     // 2. Format Email - Styled
     const { timeframe, users, engagement } = analytics;
     const dateStr = new Date(timeframe.end).toLocaleDateString("en-US", {
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric'
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
-    
+
     // Helper for metric cards
     const Card = (label: string, value: string | number, highlight = false) => `
       <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; text-align: center; width: 45%; min-width: 140px; margin-bottom: 16px;">
         <div style="font-size: 14px; color: #6b7280; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">${label}</div>
-        <div style="font-size: 24px; font-weight: 700; color: ${highlight ? '#4f46e5' : '#111827'};">${value}</div>
+        <div style="font-size: 24px; font-weight: 700; color: ${highlight ? "#4f46e5" : "#111827"};">${value}</div>
       </div>
     `;
 
@@ -90,7 +87,7 @@ Deno.serve(async (req) => {
 
           <div class="content">
             <p style="text-align: center; color: #4b5563; font-size: 14px; margin-bottom: 32px;">
-              Overview for <strong>${new Date(timeframe.start).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</strong> to <strong>${new Date(timeframe.end).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</strong>
+              Overview for <strong>${new Date(timeframe.start).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</strong> to <strong>${new Date(timeframe.end).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</strong>
             </p>
 
             ${SectionHeader("User Growth")}
@@ -120,12 +117,14 @@ Deno.serve(async (req) => {
 
     // 3. Send Email
     const resend = new Resend(RESEND_API_KEY);
-    const recipients = ANALYTICS_EMAIL_RECIPIENTS.split(",").map((e) => e.trim());
+    const recipients = ANALYTICS_EMAIL_RECIPIENTS.split(",").map((e) =>
+      e.trim(),
+    );
 
-    // Send to first recipient, BCC others if multiple, or just loop? 
+    // Send to first recipient, BCC others if multiple, or just loop?
     // Resend supports multiple in 'to' or 'bcc'. Let's us 'to' for the first, 'bcc' for others?
     // Or just put them all in 'to'.
-    
+
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: "Lobe Service <analytics@theblucks.com>", // Update this if user has a domain
       to: recipients,

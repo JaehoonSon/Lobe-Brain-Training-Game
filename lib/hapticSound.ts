@@ -25,11 +25,11 @@ export const playHaptic = async (type: HapticType): Promise<void> => {
       return Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
     case "success":
       return Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Success
+        Haptics.NotificationFeedbackType.Success,
       );
     case "warning":
       return Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Warning
+        Haptics.NotificationFeedbackType.Warning,
       );
     case "error":
       return Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);

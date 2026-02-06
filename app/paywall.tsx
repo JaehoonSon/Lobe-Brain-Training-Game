@@ -1,14 +1,12 @@
-import React from "react";
-import { useRouter } from "expo-router";
+import { CustomStepProps } from "~/app/(onboarding)/index";
 import Paywall from "~/components/Paywall";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
-import { CustomStepProps } from "~/app/(onboarding)/index";
 
-interface PaywallScreenProps extends Partial<CustomStepProps> {}
+type PaywallScreenProps = Partial<CustomStepProps>;
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 export default function PaywallScreen({ onNext }: PaywallScreenProps) {
-  const router = useRouter();
   const { completeOnboarding } = useOnboarding();
   const { isPro } = useRevenueCat();
 

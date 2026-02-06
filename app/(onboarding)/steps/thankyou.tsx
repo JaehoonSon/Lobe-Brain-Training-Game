@@ -1,15 +1,15 @@
-import { View } from "react-native";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-import { CustomStepProps } from "~/app/(onboarding)/index";
-import { useTranslation } from "react-i18next";
-import Svg, { Path } from "react-native-svg";
 import { useEffect, useState } from "react";
+import { View } from "react-native";
+import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Svg, { Path } from "react-native-svg";
+import { CustomStepProps } from "~/app/(onboarding)/index";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 import { StoreReview } from "~/lib/StoreReview";
 
-export default function ThankYouScreen({ onNext, onBack }: CustomStepProps) {
+export default function ThankYouScreen({ onNext }: CustomStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [isNextDisabled, setIsNextDisabled] = useState(true);

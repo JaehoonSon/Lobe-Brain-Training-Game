@@ -1,9 +1,9 @@
-import { View, TouchableOpacity } from "react-native";
-import { P } from "~/components/ui/typography";
-import { Settings, Flame, Zap, Code2 } from "lucide-react-native";
+import { TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
-import { cn } from "~/lib/utils";
+import { Code2, Flame, Settings, Zap } from "lucide-react-native";
+import { P } from "~/components/ui/typography";
 import { useUserStats } from "~/contexts/UserStatsContext";
+import { cn } from "~/lib/utils";
 
 interface AuthenticatedHeaderProps {
   className?: string;

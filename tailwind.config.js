@@ -92,7 +92,7 @@ module.exports = {
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
         // Nunito weight-specific families for React Native
-        "nunito": ["Nunito_400Regular"],
+        nunito: ["Nunito_400Regular"],
         "nunito-semibold": ["Nunito_600SemiBold"],
         "nunito-bold": ["Nunito_700Bold"],
         "nunito-extrabold": ["Nunito_800ExtraBold"],
@@ -127,12 +127,12 @@ module.exports = {
         "9xl": ["8rem", { lineHeight: "1.2", letterSpacing: "-0.04em" }],
       },
       lineHeight: {
-        none: '1.1',    // Nunito-safe override (was 1, clips heavy weights)
-        tight: '1.25',
-        snug: '1.375',
-        normal: '1.5',
-        relaxed: '1.625',
-        loose: '2',
+        none: "1.1", // Nunito-safe override (was 1, clips heavy weights)
+        tight: "1.25",
+        snug: "1.375",
+        normal: "1.5",
+        relaxed: "1.625",
+        loose: "2",
       },
       spacing: {
         DEFAULT: "var(--spacing)",
@@ -158,11 +158,11 @@ module.exports = {
     // Custom plugin to make font-bold, font-black etc. work with Nunito in React Native
     function ({ addUtilities }) {
       addUtilities({
-        '.font-normal': { fontFamily: 'Nunito_400Regular' },
-        '.font-semibold': { fontFamily: 'Nunito_600SemiBold' },
-        '.font-bold': { fontFamily: 'Nunito_700Bold' },
-        '.font-extrabold': { fontFamily: 'Nunito_800ExtraBold' },
-        '.font-black': { fontFamily: 'Nunito_900Black' },
+        ".font-normal": { fontFamily: "Nunito_400Regular" },
+        ".font-semibold": { fontFamily: "Nunito_600SemiBold" },
+        ".font-bold": { fontFamily: "Nunito_700Bold" },
+        ".font-extrabold": { fontFamily: "Nunito_800ExtraBold" },
+        ".font-black": { fontFamily: "Nunito_900Black" },
       });
     },
   ],

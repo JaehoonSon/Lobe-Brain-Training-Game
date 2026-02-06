@@ -9,12 +9,7 @@
         "The company's financial report was ",
         " by the recent market fluctuations."
       ],
-      "options": [
-        "affected",
-        "effected",
-        "impacted",
-        "influenced"
-      ],
+      "options": ["affected", "effected", "impacted", "influenced"],
       "answer": "affected"
     }
   },
@@ -28,12 +23,7 @@
         "Her argument was based on a fundamental ",
         " that guided her ethical decisions."
       ],
-      "options": [
-        "principal",
-        "principle",
-        "precept",
-        "doctrine"
-      ],
+      "options": ["principal", "principle", "precept", "doctrine"],
       "answer": "principle"
     }
   },
@@ -47,12 +37,7 @@
         "The diplomat's ",
         " remarks helped de-escalate the international crisis."
       ],
-      "options": [
-        "diplomatic",
-        "tactful",
-        "conciliatory",
-        "amicable"
-      ],
+      "options": ["diplomatic", "tactful", "conciliatory", "amicable"],
       "answer": "conciliatory"
     }
   },
@@ -66,12 +51,7 @@
         "By the time we arrived, the meeting had already ",
         "."
       ],
-      "options": [
-        "begun",
-        "began",
-        "started",
-        "commenced"
-      ],
+      "options": ["begun", "began", "started", "commenced"],
       "answer": "begun"
     }
   },
@@ -85,12 +65,7 @@
         "The new policy will ",
         " significant changes to the workflow."
       ],
-      "options": [
-        "effect",
-        "affect",
-        "implement",
-        "enact"
-      ],
+      "options": ["effect", "affect", "implement", "enact"],
       "answer": "effect"
     }
   },
@@ -100,16 +75,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She has a ",
-        " for remembering intricate details."
-      ],
-      "options": [
-        "knack",
-        "talent",
-        "aptitude",
-        "proclivity"
-      ],
+      "sentenceParts": ["She has a ", " for remembering intricate details."],
+      "options": ["knack", "talent", "aptitude", "proclivity"],
       "answer": "knack"
     }
   },
@@ -119,16 +86,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The contract is ",
-        " to renewal next month."
-      ],
-      "options": [
-        "subject",
-        "liable",
-        "prone",
-        "susceptible"
-      ],
+      "sentenceParts": ["The contract is ", " to renewal next month."],
+      "options": ["subject", "liable", "prone", "susceptible"],
       "answer": "subject"
     }
   },
@@ -142,12 +101,7 @@
         "His explanation was so ",
         " that no one could doubt his sincerity."
       ],
-      "options": [
-        "credible",
-        "plausible",
-        "convincing",
-        "persuasive"
-      ],
+      "options": ["credible", "plausible", "convincing", "persuasive"],
       "answer": "convincing"
     }
   },
@@ -161,12 +115,7 @@
         "We need to ",
         " the data before drawing any conclusions."
       ],
-      "options": [
-        "analyze",
-        "examine",
-        "scrutinize",
-        "evaluate"
-      ],
+      "options": ["analyze", "examine", "scrutinize", "evaluate"],
       "answer": "scrutinize"
     }
   },
@@ -180,12 +129,7 @@
         "The artist's work is often ",
         " by critics as groundbreaking."
       ],
-      "options": [
-        "described",
-        "characterized",
-        "labeled",
-        "hailed"
-      ],
+      "options": ["described", "characterized", "labeled", "hailed"],
       "answer": "hailed"
     }
   },
@@ -195,16 +139,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He was ",
-        " of the crime due to lack of evidence."
-      ],
-      "options": [
-        "absolved",
-        "acquitted",
-        "exonerated",
-        "vindicated"
-      ],
+      "sentenceParts": ["He was ", " of the crime due to lack of evidence."],
+      "options": ["absolved", "acquitted", "exonerated", "vindicated"],
       "answer": "acquitted"
     }
   },
@@ -218,12 +154,7 @@
         "The team must ",
         " to the new regulations immediately."
       ],
-      "options": [
-        "comply",
-        "adhere",
-        "conform",
-        "abide"
-      ],
+      "options": ["comply", "adhere", "conform", "abide"],
       "answer": "comply"
     }
   },
@@ -237,12 +168,7 @@
         "Her speech was filled with ",
         " that resonated with the audience."
       ],
-      "options": [
-        "pathos",
-        "emotion",
-        "sentiment",
-        "feeling"
-      ],
+      "options": ["pathos", "emotion", "sentiment", "feeling"],
       "answer": "pathos"
     }
   },
@@ -256,12 +182,7 @@
         "The project's success is ",
         " on securing additional funding."
       ],
-      "options": [
-        "contingent",
-        "dependent",
-        "reliant",
-        "conditional"
-      ],
+      "options": ["contingent", "dependent", "reliant", "conditional"],
       "answer": "contingent"
     }
   },
@@ -271,16 +192,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "They decided to ",
-        " the meeting until next week."
-      ],
-      "options": [
-        "postpone",
-        "delay",
-        "defer",
-        "adjourn"
-      ],
+      "sentenceParts": ["They decided to ", " the meeting until next week."],
+      "options": ["postpone", "delay", "defer", "adjourn"],
       "answer": "adjourn"
     }
   },
@@ -290,16 +203,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The novel's plot is ",
-        " with unexpected twists."
-      ],
-      "options": [
-        "replete",
-        "filled",
-        "abundant",
-        "teeming"
-      ],
+      "sentenceParts": ["The novel's plot is ", " with unexpected twists."],
+      "options": ["replete", "filled", "abundant", "teeming"],
       "answer": "replete"
     }
   },
@@ -309,16 +214,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His actions were ",
-        " as reckless by the committee."
-      ],
-      "options": [
-        "deemed",
-        "considered",
-        "judged",
-        "regarded"
-      ],
+      "sentenceParts": ["His actions were ", " as reckless by the committee."],
+      "options": ["deemed", "considered", "judged", "regarded"],
       "answer": "deemed"
     }
   },
@@ -328,10 +225,7 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The agreement was reached after lengthy ",
-        "."
-      ],
+      "sentenceParts": ["The agreement was reached after lengthy ", "."],
       "options": [
         "negotiations",
         "discussions",
@@ -347,16 +241,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She has a ",
-        " understanding of quantum mechanics."
-      ],
-      "options": [
-        "profound",
-        "deep",
-        "thorough",
-        "comprehensive"
-      ],
+      "sentenceParts": ["She has a ", " understanding of quantum mechanics."],
+      "options": ["profound", "deep", "thorough", "comprehensive"],
       "answer": "profound"
     }
   },
@@ -366,16 +252,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The evidence was ",
-        " to support the hypothesis."
-      ],
-      "options": [
-        "insufficient",
-        "inadequate",
-        "deficient",
-        "lacking"
-      ],
+      "sentenceParts": ["The evidence was ", " to support the hypothesis."],
+      "options": ["insufficient", "inadequate", "deficient", "lacking"],
       "answer": "insufficient"
     }
   },
@@ -385,16 +263,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He tends to ",
-        " over minor details."
-      ],
-      "options": [
-        "obsess",
-        "fixate",
-        "dwell",
-        "ponder"
-      ],
+      "sentenceParts": ["He tends to ", " over minor details."],
+      "options": ["obsess", "fixate", "dwell", "ponder"],
       "answer": "obsess"
     }
   },
@@ -408,12 +278,7 @@
         "The report highlights the ",
         " between theory and practice."
       ],
-      "options": [
-        "discrepancy",
-        "difference",
-        "divergence",
-        "variance"
-      ],
+      "options": ["discrepancy", "difference", "divergence", "variance"],
       "answer": "discrepancy"
     }
   },
@@ -427,12 +292,7 @@
         "Her response was ",
         " and left no room for ambiguity."
       ],
-      "options": [
-        "unequivocal",
-        "clear",
-        "explicit",
-        "definitive"
-      ],
+      "options": ["unequivocal", "clear", "explicit", "definitive"],
       "answer": "unequivocal"
     }
   },
@@ -442,16 +302,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The company is ",
-        " to expand into Asian markets."
-      ],
-      "options": [
-        "poised",
-        "ready",
-        "prepared",
-        "set"
-      ],
+      "sentenceParts": ["The company is ", " to expand into Asian markets."],
+      "options": ["poised", "ready", "prepared", "set"],
       "answer": "poised"
     }
   },
@@ -461,16 +313,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The lawyer's argument was ",
-        " by the judge."
-      ],
-      "options": [
-        "overruled",
-        "rejected",
-        "dismissed",
-        "denied"
-      ],
+      "sentenceParts": ["The lawyer's argument was ", " by the judge."],
+      "options": ["overruled", "rejected", "dismissed", "denied"],
       "answer": "overruled"
     }
   },
@@ -480,16 +324,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His behavior was ",
-        " of a true leader."
-      ],
-      "options": [
-        "indicative",
-        "suggestive",
-        "evocative",
-        "characteristic"
-      ],
+      "sentenceParts": ["His behavior was ", " of a true leader."],
+      "options": ["indicative", "suggestive", "evocative", "characteristic"],
       "answer": "characteristic"
     }
   },
@@ -503,12 +339,7 @@
         "The software update will ",
         " several security vulnerabilities."
       ],
-      "options": [
-        "remedy",
-        "fix",
-        "address",
-        "resolve"
-      ],
+      "options": ["remedy", "fix", "address", "resolve"],
       "answer": "address"
     }
   },
@@ -522,12 +353,7 @@
         "She spoke with ",
         " confidence during the presentation."
       ],
-      "options": [
-        "unwavering",
-        "steadfast",
-        "resolute",
-        "firm"
-      ],
+      "options": ["unwavering", "steadfast", "resolute", "firm"],
       "answer": "unwavering"
     }
   },
@@ -537,16 +363,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The treaty is designed to ",
-        " peace in the region."
-      ],
-      "options": [
-        "foster",
-        "promote",
-        "encourage",
-        "cultivate"
-      ],
+      "sentenceParts": ["The treaty is designed to ", " peace in the region."],
+      "options": ["foster", "promote", "encourage", "cultivate"],
       "answer": "foster"
     }
   },
@@ -560,12 +378,7 @@
         "His explanation was ",
         " and failed to convince the panel."
       ],
-      "options": [
-        "specious",
-        "misleading",
-        "deceptive",
-        "fallacious"
-      ],
+      "options": ["specious", "misleading", "deceptive", "fallacious"],
       "answer": "specious"
     }
   },
@@ -575,16 +388,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The team must ",
-        " a strategy before proceeding."
-      ],
-      "options": [
-        "devise",
-        "formulate",
-        "conceive",
-        "craft"
-      ],
+      "sentenceParts": ["The team must ", " a strategy before proceeding."],
+      "options": ["devise", "formulate", "conceive", "craft"],
       "answer": "formulate"
     }
   },
@@ -598,12 +403,7 @@
         "The artist's style is ",
         " by bold colors and dynamic shapes."
       ],
-      "options": [
-        "marked",
-        "characterized",
-        "defined",
-        "distinguished"
-      ],
+      "options": ["marked", "characterized", "defined", "distinguished"],
       "answer": "characterized"
     }
   },
@@ -617,12 +417,7 @@
         "The decision was made after careful ",
         " of all options."
       ],
-      "options": [
-        "consideration",
-        "evaluation",
-        "assessment",
-        "appraisal"
-      ],
+      "options": ["consideration", "evaluation", "assessment", "appraisal"],
       "answer": "consideration"
     }
   },
@@ -636,12 +431,7 @@
         "Her remarks were ",
         " and intended to provoke thought."
       ],
-      "options": [
-        "incisive",
-        "sharp",
-        "penetrating",
-        "keen"
-      ],
+      "options": ["incisive", "sharp", "penetrating", "keen"],
       "answer": "incisive"
     }
   },
@@ -655,12 +445,7 @@
         "The project's timeline is ",
         " due to unforeseen delays."
       ],
-      "options": [
-        "extended",
-        "prolonged",
-        "lengthened",
-        "stretched"
-      ],
+      "options": ["extended", "prolonged", "lengthened", "stretched"],
       "answer": "extended"
     }
   },
@@ -670,16 +455,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He has a ",
-        " ability to solve complex problems."
-      ],
-      "options": [
-        "remarkable",
-        "notable",
-        "extraordinary",
-        "exceptional"
-      ],
+      "sentenceParts": ["He has a ", " ability to solve complex problems."],
+      "options": ["remarkable", "notable", "extraordinary", "exceptional"],
       "answer": "remarkable"
     }
   },
@@ -689,16 +466,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The agreement was ",
-        " by both parties."
-      ],
-      "options": [
-        "ratified",
-        "approved",
-        "endorsed",
-        "sanctioned"
-      ],
+      "sentenceParts": ["The agreement was ", " by both parties."],
+      "options": ["ratified", "approved", "endorsed", "sanctioned"],
       "answer": "ratified"
     }
   },
@@ -708,16 +477,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her analysis was ",
-        " and overlooked key factors."
-      ],
-      "options": [
-        "superficial",
-        "shallow",
-        "cursory",
-        "perfunctory"
-      ],
+      "sentenceParts": ["Her analysis was ", " and overlooked key factors."],
+      "options": ["superficial", "shallow", "cursory", "perfunctory"],
       "answer": "superficial"
     }
   },
@@ -727,16 +488,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The company aims to ",
-        " its market share by 20%."
-      ],
-      "options": [
-        "increase",
-        "expand",
-        "augment",
-        "boost"
-      ],
+      "sentenceParts": ["The company aims to ", " its market share by 20%."],
+      "options": ["increase", "expand", "augment", "boost"],
       "answer": "boost"
     }
   },
@@ -746,16 +499,8 @@
     "difficulty": 5,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His testimony was ",
-        " by corroborating evidence."
-      ],
-      "options": [
-        "substantiated",
-        "supported",
-        "validated",
-        "confirmed"
-      ],
+      "sentenceParts": ["His testimony was ", " by corroborating evidence."],
+      "options": ["substantiated", "supported", "validated", "confirmed"],
       "answer": "substantiated"
     }
   }

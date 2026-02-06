@@ -3,14 +3,16 @@
 shadcn/ui-style primitives using Class Variance Authority (CVA).
 
 ## WHERE TO LOOK
-| Task | Location |
-|------|----------|
-| Add primitive | `components/ui/` |
+
+| Task            | Location                   |
+| --------------- | -------------------------- |
+| Add primitive   | `components/ui/`           |
 | Button variants | `components/ui/button.tsx` |
-| Text styling | `components/ui/text.tsx` |
-| CVA examples | Any component in this dir |
+| Text styling    | `components/ui/text.tsx`   |
+| CVA examples    | Any component in this dir  |
 
 ## CONVENTIONS
+
 - **CVA pattern**: Define variants, export component + variants + types
 - **Exports**: `export { Component, componentVariants, componentTextVariants }; export type { ComponentProps };`
 - **Text nesting**: Use `TextClassContext.Provider` for child text styling
@@ -34,6 +36,7 @@ export function Component({ ref, className, variant, size, ...props }: Component
 ```
 
 ## ANTI-PATTERNS
+
 - **NEVER** use inline styles for variant-based components
 - **NEVER** skip TextClassContext when component contains Text children
 - **NEVER** mix web-only styles without `web:` prefix

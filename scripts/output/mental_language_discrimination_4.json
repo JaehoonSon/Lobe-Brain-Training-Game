@@ -9,12 +9,7 @@
         "The company's new policy will",
         "employee morale significantly."
       ],
-      "options": [
-        "affect",
-        "effect",
-        "impact",
-        "influence"
-      ],
+      "options": ["affect", "effect", "impact", "influence"],
       "answer": "affect"
     }
   },
@@ -28,12 +23,7 @@
         "Her argument was based on a fundamental",
         "of physics."
       ],
-      "options": [
-        "principle",
-        "principal",
-        "precept",
-        "doctrine"
-      ],
+      "options": ["principle", "principal", "precept", "doctrine"],
       "answer": "principle"
     }
   },
@@ -47,12 +37,7 @@
         "The manager's decision was",
         "by recent market trends."
       ],
-      "options": [
-        "informed",
-        "influenced",
-        "guided",
-        "driven"
-      ],
+      "options": ["informed", "influenced", "guided", "driven"],
       "answer": "informed"
     }
   },
@@ -66,12 +51,7 @@
         "She has a",
         "for languages, picking up new ones quickly."
       ],
-      "options": [
-        "knack",
-        "talent",
-        "gift",
-        "aptitude"
-      ],
+      "options": ["knack", "talent", "gift", "aptitude"],
       "answer": "knack"
     }
   },
@@ -81,16 +61,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The contract must be signed",
-        "both parties agree."
-      ],
-      "options": [
-        "before",
-        "after",
-        "when",
-        "once"
-      ],
+      "sentenceParts": ["The contract must be signed", "both parties agree."],
+      "options": ["before", "after", "when", "once"],
       "answer": "before"
     }
   },
@@ -104,12 +76,7 @@
         "They decided to",
         "the meeting due to scheduling conflicts."
       ],
-      "options": [
-        "postpone",
-        "delay",
-        "cancel",
-        "adjourn"
-      ],
+      "options": ["postpone", "delay", "cancel", "adjourn"],
       "answer": "postpone"
     }
   },
@@ -119,16 +86,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The evidence was",
-        "enough to convict the suspect."
-      ],
-      "options": [
-        "compelling",
-        "convincing",
-        "persuasive",
-        "strong"
-      ],
+      "sentenceParts": ["The evidence was", "enough to convict the suspect."],
+      "options": ["compelling", "convincing", "persuasive", "strong"],
       "answer": "compelling"
     }
   },
@@ -138,16 +97,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He tends to",
-        "his emotions, rarely showing anger."
-      ],
-      "options": [
-        "suppress",
-        "repress",
-        "control",
-        "restrain"
-      ],
+      "sentenceParts": ["He tends to", "his emotions, rarely showing anger."],
+      "options": ["suppress", "repress", "control", "restrain"],
       "answer": "suppress"
     }
   },
@@ -157,16 +108,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The project is",
-        "completion by next month."
-      ],
-      "options": [
-        "scheduled for",
-        "due for",
-        "set for",
-        "planned for"
-      ],
+      "sentenceParts": ["The project is", "completion by next month."],
+      "options": ["scheduled for", "due for", "set for", "planned for"],
       "answer": "due for"
     }
   },
@@ -180,12 +123,7 @@
         "Her remarks were",
         "and offended many in the audience."
       ],
-      "options": [
-        "insensitive",
-        "tactless",
-        "rude",
-        "blunt"
-      ],
+      "options": ["insensitive", "tactless", "rude", "blunt"],
       "answer": "tactless"
     }
   },
@@ -195,16 +133,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We need to",
-        "a solution that works for everyone."
-      ],
-      "options": [
-        "devise",
-        "create",
-        "formulate",
-        "develop"
-      ],
+      "sentenceParts": ["We need to", "a solution that works for everyone."],
+      "options": ["devise", "create", "formulate", "develop"],
       "answer": "devise"
     }
   },
@@ -214,16 +144,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The data",
-        "a clear trend over the past decade."
-      ],
-      "options": [
-        "reveals",
-        "shows",
-        "indicates",
-        "demonstrates"
-      ],
+      "sentenceParts": ["The data", "a clear trend over the past decade."],
+      "options": ["reveals", "shows", "indicates", "demonstrates"],
       "answer": "reveals"
     }
   },
@@ -237,12 +159,7 @@
         "He was",
         "from the competition for violating the rules."
       ],
-      "options": [
-        "disqualified",
-        "excluded",
-        "eliminated",
-        "barred"
-      ],
+      "options": ["disqualified", "excluded", "eliminated", "barred"],
       "answer": "disqualified"
     }
   },
@@ -252,16 +169,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The team worked",
-        "to meet the deadline."
-      ],
-      "options": [
-        "tirelessly",
-        "diligently",
-        "hard",
-        "steadily"
-      ],
+      "sentenceParts": ["The team worked", "to meet the deadline."],
+      "options": ["tirelessly", "diligently", "hard", "steadily"],
       "answer": "tirelessly"
     }
   },
@@ -271,16 +180,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her explanation was",
-        "and easy to understand."
-      ],
-      "options": [
-        "lucid",
-        "clear",
-        "simple",
-        "straightforward"
-      ],
+      "sentenceParts": ["Her explanation was", "and easy to understand."],
+      "options": ["lucid", "clear", "simple", "straightforward"],
       "answer": "lucid"
     }
   },
@@ -290,16 +191,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The company is",
-        "to expand into new markets."
-      ],
-      "options": [
-        "poised",
-        "ready",
-        "set",
-        "prepared"
-      ],
+      "sentenceParts": ["The company is", "to expand into new markets."],
+      "options": ["poised", "ready", "set", "prepared"],
       "answer": "poised"
     }
   },
@@ -309,16 +202,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The report",
-        "several key findings."
-      ],
-      "options": [
-        "highlights",
-        "emphasizes",
-        "stresses",
-        "underscores"
-      ],
+      "sentenceParts": ["The report", "several key findings."],
+      "options": ["highlights", "emphasizes", "stresses", "underscores"],
       "answer": "highlights"
     }
   },
@@ -328,16 +213,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "They had a",
-        "agreement, nothing in writing."
-      ],
-      "options": [
-        "verbal",
-        "oral",
-        "spoken",
-        "unwritten"
-      ],
+      "sentenceParts": ["They had a", "agreement, nothing in writing."],
+      "options": ["verbal", "oral", "spoken", "unwritten"],
       "answer": "verbal"
     }
   },
@@ -347,10 +224,7 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The new law will",
-        "next year."
-      ],
+      "sentenceParts": ["The new law will", "next year."],
       "options": [
         "take effect",
         "come into effect",
@@ -366,16 +240,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His behavior was",
-        "and raised many eyebrows."
-      ],
-      "options": [
-        "unconventional",
-        "unusual",
-        "odd",
-        "peculiar"
-      ],
+      "sentenceParts": ["His behavior was", "and raised many eyebrows."],
+      "options": ["unconventional", "unusual", "odd", "peculiar"],
       "answer": "unconventional"
     }
   },
@@ -385,16 +251,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We must",
-        "the risks before proceeding."
-      ],
-      "options": [
-        "assess",
-        "evaluate",
-        "analyze",
-        "examine"
-      ],
+      "sentenceParts": ["We must", "the risks before proceeding."],
+      "options": ["assess", "evaluate", "analyze", "examine"],
       "answer": "assess"
     }
   },
@@ -404,16 +262,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The artist's work is",
-        "by critics worldwide."
-      ],
-      "options": [
-        "acclaimed",
-        "praised",
-        "lauded",
-        "celebrated"
-      ],
+      "sentenceParts": ["The artist's work is", "by critics worldwide."],
+      "options": ["acclaimed", "praised", "lauded", "celebrated"],
       "answer": "acclaimed"
     }
   },
@@ -423,16 +273,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She has a",
-        "understanding of the subject."
-      ],
-      "options": [
-        "profound",
-        "deep",
-        "thorough",
-        "comprehensive"
-      ],
+      "sentenceParts": ["She has a", "understanding of the subject."],
+      "options": ["profound", "deep", "thorough", "comprehensive"],
       "answer": "profound"
     }
   },
@@ -442,16 +284,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The plan was",
-        "after careful consideration."
-      ],
-      "options": [
-        "approved",
-        "endorsed",
-        "sanctioned",
-        "ratified"
-      ],
+      "sentenceParts": ["The plan was", "after careful consideration."],
+      "options": ["approved", "endorsed", "sanctioned", "ratified"],
       "answer": "approved"
     }
   },
@@ -465,12 +299,7 @@
         "His comments were",
         "and did not address the main issue."
       ],
-      "options": [
-        "tangential",
-        "irrelevant",
-        "off-topic",
-        "peripheral"
-      ],
+      "options": ["tangential", "irrelevant", "off-topic", "peripheral"],
       "answer": "tangential"
     }
   },
@@ -484,12 +313,7 @@
         "The team needs to",
         "a strategy for the upcoming project."
       ],
-      "options": [
-        "formulate",
-        "devise",
-        "create",
-        "develop"
-      ],
+      "options": ["formulate", "devise", "create", "develop"],
       "answer": "formulate"
     }
   },
@@ -499,16 +323,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The evidence is",
-        "and leaves no room for doubt."
-      ],
-      "options": [
-        "conclusive",
-        "definitive",
-        "decisive",
-        "final"
-      ],
+      "sentenceParts": ["The evidence is", "and leaves no room for doubt."],
+      "options": ["conclusive", "definitive", "decisive", "final"],
       "answer": "conclusive"
     }
   },
@@ -522,12 +338,7 @@
         "She spoke with",
         "confidence during the presentation."
       ],
-      "options": [
-        "unwavering",
-        "steady",
-        "firm",
-        "resolute"
-      ],
+      "options": ["unwavering", "steady", "firm", "resolute"],
       "answer": "unwavering"
     }
   },
@@ -537,16 +348,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The agreement was reached after",
-        "negotiations."
-      ],
-      "options": [
-        "protracted",
-        "lengthy",
-        "extended",
-        "prolonged"
-      ],
+      "sentenceParts": ["The agreement was reached after", "negotiations."],
+      "options": ["protracted", "lengthy", "extended", "prolonged"],
       "answer": "protracted"
     }
   },
@@ -556,16 +359,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His actions were",
-        "by a desire to help others."
-      ],
-      "options": [
-        "motivated",
-        "driven",
-        "inspired",
-        "propelled"
-      ],
+      "sentenceParts": ["His actions were", "by a desire to help others."],
+      "options": ["motivated", "driven", "inspired", "propelled"],
       "answer": "motivated"
     }
   },
@@ -579,12 +374,7 @@
         "The software has a",
         "interface that is easy to navigate."
       ],
-      "options": [
-        "user-friendly",
-        "intuitive",
-        "simple",
-        "straightforward"
-      ],
+      "options": ["user-friendly", "intuitive", "simple", "straightforward"],
       "answer": "intuitive"
     }
   },
@@ -598,12 +388,7 @@
         "They decided to",
         "the old system in favor of a new one."
       ],
-      "options": [
-        "phase out",
-        "replace",
-        "discontinue",
-        "abandon"
-      ],
+      "options": ["phase out", "replace", "discontinue", "abandon"],
       "answer": "phase out"
     }
   },
@@ -613,16 +398,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her response was",
-        "and did not reveal much."
-      ],
-      "options": [
-        "guarded",
-        "cautious",
-        "reserved",
-        "reticent"
-      ],
+      "sentenceParts": ["Her response was", "and did not reveal much."],
+      "options": ["guarded", "cautious", "reserved", "reticent"],
       "answer": "guarded"
     }
   },
@@ -632,16 +409,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The company is",
-        "a period of rapid growth."
-      ],
-      "options": [
-        "undergoing",
-        "experiencing",
-        "facing",
-        "enduring"
-      ],
+      "sentenceParts": ["The company is", "a period of rapid growth."],
+      "options": ["undergoing", "experiencing", "facing", "enduring"],
       "answer": "undergoing"
     }
   },
@@ -651,16 +420,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The report",
-        "the need for immediate action."
-      ],
-      "options": [
-        "underscores",
-        "highlights",
-        "emphasizes",
-        "stresses"
-      ],
+      "sentenceParts": ["The report", "the need for immediate action."],
+      "options": ["underscores", "highlights", "emphasizes", "stresses"],
       "answer": "underscores"
     }
   },
@@ -674,12 +435,7 @@
         "His explanation was",
         "and failed to convince anyone."
       ],
-      "options": [
-        "flimsy",
-        "weak",
-        "unconvincing",
-        "insubstantial"
-      ],
+      "options": ["flimsy", "weak", "unconvincing", "insubstantial"],
       "answer": "flimsy"
     }
   },
@@ -689,16 +445,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We must",
-        "the deadline to ensure quality."
-      ],
-      "options": [
-        "extend",
-        "prolong",
-        "delay",
-        "postpone"
-      ],
+      "sentenceParts": ["We must", "the deadline to ensure quality."],
+      "options": ["extend", "prolong", "delay", "postpone"],
       "answer": "extend"
     }
   },
@@ -712,12 +460,7 @@
         "The new policy has",
         "implications for the entire industry."
       ],
-      "options": [
-        "far-reaching",
-        "extensive",
-        "broad",
-        "wide-ranging"
-      ],
+      "options": ["far-reaching", "extensive", "broad", "wide-ranging"],
       "answer": "far-reaching"
     }
   },
@@ -727,16 +470,8 @@
     "difficulty": 4,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her dedication to the cause is",
-        "."
-      ],
-      "options": [
-        "unwavering",
-        "steadfast",
-        "resolute",
-        "firm"
-      ],
+      "sentenceParts": ["Her dedication to the cause is", "."],
+      "options": ["unwavering", "steadfast", "resolute", "firm"],
       "answer": "unwavering"
     }
   },
@@ -750,12 +485,7 @@
         "The team needs to",
         "a consensus before moving forward."
       ],
-      "options": [
-        "reach",
-        "achieve",
-        "arrive at",
-        "establish"
-      ],
+      "options": ["reach", "achieve", "arrive at", "establish"],
       "answer": "reach"
     }
   }

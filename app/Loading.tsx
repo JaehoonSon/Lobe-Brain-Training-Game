@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
   withSequence,
   withTiming,
@@ -29,10 +29,10 @@ export default function LoadingScreen() {
       scale.value = withRepeat(
         withSequence(
           withTiming(1.2, { duration: 600 }),
-          withTiming(1.0, { duration: 600 })
+          withTiming(1.0, { duration: 600 }),
         ),
         -1,
-        true
+        true,
       );
     }
   }, [showImage, scale]);

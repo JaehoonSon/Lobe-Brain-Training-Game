@@ -5,14 +5,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The company's new policy will",
-        "the way we work."
-      ],
-      "options": [
-        "affect",
-        "effect"
-      ],
+      "sentenceParts": ["The company's new policy will", "the way we work."],
+      "options": ["affect", "effect"],
       "answer": "affect"
     }
   },
@@ -22,14 +16,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She is the",
-        "of the school."
-      ],
-      "options": [
-        "principal",
-        "principle"
-      ],
+      "sentenceParts": ["She is the", "of the school."],
+      "options": ["principal", "principle"],
       "answer": "principal"
     }
   },
@@ -39,15 +27,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His remarks were",
-        "and offended many."
-      ],
-      "options": [
-        "insensitive",
-        "insensible",
-        "insensate"
-      ],
+      "sentenceParts": ["His remarks were", "and offended many."],
+      "options": ["insensitive", "insensible", "insensate"],
       "answer": "insensitive"
     }
   },
@@ -57,15 +38,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "I have",
-        "the book on the table."
-      ],
-      "options": [
-        "lay",
-        "laid",
-        "lain"
-      ],
+      "sentenceParts": ["I have", "the book on the table."],
+      "options": ["lay", "laid", "lain"],
       "answer": "laid"
     }
   },
@@ -75,14 +49,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She has a natural",
-        "for languages."
-      ],
-      "options": [
-        "flair",
-        "flare"
-      ],
+      "sentenceParts": ["She has a natural", "for languages."],
+      "options": ["flair", "flare"],
       "answer": "flair"
     }
   },
@@ -92,14 +60,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The team needs to",
-        "a decision quickly."
-      ],
-      "options": [
-        "make",
-        "take"
-      ],
+      "sentenceParts": ["The team needs to", "a decision quickly."],
+      "options": ["make", "take"],
       "answer": "make"
     }
   },
@@ -109,14 +71,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He spoke with great",
-        "about the project."
-      ],
-      "options": [
-        "assurance",
-        "insurance"
-      ],
+      "sentenceParts": ["He spoke with great", "about the project."],
+      "options": ["assurance", "insurance"],
       "answer": "assurance"
     }
   },
@@ -126,15 +82,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The weather is",
-        "to change tomorrow."
-      ],
-      "options": [
-        "liable",
-        "likely",
-        "libel"
-      ],
+      "sentenceParts": ["The weather is", "to change tomorrow."],
+      "options": ["liable", "likely", "libel"],
       "answer": "likely"
     }
   },
@@ -144,14 +93,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "her keys in the car."
-      ],
-      "options": [
-        "forgot",
-        "left"
-      ],
+      "sentenceParts": ["She", "her keys in the car."],
+      "options": ["forgot", "left"],
       "answer": "left"
     }
   },
@@ -161,14 +104,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the argument was clear."
-      ],
-      "options": [
-        "gist",
-        "jest"
-      ],
+      "sentenceParts": ["The", "of the argument was clear."],
+      "options": ["gist", "jest"],
       "answer": "gist"
     }
   },
@@ -178,15 +115,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We must",
-        "the rules to avoid confusion."
-      ],
-      "options": [
-        "adhere to",
-        "adhere with",
-        "adhere at"
-      ],
+      "sentenceParts": ["We must", "the rules to avoid confusion."],
+      "options": ["adhere to", "adhere with", "adhere at"],
       "answer": "adhere to"
     }
   },
@@ -196,14 +126,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His story was",
-        "and hard to believe."
-      ],
-      "options": [
-        "incredulous",
-        "incredible"
-      ],
+      "sentenceParts": ["His story was", "and hard to believe."],
+      "options": ["incredulous", "incredible"],
       "answer": "incredible"
     }
   },
@@ -213,15 +137,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The committee will",
-        "the proposal next week."
-      ],
-      "options": [
-        "consider",
-        "consider about",
-        "consider on"
-      ],
+      "sentenceParts": ["The committee will", "the proposal next week."],
+      "options": ["consider", "consider about", "consider on"],
       "answer": "consider"
     }
   },
@@ -235,11 +152,7 @@
         "She felt a sense of",
         "after completing the marathon."
       ],
-      "options": [
-        "accomplishment",
-        "achievement",
-        "attainment"
-      ],
+      "options": ["accomplishment", "achievement", "attainment"],
       "answer": "accomplishment"
     }
   },
@@ -249,14 +162,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "the ball over the fence."
-      ],
-      "options": [
-        "threw",
-        "through"
-      ],
+      "sentenceParts": ["He", "the ball over the fence."],
+      "options": ["threw", "through"],
       "answer": "threw"
     }
   },
@@ -266,14 +173,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The manager",
-        "the team for their hard work."
-      ],
-      "options": [
-        "complimented",
-        "complemented"
-      ],
+      "sentenceParts": ["The manager", "the team for their hard work."],
+      "options": ["complimented", "complemented"],
       "answer": "complimented"
     }
   },
@@ -283,15 +184,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We need to",
-        "on the details before signing."
-      ],
-      "options": [
-        "agree",
-        "agree to",
-        "agree with"
-      ],
+      "sentenceParts": ["We need to", "on the details before signing."],
+      "options": ["agree", "agree to", "agree with"],
       "answer": "agree on"
     }
   },
@@ -301,14 +195,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the forest was calming."
-      ],
-      "options": [
-        "peace",
-        "piece"
-      ],
+      "sentenceParts": ["The", "of the forest was calming."],
+      "options": ["peace", "piece"],
       "answer": "peace"
     }
   },
@@ -318,14 +206,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She has a",
-        "for remembering names."
-      ],
-      "options": [
-        "knack",
-        "nac"
-      ],
+      "sentenceParts": ["She has a", "for remembering names."],
+      "options": ["knack", "nac"],
       "answer": "knack"
     }
   },
@@ -335,15 +217,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The report",
-        "several key points."
-      ],
-      "options": [
-        "highlighted",
-        "highlighted on",
-        "highlighted about"
-      ],
+      "sentenceParts": ["The report", "several key points."],
+      "options": ["highlighted", "highlighted on", "highlighted about"],
       "answer": "highlighted"
     }
   },
@@ -353,15 +228,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His behavior was",
-        "and unacceptable."
-      ],
-      "options": [
-        "unbecoming",
-        "unbecoming of",
-        "unbecoming to"
-      ],
+      "sentenceParts": ["His behavior was", "and unacceptable."],
+      "options": ["unbecoming", "unbecoming of", "unbecoming to"],
       "answer": "unbecoming"
     }
   },
@@ -371,15 +239,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the mountain was breathtaking."
-      ],
-      "options": [
-        "site",
-        "sight",
-        "cite"
-      ],
+      "sentenceParts": ["The", "of the mountain was breathtaking."],
+      "options": ["site", "sight", "cite"],
       "answer": "sight"
     }
   },
@@ -389,15 +250,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "to finish the project by Friday."
-      ],
-      "options": [
-        "aims",
-        "aims at",
-        "aims for"
-      ],
+      "sentenceParts": ["She", "to finish the project by Friday."],
+      "options": ["aims", "aims at", "aims for"],
       "answer": "aims"
     }
   },
@@ -407,14 +261,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The new law will",
-        "in next month."
-      ],
-      "options": [
-        "come into effect",
-        "come into affect"
-      ],
+      "sentenceParts": ["The new law will", "in next month."],
+      "options": ["come into effect", "come into affect"],
       "answer": "come into effect"
     }
   },
@@ -424,15 +272,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He showed great",
-        "in handling the crisis."
-      ],
-      "options": [
-        "composure",
-        "composure of",
-        "composure with"
-      ],
+      "sentenceParts": ["He showed great", "in handling the crisis."],
+      "options": ["composure", "composure of", "composure with"],
       "answer": "composure"
     }
   },
@@ -442,15 +283,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "between the two options is subtle."
-      ],
-      "options": [
-        "difference",
-        "difference in",
-        "difference of"
-      ],
+      "sentenceParts": ["The", "between the two options is subtle."],
+      "options": ["difference", "difference in", "difference of"],
       "answer": "difference"
     }
   },
@@ -460,15 +294,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "her success to hard work."
-      ],
-      "options": [
-        "attributes",
-        "attributes to",
-        "attributes with"
-      ],
+      "sentenceParts": ["She", "her success to hard work."],
+      "options": ["attributes", "attributes to", "attributes with"],
       "answer": "attributes"
     }
   },
@@ -478,15 +305,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the story was unexpected."
-      ],
-      "options": [
-        "climax",
-        "climax of",
-        "climax to"
-      ],
+      "sentenceParts": ["The", "of the story was unexpected."],
+      "options": ["climax", "climax of", "climax to"],
       "answer": "climax"
     }
   },
@@ -496,15 +316,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "the meeting with a brief summary."
-      ],
-      "options": [
-        "concluded",
-        "concluded by",
-        "concluded with"
-      ],
+      "sentenceParts": ["He", "the meeting with a brief summary."],
+      "options": ["concluded", "concluded by", "concluded with"],
       "answer": "concluded"
     }
   },
@@ -514,15 +327,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the evidence was overwhelming."
-      ],
-      "options": [
-        "weight",
-        "weight of",
-        "weight to"
-      ],
+      "sentenceParts": ["The", "of the evidence was overwhelming."],
+      "options": ["weight", "weight of", "weight to"],
       "answer": "weight"
     }
   },
@@ -532,15 +338,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "her opinion during the discussion."
-      ],
-      "options": [
-        "voiced",
-        "voiced out",
-        "voiced on"
-      ],
+      "sentenceParts": ["She", "her opinion during the discussion."],
+      "options": ["voiced", "voiced out", "voiced on"],
       "answer": "voiced"
     }
   },
@@ -550,15 +349,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The plan is",
-        "to fail without more support."
-      ],
-      "options": [
-        "doomed",
-        "doomed for",
-        "doomed to"
-      ],
+      "sentenceParts": ["The plan is", "to fail without more support."],
+      "options": ["doomed", "doomed for", "doomed to"],
       "answer": "doomed"
     }
   },
@@ -568,15 +360,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He has a",
-        "for finding solutions."
-      ],
-      "options": [
-        "talent",
-        "talent for",
-        "talent in"
-      ],
+      "sentenceParts": ["He has a", "for finding solutions."],
+      "options": ["talent", "talent for", "talent in"],
       "answer": "talent"
     }
   },
@@ -586,15 +371,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the agreement is confidential."
-      ],
-      "options": [
-        "terms",
-        "terms of",
-        "terms to"
-      ],
+      "sentenceParts": ["The", "of the agreement is confidential."],
+      "options": ["terms", "terms of", "terms to"],
       "answer": "terms"
     }
   },
@@ -604,15 +382,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "the importance of punctuality."
-      ],
-      "options": [
-        "stressed",
-        "stressed on",
-        "stressed about"
-      ],
+      "sentenceParts": ["She", "the importance of punctuality."],
+      "options": ["stressed", "stressed on", "stressed about"],
       "answer": "stressed"
     }
   },
@@ -622,15 +393,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the river is polluted."
-      ],
-      "options": [
-        "water",
-        "water of",
-        "water in"
-      ],
+      "sentenceParts": ["The", "of the river is polluted."],
+      "options": ["water", "water of", "water in"],
       "answer": "water"
     }
   },
@@ -640,15 +404,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "a strong argument in his essay."
-      ],
-      "options": [
-        "presented",
-        "presented with",
-        "presented by"
-      ],
+      "sentenceParts": ["He", "a strong argument in his essay."],
+      "options": ["presented", "presented with", "presented by"],
       "answer": "presented"
     }
   },
@@ -658,14 +415,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the movie was impressive."
-      ],
-      "options": [
-        "special effects",
-        "special affects"
-      ],
+      "sentenceParts": ["The", "of the movie was impressive."],
+      "options": ["special effects", "special affects"],
       "answer": "special effects"
     }
   },
@@ -675,15 +426,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "to the new job quickly."
-      ],
-      "options": [
-        "adapted",
-        "adapted to",
-        "adapted with"
-      ],
+      "sentenceParts": ["She", "to the new job quickly."],
+      "options": ["adapted", "adapted to", "adapted with"],
       "answer": "adapted"
     }
   },
@@ -693,15 +437,8 @@
     "difficulty": 3,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the problem is complex."
-      ],
-      "options": [
-        "nature",
-        "nature of",
-        "nature to"
-      ],
+      "sentenceParts": ["The", "of the problem is complex."],
+      "options": ["nature", "nature of", "nature to"],
       "answer": "nature"
     }
   }

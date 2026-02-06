@@ -18,21 +18,22 @@ Lobe is a React Native/Expo mobile app that helps users improve their cognitive 
 
 Lobe includes 9 cognitive training games designed to challenge different areas of your brain:
 
-| Game | Description | Category |
-|------|-------------|----------|
-| **Mental Arithmetic** | Test numerical processing speed & accuracy | Speed/Logic |
-| **Memory Matrix** | Spatial memory & recall with grid patterns | Memory |
-| **Mental Language Discrimination** | Language processing & vocabulary skills | Language |
-| **Wordle** | Word guessing game (max 6 attempts) | Language |
-| **Ball Sort** | Puzzle game sorting colored balls into tubes | Logic |
-| **Word Unscramble** | Unscramble letters to form words (with hints) | Language |
-| **Math Rocket** | Speed-based math with physics mechanics | Speed |
-| **Stroop Clash** | Color/word interference cognitive test | Focus |
-| **Odd One Out** | Find the unique item among distractors | Focus/Perception |
+| Game                               | Description                                   | Category         |
+| ---------------------------------- | --------------------------------------------- | ---------------- |
+| **Mental Arithmetic**              | Test numerical processing speed & accuracy    | Speed/Logic      |
+| **Memory Matrix**                  | Spatial memory & recall with grid patterns    | Memory           |
+| **Mental Language Discrimination** | Language processing & vocabulary skills       | Language         |
+| **Wordle**                         | Word guessing game (max 6 attempts)           | Language         |
+| **Ball Sort**                      | Puzzle game sorting colored balls into tubes  | Logic            |
+| **Word Unscramble**                | Unscramble letters to form words (with hints) | Language         |
+| **Math Rocket**                    | Speed-based math with physics mechanics       | Speed            |
+| **Stroop Clash**                   | Color/word interference cognitive test        | Focus            |
+| **Odd One Out**                    | Find the unique item among distractors        | Focus/Perception |
 
 ## ✨ Features
 
 ### Core Features
+
 - 🎯 **Personalized Training Plans** - 30-day customized workout plans based on user goals
 - 📊 **Statistics & Insights** - Track performance metrics, daily streaks, and cognitive improvements
 - 🤖 **Daily AI Insights** - Personalized daily feedback and motivation
@@ -41,6 +42,7 @@ Lobe includes 9 cognitive training games designed to challenge different areas o
 - 💎 **Premium Membership** - Pro subscription via RevenueCat
 
 ### Technical Features
+
 - 🌍 **Multi-language Support** - 10 languages including English, Spanish, Japanese, Chinese, Portuguese, German, French, Hindi, Russian, and Korean
 - 🔔 **Push Notifications** - Daily training reminders
 - 📈 **Analytics** - PostHog & Tenjin integration for user behavior tracking
@@ -51,12 +53,14 @@ Lobe includes 9 cognitive training games designed to challenge different areas o
 ## 🛠️ Technology Stack
 
 ### Framework & Core
+
 - **React Native** 0.81.5
 - **Expo** ~54.0.30
 - **TypeScript** 5.9.2
 - **Expo Router** ~6.0.21 (file-based routing)
 
 ### UI & Styling
+
 - **NativeWind** v4 (Tailwind CSS for React Native)
 - **React Native Reusables** (UI primitives)
 - **Lucide React Native** (icons)
@@ -65,6 +69,7 @@ Lobe includes 9 cognitive training games designed to challenge different areas o
 - **Victory Native** (charts/graphs)
 
 ### Backend & Database
+
 - **Supabase** (PostgreSQL backend)
   - Real-time subscriptions
   - Row-level security
@@ -72,22 +77,26 @@ Lobe includes 9 cognitive training games designed to challenge different areas o
   - Auto-generated TypeScript types
 
 ### Authentication
+
 - **Apple Sign-In** (expo-apple-authentication)
 - **Google Sign-In** (@react-native-google-signin/google-signin)
 - **Supabase Auth** with session persistence
 
 ### Monetization & Analytics
+
 - **RevenueCat** - Subscription & IAP management
 - **PostHog** - Event tracking & user analytics
 - **Tenjin** - Attribution tracking
 
 ### State Management
+
 - React Context API (Auth, Games, Notifications, Onboarding, Theme, Stats)
 - AsyncStorage for persistence
 
 ## 🌍 Internationalization
 
 Lobe supports 10 languages:
+
 - 🇬🇧 English (en)
 - 🇪🇸 Spanish (es)
 - 🇯🇵 Japanese (ja)
@@ -104,6 +113,7 @@ Implementation via `i18next` and `react-i18next` with locale files in `assets/lo
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v18 or higher)
 - npm or yarn
 - Expo CLI (`npm install -g expo-cli`)
@@ -153,12 +163,14 @@ EXPO_PUBLIC_TENJIN_API_KEY=your_tenjin_api_key
 ```
 
 **Required Variables:**
+
 - **Supabase**: Backend database credentials (URL, publishable key, secret key)
 - **RevenueCat**: Subscription management API key
 - **Google Auth**: Client IDs for web and iOS authentication
 - **Apple Auth**: Secret key for Apple Sign-In
 
 **Optional Variables:**
+
 - **PostHog**: Analytics platform (key and host)
 - **Tenjin**: Mobile measurement partner for attribution tracking
 - **Google Auth Secret**: Additional Google authentication configuration
@@ -166,6 +178,7 @@ EXPO_PUBLIC_TENJIN_API_KEY=your_tenjin_api_key
 ## 📜 Available Scripts
 
 ### Development
+
 ```bash
 npm run dev              # Start Expo dev server (clear cache)
 npm run dev:web          # Start web development
@@ -176,6 +189,7 @@ npm run web              # Start web development
 ```
 
 ### Database (Supabase)
+
 ```bash
 npm run db:link          # Link Supabase project
 npm run db:new           # Create new migration
@@ -185,6 +199,7 @@ npm run db:types         # Generate TypeScript types from database
 ```
 
 ### Maintenance
+
 ```bash
 npm run clean            # Remove .expo and node_modules
 npm run lint             # Run ESLint checks
@@ -230,6 +245,7 @@ npm run lint             # Run ESLint checks
 ## 🗄️ Database Schema
 
 Key Supabase tables:
+
 - `profiles` - User profiles and preferences
 - `games` - Game metadata and results
 - `categories` - Game categories (Memory, Focus, Logic, Speed, Language)
@@ -267,12 +283,14 @@ npx expo run:android  # Android
 ## 📝 Development Guidelines
 
 ### Conventions
+
 - **Components:** PascalCase file names, named exports
 - **Hooks:** camelCase with `use` prefix
 - **Imports:** Group React → third-party → internal aliases
 - **Auth flow:** Apple/Google Auth → Supabase ID token → session management
 
 ### Anti-patterns (Avoid)
+
 - ❌ Don't use `as any` or `@ts-ignore` (strict mode)
 - ❌ Never commit `.env` files
 - ❌ Don't modify `lib/database.types.ts` directly (regenerate with `db:types`)

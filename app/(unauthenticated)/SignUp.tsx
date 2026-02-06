@@ -1,18 +1,19 @@
-import { Link } from "expo-router";
-import { View, ActivityIndicator } from "react-native";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { appMetadata } from "~/config";
-import { AntDesign } from "@expo/vector-icons";
-import { showErrorToast } from "~/components/ui/toast";
-import { useAuth } from "~/contexts/AuthProvider";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { ActivityIndicator, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { showErrorToast } from "~/components/ui/toast";
+import { appMetadata } from "~/config";
+import { useAuth } from "~/contexts/AuthProvider";
 
 export default function SignUp() {
   const { t } = useTranslation();
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const { signInApple, signInGoogle } = useAuth();
   const insets = useSafeAreaInsets();
   const [isLoading, setIsLoading] = useState(false);

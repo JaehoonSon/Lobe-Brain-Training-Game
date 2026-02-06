@@ -9,12 +9,7 @@
         "The author's prose was so ",
         " that readers felt transported to another era."
       ],
-      "options": [
-        "evocative",
-        "provocative",
-        "evocatory",
-        "provocatory"
-      ],
+      "options": ["evocative", "provocative", "evocatory", "provocatory"],
       "answer": "evocative"
     }
   },
@@ -28,12 +23,7 @@
         "Her argument was ",
         " by a logical fallacy, undermining its credibility."
       ],
-      "options": [
-        "vitiated",
-        "vitated",
-        "vitriolic",
-        "vituperative"
-      ],
+      "options": ["vitiated", "vitated", "vitriolic", "vituperative"],
       "answer": "vitiated"
     }
   },
@@ -47,12 +37,7 @@
         "The treaty's ",
         " clauses were intentionally ambiguous to allow future reinterpretation."
       ],
-      "options": [
-        "Delphic",
-        "Delphian",
-        "Delphine",
-        "Delphicly"
-      ],
+      "options": ["Delphic", "Delphian", "Delphine", "Delphicly"],
       "answer": "Delphic"
     }
   },
@@ -66,12 +51,7 @@
         "He maintained an air of ",
         " detachment, even in the face of personal tragedy."
       ],
-      "options": [
-        "Stoic",
-        "Stoical",
-        "Stoically",
-        "Stoicism"
-      ],
+      "options": ["Stoic", "Stoical", "Stoically", "Stoicism"],
       "answer": "Stoic"
     }
   },
@@ -104,12 +84,7 @@
         "Her insights were ",
         " with profound wisdom, yet delivered with humility."
       ],
-      "options": [
-        "imbued",
-        "imbibed",
-        "imbrued",
-        "imbrowned"
-      ],
+      "options": ["imbued", "imbibed", "imbrued", "imbrowned"],
       "answer": "imbued"
     }
   },
@@ -123,12 +98,7 @@
         "The politician's speech was a masterclass in ",
         " rhetoric, swaying even skeptical audiences."
       ],
-      "options": [
-        "demagogic",
-        "demagogical",
-        "demagoguery",
-        "demagogism"
-      ],
+      "options": ["demagogic", "demagogical", "demagoguery", "demagogism"],
       "answer": "demagogic"
     }
   },
@@ -142,12 +112,7 @@
         "The artist's work was ",
         " by critics for its lack of originality."
       ],
-      "options": [
-        "excoriated",
-        "excoricated",
-        "excoriating",
-        "excoriation"
-      ],
+      "options": ["excoriated", "excoricated", "excoriating", "excoriation"],
       "answer": "excoriated"
     }
   },
@@ -180,12 +145,7 @@
         "The novel's plot was ",
         " with unexpected twists that kept readers guessing."
       ],
-      "options": [
-        "replete",
-        "repleted",
-        "repletion",
-        "repleteness"
-      ],
+      "options": ["replete", "repleted", "repletion", "repleteness"],
       "answer": "replete"
     }
   },
@@ -199,12 +159,7 @@
         "Her leadership style was ",
         " fostering collaboration without sacrificing decisiveness."
       ],
-      "options": [
-        "syncretic",
-        "syncretistic",
-        "syncretically",
-        "syncretism"
-      ],
+      "options": ["syncretic", "syncretistic", "syncretically", "syncretism"],
       "answer": "syncretic"
     }
   },
@@ -218,12 +173,7 @@
         "The scientist's theory was ",
         " by new evidence, forcing a complete reevaluation."
       ],
-      "options": [
-        "falsified",
-        "falsifiable",
-        "falsification",
-        "falsifying"
-      ],
+      "options": ["falsified", "falsifiable", "falsification", "falsifying"],
       "answer": "falsified"
     }
   },
@@ -237,12 +187,7 @@
         "His remarks were ",
         " intended to provoke thought rather than offense."
       ],
-      "options": [
-        "polemical",
-        "polemic",
-        "polemically",
-        "polemicist"
-      ],
+      "options": ["polemical", "polemic", "polemically", "polemicist"],
       "answer": "polemical"
     }
   },
@@ -256,12 +201,7 @@
         "The agreement was reached through ",
         " negotiations that respected all parties' interests."
       ],
-      "options": [
-        "consensual",
-        "consensually",
-        "consensus",
-        "consensuality"
-      ],
+      "options": ["consensual", "consensually", "consensus", "consensuality"],
       "answer": "consensual"
     }
   },
@@ -275,12 +215,7 @@
         "Her analysis was ",
         " cutting through complexity to reveal underlying truths."
       ],
-      "options": [
-        "incisive",
-        "incising",
-        "incision",
-        "incisively"
-      ],
+      "options": ["incisive", "incising", "incision", "incisively"],
       "answer": "incisive"
     }
   },
@@ -294,12 +229,7 @@
         "The policy's implementation was ",
         " by bureaucratic inertia, delaying its benefits."
       ],
-      "options": [
-        "stymied",
-        "stymieing",
-        "stymier",
-        "stymie"
-      ],
+      "options": ["stymied", "stymieing", "stymier", "stymie"],
       "answer": "stymied"
     }
   },
@@ -313,12 +243,7 @@
         "His worldview was ",
         " shaped by diverse cultural experiences."
       ],
-      "options": [
-        "eclectic",
-        "eclectically",
-        "eclecticism",
-        "eclecticist"
-      ],
+      "options": ["eclectic", "eclectically", "eclecticism", "eclecticist"],
       "answer": "eclectic"
     }
   },
@@ -351,12 +276,7 @@
         "Her testimony was ",
         " with vivid details that lent it credibility."
       ],
-      "options": [
-        "replete",
-        "repleted",
-        "repletion",
-        "repleteness"
-      ],
+      "options": ["replete", "repleted", "repletion", "repleteness"],
       "answer": "replete"
     }
   },
@@ -370,12 +290,7 @@
         "The philosopher's ideas were ",
         " challenging conventional wisdom at every turn."
       ],
-      "options": [
-        "iconoclastic",
-        "iconoclasticly",
-        "iconoclasm",
-        "iconoclast"
-      ],
+      "options": ["iconoclastic", "iconoclasticly", "iconoclasm", "iconoclast"],
       "answer": "iconoclastic"
     }
   },
@@ -389,12 +304,7 @@
         "The report's conclusions were ",
         " based on flawed methodology."
       ],
-      "options": [
-        "specious",
-        "speciously",
-        "speciousness",
-        "speciosity"
-      ],
+      "options": ["specious", "speciously", "speciousness", "speciosity"],
       "answer": "specious"
     }
   },
@@ -427,12 +337,7 @@
         "The artist's vision was ",
         " blending realism with surreal elements."
       ],
-      "options": [
-        "chimerical",
-        "chimerically",
-        "chimerism",
-        "chimera"
-      ],
+      "options": ["chimerical", "chimerically", "chimerism", "chimera"],
       "answer": "chimerical"
     }
   },
@@ -446,12 +351,7 @@
         "Her argument was ",
         " relying on circular reasoning that proved nothing."
       ],
-      "options": [
-        "tautological",
-        "tautologically",
-        "tautology",
-        "tautologize"
-      ],
+      "options": ["tautological", "tautologically", "tautology", "tautologize"],
       "answer": "tautological"
     }
   },
@@ -503,12 +403,7 @@
         "His writing style was ",
         " marked by excessive ornamentation that distracted from the content."
       ],
-      "options": [
-        "florid",
-        "floridly",
-        "floridity",
-        "floridness"
-      ],
+      "options": ["florid", "floridly", "floridity", "floridness"],
       "answer": "florid"
     }
   },
@@ -522,12 +417,7 @@
         "The decision was ",
         " based on a thorough analysis of all available data."
       ],
-      "options": [
-        "prudent",
-        "prudently",
-        "prudence",
-        "prudential"
-      ],
+      "options": ["prudent", "prudently", "prudence", "prudential"],
       "answer": "prudent"
     }
   },
@@ -541,12 +431,7 @@
         "Her critique was ",
         " exposing flaws with surgical precision."
       ],
-      "options": [
-        "lacerating",
-        "lacerated",
-        "laceration",
-        "lacerative"
-      ],
+      "options": ["lacerating", "lacerated", "laceration", "lacerative"],
       "answer": "lacerating"
     }
   },
@@ -560,12 +445,7 @@
         "The narrative was ",
         " weaving together multiple timelines seamlessly."
       ],
-      "options": [
-        "nonlinear",
-        "nonlinearly",
-        "nonlinearity",
-        "nonlinearness"
-      ],
+      "options": ["nonlinear", "nonlinearly", "nonlinearity", "nonlinearness"],
       "answer": "nonlinear"
     }
   },
@@ -579,12 +459,7 @@
         "His apology was ",
         " failing to address the core issues at hand."
       ],
-      "options": [
-        "equivocal",
-        "equivocally",
-        "equivocation",
-        "equivocator"
-      ],
+      "options": ["equivocal", "equivocally", "equivocation", "equivocator"],
       "answer": "equivocal"
     }
   },
@@ -598,12 +473,7 @@
         "The policy was ",
         " designed to benefit a select few at the expense of the majority."
       ],
-      "options": [
-        "regressive",
-        "regressively",
-        "regression",
-        "regressiveness"
-      ],
+      "options": ["regressive", "regressively", "regression", "regressiveness"],
       "answer": "regressive"
     }
   },
@@ -655,12 +525,7 @@
         "His logic was ",
         " built on assumptions that were never questioned."
       ],
-      "options": [
-        "circular",
-        "circularly",
-        "circularity",
-        "circularness"
-      ],
+      "options": ["circular", "circularly", "circularity", "circularness"],
       "answer": "circular"
     }
   },
@@ -674,12 +539,7 @@
         "The artist's technique was ",
         " combining traditional methods with innovative approaches."
       ],
-      "options": [
-        "hybrid",
-        "hybridly",
-        "hybridity",
-        "hybridization"
-      ],
+      "options": ["hybrid", "hybridly", "hybridity", "hybridization"],
       "answer": "hybrid"
     }
   },
@@ -731,12 +591,7 @@
         "His criticism was ",
         " focusing on minor flaws while ignoring overall merits."
       ],
-      "options": [
-        "nitpicking",
-        "nitpicked",
-        "nitpicker",
-        "nitpick"
-      ],
+      "options": ["nitpicking", "nitpicked", "nitpicker", "nitpick"],
       "answer": "nitpicking"
     }
   },
@@ -750,12 +605,7 @@
         "The agreement was ",
         " requiring all parties to make significant concessions."
       ],
-      "options": [
-        "reciprocal",
-        "reciprocally",
-        "reciprocity",
-        "reciprocation"
-      ],
+      "options": ["reciprocal", "reciprocally", "reciprocity", "reciprocation"],
       "answer": "reciprocal"
     }
   }

@@ -1,7 +1,7 @@
-import * as TabsPrimitive from '@rn-primitives/tabs';
-import * as React from 'react';
-import { cn } from '~/lib/utils';
-import { TextClassContext } from '~/components/ui/text';
+import * as React from "react";
+import * as TabsPrimitive from "@rn-primitives/tabs";
+import { TextClassContext } from "~/components/ui/text";
+import { cn } from "~/lib/utils";
 
 const Tabs = TabsPrimitive.Root;
 
@@ -14,8 +14,8 @@ function TabsList({
   return (
     <TabsPrimitive.List
       className={cn(
-        'web:inline-flex h-10 native:h-12 items-center justify-center rounded-xl bg-muted p-1 native:px-1.5',
-        className
+        "web:inline-flex h-10 native:h-12 items-center justify-center rounded-xl bg-muted p-1 native:px-1.5",
+        className,
       )}
       {...props}
     />
@@ -32,16 +32,17 @@ function TabsTrigger({
   return (
     <TextClassContext.Provider
       value={cn(
-        'text-sm native:text-base font-bold text-muted-foreground web:transition-all',
-        value === props.value && 'text-foreground'
+        "text-sm native:text-base font-bold text-muted-foreground web:transition-all",
+        value === props.value && "text-foreground",
       )}
     >
       <TabsPrimitive.Trigger
         className={cn(
-          'inline-flex items-center justify-center shadow-none web:whitespace-nowrap rounded-xl px-3 py-1.5 text-sm font-bold web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
-          props.disabled && 'web:pointer-events-none opacity-50',
-          props.value === value && 'bg-background shadow-lg shadow-foreground/10',
-          className
+          "inline-flex items-center justify-center shadow-none web:whitespace-nowrap rounded-xl px-3 py-1.5 text-sm font-bold web:ring-offset-background web:transition-all web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
+          props.disabled && "web:pointer-events-none opacity-50",
+          props.value === value &&
+            "bg-background shadow-lg shadow-foreground/10",
+          className,
         )}
         {...props}
       />
@@ -58,8 +59,8 @@ function TabsContent({
   return (
     <TabsPrimitive.Content
       className={cn(
-        'web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2',
-        className
+        "web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2",
+        className,
       )}
       {...props}
     />

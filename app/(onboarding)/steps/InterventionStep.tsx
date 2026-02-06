@@ -1,15 +1,15 @@
 import { View } from "react-native";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ArrowRight } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import Animated, {
   FadeInDown,
   FadeInUp,
   ZoomIn,
 } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CustomStepProps } from "~/app/(onboarding)/index";
-import { ArrowRight } from "lucide-react-native";
-import { useTranslation } from "react-i18next";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 
 export interface InterventionStepProps extends CustomStepProps {
   title: string;
@@ -20,6 +20,7 @@ export interface InterventionStepProps extends CustomStepProps {
 
 export default function InterventionStep({
   onNext,
+  // eslint-disable-next-line unused-imports/no-unused-vars
   onBack,
   title,
   description,
@@ -28,7 +29,7 @@ export default function InterventionStep({
 }: InterventionStepProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const finalButtonText = buttonText || t('common.continue');
+  const finalButtonText = buttonText || t("common.continue");
 
   return (
     <View

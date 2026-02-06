@@ -1,13 +1,13 @@
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { BlurView } from "expo-blur";
-import { Lock, Unlock } from "lucide-react-native";
-import { Card } from "~/components/ui/card";
-import { H4 } from "~/components/ui/typography";
-import { Text } from "~/components/ui/text";
-import { cn } from "~/lib/utils";
+import { Lock } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { useRevenueCat, ENTITLEMENT_ID } from "~/contexts/RevenueCatProvider";
+import { Card } from "~/components/ui/card";
+import { Text } from "~/components/ui/text";
+import { H4 } from "~/components/ui/typography";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { cn } from "~/lib/utils";
 
 interface FeatureCardProps {
   title: string;
@@ -24,7 +24,6 @@ interface FeatureCardProps {
 export function FeatureCard({
   title,
   children,
-  variant = "primary",
   isLocked = false,
   noPadding = false,
 }: FeatureCardProps) {
@@ -53,19 +52,28 @@ export function FeatureCard({
             onPress={() => presentPaywall()}
             className="bg-primary px-3 py-1.5 rounded-full flex-row items-center gap-1.5 shadow-sm"
           >
-            <Text className="text-white font-black text-xs">{t('feature_card.unlock')}</Text>
+            <Text className="text-white font-black text-xs">
+              {t("feature_card.unlock")}
+            </Text>
             <Lock size={12} color="white" strokeWidth={3} />
           </TouchableOpacity>
         ) : showProBadge ? (
           <View className="bg-secondary/10 px-2 py-1 rounded-md border border-secondary/20">
-            <Text className="text-secondary font-black text-[10px]">{t('feature_card.pro')}</Text>
+            <Text className="text-secondary font-black text-[10px]">
+              {t("feature_card.pro")}
+            </Text>
           </View>
         ) : null}
       </View>
 
       <View className="relative">
         {/* Main Content */}
-        <View className={cn(noPadding ? "px-0 py-2" : "p-4 pb-2", isGated && "opacity-50")}>
+        <View
+          className={cn(
+            noPadding ? "px-0 py-2" : "p-4 pb-2",
+            isGated && "opacity-50",
+          )}
+        >
           {children}
         </View>
 
@@ -87,7 +95,7 @@ export function FeatureCard({
                   <Lock size={24} className="text-primary" />
                 </View>
                 <Text className="text-center font-bold text-foreground/80 text-sm">
-                  {t('feature_card.premium_msg')}
+                  {t("feature_card.premium_msg")}
                 </Text>
               </View>
             </View>

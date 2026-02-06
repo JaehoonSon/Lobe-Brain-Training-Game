@@ -1,25 +1,25 @@
 import React from "react";
-import { View, useWindowDimensions, StyleSheet } from "react-native";
-import Svg, { Path, Defs, LinearGradient, Stop, Rect } from "react-native-svg";
+import { StyleSheet, View, useWindowDimensions } from "react-native";
+import Svg, { Defs, LinearGradient, Path, Stop } from "react-native-svg";
 import { cn } from "~/lib/utils";
 
 interface CloudBackgroundProps {
-    children?: React.ReactNode;
-    className?: string;
-    skyColor?: string;
+  children?: React.ReactNode;
+  className?: string;
+  skyColor?: string;
 }
 
 export function CloudBackground({
-    children,
-    className,
-    skyColor = "#e0f2fe", // Default sky-100
+  children,
+  className,
+  skyColor = "#e0f2fe", // Default sky-100
 }: CloudBackgroundProps) {
-    const { width } = useWindowDimensions();
-    const height = width * 1.05; // Increased height
-    const cloudHeight = width * 1.05;
+  const { width } = useWindowDimensions();
+  const height = width * 1.05; // Increased height
+  const cloudHeight = width * 1.05;
 
-    // A more pronounced "cloud" path
-    const cloudPath = `
+  // A more pronounced "cloud" path
+  const cloudPath = `
     M0,0 
     L${width},0 
     L${width},${cloudHeight * 0.82} 
@@ -32,24 +32,27 @@ export function CloudBackground({
     Z
   `;
 
-    return (
-        <View className={cn("absolute top-0 left-0 right-0", className)} style={{ height }}>
-            <Svg height={height} width={width} style={StyleSheet.absoluteFill}>
-                <Defs>
-                    <LinearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                        <Stop offset="0" stopColor={skyColor} stopOpacity="1" />
-                        <Stop offset="0.8" stopColor={skyColor} stopOpacity="0.9" />
-                        <Stop offset="1" stopColor={skyColor} stopOpacity="1" />
-                    </LinearGradient>
-                </Defs>
-                {/* Sky Background with Clouds */}
-                <Path d={cloudPath} fill="url(#skyGrad)" />
-            </Svg>
+  return (
+    <View
+      className={cn("absolute top-0 left-0 right-0", className)}
+      style={{ height }}
+    >
+      <Svg height={height} width={width} style={StyleSheet.absoluteFill}>
+        <Defs>
+          <LinearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0" stopColor={skyColor} stopOpacity="1" />
+            <Stop offset="0.8" stopColor={skyColor} stopOpacity="0.9" />
+            <Stop offset="1" stopColor={skyColor} stopOpacity="1" />
+          </LinearGradient>
+        </Defs>
+        {/* Sky Background with Clouds */}
+        <Path d={cloudPath} fill="url(#skyGrad)" />
+      </Svg>
 
-            {/* Content Container (Floating in the sky) */}
-            <View className="absolute inset-0 items-center justify-center p-6">
-                {children}
-            </View>
-        </View>
-    );
+      {/* Content Container (Floating in the sky) */}
+      <View className="absolute inset-0 items-center justify-center p-6">
+        {children}
+      </View>
+    </View>
+  );
 }

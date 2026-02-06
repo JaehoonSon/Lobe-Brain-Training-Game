@@ -1,6 +1,6 @@
+import LoadingScreen from "../Loading";
 import { Stack } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
-import LoadingScreen from "../Loading";
 
 export default function UnAuthenticatedLayout() {
   const { isLoading } = useAuth();

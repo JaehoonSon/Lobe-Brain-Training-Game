@@ -1,15 +1,15 @@
-import 'dotenv/config';
-import fs from 'fs';
-import path from 'path';
-import crypto from 'crypto';
-import { z } from 'zod';
-import { generateText, Output } from 'ai';
+import { Output, generateText } from "ai";
+import crypto from "crypto";
+import "dotenv/config";
+import fs from "fs";
+import path from "path";
+import { z } from "zod";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Config                                   */
 /* -------------------------------------------------------------------------- */
 
-const MODEL = 'deepseek/deepseek-v3.2';
+const MODEL = "deepseek/deepseek-v3.2";
 
 /* -------------------------------------------------------------------------- */
 /*                                   Schemas                                  */
@@ -17,14 +17,14 @@ const MODEL = 'deepseek/deepseek-v3.2';
 
 // 1. Mental Arithmetic
 const MentalArithmeticSchema = z.object({
-  type: z.literal('mental_arithmetic'),
+  type: z.literal("mental_arithmetic"),
   operandRange: z.tuple([z.number(), z.number()]),
-  operators: z.array(z.enum(['+', '-', '*', '/'])),
+  operators: z.array(z.enum(["+", "-", "*", "/"])),
 });
 
 // 2. Memory Matrix
 const MemoryMatrixSchema = z.object({
-  type: z.literal('memory_matrix'),
+  type: z.literal("memory_matrix"),
   grid_size: z.object({
     rows: z.number(),
     cols: z.number(),
@@ -35,7 +35,7 @@ const MemoryMatrixSchema = z.object({
 
 // 3. Mental Language Discrimination
 const MentalLanguageDiscriminationSchema = z.object({
-  type: z.literal('mental_language_discrimination'),
+  type: z.literal("mental_language_discrimination"),
   sentenceParts: z.tuple([z.string(), z.string()]),
   options: z.array(z.string()),
   answer: z.string(),
@@ -43,14 +43,14 @@ const MentalLanguageDiscriminationSchema = z.object({
 
 // 4. Wordle
 const WordleSchema = z.object({
-  type: z.literal('wordle'),
+  type: z.literal("wordle"),
   word: z.string(),
   max_guesses: z.number(),
 });
 
 // 5. Ball Sort
 const BallSortSchema = z.object({
-  type: z.literal('ball_sort'),
+  type: z.literal("ball_sort"),
   tubeCount: z.number(),
   capacityPerTube: z.number(),
   colorCount: z.number(),
@@ -58,15 +58,15 @@ const BallSortSchema = z.object({
 
 // 6. Word Unscramble
 const WordUnscrambleSchema = z.object({
-  type: z.literal('word_unscramble'),
+  type: z.literal("word_unscramble"),
   word: z.string(),
 });
 
 // 7. Math Rocket
 const MathRocketSchema = z.object({
-  type: z.literal('math_rocket'),
+  type: z.literal("math_rocket"),
   operandRange: z.tuple([z.number(), z.number()]),
-  operators: z.array(z.enum(['+', '-', '*', '/'])),
+  operators: z.array(z.enum(["+", "-", "*", "/"])),
   gravity: z.number().optional(),
   thrust: z.number().optional(),
   winningScore: z.number().optional(),
@@ -74,7 +74,7 @@ const MathRocketSchema = z.object({
 
 // 8. Odd One Out
 const OddOneOutSchema = z.object({
-  type: z.literal('odd_one_out'),
+  type: z.literal("odd_one_out"),
   target: z.string(),
   distractor: z.string(),
   rows: z.number(),
@@ -126,15 +126,15 @@ function parseArgs(): ScriptConfig {
 
   for (let i = 0; i < args.length; i++) {
     switch (args[i]) {
-      case '--game':
+      case "--game":
         config.game = args[i + 1] as GameId;
         i++;
         break;
-      case '--difficulty':
+      case "--difficulty":
         config.difficulty = Number(args[i + 1]);
         i++;
         break;
-      case '--count':
+      case "--count":
         config.count = Number(args[i + 1]);
         i++;
         break;
@@ -143,7 +143,7 @@ function parseArgs(): ScriptConfig {
 
   if (!config.game || !config.count) {
     console.error(
-      'Usage: npx tsx scripts/generate-questions.ts --game <game_id> --count <number>'
+      "Usage: npx tsx scripts/generate-questions.ts --game <game_id> --count <number>",
     );
     process.exit(1);
   }
@@ -165,12 +165,12 @@ function buildOutputSchema<G extends GameId>(game: G) {
 
 // Payload now has questions without 'type'
 type OutputPayload<G extends GameId> = {
-  questions: Omit<GameContent<G>, 'type'>[];
+  questions: Omit<GameContent<G>, "type">[];
 };
 
 function buildPrompt(game: GameId, count: number, difficulty: number): string {
   switch (game) {
-    case 'mental_arithmetic':
+    case "mental_arithmetic":
       return `
     Generate ${count} unique mental arithmetic configurations for difficulty ${difficulty}/10.
 
@@ -194,7 +194,7 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
     Output ONLY valid JSON.
     `;
 
-    case 'memory_matrix':
+    case "memory_matrix":
       return `
     Generate ${count} unique memory matrix configurations for difficulty ${difficulty}/10.
 
@@ -213,7 +213,7 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
     Output ONLY valid JSON.
     `;
 
-    case 'mental_language_discrimination':
+    case "mental_language_discrimination":
       return `
     Generate ${count} unique language discrimination questions for difficulty ${difficulty}/10.
 
@@ -238,8 +238,9 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
     Output ONLY valid JSON.
     `;
 
-    case 'wordle': {
-      const wordLength = difficulty <= 4 ? 5 : difficulty <= 6 ? 6 : difficulty <= 8 ? 7 : 8;
+    case "wordle": {
+      const wordLength =
+        difficulty <= 4 ? 5 : difficulty <= 6 ? 6 : difficulty <= 8 ? 7 : 8;
       const maxGuesses = difficulty >= 7 ? 5 : 6;
 
       return `
@@ -267,12 +268,12 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
     `;
     }
 
-    case 'ball_sort': {
+    case "ball_sort": {
       // Logic for scaling difficulty
       // Diff 1-3: Easy (Extra empty tubes, few colors)
       // Diff 4-7: Medium
       // Diff 8-10: Hard (Minimal empty tubes, many colors)
-      
+
       return `
       Generate ${count} unique Ball Sort game configurations for difficulty ${difficulty}/10.
 
@@ -293,12 +294,12 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
       `;
     }
 
-    case 'word_unscramble': {
-      let wordLengthRange = '3-4';
-      if (difficulty <= 2) wordLengthRange = '3-4';
-      else if (difficulty <= 5) wordLengthRange = '5-6';
-      else if (difficulty <= 8) wordLengthRange = '7-8';
-      else wordLengthRange = '8-9'; // Strict cap at 9
+    case "word_unscramble": {
+      let wordLengthRange = "3-4";
+      if (difficulty <= 2) wordLengthRange = "3-4";
+      else if (difficulty <= 5) wordLengthRange = "5-6";
+      else if (difficulty <= 8) wordLengthRange = "7-8";
+      else wordLengthRange = "8-9"; // Strict cap at 9
 
       return `
       Generate ${count} unique Word Unscramble profiles for difficulty ${difficulty}/10.
@@ -320,7 +321,7 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
       `;
     }
 
-    case 'math_rocket': {
+    case "math_rocket": {
       return `
       Generate ${count} unique Math Rocket game configurations for difficulty ${difficulty}/10.
 
@@ -351,7 +352,7 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
       `;
     }
 
-    case 'odd_one_out': {
+    case "odd_one_out": {
       return `
       Generate ${count} unique Odd One Out game configurations for difficulty ${difficulty}/10.
 
@@ -371,7 +372,7 @@ function buildPrompt(game: GameId, count: number, difficulty: number): string {
 
     default:
       game satisfies never;
-      return '';
+      return "";
   }
 }
 
@@ -383,11 +384,11 @@ async function main() {
   const { game, count } = parseArgs();
 
   if (!process.env.AI_GATEWAY_API_KEY) {
-    console.error('Error: AI_GATEWAY_API_KEY is not set.');
+    console.error("Error: AI_GATEWAY_API_KEY is not set.");
     process.exit(1);
   }
 
-  const outputDir = path.join(process.cwd(), 'scripts', 'output');
+  const outputDir = path.join(process.cwd(), "scripts", "output");
   fs.mkdirSync(outputDir, { recursive: true });
 
   const difficulties = Array.from({ length: 10 }, (_, i) => i + 1);
@@ -400,10 +401,10 @@ async function main() {
       let existingQuestions: Question<typeof game>[] = [];
       if (fs.existsSync(outputFile)) {
         try {
-          existingQuestions = JSON.parse(fs.readFileSync(outputFile, 'utf-8'));
+          existingQuestions = JSON.parse(fs.readFileSync(outputFile, "utf-8"));
         } catch (e) {
           console.warn(
-            `Warning: Could not parse existing questions file for diff ${difficulty}, starting fresh.`
+            `Warning: Could not parse existing questions file for diff ${difficulty}, starting fresh.`,
           );
         }
       }
@@ -412,12 +413,12 @@ async function main() {
       const existingCount = existingQuestions.length;
 
       console.log(
-        `[Difficulty ${difficulty}] Found ${existingCount} existing questions. Requested: ${count}.`
+        `[Difficulty ${difficulty}] Found ${existingCount} existing questions. Requested: ${count}.`,
       );
 
       if (existingCount >= count) {
         console.log(
-          `[Difficulty ${difficulty}] Skipping generation: Have enough questions (${existingCount} >= ${count}).`
+          `[Difficulty ${difficulty}] Skipping generation: Have enough questions (${existingCount} >= ${count}).`,
         );
         return;
       }
@@ -426,7 +427,7 @@ async function main() {
       const prompt = buildPrompt(game, count, difficulty);
 
       console.log(
-        `[Difficulty ${difficulty}] Generating ${count} NEW questions for ${game}...`
+        `[Difficulty ${difficulty}] Generating ${count} NEW questions for ${game}...`,
       );
 
       try {
@@ -447,7 +448,7 @@ async function main() {
               ...partialContent,
               type: game,
             } as GameContent<typeof game>,
-          })
+          }),
         );
 
         // Overwrite the file with the new complete set
@@ -455,22 +456,22 @@ async function main() {
 
         console.log(
           `[Difficulty ${difficulty}] Success: Saved ${newQuestions.length} questions to ${path.basename(
-            outputFile
-          )}`
+            outputFile,
+          )}`,
         );
       } catch (error) {
         console.error(
           `[Difficulty ${difficulty}] Error generating questions:`,
-          error
+          error,
         );
       }
-    })
+    }),
   );
 }
 
 /* -------------------------------------------------------------------------- */
 
 main().catch((err) => {
-  console.error('Fatal error:', err);
+  console.error("Fatal error:", err);
   process.exit(1);
 });
