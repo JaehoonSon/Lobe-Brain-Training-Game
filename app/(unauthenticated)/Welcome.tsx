@@ -1,9 +1,6 @@
 import React from "react";
 import { View, ScrollView, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H2, P, Muted } from "~/components/ui/typography";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent } from "~/components/ui/card";
+import { router } from "expo-router";
 import {
   BrainCircuit,
   Sparkles,
@@ -11,9 +8,12 @@ import {
   Target,
   ArrowRight,
 } from "lucide-react-native";
-import { router } from "expo-router";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent } from "~/components/ui/card";
+import { H1, H2, P, Muted } from "~/components/ui/typography";
 
 const WelcomeScreen = () => {
   const { t } = useTranslation();

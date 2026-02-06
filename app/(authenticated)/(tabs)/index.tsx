@@ -1,28 +1,27 @@
+import React, { useState, useEffect, useCallback } from "react";
 import { View, ScrollView, TouchableOpacity } from "react-native";
+import { router, useFocusEffect } from "expo-router";
+import { Zap, Lightbulb, Globe } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { H3, H4, P, Muted } from "~/components/ui/typography";
+import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
+import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-
-import { Zap, Lightbulb, Globe } from "lucide-react-native";
-import { router, useFocusEffect } from "expo-router";
-import { cn } from "~/lib/utils";
-import i18n from "~/lib/i18n";
-import { Database } from "~/lib/database.types";
-import { supabase } from "~/lib/supabase";
+import { H3, H4, P, Muted } from "~/components/ui/typography";
+import { useAuth } from "~/contexts/AuthProvider";
+import { useGames } from "~/contexts/GamesContext";
+import { useDailyInsight } from "~/hooks/useDailyInsight";
 import {
   buildTranslationMap,
   fetchContentTranslations,
   resolveTranslation,
 } from "~/lib/content-translations";
+import { Database } from "~/lib/database.types";
+import i18n from "~/lib/i18n";
 import { normalizeLocale } from "~/lib/locale";
-import React, { useState, useEffect, useCallback } from "react";
-import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
-import { useGames } from "~/contexts/GamesContext";
-import { useAuth } from "~/contexts/AuthProvider";
-import { useDailyInsight } from "~/hooks/useDailyInsight";
-import { useTranslation } from "react-i18next";
+import { supabase } from "~/lib/supabase";
+import { cn } from "~/lib/utils";
 
 export default function Dashboard() {
   const { t } = useTranslation();

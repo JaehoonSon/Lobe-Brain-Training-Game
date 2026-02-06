@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import type { ComponentProps } from "react";
-import { Text as RNText } from "./text";
 import * as Haptics from "expo-haptics";
 import Animated, { FadeIn } from "react-native-reanimated";
+import { Text as RNText } from "./text";
 
 /* ------------------------------------------------------------------ */
 /*  Types & helpers                                                   */

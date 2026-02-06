@@ -2,12 +2,12 @@ import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
 import { Lock } from "lucide-react-native";
-import { Card } from "~/components/ui/card";
-import { H4 } from "~/components/ui/typography";
-import { Text } from "~/components/ui/text";
-import { cn } from "~/lib/utils";
 import { useTranslation } from "react-i18next";
+import { Card } from "~/components/ui/card";
+import { Text } from "~/components/ui/text";
+import { H4 } from "~/components/ui/typography";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { cn } from "~/lib/utils";
 
 interface FeatureCardProps {
   title: string;

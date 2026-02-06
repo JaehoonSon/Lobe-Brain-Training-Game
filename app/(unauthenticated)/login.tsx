@@ -1,8 +1,8 @@
 import { View } from "react-native";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 
 export default function LoginScreen() {
   const { t } = useTranslation();

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { CheckCircle, XCircle, Info, AlertTriangle } from "lucide-react-native";
 import Toast, {
   ToastConfig,
   ToastConfigParams,
 } from "react-native-toast-message";
-import { CheckCircle, XCircle, Info, AlertTriangle } from "lucide-react-native";
 
 // Type definitions
 export type ToastType = "success" | "error" | "info" | "warning";

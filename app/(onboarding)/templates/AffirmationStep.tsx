@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { View, ImageSourcePropType } from "react-native";
 import { Image } from "expo-image";
-import { Text } from "~/components/ui/text";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { Text } from "~/components/ui/text";
 
 export interface AffirmationStepConfig {
   type: "affirmation";

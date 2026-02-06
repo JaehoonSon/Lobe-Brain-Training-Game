@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
 import { View, TouchableOpacity, Dimensions } from "react-native";
+import * as Haptics from "expo-haptics";
+import { useTranslation } from "react-i18next";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
-import * as Haptics from "expo-haptics";
 import { WordleContent } from "~/lib/validators/game-content";
-import { useTranslation } from "react-i18next";
 
 interface WordleProps {
   onComplete: (accuracy: number) => void; // 0.0 to 1.0

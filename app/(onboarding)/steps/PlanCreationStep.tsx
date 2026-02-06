@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View } from "react-native";
-import { Text } from "~/components/ui/text";
 import { Brain } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
   Easing,
 } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
+import { Text } from "~/components/ui/text";
 
 interface PlanCreationStepProps {
   onNext: () => void;

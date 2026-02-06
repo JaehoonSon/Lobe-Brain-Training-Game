@@ -1,8 +1,8 @@
+import { View, ViewProps } from "react-native";
 import * as Slot from "@rn-primitives/slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { View, ViewProps } from "react-native";
-import { cn } from "~/lib/utils";
 import { TextClassContext } from "~/components/ui/text";
+import { cn } from "~/lib/utils";
 
 const badgeVariants = cva(
   "web:inline-flex items-center rounded-full border-2 border-border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2",

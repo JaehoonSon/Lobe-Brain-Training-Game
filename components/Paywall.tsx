@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
-import RevenueCatUI from "react-native-purchases-ui";
 import { CustomerInfo } from "react-native-purchases";
+import RevenueCatUI from "react-native-purchases-ui";
 import Tenjin from "react-native-tenjin";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 

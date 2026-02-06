@@ -1,5 +1,5 @@
-import * as AppleAuthentication from "expo-apple-authentication";
 import { View, StyleSheet } from "react-native";
+import * as AppleAuthentication from "expo-apple-authentication";
 import { supabase } from "~/lib/supabase";
 
 export default function App() {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { View, TouchableOpacity, useWindowDimensions } from "react-native";
+import * as Haptics from "expo-haptics";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
-import * as Haptics from "expo-haptics";
 import { OddOneOutContent } from "~/lib/validators/game-content";
 
 interface OddOneOutProps {

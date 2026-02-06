@@ -1,14 +1,14 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { Progress } from "~/components/ui/progress";
-import { useOnboarding } from "~/contexts/OnboardingContext";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { Check, ChevronLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Progress } from "~/components/ui/progress";
+import { Text } from "~/components/ui/text";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 
 interface PlanRevealStepProps {
   onNext: () => void;

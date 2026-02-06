@@ -1,12 +1,12 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Progress } from "~/components/ui/progress";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useOnboarding } from "~/contexts/OnboardingContext";
 import { ChevronLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Progress } from "~/components/ui/progress";
+import { Text } from "~/components/ui/text";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 
 interface WizardLayoutProps {
   title: string;

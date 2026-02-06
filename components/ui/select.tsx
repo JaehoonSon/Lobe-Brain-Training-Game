@@ -1,6 +1,6 @@
-import * as SelectPrimitive from "@rn-primitives/select";
 import * as React from "react";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import * as SelectPrimitive from "@rn-primitives/select";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { Check } from "~/lib/icons/Check";
 import { ChevronDown } from "~/lib/icons/ChevronDown";

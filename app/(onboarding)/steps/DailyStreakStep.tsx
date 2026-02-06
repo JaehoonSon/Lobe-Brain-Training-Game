@@ -1,12 +1,12 @@
 import React from "react";
 import { View } from "react-native";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { CustomStepProps } from "~/app/(onboarding)/index";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { Flame } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CustomStepProps } from "~/app/(onboarding)/index";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 
 export default function DailyStreakStep({ onNext }: CustomStepProps) {
   const { t } = useTranslation();

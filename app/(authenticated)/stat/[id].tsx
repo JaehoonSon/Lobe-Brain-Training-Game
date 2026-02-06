@@ -6,7 +6,15 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { router, useLocalSearchParams } from "expo-router";
+import {
+  ChevronLeft,
+  Zap,
+  TrendingUp,
+  Lightbulb,
+  ChevronRight,
+} from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 import Animated, {
   FadeInDown,
   useSharedValue,
@@ -15,23 +23,14 @@ import Animated, {
   withTiming,
   withSequence,
 } from "react-native-reanimated";
-import {
-  ChevronLeft,
-  Zap,
-  TrendingUp,
-  Lightbulb,
-  ChevronRight,
-} from "lucide-react-native";
-import { router, useLocalSearchParams } from "expo-router";
-import { H1, H4, P, Muted } from "~/components/ui/typography";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
+import { FeatureCard } from "~/components/FeatureCard";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-import { useTranslation } from "react-i18next";
-import { useUserStats } from "~/contexts/UserStatsContext";
-
+import { H1, H4, P, Muted } from "~/components/ui/typography";
 import { useGames } from "~/contexts/GamesContext";
-import { FeatureCard } from "~/components/FeatureCard";
-import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
+import { useUserStats } from "~/contexts/UserStatsContext";
 import { INSIGHTS } from "~/lib/insights-data";
 
 export default function CategoryDetailScreen() {

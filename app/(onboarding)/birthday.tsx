@@ -1,17 +1,17 @@
+import { useState, useRef } from "react";
 import {
   View,
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useState, useRef } from "react";
-import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-import { CustomStepProps } from "~/app/(onboarding)/index";
-import { useOnboarding } from "~/contexts/OnboardingContext";
 import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CustomStepProps } from "~/app/(onboarding)/index";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { useOnboarding } from "~/contexts/OnboardingContext";
 
 export default function BirthdaySelectionScreen({
   onNext,

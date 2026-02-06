@@ -1,3 +1,4 @@
+import { useColorScheme } from "react-native";
 import { Tabs } from "expo-router";
 import {
   Sun,
@@ -6,7 +7,6 @@ import {
   Lightbulb,
   LayoutTemplate,
 } from "lucide-react-native";
-import { useColorScheme } from "react-native";
 import { useTranslation } from "react-i18next";
 
 // Toggle this to show/hide the tab bar UI

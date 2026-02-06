@@ -4,8 +4,8 @@ import { format } from "date-fns";
 import { LineChart } from "react-native-gifted-charts";
 import { Text } from "~/components/ui/text";
 import { P } from "~/components/ui/typography";
-import { cn } from "~/lib/utils";
 import { ScoreHistoryPoint } from "~/contexts/UserStatsContext";
+import { cn } from "~/lib/utils";
 
 export type ChartRange = "1W" | "1M" | "3M" | "6M" | "1Y" | "ALL";
 

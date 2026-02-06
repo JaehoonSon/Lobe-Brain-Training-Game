@@ -5,12 +5,12 @@ import {
   useWindowDimensions,
   Animated,
 } from "react-native";
-import { Text } from "~/components/ui/text";
-import { cn } from "~/lib/utils";
 import * as Haptics from "expo-haptics";
-import { StroopClashContent } from "~/lib/validators/game-content";
 import { PaintBucket, Type } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { Text } from "~/components/ui/text";
+import { cn } from "~/lib/utils";
+import { StroopClashContent } from "~/lib/validators/game-content";
 
 interface StroopClashProps {
   onComplete: (accuracy: number, userResponse?: any) => void;

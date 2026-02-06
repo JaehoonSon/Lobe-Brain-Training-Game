@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
+import * as Haptics from "expo-haptics";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
-import * as Haptics from "expo-haptics";
 import { MentalArithmeticContent } from "~/lib/validators/game-content";
 
 interface MentalArithmeticProps {

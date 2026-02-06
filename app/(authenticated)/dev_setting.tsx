@@ -1,14 +1,14 @@
 import { ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, P } from "~/components/ui/typography";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
-import { useAuth } from "~/contexts/AuthProvider";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { H1, P } from "~/components/ui/typography";
+import { useAuth } from "~/contexts/AuthProvider";
+import { useNotifications } from "~/contexts/NotificationProvider";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
-import { useNotifications } from "~/contexts/NotificationProvider";
-import { useTranslation } from "react-i18next";
 import { StoreReview } from "~/lib/StoreReview";
 
 export default function IndexAuthenticatedScreen() {

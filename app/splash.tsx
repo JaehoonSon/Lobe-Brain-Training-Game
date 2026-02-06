@@ -1,9 +1,9 @@
-import { SplashScreen } from "expo-router";
-import { useAuth } from "~/contexts/AuthProvider";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import LottieView from "lottie-react-native";
 import { Image } from "expo-image";
+import { SplashScreen } from "expo-router";
+import LottieView from "lottie-react-native";
+import { useAuth } from "~/contexts/AuthProvider";
 
 const SPLASH_BG_COLOR = "#fe7939"; // Primary Theme Orange
 const MIN_DISPLAY_TIME = 600; // 600ms delay

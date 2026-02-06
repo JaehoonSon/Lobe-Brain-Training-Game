@@ -5,12 +5,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, router } from "expo-router";
-import { useGames } from "~/contexts/GamesContext";
-import { useUserStats } from "~/contexts/UserStatsContext";
-import { H1, H4, P } from "~/components/ui/typography";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
 import {
   ChevronLeft,
   X,
@@ -20,10 +16,14 @@ import {
   Star,
   Lock,
 } from "lucide-react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { H1, H4, P } from "~/components/ui/typography";
+import { useGames } from "~/contexts/GamesContext";
+import { useRevenueCat } from "~/contexts/RevenueCatProvider";
+import { useUserStats } from "~/contexts/UserStatsContext";
 
 export default function GameDetailScreen() {
   const { t } = useTranslation();

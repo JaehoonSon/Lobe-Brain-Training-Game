@@ -1,10 +1,10 @@
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { ChevronLeft, Share2, Bookmark } from "lucide-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Text } from "~/components/ui/text";
 import { H1, H2, H3, P, Muted } from "~/components/ui/typography";
 import { INSIGHTS } from "~/lib/insights-data";
-import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
 
 // Simple Markdown Renderer

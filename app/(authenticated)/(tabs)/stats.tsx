@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import {
   View,
   ScrollView,
@@ -5,14 +6,7 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from "react-native";
-import { useCallback, useState } from "react";
-import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
-import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
-
-import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H4, P } from "~/components/ui/typography";
-import { Card } from "~/components/ui/card";
-import { Text } from "~/components/ui/text";
+import { router } from "expo-router";
 import {
   Zap,
   ChevronRight,
@@ -24,13 +18,17 @@ import {
   Puzzle,
   Eye,
 } from "lucide-react-native";
-import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
-
-import { router } from "expo-router";
-import { cn } from "~/lib/utils";
-import { FeatureCard } from "~/components/FeatureCard";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
+import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
+import { FeatureCard } from "~/components/FeatureCard";
+import { Card } from "~/components/ui/card";
+import { Text } from "~/components/ui/text";
+import { H1, H4, P } from "~/components/ui/typography";
+import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
+import { cn } from "~/lib/utils";
 // --- Components ---
 
 function getCategoryIcon(categoryName: string) {

@@ -1,5 +1,5 @@
-import * as LabelPrimitive from "@rn-primitives/label";
 import * as React from "react";
+import * as LabelPrimitive from "@rn-primitives/label";
 import { cn } from "~/lib/utils";
 
 function Label({

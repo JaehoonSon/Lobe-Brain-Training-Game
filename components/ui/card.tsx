@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Text, TextProps, View, ViewProps } from "react-native";
+import { cva, type VariantProps } from "class-variance-authority";
 import { TextClassContext } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
-
-import { cva, type VariantProps } from "class-variance-authority";
 
 const cardVariants = cva("rounded-xl border-2 border-b-4", {
   variants: {

@@ -7,11 +7,11 @@ import {
   Platform,
   UIManager,
 } from "react-native";
+import * as Haptics from "expo-haptics";
+import { useTranslation } from "react-i18next";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";
-import * as Haptics from "expo-haptics";
 import { BallSortContent } from "~/lib/validators/game-content";
-import { useTranslation } from "react-i18next";
 
 // Enable LayoutAnimation for Android
 if (

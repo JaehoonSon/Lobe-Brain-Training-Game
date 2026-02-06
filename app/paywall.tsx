@@ -1,7 +1,7 @@
+import { CustomStepProps } from "~/app/(onboarding)/index";
 import Paywall from "~/components/Paywall";
 import { useOnboarding } from "~/contexts/OnboardingContext";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
-import { CustomStepProps } from "~/app/(onboarding)/index";
 
 type PaywallScreenProps = Partial<CustomStepProps>;
 

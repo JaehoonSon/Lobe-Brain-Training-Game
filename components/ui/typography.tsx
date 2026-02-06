@@ -1,6 +1,6 @@
-import * as Slot from "@rn-primitives/slot";
 import * as React from "react";
 import { Platform, Text as RNText } from "react-native";
+import * as Slot from "@rn-primitives/slot";
 import { cn } from "~/lib/utils";
 
 type TypographyProps = React.ComponentProps<typeof RNText> & {

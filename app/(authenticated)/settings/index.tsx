@@ -1,4 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
+import { PortalHost } from "@rn-primitives/portal";
+import Constants from "expo-constants";
+import { useRouter, useFocusEffect } from "expo-router";
+import * as WebBrowser from "expo-web-browser";
 import {
   ChevronRight,
   LogOut,
@@ -13,24 +18,19 @@ import {
   Bell,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { useRouter, useFocusEffect } from "expo-router";
-import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
-import { PortalHost } from "@rn-primitives/portal";
-import * as WebBrowser from "expo-web-browser";
-import Constants from "expo-constants";
+import { Card } from "~/components/ui/card";
+import { Option } from "~/components/ui/select";
+import { Switch } from "~/components/ui/switch";
 import { showErrorToast } from "~/components/ui/toast";
 import { H1, Muted, P } from "~/components/ui/typography";
-import { Card } from "~/components/ui/card";
+import { appMetadata } from "~/config";
 import { useAuth } from "~/contexts/AuthProvider";
+import { useNotifications } from "~/contexts/NotificationProvider";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
-import { appMetadata } from "~/config";
-import { supabase } from "~/lib/supabase";
-import { useNotifications } from "~/contexts/NotificationProvider";
-import { Switch } from "~/components/ui/switch";
-import { normalizeLocale } from "~/lib/locale";
 import { getPreferredLanguage, SYSTEM_LANGUAGE_VALUE } from "~/lib/i18n";
-import { Option } from "~/components/ui/select";
+import { normalizeLocale } from "~/lib/locale";
+import { supabase } from "~/lib/supabase";
 
 const SUPPORTED_LANGUAGES: Option[] = [
   { value: "en", label: "English" },

@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Dimensions } from "react-native";
-import { Image } from "expo-image";
-import { Text } from "~/components/ui/text";
-import { Button } from "~/components/ui/button";
 import * as Haptics from "expo-haptics";
-import { MathRocketContent } from "~/lib/validators/game-content";
+import { Image } from "expo-image";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -17,6 +14,9 @@ import Animated, {
   Easing,
   cancelAnimation,
 } from "react-native-reanimated";
+import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { MathRocketContent } from "~/lib/validators/game-content";
 
 const { width, height } = Dimensions.get("window");
 const ROCKET_SIZE = 100;

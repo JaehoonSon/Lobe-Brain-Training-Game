@@ -1,15 +1,19 @@
 import * as React from "react";
 import { SafeAreaView, ScrollView, View, Text } from "react-native";
+import { Info, Check, X } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Input } from "~/components/ui/input";
-import { Textarea } from "~/components/ui/textarea";
-import { Badge } from "~/components/ui/badge";
 import { Checkbox } from "~/components/ui/checkbox";
-import { Switch } from "~/components/ui/switch";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 import { Progress } from "~/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { Switch } from "~/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { Textarea } from "~/components/ui/textarea";
 import {
   H1,
   H2,
@@ -22,10 +26,6 @@ import {
   Code,
   Lead,
 } from "~/components/ui/typography";
-import { Info, Check, X } from "lucide-react-native";
-import { Label } from "~/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { useTranslation } from "react-i18next";
 
 export default function ComponentShowcase() {
   const { t } = useTranslation();

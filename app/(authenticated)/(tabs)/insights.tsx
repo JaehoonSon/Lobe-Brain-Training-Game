@@ -1,13 +1,13 @@
 import { View, ScrollView, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { H1, H4, P } from "~/components/ui/typography";
-import { Card, CardContent } from "~/components/ui/card";
-import { Lightbulb, ChevronRight } from "lucide-react-native";
-import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
-import { INSIGHTS } from "~/lib/insights-data";
 import { router } from "expo-router";
-import { Text } from "~/components/ui/text";
+import { Lightbulb, ChevronRight } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
+import { Card, CardContent } from "~/components/ui/card";
+import { Text } from "~/components/ui/text";
+import { H1, H4, P } from "~/components/ui/typography";
+import { INSIGHTS } from "~/lib/insights-data";
 
 export default function InsightsScreen() {
   const { t } = useTranslation();

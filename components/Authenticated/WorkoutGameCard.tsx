@@ -1,9 +1,9 @@
 import { View, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
-import { H4, P } from "~/components/ui/typography";
-import { Card } from "~/components/ui/card";
 import { Check, Lock, Play } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { Card } from "~/components/ui/card";
+import { H4, P } from "~/components/ui/typography";
 import { Database } from "~/lib/database.types";
 import { cn } from "~/lib/utils";
 

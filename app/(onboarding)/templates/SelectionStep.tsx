@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity } from "react-native";
+import * as Haptics from "expo-haptics";
+import { Check } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { Text } from "~/components/ui/text";
 import { useOnboarding } from "~/contexts/OnboardingContext";
-import { Check } from "lucide-react-native";
-import * as Haptics from "expo-haptics";
-import Animated, { FadeInDown } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
 
 export interface SelectionStepConfig {
   type: "selection";

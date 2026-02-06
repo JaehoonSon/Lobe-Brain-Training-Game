@@ -5,17 +5,17 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
-import { Flame, Trophy, Target, X } from "lucide-react-native";
 import { router } from "expo-router";
-import { H1, P, Muted } from "~/components/ui/typography";
+import LottieView from "lottie-react-native";
+import { Flame, Trophy, Target, X } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
+import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Card, CardContent } from "~/components/ui/card";
-import { supabase } from "~/lib/supabase";
+import { H1, P, Muted } from "~/components/ui/typography";
 import { useAuth } from "~/contexts/AuthProvider";
 import { Database } from "~/lib/database.types";
-import LottieView from "lottie-react-native";
-import { useTranslation } from "react-i18next";
+import { supabase } from "~/lib/supabase";
 
 type UserStreak = Database["public"]["Tables"]["user_streaks"]["Row"];
 
