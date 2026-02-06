@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { View, Dimensions } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { Dimensions, View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  interpolate,
+  Easing,
   Extrapolation,
-  useFrameCallback,
+  cancelAnimation,
+  interpolate,
   runOnJS,
+  useAnimatedStyle,
+  useFrameCallback,
+  useSharedValue,
   withRepeat,
   withTiming,
-  Easing,
-  cancelAnimation,
 } from "react-native-reanimated";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";

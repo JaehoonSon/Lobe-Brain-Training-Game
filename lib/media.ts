@@ -1,7 +1,7 @@
 // utils/media.ts
-import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import * as FileSystem from "expo-file-system";
+import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
 
 export async function checkPhotoPermission(): Promise<boolean> {
@@ -25,7 +25,7 @@ export async function requestCameraPermission(): Promise<boolean> {
 }
 
 export async function openGallery(
-  options: ImagePicker.ImagePickerOptions = {}
+  options: ImagePicker.ImagePickerOptions = {},
 ) {
   // Ensure library permission
   if (!(await checkPhotoPermission())) {
@@ -62,7 +62,7 @@ export async function openCamera(options: ImagePicker.ImagePickerOptions = {}) {
 
 export async function downloadImageToLibrary(
   imageUrl: string,
-  fileName?: string
+  fileName?: string,
 ): Promise<MediaLibrary.Asset> {
   if (!(await checkPhotoPermission())) {
     const granted = await requestPhotoPermission();

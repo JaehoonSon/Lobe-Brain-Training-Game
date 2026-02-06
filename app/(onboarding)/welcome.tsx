@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Image } from "expo-image";
-import { Zap, Brain, Target, Check } from "lucide-react-native";
+import { Brain, Check, Target, Zap } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

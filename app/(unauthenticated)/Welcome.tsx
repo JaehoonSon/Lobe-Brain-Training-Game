@@ -1,19 +1,19 @@
 import React from "react";
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
 import {
+  ArrowRight,
   BrainCircuit,
   Sparkles,
-  Zap,
   Target,
-  ArrowRight,
+  Zap,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
-import { H1, H2, P, Muted } from "~/components/ui/typography";
+import { H1, H2, Muted, P } from "~/components/ui/typography";
 
 const WelcomeScreen = () => {
   const { t } = useTranslation();

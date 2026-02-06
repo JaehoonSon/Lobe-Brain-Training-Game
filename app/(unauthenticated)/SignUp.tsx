@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useTranslation } from "react-i18next";

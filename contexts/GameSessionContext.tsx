@@ -1,14 +1,13 @@
 import React, {
   createContext,
-  useContext,
-  useState,
-  useRef,
   useCallback,
+  useContext,
+  useRef,
+  useState,
 } from "react";
-import { supabase } from "~/lib/supabase";
-import { calculateBPI } from "~/lib/scoring";
 import { Database, Json } from "~/lib/database.types";
-
+import { calculateBPI } from "~/lib/scoring";
+import { supabase } from "~/lib/supabase";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -53,7 +52,7 @@ interface GameSessionContextType {
   setGameMetadata: (
     gameId: string,
     gameName: string,
-    categoryName?: string
+    categoryName?: string,
   ) => void;
   startRound: (config: RoundSessionConfig) => void;
   recordAnswer: (answer: AnswerRecord) => void;
@@ -76,7 +75,7 @@ const initialState: RoundSessionState = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GameSessionContext = createContext<GameSessionContextType | undefined>(
-  undefined
+  undefined,
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -114,7 +113,7 @@ export function GameSessionProvider({
         categoryName,
       }));
     },
-    []
+    [],
   );
 
   /**
@@ -170,10 +169,7 @@ export function GameSessionProvider({
 
     // Get current answers from ref to avoid stale state
     const currentAnswers = answersRef.current;
-    const accuracySum = currentAnswers.reduce(
-      (sum, a) => sum + a.accuracy,
-      0
-    );
+    const accuracySum = currentAnswers.reduce((sum, a) => sum + a.accuracy, 0);
 
     // Clamp difficulty values
     const avgQDifficulty = Math.max(0, Math.min(10, avgQuestionDifficulty));
@@ -197,9 +193,9 @@ export function GameSessionProvider({
     const avgResponseTimeMs =
       currentAnswers.length > 0
         ? Math.round(
-          currentAnswers.reduce((sum, a) => sum + a.responseTimeMs, 0) /
-          currentAnswers.length
-        )
+            currentAnswers.reduce((sum, a) => sum + a.responseTimeMs, 0) /
+              currentAnswers.length,
+          )
         : null;
 
     const bpi = calculateBPI({
@@ -207,9 +203,9 @@ export function GameSessionProvider({
       difficulty: avgQDifficulty,
       ...(targetPerQ && avgResponseTimeMs !== null
         ? {
-          targetTimeMs: targetPerQ,
-          actualTimeMs: avgResponseTimeMs,
-        }
+            targetTimeMs: targetPerQ,
+            actualTimeMs: avgResponseTimeMs,
+          }
         : {}),
     });
 
@@ -268,7 +264,7 @@ export function GameSessionProvider({
       }
 
       const { error: refreshError } = await supabase.rpc(
-        "refresh_ability_scores" as keyof Database["public"]["Functions"]
+        "refresh_ability_scores" as keyof Database["public"]["Functions"],
       );
       if (refreshError) {
         console.error("Failed to refresh ability scores:", refreshError);

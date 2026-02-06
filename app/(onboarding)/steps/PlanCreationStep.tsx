@@ -3,11 +3,11 @@ import { View } from "react-native";
 import { Brain } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import Animated, {
-  useSharedValue,
+  Easing,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
   withTiming,
-  Easing,
 } from "react-native-reanimated";
 import { Text } from "~/components/ui/text";
 

@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { supabase } from "~/lib/supabase";
 

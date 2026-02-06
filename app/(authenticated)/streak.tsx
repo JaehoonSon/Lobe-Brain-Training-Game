@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
-  View,
+  ActivityIndicator,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
+  View,
 } from "react-native";
 import { router } from "expo-router";
 import LottieView from "lottie-react-native";
-import { Flame, Trophy, Target, X } from "lucide-react-native";
+import { Flame, Target, Trophy, X } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Card, CardContent } from "~/components/ui/card";
-import { H1, P, Muted } from "~/components/ui/typography";
+import { H1, Muted, P } from "~/components/ui/typography";
 import { useAuth } from "~/contexts/AuthProvider";
 import { Database } from "~/lib/database.types";
 import { supabase } from "~/lib/supabase";

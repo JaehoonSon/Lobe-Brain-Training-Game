@@ -1,4 +1,4 @@
-import { startOfWeek, addDays, addWeeks, format } from "date-fns";
+import { addDays, addWeeks, format, startOfWeek } from "date-fns";
 
 export function getWeekDates(weeksOffset = 0) {
   const today = new Date();

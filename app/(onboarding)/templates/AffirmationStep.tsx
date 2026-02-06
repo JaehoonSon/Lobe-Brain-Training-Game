@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, ImageSourcePropType } from "react-native";
+import { ImageSourcePropType, View } from "react-native";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";

@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import i18n from "~/lib/i18n";
-import { supabase } from "~/lib/supabase";
 import {
   buildTranslationMap,
   fetchContentTranslations,
   resolveTranslation,
 } from "~/lib/content-translations";
-import { normalizeLocale } from "~/lib/locale";
 import { Database } from "~/lib/database.types";
+import i18n from "~/lib/i18n";
+import { normalizeLocale } from "~/lib/locale";
+import { supabase } from "~/lib/supabase";
 
 type Game = Database["public"]["Tables"]["games"]["Row"];
 type Category = Database["public"]["Tables"]["categories"]["Row"];
@@ -30,7 +30,7 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
   const [games, setGames] = useState<Game[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [dailyCompletedGameIds, setDailyCompletedGameIds] = useState<string[]>(
-    []
+    [],
   );
   const [locale, setLocale] = useState(() => normalizeLocale(i18n.language));
   const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +51,7 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
       if (sessions) {
         // distinct game IDs
         const uniqueGameIds = Array.from(
-          new Set(sessions.map((s) => s.game_id).filter(Boolean) as string[])
+          new Set(sessions.map((s) => s.game_id).filter(Boolean) as string[]),
         );
         setDailyCompletedGameIds(uniqueGameIds);
       }
@@ -84,13 +84,13 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
           "game",
           gameIds,
           ["name", "description", "instructions"],
-          locale
+          locale,
         ),
         fetchContentTranslations(
           "category",
           categoryIds,
           ["name", "description"],
-          locale
+          locale,
         ),
       ]);
 
@@ -99,25 +99,30 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
 
       const localizedGames = activeGames.map((game) => ({
         ...game,
-        name: resolveTranslation(gameTranslationMap, game.id, "name", game.name),
+        name: resolveTranslation(
+          gameTranslationMap,
+          game.id,
+          "name",
+          game.name,
+        ),
         description: resolveTranslation(
           gameTranslationMap,
           game.id,
           "description",
-          game.description
+          game.description,
         ),
         instructions: resolveTranslation(
           gameTranslationMap,
           game.id,
           "instructions",
-          game.instructions
+          game.instructions,
         ),
       }));
 
       setGames(localizedGames);
 
       const categoriesWithGames = allCategories.filter((category) =>
-        activeGames.some((game) => game.category_id === category.id)
+        activeGames.some((game) => game.category_id === category.id),
       );
 
       const localizedCategories = categoriesWithGames.map((category) => ({
@@ -126,13 +131,13 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
           categoryTranslationMap,
           category.id,
           "name",
-          category.name
+          category.name,
         ),
         description: resolveTranslation(
           categoryTranslationMap,
           category.id,
           "description",
-          category.description
+          category.description,
         ),
       }));
 

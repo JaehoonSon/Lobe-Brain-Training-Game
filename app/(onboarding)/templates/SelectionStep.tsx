@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { TouchableOpacity, View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Check } from "lucide-react-native";
 import { useTranslation } from "react-i18next";

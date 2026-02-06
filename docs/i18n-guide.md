@@ -6,10 +6,10 @@ This guide documents how to add localized text to Brain App. Follow these patter
 
 ## Quick Decision: Which System to Use?
 
-| Text Type | System | Location |
-|-----------|--------|----------|
-| **UI strings** (buttons, labels, headers) | i18next | `assets/locales/*.json` |
-| **User messages** (toasts, alerts, errors) | i18next | `assets/locales/*.json` |
+| Text Type                                          | System          | Location                     |
+| -------------------------------------------------- | --------------- | ---------------------------- |
+| **UI strings** (buttons, labels, headers)          | i18next         | `assets/locales/*.json`      |
+| **User messages** (toasts, alerts, errors)         | i18next         | `assets/locales/*.json`      |
 | **Database content** (games, categories, insights) | DB translations | `content_translations` table |
 
 > **Rule of thumb:** If the text is hardcoded in `.tsx` files → use i18next. If it comes from the database → use `content_translations`.
@@ -18,18 +18,18 @@ This guide documents how to add localized text to Brain App. Follow these patter
 
 ## Supported Languages
 
-| Code | Language |
-|------|----------|
-| `en` | English (Default) |
-| `es` | Spanish |
-| `ko` | Korean |
+| Code | Language             |
+| ---- | -------------------- |
+| `en` | English (Default)    |
+| `es` | Spanish              |
+| `ko` | Korean               |
 | `zh` | Chinese (Simplified) |
-| `ja` | Japanese |
-| `pt` | Portuguese |
-| `de` | German |
-| `fr` | French |
-| `hi` | Hindi |
-| `ru` | Russian |
+| `ja` | Japanese             |
+| `pt` | Portuguese           |
+| `de` | German               |
+| `fr` | French               |
+| `hi` | Hindi                |
+| `ru` | Russian              |
 
 ---
 
@@ -40,6 +40,7 @@ Use this for any text hardcoded in React components.
 ### Step 1: Add the Key to Locale Files
 
 **`assets/locales/en.json`:**
+
 ```json
 {
   "dashboard": {
@@ -49,6 +50,7 @@ Use this for any text hardcoded in React components.
 ```
 
 **`assets/locales/es.json`:**
+
 ```json
 {
   "dashboard": {
@@ -63,41 +65,44 @@ Use this for any text hardcoded in React components.
 ### Step 2: Use in Component
 
 ```tsx
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export function MyComponent() {
   const { t } = useTranslation();
-  return <Text>{t('dashboard.welcome_message')}</Text>;
+  return <Text>{t("dashboard.welcome_message")}</Text>;
 }
 ```
 
 ### Namespace Conventions
 
-| Prefix | Use For |
-|--------|---------|
-| `common.*` | Shared (buttons, errors, labels) |
-| `dashboard.*` | Today/Home screen |
-| `games_tab.*` | Games screen |
-| `stats.*` | Stats screen |
-| `insights.*` | Insights screen |
-| `settings.*` | Settings screen |
-| `onboarding.*` | Onboarding flow |
-| `unauth.*` | Login/signup screens |
-| `game.*` | Game detail/play screens |
+| Prefix         | Use For                          |
+| -------------- | -------------------------------- |
+| `common.*`     | Shared (buttons, errors, labels) |
+| `dashboard.*`  | Today/Home screen                |
+| `games_tab.*`  | Games screen                     |
+| `stats.*`      | Stats screen                     |
+| `insights.*`   | Insights screen                  |
+| `settings.*`   | Settings screen                  |
+| `onboarding.*` | Onboarding flow                  |
+| `unauth.*`     | Login/signup screens             |
+| `game.*`       | Game detail/play screens         |
 
 ### Dynamic Values (Interpolation)
 
 **❌ Don't concatenate:**
+
 ```tsx
 <Text>{"Hello, " + userName + "!"}</Text>
 ```
 
 **✅ Use interpolation:**
+
 ```json
 { "greeting": "Hello, {{name}}!" }
 ```
+
 ```tsx
-<Text>{t('greeting', { name: userName })}</Text>
+<Text>{t("greeting", { name: userName })}</Text>
 ```
 
 ### Pluralization
@@ -108,9 +113,10 @@ export function MyComponent() {
   "sessions_count_plural": "{{count}} sessions"
 }
 ```
+
 ```tsx
-t('sessions_count', { count: 5 }) // "5 sessions"
-t('sessions_count', { count: 1 }) // "1 session"
+t("sessions_count", { count: 5 }); // "5 sessions"
+t("sessions_count", { count: 1 }); // "1 session"
 ```
 
 ---
@@ -123,25 +129,29 @@ Use this for content stored in the database (games, categories, insights).
 
 The `content_translations` table stores translations:
 
-| Column | Description |
-|--------|-------------|
-| `entity_type` | `game`, `category`, or `insight` |
-| `entity_id` | UUID or slug of the record |
-| `field` | Column being translated (`name`, `description`, etc.) |
-| `locale` | Language code (`es`, `ko`, etc.) |
-| `text` | The translated content |
+| Column        | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `entity_type` | `game`, `category`, or `insight`                      |
+| `entity_id`   | UUID or slug of the record                            |
+| `field`       | Column being translated (`name`, `description`, etc.) |
+| `locale`      | Language code (`es`, `ko`, etc.)                      |
+| `text`        | The translated content                                |
 
 ### Usage Pattern
 
 ```tsx
-import { fetchContentTranslations, buildTranslationMap, resolveTranslation } from '~/lib/content-translations';
+import {
+  buildTranslationMap,
+  fetchContentTranslations,
+  resolveTranslation,
+} from "~/lib/content-translations";
 
 // 1. Fetch translations
 const translations = await fetchContentTranslations(
-  "game", 
-  [gameId], 
-  ["name", "description"], 
-  locale
+  "game",
+  [gameId],
+  ["name", "description"],
+  locale,
 );
 
 // 2. Build lookup map
@@ -149,19 +159,19 @@ const translationMap = buildTranslationMap(translations);
 
 // 3. Resolve with fallback
 const localizedName = resolveTranslation(
-  translationMap, 
-  gameId, 
-  "name", 
-  baseGame.name  // Fallback to English
+  translationMap,
+  gameId,
+  "name",
+  baseGame.name, // Fallback to English
 );
 ```
 
 ### Key Files
 
-| File | Purpose |
-|------|---------|
-| `lib/content-translations.ts` | Fetch and resolve translations |
-| `lib/locale.ts` | Normalize locale codes (`en-US` → `en`) |
+| File                          | Purpose                                 |
+| ----------------------------- | --------------------------------------- |
+| `lib/content-translations.ts` | Fetch and resolve translations          |
+| `lib/locale.ts`               | Normalize locale codes (`en-US` → `en`) |
 
 ---
 
@@ -187,6 +197,7 @@ When adding new text to the app:
 ### Force a Language (Development)
 
 In `lib/i18n.ts`, temporarily change:
+
 ```typescript
 lng: 'es', // Force Spanish
 ```
@@ -227,13 +238,13 @@ brain-app/
 
 ## Common Mistakes
 
-| Mistake | Fix |
-|---------|-----|
-| Hardcoded string in component | Use `t('key')` instead |
-| String concatenation | Use interpolation `{{variable}}` |
-| Missing key in non-English locale | Add to all locale files |
+| Mistake                            | Fix                                            |
+| ---------------------------------- | ---------------------------------------------- |
+| Hardcoded string in component      | Use `t('key')` instead                         |
+| String concatenation               | Use interpolation `{{variable}}`               |
+| Missing key in non-English locale  | Add to all locale files                        |
 | Forgetting fallback for DB content | Always pass `fallback` to `resolveTranslation` |
 
 ---
 
-*Last updated: January 2026*
+_Last updated: January 2026_

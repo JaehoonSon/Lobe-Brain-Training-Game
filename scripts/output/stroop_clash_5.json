@@ -9,13 +9,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Red",
-        "Blue",
-        "Orange",
-        "Purple",
-        "Green"
-      ],
+      "options": ["Red", "Blue", "Orange", "Purple", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -29,13 +23,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Green",
-        "Blue",
-        "Red",
-        "Orange"
-      ],
+      "options": ["Purple", "Green", "Blue", "Red", "Orange"],
       "targetTimeMs": 2800
     }
   },
@@ -49,13 +37,7 @@
       "ink": "#FF0000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Red",
-        "Blue",
-        "Orange",
-        "Purple",
-        "Green"
-      ],
+      "options": ["Red", "Blue", "Orange", "Purple", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -69,13 +51,7 @@
       "ink": "#FFA500",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Red",
-        "Blue",
-        "Yellow",
-        "Purple",
-        "Orange"
-      ],
+      "options": ["Red", "Blue", "Yellow", "Purple", "Orange"],
       "targetTimeMs": 2800
     }
   },
@@ -89,13 +65,7 @@
       "ink": "#FFA500",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Orange",
-        "Yellow",
-        "Green",
-        "Blue",
-        "Red"
-      ],
+      "options": ["Orange", "Yellow", "Green", "Blue", "Red"],
       "targetTimeMs": 2800
     }
   },
@@ -109,13 +79,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Red",
-        "Yellow",
-        "Blue",
-        "Orange"
-      ],
+      "options": ["Green", "Red", "Yellow", "Blue", "Orange"],
       "targetTimeMs": 2800
     }
   },
@@ -129,13 +93,7 @@
       "ink": "#0000FF",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Blue",
-        "Orange",
-        "Purple",
-        "Yellow",
-        "Green"
-      ],
+      "options": ["Blue", "Orange", "Purple", "Yellow", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -149,13 +107,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Yellow",
-        "Red",
-        "Purple",
-        "Blue",
-        "Green"
-      ],
+      "options": ["Yellow", "Red", "Purple", "Blue", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -169,13 +121,7 @@
       "ink": "#800080",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Orange",
-        "Purple",
-        "Blue",
-        "Green",
-        "Red"
-      ],
+      "options": ["Orange", "Purple", "Blue", "Green", "Red"],
       "targetTimeMs": 2800
     }
   },
@@ -189,13 +135,7 @@
       "ink": "#0000FF",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Blue",
-        "Yellow",
-        "Orange",
-        "Purple",
-        "Green"
-      ],
+      "options": ["Blue", "Yellow", "Orange", "Purple", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -209,13 +149,7 @@
       "ink": "#FFA500",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Orange",
-        "Blue",
-        "Purple",
-        "Green",
-        "Yellow"
-      ],
+      "options": ["Orange", "Blue", "Purple", "Green", "Yellow"],
       "targetTimeMs": 2800
     }
   },
@@ -229,13 +163,7 @@
       "ink": "#0000FF",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Blue",
-        "Green",
-        "Purple",
-        "Orange",
-        "Red"
-      ],
+      "options": ["Blue", "Green", "Purple", "Orange", "Red"],
       "targetTimeMs": 2800
     }
   },
@@ -249,13 +177,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Yellow",
-        "Green",
-        "Blue",
-        "Red",
-        "Purple"
-      ],
+      "options": ["Yellow", "Green", "Blue", "Red", "Purple"],
       "targetTimeMs": 2800
     }
   },
@@ -269,13 +191,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Green",
-        "Orange",
-        "Yellow",
-        "Red",
-        "Blue"
-      ],
+      "options": ["Green", "Orange", "Yellow", "Red", "Blue"],
       "targetTimeMs": 2800
     }
   },
@@ -289,13 +205,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Blue",
-        "Yellow",
-        "Orange",
-        "Green",
-        "Purple"
-      ],
+      "options": ["Blue", "Yellow", "Orange", "Green", "Purple"],
       "targetTimeMs": 2800
     }
   },
@@ -309,13 +219,7 @@
       "ink": "#0000FF",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Purple",
-        "Orange",
-        "Green",
-        "Red",
-        "Blue"
-      ],
+      "options": ["Purple", "Orange", "Green", "Red", "Blue"],
       "targetTimeMs": 2800
     }
   },
@@ -329,13 +233,7 @@
       "ink": "#FFFF00",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Orange",
-        "Yellow",
-        "Purple",
-        "Green",
-        "Blue"
-      ],
+      "options": ["Orange", "Yellow", "Purple", "Green", "Blue"],
       "targetTimeMs": 2800
     }
   },
@@ -349,13 +247,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Yellow",
-        "Red",
-        "Orange",
-        "Blue",
-        "Green"
-      ],
+      "options": ["Yellow", "Red", "Orange", "Blue", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -369,13 +261,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Blue",
-        "Orange",
-        "Purple",
-        "Yellow",
-        "Green"
-      ],
+      "options": ["Blue", "Orange", "Purple", "Yellow", "Green"],
       "targetTimeMs": 2800
     }
   },
@@ -389,13 +275,7 @@
       "ink": "#008000",
       "task": "INK",
       "cue": "COLOR",
-      "options": [
-        "Red",
-        "Blue",
-        "Green",
-        "Yellow",
-        "Purple"
-      ],
+      "options": ["Red", "Blue", "Green", "Yellow", "Purple"],
       "targetTimeMs": 2800
     }
   }

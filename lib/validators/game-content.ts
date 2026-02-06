@@ -94,19 +94,19 @@ export const MathRocketContentSchema = z.object({
 // 8. Stroop Clash
 export const StroopClashContentSchema = z.object({
   type: z.literal("stroop_clash"),
-  word: z.string(),          // The text shown
-  ink: z.string(),           // The hex color or color name for rendering
+  word: z.string(), // The text shown
+  ink: z.string(), // The hex color or color name for rendering
   task: z.enum(["INK", "WORD"]),
-  cue: z.string(),           // e.g., "COLOR" or "TEXT"
+  cue: z.string(), // e.g., "COLOR" or "TEXT"
   options: z.array(z.string()), // Labels for the buttons
-  targetTimeMs: z.number(),  // Optimal time for BPI speed bonus
+  targetTimeMs: z.number(), // Optimal time for BPI speed bonus
 });
 
 // 9. Odd One Out
 export const OddOneOutContentSchema = z.object({
   type: z.literal("odd_one_out"),
-  target: z.string(),       // The unique item (e.g. "O")
-  distractor: z.string(),   // The common item (e.g. "Q")
+  target: z.string(), // The unique item (e.g. "O")
+  distractor: z.string(), // The common item (e.g. "Q")
   rows: z.number().min(2),
   cols: z.number().min(2),
 });

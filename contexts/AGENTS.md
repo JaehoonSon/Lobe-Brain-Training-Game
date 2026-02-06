@@ -3,15 +3,17 @@
 React Context providers for global state management.
 
 ## WHERE TO LOOK
-| Context | Location |
-|---------|----------|
-| Authentication | `contexts/AuthProvider.tsx` |
-| Theme | `contexts/ThemeContext.tsx` |
-| Games | `contexts/GamesContext.tsx` |
-| Onboarding | `contexts/OnboardingContext.tsx` |
-| Revenue | `contexts/RevenueCatProvider.tsx` |
+
+| Context        | Location                          |
+| -------------- | --------------------------------- |
+| Authentication | `contexts/AuthProvider.tsx`       |
+| Theme          | `contexts/ThemeContext.tsx`       |
+| Games          | `contexts/GamesContext.tsx`       |
+| Onboarding     | `contexts/OnboardingContext.tsx`  |
+| Revenue        | `contexts/RevenueCatProvider.tsx` |
 
 ## CONVENTIONS
+
 - **Pattern**: Context + Provider component + custom hook
 - **Context type**: Define interface, initialize with `createContext<Type | undefined>(undefined)`
 - **Provider**: Wrap children, memoize value with `useMemo`
@@ -37,6 +39,7 @@ export function useContextName() {
 - **Cleanup**: Return cleanup function from `useEffect`
 
 ## ANTI-PATTERNS
+
 - **NEVER** skip throw in custom hook (breaks type safety)
 - **NEVER** use context directly without custom hook
 - **NEVER** put large objects in context value without memoization
@@ -44,6 +47,7 @@ export function useContextName() {
 - **NEVER** mix concerns in single context provider
 
 ## NOTES
+
 - AuthProvider manages Supabase session with AsyncStorage persistence
 - All providers are nested in root layout
 - Debug logging present in AuthProvider for state transitions

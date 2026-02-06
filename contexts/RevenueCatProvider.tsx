@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Platform } from "react-native";
+import { useAuth } from "./AuthProvider";
 import Purchases, {
   CustomerInfo,
-  PurchasesPackage,
   PurchasesOffering,
+  PurchasesPackage,
 } from "react-native-purchases";
 import RevenueCatUI, { PAYWALL_RESULT } from "react-native-purchases-ui";
 import Tenjin from "react-native-tenjin";
@@ -31,8 +32,6 @@ interface RevenueCatContextType {
 const RevenueCatContext = createContext<RevenueCatContextType | undefined>(
   undefined,
 );
-
-import { useAuth } from "./AuthProvider";
 
 export const RevenueCatProvider = ({
   children,

@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  View,
-  TouchableOpacity,
-  useWindowDimensions,
   LayoutAnimation,
   Platform,
+  TouchableOpacity,
   UIManager,
+  View,
+  useWindowDimensions,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { useTranslation } from "react-i18next";

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { View, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { ActivityIndicator, Alert, TouchableOpacity, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { X } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
@@ -11,15 +11,15 @@ import { MentalArithmetic } from "~/components/games/MentalArithmetic";
 import { MentalLanguageDiscrimination } from "~/components/games/MentalLanguageDiscrimination";
 import { OddOneOut } from "~/components/games/OddOneOut";
 import { StroopClash } from "~/components/games/StroopClash";
-import { Wordle } from "~/components/games/Wordle";
 import { WordUnscramble } from "~/components/games/WordUnscramble";
+import { Wordle } from "~/components/games/Wordle";
 import { Text } from "~/components/ui/text";
 import { useAuth } from "~/contexts/AuthProvider";
+import { AnswerRecord, useGameSession } from "~/contexts/GameSessionContext";
 import { useGames } from "~/contexts/GamesContext";
-import { useGameSession, AnswerRecord } from "~/contexts/GameSessionContext";
 import { useAnalytics } from "~/contexts/PostHogProvider";
 import { supabase } from "~/lib/supabase";
-import { GameContentSchema, GameContent } from "~/lib/validators/game-content";
+import { GameContent, GameContentSchema } from "~/lib/validators/game-content";
 
 interface QuestionData {
   id?: string; // Question ID from DB (if applicable)

@@ -117,7 +117,7 @@ Don't just keep struggling! It can actually reinforce the mental block. Instead:
     `,
     color: "#ec4899", // Pink
   },
-    {
+  {
     id: "general-neuroplasticity",
     title: "Neuroplasticity 101",
     category: "General",

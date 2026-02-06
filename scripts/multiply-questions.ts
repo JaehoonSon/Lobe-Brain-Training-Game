@@ -1,24 +1,20 @@
+import crypto from "crypto";
+import fs from "fs";
+import path from "path";
 
-import fs from 'fs';
-import path from 'path';
-import crypto from 'crypto';
-
-const OUTPUT_DIR = path.join(process.cwd(), 'scripts', 'output');
+const OUTPUT_DIR = path.join(process.cwd(), "scripts", "output");
 
 async function main() {
   const files = fs.readdirSync(OUTPUT_DIR);
 
   for (const file of files) {
-    if (
-      (file.startsWith('math_rocket_')) &&
-      file.endsWith('.json')
-    ) {
+    if (file.startsWith("math_rocket_") && file.endsWith(".json")) {
       const filePath = path.join(OUTPUT_DIR, file);
-      const content = fs.readFileSync(filePath, 'utf-8');
-      
+      const content = fs.readFileSync(filePath, "utf-8");
+
       try {
         const questions = JSON.parse(content);
-        
+
         if (!Array.isArray(questions) || questions.length === 0) {
           console.warn(`Skipping ${file}: Invalid content or empty array.`);
           continue;
@@ -37,7 +33,6 @@ async function main() {
 
         fs.writeFileSync(filePath, JSON.stringify(newQuestions, null, 2));
         console.log(`Updated ${file} with 15 questions.`);
-
       } catch (error) {
         console.error(`Error processing ${file}:`, error);
       }

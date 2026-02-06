@@ -1,6 +1,6 @@
 import React from "react";
-import { View, useWindowDimensions, StyleSheet } from "react-native";
-import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
+import { StyleSheet, View, useWindowDimensions } from "react-native";
+import Svg, { Defs, LinearGradient, Path, Stop } from "react-native-svg";
 import { cn } from "~/lib/utils";
 
 interface CloudBackgroundProps {

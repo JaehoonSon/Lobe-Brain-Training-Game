@@ -1,11 +1,11 @@
 import { useColorScheme } from "react-native";
 import { Tabs } from "expo-router";
 import {
-  Sun,
-  Gamepad2,
   BarChart3,
-  Lightbulb,
+  Gamepad2,
   LayoutTemplate,
+  Lightbulb,
+  Sun,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 

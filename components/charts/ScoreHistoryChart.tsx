@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, useWindowDimensions } from "react-native";
+import { TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { format } from "date-fns";
 import { LineChart } from "react-native-gifted-charts";
 import { Text } from "~/components/ui/text";

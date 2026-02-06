@@ -114,12 +114,12 @@ Used for: mental_language_discrimination
 ```json
 {
   "type": "stroop_clash",
-  "word": "RED",              // The text shown (uppercase color name)
-  "ink": "#0000FF",           // Hex color the word is rendered in
-  "task": "INK",              // "INK" = identify ink color, "WORD" = identify text
-  "cue": "COLOR",             // Display cue: "COLOR" or "TEXT"
+  "word": "RED", // The text shown (uppercase color name)
+  "ink": "#0000FF", // Hex color the word is rendered in
+  "task": "INK", // "INK" = identify ink color, "WORD" = identify text
+  "cue": "COLOR", // Display cue: "COLOR" or "TEXT"
   "options": ["Red", "Blue", "Green", "Yellow"], // Button labels
-  "targetTimeMs": 2800        // Optimal response time for scoring
+  "targetTimeMs": 2800 // Optimal response time for scoring
 }
 ```
 

@@ -1,18 +1,18 @@
+import de from "../assets/locales/de.json";
+import en from "../assets/locales/en.json";
+import es from "../assets/locales/es.json";
+import fr from "../assets/locales/fr.json";
+import hi from "../assets/locales/hi.json";
+import ja from "../assets/locales/ja.json";
+import ko from "../assets/locales/ko.json";
+import ptBR from "../assets/locales/pt-BR.json";
+import ptPT from "../assets/locales/pt-PT.json";
+import ru from "../assets/locales/ru.json";
+import zhCN from "../assets/locales/zh-CN.json";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Localization from "expo-localization";
 import i18n, { LanguageDetectorAsyncModule } from "i18next";
-import { initReactI18next } from 'react-i18next';
-import * as Localization from 'expo-localization';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import en from '../assets/locales/en.json';
-import es from '../assets/locales/es.json';
-import ko from '../assets/locales/ko.json';
-import zhCN from '../assets/locales/zh-CN.json';
-import ja from '../assets/locales/ja.json';
-import ptBR from '../assets/locales/pt-BR.json';
-import ptPT from '../assets/locales/pt-PT.json';
-import de from '../assets/locales/de.json';
-import fr from '../assets/locales/fr.json';
-import hi from '../assets/locales/hi.json';
-import ru from '../assets/locales/ru.json';
+import { initReactI18next } from "react-i18next";
 
 const resources = {
   en: { translation: en },
@@ -31,9 +31,9 @@ const resources = {
 const getDeviceLocale = () => {
   const locales = Localization.getLocales();
   if (locales && locales.length > 0) {
-    return locales[0].languageCode ?? 'en';
+    return locales[0].languageCode ?? "en";
   }
-  return 'en';
+  return "en";
 };
 
 const LANGUAGE_KEY = "user-language";
@@ -127,7 +127,7 @@ const resolveLanguagePreference = async () => {
 const languageDetector: LanguageDetectorAsyncModule = {
   type: "languageDetector",
   async: true,
-  init: () => { },
+  init: () => {},
   detect: async (callback: (lng: string) => void) => {
     const { preference, mode, deviceLocale } =
       await resolveLanguagePreference();
@@ -144,7 +144,7 @@ i18n
   .use(languageDetector)
   .init({
     resources,
-    fallbackLng: 'en',
+    fallbackLng: "en",
     interpolation: {
       escapeValue: false,
     },
@@ -157,7 +157,7 @@ export const setPreferredLanguage = async (lng: string) => {
   await writeStoredLanguage(lng);
   await writeStoredLanguageMode(LANGUAGE_MODE_CUSTOM);
 
-    await i18n.changeLanguage(lng);
+  await i18n.changeLanguage(lng);
 };
 
 export const getPreferredLanguage = async () => {

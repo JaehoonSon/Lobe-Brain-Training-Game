@@ -1,21 +1,21 @@
-import { useState, useEffect, useCallback } from "react";
-import { View, TouchableOpacity, Alert, ScrollView } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { Alert, ScrollView, TouchableOpacity, View } from "react-native";
 import { PortalHost } from "@rn-primitives/portal";
 import Constants from "expo-constants";
-import { useRouter, useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import {
+  Bell,
+  BookText,
+  Cake,
   ChevronRight,
+  Crown,
+  Info,
+  Languages,
   LogOut,
   ShieldCheck,
-  BookText,
   Trash,
   User,
-  Info,
-  Crown,
-  Cake,
-  Languages,
-  Bell,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Card } from "~/components/ui/card";
@@ -28,7 +28,7 @@ import { useAuth } from "~/contexts/AuthProvider";
 import { useNotifications } from "~/contexts/NotificationProvider";
 import { useRevenueCat } from "~/contexts/RevenueCatProvider";
 import { playHaptic } from "~/lib/hapticSound";
-import { getPreferredLanguage, SYSTEM_LANGUAGE_VALUE } from "~/lib/i18n";
+import { SYSTEM_LANGUAGE_VALUE, getPreferredLanguage } from "~/lib/i18n";
 import { normalizeLocale } from "~/lib/locale";
 import { supabase } from "~/lib/supabase";
 

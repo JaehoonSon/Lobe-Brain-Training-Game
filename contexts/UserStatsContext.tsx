@@ -1,15 +1,15 @@
 import React, {
   createContext,
-  useContext,
-  useState,
-  useEffect,
   useCallback,
+  useContext,
+  useEffect,
   useMemo,
+  useState,
 } from "react";
-import { supabase } from "~/lib/supabase";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useGames } from "~/contexts/GamesContext";
 import { Database } from "~/lib/database.types";
+import { supabase } from "~/lib/supabase";
 
 type GameSession = Database["public"]["Tables"]["game_sessions"]["Row"];
 type UserGamePerformance =
@@ -27,8 +27,6 @@ type UserCategoryAbilityHistory =
 type UserGlobalAbilityHistory =
   Database["public"]["Tables"]["user_global_ability_history"]["Row"];
 
-
-
 export interface GameStats {
   gameId: string;
   gameName: string;
@@ -38,7 +36,6 @@ export interface GameStats {
   highestScore: number | null;
   gamesPlayed: number;
   currentRating: number; // Difficulty rating 1-10
-
 }
 
 export interface GlobalStats {
@@ -81,10 +78,7 @@ export interface UserStatsContextValue {
   refresh: () => Promise<void>;
 }
 
-
 const MAX_EXPECTED_BPI = 2000;
-
-
 
 // Minimum categories required for Overall BPI calculation
 const MIN_CATEGORIES_FOR_OVERALL = 3;
@@ -99,12 +93,17 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
   const [recentSessions, setRecentSessions] = useState<GameSession[]>([]);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [globalScore, setGlobalScore] = useState<number | null>(null);
-  const [overallScoreHistory, setOverallScoreHistory] = useState<ScoreHistoryPoint[]>([]);
-  const [categoryScoreHistory, setCategoryScoreHistory] = useState<Record<string, ScoreHistoryPoint[]>>({});
-  const [gameScoreHistory, setGameScoreHistory] = useState<Record<string, ScoreHistoryPoint[]>>({});
+  const [overallScoreHistory, setOverallScoreHistory] = useState<
+    ScoreHistoryPoint[]
+  >([]);
+  const [categoryScoreHistory, setCategoryScoreHistory] = useState<
+    Record<string, ScoreHistoryPoint[]>
+  >({});
+  const [gameScoreHistory, setGameScoreHistory] = useState<
+    Record<string, ScoreHistoryPoint[]>
+  >({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
-
 
   const fetchStats = useCallback(async () => {
     if (!user?.id) {
@@ -179,7 +178,6 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
           .single(),
       ]);
 
-
       if (sessionsError) throw sessionsError;
       if (perfError) throw perfError;
       if (percentilesError) throw percentilesError;
@@ -189,7 +187,6 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       if (categoryHistoryError) throw categoryHistoryError;
       if (globalHistoryError) throw globalHistoryError;
       if (streakError && streakError.code !== "PGRST116") {
-
         throw streakError;
       }
 
@@ -209,16 +206,20 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         abilityScoreMap.set(abilityScore.game_id, abilityScore);
       });
 
-      const categoryAbilityScoreMap = new Map<string, UserCategoryAbilityScore>();
+      const categoryAbilityScoreMap = new Map<
+        string,
+        UserCategoryAbilityScore
+      >();
       (categoryAbilityScores || []).forEach((score) => {
         categoryAbilityScoreMap.set(score.category_id, score);
       });
 
-      const gameHistoryRows = (gameAbilityHistory || []) as UserGameAbilityHistory[];
-      const categoryHistoryRows =
-        (categoryAbilityHistory || []) as UserCategoryAbilityHistory[];
-      const globalHistoryRows =
-        (globalAbilityHistory || []) as UserGlobalAbilityHistory[];
+      const gameHistoryRows = (gameAbilityHistory ||
+        []) as UserGameAbilityHistory[];
+      const categoryHistoryRows = (categoryAbilityHistory ||
+        []) as UserCategoryAbilityHistory[];
+      const globalHistoryRows = (globalAbilityHistory ||
+        []) as UserGlobalAbilityHistory[];
 
       const gameHistory: Record<string, ScoreHistoryPoint[]> = {};
       gameHistoryRows.forEach((row) => {
@@ -260,7 +261,6 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       setCategoryScoreHistory(categoryHistory);
       setOverallScoreHistory(overallHistory);
 
-
       // Calculate per-game stats from aggregates
       const allGameStats: GameStats[] = games
         .filter((game) => game.category_id)
@@ -273,7 +273,6 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
           const percentile = abilityScore?.percentile ?? null;
           const highestScore = perf?.highest_score ?? null;
           const currentRating = perf?.difficulty_rating ?? 1.0;
-
 
           return {
             gameId: game.id,
@@ -301,12 +300,10 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
 
         const totalGamesPlayed = gameStats.reduce(
           (sum, gs) => sum + gs.gamesPlayed,
-          0
+          0,
         );
         const categoryAverageScore =
           categoryAbilityScoreMap.get(category.id)?.ability_score ?? null;
-
-
 
         // Category highest = max of all game highest scores
         const allHighestScores = gameStats
@@ -319,9 +316,9 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
         const progress =
           categoryAverageScore !== null
             ? Math.min(
-              100,
-              Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100)
-            )
+                100,
+                Math.round((categoryAverageScore / MAX_EXPECTED_BPI) * 100),
+              )
             : 0;
 
         return {
@@ -353,15 +350,14 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
     globalScore ??
     (categoriesWithScores.length >= MIN_CATEGORIES_FOR_OVERALL
       ? Math.round(
-        categoriesWithScores.reduce((sum, c) => sum + (c.score ?? 0), 0) /
-        categoriesWithScores.length
-      )
+          categoriesWithScores.reduce((sum, c) => sum + (c.score ?? 0), 0) /
+            categoriesWithScores.length,
+        )
       : null);
-
 
   const totalGamesPlayed = categoryStats.reduce(
     (sum, c) => sum + c.gamesPlayed,
-    0
+    0,
   );
 
   const overallPercentile: number | null = null;
@@ -394,8 +390,7 @@ export function UserStatsProvider({ children }: { children: React.ReactNode }) {
       isLoading,
       error,
       fetchStats,
-    ]
-
+    ],
   );
 
   return (
@@ -414,8 +409,4 @@ export function useUserStats(): UserStatsContextValue {
 }
 
 // Re-export types for backward compatibility
-export type {
-  GameStats as GameStatsType,
-  CategoryStats as CategoryStatsType,
-};
-
+export type { GameStats as GameStatsType, CategoryStats as CategoryStatsType };

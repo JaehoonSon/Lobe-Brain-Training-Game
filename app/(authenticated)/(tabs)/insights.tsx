@@ -1,6 +1,6 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
-import { Lightbulb, ChevronRight } from "lucide-react-native";
+import { ChevronRight, Lightbulb } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";

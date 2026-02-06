@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Button } from "~/components/ui/button";

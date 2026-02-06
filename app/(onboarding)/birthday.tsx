@@ -1,9 +1,9 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import {
-  View,
+  Keyboard,
   TextInput,
   TouchableWithoutFeedback,
-  Keyboard,
+  View,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";

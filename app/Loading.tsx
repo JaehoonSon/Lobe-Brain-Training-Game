@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
   withSequence,
   withTiming,

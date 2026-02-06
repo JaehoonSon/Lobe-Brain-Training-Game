@@ -1,17 +1,17 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
-  useState,
-  useCallback,
   useMemo,
+  useState,
 } from "react";
-import { Platform, Alert, Linking } from "react-native";
-import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
+import { Alert, Linking, Platform } from "react-native";
 import Constants from "expo-constants";
-import { supabase } from "~/lib/supabase";
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
 import { useAuth } from "~/contexts/AuthProvider";
+import { supabase } from "~/lib/supabase";
 
 // Helper function to open notification settings
 const openNotificationSettings = () => {

@@ -1,34 +1,34 @@
 import { useEffect } from "react";
 import {
-  View,
+  ActivityIndicator,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
+  View,
 } from "react-native";
 import { Image } from "expo-image";
 import { router, useLocalSearchParams } from "expo-router";
 import {
   ChevronLeft,
-  Zap,
-  TrendingUp,
-  Lightbulb,
   ChevronRight,
+  Lightbulb,
+  TrendingUp,
+  Zap,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import Animated, {
   FadeInDown,
-  useSharedValue,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
-  withTiming,
   withSequence,
+  withTiming,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 import { FeatureCard } from "~/components/FeatureCard";
+import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 import { Card, CardContent } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-import { H1, H4, P, Muted } from "~/components/ui/typography";
+import { H1, H4, Muted, P } from "~/components/ui/typography";
 import { useGames } from "~/contexts/GamesContext";
 import { useUserStats } from "~/contexts/UserStatsContext";
 import { INSIGHTS } from "~/lib/insights-data";

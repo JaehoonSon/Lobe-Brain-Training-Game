@@ -1,9 +1,9 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
-import { useLocalSearchParams, router } from "expo-router";
-import { ChevronLeft, Share2, Bookmark } from "lucide-react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { Bookmark, ChevronLeft, Share2 } from "lucide-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "~/components/ui/text";
-import { H1, H2, H3, P, Muted } from "~/components/ui/typography";
+import { H1, H2, H3, Muted, P } from "~/components/ui/typography";
 import { INSIGHTS } from "~/lib/insights-data";
 import { cn } from "~/lib/utils";
 

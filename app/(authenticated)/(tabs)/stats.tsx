@@ -1,34 +1,35 @@
 import { useCallback, useState } from "react";
 import {
-  View,
-  ScrollView,
-  TouchableOpacity,
   ActivityIndicator,
   RefreshControl,
+  ScrollView,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { router } from "expo-router";
 import {
-  Zap,
-  ChevronRight,
-  TrendingUp,
   Brain,
   Calculator,
-  Languages,
-  Target,
-  Puzzle,
+  ChevronRight,
   Eye,
+  Languages,
+  Puzzle,
+  Target,
+  TrendingUp,
+  Zap,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
+import { FeatureCard } from "~/components/FeatureCard";
 import { ScoreHistoryChart } from "~/components/charts/ScoreHistoryChart";
 import { StrengthProfileChart } from "~/components/charts/StrengthProfileChart";
-import { FeatureCard } from "~/components/FeatureCard";
 import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 import { H1, H4, P } from "~/components/ui/typography";
-import { useUserStats, CategoryStats } from "~/contexts/UserStatsContext";
+import { CategoryStats, useUserStats } from "~/contexts/UserStatsContext";
 import { cn } from "~/lib/utils";
+
 // --- Components ---
 
 function getCategoryIcon(categoryName: string) {

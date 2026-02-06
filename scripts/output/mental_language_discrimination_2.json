@@ -5,16 +5,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She was",
-        "by the unexpected news."
-      ],
-      "options": [
-        "affected",
-        "effected",
-        "inflicted",
-        "reflected"
-      ],
+      "sentenceParts": ["She was", "by the unexpected news."],
+      "options": ["affected", "effected", "inflicted", "reflected"],
       "answer": "affected"
     }
   },
@@ -24,16 +16,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The",
-        "of the school is a respected leader."
-      ],
-      "options": [
-        "principal",
-        "principle",
-        "principality",
-        "principled"
-      ],
+      "sentenceParts": ["The", "of the school is a respected leader."],
+      "options": ["principal", "principle", "principality", "principled"],
       "answer": "principal"
     }
   },
@@ -43,16 +27,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His",
-        "attitude made him unpopular."
-      ],
-      "options": [
-        "arrogant",
-        "confident",
-        "proud",
-        "assertive"
-      ],
+      "sentenceParts": ["His", "attitude made him unpopular."],
+      "options": ["arrogant", "confident", "proud", "assertive"],
       "answer": "arrogant"
     }
   },
@@ -62,16 +38,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We need to",
-        "the meeting until tomorrow."
-      ],
-      "options": [
-        "postpone",
-        "cancel",
-        "delay",
-        "adjourn"
-      ],
+      "sentenceParts": ["We need to", "the meeting until tomorrow."],
+      "options": ["postpone", "cancel", "delay", "adjourn"],
       "answer": "postpone"
     }
   },
@@ -81,16 +49,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "to the store yesterday."
-      ],
-      "options": [
-        "went",
-        "gone",
-        "goed",
-        "going"
-      ],
+      "sentenceParts": ["She", "to the store yesterday."],
+      "options": ["went", "gone", "goed", "going"],
       "answer": "went"
     }
   },
@@ -100,16 +60,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He is",
-        "in mathematics."
-      ],
-      "options": [
-        "interested",
-        "interesting",
-        "interest",
-        "interests"
-      ],
+      "sentenceParts": ["He is", "in mathematics."],
+      "options": ["interested", "interesting", "interest", "interests"],
       "answer": "interested"
     }
   },
@@ -119,16 +71,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Please",
-        "attention to the details."
-      ],
-      "options": [
-        "pay",
-        "give",
-        "take",
-        "make"
-      ],
+      "sentenceParts": ["Please", "attention to the details."],
+      "options": ["pay", "give", "take", "make"],
       "answer": "pay"
     }
   },
@@ -138,16 +82,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The weather is",
-        "today."
-      ],
-      "options": [
-        "nice",
-        "well",
-        "good",
-        "fine"
-      ],
+      "sentenceParts": ["The weather is", "today."],
+      "options": ["nice", "well", "good", "fine"],
       "answer": "nice"
     }
   },
@@ -157,16 +93,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "I",
-        "my keys on the table."
-      ],
-      "options": [
-        "lay",
-        "laid",
-        "lie",
-        "lain"
-      ],
+      "sentenceParts": ["I", "my keys on the table."],
+      "options": ["lay", "laid", "lie", "lain"],
       "answer": "laid"
     }
   },
@@ -176,16 +104,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She has a",
-        "for painting."
-      ],
-      "options": [
-        "talent",
-        "skill",
-        "ability",
-        "gift"
-      ],
+      "sentenceParts": ["She has a", "for painting."],
+      "options": ["talent", "skill", "ability", "gift"],
       "answer": "talent"
     }
   },
@@ -195,16 +115,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "They",
-        "the project successfully."
-      ],
-      "options": [
-        "completed",
-        "finished",
-        "ended",
-        "concluded"
-      ],
+      "sentenceParts": ["They", "the project successfully."],
+      "options": ["completed", "finished", "ended", "concluded"],
       "answer": "completed"
     }
   },
@@ -214,16 +126,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "the ball to his friend."
-      ],
-      "options": [
-        "passed",
-        "past",
-        "pass",
-        "passing"
-      ],
+      "sentenceParts": ["He", "the ball to his friend."],
+      "options": ["passed", "past", "pass", "passing"],
       "answer": "passed"
     }
   },
@@ -233,16 +137,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The movie was",
-        "interesting."
-      ],
-      "options": [
-        "very",
-        "too",
-        "so",
-        "much"
-      ],
+      "sentenceParts": ["The movie was", "interesting."],
+      "options": ["very", "too", "so", "much"],
       "answer": "very"
     }
   },
@@ -252,16 +148,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "a mistake in the report."
-      ],
-      "options": [
-        "made",
-        "did",
-        "committed",
-        "performed"
-      ],
+      "sentenceParts": ["She", "a mistake in the report."],
+      "options": ["made", "did", "committed", "performed"],
       "answer": "made"
     }
   },
@@ -271,16 +159,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We should",
-        "a decision soon."
-      ],
-      "options": [
-        "make",
-        "take",
-        "do",
-        "have"
-      ],
+      "sentenceParts": ["We should", "a decision soon."],
+      "options": ["make", "take", "do", "have"],
       "answer": "make"
     }
   },
@@ -290,16 +170,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He is",
-        "to help us."
-      ],
-      "options": [
-        "willing",
-        "ready",
-        "prepared",
-        "able"
-      ],
+      "sentenceParts": ["He is", "to help us."],
+      "options": ["willing", "ready", "prepared", "able"],
       "answer": "willing"
     }
   },
@@ -309,16 +181,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The cat is",
-        "the table."
-      ],
-      "options": [
-        "under",
-        "below",
-        "beneath",
-        "underneath"
-      ],
+      "sentenceParts": ["The cat is", "the table."],
+      "options": ["under", "below", "beneath", "underneath"],
       "answer": "under"
     }
   },
@@ -328,16 +192,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "the book on the shelf."
-      ],
-      "options": [
-        "put",
-        "placed",
-        "set",
-        "laid"
-      ],
+      "sentenceParts": ["She", "the book on the shelf."],
+      "options": ["put", "placed", "set", "laid"],
       "answer": "put"
     }
   },
@@ -347,16 +203,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "to the party last night."
-      ],
-      "options": [
-        "came",
-        "come",
-        "coming",
-        "comes"
-      ],
+      "sentenceParts": ["He", "to the party last night."],
+      "options": ["came", "come", "coming", "comes"],
       "answer": "came"
     }
   },
@@ -366,16 +214,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The soup tastes",
-        "."
-      ],
-      "options": [
-        "good",
-        "well",
-        "fine",
-        "nice"
-      ],
+      "sentenceParts": ["The soup tastes", "."],
+      "options": ["good", "well", "fine", "nice"],
       "answer": "good"
     }
   },
@@ -385,16 +225,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "her homework every day."
-      ],
-      "options": [
-        "does",
-        "makes",
-        "performs",
-        "executes"
-      ],
+      "sentenceParts": ["She", "her homework every day."],
+      "options": ["does", "makes", "performs", "executes"],
       "answer": "does"
     }
   },
@@ -404,16 +236,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We",
-        "a great time at the beach."
-      ],
-      "options": [
-        "had",
-        "have",
-        "has",
-        "having"
-      ],
+      "sentenceParts": ["We", "a great time at the beach."],
+      "options": ["had", "have", "has", "having"],
       "answer": "had"
     }
   },
@@ -423,16 +247,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He is",
-        "than his brother."
-      ],
-      "options": [
-        "taller",
-        "more tall",
-        "tallest",
-        "most tall"
-      ],
+      "sentenceParts": ["He is", "than his brother."],
+      "options": ["taller", "more tall", "tallest", "most tall"],
       "answer": "taller"
     }
   },
@@ -442,16 +258,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Please",
-        "the door when you leave."
-      ],
-      "options": [
-        "close",
-        "shut",
-        "lock",
-        "seal"
-      ],
+      "sentenceParts": ["Please", "the door when you leave."],
+      "options": ["close", "shut", "lock", "seal"],
       "answer": "close"
     }
   },
@@ -461,16 +269,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "a letter to her friend."
-      ],
-      "options": [
-        "wrote",
-        "written",
-        "write",
-        "writing"
-      ],
+      "sentenceParts": ["She", "a letter to her friend."],
+      "options": ["wrote", "written", "write", "writing"],
       "answer": "wrote"
     }
   },
@@ -480,16 +280,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The children are playing",
-        "the park."
-      ],
-      "options": [
-        "in",
-        "at",
-        "on",
-        "by"
-      ],
+      "sentenceParts": ["The children are playing", "the park."],
+      "options": ["in", "at", "on", "by"],
       "answer": "in"
     }
   },
@@ -499,16 +291,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "a new car last week."
-      ],
-      "options": [
-        "bought",
-        "buyed",
-        "buy",
-        "buying"
-      ],
+      "sentenceParts": ["He", "a new car last week."],
+      "options": ["bought", "buyed", "buy", "buying"],
       "answer": "bought"
     }
   },
@@ -518,16 +302,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She is",
-        "to visit her grandparents."
-      ],
-      "options": [
-        "going",
-        "go",
-        "went",
-        "gone"
-      ],
+      "sentenceParts": ["She is", "to visit her grandparents."],
+      "options": ["going", "go", "went", "gone"],
       "answer": "going"
     }
   },
@@ -537,16 +313,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The sky is",
-        "blue."
-      ],
-      "options": [
-        "brightly",
-        "very",
-        "deeply",
-        "highly"
-      ],
+      "sentenceParts": ["The sky is", "blue."],
+      "options": ["brightly", "very", "deeply", "highly"],
       "answer": "very"
     }
   },
@@ -556,16 +324,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "the ball over the fence."
-      ],
-      "options": [
-        "threw",
-        "throwed",
-        "throw",
-        "throwing"
-      ],
+      "sentenceParts": ["He", "the ball over the fence."],
+      "options": ["threw", "throwed", "throw", "throwing"],
       "answer": "threw"
     }
   },
@@ -575,16 +335,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "to the music every morning."
-      ],
-      "options": [
-        "listens",
-        "hears",
-        "listening",
-        "heard"
-      ],
+      "sentenceParts": ["She", "to the music every morning."],
+      "options": ["listens", "hears", "listening", "heard"],
       "answer": "listens"
     }
   },
@@ -594,16 +346,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We",
-        "to the zoo next weekend."
-      ],
-      "options": [
-        "will go",
-        "go",
-        "going",
-        "went"
-      ],
+      "sentenceParts": ["We", "to the zoo next weekend."],
+      "options": ["will go", "go", "going", "went"],
       "answer": "will go"
     }
   },
@@ -613,16 +357,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He is",
-        "a book right now."
-      ],
-      "options": [
-        "reading",
-        "read",
-        "reads",
-        "readed"
-      ],
+      "sentenceParts": ["He is", "a book right now."],
+      "options": ["reading", "read", "reads", "readed"],
       "answer": "reading"
     }
   },
@@ -632,16 +368,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The cake smells",
-        "."
-      ],
-      "options": [
-        "delicious",
-        "well",
-        "goodly",
-        "fine"
-      ],
+      "sentenceParts": ["The cake smells", "."],
+      "options": ["delicious", "well", "goodly", "fine"],
       "answer": "delicious"
     }
   },
@@ -651,16 +379,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "her room every Saturday."
-      ],
-      "options": [
-        "cleans",
-        "clean",
-        "cleaned",
-        "cleaning"
-      ],
+      "sentenceParts": ["She", "her room every Saturday."],
+      "options": ["cleans", "clean", "cleaned", "cleaning"],
       "answer": "cleans"
     }
   },
@@ -670,16 +390,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He",
-        "to school by bus."
-      ],
-      "options": [
-        "goes",
-        "go",
-        "going",
-        "went"
-      ],
+      "sentenceParts": ["He", "to school by bus."],
+      "options": ["goes", "go", "going", "went"],
       "answer": "goes"
     }
   },
@@ -689,16 +401,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The dog is",
-        "the couch."
-      ],
-      "options": [
-        "on",
-        "in",
-        "at",
-        "over"
-      ],
+      "sentenceParts": ["The dog is", "the couch."],
+      "options": ["on", "in", "at", "over"],
       "answer": "on"
     }
   },
@@ -708,16 +412,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "She",
-        "a picture of the sunset."
-      ],
-      "options": [
-        "drew",
-        "drawed",
-        "draw",
-        "drawing"
-      ],
+      "sentenceParts": ["She", "a picture of the sunset."],
+      "options": ["drew", "drawed", "draw", "drawing"],
       "answer": "drew"
     }
   },
@@ -727,16 +423,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "We",
-        "a movie last night."
-      ],
-      "options": [
-        "watched",
-        "watch",
-        "watching",
-        "watches"
-      ],
+      "sentenceParts": ["We", "a movie last night."],
+      "options": ["watched", "watch", "watching", "watches"],
       "answer": "watched"
     }
   },
@@ -746,16 +434,8 @@
     "difficulty": 2,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He is",
-        "to finish his work."
-      ],
-      "options": [
-        "trying",
-        "try",
-        "tried",
-        "tries"
-      ],
+      "sentenceParts": ["He is", "to finish his work."],
+      "options": ["trying", "try", "tried", "tries"],
       "answer": "trying"
     }
   }

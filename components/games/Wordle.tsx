@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { View, TouchableOpacity, Dimensions } from "react-native";
+import React, { useCallback, useState } from "react";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { useTranslation } from "react-i18next";
 import { Text } from "~/components/ui/text";

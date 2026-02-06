@@ -1,8 +1,8 @@
+import LoadingScreen from "../Loading";
 import { Redirect, Stack } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
 import { GamesProvider } from "~/contexts/GamesContext";
 import { UserStatsProvider } from "~/contexts/UserStatsContext";
-import LoadingScreen from "../Loading";
 
 export default function AuthenticatedLayout() {
   const { isAuthenticated, isLoading } = useAuth();

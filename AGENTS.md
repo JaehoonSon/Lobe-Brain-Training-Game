@@ -5,9 +5,11 @@
 **Branch:** main
 
 ## OVERVIEW
+
 Expo/React Native brain training app with Supabase backend, Expo Router navigation, NativeWind styling.
 
 ## STRUCTURE
+
 ```
 ./
 ├── app/                     # Expo Router screens & route groups
@@ -26,16 +28,18 @@ Expo/React Native brain training app with Supabase backend, Expo Router navigati
 ```
 
 ## WHERE TO LOOK
-| Task | Location | Notes |
-|------|----------|-------|
-| Add screen | `app/` | Route groups enforce auth state |
-| UI component | `components/ui/` | Use CVA for variants |
-| Business logic | `hooks/`, `contexts/` | Hooks for state, contexts for global state |
-| Supabase query | `lib/`, `hooks/` | Types from `lib/database.types.ts` |
-| Database schema | `supabase/migrations/` | Run `db:push` after changes |
-| Styling config | `tailwind.config.js`, `global.css` | CSS variables for theming |
+
+| Task            | Location                           | Notes                                      |
+| --------------- | ---------------------------------- | ------------------------------------------ |
+| Add screen      | `app/`                             | Route groups enforce auth state            |
+| UI component    | `components/ui/`                   | Use CVA for variants                       |
+| Business logic  | `hooks/`, `contexts/`              | Hooks for state, contexts for global state |
+| Supabase query  | `lib/`, `hooks/`                   | Types from `lib/database.types.ts`         |
+| Database schema | `supabase/migrations/`             | Run `db:push` after changes                |
+| Styling config  | `tailwind.config.js`, `global.css` | CSS variables for theming                  |
 
 ## CONVENTIONS
+
 - **Path alias**: `~/` = project root (configured in tsconfig.json)
 - **Components**: PascalCase file names, named exports `export { Component }`
 - **Hooks**: camelCase with `use` prefix (`useAuth`, `useGameSession`)
@@ -46,6 +50,7 @@ Expo/React Native brain training app with Supabase backend, Expo Router navigati
 - **Navigation**: Expo Router with route groups, Stack.Protected for auth guards
 
 ## ANTI-PATTERNS (THIS PROJECT)
+
 - **NEVER** use `as any` or `@ts-ignore` (strict mode)
 - **NEVER** commit `.env` files (secrets)
 - **NEVER** modify `lib/database.types.ts` directly (regenerate with `db:types`)
@@ -53,12 +58,14 @@ Expo/React Native brain training app with Supabase backend, Expo Router navigati
 - **ALWAYS** throw errors after Supabase operations: `if (error) throw error;`
 
 ## UNIQUE STYLES
+
 - Button press effects via `border-b-4` → `border-b-0` + `translate-y-1` for tactile feel
 - Font utilities map to Nunito weights (font-normal → Nunito_400Regular, etc.)
 - Android navigation bar auto-matches theme (useAndroidNavigationBar hook)
 - Text nesting via `TextClassContext.Provider` in components with child text
 
 ## COMMANDS
+
 ```bash
 # Development
 npm run dev              # Expo dev server (clear cache)
@@ -77,6 +84,7 @@ npm run lint             # ESLint checks
 ```
 
 ## NOTES
+
 - Route groups: `(authenticated)` requires auth, `(unauthenticated)` for public, `(onboarding)` for first-time users
 - Debug logging is present in auth flow (console.log for state transitions)
 - No test runner configured—validate by running app in Expo

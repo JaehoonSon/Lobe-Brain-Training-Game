@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./AuthProvider";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
-import { STEPS } from "~/app/(onboarding)";
-import { supabase } from "~/lib/supabase";
-import { useAuth } from "./AuthProvider";
-import { useAnalytics } from "~/contexts/PostHogProvider";
 import Tenjin from "react-native-tenjin";
+import { STEPS } from "~/app/(onboarding)";
+import { useAnalytics } from "~/contexts/PostHogProvider";
+import { supabase } from "~/lib/supabase";
 
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps

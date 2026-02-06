@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
-  View,
-  TouchableOpacity,
-  useWindowDimensions,
   Animated,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { PaintBucket, Type } from "lucide-react-native";

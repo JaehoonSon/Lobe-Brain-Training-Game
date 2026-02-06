@@ -1,20 +1,20 @@
 import {
-  View,
+  ActivityIndicator,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
+  View,
 } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { useLocalSearchParams, router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import {
   ChevronLeft,
-  X,
-  Trophy,
-  Hexagon,
   Crown,
-  Star,
+  Hexagon,
   Lock,
+  Star,
+  Trophy,
+  X,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";

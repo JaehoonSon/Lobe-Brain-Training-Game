@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View } from "react-native";
+import { CustomStepProps } from "../index";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
@@ -7,7 +8,6 @@ import Svg, { Path } from "react-native-svg";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { useNotifications } from "~/contexts/NotificationProvider";
-import { CustomStepProps } from "../index";
 
 export default function NotificationPermissionStep({
   onNext,

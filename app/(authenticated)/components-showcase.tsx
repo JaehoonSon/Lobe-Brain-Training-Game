@@ -1,6 +1,6 @@
 import * as React from "react";
-import { SafeAreaView, ScrollView, View, Text } from "react-native";
-import { Info, Check, X } from "lucide-react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { Check, Info, X } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { Badge } from "~/components/ui/badge";
@@ -15,16 +15,16 @@ import { Switch } from "~/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Textarea } from "~/components/ui/textarea";
 import {
+  Code,
   H1,
   H2,
   H3,
   H4,
-  P,
   Large,
-  Small,
-  Muted,
-  Code,
   Lead,
+  Muted,
+  P,
+  Small,
 } from "~/components/ui/typography";
 
 export default function ComponentShowcase() {

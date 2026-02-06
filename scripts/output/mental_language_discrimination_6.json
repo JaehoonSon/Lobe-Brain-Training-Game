@@ -9,12 +9,7 @@
         "The committee's decision was met with widespread ",
         " from the public."
       ],
-      "options": [
-        "acclaim",
-        "acclamation",
-        "applause",
-        "approval"
-      ],
+      "options": ["acclaim", "acclamation", "applause", "approval"],
       "answer": "acclaim"
     }
   },
@@ -28,12 +23,7 @@
         "She had a ",
         " for languages, mastering five by age twenty."
       ],
-      "options": [
-        "propensity",
-        "proclivity",
-        "aptitude",
-        "tendency"
-      ],
+      "options": ["propensity", "proclivity", "aptitude", "tendency"],
       "answer": "aptitude"
     }
   },
@@ -47,12 +37,7 @@
         "The treaty's ambiguous wording left room for ",
         " interpretation."
       ],
-      "options": [
-        "disparate",
-        "divergent",
-        "contrasting",
-        "varying"
-      ],
+      "options": ["disparate", "divergent", "contrasting", "varying"],
       "answer": "divergent"
     }
   },
@@ -66,12 +51,7 @@
         "His argument was ",
         " by faulty logic and insufficient evidence."
       ],
-      "options": [
-        "undermined",
-        "weakened",
-        "vitiated",
-        "compromised"
-      ],
+      "options": ["undermined", "weakened", "vitiated", "compromised"],
       "answer": "vitiated"
     }
   },
@@ -85,12 +65,7 @@
         "The artist's work is characterized by its ",
         " use of color and light."
       ],
-      "options": [
-        "evocative",
-        "suggestive",
-        "provocative",
-        "indicative"
-      ],
+      "options": ["evocative", "suggestive", "provocative", "indicative"],
       "answer": "evocative"
     }
   },
@@ -104,12 +79,7 @@
         "We need to ",
         " the data before drawing any conclusions."
       ],
-      "options": [
-        "scrutinize",
-        "examine",
-        "inspect",
-        "analyze"
-      ],
+      "options": ["scrutinize", "examine", "inspect", "analyze"],
       "answer": "scrutinize"
     }
   },
@@ -123,12 +93,7 @@
         "Her remarks were ",
         " with sarcasm, making her true intentions unclear."
       ],
-      "options": [
-        "laden",
-        "filled",
-        "imbued",
-        "saturated"
-      ],
+      "options": ["laden", "filled", "imbued", "saturated"],
       "answer": "imbued"
     }
   },
@@ -142,12 +107,7 @@
         "The company's profits have been ",
         " for the past three quarters."
       ],
-      "options": [
-        "declining",
-        "diminishing",
-        "waning",
-        "ebbing"
-      ],
+      "options": ["declining", "diminishing", "waning", "ebbing"],
       "answer": "waning"
     }
   },
@@ -161,12 +121,7 @@
         "He spoke with such ",
         " that everyone in the room was captivated."
       ],
-      "options": [
-        "eloquence",
-        "fluency",
-        "articulacy",
-        "expressiveness"
-      ],
+      "options": ["eloquence", "fluency", "articulacy", "expressiveness"],
       "answer": "eloquence"
     }
   },
@@ -180,12 +135,7 @@
         "The new policy is expected to ",
         " economic growth in the region."
       ],
-      "options": [
-        "stimulate",
-        "encourage",
-        "foster",
-        "promote"
-      ],
+      "options": ["stimulate", "encourage", "foster", "promote"],
       "answer": "stimulate"
     }
   },
@@ -199,12 +149,7 @@
         "Her apology seemed ",
         ", as if she didn't truly mean it."
       ],
-      "options": [
-        "perfunctory",
-        "cursory",
-        "superficial",
-        "hasty"
-      ],
+      "options": ["perfunctory", "cursory", "superficial", "hasty"],
       "answer": "perfunctory"
     }
   },
@@ -237,12 +182,7 @@
         "The team's strategy was ",
         " by unexpected changes in market conditions."
       ],
-      "options": [
-        "thwarted",
-        "frustrated",
-        "obstructed",
-        "impeded"
-      ],
+      "options": ["thwarted", "frustrated", "obstructed", "impeded"],
       "answer": "thwarted"
     }
   },
@@ -256,12 +196,7 @@
         "His writing style is ",
         " with complex metaphors and allegories."
       ],
-      "options": [
-        "replete",
-        "abundant",
-        "plentiful",
-        "teeming"
-      ],
+      "options": ["replete", "abundant", "plentiful", "teeming"],
       "answer": "replete"
     }
   },
@@ -275,12 +210,7 @@
         "The agreement was reached after lengthy and ",
         " negotiations."
       ],
-      "options": [
-        "arduous",
-        "laborious",
-        "strenuous",
-        "grueling"
-      ],
+      "options": ["arduous", "laborious", "strenuous", "grueling"],
       "answer": "arduous"
     }
   },
@@ -294,12 +224,7 @@
         "She has a ",
         " ability to remember even the smallest details."
       ],
-      "options": [
-        "prodigious",
-        "remarkable",
-        "extraordinary",
-        "phenomenal"
-      ],
+      "options": ["prodigious", "remarkable", "extraordinary", "phenomenal"],
       "answer": "prodigious"
     }
   },
@@ -313,12 +238,7 @@
         "The report's conclusions are based on ",
         " assumptions that may not hold true."
       ],
-      "options": [
-        "tenuous",
-        "fragile",
-        "weak",
-        "flimsy"
-      ],
+      "options": ["tenuous", "fragile", "weak", "flimsy"],
       "answer": "tenuous"
     }
   },
@@ -332,12 +252,7 @@
         "His behavior at the meeting was ",
         ", causing many to question his judgment."
       ],
-      "options": [
-        "unbecoming",
-        "inappropriate",
-        "improper",
-        "unseemly"
-      ],
+      "options": ["unbecoming", "inappropriate", "improper", "unseemly"],
       "answer": "unbecoming"
     }
   },
@@ -351,12 +266,7 @@
         "The novel's plot is ",
         " with twists that keep readers guessing until the end."
       ],
-      "options": [
-        "replete",
-        "filled",
-        "laden",
-        "imbued"
-      ],
+      "options": ["replete", "filled", "laden", "imbued"],
       "answer": "replete"
     }
   },
@@ -370,12 +280,7 @@
         "We must ",
         " our efforts if we are to meet the deadline."
       ],
-      "options": [
-        "redouble",
-        "intensify",
-        "heighten",
-        "amplify"
-      ],
+      "options": ["redouble", "intensify", "heighten", "amplify"],
       "answer": "redouble"
     }
   },
@@ -389,12 +294,7 @@
         "Her criticism was ",
         ", pointing out flaws without offering solutions."
       ],
-      "options": [
-        "destructive",
-        "negative",
-        "detrimental",
-        "damaging"
-      ],
+      "options": ["destructive", "negative", "detrimental", "damaging"],
       "answer": "destructive"
     }
   },
@@ -408,12 +308,7 @@
         "The scientist's theory was initially met with ",
         " from her peers."
       ],
-      "options": [
-        "skepticism",
-        "doubt",
-        "disbelief",
-        "incredulity"
-      ],
+      "options": ["skepticism", "doubt", "disbelief", "incredulity"],
       "answer": "skepticism"
     }
   },
@@ -427,12 +322,7 @@
         "His speech was ",
         " with references to classical literature."
       ],
-      "options": [
-        "interspersed",
-        "sprinkled",
-        "scattered",
-        "dotted"
-      ],
+      "options": ["interspersed", "sprinkled", "scattered", "dotted"],
       "answer": "interspersed"
     }
   },
@@ -446,12 +336,7 @@
         "The company's success can be ",
         " to its innovative marketing strategies."
       ],
-      "options": [
-        "attributed",
-        "ascribed",
-        "credited",
-        "imputed"
-      ],
+      "options": ["attributed", "ascribed", "credited", "imputed"],
       "answer": "attributed"
     }
   },
@@ -465,12 +350,7 @@
         "The evidence presented was ",
         ", failing to convince the jury."
       ],
-      "options": [
-        "inconclusive",
-        "ambiguous",
-        "equivocal",
-        "indeterminate"
-      ],
+      "options": ["inconclusive", "ambiguous", "equivocal", "indeterminate"],
       "answer": "inconclusive"
     }
   },
@@ -484,12 +364,7 @@
         "Her dedication to the project was ",
         ", working late nights and weekends."
       ],
-      "options": [
-        "unwavering",
-        "steadfast",
-        "resolute",
-        "unfaltering"
-      ],
+      "options": ["unwavering", "steadfast", "resolute", "unfaltering"],
       "answer": "unwavering"
     }
   },
@@ -503,12 +378,7 @@
         "The new regulations will ",
         " stricter penalties for violations."
       ],
-      "options": [
-        "impose",
-        "enforce",
-        "levy",
-        "exact"
-      ],
+      "options": ["impose", "enforce", "levy", "exact"],
       "answer": "impose"
     }
   },
@@ -522,12 +392,7 @@
         "His explanation was so ",
         " that no one could follow his reasoning."
       ],
-      "options": [
-        "convoluted",
-        "complicated",
-        "intricate",
-        "involved"
-      ],
+      "options": ["convoluted", "complicated", "intricate", "involved"],
       "answer": "convoluted"
     }
   },
@@ -541,12 +406,7 @@
         "The team's performance was ",
         " by a lack of coordination among members."
       ],
-      "options": [
-        "hampered",
-        "hindered",
-        "impeded",
-        "obstructed"
-      ],
+      "options": ["hampered", "hindered", "impeded", "obstructed"],
       "answer": "hampered"
     }
   },
@@ -560,12 +420,7 @@
         "Her response was ",
         ", carefully avoiding any commitment."
       ],
-      "options": [
-        "noncommittal",
-        "evasive",
-        "elusive",
-        "ambiguous"
-      ],
+      "options": ["noncommittal", "evasive", "elusive", "ambiguous"],
       "answer": "noncommittal"
     }
   },
@@ -579,12 +434,7 @@
         "The artist's latest work is a ",
         " of traditional and modern styles."
       ],
-      "options": [
-        "fusion",
-        "amalgamation",
-        "blend",
-        "combination"
-      ],
+      "options": ["fusion", "amalgamation", "blend", "combination"],
       "answer": "fusion"
     }
   },
@@ -598,12 +448,7 @@
         "We need to ",
         " the risks before proceeding with the investment."
       ],
-      "options": [
-        "assess",
-        "evaluate",
-        "appraise",
-        "gauge"
-      ],
+      "options": ["assess", "evaluate", "appraise", "gauge"],
       "answer": "assess"
     }
   },
@@ -617,12 +462,7 @@
         "His actions were ",
         " by a desire for personal gain rather than the common good."
       ],
-      "options": [
-        "motivated",
-        "driven",
-        "propelled",
-        "impelled"
-      ],
+      "options": ["motivated", "driven", "propelled", "impelled"],
       "answer": "motivated"
     }
   },
@@ -636,12 +476,7 @@
         "The report provides a ",
         " analysis of the current economic trends."
       ],
-      "options": [
-        "comprehensive",
-        "thorough",
-        "exhaustive",
-        "complete"
-      ],
+      "options": ["comprehensive", "thorough", "exhaustive", "complete"],
       "answer": "comprehensive"
     }
   },
@@ -655,12 +490,7 @@
         "Her argument was ",
         " with logical fallacies, weakening its overall impact."
       ],
-      "options": [
-        "riddled",
-        "filled",
-        "laden",
-        "imbued"
-      ],
+      "options": ["riddled", "filled", "laden", "imbued"],
       "answer": "riddled"
     }
   },
@@ -674,12 +504,7 @@
         "The company's expansion plans were ",
         " by unexpected financial constraints."
       ],
-      "options": [
-        "curtailed",
-        "restricted",
-        "limited",
-        "constrained"
-      ],
+      "options": ["curtailed", "restricted", "limited", "constrained"],
       "answer": "curtailed"
     }
   },
@@ -693,12 +518,7 @@
         "His tone was ",
         ", suggesting he was not taking the matter seriously."
       ],
-      "options": [
-        "flippant",
-        "frivolous",
-        "lighthearted",
-        "playful"
-      ],
+      "options": ["flippant", "frivolous", "lighthearted", "playful"],
       "answer": "flippant"
     }
   },
@@ -712,12 +532,7 @@
         "The treaty aims to ",
         " peace and stability in the region."
       ],
-      "options": [
-        "foster",
-        "promote",
-        "encourage",
-        "nurture"
-      ],
+      "options": ["foster", "promote", "encourage", "nurture"],
       "answer": "foster"
     }
   },
@@ -731,12 +546,7 @@
         "Her insights were ",
         ", offering a fresh perspective on the issue."
       ],
-      "options": [
-        "illuminating",
-        "enlightening",
-        "revealing",
-        "informative"
-      ],
+      "options": ["illuminating", "enlightening", "revealing", "informative"],
       "answer": "illuminating"
     }
   },
@@ -750,12 +560,7 @@
         "The evidence was so ",
         " that the jury reached a verdict quickly."
       ],
-      "options": [
-        "compelling",
-        "persuasive",
-        "convincing",
-        "forceful"
-      ],
+      "options": ["compelling", "persuasive", "convincing", "forceful"],
       "answer": "compelling"
     }
   }

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
-import { Zap, Lightbulb, Globe } from "lucide-react-native";
+import { Globe, Lightbulb, Zap } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WorkoutGameCard } from "~/components/Authenticated/WorkoutGameCard";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";
 import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
-import { H3, H4, P, Muted } from "~/components/ui/typography";
+import { H3, H4, Muted, P } from "~/components/ui/typography";
 import { useAuth } from "~/contexts/AuthProvider";
 import { useGames } from "~/contexts/GamesContext";
 import { useDailyInsight } from "~/hooks/useDailyInsight";

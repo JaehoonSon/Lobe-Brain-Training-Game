@@ -9,12 +9,7 @@
         "The committee's decision was ",
         ", leaving no room for appeal."
       ],
-      "options": [
-        "irrevocable",
-        "irreversible",
-        "irreparable",
-        "irrefutable"
-      ],
+      "options": ["irrevocable", "irreversible", "irreparable", "irrefutable"],
       "answer": "irrevocable"
     }
   },
@@ -28,12 +23,7 @@
         "Her argument was so ",
         " that it convinced even the skeptics."
       ],
-      "options": [
-        "cogent",
-        "coherent",
-        "cohesive",
-        "cognizant"
-      ],
+      "options": ["cogent", "coherent", "cohesive", "cognizant"],
       "answer": "cogent"
     }
   },
@@ -47,12 +37,7 @@
         "The treaty's ",
         " clauses were subject to intense scrutiny."
       ],
-      "options": [
-        "abstruse",
-        "arcane",
-        "esoteric",
-        "recondite"
-      ],
+      "options": ["abstruse", "arcane", "esoteric", "recondite"],
       "answer": "arcane"
     }
   },
@@ -66,12 +51,7 @@
         "He maintained a ",
         " demeanor despite the provocation."
       ],
-      "options": [
-        "stoic",
-        "stolid",
-        "staid",
-        "static"
-      ],
+      "options": ["stoic", "stolid", "staid", "static"],
       "answer": "stoic"
     }
   },
@@ -85,12 +65,7 @@
         "The artist's work was praised for its ",
         " use of color."
       ],
-      "options": [
-        "judicious",
-        "judicial",
-        "judgmental",
-        "adjudicative"
-      ],
+      "options": ["judicious", "judicial", "judgmental", "adjudicative"],
       "answer": "judicious"
     }
   },
@@ -100,16 +75,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her apology seemed ",
-        ", lacking genuine remorse."
-      ],
-      "options": [
-        "perfunctory",
-        "perfidious",
-        "peripheral",
-        "perennial"
-      ],
+      "sentenceParts": ["Her apology seemed ", ", lacking genuine remorse."],
+      "options": ["perfunctory", "perfidious", "peripheral", "perennial"],
       "answer": "perfunctory"
     }
   },
@@ -123,12 +90,7 @@
         "The evidence was ",
         ", pointing unequivocally to his guilt."
       ],
-      "options": [
-        "inculpatory",
-        "incriminatory",
-        "indictive",
-        "implicative"
-      ],
+      "options": ["inculpatory", "incriminatory", "indictive", "implicative"],
       "answer": "inculpatory"
     }
   },
@@ -142,12 +104,7 @@
         "His leadership style was ",
         ", often ignoring others' input."
       ],
-      "options": [
-        "autocratic",
-        "autonomous",
-        "automatic",
-        "autodidactic"
-      ],
+      "options": ["autocratic", "autonomous", "automatic", "autodidactic"],
       "answer": "autocratic"
     }
   },
@@ -157,16 +114,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The novel's plot was ",
-        ", with unexpected twists."
-      ],
-      "options": [
-        "convoluted",
-        "complicated",
-        "complex",
-        "compound"
-      ],
+      "sentenceParts": ["The novel's plot was ", ", with unexpected twists."],
+      "options": ["convoluted", "complicated", "complex", "compound"],
       "answer": "convoluted"
     }
   },
@@ -180,12 +129,7 @@
         "She had a ",
         " talent for languages, mastering them quickly."
       ],
-      "options": [
-        "prodigious",
-        "prodigal",
-        "profound",
-        "profuse"
-      ],
+      "options": ["prodigious", "prodigal", "profound", "profuse"],
       "answer": "prodigious"
     }
   },
@@ -195,16 +139,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The agreement was ",
-        " upon mutual consent."
-      ],
-      "options": [
-        "abrogated",
-        "abdicated",
-        "abnegated",
-        "abjured"
-      ],
+      "sentenceParts": ["The agreement was ", " upon mutual consent."],
+      "options": ["abrogated", "abdicated", "abnegated", "abjured"],
       "answer": "abrogated"
     }
   },
@@ -214,10 +150,7 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His remarks were ",
-        ", intended to soothe tensions."
-      ],
+      "sentenceParts": ["His remarks were ", ", intended to soothe tensions."],
       "options": [
         "conciliatory",
         "concilatory",
@@ -233,16 +166,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The theory remains ",
-        ", lacking empirical support."
-      ],
-      "options": [
-        "speculative",
-        "spectacular",
-        "specific",
-        "specialized"
-      ],
+      "sentenceParts": ["The theory remains ", ", lacking empirical support."],
+      "options": ["speculative", "spectacular", "specific", "specialized"],
       "answer": "speculative"
     }
   },
@@ -256,12 +181,7 @@
         "Her critique was ",
         ", highlighting flaws without malice."
       ],
-      "options": [
-        "incisive",
-        "invasive",
-        "insidious",
-        "insistent"
-      ],
+      "options": ["incisive", "invasive", "insidious", "insistent"],
       "answer": "incisive"
     }
   },
@@ -271,16 +191,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The policy had ",
-        " effects on the economy."
-      ],
-      "options": [
-        "pernicious",
-        "perspicacious",
-        "pertinent",
-        "peremptory"
-      ],
+      "sentenceParts": ["The policy had ", " effects on the economy."],
+      "options": ["pernicious", "perspicacious", "pertinent", "peremptory"],
       "answer": "pernicious"
     }
   },
@@ -290,16 +202,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He was known for his ",
-        " integrity in all dealings."
-      ],
-      "options": [
-        "unimpeachable",
-        "unimpeached",
-        "unimpeded",
-        "unimpaired"
-      ],
+      "sentenceParts": ["He was known for his ", " integrity in all dealings."],
+      "options": ["unimpeachable", "unimpeached", "unimpeded", "unimpaired"],
       "answer": "unimpeachable"
     }
   },
@@ -313,12 +217,7 @@
         "The debate grew ",
         ", with personal attacks emerging."
       ],
-      "options": [
-        "acrimonious",
-        "acoustic",
-        "acrobatic",
-        "acronymic"
-      ],
+      "options": ["acrimonious", "acoustic", "acrobatic", "acronymic"],
       "answer": "acrimonious"
     }
   },
@@ -347,16 +246,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The data was ",
-        ", requiring careful interpretation."
-      ],
-      "options": [
-        "equivocal",
-        "equitable",
-        "equable",
-        "equine"
-      ],
+      "sentenceParts": ["The data was ", ", requiring careful interpretation."],
+      "options": ["equivocal", "equitable", "equable", "equine"],
       "answer": "equivocal"
     }
   },
@@ -366,16 +257,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His actions were ",
-        ", motivated by self-interest."
-      ],
-      "options": [
-        "mercenary",
-        "mercurial",
-        "meritorious",
-        "meridional"
-      ],
+      "sentenceParts": ["His actions were ", ", motivated by self-interest."],
+      "options": ["mercenary", "mercurial", "meritorious", "meridional"],
       "answer": "mercenary"
     }
   },
@@ -385,10 +268,7 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The report was ",
-        ", avoiding any bias."
-      ],
+      "sentenceParts": ["The report was ", ", avoiding any bias."],
       "options": [
         "disinterested",
         "uninterested",
@@ -408,12 +288,7 @@
         "Her style was ",
         ", blending classic and modern elements."
       ],
-      "options": [
-        "eclectic",
-        "eccentric",
-        "ecstatic",
-        "economic"
-      ],
+      "options": ["eclectic", "eccentric", "ecstatic", "economic"],
       "answer": "eclectic"
     }
   },
@@ -423,16 +298,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The argument was ",
-        ", based on flawed assumptions."
-      ],
-      "options": [
-        "specious",
-        "spacious",
-        "special",
-        "specific"
-      ],
+      "sentenceParts": ["The argument was ", ", based on flawed assumptions."],
+      "options": ["specious", "spacious", "special", "specific"],
       "answer": "specious"
     }
   },
@@ -442,16 +309,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "He showed ",
-        " courage in the face of danger."
-      ],
-      "options": [
-        "intrepid",
-        "intricate",
-        "intrinsic",
-        "introspective"
-      ],
+      "sentenceParts": ["He showed ", " courage in the face of danger."],
+      "options": ["intrepid", "intricate", "intrinsic", "introspective"],
       "answer": "intrepid"
     }
   },
@@ -461,16 +320,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The solution was ",
-        ", addressing the root cause."
-      ],
-      "options": [
-        "salutary",
-        "salubrious",
-        "salacious",
-        "salient"
-      ],
+      "sentenceParts": ["The solution was ", ", addressing the root cause."],
+      "options": ["salutary", "salubrious", "salacious", "salient"],
       "answer": "salutary"
     }
   },
@@ -480,16 +331,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her tone was ",
-        ", subtly mocking."
-      ],
-      "options": [
-        "sardonic",
-        "sarcastic",
-        "satiric",
-        "sapid"
-      ],
+      "sentenceParts": ["Her tone was ", ", subtly mocking."],
+      "options": ["sardonic", "sarcastic", "satiric", "sapid"],
       "answer": "sardonic"
     }
   },
@@ -499,16 +342,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The evidence was ",
-        ", leaving no doubt."
-      ],
-      "options": [
-        "conclusive",
-        "conclusive",
-        "inclusive",
-        "exclusive"
-      ],
+      "sentenceParts": ["The evidence was ", ", leaving no doubt."],
+      "options": ["conclusive", "conclusive", "inclusive", "exclusive"],
       "answer": "conclusive"
     }
   },
@@ -522,12 +357,7 @@
         "His approach was ",
         ", ignoring conventional methods."
       ],
-      "options": [
-        "iconoclastic",
-        "idiosyncratic",
-        "ideological",
-        "idolatrous"
-      ],
+      "options": ["iconoclastic", "idiosyncratic", "ideological", "idolatrous"],
       "answer": "iconoclastic"
     }
   },
@@ -537,10 +367,7 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The agreement was ",
-        ", binding all parties."
-      ],
+      "sentenceParts": ["The agreement was ", ", binding all parties."],
       "options": [
         "indissoluble",
         "indisputable",
@@ -556,16 +383,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her analysis was ",
-        ", revealing hidden patterns."
-      ],
-      "options": [
-        "penetrating",
-        "penitent",
-        "pendulous",
-        "penurious"
-      ],
+      "sentenceParts": ["Her analysis was ", ", revealing hidden patterns."],
+      "options": ["penetrating", "penitent", "pendulous", "penurious"],
       "answer": "penetrating"
     }
   },
@@ -575,16 +394,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The policy was ",
-        ", applying to everyone equally."
-      ],
-      "options": [
-        "universal",
-        "unilateral",
-        "univocal",
-        "univalent"
-      ],
+      "sentenceParts": ["The policy was ", ", applying to everyone equally."],
+      "options": ["universal", "unilateral", "univocal", "univalent"],
       "answer": "universal"
     }
   },
@@ -594,16 +405,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His memory was ",
-        ", recalling details accurately."
-      ],
-      "options": [
-        "retentive",
-        "retrospective",
-        "retroactive",
-        "retrograde"
-      ],
+      "sentenceParts": ["His memory was ", ", recalling details accurately."],
+      "options": ["retentive", "retrospective", "retroactive", "retrograde"],
       "answer": "retentive"
     }
   },
@@ -613,16 +416,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The criticism was ",
-        ", focusing on minor flaws."
-      ],
-      "options": [
-        "captious",
-        "capacious",
-        "capricious",
-        "capital"
-      ],
+      "sentenceParts": ["The criticism was ", ", focusing on minor flaws."],
+      "options": ["captious", "capacious", "capricious", "capital"],
       "answer": "captious"
     }
   },
@@ -632,16 +427,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her response was ",
-        ", avoiding direct answers."
-      ],
-      "options": [
-        "evasive",
-        "elusive",
-        "illusive",
-        "allusive"
-      ],
+      "sentenceParts": ["Her response was ", ", avoiding direct answers."],
+      "options": ["evasive", "elusive", "illusive", "allusive"],
       "answer": "evasive"
     }
   },
@@ -651,16 +438,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The theory was ",
-        ", challenging established norms."
-      ],
-      "options": [
-        "heretical",
-        "hereditary",
-        "hermetic",
-        "heroic"
-      ],
+      "sentenceParts": ["The theory was ", ", challenging established norms."],
+      "options": ["heretical", "hereditary", "hermetic", "heroic"],
       "answer": "heretical"
     }
   },
@@ -670,16 +449,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "His advice was ",
-        ", based on practical experience."
-      ],
-      "options": [
-        "pragmatic",
-        "dogmatic",
-        "enigmatic",
-        "systematic"
-      ],
+      "sentenceParts": ["His advice was ", ", based on practical experience."],
+      "options": ["pragmatic", "dogmatic", "enigmatic", "systematic"],
       "answer": "pragmatic"
     }
   },
@@ -689,16 +460,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The document was ",
-        ", with ambiguous wording."
-      ],
-      "options": [
-        "obfuscatory",
-        "obligatory",
-        "obsequious",
-        "observant"
-      ],
+      "sentenceParts": ["The document was ", ", with ambiguous wording."],
+      "options": ["obfuscatory", "obligatory", "obsequious", "observant"],
       "answer": "obfuscatory"
     }
   },
@@ -708,16 +471,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "Her manner was ",
-        ", showing great refinement."
-      ],
-      "options": [
-        "urbane",
-        "urban",
-        "urgent",
-        "usurious"
-      ],
+      "sentenceParts": ["Her manner was ", ", showing great refinement."],
+      "options": ["urbane", "urban", "urgent", "usurious"],
       "answer": "urbane"
     }
   },
@@ -727,16 +482,8 @@
     "difficulty": 8,
     "content": {
       "type": "mental_language_discrimination",
-      "sentenceParts": [
-        "The decision was ",
-        ", made after careful thought."
-      ],
-      "options": [
-        "deliberate",
-        "deliberative",
-        "delicate",
-        "delinquent"
-      ],
+      "sentenceParts": ["The decision was ", ", made after careful thought."],
+      "options": ["deliberate", "deliberative", "delicate", "delinquent"],
       "answer": "deliberate"
     }
   },
@@ -750,12 +497,7 @@
         "His explanation was ",
         ", overly detailed and tedious."
       ],
-      "options": [
-        "verbose",
-        "veritable",
-        "versatile",
-        "vertebrate"
-      ],
+      "options": ["verbose", "veritable", "versatile", "vertebrate"],
       "answer": "verbose"
     }
   }

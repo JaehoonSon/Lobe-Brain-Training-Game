@@ -5,14 +5,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -21,14 +15,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -37,14 +25,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -53,14 +35,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -69,14 +45,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -85,14 +55,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -101,14 +65,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -117,14 +75,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -133,14 +85,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   },
   {
@@ -149,14 +95,8 @@
     "difficulty": 9,
     "content": {
       "type": "mental_arithmetic",
-      "operandRange": [
-        100,
-        999
-      ],
-      "operators": [
-        "+",
-        "-"
-      ]
+      "operandRange": [100, 999],
+      "operators": ["+", "-"]
     }
   }
 ]

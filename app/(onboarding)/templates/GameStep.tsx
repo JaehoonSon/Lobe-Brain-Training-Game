@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { View, ActivityIndicator, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Alert, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CustomStepProps } from "~/app/(onboarding)/index";
 import { MemoryMatrix } from "~/components/games/MemoryMatrix";

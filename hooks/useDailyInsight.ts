@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import i18n from "~/lib/i18n";
-import { supabase } from "~/lib/supabase";
+import { useEffect, useState } from "react";
 import {
   buildTranslationMap,
   fetchContentTranslations,
   resolveTranslation,
 } from "~/lib/content-translations";
+import i18n from "~/lib/i18n";
 import { normalizeLocale } from "~/lib/locale";
+import { supabase } from "~/lib/supabase";
 
 interface DailyInsight {
   id: string;

@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import { Search, Lock, Zap } from "lucide-react-native";
+import { Lock, Search, Zap } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthenticatedHeader } from "~/components/AuthenticatedHeader";

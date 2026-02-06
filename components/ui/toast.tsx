@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { CheckCircle, XCircle, Info, AlertTriangle } from "lucide-react-native";
+import { Text, View } from "react-native";
+import { AlertTriangle, CheckCircle, Info, XCircle } from "lucide-react-native";
 import Toast, {
   ToastConfig,
   ToastConfigParams,

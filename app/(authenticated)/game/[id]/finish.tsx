@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import LottieView from "lottie-react-native";
 import { Clock, Target, Zap } from "lucide-react-native";
@@ -8,8 +8,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { H1, P } from "~/components/ui/typography";
-import { useGames } from "~/contexts/GamesContext";
 import { useGameSession } from "~/contexts/GameSessionContext";
+import { useGames } from "~/contexts/GamesContext";
 import { useUserStats } from "~/contexts/UserStatsContext";
 import { StoreReview } from "~/lib/StoreReview";
 import { cn } from "~/lib/utils";

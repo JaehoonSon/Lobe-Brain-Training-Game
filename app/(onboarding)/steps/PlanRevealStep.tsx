@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Image } from "expo-image";
 import { Check, ChevronLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";

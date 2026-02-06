@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
-import { ChevronLeft, Check } from "lucide-react-native";
+import { Check, ChevronLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Card } from "~/components/ui/card";
-import { H1, P, Muted } from "~/components/ui/typography";
+import { H1, Muted, P } from "~/components/ui/typography";
 import { playHaptic } from "~/lib/hapticSound";
 import {
+  SYSTEM_LANGUAGE_VALUE,
   getPreferredLanguage,
   setPreferredLanguage,
   setSystemLanguage,
-  SYSTEM_LANGUAGE_VALUE,
 } from "~/lib/i18n";
 import { normalizeLocale } from "~/lib/locale";
 

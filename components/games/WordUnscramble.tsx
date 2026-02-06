@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { View, TouchableOpacity, Dimensions } from "react-native";
+import { useEffect, useState } from "react";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 import * as Haptics from "expo-haptics";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/lib/utils";

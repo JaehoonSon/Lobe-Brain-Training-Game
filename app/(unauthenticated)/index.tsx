@@ -3,17 +3,17 @@ import { Image } from "expo-image";
 import { router } from "expo-router";
 import {
   BookOpen,
-  Zap,
-  Trophy,
   Gamepad2,
+  GraduationCap,
   Lightbulb,
-  Puzzle,
-  Rocket,
-  Target,
   Music,
   Palette,
+  Puzzle,
+  Rocket,
   Sparkles,
-  GraduationCap,
+  Target,
+  Trophy,
+  Zap,
 } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Image } from "expo-image";
 import { Check, Lock, Play } from "lucide-react-native";
 import { useTranslation } from "react-i18next";

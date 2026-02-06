@@ -1,9 +1,9 @@
 interface ScoreInputs {
-  accuracy: number;        // 0..1
-  difficulty: number;      // 0..10 (avg_question_difficulty)
-  targetTimeMs?: number;   // per-question target time
-  actualTimeMs?: number;   // per-question actual (avg)
-  guessRate?: number;      // 0.25, 0.5...
+  accuracy: number; // 0..1
+  difficulty: number; // 0..10 (avg_question_difficulty)
+  targetTimeMs?: number; // per-question target time
+  actualTimeMs?: number; // per-question actual (avg)
+  guessRate?: number; // 0.25, 0.5...
   useSpeed?: boolean;
 }
 
@@ -26,7 +26,7 @@ export function calculateBPI({
   }
 
   // Base skill (0..1)
-  const base = useSpeed ? (0.85 * A + 0.15 * S) : A;
+  const base = useSpeed ? 0.85 * A + 0.15 * S : A;
 
   // Difficulty gate: easy content caps your score
   const dNorm = clamp01(difficulty / 10);

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { View, Dimensions, FlatList, ViewToken } from "react-native";
+import React, { useRef, useState } from "react";
+import { Dimensions, FlatList, View, ViewToken } from "react-native";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 import Animated, {
