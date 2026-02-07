@@ -6,6 +6,7 @@ import Tenjin from "react-native-tenjin";
 import { STEPS } from "~/app/(onboarding)";
 import { useAnalytics } from "~/contexts/PostHogProvider";
 import { supabase } from "~/lib/supabase";
+import { syncUserTimezone } from "~/lib/timezone";
 
 // Define the shape of the onboarding data
 // We'll use a Record<string, any> for flexibility as we build out the 32 steps
@@ -178,6 +179,10 @@ export function OnboardingProvider({
       console.log("Onboarding data saved successfully");
       setIsComplete(true);
       markOnboardingComplete(); // Update AuthProvider state to trigger navigation
+
+      // Sync timezone to profile (runs once, cached)
+      await syncUserTimezone(user.id);
+
       track("onboarding_completed", {
         total_steps: TOTAL_STEPS,
       });
