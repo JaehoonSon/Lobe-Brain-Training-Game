@@ -339,6 +339,7 @@ export type Database = {
           created_at: string | null
           full_name: string | null
           id: string
+          last_active_at: string | null
           onboarding_completed_at: string | null
           onboarding_data: Json | null
           timezone: string | null
@@ -351,6 +352,7 @@ export type Database = {
           created_at?: string | null
           full_name?: string | null
           id: string
+          last_active_at?: string | null
           onboarding_completed_at?: string | null
           onboarding_data?: Json | null
           timezone?: string | null
@@ -363,6 +365,7 @@ export type Database = {
           created_at?: string | null
           full_name?: string | null
           id?: string
+          last_active_at?: string | null
           onboarding_completed_at?: string | null
           onboarding_data?: Json | null
           timezone?: string | null

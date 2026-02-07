@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import type { User } from "@supabase/supabase-js";
 import * as AppleAuthentication from "expo-apple-authentication";
 import Tenjin from "react-native-tenjin";
-import { showErrorToast, showSuccessToast } from "~/components/ui/toast";
+import { showErrorToast } from "~/components/ui/toast";
 import { supabase } from "~/lib/supabase";
 
 interface AuthContextType {
@@ -40,6 +40,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     console.log("onboardingComplete:", onboardingComplete);
     console.log("========================");
   }, [user, onboardingComplete]);
+
+  // ----- Update last_active_at when authenticated -----
+  useEffect(() => {
+    if (!user?.id) return;
+
+    supabase
+      .from("profiles")
+      .update({ last_active_at: new Date().toISOString() })
+      .eq("id", user.id)
+      .then(({ error }) => {
+        if (error)
+          console.error("[Auth] Failed to update last_active_at", error);
+      });
+  }, [user?.id]);
 
   // ----- Supabase session boot + listener -----
   useEffect(() => {
