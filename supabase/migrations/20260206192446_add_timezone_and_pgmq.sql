@@ -85,7 +85,7 @@ begin
         'to', r.expo_push_token,
         'title', 'Time for your brain training!',
         'body', 'Your daily exercises are ready. Keep your streak alive!',
-        'data', jsonb_build_object('url', '/(tabs)/')
+        'data', jsonb_build_object('url', '/(authenticated)/(tabs)/games')
       ),
       delay => delay_seconds
     );

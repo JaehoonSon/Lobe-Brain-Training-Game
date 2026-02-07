@@ -10,6 +10,7 @@ import { Alert, Linking, Platform } from "react-native";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import { Href, router } from "expo-router";
 import { useAuth } from "~/contexts/AuthProvider";
 import { supabase } from "~/lib/supabase";
 
@@ -118,11 +119,20 @@ export function NotificationProvider({
       },
     );
 
-    // Listener for user interactions with notifications
+    // Listener for user interactions with notifications (taps)
     const responseListener =
       Notifications.addNotificationResponseReceivedListener((response) => {
         console.log("Notification response received:", response);
         setLastNotificationResponse(response);
+
+        // Handle deep linking from notification data
+        const data = response.notification.request.content.data;
+        if (data?.url && typeof data.url === "string") {
+          // Small delay to ensure navigation is ready
+          setTimeout(() => {
+            router.push(data.url as Href);
+          }, 100);
+        }
       });
 
     // Check initial permission status
